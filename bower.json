@@ -1,0 +1,10 @@
+{
+  "name": "Rodin-JS-front",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "restangular": "^1.5.2",
+    "a0-angular-storage": "^0.0.15",
+    "angular-ui-router": "^0.3.1"
+  }
+}
