@@ -191,9 +191,7 @@ gulp.task('watch', () =>  {
 });
 
 gulp.task('clean', () =>  {
-  return del(['./build/**','!./build/scripts/vendor/**','!./build/scripts','!./build']).then(function (paths) {
-      console.log('Deleted files and folders:\n', paths.join('\n'));
-  });
+  return del(['./build/**','!./build/scripts/vendor/**','!./build/scripts','!./build']);
 });
 
 
