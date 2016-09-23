@@ -5,11 +5,11 @@
 			<div class="col-md-6 offset-md-3 col-xs-12">
 				<h1 class="text-xs-center" data-ng-bind="::$ctrl.title"></h1>
 				<p class="text-xs-center">
-					<a data-ui-sref="app.login"
+					<a data-ui-sref="landing.login"
 					   data-ng-show="$ctrl.authType === 'register'">
 						Have an account?
 					</a>
-					<a data-ui-sref="app.register"
+					<a data-ui-sref="landing.register"
 					   data-ng-show="$ctrl.authType === 'login'">
 						Need an account?
 					</a>
@@ -21,9 +21,9 @@
 
 						<fieldset class="form-group">
 							<input class="form-control form-control-lg"
-							       type="email"
-							       placeholder="Email"
-							       data-ng-model="$ctrl.formData.email"/>
+							       type="text"
+							       placeholder="Username"
+							       data-ng-model="$ctrl.formData.username"/>
 						</fieldset>
 
 						<fieldset class="form-group">

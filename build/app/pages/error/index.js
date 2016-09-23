@@ -13,7 +13,7 @@ System.register(['angular/index', './error.config', './error.controller'], funct
       ErrorCtrl = _errorController.default;
     }],
     execute: function () {
-      errorModule = angular.module('app.error', []);
+      errorModule = angular.module('landing.error', []);
 
       errorModule.config(ErrorConfig);
 

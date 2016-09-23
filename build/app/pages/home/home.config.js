@@ -6,7 +6,7 @@ System.register([], function (_export, _context) {
 	function HomeConfig($stateProvider) {
 		'ngInject';
 
-		$stateProvider.state('app.home', {
+		$stateProvider.state('landing.home', {
 			url: '/',
 			controller: 'HomeCtrl',
 			controllerAs: '$ctrl',

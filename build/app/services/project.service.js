@@ -3,7 +3,7 @@
 System.register([], function (_export, _context) {
 	"use strict";
 
-	var _createClass, User;
+	var _createClass, Project;
 
 	function _classCallCheck(instance, Constructor) {
 		if (!(instance instanceof Constructor)) {
@@ -32,43 +32,36 @@ System.register([], function (_export, _context) {
 				};
 			}();
 
-			User = function () {
-				User.$inject = ['JWT', 'AppConstants', 'Restangular', 'Validator', '$state', '$q'];
+			Project = function () {
+				Project.$inject = ['JWT', 'AppConstants', 'Restangular', 'Validator', '$state', '$q'];
 
-				function User(JWT, AppConstants, Restangular, Validator, $state, $q) {
+				function Project(JWT, AppConstants, Restangular, Validator, $state, $q) {
 					'ngInject';
 
-					_classCallCheck(this, User);
+					_classCallCheck(this, Project);
 
 					this._JWT = JWT;
 					this._AppConstants = AppConstants;
 
-					this._User = Restangular.all('user');
-					this._Auth = Restangular.all('auth');
+					this._Projects = Restangular.all('projects');
 					this._$state = $state;
 					this._$q = $q;
 					this._Validator = new Validator();
-
-					this.current = null;
-					this._inProgress = false;
 				}
 
-				_createClass(User, [{
-					key: 'login',
-					value: function login() {
+				_createClass(Project, [{
+					key: 'get',
+					value: function get() {
 						var _this = this;
 
-						var fields = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+						var projectId = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+						var fields = arguments[1];
 
 						var deferred = this._$q.defer();
-						this._Auth.all("login").post(fields).then(function (result) {
+						this._Projects.one(projectId).get(fields).then(function (result) {
 							_this._Validator.validateHTTP(result);
 							if (_this._Validator.isValidHTTP()) {
 								var response = _this._Validator.getDataHTTP();
-								/// set auth token
-								_this._JWT.save(response.token);
-								_this.current = response.user;
-
 								deferred.resolve(response);
 							} else {
 								deferred.reject(_this._Validator.getErrorsHTTP());
@@ -82,32 +75,41 @@ System.register([], function (_export, _context) {
 						return deferred.promise;
 					}
 				}, {
-					key: 'signUp',
-					value: function signUp() {
+					key: 'getList',
+					value: function getList() {
 						var _this2 = this;
 
 						var fields = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-						return this.create(fields).then(function (res) {
-							_this2._JWT.save(res.token);
-							_this2.current = res.user;
+						var deferred = this._$q.defer();
+						this._Projects.getList(fields).then(function (result) {
+							_this2._Validator.validateHTTP(result);
+							if (_this2._Validator.isValidHTTP()) {
+								var response = _this2._Validator.getDataHTTP();
 
-							return res;
-						}, function (err) {
-							return err;
+								deferred.resolve(response);
+							} else {
+								deferred.reject(_this2._Validator.getErrorsHTTP());
+							}
+						}, function (result) {
+							_this2._Validator.validateHTTP(result.data);
+
+							deferred.reject(_this2._Validator.getErrorsHTTP());
 						});
+
+						return deferred.promise;
 					}
 				}, {
 					key: 'update',
 					value: function update() {
 						var _this3 = this;
 
-						var userId = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+						var projectId = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
 						var fields = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
 						var deferred = this._$q.defer();
 
-						this._User.put(fields).then(function (result) {
+						this._Projects.one(projectId).put(fields).then(function (result) {
 							_this3._Validator.validateHTTP(result);
 							if (_this3._Validator.isValidHTTP()) {
 								var response = _this3._Validator.getDataHTTP();
@@ -132,7 +134,7 @@ System.register([], function (_export, _context) {
 
 						var deferred = this._$q.defer();
 
-						this._User.post(fields).then(function (result) {
+						this._Projects.post(fields).then(function (result) {
 							_this4._Validator.validateHTTP(result);
 							if (_this4._Validator.isValidHTTP()) {
 								var response = _this4._Validator.getDataHTTP();
@@ -149,62 +151,37 @@ System.register([], function (_export, _context) {
 						return deferred.promise;
 					}
 				}, {
-					key: 'logout',
-					value: function logout() {
-						this.current = null;
-						this._JWT.destroy();
-						this._$state.go(this._$state.$current, null, { reload: true });
-					}
-				}, {
-					key: 'verifyAuth',
-					value: function verifyAuth() {
+					key: 'remove',
+					value: function remove() {
 						var _this5 = this;
 
-						var deferred = this._$q.defer();
-						// check for JWT token
-						if (!this._JWT.get()) {
-							deferred.resolve(false);
-							return deferred.promise;
-						}
-
-						if (this.current) {
-							deferred.resolve(true);
-						} else {
-							this._User.one("me").get().then(function (res) {
-								_this5.current = res.data;
-								deferred.resolve(true);
-							}, function (err) {
-								_this5._JWT.destroy();
-								deferred.resolve(false);
-							});
-						}
-						return deferred.promise;
-					}
-				}, {
-					key: 'ensureAuthIs',
-					value: function ensureAuthIs() {
-						var _this6 = this;
-
-						var bool = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+						var projectId = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+						var fields = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
 						var deferred = this._$q.defer();
-						this.verifyAuth().then(function (authValid) {
-							if (authValid !== bool) {
-								_this6._$state.go('landing.login');
-								deferred.resolve(false);
+
+						this._Projects.one(projectId).remove(fields).then(function (result) {
+							_this5._Validator.validateHTTP(result);
+							if (_this5._Validator.isValidHTTP()) {
+								var response = _this5._Validator.getDataHTTP();
+								deferred.resolve(response);
 							} else {
-								deferred.resolve(true);
+								deferred.reject(_this5._Validator.getErrorsHTTP());
 							}
+						}, function (result) {
+							_this5._Validator.validateHTTP(result.data);
+
+							deferred.reject(_this5._Validator.getErrorsHTTP());
 						});
 
 						return deferred.promise;
 					}
 				}]);
 
-				return User;
+				return Project;
 			}();
 
-			_export('default', User);
+			_export('default', Project);
 		}
 	};
 });

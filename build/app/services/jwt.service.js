@@ -85,7 +85,7 @@ System.register([], function (_export, _context) {
 								return res;
 							}, function (err) {
 								_this.destroy();
-								_this._$state.go("app.login");
+								_this._$state.go("landing.login");
 								return err;
 							});
 						}

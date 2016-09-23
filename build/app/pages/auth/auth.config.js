@@ -6,7 +6,7 @@ System.register([], function (_export, _context) {
 	function AuthConfig($stateProvider) {
 		'ngInject';
 
-		$stateProvider.state('app.login', {
+		$stateProvider.state('landing.login', {
 			url: '/login',
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'pages/auth/auth.html',
@@ -16,7 +16,7 @@ System.register([], function (_export, _context) {
 					return User.ensureAuthIs(false);
 				}]
 			}
-		}).state('app.register', {
+		}).state('landing.register', {
 			url: '/register',
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'pages/auth/auth.html',
@@ -26,7 +26,7 @@ System.register([], function (_export, _context) {
 					return User.ensureAuthIs(false);
 				}]
 			}
-		}).state('app.forgot', {
+		}).state('landing.forgot', {
 			url: '/forgot',
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'pages/auth/auth.html',

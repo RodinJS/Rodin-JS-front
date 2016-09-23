@@ -13,7 +13,7 @@ System.register(['angular/index', './auth.config', './auth.controller'], functio
       AuthCtrl = _authController.default;
     }],
     execute: function () {
-      authModule = angular.module('app.auth', []);
+      authModule = angular.module('landing.auth', []);
 
       authModule.config(AuthConfig);
 

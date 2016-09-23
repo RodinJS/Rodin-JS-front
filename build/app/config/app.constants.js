@@ -8,83 +8,99 @@ System.register([], function (_export, _context) {
 		setters: [],
 		execute: function () {
 			AppConstants = {
-				env: "dev",
-				prodAPI: 'http://192.168.0.30:3000/api',
+				env: "prod",
+				prodAPI: 'http://dev.yvn.io/api',
 				devAPI: 'http://127.0.0.1:3000/api',
 				jwtKey: 'jwtToken',
 				appName: 'Rodin',
 				ERRORCODES: {
-					300: {
-						message: 'Oops! Something want wrong, please try again later.',
-						field: ""
+					"310": {
+						"message": "WRONG_USERNAME_OR_PASSWORD",
+						"field": ["username", "email"]
 					},
-					302: {
-						message: 'access-token does not provided',
-						field: ['token']
+					"311": {
+						"message": "EMAIL_EXISTS",
+						"field": "email"
 					},
-					303: {
-						message: 'unknown token',
-						field: ['token']
+					"312": {
+						"message": "USER_WITH_ID_NOT_FOUND",
+						"field": "id"
 					},
-					310: {
-						message: 'Wrong username or password',
-						field: ""
+					"313": {
+						"message": "PROJECT_WITH_ID_NOT_FOUND",
+						"field": "id"
 					},
-					311: {
-						message: 'user with email already exists',
-						field: ['email']
+					"314": {
+						"message": "ACCESS_TO_PROJECT_DENIED",
+						"field": ""
 					},
-					312: {
-						message: 'user not found',
-						field: ""
+					"315": {
+						"message": "TOKEN_DOES_NOT_PROVIDED",
+						"field": "token"
 					},
-					313: {
-						message: 'space not found',
-						field: ['space']
+					"316": {
+						"message": "UNKNOWN_TOKEN",
+						"field": "token"
 					},
-					314: {
-						message: 'you don\'t have access to this space',
-						field: ['space']
+					"317": {
+						"message": "ORGANIZATION_NOT_FOUND",
+						"field": "organization"
 					},
-					315: {
-						message: 'user\'s team not found',
-						field: ['team']
+					"318": {
+						"message": "EMAIL_SEND_ERROR",
+						"field": ""
 					},
-					316: {
-						message: 'Cant send email. Please try again later.',
-						field: ''
+					"319": {
+						"message": "USER_WITH_EMAIL_NOT_FOUND",
+						"field": "email"
 					},
-					317: {
-						message: 'user with email not found',
-						field: ['email']
+					"320": {
+						"message": "UNKNOWN_RESET_PASSWORD_CODE",
+						"field": "reset_code"
 					},
-					318: {
-						message: 'Unknown reset code, please fill forgot form again.',
-						field: ['code']
+					"321": {
+						"message": "USER_WITH_USERNAME_NOT_FOUND",
+						"field": "username"
 					},
-					319: {
-						message: 'user with username ${username} not found',
-						field: ['username']
+					"322": {
+						"message": "INVALID_PASSWORD",
+						"field": ""
 					},
-					320: {
-						message: 'invalid password',
-						field: ['oldPassword']
+					"323": {
+						"message": "ORGANIZATION_PERMISSION_DENIED",
+						"field": ""
 					},
-					321: {
-						message: 'permission denied',
-						field: ['permission']
+					"324": {
+						"message": "ADMIN_PERMISSION_REQUIRED",
+						"field": ""
 					},
-					322: {
-						message: 'admin permission required for this query',
-						field: ['permission']
+					"325": {
+						"message": "USER_ALREADY_IN_ORGANIZATION",
+						"field": ""
 					},
-					323: {
-						message: 'User is already in team.',
-						field: ''
+					"326": {
+						"message": "ADD_YOURSELF_TO_YOUR_ORGANIZATION",
+						"field": ""
 					},
-					324: {
-						message: 'You cant add yourself to your team.',
-						field: ''
+					"327": {
+						"message": "SOMETHING_WENT_WRONG",
+						"field": ""
+					},
+					"601": {
+						"message": "UNKNOWN_SOCKET_CHANNEL",
+						"field": ""
+					},
+					"602": {
+						"message": "UNKNOWN_SOCKET_ROOM",
+						"field": ""
+					},
+					"603": {
+						"message": "PERMISSION_SOCKET_DENIED",
+						"field": ""
+					},
+					"604": {
+						"message": "UNKNOWN_SOCKET_ACTION",
+						"field": ""
 					}
 				}
 			};

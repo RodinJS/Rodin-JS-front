@@ -13,7 +13,7 @@ System.register(['angular/index', './home.config', './home.controller'], functio
       HomeCtrl = _homeController.default;
     }],
     execute: function () {
-      homeModule = angular.module('app.home', []);
+      homeModule = angular.module('landing.home', []);
 
       homeModule.config(HomeConfig);
 

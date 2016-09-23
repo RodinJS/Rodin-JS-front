@@ -3,7 +3,7 @@ function AuthConfig($stateProvider) {
 
 	$stateProvider
 
-		.state('app.login', {
+		.state('landing.login', {
 			url: '/login',
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'pages/auth/auth.html',
@@ -15,7 +15,7 @@ function AuthConfig($stateProvider) {
 			}
 		})
 
-		.state('app.register', {
+		.state('landing.register', {
 			url: '/register',
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'pages/auth/auth.html',
@@ -27,7 +27,7 @@ function AuthConfig($stateProvider) {
 			}
 		})
 
-		.state('app.forgot', {
+		.state('landing.forgot', {
 			url: '/forgot',
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'pages/auth/auth.html',

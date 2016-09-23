@@ -10,8 +10,7 @@ System.register([], function (_export, _context) {
 		'ngInject';
 
 		Restangular.addFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
-			console.log(headers);
-			headers["token"] = JWT.get();
+			headers["x-access-token"] = JWT.get();
 			return {
 				headers: headers
 			};
@@ -20,7 +19,7 @@ System.register([], function (_export, _context) {
 		Restangular.setErrorInterceptor(function (response, deferred, responseHandler) {
 			if (response.status === 401) {
 				JWT.destroy();
-				$state.go("app.login");
+				$state.go("landing.login");
 				return false; // error handled
 			}
 

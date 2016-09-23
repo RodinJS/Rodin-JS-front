@@ -1,7 +1,7 @@
 import angular from 'angular/index';
 
 // Create the module where our functionality can attach to
-let errorModule = angular.module('app.error', []);
+let errorModule = angular.module('landing.error', []);
 
 // Include our UI-Router config settings
 import ErrorConfig from './error.config';

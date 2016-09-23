@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['angular/index', './validator.service', './error.service', './jwt.service', './user.service'], function (_export, _context) {
+System.register(['angular/index', './validator.service', './error.service', './jwt.service', './user.service', './project.service'], function (_export, _context) {
   "use strict";
 
-  var angular, ValidatorService, ErrorService, JwtService, UserService, servicesModule;
+  var angular, ValidatorService, ErrorService, JwtService, UserService, ProjectService, servicesModule;
   return {
     setters: [function (_angularIndex) {
       angular = _angularIndex.default;
@@ -15,6 +15,8 @@ System.register(['angular/index', './validator.service', './error.service', './j
       JwtService = _jwtService.default;
     }, function (_userService) {
       UserService = _userService.default;
+    }, function (_projectService) {
+      ProjectService = _projectService.default;
     }],
     execute: function () {
       servicesModule = angular.module('app.services', []);
@@ -26,6 +28,8 @@ System.register(['angular/index', './validator.service', './error.service', './j
       servicesModule.service('JWT', JwtService);
 
       servicesModule.service('User', UserService);
+
+      servicesModule.service('Project', ProjectService);
 
       _export('default', servicesModule);
     }

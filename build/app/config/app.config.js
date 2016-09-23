@@ -24,7 +24,15 @@ System.register([], function (_export, _context) {
 			templateUrl: 'layout/main/app-view.html',
 			resolve: {
 				auth: ["User", function auth(User) {
-					return User.verifyAuth();
+					return User.verifyAuth(true);
+				}]
+			}
+		}).state('landing', {
+			abstract: true,
+			templateUrl: 'layout/landing/landing-view.html',
+			resolve: {
+				auth: ["User", function auth(User) {
+					return User.verifyAuth(false);
 				}]
 			}
 		});

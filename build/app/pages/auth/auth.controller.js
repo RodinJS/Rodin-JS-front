@@ -44,7 +44,7 @@ System.register([], function (_export, _context) {
 					this._$state = $state;
 
 					this.title = $state.current.title;
-					this.authType = $state.current.name.replace('app.', '');
+					this.authType = $state.current.name.replace('landing.', '');
 				}
 
 				_createClass(AuthCtrl, [{

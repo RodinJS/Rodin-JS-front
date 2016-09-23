@@ -14,10 +14,10 @@ import './error/index';
 
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
-	'app.auth',
-	'app.home',
+	'landing.auth',
+	'landing.home',
 	'app.dashboard',
-	'app.error',
+	'landing.error',
 ]);
 
 

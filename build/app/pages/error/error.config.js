@@ -6,7 +6,7 @@ System.register([], function (_export, _context) {
 	function ErrorConfig($stateProvider) {
 		'ngInject';
 
-		$stateProvider.state('app.error', {
+		$stateProvider.state('landing.error', {
 			url: '/error',
 			controller: 'ErrorCtrl',
 			controllerAs: '$ctrl',

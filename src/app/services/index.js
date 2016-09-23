@@ -17,4 +17,8 @@ import UserService from './user.service';
 servicesModule.service('User', UserService);
 
 
+import ProjectService from './project.service';
+servicesModule.service('Project', ProjectService);
+
+
 export default servicesModule;

@@ -1,4 +1,4 @@
-export default class Error {
+class Error {
 	constructor($log) {
 		'ngInject';
 
@@ -83,5 +83,6 @@ export default class Error {
 		}
 	}
 
-
 }
+
+export default Error;

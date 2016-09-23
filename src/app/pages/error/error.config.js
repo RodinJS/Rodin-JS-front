@@ -2,7 +2,7 @@ function ErrorConfig($stateProvider) {
 	'ngInject';
 
 	$stateProvider
-		.state('app.error', {
+		.state('landing.error', {
 			url: '/error',
 			controller: 'ErrorCtrl',
 			controllerAs: '$ctrl',

@@ -1,0 +1,43 @@
+<nav class="navbar navbar-light">
+	<div class="container">
+
+		<a class="navbar-brand"
+		   data-ui-sref="landing.home"
+		   data-ng-bind="::$ctrl.appName | lowercase">
+		</a>
+
+		<!-- Show this for logged out users -->
+		<ul class="nav navbar-nav pull-xs-right">
+
+			<li class="nav-item">
+				test
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link"
+				   data-ui-sref-active="active"
+				   data-ui-sref="landing.home">
+					Home
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link"
+				   data-ui-sref-active="active"
+				   data-ui-sref="landing.login">
+					Sign in
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link"
+				   data-ui-sref-active="active"
+				   data-ui-sref="landing.register">
+					Sign up
+				</a>
+			</li>
+
+		</ul>
+
+	</div>
+</nav>

@@ -1,7 +1,6 @@
 class AppHeaderCtrl {
 	constructor(AppConstants, User, $scope) {
 		'ngInject';
-
 		this.appName = AppConstants.appName;
 		this.currentUser = User.current;
 		this.logout = ()=> {

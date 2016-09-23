@@ -1,7 +1,7 @@
 import angular from 'angular/index';
 
 // Create the module where our functionality can attach to
-let authModule = angular.module('app.auth', []);
+let authModule = angular.module('landing.auth', []);
 
 // Include our UI-Router config settings
 import AuthConfig from './auth.config';

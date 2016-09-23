@@ -39,7 +39,7 @@ export default class JWT {
 				return res;
 			}, (err)=> {
 				this.destroy();
-				this._$state.go("app.login");
+				this._$state.go("landing.login");
 				return err;
 			});
 		}
