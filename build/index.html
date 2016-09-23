@@ -3,12 +3,14 @@
 <head>
 	<meta charset="utf-8">
 	<title data-ng-bind="pageTitle"></title>
+
+	<link rel="stylesheet" href="/scripts/vendor/font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="/styles/style.css">
 	<base href="/">
 </head>
-<body>
+<body class="page">
 
-<div data-ui-view></div>
+<div data-ui-view class="page__wrapper"></div>
 
 <script type="text/javascript" src="/scripts/systemjs/system.js"></script>
 <script>

@@ -1,0 +1,11 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700';
+
+// Icon font
+@font-face {
+	font-family: 'rodin-icon';
+	src: url('#{$icomoon-font-path}/rodin-icon.ttf') format('truetype'),
+	url('#{$icomoon-font-path}/rodin-icon.woff') format('woff'),
+	url('#{$icomoon-font-path}/rodin-icon.svg#rodin-icon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

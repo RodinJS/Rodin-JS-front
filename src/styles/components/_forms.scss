@@ -1,0 +1,54 @@
+.from-wrapper{
+	.form-group{
+		position: relative;
+		.form-control{
+			font-size: 12px;
+			color: $white;
+			border: none;
+			border-radius: 0;
+			height: 42px;
+			background-color: $colorSemiWhite;
+			padding: 12px 10px;
+			@include placeholder($color: $white);
+			&:focus{
+				@include placeholder($color: transparent);
+			}
+			&:focus + .float-label{
+				bottom: 100%;
+				left: 0;
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+		.control-label{
+			font-size: 8px;
+			color: $white;
+			margin-bottom: 3px;
+			font-weight: 400;
+			position: absolute;
+			bottom: 50%;
+			left: 10px;
+			transform: translateY(50%);
+			visibility: hidden;
+			opacity: 0;
+			transition: all .3s;
+		}
+	}
+}
+
+// medium
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+
+}
+// tablet
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+}
+// phone + tablet
+@media (max-width: $screen-sm-max) {
+
+}
+// phone
+@media (max-width: $screen-xs-max) {
+
+}
