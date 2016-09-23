@@ -9,6 +9,9 @@ import appConfig  from './config/app.config';
 import appRun     from './config/app.run';
 
 // Import our dependencies
+import 'angular-animate/angular-animate.min';
+import 'angular-touch/angular-touch.min';
+
 import 'angular-ui-router/release/angular-ui-router.min';
 import 'a0-angular-storage/dist/angular-storage.min';
 import 'lodash/dist/lodash.min';
@@ -25,6 +28,8 @@ import './pages/index';
 
 // Create and bootstrap application
 const requires = [
+	'ngAnimate',
+	'ngTouch',
 	'ui.router',
 	'angular-storage',
 	'restangular',
