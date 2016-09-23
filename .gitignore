@@ -81,4 +81,5 @@ Temporary Items
 .Trash-*
 /node_modules/
 /build/scripts/vendor/
-src/app/controllers/
+/build
+/src/app/config/app.templates.js
