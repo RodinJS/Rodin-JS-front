@@ -7,17 +7,21 @@ import './auth/index';
 
 import './home/index';
 
+import './error/index';
+
 import './dashboard/index';
 
-import './error/index';
+import './profile/index';
 
 
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
 	'landing.auth',
 	'landing.home',
-	'app.dashboard',
 	'landing.error',
+
+	'app.dashboard',
+	'app.profile',
 ]);
 
 
