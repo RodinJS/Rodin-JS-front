@@ -80,6 +80,6 @@ Temporary Items
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 /node_modules/
-/build/scripts/vendor/
 /build
+#/build/scripts/vendor/
 /src/app/config/app.templates.js
