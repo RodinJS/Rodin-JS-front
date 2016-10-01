@@ -29,7 +29,7 @@
 								<ul class="item-action-list">
 									<li><a href=""><i class="icon icon-link"></i></a>
 									</li>
-									<li><a href=""><i class="icon icon-edit"></i></a>
+									<li><a href="{{$ctrl.protocol + '//editor.' + $ctrl.domain + '/' + $ctrl.user.username + '/' + project._id}}"><i class="icon icon-edit"></i></a>
 									</li>
 									<li><a ui-sref="app.editproject({projectId: project._id})"><i class="icon icon-settings"></i></a>
 									</li>
@@ -42,7 +42,7 @@
 							</div>
 						</div>
 						<a href="" class="dashboard-item-link">
-							<h1 class="box-title"><i class="icon icon-lock"></i>{{project.name}}</h1>
+							<h1 class="box-title"><i ng-if="!project.public" class="icon icon-lock"></i>{{project.name}}</h1>
 							<p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
 							</p>
 						</a>

@@ -56,7 +56,7 @@ class User {
 	update(userId = null, fields = {}) {
 		let deferred = this._$q.defer();
 
-		this._User.put(fields).then((result) => {
+		this._User.one(fields.username).customPUT(fields).then((result) => {
 			this._Validator.validateHTTP(result);
 			if (this._Validator.isValidHTTP()) {
 				let response = this._Validator.getDataHTTP();
@@ -66,7 +66,25 @@ class User {
 			}
 		}, (result) => {
 			this._Validator.validateHTTP(result.data);
+			deferred.reject(this._Validator.getErrorsHTTP());
+		});
 
+		return deferred.promise;
+	}
+
+	updatePassword(username = null, fields = {}) {
+		let deferred = this._$q.defer();
+
+		this._User.one(username).one('password').customPUT(fields).then((result) => {
+			this._Validator.validateHTTP(result);
+			if (this._Validator.isValidHTTP()) {
+				let response = this._Validator.getDataHTTP();
+				deferred.resolve(response);
+			} else {
+				deferred.reject(this._Validator.getErrorsHTTP());
+			}
+		}, (result) => {
+			this._Validator.validateHTTP(result.data);
 			deferred.reject(this._Validator.getErrorsHTTP());
 		});
 

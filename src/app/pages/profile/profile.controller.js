@@ -1,64 +1,115 @@
 class ProfileCtrl {
-	constructor(AppConstants, User, $scope, Validator, Error) {
-		'ngInject';
+    constructor(AppConstants, User, $scope, Validator, Error) {
+        'ngInject';
 
-		this.appName = AppConstants.appName;
-		this.currentUser = User.current;
-		this.formData = {};
+        this.appName = AppConstants.appName;
+        this.currentUser = User.current;
+        this._Validator = Validator;
+        this._User = User;
+        this.formData = {};
 
-		$scope.$watch('User.current', (newUser) => {
-			this.currentUser = newUser;
-		});
+        this.showLoader = false;
 
-	}
+        this.patterns = {
+            email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        };
 
-	updateProfile(isValidForm = true) {
-		console.log("currentUser", this.currentUser);
-		if (!isValidForm) {
-			return;
-		}
+        this.newPassword = {
+            password: "",
+            confirm: ""
+        };
 
+        this.passwordChangeResponse = '';
+    }
 
-		Validator.validate([
-			{
-				name: "avatar",
-				value: scope.UserGeneralInfo.avatar,
-				conditions: {}
-			},
-			{
-				name: "name",
-				value: scope.UserGeneralInfo.name,
-				conditions: {
-					required: true,
-					pattern: scope.patterns.name
-				}
-			},
-			{
-				name: "state",
-				value: scope.UserGeneralInfo.state,
-				conditions: {}
-			},
-			{
-				name: "country",
-				value: scope.UserGeneralInfo.country,
-				conditions: {}
-			}
-		]);
+    updateProfile(isValidForm = true) {
+        if (!isValidForm) {
+            return;
+        }
 
-		if (Validator.isValid()) {
-			var data = Validator.getData();
-			data.avatar = data.avatar || "";
+        const Validator = new this._Validator();
 
-			User.update(Validator.getData()).then(function (data) {
-				Notification.success('Your profile successfully updated.');
-			}, function (data) {
-				Error.show(data, scope.profileForm, scope);
-			});
-		} else {
-			Error.show(Validator.getErrors(), this.formData, scope);
-		}
+        Validator.validate([
+            {
+                name: "profile.firstName",
+                value: this.currentUser.profile.firstName,
+                conditions: {}
+            },
+            {
+                name: "profile.lastName",
+                value: this.currentUser.profile.lastName,
+                conditions: {}
+            },
+            {
+                name: 'email',
+                value: this.currentUser.email,
+                conditions: {
+                    pattern: this.patterns.email,
+                    required: true
+                }
+            },
+            {
+                name: 'username',
+                value: this.currentUser.username,
+                conditions: {}
+            }
+        ]);
 
-	}
+        if (Validator.isValid()) {
+            var data = Validator.getData();
+
+            this.showLoader = true;
+            this._User.update(null, data).then((data) => {
+                this.showLoader = false;
+                console.log("success");
+            }, (data) => {
+                this.showLoader = false;
+                console.log("error");
+            });
+        } else {
+            console.log(Validator.getErrors());
+        }
+    }
+
+    updatePassword(isValidForm = true) {
+        if (!isValidForm) {
+            return;
+        }
+
+        const Validator = new this._Validator();
+
+        Validator.validate([
+            {
+                name: "password",
+                value: this.newPassword.password,
+                conditions: {
+                    required: true,
+                }
+            },
+            {
+                name: "confirm",
+                value: this.newPassword.confirm,
+                conditions: {
+                    required: true
+                }
+            }
+        ]);
+
+        if (Validator.isValid()) {
+            var data = Validator.getData();
+
+            this.showLoader = true;
+            this._User.updatePassword(this.currentUser.username, data).then((data) => {
+                this.showLoader = false;
+                this.passwordChangeResponse = 'success';
+            }, (data) => {
+                this.showLoader = false;
+                this.passwordChangeResponse = 'error';
+            });
+        } else {
+            console.log(Validator.getErrors());
+        }
+    }
 }
 
 export default ProfileCtrl;

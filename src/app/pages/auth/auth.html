@@ -21,9 +21,9 @@
 
 						<fieldset class="form-group">
 							<div class="row">
-								<div class="center-block">
+								<div class="center-block landing-input-block margin-top-20">
 									<div class="form-wrapper">
-										<div class="form-group">
+										<div class="form-group" custom-input>
 											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.username">
 											<label class="control-label float-label">Username</label>
 										</div>
@@ -34,9 +34,9 @@
 
 						<fieldset class="form-group">
 							<div class="row">
-								<div class="center-block">
+								<div class="center-block landing-input-block">
 									<div class="form-wrapper">
-										<div class="form-group">
+										<div class="form-group" custom-input>
 											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.password">
 											<label class="control-label float-label">Password</label>
 										</div>
@@ -45,64 +45,93 @@
 							</div>
 						</fieldset>
 
-						<!--<button class="btn btn-lg btn-primary pull-xs-right"-->
-						        <!--type="submit"-->
-						        <!--data-ng-bind="::$ctrl.title">-->
-						<!--</button>-->
-						<div class="row">
-							<div class="col-md-6">
-								<div class="btn-wrapper">
-									<button type="submit" class="btn btn-primary">Sign in</button>
+						<div class="section section-project-content">
+							<div class="row">
+								<div class="center-block">
+									<div class="btn-wrapper">
+										<button type="submit" class="btn btn-primary border-orange">Sign in</button>
+									</div>
 								</div>
 							</div>
 						</div>
-
 					</fieldset>
 
 					<fieldset data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'forgot'">
 
 						<fieldset class="form-group">
-							<input class="form-control form-control-lg"
-							       type="email"
-							       placeholder="Email"
-							       data-ng-model="$ctrl.formData.email"/>
+							<div class="row">
+								<div class="center-block landing-input-block margin-top-20">
+									<div class="form-wrapper">
+										<div class="form-group" custom-input>
+											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.email">
+											<label class="control-label float-label">Email</label>
+										</div>
+									</div>
+								</div>
+							</div>
 						</fieldset>
 
-						<button class="btn btn-lg btn-primary pull-xs-right"
-						        type="submit"
-						        data-ng-bind="::$ctrl.title">
-						</button>
-
+						<div class="section section-project-content">
+							<div class="row">
+								<div class="center-block">
+									<div class="btn-wrapper">
+										<button type="submit" class="btn btn-primary border-orange">Send Email</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</fieldset>
 
 					<fieldset data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'register'">
 
 						<fieldset class="form-group">
-							<input class="form-control form-control-lg"
-							       type="text"
-							       placeholder="Username"
-							       data-ng-model="$ctrl.formData.username"/>
+							<div class="row">
+								<div class="center-block landing-input-block margin-top-20">
+									<div class="form-wrapper">
+										<div class="form-group" custom-input>
+											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.username">
+											<label class="control-label float-label">Username</label>
+										</div>
+									</div>
+								</div>
+							</div>
 						</fieldset>
 
 						<fieldset class="form-group">
-							<input class="form-control form-control-lg"
-							       type="email"
-							       placeholder="Email"
-							       data-ng-model="$ctrl.formData.email"/>
+							<div class="row">
+								<div class="center-block landing-input-block">
+									<div class="form-wrapper">
+										<div class="form-group" custom-input>
+											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.email">
+											<label class="control-label float-label">Email</label>
+										</div>
+									</div>
+								</div>
+							</div>
 						</fieldset>
 
 						<fieldset class="form-group">
-							<input class="form-control form-control-lg"
-							       type="password"
-							       placeholder="Password"
-							       data-ng-model="$ctrl.formData.password"/>
+							<div class="row">
+								<div class="center-block landing-input-block">
+									<div class="form-wrapper">
+										<div class="form-group" custom-input>
+											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.password">
+											<label class="control-label float-label">Password</label>
+										</div>
+									</div>
+								</div>
+							</div>
 						</fieldset>
 
-						<button class="btn btn-lg btn-primary pull-xs-right"
-						        type="submit"
-						        data-ng-bind="::$ctrl.title">
-						</button>
-
+						<div class="section section-project-content">
+							<div class="row">
+								<div class="center-block">
+									<div class="btn-wrapper">
+										<button type="submit" class="btn btn-primary border-orange">Sign up</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</fieldset>
 
 				</form>

@@ -47,11 +47,7 @@
                 </ul>
             </div>
             <div class="section section-switch">
-                <div class="switch-cont active">
-                    <span class="on">ON</span>
-                    <div class="switch-btn"></div>
-                    <span class="off">OFF</span>
-                </div>
+                <switch id="enabled" data-name="enabled" data-ng-model="$ctrl.project.public" data-on="ON" data-off="OFF" class="green"></switch>
                 <h5 class="switch-box-title">Showcase This Space</h5>
                 <p class="description text-small text-down">Showcased sites appear in your public Webflow profile and In our Discover pages.</p>
             </div>
@@ -60,16 +56,16 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-wrapper">
-                            <div class="form-group is-dirty">
+                            <div class="form-group" custom-input>
                                 <input type="email" class="form-control" placeholder="" data-ng-model="$ctrl.project.name">
                                 <label class="control-label float-label">Space Name</label>
                             </div>
                             <p class="text-small description">This is the Space title within Webflow You can update what visitors see in search results in each page s settings in The Designer</p>
-                            <div class="form-group is-dirty">
-                                <input type="email" class="form-control" placeholder="" value="">
+                            <div class="form-group" custom-input>
+                                <input type="email" class="form-control" placeholder="" value="" ng-disabled="true">
                                 <label class="control-label float-label">
                                     Url
-                                    <!-- <span class="transparent-color">.rodin.io</span> -->
+                                     <!--<span class="transparent-color">.rodin.io</span>-->
                                 </label>
                             </div>
                             <p class="text-small description">Must be alphanumeric (A-Z, 0-9) wilh dashes between words Th« site nasnT been published yet.</p>

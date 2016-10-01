@@ -9,7 +9,10 @@ class AppHeaderCtrl {
 
 		$scope.$watch('User.current', (newUser) => {
 			this.currentUser = newUser;
-		})
+		});
+
+		this.user = User.current;
+		console.log(this.user);
 	}
 }
 

@@ -55,7 +55,7 @@ class Project {
 	update(projectId = null, fields = {}) {
 		let deferred = this._$q.defer();
 
-		this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags'])).then((result) => {
+		this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'public'])).then((result) => {
 			this._Validator.validateHTTP(result);
 			if (this._Validator.isValidHTTP()) {
 				let response = this._Validator.getDataHTTP();

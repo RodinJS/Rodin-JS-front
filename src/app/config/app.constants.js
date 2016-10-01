@@ -1,10 +1,13 @@
 /**
  * Created by kh.levon98 on 13-Sep-16.
  */
+import '../helpers';
+
 const AppConstants = {
+	domain: window.extractDomain(),
 	env: "dev",
 	prodAPI: 'https://api.rodinapp.com/api',
-	devAPI: 'https://api.rodinapp.com/api',
+	devAPI: 'http://localhost:3000/api',
 	jwtKey: 'jwtToken',
 	appName: 'Rodin',
 	ERRORCODES: {
@@ -103,5 +106,7 @@ const AppConstants = {
 		}
 	}
 };
+
+console.log(AppConstants.domain);
 
 export default AppConstants;

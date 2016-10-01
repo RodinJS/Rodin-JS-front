@@ -12,4 +12,7 @@ componentsModule.directive('showAuthed', ShowAuthed);
 import CheckForUnique from './check-for-unique/index';
 componentsModule.directive('checkForUnique', CheckForUnique);
 
+import CustomInput from './custom-input/index';
+componentsModule.directive('customInput', CustomInput);
+
 export default componentsModule;

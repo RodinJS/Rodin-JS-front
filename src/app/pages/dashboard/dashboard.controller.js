@@ -1,13 +1,16 @@
 class DashboardCtrl {
-	constructor(AppConstants, Project) {
+	constructor(AppConstants, Project, User) {
 		'ngInject';
+		this.user = User.current;
 		this.appName = AppConstants.appName;
+		this.domain = AppConstants.domain;
+		this.protocol = location.protocol;
 		this.Project = Project;
 
 		this.getProjects();
 		this.projects = [];
 		this.showLoader = true;
-		this.queryString = ""
+		this.queryString = "";
 	}
 
 	getProjects() {

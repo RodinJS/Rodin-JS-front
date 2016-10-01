@@ -77,13 +77,13 @@
           				<span class="avatar">
           					<span class="avatar-name">R</span>
           				</span>
-          				Ryan Schneider
+          				{{$ctrl.user.username}}
           				<i class="fa fa-angle-down"></i>
       				</a>
           			<ul class="dropdown-menu dropdown-menu-account" uib-dropdown-menu>
         				<li>
-    						<h2>Ryan Schneider</h2>
-    						<a href="mailto:lwarren@quinu.info" class="mail-link">lwarren@quinu.info</a>
+    						<h2>{{$ctrl.user.username}}</h2>
+    						<a href="mailto:lwarren@quinu.info" class="mail-link">{{$ctrl.user.email}}</a>
     					</li>
             			<li><a data-ui-sref-active="active" ui-sref="app.profile" data-ui-sref="app.profile">EDIT Profile</a></li>
             			<li><a data-ui-sref-active="active" href="" ui-sref="app.plans" class="plan-link">Upgrade Your Plan</a></li>
