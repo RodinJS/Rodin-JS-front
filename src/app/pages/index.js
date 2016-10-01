@@ -13,6 +13,15 @@ import './dashboard/index';
 
 import './profile/index';
 
+import './project/index';
+
+import './editproject/index';
+
+import './plans/index';
+
+import './billing/index';
+
+import './purchases/index';
 
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
@@ -22,6 +31,11 @@ let pagesModule = angular.module('app.pages', [
 
 	'app.dashboard',
 	'app.profile',
+	'app.project',
+	'app.editproject',
+	'app.plans',
+	'app.billing',
+	'app.purchases'
 ]);
 
 

@@ -1,8 +1,8 @@
 <div class="auth-page">
 	<div class="container page">
-		<div class="row">
+		<div class="row" style="text-align: center">
 
-			<div class="col-md-6 offset-md-3 col-xs-12">
+			<div class="offset-md-6 col-xs-12">
 				<h1 class="text-xs-center" data-ng-bind="::$ctrl.title"></h1>
 				<p class="text-xs-center">
 					<a data-ui-sref="landing.login"
@@ -20,23 +20,42 @@
 					<fieldset data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'login'">
 
 						<fieldset class="form-group">
-							<input class="form-control form-control-lg"
-							       type="text"
-							       placeholder="Username"
-							       data-ng-model="$ctrl.formData.username"/>
+							<div class="row">
+								<div class="center-block">
+									<div class="form-wrapper">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.username">
+											<label class="control-label float-label">Username</label>
+										</div>
+									</div>
+								</div>
+							</div>
 						</fieldset>
 
 						<fieldset class="form-group">
-							<input class="form-control form-control-lg"
-							       type="password"
-							       placeholder="Password"
-							       data-ng-model="$ctrl.formData.password"/>
+							<div class="row">
+								<div class="center-block">
+									<div class="form-wrapper">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.password">
+											<label class="control-label float-label">Password</label>
+										</div>
+									</div>
+								</div>
+							</div>
 						</fieldset>
 
-						<button class="btn btn-lg btn-primary pull-xs-right"
-						        type="submit"
-						        data-ng-bind="::$ctrl.title">
-						</button>
+						<!--<button class="btn btn-lg btn-primary pull-xs-right"-->
+						        <!--type="submit"-->
+						        <!--data-ng-bind="::$ctrl.title">-->
+						<!--</button>-->
+						<div class="row">
+							<div class="col-md-6">
+								<div class="btn-wrapper">
+									<button type="submit" class="btn btn-primary">Sign in</button>
+								</div>
+							</div>
+						</div>
 
 					</fieldset>
 

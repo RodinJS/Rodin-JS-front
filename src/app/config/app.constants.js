@@ -2,12 +2,17 @@
  * Created by kh.levon98 on 13-Sep-16.
  */
 const AppConstants = {
-	env: "prod",
-	prodAPI: 'http://dev.yvn.io/api',
-	devAPI: 'http://127.0.0.1:3000/api',
+	env: "dev",
+	prodAPI: 'https://api.rodinapp.com/api',
+	devAPI: 'https://api.rodinapp.com/api',
 	jwtKey: 'jwtToken',
 	appName: 'Rodin',
 	ERRORCODES: {
+		"404": {
+			"message": "NOT_FOUND",
+			"field": ""
+		},
+		//////
 		"310": {
 			"message": "WRONG_USERNAME_OR_PASSWORD",
 			"field": ["username", "email"]

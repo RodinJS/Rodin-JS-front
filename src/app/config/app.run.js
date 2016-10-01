@@ -26,6 +26,7 @@ function AppRun(AppConstants, $rootScope, Restangular, JWT, $state) {
 	// change page title based on state
 	$rootScope.$on('$stateChangeSuccess', (event, toState) => {
 		$rootScope.setPageTitle(toState.title);
+		$rootScope.setPageClass(toState.pageClass);
 	});
 
 	$rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
@@ -46,6 +47,10 @@ function AppRun(AppConstants, $rootScope, Restangular, JWT, $state) {
 		$rootScope.pageTitle += AppConstants.appName;
 	};
 
+	$rootScope.pageClass = "";
+	$rootScope.setPageClass = (pageClass = "") => {
+		$rootScope.pageClass = pageClass;
+	}
 }
 
 export default AppRun;

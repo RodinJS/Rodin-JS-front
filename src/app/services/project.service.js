@@ -7,7 +7,7 @@ class Project {
 		this._JWT = JWT;
 		this._AppConstants = AppConstants;
 
-		this._Projects = Restangular.all('projects');
+		this._Projects = Restangular.all('project');
 		this._$state = $state;
 		this._$q = $q;
 		this._Validator = new Validator();
@@ -34,7 +34,7 @@ class Project {
 
 	getList(fields = {}) {
 		let deferred = this._$q.defer();
-		this._Projects.getList(fields).then((result) => {
+		this._Projects.one('').get(fields).then((result) => {
 			this._Validator.validateHTTP(result);
 			if (this._Validator.isValidHTTP()) {
 				let response = this._Validator.getDataHTTP();
@@ -55,7 +55,7 @@ class Project {
 	update(projectId = null, fields = {}) {
 		let deferred = this._$q.defer();
 
-		this._Projects.one(projectId).put(fields).then((result) => {
+		this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags'])).then((result) => {
 			this._Validator.validateHTTP(result);
 			if (this._Validator.isValidHTTP()) {
 				let response = this._Validator.getDataHTTP();

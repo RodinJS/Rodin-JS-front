@@ -3,6 +3,8 @@
  */
 import angular from 'angular/index';
 
+import './helpers';
+
 // Import our app config files
 import constants  from './config/app.constants';
 import appConfig  from './config/app.config';

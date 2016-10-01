@@ -1,0 +1,322 @@
+<div class="page__wrapper">
+
+    <div class="main-container">
+        <h1 class="main-title">Space/<i class="icon icon-lock"></i><span class="user-name">{{$ctrl.project.name}}</span></h1>
+        <div class="page-content">
+            <div class="content-navbar">
+                <ul class="navbar-list">
+                    <li class="active"><a href="settings.html">Settings</a>
+                    </li>
+                    <li class=""><a href="cms.html">CMS</a>
+                    </li>
+                    <li class=""><a href="">Hosting</a>
+                    </li>
+                    <li class=""><a href="">Bilding</a>
+                    </li>
+                    <li class=""><a href="">SEO</a>
+                    </li>
+                    <li class=""><a href="">Forms</a>
+                    </li>
+                    <li class=""><a href="">Fonts</a>
+                    </li>
+                    <li class=""><a href="">Backups</a>
+                    </li>
+                    <li class=""><a href="">Analytics</a>
+                    </li>
+                    <li class=""><a href="">Custom Code</a>
+                    </li>
+                    <li class="other-links dropdown">
+                        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="icon icon-more"></i>
+                        </a>
+                        <ul aria-labelledby="dLabel" class="dropdown-menu dropdown-menu-more">
+                            <li><a href="#">Editor</a>
+                            </li>
+                            <li><a href="#">Designer</a>
+                            </li>
+                            <li><a href="#">Duplicate</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="other-links"><a><i class="icon icon-delete"></i></a><span>Delete</span>
+                    </li>
+                    <li class="other-links"><a><i class="icon icon-link"></i></a><span>Share</span>
+                    </li>
+                    <li class="other-links"><a><i class="icon icon-publish"></i></a><span>Publish</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="section section-switch">
+                <div class="switch-cont active">
+                    <span class="on">ON</span>
+                    <div class="switch-btn"></div>
+                    <span class="off">OFF</span>
+                </div>
+                <h5 class="switch-box-title">Showcase This Space</h5>
+                <p class="description text-small text-down">Showcased sites appear in your public Webflow profile and In our Discover pages.</p>
+            </div>
+            <div class="section section-general-setting">
+                <h2 class="section-title">General Settings</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-wrapper">
+                            <div class="form-group is-dirty">
+                                <input type="email" class="form-control" placeholder="" data-ng-model="$ctrl.project.name">
+                                <label class="control-label float-label">Space Name</label>
+                            </div>
+                            <p class="text-small description">This is the Space title within Webflow You can update what visitors see in search results in each page s settings in The Designer</p>
+                            <div class="form-group is-dirty">
+                                <input type="email" class="form-control" placeholder="" value="">
+                                <label class="control-label float-label">
+                                    Url
+                                    <!-- <span class="transparent-color">.rodin.io</span> -->
+                                </label>
+                            </div>
+                            <p class="text-small description">Must be alphanumeric (A-Z, 0-9) wilh dashes between words Th« site nasnT been published yet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section section-vr-space">
+                <h2 class="section-title">VR space icons</h2>
+                <!--<div class="drag-cont">
+            <div class="drag-item first">
+                <h5 class="section-small-title">Webclip</h5>
+                <p class="text-small description">Upload a <span>256 x 256 pixel</span> nebdip image. The icon
+                    shows up when your websrte
+                    link s saved to an iPhone home screen</p>
+                <div class="drag-area first">
+                    <p class="center-row">256 x 256</p>
+                    <p class="drag-instruct">Drag or <span>Click</span></p>
+                </div>
+            </div>
+            <div class="drag-item">
+                <h5 class="section-small-title">Favicon</h5>
+                <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon
+                    image Supported image formats are .ico, .png, .gif and .jpg</p>
+                <div class="drag-area first">
+                    <p class="center-row">32 x 32</p>
+                    <p class="drag-instruct">Drag or Click </p>
+                </div>
+            </div>
+        </div>-->
+                <!--<div class="drag-cont">
+            <div class="drag-item first">
+                <h5 class="section-small-title">Webclip</h5>
+                <p class="text-small description">Upload a <span>256 x 256 pixel</span> nebdip image. The icon
+                    shows up when your websrte
+                    link s saved to an iPhone home screen</p>
+                <div class="drag-area drag-area-loading first">
+                    <div class="loaded"></div>
+                    <p class="drag-instruct">Loading</p>
+                </div>
+            </div>
+            <div class="drag-item">
+                <h5 class="section-small-title">Favicon</h5>
+                <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon
+                    image Supported image formats are .ico, .png, .gif and .jpg</p>
+                <div class="drag-area drag-area-loading first">
+                    <div class="loaded"></div>
+                    <p class="drag-instruct">Loading</p>
+                </div>
+            </div>
+        </div>-->
+                <!--<div class="drag-cont">
+            <div class="drag-item first">
+                <h5 class="section-small-title">Webclip</h5>
+                <p class="text-small description">Upload a <span>256 x 256 pixel</span> nebdip image. The icon
+                    shows up when your websrte
+                    link s saved to an iPhone home screen</p>
+                <div class="drag-area drag-area-loading add-img first">
+                    <img src="static/img/general/256img.png">
+                    <p class="drag-instruct">Imagename.png</p>
+                </div>
+            </div>
+            <div class="drag-item">
+                <h5 class="section-small-title">Favicon</h5>
+                <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon
+                    image Supported image formats are .ico, .png, .gif and .jpg</p>
+                <div class="drag-area drag-area-loading add-img first">
+                    <img src="static/img/general/32img.png">
+                    <p class="drag-instruct">Imagename.png</p>
+                </div>
+            </div>
+        </div>-->
+                <div class="drag-cont">
+                    <div class="drag-item first">
+                        <h5 class="section-small-title">Webclip</h5>
+                        <p class="text-small description">Upload a <span>256 x 256 pixel</span> nebdip image. The icon shows up when your websrte link s saved to an iPhone home screen</p>
+                        <div class="drag-area first">
+                            <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#thumbnail-img').click()">
+                                <i ng-if="!$ctrl.project.thumbnail" class="icon icon-invalid"></i>
+                                <img width="166" height="166" ng-src="{{$ctrl.project.thumbnail}}" ng-if="!!$ctrl.project.thumbnail" alt="">
+                            </div>
+                            <p class="drag-instruct">To try
+                                <span>
+                                    Again
+                                    <input class="hidden" type="file" id="thumbnail-img" data-ng-model="avatarUrl" accept="image/jpeg,image/jpg,image/png,"
+                                           onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)" name="avatar"/>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="drag-item">
+                        <h5 class="section-small-title">Favicon</h5>
+                        <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon image Supported image formats are .ico, .png, .gif and .jpg</p>
+                        <div class="drag-area first">
+                            <div class="center-row"><i class="icon icon-invalid"></i>
+                            </div>
+                            <p class="drag-instruct">To try <span>Again</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="section sit-time-zone">-->
+                <!--<h2 class="section-title">Site Time Zone</h2>-->
+                <!--<div class="form-wrapper">-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-6">-->
+                            <!--<div class="form-group loaded col-md-6 col-sm-12 col-sm-12 col-xs-12 clearfix select-group">-->
+                                <!--<select class="form-control selectpicker">-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                    <!--<option value="">Choose the time zone from this list</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="btn-primary-cont">-->
+                                <!--<span class="divider">or</span>-->
+                                <!--<button type="button" class="btn btn-primary active">Detect my time zone</button>-->
+                            <!--</div>-->
+                            <!--<div class="row">-->
+                                <!--<p class="col-md-7 text-small description">Time zone defaults to UTC, so setting it to your local time zone will improve any dat&'hme remind features of your dynamic content including relative date tillerng. It will also update any datedime-relaled elements-->
+                                    <!--of your existing dynamic content</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="section overview">
+                <h2 class="section-title">Overview</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table main-table">
+                            <tbody>
+                            <tr>
+                                <td class="text-primary"><span>Total Asset Size</span>
+                                </td>
+                                <td class="text-primary"><span>10.8 mb ( Files. Fonts, and Backups)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Last Published</span>
+                                </td>
+                                <td class="text-primary"><span>Never</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Template Of</span>
+                                </td>
+                                <td class="text-primary id"><span>530e6c3095aD4ec93c0002e4</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Last Updated</span>
+                                </td>
+                                <td class="text-primary"><span>25 minutes ago</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Created</span>
+                                </td>
+                                <td class="text-primary"><span>June 27th 2014.7:58:58 am</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Pages</span>
+                                </td>
+                                <td class="text-primary"><span>2</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Form Submissions</span>
+                                </td>
+                                <td class="text-primary"><span>0</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="section traffic-statistics last-section">
+                <h2 class="section-title">Traffic Statistics</h2>
+                <p class="text-small description">
+                    Statistics from the past <span>30 days</span> of traffic data
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table main-table">
+                            <tbody>
+                            <tr>
+                                <td class="text-primary"><span>Total Asset Size</span>
+                                </td>
+                                <td class="text-primary">0 views<span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Last Published</span>
+                                </td>
+                                <td class="text-primary">0 views<span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Template Of</span>
+                                </td>
+                                <td class="text-primary">946.0 Mb<span></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-project-content last-section">
+                <h2 class="section-title"> Content of the Project</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+                            <a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
+                        </div>
+                        <textarea data-ng-model="$ctrl.project.description" class="textarea-editor" id="editor"></textarea>
+                        <div class="btn-wrapper">
+                            <button type="button" ng-click="$ctrl.update()" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+
+</div>

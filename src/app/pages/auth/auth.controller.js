@@ -7,7 +7,6 @@ class AuthCtrl {
 
 		this.title = $state.current.title;
 		this.authType = $state.current.name.replace('landing.', '');
-
 	}
 
 	submitForm() {
@@ -37,8 +36,6 @@ class AuthCtrl {
 		} else {
 			this.isSubmitting = false;
 		}
-
-
 	}
 }
 
