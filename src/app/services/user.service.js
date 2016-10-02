@@ -72,10 +72,10 @@ class User {
 		return deferred.promise;
 	}
 
-	updatePassword(username = null, fields = {}) {
+	updatePassword(fields = {}) {
 		let deferred = this._$q.defer();
 
-		this._User.one(username).one('password').customPUT(fields).then((result) => {
+		this._User.one('password').customPUT(fields).then((result) => {
 			this._Validator.validateHTTP(result);
 			if (this._Validator.isValidHTTP()) {
 				let response = this._Validator.getDataHTTP();

@@ -6,6 +6,7 @@ class ProfileCtrl {
         this.currentUser = User.current;
         this._Validator = Validator;
         this._User = User;
+        this._$scope = $scope;
         this.formData = {};
 
         this.showLoader = false;
@@ -99,7 +100,7 @@ class ProfileCtrl {
             var data = Validator.getData();
 
             this.showLoader = true;
-            this._User.updatePassword(this.currentUser.username, data).then((data) => {
+            this._User.updatePassword(Object.filterByKeys(data, ['password'])).then((data) => {
                 this.showLoader = false;
                 this.passwordChangeResponse = 'success';
             }, (data) => {
@@ -109,6 +110,10 @@ class ProfileCtrl {
         } else {
             console.log(Validator.getErrors());
         }
+    }
+
+    confirmPassword() {
+        this._$scope.changePasswordForm.confirmPassword.$setValidity('match', this.newPassword.password == this.newPassword.confirm);
     }
 }
 

@@ -11,6 +11,12 @@ class DashboardCtrl {
         this.projects = [];
         this.showLoader = true;
         this.queryString = "";
+        this.timerToSearch = null;
+
+        this.newPassword = {
+            password: "",
+            confirm: ""
+        }
     }
 
     getProjects() {
@@ -27,12 +33,18 @@ class DashboardCtrl {
     }
 
     search() {
-        this.queryString = this.queryString.trim();
-        if (this.queryString.length < 3 && this.queryString !== "") {
+        if (this.queryString === "") {
+            return this.getProjects();
+        }
+
+        if (this.queryString.length < 3) {
             return;
         }
 
-        return this.getProjects();
+        clearTimeout(this.timerToSearch);
+        this.timerToSearch = setTimeout(() => {
+            this.getProjects();
+        }, 500);
     }
 }
 
