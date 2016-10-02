@@ -103,3 +103,49 @@
     }
   }
 }
+
+.dashboard-search {
+  position: relative;
+  display: inline-block;
+}
+
+.search-form {
+  input {
+    transition: all .5s ease;
+    padding: 0 !important;
+    border: 0 !important;
+    width: 0 !important;
+  }
+
+  label {
+    transition: all .5s ease;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    opacity: 0;
+  }
+
+  i {
+    cursor: pointer;
+    margin-top: 0 !important;
+    font-size: 25px !important;
+    transition: all .3s linear !important;
+    line-height: 44px !important;
+    top: 0 !important;
+  }
+
+  .is-dirty {
+    i {
+      font-size: 15px !important;
+    }
+
+    input {
+      width: 250px !important;
+      padding: 0 10px !important;
+      border: 1px !important;
+    }
+
+    label {
+      opacity: 1;
+    }
+  }
+}

@@ -9,6 +9,7 @@ function CustomInput($timeout) {
         link: function (scope, element, attrs, ngModel) {
             let dirty = false;
             const $elem = $(element);
+            const $i = $elem.find('i.search');
             const $input = $elem.find('input');
 
             if ($input.val() !== '') {
@@ -28,6 +29,8 @@ function CustomInput($timeout) {
                     $elem.removeClass('is-dirty');
                 }
             });
+
+            $i.on('click', () => dirty ? $input.blur() : $input.focus());
 
             scope.$watch(() => $input.val(), (newValue, oldValue) => {
                 if(newValue !== '' && !dirty) {
