@@ -125,7 +125,8 @@
                         <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
                           <a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
                         </div>
-                        <textarea data-ng-model="$ctrl.project.description" class="textarea-editor" id="editor"></textarea>
+                        <!--<textarea data-ng-model="$ctrl.project.description" class="textarea-editor" id="editor"></textarea>-->
+                        <div simditor ng-model="editor" placeholder="some placeholder"></div>
                         <div class="btn-wrapper">
                             <button type="button" ng-click="$ctrl.save()" class="btn btn-primary">Save</button>
                         </div>
