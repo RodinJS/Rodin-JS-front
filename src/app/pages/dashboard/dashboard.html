@@ -1,77 +1,78 @@
 <div class="page__wrapper">
 
-    <div class="main-container">
-        <div class="section-dashboard-action">
-            <div class="btn-action-wrapper clearfix">
-                <div class="pull-right">
-                    <a ui-sref="app.project" class="btn-add"><i class="icon icon-add"></i></a>
-                </div>
-                <div class="form-wrapper pull-right search-form">
-                    <div class="row">
-                        <div class="form-group pass-group" custom-input>
-                            <input type="text" class="form-control" placeholder="" data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
-                            <label class="control-label float-label">Name, Description or Meta tags</label>
-                            <i class="icon icon-search search"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-if="$ctrl.projects.length === 0" class="empty-dashboard-space">
-            <p class="text-primary">At this point you do not have more than one project</p>
-            <h2>
-                <a ui-sref="app.project">CREATE A NEW PROJECT</a>
-            </h2>
-        </div>
-        <div ng-if="$ctrl.projects.length !== 0" class="dashboard-content">
-            <div class="main-alert alert-warning">
-                <p class="text-action">
-                    <i class="icon icon-info"></i> You can access unlimited hosted sites but only 2 non hosted sites at
-                    once
-                    on your plan. To access your non hosted sites, <a href="" ui-sref="app.plans">upgrade your plan</a>
-                    or
-                    add hosting to an existing site.
-                </p>
-            </div>
-            <div class="row">
-                <div ng-repeat="project in $ctrl.projects" class="col-md-3">
-                    <div class="dashboard-content-item">
-                        <div class="item-content-wrapper">
-                            <div ng-if="!project.thumbnail" class="dashboard-content-img"
-                                 style="background-image: url(images/content/dashboard-content-img.jpg);"></div>
-                            <div ng-if="!!project.thumbnail" class="dashboard-content-img"
-                                 style="background-image: url({{project.thumbnail}})"></div>
-                            <div class="item-description">
-                                <ul class="item-action-list">
-                                    <li><a href=""><i class="icon icon-link"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{$ctrl.protocol + '//editor.' + $ctrl.domain + '/' + $ctrl.user.username + '/' + project._id}}"><i
-                                                class="icon icon-edit"></i></a>
-                                    </li>
-                                    <li><a ui-sref="app.editproject({projectId: project._id})"><i
-                                            class="icon icon-settings"></i></a>
-                                    </li>
-                                </ul>
-                                <h5>
-                                    <a href="" class="item-title-link">
-                                        ADD HOSTING TO UNLOCK
-                                    </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <a href="" class="dashboard-item-link">
-                            <h1 class="box-title"><i ng-if="!project.public" class="icon icon-lock"></i>{{project.name}}
-                            </h1>
-                            <p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="main-container">
+		<div class="section-dashboard-action">
+			<div class="btn-action-wrapper clearfix">
+				<div class="pull-right">
+					<a ui-sref="app.project" class="btn-add"><i class="icon icon-add"></i></a>
+				</div>
+				<div class="form-wrapper pull-right search-form">
+					<div class="row">
+						<div class="form-group pass-group" custom-input>
+							<input type="text" class="form-control" placeholder="" data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
+							<label class="control-label float-label">Name, Description or Meta tags</label>
+							<i class="icon icon-search search"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="$ctrl.projects.length === 0" class="empty-dashboard-space">
+			<p class="text-primary">At this point you do not have more than one project</p>
+			<h2>
+				<a ui-sref="app.project">CREATE A NEW PROJECT</a>
+			</h2>
+		</div>
+		<div ng-if="$ctrl.projects.length !== 0" class="dashboard-content">
+			<div class="main-alert alert-warning">
+				<p class="text-action">
+					<i class="icon icon-info"></i> You can access unlimited hosted sites but only 2 non hosted sites at
+					once
+					on your plan. To access your non hosted sites, <a href="" ui-sref="app.plans">upgrade your plan</a>
+					or
+					add hosting to an existing site.
+				</p>
+			</div>
+			<div class="row">
+				<div ng-repeat="project in $ctrl.projects" class="col-md-3">
+					<div class="dashboard-content-item">
+						<div class="item-content-wrapper">
+							<div ng-if="!project.thumbnail" class="dashboard-content-img"
+							     style="background-image: url(images/content/dashboard-content-img.jpg);"></div>
+							<div ng-if="!!project.thumbnail" class="dashboard-content-img"
+							     style="background-image: url({{project.thumbnail}})"></div>
+							<div class="item-description">
+								<ul class="item-action-list">
+									<li><a href=""><i class="icon icon-link"></i></a>
+									</li>
+									<li>
+										<a data-ng-href="{{$ctrl.editorUrl + project.root}}">
+											<i class="icon icon-edit"></i>
+										</a>
+									</li>
+									<li><a data-ui-sref="app.editproject({projectId: project._id})"><i
+										class="icon icon-settings"></i></a>
+									</li>
+								</ul>
+								<h5>
+									<a href="" class="item-title-link">
+										ADD HOSTING TO UNLOCK
+									</a>
+								</h5>
+							</div>
+						</div>
+						<a href="" class="dashboard-item-link">
+							<h1 class="box-title"><i ng-if="!project.public" class="icon icon-lock"></i>{{project.name}}
+							</h1>
+							<p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
+							</p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+	<div class="loader" data-ng-if="$ctrl.showLoader"></div>
 
 </div>

@@ -8,7 +8,9 @@ const AppConstants = {
 	env: "dev",
 	prodAPI: 'https://api.rodinapp.com/api',
 	devAPI: 'http://localhost:3000/api',
-	jwtKey: 'jwtToken',
+	prodEditor: 'https://editor.rodinapp.com/',
+	devEditor: 'http://localhost:8000/#/',
+	jwtKey: 'token',
 	appName: 'Rodin',
 	ERRORCODES: {
 		"404": {
