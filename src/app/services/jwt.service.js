@@ -12,7 +12,9 @@ export default class JWT {
 	}
 
 	save(token) {
-		this._$cookies.put(this._AppConstants.jwtKey, token, {});
+		this._$cookies.put(this._AppConstants.jwtKey, token, {
+			domain: "." + extractDomain()
+		});
 		this._update();
 	}
 
