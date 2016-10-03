@@ -52,15 +52,6 @@ function AppRun(AppConstants, $rootScope, Restangular, JWT, $state, User) {
 		$rootScope.pageClass = pageClass;
 	}
 
-	if (!JWT.get()) {
-		User.login({
-			username: "sculptor",
-			password: "demo",
-		}).then((res) => {
-			$state.go('app.dashboard');
-		})
-
-	}
 }
 
 export default AppRun;

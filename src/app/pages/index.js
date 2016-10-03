@@ -3,6 +3,8 @@
  */
 import angular from 'angular/index';
 
+import './demo/index';
+
 import './auth/index';
 
 import './home/index';
@@ -29,6 +31,7 @@ import './editproject-ios/index';
 let pagesModule = angular.module('app.pages', [
 	'landing.auth',
 	'landing.home',
+	'landing.demo',
 	'landing.error',
 
 	'app.dashboard',
