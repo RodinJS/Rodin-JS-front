@@ -2,7 +2,7 @@
  * Created by kh.levon98 on 20-Sep-16.
  */
 class User {
-	constructor(JWT, AppConstants, Restangular, Validator, $state, $q) {
+	constructor(JWT, AppConstants, Restangular, Validator, $state, $q, $timeout) {
 		'ngInject';
 
 		this._JWT = JWT;
@@ -12,6 +12,7 @@ class User {
 		this._Auth = Restangular.all('auth');
 		this._$state = $state;
 		this._$q = $q;
+		this._$timeout = $timeout;
 		this._Validator = new Validator();
 
 		this.current = null;
@@ -114,12 +115,15 @@ class User {
 	logout() {
 		this.current = null;
 		this._JWT.destroy();
-		this._$state.go(this._$state.$current, null, {reload: true});
+		this._$timeout(()=> {
+			this._$state.go(this._$state.$current, null, {reload: true});
+		}, 10);
 	}
 
 	verifyAuth() {
 		let deferred = this._$q.defer();
 		// check for JWT token
+		// console.log("verifyAuth", this._JWT.get())
 		if (!this._JWT.get()) {
 			deferred.resolve(false);
 			return deferred.promise;
