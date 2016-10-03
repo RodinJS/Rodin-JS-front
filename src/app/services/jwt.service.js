@@ -12,8 +12,8 @@ export default class JWT {
 	}
 
 	save(token) {
-		this._$cookies.put(this._AppConstants.jwtKey, token, {
-			domain: "." + extractDomain()
+		Cookies.set(this._AppConstants.jwtKey, token, {
+			domain: ".rodinapp.com"
 		});
 		this._update();
 	}
