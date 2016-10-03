@@ -1,4 +1,4 @@
-<div class="auth-page">
+<div class="auth-page hidden">
 	<div class="container page">
 		<div class="row" style="text-align: center">
 
@@ -9,10 +9,10 @@
 					   data-ng-show="$ctrl.authType === 'register'">
 						Have an account?
 					</a>
-					<a data-ui-sref="landing.register"
+					<!--<a data-ui-sref="landing.register"
 					   data-ng-show="$ctrl.authType === 'login'">
 						Need an account?
-					</a>
+					</a>-->
 				</p>
 
 				<form data-ng-submit="$ctrl.submitForm()">
@@ -37,7 +37,7 @@
 								<div class="center-block landing-input-block">
 									<div class="form-wrapper">
 										<div class="form-group" custom-input>
-											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.password">
+											<input type="password" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.password">
 											<label class="control-label float-label">Password</label>
 										</div>
 									</div>

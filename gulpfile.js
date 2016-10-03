@@ -47,7 +47,7 @@ const SYSTEMJS = ['src/systemjs/*.js'];
 const ASSISTS = ['src/assists/**/*.js'];
 const SASS = ['src/styles/**/*.scss', '!src/styles/{vendor,vendor/**}'];
 const FONT = ['src/fonts/**/*.{ttf,woff,woff2,eof,svg,eot,json,otf}'];
-const IMG = ['src/images/**/*.{jpg,jpeg,ico,png,svg,gif}'];
+const IMG = ['src/images/**/*.{jpg,jpeg,ico,png,svg,gif,json,xml}'];
 
 const AUTOPREFIXER_BROWSERS = [
     'ie >= 10',

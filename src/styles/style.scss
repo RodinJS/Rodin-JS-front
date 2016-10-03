@@ -1,6 +1,10 @@
 @import "/scripts/vendor/angular-ui-switch/angular-ui-switch.min.css";
 @import "_style";
 
+.form-wrapper .form-group.fixed-placeholder-group .form-control {
+  padding-left: 255px;
+}
+
 .loader {
   background-color: rgba(0, 0, 0, .5);
   background-image: url(../images/general/loader.gif);

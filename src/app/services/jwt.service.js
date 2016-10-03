@@ -13,7 +13,7 @@ export default class JWT {
 
 	save(token) {
 		Cookies.set(this._AppConstants.jwtKey, token, {
-			domain: ".rodinapp.com"
+			domain: (extractDomain() == "localhost" ? "localhost" : ".rodinapp.com")
 		});
 		this._update();
 	}

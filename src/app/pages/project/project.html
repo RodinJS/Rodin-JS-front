@@ -105,7 +105,7 @@
                         <div class="form-wrapper">
                             <div class="form-group fixed-placeholder-group is-focused">
                                 <input type="text" class="form-control" placeholder="typehereprojectname" value="" data-ng-model="$ctrl.project.name">
-                                <span class="text-primary fixed-placeholder">http/rodin.io/ryanschneider/post/</span>
+                                <span class="text-primary fixed-placeholder">https://api.rodinapp.com/preview/{{$ctrl.currentUser.username}}/</span>
                                 <label class="control-label float-label">Project Name</label>
                             </div>
                             <p class="text-small description">Is the name of your project, which will be displayed in the URL</p>
@@ -125,9 +125,9 @@
                         <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
                           <a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
                         </div>
-                        <textarea ui-tinymce="$ctrl.tinymceOptions" ng-model="$ctrl.project.description"></textarea>
+                        <textarea data-ui-tinymce="$ctrl.tinymceOptions" id="project_description" data-ng-model="projectDescription"></textarea>
                         <div class="btn-wrapper">
-                            <button type="button" ng-click="$ctrl.save()" class="btn btn-primary">Save</button>
+                            <button type="button" data-ng-click="$ctrl.save()" class="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </div>

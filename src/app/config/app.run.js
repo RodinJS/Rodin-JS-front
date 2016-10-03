@@ -1,7 +1,7 @@
 /**
  * Created by kh.levon98 on 13-Sep-16.
  */
-function AppRun(AppConstants, $rootScope, Restangular, JWT, $state) {
+function AppRun(AppConstants, $rootScope, Restangular, JWT, $state, User) {
 	'ngInject';
 
 	Restangular.addFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
@@ -50,6 +50,16 @@ function AppRun(AppConstants, $rootScope, Restangular, JWT, $state) {
 	$rootScope.pageClass = "";
 	$rootScope.setPageClass = (pageClass = "") => {
 		$rootScope.pageClass = pageClass;
+	}
+
+	if (!JWT.get()) {
+		User.login({
+			username: "sculptor",
+			password: "demo",
+		}).then((res) => {
+			$state.go('app.dashboard');
+		})
+
 	}
 }
 

@@ -13,6 +13,10 @@ const AppConstants = {
 	jwtKey: 'token',
 	appName: 'Rodin',
 	ERRORCODES: {
+		"400": {
+			"message": "BAD_REQUEST",
+			"field": ""
+		},
 		"404": {
 			"message": "NOT_FOUND",
 			"field": ""
