@@ -12,6 +12,7 @@
     "angular-touch": "^1.5.8",
     "font-awesome": "^4.6.3",
     "angular-ui-switch": "^0.1.1",
-    "angular-ui-tinymce": "latest"
+    "angular-ui-tinymce": "latest",
+    "jquery-form": "https://github.com/malsup/form.git#^3.46.0"
   }
 }

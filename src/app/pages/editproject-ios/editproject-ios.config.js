@@ -1,0 +1,20 @@
+function EditProjectIosConfig($stateProvider) {
+	'ngInject';
+
+	$stateProvider
+		.state('app.editprojectIos', {
+			url: '/project/:projectId/ios',
+			controller: 'EditProjectIosCtrl',
+			controllerAs: '$ctrl',
+			templateUrl: 'pages/editproject-ios/editproject-ios.html',
+			title: 'EditProjectIos',
+			pageClass: 'page-account',
+			resolve: {
+				auth: function (User) {
+					return User.ensureAuthIs(true);
+				}
+			}
+		});
+}
+
+export default EditProjectIosConfig;

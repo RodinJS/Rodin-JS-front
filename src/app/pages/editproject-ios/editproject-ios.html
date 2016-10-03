@@ -1,0 +1,188 @@
+<div class="page__wrapper">
+    <div class="main-container development-container">
+        <div class="main-title-wrapper">
+            <h1 class="main-title">Build/<i class="icon icon-lock"></i><span class="user-name text-white">{{$ctrl.project.name}}</span>
+            </h1>
+        </div>
+        <div class="page-content">
+            <div class="content-navbar">
+                <ul class="navbar-list">
+                    <li class=""><a ui-sref="app.editproject({projectId: $ctrl.project._id})">Settings</a>
+                    </li>
+
+                    <li class="active"><a ui-sref="app.editprojectIos({projectId: $ctrl.project._id})">IOS</a>
+                    </li>
+                    <li class=""><a ui-sref="app.editprojectIos">Android</a>
+                    </li>
+                    <li class=""><a ui-sref="app.editprojectIos">Desctop</a>
+                    </li>
+                    <li class=""><a ui-sref="app.editprojectIos">Web</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="section-wrapper">
+                <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs">
+                    <div class="section">
+                        <h2 class="section-title">iOS required fields</h2>
+                        <div class="required-field-item">
+                            <ul class="field-intruction">
+                                <!--<li>App Name - Display name of your app</li>-->
+                                <li>
+                                    <div class="form-wrapper">
+                                        <div class="form-group" custom-input
+                                             data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
+                                            <input type="text" class="form-control" placeholder=""
+                                                   data-ng-model="$ctrl.project.ios.name"
+                                                   name="displayName"
+                                                   required
+                                                   data-ng-focus="configs.displayName.focused = true">
+                                            <label class="control-label float-label">Display name</label>
+                                        </div>
+                                        <p class="text-small description">App Name - Display name of your app</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-wrapper">
+                                        <div class="form-group" custom-input
+                                             data-ng-class="{'has-error': configs.bundle.$invalid && configs.bundle.focused, 'has-success': configs.bundle.$valid && configs.bundle.focused}">
+                                        <input type="text" class="form-control" placeholder=""
+                                               data-ng-model="$ctrl.project.ios.bundle"
+                                               name="bundle"
+                                               required
+                                               ng-pattern="$ctrl.patterns.bundle"
+                                               data-ng-focus="configs.bundle.focused = true">
+                                        <label class="control-label float-label">Bundle Identifier</label>
+                                        </div>
+                                        <p class="text-small description">Bundle Identifier - A bundle ID precisely
+                                            identifies a single app. A bundle ID is
+                                            used during the development process to provision devices and by the
+                                            operating system
+                                            when the apps distributed to customers.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-wrapper">
+                                        <div class="form-group" custom-input
+                                             data-ng-class="{'has-error': configs.developerId.$invalid && configs.developerId.focused, 'has-success': configs.developerId.$valid && configs.developerId.focused}">
+                                            <input type="text" class="form-control" placeholder=""
+                                                   data-ng-model="$ctrl.project.ios.developerId"
+                                                   name="developerId"
+                                                   required
+                                                   data-ng-focus="configs.developerId.focused = true">
+                                            <label class="control-label float-label">Developer ID.</label>
+                                        </div>
+                                        <p class="text-small description">Developer ID.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="padding-bottom-20">Provisioning Profile</div>
+                                    <div class="main-upload-area">
+                                        <label class="upload-area" ng-show="$ctrl.files.profile.name === ''">
+                                            <div class="area-content">.provision</div>
+                                            <input type="file"
+                                                   id="profile-file"
+                                                   name="profile"
+                                                   onchange="angular.element(this).scope().$ctrl.changeProfile(event)">
+                                        </label>
+                                        <img ng-show="$ctrl.files.profile.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
+                                             class="uploaded-file-icon">
+                                        <p class="area-label">{{!!$ctrl.files.profile.name ? $ctrl.files.profile.name : 'Drag or Click'}}</p>
+                                    </div>
+                                    <div class="required-field-actions margin-0-important">
+                                        <button type="button" class="btn btn-primary">browse</button>
+                                    </div>
+                                </li>
+                                <li class="margin-top-40">
+                                    <div style="margin-bottom: 20px">Distribution/Development certificate.</div>
+                                    <div class="main-upload-area">
+                                        <label class="upload-area" ng-show="$ctrl.files.cert.name === ''">
+                                            <div class="area-content">.p12</div>
+                                            <input type="file"
+                                                   id="cert-file"
+                                                   name="cert"
+                                                   onchange="angular.element(this).scope().$ctrl.changeCert(event)">
+                                        </label>
+                                        <img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
+                                             class="uploaded-file-icon">
+                                        <p class="area-label">{{ !!$ctrl.files.cert.name ? $ctrl.files.cert.name : 'Drag or Click' }}</p>
+                                    </div>
+                                    <div class="required-field-actions margin-0-important">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-click="document.querySelector('#cert-file').click()">browse</button>
+                                    </div>
+
+                                    <div class="form-wrapper margin-top-40">
+                                        <div class="form-group" custom-input
+                                             data-ng-class="{'has-error': configs.certPassword.$invalid && configs.certPassword.focused, 'has-success': configs.certPassword.$valid && configs.certPassword.focused}">
+                                            <input type="text" class="form-control" placeholder=""
+                                                   data-ng-model="$ctrl.project.ios.certPassword"
+                                                   name="certPassword"
+                                                   required
+                                                   data-ng-focus="configs.certPassword.focused = true">
+                                            <label class="control-label float-label">Certificate Password</label>
+                                        </div>
+                                        <p class="text-small description">Certificate Password.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div style="margin-bottom: 20px">App icon - upload .png 1024x1024</div>
+                                    <div class="main-upload-area">
+                                        <label class="upload-area" ng-show="$ctrl.files.icon.name === ''">
+                                            <div class="area-content">.png</div>
+                                            <input type="file"
+                                                   id="icon-file"
+                                                   name="icon-h"
+                                                   onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
+                                        </label>
+                                        <img ng-show="$ctrl.files.icon.name !== ''"
+                                             ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"
+                                             class="uploaded-file-icon">
+                                        <p class="area-label">{{ !!$ctrl.files.icon.name ? $ctrl.files.icon.name : 'Drag or Click' }}</p>
+                                    </div>
+                                    <div class="required-field-actions margin-0-important">
+                                        <button type="button" class="btn btn-primary">browse</button>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="required-field-actions">
+                                <button type="submit" class="btn btn-primary"
+                                        ng-click="$ctrl.build($event)">
+                                    <!--ng-disabled="!configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name"-->build</button>
+                                <a href="" class="btn btn-save" disabled>remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form action="" ng-if="$ctrl.project.ios.ready">
+                    <div class="section">
+                        <div class="required-field-item">
+                            <ul class="field-intruction">
+                                <li>The buying of large-screen TVs has absolutely skyrocketed lately</li>
+                                <li>The next section is “small size,” which is also important.</li>
+                                <li>Another problem area, but for LCDs, is “delay.”</li>
+                                <li>Next is viewing angle.</li>
+                            </ul>
+                            <!--<div class="main-upload-area">-->
+                            <!--<img src="images/general/file_icon_plist.png" alt="" width="60"-->
+                            <!--class="uploaded-file-icon">-->
+                            <!--<p class="area-label">esiminch.ipa</p>-->
+                            <!--</div>-->
+                            <div class="main-upload-area">
+                                <img src="images/general/file_icon_placeholder.png" alt="" width="60"
+                                     class="uploaded-file-icon">
+                                <p class="area-label"></p>
+                            </div>
+                            <div class="required-field-actions">
+                                <button type="button" class="btn btn-primary" disabled>download</button>
+                                <a href="" class="btn btn-save" disabled>cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+
+</div>

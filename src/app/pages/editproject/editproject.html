@@ -5,26 +5,36 @@
         <div class="page-content">
             <div class="content-navbar">
                 <ul class="navbar-list">
-                    <li class="active"><a href="settings.html">Settings</a>
+                    <li class="active"><a ui-sref="app.editproject({projectId: $ctrl.project._id})">Settings</a>
                     </li>
-                    <li class=""><a href="cms.html">CMS</a>
+
+                    <li class=""><a ui-sref="app.editprojectIos({projectId: $ctrl.project._id})">IOS</a>
                     </li>
-                    <li class=""><a href="">Hosting</a>
+                    <li class=""><a ui-sref="app.editproject">Android</a>
                     </li>
-                    <li class=""><a href="">Bilding</a>
+                    <li class=""><a ui-sref="app.editproject">Desctop</a>
                     </li>
-                    <li class=""><a href="">SEO</a>
+                    <li class=""><a ui-sref="app.editproject">Web</a>
                     </li>
-                    <li class=""><a href="">Forms</a>
-                    </li>
-                    <li class=""><a href="">Fonts</a>
-                    </li>
-                    <li class=""><a href="">Backups</a>
-                    </li>
-                    <li class=""><a href="">Analytics</a>
-                    </li>
-                    <li class=""><a href="">Custom Code</a>
-                    </li>
+
+                    <!--<li class=""><a href="cms.html">CMS</a>-->
+                    <!--</li>-->
+                    <!--<li class=""><a href="">Hosting</a>-->
+                    <!--</li>-->
+                    <!--<li class=""><a href="">Bilding</a>-->
+                    <!--</li>-->
+                    <!--<li class=""><a href="">SEO</a>-->
+                    <!--</li>-->
+                    <!--<li class=""><a href="">Forms</a>-->
+                    <!--</li>-->
+                    <!--<li class=""><a href="">Fonts</a>-->
+                    <!--</li>-->
+                    <!--<li class=""><a href="">Backups</a>-->
+                    <!--</li>-->
+                    <!--<li class=""><a href="">Analytics</a>-->
+                    <!--</li>-->
+                    <!--<li class=""><a href="">Custom Code</a>-->
+                    <!--</li>-->
                     <li class="other-links dropdown">
                         <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="icon icon-more"></i>

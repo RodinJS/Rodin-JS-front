@@ -23,6 +23,8 @@ import './billing/index';
 
 import './purchases/index';
 
+import './editproject-ios/index';
+
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
 	'landing.auth',
@@ -33,6 +35,7 @@ let pagesModule = angular.module('app.pages', [
 	'app.profile',
 	'app.project',
 	'app.editproject',
+	'app.editporjectIos',
 	'app.plans',
 	'app.billing',
 	'app.purchases'
