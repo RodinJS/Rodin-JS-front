@@ -24,21 +24,42 @@
 <script type="text/javascript" src="/scripts/systemjs/system.js"></script>
 <script>
 
+	(function (System) {
+		var systemnormalize = System.normalize;
+		var blacklist = ['systemjs-json'];
+
+		function shouldReverse(parts) {
+			return parts.every(function (part) {
+				return blacklist.indexOf(part) === -1;
+			});
+		}
+
+		System.normalize = function (name, parentName) {
+			var parts = name.split('!');
+
+			if (parts.length > 1 && shouldReverse(parts)) {
+				name = parts.reverse().join('!');
+			}
+
+			return systemnormalize.call(this, name, parentName);
+		};
+	})(System);
+
 	var systemLocate = System.locate;
-	System.locate = function(load) {
+	System.locate = function (load) {
 		var System = this;
-		return Promise.resolve(systemLocate.call(this, load)).then(function(address) {
+		return Promise.resolve(systemLocate.call(this, load)).then(function (address) {
 			return address + System.cacheBust;
 		});
 	};
 	System.cacheBust = '?v=0.0.5';
-	
+
 	System.config({
 		packages: {
-			"app": {  // path to your project root
+			"/app": {  // path to your project root
 				"defaultJSExtensions": true
 			},
-			"scripts": {  // path to your project root
+			"/scripts": {  // path to your project root
 				"defaultJSExtensions": true
 			}
 		},
