@@ -4,7 +4,7 @@
 		<div class="section-dashboard-action">
 			<div class="btn-action-wrapper clearfix">
 				<div class="pull-right">
-					<a ui-sref="app.project" class="btn-add"><i class="icon icon-add"></i></a>
+					<a data-ui-sref="app.project" class="btn-add"><i class="icon icon-add"></i></a>
 				</div>
 				<div class="form-wrapper pull-right search-form">
 					<div class="row">
@@ -17,29 +17,29 @@
 				</div>
 			</div>
 		</div>
-		<div ng-if="$ctrl.projects.length === 0" class="empty-dashboard-space">
+		<div data-ng-if="$ctrl.projects.length === 0" class="empty-dashboard-space">
 			<p class="text-primary">At this point you do not have more than one project</p>
 			<h2>
-				<a ui-sref="app.project">CREATE A NEW PROJECT</a>
+				<a data-ui-sref="app.project">CREATE A NEW PROJECT</a>
 			</h2>
 		</div>
-		<div ng-if="$ctrl.projects.length !== 0" class="dashboard-content">
+		<div data-ng-if="$ctrl.projects.length !== 0" class="dashboard-content">
 			<div class="main-alert alert-warning hidden">
 				<p class="text-action">
 					<i class="icon icon-info"></i> You can access unlimited hosted sites but only 2 non hosted sites at
 					once
-					on your plan. To access your non hosted sites, <a href="" ui-sref="app.plans">upgrade your plan</a>
+					on your plan. To access your non hosted sites, <a href="" data-ui-sref="app.plans">upgrade your plan</a>
 					or
 					add hosting to an existing site.
 				</p>
 			</div>
 			<div class="row">
-				<div ng-repeat="project in $ctrl.projects" class="col-md-3">
+				<div data-ng-repeat="project in $ctrl.projects" class="col-md-3">
 					<div class="dashboard-content-item">
 						<div class="item-content-wrapper">
-							<div ng-if="!project.thumbnail" class="dashboard-content-img"
+							<div data-ng-if="!project.thumbnail" class="dashboard-content-img"
 							     style="background-image: url(images/content/dashboard-content-img.jpg);"></div>
-							<div ng-if="!!project.thumbnail" class="dashboard-content-img"
+							<div data-ng-if="!!project.thumbnail" class="dashboard-content-img"
 							     style="background-image: url({{project.thumbnail}})"></div>
 							<div class="item-description">
 								<ul class="item-action-list">
@@ -55,14 +55,14 @@
 									</li>
 								</ul>
 								<h5>
-									<a data-ng-href="{{$CTRL.editorUrl + project.root}}" class="item-title-link">
+									<a data-ng-href="{{$ctrl.editorUrl + project.root}}" class="item-title-link">
 										Open in Editor
 									</a>
 								</h5>
 							</div>
 						</div>
 						<a href="" class="dashboard-item-link">
-							<h1 class="box-title"><i ng-if="!project.public" class="icon icon-lock"></i>{{project.name}}
+							<h1 class="box-title"><i data-ng-if="!project.public" class="icon icon-lock"></i>{{project.name}}
 							</h1>
 							<p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
 							</p>
