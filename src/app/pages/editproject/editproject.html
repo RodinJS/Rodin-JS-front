@@ -57,7 +57,7 @@
                 </ul>
             </div>
             <div class="section section-switch">
-                <switch id="enabled" data-name="enabled" data-ng-model="$ctrl.project.public" data-on="ON" data-off="OFF" class="green"></switch>
+                <switch id="enabled" data-name="enabled" data-ng-change="$ctrl.toggleStatus()" data-ng-model="$ctrl.projectPublic" data-on="ON" data-off="OFF" class="green"></switch>
                 <h5 class="switch-box-title">Showcase This Space</h5>
                 <p class="description text-small text-down">Showcased sites appear in your public profile.</p>
             </div>

@@ -31,7 +31,7 @@ class ProjectCtrl {
 
 		let projectInfo = {};
 		angular.extend(projectInfo, this.project);
-		projectInfo.tags = projectInfo.tags.split(",");
+		projectInfo.tags = (projectInfo.tags && projectInfo.tags.split(",")) || [];
 
 		this.Project.create(projectInfo).then(
 			data => {

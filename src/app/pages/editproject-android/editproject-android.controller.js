@@ -1,8 +1,10 @@
-class EditProjectCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope) {
+class EditProjectAndroidCtrl {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
         'ngInject';
 
         this.appName = AppConstants.appName;
+        this._AppConstants = AppConstants;
+        this._JWT = JWT;
         this.Project = Project;
         this.$state = $state;
         this.$q = $q;
@@ -13,14 +15,27 @@ class EditProjectCtrl {
         this.showLoader = true;
         this.getProject();
 
-        this.tinymceOptions = {
-            menubar:false,
-            statusbar: false,
-            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist',
-            inline: false,
-            plugins : 'advlist autolink link image lists charmap print preview',
-            theme : "modern"
+        this.user = User.current;
+
+        this.fileChoosen = {
+            profile: false,
+            p12: false
         };
+
+        this.files = {
+            profile: {
+                name: ""
+            },
+            cert: {
+                name: ""
+            },
+            icon: {
+                name: "",
+                src: ""
+            }
+        };
+
+        this.submiting = false;
     }
 
     getProject() {
@@ -29,26 +44,9 @@ class EditProjectCtrl {
             project => {
                 this.showLoader = false;
                 this.project = project;
-                this.projectPublic = project.public === 'true';
             },
             err => {
                 this.$state.go('landing.error');
-            }
-        )
-    }
-
-    toggleStatus() {
-        this.project.public = this.projectPublic.toString();
-
-        this.showLoader = true;
-        this.Project.toggleStatus(this.project._id, this.project.public).then(
-            res => {
-                this.showLoader = false;
-            },
-            err => {
-                this.projectPublic = !this.projectPublic;
-                this.project.public = this.projectPublic.toString();
-                this.showLoader = false;
             }
         )
     }
@@ -67,7 +65,7 @@ class EditProjectCtrl {
         )
     }
 
-    changeThumbnail(e) {
+    changeIcon(e) {
         if (window.FileReader && window.Blob) {
 
             var file = e.target.files[0];
@@ -76,7 +74,8 @@ class EditProjectCtrl {
                 this.isValidImage(file).then((result) => {
                     var reader = new FileReader();
                     reader.onloadend = (e) => {
-                        this.project.thumbnail = reader.result;
+                        this.files.icon.name = file.name;
+                        this.files.icon.src = reader.result;
                         this._$scope.$apply();
                     };
                     reader.readAsDataURL(file);
@@ -114,12 +113,7 @@ class EditProjectCtrl {
                 }
 
                 switch (header) {
-                    case "89504e47"://"image/png"
-                    //case "47494638"://"image/gif"
-                    case "ffd8ffe0"://"image/jpeg"
-                    case "ffd8ffe1":
-                    case "ffd8ffe2":
-                        // valid
+                    case "89504e47":
                         break;
                     default:
                         result.valid = false;
@@ -138,6 +132,63 @@ class EditProjectCtrl {
 
         return defer.promise;
     }
+
+    changeCert(e) {
+        if (window.FileReader && window.Blob) {
+            var file = e.target.files[0];
+            this.files.cert.name = file.name;
+            this._$scope.$apply();
+
+        } else {
+            alert("It seems your browser doesn't support FileReader.");
+        }
+    }
+
+    changeProfile(e) {
+        if (window.FileReader && window.Blob) {
+            var file = e.target.files[0];
+            this.files.profile.name = file.name;
+            this._$scope.$apply();
+
+        } else {
+            alert("It seems your browser doesn't support FileReader.");
+        }
+    }
+
+    build(e) {
+        e.preventDefault();
+        let project = {
+            userId: this.user.username,
+            appId: this.project._id,
+            url: "http://google.com",
+            appName: this.project.android.name,
+            android: {
+                exportMethod: "ad-hoc",
+                bundleIdentifier: this.project.android.bundle,
+                developerId: this.project.android.developerId,
+                certPassword: this.project.android.certPassword
+            }
+        };
+
+        $("#configs").ajaxForm({
+            dataType:"json",
+            url: this._AppConstants[this._AppConstants.env + "API"] + '/project/' + this.project._id + '/build/android',
+            headers: {
+                "x-access-token": this._JWT.get()
+            },
+            data:{
+                project: angular.toJson(project)
+            },
+            success: function (data) {
+                console.log("success", data);
+            },
+            error: function (data) {
+                console.log("success", data);
+            }
+        }).submit();
+
+        console.log(project);
+    };
 }
 
-export default EditProjectCtrl;
+export default EditProjectAndroidCtrl;
