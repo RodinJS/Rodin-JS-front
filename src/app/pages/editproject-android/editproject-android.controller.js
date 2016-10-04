@@ -196,7 +196,8 @@ class EditProjectAndroidCtrl {
 
     open(e) {
         this.modals.password = true;
-        this.build(e);
+        return;
+        // this.build(e);
     }
 }
 
