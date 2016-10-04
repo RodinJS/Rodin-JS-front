@@ -33,7 +33,9 @@ export default class JWT {
 
 	destroy() {
 		// console.trace("remove");
-		Cookies.remove(this._AppConstants.jwtKey);
+		Cookies.remove(this._AppConstants.jwtKey, {
+			domain: (extractDomain() == "localhost" ? "localhost" : ".rodinapp.com")
+		});
 		this._update();
 	}
 
