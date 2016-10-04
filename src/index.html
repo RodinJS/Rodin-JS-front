@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="/styles/style.css">
 	<base href="/">
 </head>
-<body class="page" ng-class="pageClass">
+<body class="page" data-ng-class="pageClass">
 
 <div data-ui-view class="page__wrapper"></div>
 
@@ -24,6 +24,15 @@
 <script type="text/javascript" src="/scripts/systemjs/system.js"></script>
 <script>
 
+	var systemLocate = System.locate;
+	System.locate = function(load) {
+		var System = this;
+		return Promise.resolve(systemLocate.call(this, load)).then(function(address) {
+			return address + System.cacheBust;
+		});
+	};
+	System.cacheBust = '?v=0.0.5';
+	
 	System.config({
 		packages: {
 			"app": {  // path to your project root
@@ -32,10 +41,7 @@
 			"scripts": {  // path to your project root
 				"defaultJSExtensions": true
 			}
-		}
-	});
-
-	System.config({
+		},
 		paths: {
 			'*': 'scripts/vendor/*',
 			'app/*': 'app/*',
