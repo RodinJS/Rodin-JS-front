@@ -4,7 +4,7 @@ class DashboardCtrl {
 		this.user = User.current;
 		this.appName = AppConstants.appName;
 		this.domain = AppConstants.domain;
-		this.editorUrl = AppConstants[AppConstants.env + "Editor"];
+		this.editorUrl = AppConstants.EDITOR;
 		this.Project = Project;
 
 		this.getProjects();

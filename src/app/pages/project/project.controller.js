@@ -3,6 +3,8 @@ class ProjectCtrl {
 		'ngInject';
 
 		this.appName = AppConstants.appName;
+		this.editorUrl = AppConstants.EDITOR;
+		this.previewUrl = AppConstants.PREVIEW;
 		this.Project = Project;
 		this.$state = $state;
 		this.currentUser = User.current;
