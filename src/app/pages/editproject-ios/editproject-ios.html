@@ -110,19 +110,6 @@
                                         <button type="button" class="btn btn-primary"
                                                 ng-click="document.querySelector('#cert-file').click()">browse</button>
                                     </div>
-
-                                    <div class="form-wrapper margin-top-40">
-                                        <div class="form-group" custom-input
-                                             data-ng-class="{'has-error': configs.certPassword.$invalid && configs.certPassword.focused, 'has-success': configs.certPassword.$valid && configs.certPassword.focused}">
-                                            <input type="text" class="form-control" placeholder=""
-                                                   data-ng-model="$ctrl.project.ios.certPassword"
-                                                   name="certPassword"
-                                                   required
-                                                   data-ng-focus="configs.certPassword.focused = true">
-                                            <label class="control-label float-label">Certificate Password</label>
-                                        </div>
-                                        <p class="text-small description">Certificate Password.</p>
-                                    </div>
                                 </li>
                                 <li>
                                     <div style="margin-bottom: 20px">App icon - upload .png 1024x1024</div>
@@ -146,8 +133,8 @@
                             </ul>
                             <div class="required-field-actions">
                                 <button type="submit" class="btn btn-primary"
-                                        ng-click="$ctrl.build($event)" disabled>build</button>
-                                        <!--ng-disabled="!configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name">build</button>-->
+                                        ng-click="$ctrl.open($event)"
+                                        ng-disabled="!configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name">build</button>
                                 <a href="" class="btn btn-save" disabled>remove</a>
                                 <p class="description margin-top-20 text-white">Coming in next few days . . . </p>
                             </div>
@@ -186,4 +173,39 @@
 
     <div class="loader" data-ng-if="$ctrl.showLoader"></div>
 
+</div>
+
+<div class="modal" ng-class="{'display-block': $ctrl.modals.password, 'display-none': !$ctrl.modals.password}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" data-ng-click="$ctrl.modals.password = false">×</span>
+            <h2>Certificate Password</h2>
+        </div>
+        <div class="modal-body">
+            <form name="password">
+                <div class="form-wrapper margin-top-40">
+                    <div class="form-group" custom-input
+                         data-ng-class="{'has-error': password.certPassword.$invalid && password.certPassword.focused, 'has-success': password.certPassword.$valid && password.certPassword.focused}">
+                        <input type="password" class="form-control" placeholder=""
+                               data-ng-model="$ctrl.project.ios.certPassword"
+                               name="certPassword"
+                               required
+                               data-ng-focus="password.certPassword.focused = true">
+                        <label class="control-label float-label">Certificate Password</label>
+                    </div>
+                    <p class="text-small description">Certificate Password.</p>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions">
+                <button type="submit" class="btn btn-primary"
+                        disabled
+                        ng-click="$ctrl.submit($ctrl.openEvent)">build</button>
+                        <!--data-ng-disabled="!password.$valid">build</button>-->
+                <a href="" class="btn btn-save" disabled>remove</a>
+                <p class="description margin-top-20 text-white">Coming in next few days . . . </p>
+            </div>
+        </div>
+    </div>
 </div>

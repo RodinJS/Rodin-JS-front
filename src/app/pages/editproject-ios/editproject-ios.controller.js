@@ -35,7 +35,12 @@ class EditProjectIosCtrl {
             }
         };
 
+        this.modals = {
+            password: false
+        };
+
         this.submiting = false;
+        this.openEvent = null;
     }
 
     getProject() {
@@ -155,7 +160,8 @@ class EditProjectIosCtrl {
         }
     }
 
-    build(e) {
+    build() {
+        const e = this.openEvent;
         e.preventDefault();
         let project = {
             userId: this.user.username,
@@ -171,12 +177,12 @@ class EditProjectIosCtrl {
         };
 
         $("#configs").ajaxForm({
-            dataType:"json",
+            dataType: "json",
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/ios',
             headers: {
                 "x-access-token": this._JWT.get()
             },
-            data:{
+            data: {
                 project: angular.toJson(project)
             },
             success: function (data) {
@@ -189,6 +195,11 @@ class EditProjectIosCtrl {
 
         console.log(project);
     };
+
+    open(e) {
+        this.modals.password = true;
+        this.openEvent = e;
+    }
 }
 
 export default EditProjectIosCtrl;

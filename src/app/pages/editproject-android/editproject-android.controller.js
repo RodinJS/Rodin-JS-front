@@ -36,6 +36,10 @@ class EditProjectAndroidCtrl {
         };
 
         this.submiting = false;
+
+        this.modals = {
+            password: false
+        }
     }
 
     getProject() {
@@ -171,12 +175,12 @@ class EditProjectAndroidCtrl {
         };
 
         $("#configs").ajaxForm({
-            dataType:"json",
+            dataType: "json",
             url: this._AppConstants[this._AppConstants.env + "API"] + '/project/' + this.project._id + '/build/android',
             headers: {
                 "x-access-token": this._JWT.get()
             },
-            data:{
+            data: {
                 project: angular.toJson(project)
             },
             success: function (data) {
@@ -189,6 +193,11 @@ class EditProjectAndroidCtrl {
 
         console.log(project);
     };
+
+    open(e) {
+        this.modals.password = true;
+        this.build(e);
+    }
 }
 
 export default EditProjectAndroidCtrl;

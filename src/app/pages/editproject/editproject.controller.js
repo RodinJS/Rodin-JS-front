@@ -53,6 +53,20 @@ class EditProjectCtrl {
         )
     }
 
+    deleteProject() {
+        this.showLoader = true;
+
+        this.Project.remove(this.project._id).then(
+            data => {
+                this.showLoader = false;
+                this.$state.go('app.dashboard');
+            },
+            err => {
+                this.showLoader = false;
+            }
+        );
+    }
+
     update() {
         this.showLoader = true;
         this.Project.update(this.project._id, this.project).then(

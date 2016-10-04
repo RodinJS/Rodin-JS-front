@@ -44,86 +44,19 @@
                                 <li>
                                     <div class="form-wrapper">
                                         <div class="form-group" custom-input
-                                             data-ng-class="{'has-error': configs.bundle.$invalid && configs.bundle.focused, 'has-success': configs.bundle.$valid && configs.bundle.focused}">
+                                             data-ng-class="{'has-error': configs.package.$invalid && configs.package.focused, 'has-success': configs.package.$valid && configs.package.focused}">
                                         <input type="text" class="form-control" placeholder=""
-                                               data-ng-model="$ctrl.project.android.bundle"
-                                               name="bundle"
+                                               data-ng-model="$ctrl.project.android.package"
+                                               name="package"
                                                required
-                                               ng-pattern="$ctrl.patterns.bundle"
-                                               data-ng-focus="configs.bundle.focused = true">
+                                               ng-pattern="$ctrl.patterns.package"
+                                               data-ng-focus="configs.package.focused = true">
                                         <label class="control-label float-label">Bundle Identifier</label>
                                         </div>
-                                        <p class="text-small description">Bundle Identifier - A bundle ID precisely
-                                            identifies a single app. A bundle ID is
-                                            used during the development process to provision devices and by the
-                                            operating system
-                                            when the apps distributed to customers.</p>
+                                        <p class="text-small description">Package</p>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="form-wrapper">
-                                        <div class="form-group" custom-input
-                                             data-ng-class="{'has-error': configs.developerId.$invalid && configs.developerId.focused, 'has-success': configs.developerId.$valid && configs.developerId.focused}">
-                                            <input type="text" class="form-control" placeholder=""
-                                                   data-ng-model="$ctrl.project.android.developerId"
-                                                   name="developerId"
-                                                   required
-                                                   data-ng-focus="configs.developerId.focused = true">
-                                            <label class="control-label float-label">Developer ID.</label>
-                                        </div>
-                                        <p class="text-small description">Developer ID.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="padding-bottom-20">Provisioning Profile</div>
-                                    <div class="main-upload-area">
-                                        <label class="upload-area" ng-show="$ctrl.files.profile.name === ''">
-                                            <div class="area-content">.provision</div>
-                                            <input type="file"
-                                                   id="profile-file"
-                                                   name="profile"
-                                                   onchange="angular.element(this).scope().$ctrl.changeProfile(event)">
-                                        </label>
-                                        <img ng-show="$ctrl.files.profile.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
-                                             class="uploaded-file-icon">
-                                        <p class="area-label">{{!!$ctrl.files.profile.name ? $ctrl.files.profile.name : 'Drag or Click'}}</p>
-                                    </div>
-                                    <div class="required-field-actions margin-0-important">
-                                        <button type="button" class="btn btn-primary">browse</button>
-                                    </div>
-                                </li>
-                                <li class="margin-top-40">
-                                    <div style="margin-bottom: 20px">Distribution/Development certificate.</div>
-                                    <div class="main-upload-area">
-                                        <label class="upload-area" ng-show="$ctrl.files.cert.name === ''">
-                                            <div class="area-content">.p12</div>
-                                            <input type="file"
-                                                   id="cert-file"
-                                                   name="cert"
-                                                   onchange="angular.element(this).scope().$ctrl.changeCert(event)">
-                                        </label>
-                                        <img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
-                                             class="uploaded-file-icon">
-                                        <p class="area-label">{{ !!$ctrl.files.cert.name ? $ctrl.files.cert.name : 'Drag or Click' }}</p>
-                                    </div>
-                                    <div class="required-field-actions margin-0-important">
-                                        <button type="button" class="btn btn-primary"
-                                                ng-click="document.querySelector('#cert-file').click()">browse</button>
-                                    </div>
 
-                                    <div class="form-wrapper margin-top-40">
-                                        <div class="form-group" custom-input
-                                             data-ng-class="{'has-error': configs.certPassword.$invalid && configs.certPassword.focused, 'has-success': configs.certPassword.$valid && configs.certPassword.focused}">
-                                            <input type="text" class="form-control" placeholder=""
-                                                   data-ng-model="$ctrl.project.android.certPassword"
-                                                   name="certPassword"
-                                                   required
-                                                   data-ng-focus="configs.certPassword.focused = true">
-                                            <label class="control-label float-label">Certificate Password</label>
-                                        </div>
-                                        <p class="text-small description">Certificate Password.</p>
-                                    </div>
-                                </li>
                                 <li>
                                     <div style="margin-bottom: 20px">App icon - upload .png 1024x1024</div>
                                     <div class="main-upload-area">
@@ -143,10 +76,61 @@
                                         <button type="button" class="btn btn-primary">browse</button>
                                     </div>
                                 </li>
+
+                                <li class="margin-top-40">
+                                    keyStore Settings
+                                    <div class="form-wrapper margin-top-20">
+                                        <div class="form-group" custom-input>
+                                            <input type="text" class="form-control" placeholder="">
+                                            <label class="control-label float-label">Name</label>
+                                        </div>
+                                        <p class="text-small description">Name</p>
+                                        <div class="form-group" custom-input>
+                                            <input type="password" class="form-control" placeholder="">
+                                            <label class="control-label float-label">Password</label>
+                                        </div>
+                                        <p class="text-small description">Password</p>
+                                        <div class="form-group" custom-input>
+                                            <input type="text" class="form-control" placeholder="">
+                                            <label class="control-label float-label">First-Last Name</label>
+                                        </div>
+                                        <p class="text-small description">First and Last Names</p>
+                                        <div class="form-group" custom-input>
+                                            <input type="text" class="form-control" placeholder="">
+                                            <label class="control-label float-label">Organization</label>
+                                        </div>
+                                        <p class="text-small description">Organization</p>
+                                        <div class="form-group" custom-input>
+                                            <input type="text" class="form-control" placeholder="">
+                                            <label class="control-label float-label">City</label>
+                                        </div>
+                                        <p class="text-small description">City</p>
+                                        <div class="form-group" custom-input>
+                                            <input type="text" class="form-control" placeholder="">
+                                            <label class="control-label float-label">State</label>
+                                        </div>
+                                        <p class="text-small description">State</p>
+                                        <div class="form-group" custom-input>
+                                            <input type="text" class="form-control" placeholder="">
+                                            <label class="control-label float-label">Country Code</label>
+                                        </div>
+                                        <p class="text-small description">Country Code</p>
+                                        <div class="form-group" custom-input>
+                                            <input type="text" class="form-control" placeholder="">
+                                            <label class="control-label float-label">Alias</label>
+                                        </div>
+                                        <p class="text-small description">Alias</p>
+                                        <div class="form-group" custom-input>
+                                            <input type="password" class="form-control" placeholder="">
+                                            <label class="control-label float-label">Alias Password</label>
+                                        </div>
+                                        <p class="text-small description">Alias password</p>
+                                    </div>
+                                </li>
                             </ul>
                             <div class="required-field-actions">
                                 <button type="submit" class="btn btn-primary"
-                                        ng-click="$ctrl.build($event)" disabled>build</button>
+                                        ng-click="$ctrl.build($event)">build</button>
                                         <!--ng-disabled="!configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name">build</button>-->
                                 <a href="" class="btn btn-save" disabled>remove</a>
                                 <p class="description margin-top-20 text-white">Coming in next few days . . . </p>

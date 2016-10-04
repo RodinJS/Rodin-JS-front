@@ -10,7 +10,7 @@
 
                     <li class=""><a ui-sref="app.editprojectIos({projectId: $ctrl.project._id})">IOS</a>
                     </li>
-                    <li class=""><a ui-sref="app.editproject">Android</a>
+                    <li class=""><a ui-sref="app.editprojectAndroid({projectId: $ctrl.project._id})">Android</a>
                     </li>
                     <li class=""><a ui-sref="app.editproject">Desctop</a>
                     </li>
@@ -48,7 +48,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="other-links"><a><i class="icon icon-delete"></i></a><span>Delete</span>
+                    <li class="other-links" ng-click="$ctrl.deleteProject()"><a><i class="icon icon-delete"></i></a><span>Delete</span>
                     </li>
                     <li class="other-links"><a><i class="icon icon-link"></i></a><span>Share</span>
                     </li>
