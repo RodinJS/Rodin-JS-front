@@ -172,7 +172,7 @@ class EditProjectIosCtrl {
 
         $("#configs").ajaxForm({
             dataType:"json",
-            url: this._AppConstants[this._AppConstants.env + "API"] + '/project/' + this.project._id + '/build/ios',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/ios',
             headers: {
                 "x-access-token": this._JWT.get()
             },
