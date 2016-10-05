@@ -37,6 +37,7 @@ class EditProjectAndroidCtrl {
 
         this.submiting = false;
 
+        this.openEvent = null;
         this.modals = {
             password: false
         }
@@ -159,7 +160,8 @@ class EditProjectAndroidCtrl {
         }
     }
 
-    build(e) {
+    build() {
+        const e = this.openEvent;
         e.preventDefault();
         let project = {
             userId: this.user.username,
@@ -167,10 +169,8 @@ class EditProjectAndroidCtrl {
             url: "http://google.com",
             appName: this.project.android.name,
             android: {
-                exportMethod: "ad-hoc",
-                bundleIdentifier: this.project.android.bundle,
-                developerId: this.project.android.developerId,
-                certPassword: this.project.android.certPassword
+                package: this.project.android.package,
+                keyStore: this.project.android.keyStore
             }
         };
 
@@ -196,8 +196,7 @@ class EditProjectAndroidCtrl {
 
     open(e) {
         this.modals.password = true;
-        return;
-        // this.build(e);
+        this.openEvent = e;
     }
 }
 

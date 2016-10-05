@@ -174,14 +174,14 @@
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
+  padding-top: 150px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
   background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-content {
@@ -190,6 +190,7 @@
   margin: auto;
   padding: 0;
   width: 80%;
+  max-width: 410px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -221,9 +222,12 @@
 
 .close {
   color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+  position: absolute;
+  top: 0;
+  right: -30px;
+  font-size: 35px;
+  line-height: 18px;
+  font-weight: 100;
 }
 
 .close:hover,
@@ -234,23 +238,29 @@
 }
 
 .modal-header {
-  padding: 2px 16px;
-  background-color: #000000;
-  color: #ff9a2b;
+  padding: 2px 35px;
+  background-color: #333;
+  color: white;
   border: 0 !important;
 
-  h2 {
-    margin: 20px 0;
+  h1 {
+    margin: 40px 0 10px 0;
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 12px !important;
+    opacity: 0.5;
   }
 }
 
 .modal-body {
-  padding: 2px 16px;
+  padding: 2px 35px;
 }
 
 .modal-footer {
-  padding: 2px 16px;
-  background-color: #000000;
+  padding: 2px 35px;
+  background-color: #333;
   color: white;
   border: 0 !important;
 
@@ -261,6 +271,18 @@
 
   .required-field-actions {
     margin-top: 20px !important;
+  }
+
+  button {
+    height: 35px !important;
+    float: left !important;
+  }
+
+  a {
+    float: left !important;
+    line-height: 35px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 }
 

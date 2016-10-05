@@ -14,7 +14,7 @@
                     </li>
                     <li class=""><a ui-sref="app.editprojectAndroid({projectId: $ctrl.project._id})">Android</a>
                     </li>
-                    <li class=""><a ui-sref="app.editprojectIos">Desctop</a>
+                    <li class=""><a ui-sref="app.editprojectIos">Desktop</a>
                     </li>
                     <li class=""><a ui-sref="app.editprojectIos">Web</a>
                     </li>
@@ -177,13 +177,14 @@
 
 <div class="modal" ng-class="{'display-block': $ctrl.modals.password, 'display-none': !$ctrl.modals.password}">
     <div class="modal-content">
+        <span class="close" data-ng-click="$ctrl.modals.password = false"> ×</span>
         <div class="modal-header">
-            <span class="close" data-ng-click="$ctrl.modals.password = false">×</span>
-            <h2>Certificate Password</h2>
+            <h1>Certificate Password</h1>
+            <p class="description text-small">Certificate password when u generate the app</p>
         </div>
         <div class="modal-body">
             <form name="password">
-                <div class="form-wrapper margin-top-40">
+                <div class="form-wrapper margin-top-20">
                     <div class="form-group" custom-input
                          data-ng-class="{'has-error': password.certPassword.$invalid && password.certPassword.focused, 'has-success': password.certPassword.$valid && password.certPassword.focused}">
                         <input type="password" class="form-control" placeholder=""
@@ -193,20 +194,19 @@
                                data-ng-focus="password.certPassword.focused = true">
                         <label class="control-label float-label">Certificate Password</label>
                     </div>
-                    <p class="text-small description">Certificate Password.</p>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <div class="required-field-actions">
+            <div class="required-field-actions clearfix">
                 <button type="submit" class="btn btn-primary"
                         disabled
-                        ng-click="$ctrl.submit($ctrl.openEvent)">build</button>
-                        <!--data-ng-disabled="!password.$valid">build</button>-->
+                        data-ng-click="$ctrl.build()">build</button>
+                <!--data-ng-disabled="!password.$valid"-->
                 <a href="" class="btn btn-save"
                    data-ng-click="$ctrl.modals.password = false">cancel</a>
-                <p class="description margin-top-20 text-white">Coming in next few days . . . </p>
             </div>
+            <p class="description margin-top-20 text-white">Coming in next few days . . . </p>
         </div>
     </div>
 </div>
