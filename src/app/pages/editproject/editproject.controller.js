@@ -21,6 +21,10 @@ class EditProjectCtrl {
             plugins : 'advlist autolink link image lists charmap print preview',
             theme : "modern"
         };
+
+        this.modals = {
+            remove: false
+        };
     }
 
     getProject() {
@@ -151,6 +155,10 @@ class EditProjectCtrl {
         }
 
         return defer.promise;
+    }
+
+    open() {
+        this.modals.remove = true;
     }
 }
 

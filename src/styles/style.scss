@@ -182,6 +182,12 @@
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.6);
+
+   &.model-confirm {
+     .modal-footer {
+       padding-bottom: 35px;
+     }
+   }
 }
 
 .modal-content {

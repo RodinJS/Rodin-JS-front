@@ -48,7 +48,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="other-links" ng-click="$ctrl.deleteProject()"><a><i class="icon icon-delete"></i></a><span>Delete</span>
+                    <li class="other-links" ng-click="$ctrl.open()"><a><i class="icon icon-delete"></i></a><span>Delete</span>
                     </li>
                     <li class="other-links"><a><i class="icon icon-link"></i></a><span>Share</span>
                     </li>
@@ -320,3 +320,21 @@
     <div class="loader" data-ng-if="$ctrl.showLoader"></div>
 
 </div>
+
+<div class="modal model-confirm" ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
+            <h1>Delete this project ?</h1>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <button type="button" class="btn btn-primary"
+                        ng-click="$ctrl.deleteProject()">delete</button>
+                <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.password = false">cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
