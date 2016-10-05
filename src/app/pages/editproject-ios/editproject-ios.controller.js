@@ -162,6 +162,7 @@ class EditProjectIosCtrl {
 
     build() {
         const e = this.openEvent;
+        const ctrl = this;
         e.preventDefault();
         let project = {
             userId: this.user.username,
@@ -176,6 +177,7 @@ class EditProjectIosCtrl {
             }
         };
 
+        ctrl.showLoader = true;
         $("#configs").ajaxForm({
             dataType: "json",
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/ios',
@@ -186,14 +188,12 @@ class EditProjectIosCtrl {
                 project: angular.toJson(project)
             },
             success: function (data) {
-                console.log("success", data);
+                ctrl.getProject();
             },
             error: function (data) {
-                console.log("success", data);
+                ctrl.showLoader = false;
             }
         }).submit();
-
-        console.log(project);
     };
 
     open(e) {

@@ -200,9 +200,8 @@
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <button type="submit" class="btn btn-primary"
-                        disabled
+                        data-ng-disabled="!password.$valid"
                         data-ng-click="$ctrl.build()">build</button>
-                <!--data-ng-disabled="!password.$valid"-->
                 <a href="" class="btn btn-save"
                    data-ng-click="$ctrl.modals.password = false">cancel</a>
             </div>
