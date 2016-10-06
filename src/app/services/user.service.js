@@ -117,7 +117,7 @@ class User {
 		this._JWT.destroy();
 		this._$timeout(()=> {
 			this._$state.go(this._$state.$current, null, {reload: true});
-		}, 10);
+		}, 100);
 	}
 
 	verifyAuth() {
@@ -137,7 +137,9 @@ class User {
 				deferred.resolve(true);
 			}, (err) => {
 				this._JWT.destroy();
-				deferred.resolve(false);
+				this._$timeout(()=> {
+					deferred.resolve(false);
+				}, 100);
 			});
 		}
 		return deferred.promise;

@@ -5,11 +5,7 @@ function DemoConfig($stateProvider) {
 			url: '/demo',
 			controller: 'DemoCtrl as $ctrl',
 			title: 'Demo Page',
-			resolve: {
-				auth: function (User) {
-					return User.ensureAuthIs(false);
-				}
-			}
+			redirectToWhenAuthenticated: "app.dashboard"
 		})
 
 }

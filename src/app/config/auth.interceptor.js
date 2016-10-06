@@ -1,7 +1,7 @@
 /**
  * Created by kh.levon98 on 13-Sep-16.
  */
-function authInterceptor(JWT, AppConstants, $window, $q) {
+function authInterceptor(JWT, AppConstants, $window, $q, $timeout) {
 	'ngInject'
 
 	return {
@@ -18,8 +18,10 @@ function authInterceptor(JWT, AppConstants, $window, $q) {
 			if (rejection.status === 401) {
 				// clear any JWT token being stored
 				JWT.destroy();
-				// do a hard page refresh
-				$window.location.reload();
+				$timeout(()=> {
+					// do a hard page refresh
+					$window.location.reload();
+				}, 100);
 			}
 			return $q.reject(rejection);
 		}
