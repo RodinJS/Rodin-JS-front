@@ -120,7 +120,7 @@ class User {
 		}, 100);
 	}
 
-		verifyAuth() {
+	verifyAuth() {
 		let deferred = this._$q.defer();
 		// check for JWT token
 		// console.log("verifyAuth", this._JWT.get())
