@@ -117,10 +117,10 @@ class User {
 		this._JWT.destroy();
 		this._$timeout(()=> {
 			this._$state.go(this._$state.$current, null, {reload: true});
-		}, 10);
+		}, 100);
 	}
 
-	verifyAuth() {
+		verifyAuth() {
 		let deferred = this._$q.defer();
 		// check for JWT token
 		// console.log("verifyAuth", this._JWT.get())
@@ -137,7 +137,9 @@ class User {
 				deferred.resolve(true);
 			}, (err) => {
 				this._JWT.destroy();
-				deferred.resolve(false);
+				this._$timeout(()=> {
+					deferred.resolve(false);
+				}, 100);
 			});
 		}
 		return deferred.promise;
