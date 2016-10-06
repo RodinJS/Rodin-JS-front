@@ -48,9 +48,9 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="other-links" ng-click="$ctrl.open()"><a><i class="icon icon-delete"></i></a><span>Delete</span>
+                    <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
                     </li>
-                    <li class="other-links"><a><i class="icon icon-link"></i></a><span>Share</span>
+                    <li class="other-links" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>
                     </li>
                     <li class="other-links"><a><i class="icon icon-publish"></i></a><span>Publish</span>
                     </li>
@@ -333,6 +333,33 @@
                 <button type="button" class="btn btn-primary"
                         ng-click="$ctrl.deleteProject()">delete</button>
                 <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.password = false">cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" data-ng-click="$ctrl.modals.share = false">×</span>
+            <h1>Share this project</h1>
+        </div>
+        <div class="modal-body">
+            <p data-ng-if="!$ctrl.project.public" class="text-small description">This project is not public, you can change this from project settings.
+                project settingsy lini orangevi link vor sghmi miangamic baci et projecti settingsy</p>
+            <div class="form-wrapper margin-top-20" data-ng-if="$ctrl.project.public">
+                <div class="form-group" custom-input>
+                    <input id="projectUrl" type="text" class="form-control" value="{{'some url here'}}">
+                    <label class="control-label float-label">Url of project</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer padding-bottom-20-important">
+            <div class="required-field-actions clearfix">
+                <button data-ng-if="!$ctrl.project.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.goToSettings()">go to settings</button>
+                <button  data-ng-if="$ctrl.project.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.copyUrl()">copy this url</button>
+                <button  data-ng-if="$ctrl.project.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.copyUrl()">copy this url</button>
+                <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.share = false">cancel</a>
             </div>
         </div>
     </div>

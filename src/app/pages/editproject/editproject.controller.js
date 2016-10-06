@@ -23,7 +23,8 @@ class EditProjectCtrl {
         };
 
         this.modals = {
-            remove: false
+            remove: false,
+            share: false
         };
     }
 
@@ -157,8 +158,8 @@ class EditProjectCtrl {
         return defer.promise;
     }
 
-    open() {
-        this.modals.remove = true;
+    open(modal) {
+        this.modals[modal] = true;
     }
 }
 
