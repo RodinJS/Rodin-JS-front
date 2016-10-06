@@ -188,6 +188,7 @@ class EditProjectIosCtrl {
                 project: angular.toJson(project)
             },
             success: function (data) {
+                ctrl.modals.password = false;
                 ctrl.getProject();
             },
             error: function (data) {
@@ -199,6 +200,20 @@ class EditProjectIosCtrl {
     open(e) {
         this.modals.password = true;
         this.openEvent = e;
+    }
+
+    download() {
+        this.showLoader = true;
+        this.Project.download(this.project._id, 'ios').then(
+            data => {
+                this.showLoader = false;
+                window.location = data.downloadUrl;
+            },
+            err => {
+                this.showLoader = false;
+                console.log(err);
+            }
+        )
     }
 }
 

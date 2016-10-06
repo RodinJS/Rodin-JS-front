@@ -162,21 +162,20 @@ class EditProjectAndroidCtrl {
 
     build() {
         const e = this.openEvent;
+        const ctrl = this;
         e.preventDefault();
         let project = {
             userId: this.user.username,
             appId: this.project._id,
             url: "http://google.com",
             appName: this.project.android.name,
-            android: {
-                package: this.project.android.package,
-                keyStore: this.project.android.keyStore
-            }
+            android: this.project.android
         };
 
+        this.showLoader = true;
         $("#configs").ajaxForm({
             dataType: "json",
-            url: this._AppConstants[this._AppConstants.env + "API"] + '/project/' + this.project._id + '/build/android',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/android',
             headers: {
                 "x-access-token": this._JWT.get()
             },
@@ -184,10 +183,11 @@ class EditProjectAndroidCtrl {
                 project: angular.toJson(project)
             },
             success: function (data) {
-                console.log("success", data);
+                ctrl.modals.password = false;
+                ctrl.getProject();
             },
             error: function (data) {
-                console.log("success", data);
+                ctrl.modals.password = false;
             }
         }).submit();
 
@@ -197,6 +197,20 @@ class EditProjectAndroidCtrl {
     open(e) {
         this.modals.password = true;
         this.openEvent = e;
+    }
+
+    download() {
+        this.showLoader = true;
+        this.Project.download(this.project._id, 'android').then(
+            data => {
+                this.showLoader = false;
+                window.location = data.downloadUrl;
+            },
+            err => {
+                this.showLoader = false;
+                console.log(err);
+            }
+        )
     }
 }
 

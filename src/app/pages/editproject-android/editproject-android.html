@@ -51,7 +51,7 @@
                                                required
                                                ng-pattern="$ctrl.patterns.package"
                                                data-ng-focus="configs.package.focused = true">
-                                        <label class="control-label float-label">Bundle Identifier</label>
+                                        <label class="control-label float-label">Package</label>
                                         </div>
                                         <p class="text-small description">Package</p>
                                     </div>
@@ -148,6 +148,7 @@
                                             <input type="text" class="form-control" placeholder=""
                                                    data-ng-model="$ctrl.project.android.keyStore.alias"
                                                    name="KSAlias"
+                                                   required
                                                    ng-pattern="$ctrl.patterns.package"
                                                    data-ng-focus="configs.KSAlias.focused = true">
                                             <label class="control-label float-label">Alias</label>
@@ -159,35 +160,34 @@
                             <div class="required-field-actions">
                                 <button type="button" class="btn btn-primary"
                                         ng-click="$ctrl.open($event)"
-                                        ng-disabled="!configs.$valid || !$ctrl.files.icon.name">build</button>
+                                        ng-disabled="!configs.$valid || !$ctrl.files.icon.name || ($ctrl.project.build.ios.requested && !$ctrl.project.build.ios.built)">build</button>
                                 <a href="" class="btn btn-save" disabled>remove</a>
                                 <p class="description margin-top-20 text-white">Coming in next few days . . . </p>
                             </div>
                         </div>
                     </div>
                 </form>
-                <form action="" ng-if="$ctrl.project.android.ready">
+                <form action="" ng-if="$ctrl.project.build.android.requested">
                     <div class="section">
                         <div class="required-field-item">
-                            <ul class="field-intruction">
-                                <li>The buying of large-screen TVs has absolutely skyrocketed lately</li>
-                                <li>The next section is “small size,” which is also important.</li>
-                                <li>Another problem area, but for LCDs, is “delay.”</li>
-                                <li>Next is viewing angle.</li>
-                            </ul>
-                            <!--<div class="main-upload-area">-->
-                            <!--<img src="images/general/file_icon_plist.png" alt="" width="60"-->
-                            <!--class="uploaded-file-icon">-->
-                            <!--<p class="area-label">esiminch.ipa</p>-->
-                            <!--</div>-->
-                            <div class="main-upload-area">
+                            <div class="small-loader" data-ng-if="$ctrl.project.build.android.requested && !$ctrl.project.build.android.built">
+                                <div class="image"></div>
+                            </div>
+                            <div class="main-upload-area"
+                                 data-ng-if="$ctrl.project.build.android.built">
                                 <img src="images/general/file_icon_placeholder.png" alt="" width="60"
                                      class="uploaded-file-icon">
                                 <p class="area-label"></p>
                             </div>
+                            <p data-ng-if="!$ctrl.project.build.android.built"
+                               class="description margin-top-20 text-white">We are now building your installation package, the download link will appear here once done.</p>
+                            <p data-ng-if="$ctrl.project.build.android.built"
+                               class="description margin-top-20 text-white">Package ready</p>
                             <div class="required-field-actions">
-                                <button type="button" class="btn btn-primary" disabled>download</button>
-                                <a href="" class="btn btn-save" disabled>cancel</a>
+                                <button data-ng-if="$ctrl.project.build.android.built"
+                                        type="button" class="btn btn-primary"
+                                        ng-click="$ctrl.download()">download</button>
+                                <a data-ng-if="!$ctrl.project.build.android.built" class="btn btn-save">cancel</a>
                             </div>
                         </div>
                     </div>
@@ -237,13 +237,11 @@
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <button type="button" class="btn btn-primary"
-                        disabled
-                        ng-click="$ctrl.build()">build</button>
-                        <!--data-ng-disabled="!password.$valid">build</button>-->
+                        ng-click="$ctrl.build()"
+                        data-ng-disabled="!password.$valid">build</button>
                 <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.password = false">cancel</a>
             </div>
             <p class="description margin-top-20 text-white">Coming in next few days . . . </p>
         </div>
     </div>
 </div>
-
