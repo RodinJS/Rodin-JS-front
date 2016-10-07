@@ -45,7 +45,7 @@ class EditProjectAndroidCtrl {
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId).then(
+        this.Project.get(this.projectId, {device: 'android'}).then(
             project => {
                 this.showLoader = false;
                 this.project = project;

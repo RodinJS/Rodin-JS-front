@@ -45,7 +45,7 @@ class EditProjectOculusCtrl {
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId).then(
+        this.Project.get(this.projectId, {device: 'oculus'}).then(
             project => {
                 this.showLoader = false;
                 this.project = project;

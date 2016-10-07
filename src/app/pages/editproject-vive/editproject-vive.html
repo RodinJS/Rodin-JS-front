@@ -34,7 +34,7 @@
                                         <div class="form-group" custom-input
                                              data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
                                             <input type="text" class="form-control" placeholder=""
-                                                   data-ng-model="$ctrl.project.vive.name"
+                                                   data-ng-model="$ctrl.project.oculus.name"
                                                    name="displayName"
                                                    required
                                                    data-ng-focus="configs.displayName.focused = true">
@@ -47,7 +47,7 @@
                             <div class="required-field-actions">
                                 <button type="button" class="btn btn-primary"
                                         ng-click="$ctrl.build($event)"
-                                        ng-disabled="!configs.$valid || ($ctrl.project.build.vive.requested && !$ctrl.project.build.vive.built)">
+                                        ng-disabled="!configs.$valid || ($ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built)">
                                     build
                                 </button>
                                 <a href="" class="btn btn-save" disabled>remove</a>
@@ -55,30 +55,30 @@
                         </div>
                     </div>
                 </form>
-                <form action="" ng-if="$ctrl.project.build.vive.requested">
+                <form action="" ng-if="$ctrl.project.build.oculus.requested">
                     <div class="section">
                         <div class="required-field-item">
                             <div class="small-loader"
-                                 data-ng-if="$ctrl.project.build.vive.requested && !$ctrl.project.build.vive.built">
+                                 data-ng-if="$ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built">
                                 <div class="image"></div>
                             </div>
                             <div class="main-upload-area"
-                                 data-ng-if="$ctrl.project.build.vive.built">
+                                 data-ng-if="$ctrl.project.build.oculus.built">
                                 <img src="images/general/file_icon_placeholder.png" alt="" width="60"
                                      class="uploaded-file-icon">
                                 <p class="area-label"></p>
                             </div>
-                            <p data-ng-if="!$ctrl.project.build.vive.built"
+                            <p data-ng-if="!$ctrl.project.build.oculus.built"
                                class="description margin-top-20 text-white">We are now building your installation
                                 package, the download link will appear here once done.</p>
-                            <p data-ng-if="$ctrl.project.build.vive.built"
+                            <p data-ng-if="$ctrl.project.build.oculus.built"
                                class="description margin-top-20 text-white">Package ready</p>
                             <div class="required-field-actions">
-                                <button data-ng-if="$ctrl.project.build.vive.built"
+                                <button data-ng-if="$ctrl.project.build.oculus.built"
                                         type="button" class="btn btn-primary"
                                         ng-click="$ctrl.download()">download
                                 </button>
-                                <a data-ng-if="!$ctrl.project.build.vive.built" class="btn btn-save">cancel</a>
+                                <a data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">cancel</a>
                             </div>
                         </div>
                     </div>

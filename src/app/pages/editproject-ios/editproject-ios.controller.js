@@ -45,7 +45,7 @@ class EditProjectIosCtrl {
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId).then(
+        this.Project.get(this.projectId, {device: 'ios'}).then(
             project => {
                 this.showLoader = false;
                 this.project = project;
