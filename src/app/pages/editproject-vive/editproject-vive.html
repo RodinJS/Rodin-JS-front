@@ -14,9 +14,9 @@
                     </li>
                     <li class=""><a ui-sref="app.editprojectAndroid({projectId: $ctrl.project._id})">Android</a>
                     </li>
-                    <li class="active"><a ui-sref="app.editprojectOculus({projectId: $ctrl.project._id})">Oculus</a>
+                    <li class=""><a ui-sref="app.editprojectOculus({projectId: $ctrl.project._id})">Oculus</a>
                     </li>
-                    <li class=""><a ui-sref="app.editprojectVive({projectId: $ctrl.project._id})">VIVE</a>
+                    <li class="active"><a ui-sref="app.editprojectVive({projectId: $ctrl.project._id})">VIVE</a>
                     </li>
                     <li class=""><a ui-sref="app.editproject">Web</a>
                     </li>
@@ -25,7 +25,7 @@
             <div class="section-wrapper">
                 <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs">
                     <div class="section">
-                        <h2 class="section-title">Oculus required fields</h2>
+                        <h2 class="section-title">VIVE required fields</h2>
                         <div class="required-field-item">
                             <ul class="field-intruction">
                                 <!--<li>App Name - Display name of your app</li>-->
@@ -34,7 +34,7 @@
                                         <div class="form-group" custom-input
                                              data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
                                             <input type="text" class="form-control" placeholder=""
-                                                   data-ng-model="$ctrl.project.oculus.name"
+                                                   data-ng-model="$ctrl.project.vive.name"
                                                    name="displayName"
                                                    required
                                                    data-ng-focus="configs.displayName.focused = true">
@@ -47,7 +47,7 @@
                             <div class="required-field-actions">
                                 <button type="button" class="btn btn-primary"
                                         ng-click="$ctrl.build($event)"
-                                        ng-disabled="!configs.$valid || ($ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built)">
+                                        ng-disabled="!configs.$valid || ($ctrl.project.build.vive.requested && !$ctrl.project.build.vive.built)">
                                     build
                                 </button>
                                 <a href="" class="btn btn-save" disabled>remove</a>
@@ -55,30 +55,30 @@
                         </div>
                     </div>
                 </form>
-                <form action="" ng-if="$ctrl.project.build.oculus.requested">
+                <form action="" ng-if="$ctrl.project.build.vive.requested">
                     <div class="section">
                         <div class="required-field-item">
                             <div class="small-loader"
-                                 data-ng-if="$ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built">
+                                 data-ng-if="$ctrl.project.build.vive.requested && !$ctrl.project.build.vive.built">
                                 <div class="image"></div>
                             </div>
                             <div class="main-upload-area"
-                                 data-ng-if="$ctrl.project.build.oculus.built">
+                                 data-ng-if="$ctrl.project.build.vive.built">
                                 <img src="images/general/file_icon_placeholder.png" alt="" width="60"
                                      class="uploaded-file-icon">
                                 <p class="area-label"></p>
                             </div>
-                            <p data-ng-if="!$ctrl.project.build.oculus.built"
+                            <p data-ng-if="!$ctrl.project.build.vive.built"
                                class="description margin-top-20 text-white">We are now building your installation
                                 package, the download link will appear here once done.</p>
-                            <p data-ng-if="$ctrl.project.build.oculus.built"
+                            <p data-ng-if="$ctrl.project.build.vive.built"
                                class="description margin-top-20 text-white">Package ready</p>
                             <div class="required-field-actions">
-                                <button data-ng-if="$ctrl.project.build.oculus.built"
+                                <button data-ng-if="$ctrl.project.build.vive.built"
                                         type="button" class="btn btn-primary"
                                         ng-click="$ctrl.download()">download
                                 </button>
-                                <a data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">cancel</a>
+                                <a data-ng-if="!$ctrl.project.build.vive.built" class="btn btn-save">cancel</a>
                             </div>
                         </div>
                     </div>

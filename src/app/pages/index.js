@@ -31,6 +31,8 @@ import './editproject-android/index';
 
 import './editproject-oculus/index';
 
+import './editproject-vive/index';
+
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
 	'landing.auth',
@@ -46,6 +48,7 @@ let pagesModule = angular.module('app.pages', [
 	'app.editporjectIos',
 	'app.editprojectAndroid',
 	'app.editporjectOculus',
+	'app.editporjectVive',
 
 	'app.plans',
 	'app.billing',
