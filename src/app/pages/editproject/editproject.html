@@ -356,9 +356,8 @@
         </div>
         <div class="modal-footer padding-bottom-20-important">
             <div class="required-field-actions clearfix">
-                <button data-ng-if="!$ctrl.project.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.goToSettings()">go to settings</button>
-                <button  data-ng-if="$ctrl.project.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.copyUrl()">copy this url</button>
-                <button  data-ng-if="$ctrl.project.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.copyUrl()">copy this url</button>
+                <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-primary" data-ng-click="$ctrl.goToSettings()">go to settings</button>
+                <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-primary" data-ng-click="$ctrl.copyUrl()">copy this url</button>
                 <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.share = false">cancel</a>
             </div>
         </div>

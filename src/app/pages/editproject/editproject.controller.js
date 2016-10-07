@@ -161,6 +161,20 @@ class EditProjectCtrl {
     open(modal) {
         this.modals[modal] = true;
     }
+
+    copyUrl() {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($("#projectUrl").val()).select();
+        document.execCommand("copy");
+        document.getElementById('projectUrl').style['transition'] = 'all .5s ease';
+        document.getElementById('projectUrl').style['box-shadow'] = '0 0 5px 5px #222';
+        $temp.remove();
+        const t = setTimeout(() => {
+            document.getElementById('projectUrl').style['box-shadow'] = 'none';
+            clearTimeout(t);
+        }, 1000);
+    }
 }
 
 export default EditProjectCtrl;
