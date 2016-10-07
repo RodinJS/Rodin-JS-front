@@ -16,7 +16,7 @@ export default class JWT {
 		console.trace("set");
 		Cookies.set(this._AppConstants.jwtKey, token, {
 			expires: 7,
-			domain: (extractDomain() == "localhost" ? "localhost" : ".rodinapp.com")
+			domain: this._AppConstants.COOKIEDOMAIN
 		});
 		this._update();
 	}
@@ -35,7 +35,7 @@ export default class JWT {
 	destroy() {
 		// console.trace("remove");
 		Cookies.remove(this._AppConstants.jwtKey, {
-			domain: (extractDomain() == "localhost" ? "localhost" : ".rodinapp.com")
+			domain: this._AppConstants.COOKIEDOMAIN
 		});
 		this._update();
 	}

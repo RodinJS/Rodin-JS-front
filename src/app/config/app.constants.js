@@ -9,6 +9,7 @@ const AppConstants = {
 
 
 	dev: {
+		COOKIEDOMAIN: 'localhost',
 		// API: 'http://localhost:3000/api',
 		API: 'http://localhost:3000/api',
 		// SITE: 'http://localhost:3000/api',
@@ -18,11 +19,13 @@ const AppConstants = {
 		EDITOR: 'http://localhost:8000/#/',
 	},
 	prod: {
+		// COOKIEDOMAIN: '.rodinapp.com',
 		// API: 'https://api.rodinapp.com/api',
 		// SITE: 'https://rodinapp.com/',
 		// PREVIEW: 'https://api.rodinapp.com/preview/',
 		// PUBLIC: 'https://api.rodinapp.com/public/',
 		// EDITOR: 'https://editor.rodinapp.com/',
+		COOKIEDOMAIN: '.rodin.space',
 		API: 'https://api.rodin.space/api',
 		SITE: 'https://rodin.space/',
 		PREVIEW: 'https://api.rodin.space/preview/',
@@ -49,6 +52,10 @@ const AppConstants = {
 
 	get EDITOR() {
 		return this[this.env].EDITOR;
+	},
+
+	get COOKIEDOMAIN() {
+		return this[this.env].COOKIEDOMAIN;
 	},
 
 
