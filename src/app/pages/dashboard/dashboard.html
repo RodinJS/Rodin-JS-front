@@ -81,15 +81,16 @@
 </div>
 
 
-<div class="modal" ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
+<div class="modal" data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
 	<div class="modal-content">
 		<div class="modal-header">
 			<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>
 			<h1>Share this project</h1>
 		</div>
 		<div class="modal-body">
-			<p data-ng-if="!$ctrl.currentModalProject.public" class="text-small description">This project is not public, you can change this from project settings.
-                project settingsy lini orangevi link vor sghmi miangamic baci et projecti settingsy</p>
+			<p data-ng-if="!$ctrl.currentModalProject.public" class="text-small description">
+				This project is not public, you can change this from project settings.
+				project settingsy lini orangevi link vor sghmi miangamic baci et projecti settingsy</p>
 			<div class="form-wrapper margin-top-20" data-ng-if="$ctrl.currentModalProject.public">
 				<div class="form-group" custom-input>
 					<input id="projectUrl" type="text" class="form-control" value="{{'some url here'}}">
@@ -99,8 +100,11 @@
 		</div>
 		<div class="modal-footer padding-bottom-20-important">
 			<div class="required-field-actions clearfix">
-				<button data-ng-if="!$ctrl.currentModalProject.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.goToSettings()">go to settings</button>
-				<button  data-ng-if="$ctrl.currentModalProject.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.copyUrl()">copy this url</button>
+				<button data-ng-if="!$ctrl.currentModalProject.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.goToSettings()">go to
+					settings
+				</button>
+				<button data-ng-if="$ctrl.currentModalProject.public" type="button" class="btn btn-primary" data-ng-click="$ctrl.copyUrl()">copy this url
+				</button>
 				<a href="" class="btn btn-save" data-ng-click="$ctrl.modals.share = false">cancel</a>
 			</div>
 		</div>
