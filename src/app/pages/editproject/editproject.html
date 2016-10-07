@@ -16,7 +16,7 @@
                     </li>
                     <li class=""><a ui-sref="app.editprojectVive({projectId: $ctrl.project._id})">VIVE</a>
                     </li>
-                    <li class=""><a ui-sref="app.editproject">Web</a>
+                    <li class=""><a ui-sref="app.editprojectWeb({projectId: $ctrl.project._id})">Web</a>
                     </li>
 
                     <!--<li class=""><a href="cms.html">CMS</a>-->
@@ -351,7 +351,7 @@
                 project settingsy lini orangevi link vor sghmi miangamic baci et projecti settingsy</p>
             <div class="form-wrapper margin-top-20" data-ng-if="$ctrl.project.public">
                 <div class="form-group" custom-input>
-                    <input id="projectUrl" type="text" class="form-control" value="{{'some url here'}}">
+                    <input id="projectUrl" type="text" class="form-control" value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name}}" disabled>
                     <label class="control-label float-label">Url of project</label>
                 </div>
             </div>

@@ -18,7 +18,7 @@
                     </li>
                     <li class=""><a ui-sref="app.editprojectVive({projectId: $ctrl.project._id})">VIVE</a>
                     </li>
-                    <li class=""><a ui-sref="app.editproject">Web</a>
+                    <li class=""><a ui-sref="app.editprojectWeb({projectId: $ctrl.project._id})">Web</a>
                     </li>
                 </ul>
             </div>
@@ -163,7 +163,7 @@
                                 <button type="button" class="btn btn-primary"
                                         ng-click="$ctrl.open($event)"
                                         ng-disabled="!configs.$valid || !$ctrl.files.icon.name || ($ctrl.project.build.ios.requested && !$ctrl.project.build.ios.built)">build</button>
-                                <a href="" class="btn btn-save" disabled>remove</a>
+                                <!--<a href="" class="btn btn-save" disabled>remove</a>-->
                                 <p class="description margin-top-20 text-white">Coming in next few days . . . </p>
                             </div>
                         </div>

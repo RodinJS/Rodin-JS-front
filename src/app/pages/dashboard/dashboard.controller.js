@@ -5,6 +5,7 @@ class DashboardCtrl {
 		this.appName = AppConstants.appName;
 		this.domain = AppConstants.domain;
 		this.editorUrl = AppConstants.EDITOR;
+		this.PUBLIC = AppConstants.PUBLIC;
 		this.Project = Project;
 		this.$state = $state;
 

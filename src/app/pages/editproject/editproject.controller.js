@@ -1,12 +1,14 @@
 class EditProjectCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User) {
         'ngInject';
 
         this.appName = AppConstants.appName;
         this.Project = Project;
+        this.PUBLIC = AppConstants.PUBLIC;
         this.$state = $state;
         this.$q = $q;
         this._$scope = $scope;
+        this.user = User.current;
 
         this.projectId = $stateParams.projectId;
         this.project = {};

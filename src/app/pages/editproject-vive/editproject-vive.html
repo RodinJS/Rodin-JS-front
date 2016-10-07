@@ -18,7 +18,7 @@
                     </li>
                     <li class="active"><a ui-sref="app.editprojectVive({projectId: $ctrl.project._id})">VIVE</a>
                     </li>
-                    <li class=""><a ui-sref="app.editproject">Web</a>
+                    <li class=""><a ui-sref="app.editprojectWeb({projectId: $ctrl.project._id})">Web</a>
                     </li>
                 </ul>
             </div>
@@ -50,7 +50,7 @@
                                         ng-disabled="!configs.$valid || ($ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built)">
                                     build
                                 </button>
-                                <a href="" class="btn btn-save" disabled>remove</a>
+                                <!--<a href="" class="btn btn-save" disabled>remove</a>-->
                             </div>
                         </div>
                     </div>
