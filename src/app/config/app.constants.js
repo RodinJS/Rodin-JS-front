@@ -4,7 +4,7 @@
 import '../helpers';
 
 const AppConstants = {
-	env: "dev",
+	env: "prod",
 	jwtKey: 'token',
 	appName: 'Rodin',
 
