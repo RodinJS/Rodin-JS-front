@@ -4,14 +4,14 @@
 import '../helpers';
 
 const AppConstants = {
-	domain: window.extractDomain(),
 	env: "dev",
-
+	jwtKey: 'token',
+	appName: 'Rodin',
 
 	dev: {
-		COOKIEDOMAIN: 'localhost',
+		COOKIEDOMAIN: ['localhost', '.rodin.space'],
 		// API: 'http://localhost:3000/api',
-		API: 'http://localhost:3000/api',
+		API: 'https://api.rodinapp.com/api',
 		// SITE: 'http://localhost:3000/api',
 		SITE: 'http://localhost:8585/#/',
 		PREVIEW: 'https://api.rodinapp.com/preview/',
@@ -19,20 +19,13 @@ const AppConstants = {
 		EDITOR: 'http://localhost:8000/#/',
 	},
 	prod: {
-		// COOKIEDOMAIN: '.rodinapp.com',
-		// API: 'https://api.rodinapp.com/api',
-		// SITE: 'https://rodinapp.com/',
-		// PREVIEW: 'https://api.rodinapp.com/preview/',
-		// PUBLIC: 'https://api.rodinapp.com/public/',
-		// EDITOR: 'https://editor.rodinapp.com/',
-		COOKIEDOMAIN: '.rodin.space',
-		API: 'https://api.rodin.space/api',
-		SITE: 'https://rodin.space/',
-		PREVIEW: 'https://api.rodin.space/preview/',
-		PUBLIC: 'https://api.rodin.space/public/',
-		EDITOR: 'https://editor.rodin.space/',
+		COOKIEDOMAIN: ['.rodinapp.com', '.rodin.space'],
+		API: 'https://api.' + window.extractDomain() + '/api',
+		SITE: 'https://' + window.extractDomain() + '/',
+		PREVIEW: 'https://' + window.extractDomain() + '/preview/',
+		PUBLIC: 'https://' + window.extractDomain() + '/public/',
+		EDITOR: 'https://editor.' + window.extractDomain() + '/',
 	},
-
 
 	get API() {
 		return this[this.env].API;
@@ -59,8 +52,6 @@ const AppConstants = {
 	},
 
 
-	jwtKey: 'token',
-	appName: 'Rodin',
 	ERRORCODES: {
 		"400": {
 			"message": "BAD_REQUEST",
@@ -161,7 +152,5 @@ const AppConstants = {
 		}
 	}
 };
-
-console.log(AppConstants.domain);
 
 export default AppConstants;
