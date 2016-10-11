@@ -7,7 +7,8 @@ function ErrorConfig($stateProvider) {
 			controller: 'ErrorCtrl',
 			controllerAs: '$ctrl',
 			templateUrl: 'pages/error/error.html',
-			title: 'Error'
+			title: 'Error',
+			pageClass: 'page-404',
 		});
 
 }
