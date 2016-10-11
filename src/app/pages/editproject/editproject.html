@@ -347,9 +347,9 @@
             <h1>Share this project</h1>
         </div>
         <div class="modal-body">
-            <p data-ng-if="!$ctrl.project.public" class="text-small description">This project is not public, you can change this from project settings.
+            <p data-ng-if="$ctrl.project.public === 'false'" class="text-small description">This project is not public, you can change this from project settings.
                 project settingsy lini orangevi link vor sghmi miangamic baci et projecti settingsy</p>
-            <div class="form-wrapper margin-top-20" data-ng-if="$ctrl.project.public">
+            <div class="form-wrapper margin-top-20" data-ng-if="$ctrl.project.public === 'true'">
                 <div class="form-group" custom-input>
                     <input id="projectUrl" type="text" class="form-control" value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name}}" disabled>
                     <label class="control-label float-label">Url of project</label>
