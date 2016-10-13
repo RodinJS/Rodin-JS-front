@@ -50,175 +50,175 @@ const FONT = ['src/fonts/**/*.{ttf,woff,woff2,eof,svg,eot,json,otf}'];
 const IMG = ['src/images/**/*.{jpg,jpeg,ico,png,svg,gif,json,xml}'];
 
 const AUTOPREFIXER_BROWSERS = [
-    'ie >= 10',
-    'ie_mob >= 10',
-    'ff >= 30',
-    'chrome >= 34',
-    'safari >= 7',
-    'opera >= 23',
-    'ios >= 7',
-    'android >= 4.4',
-    'bb >= 10'
+	'ie >= 10',
+	'ie_mob >= 10',
+	'ff >= 30',
+	'chrome >= 34',
+	'safari >= 7',
+	'opera >= 23',
+	'ios >= 7',
+	'android >= 4.4',
+	'bb >= 10'
 ];
 
 const UGLIFY_AGRESIVE = {
-    preserveComments: 'license',
-    mangle: true,
-    compress: true
+	preserveComments: 'license',
+	mangle: true,
+	compress: true
 };
 
 const ERROR_MESSAGE = {
-    errorHandler: notify.onError("Error: <%= error.message %>")
+	errorHandler: notify.onError("Error: <%= error.message %>")
 };
 
 gulp.task('js', () => {
-    const s = size({title: 'JS -> ', pretty: true});
-    return gulp.src(JS)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(sourcemaps.init())
-        .pipe(babel())
-        // .pipe(ngAnnotate())
-        .pipe(s)
-        .pipe(plumber.stop())
-        .pipe(gulp.dest('./build/app'))
-        .pipe(notify({
-            onLast: true,
-            message: () => `JS - Total size ${s.prettySize}`
-        }));
+	const s = size({title: 'JS -> ', pretty: true});
+	return gulp.src(JS)
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(sourcemaps.init())
+		.pipe(babel())
+		// .pipe(ngAnnotate())
+		.pipe(s)
+		.pipe(plumber.stop())
+		.pipe(gulp.dest('./build/app'))
+		.pipe(notify({
+			onLast: true,
+			message: () => `JS - Total size ${s.prettySize}`
+		}));
 });
 
 gulp.task('js-prod', () => {
-    const s = size({title: 'JS production -> ', pretty: false});
-    return gulp.src(JS)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(babel())
-        // .pipe(ngAnnotate())
-        .pipe(uglify(UGLIFY_AGRESIVE))
-        .pipe(s)
-        .pipe(gulp.dest('./build/app'))
-        .pipe(notify({
-            onLast: true,
-            message: () => `JS(prod) - Total size ${s.prettySize}`
-        }));
+	const s = size({title: 'JS production -> ', pretty: false});
+	return gulp.src(JS)
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(babel())
+		.pipe(uglify(UGLIFY_AGRESIVE))
+		.pipe(s)
+		.pipe(plumber.stop())
+		.pipe(gulp.dest('./build/app'))
+		.pipe(notify({
+			onLast: true,
+			message: () => `JS(prod) - Total size ${s.prettySize}`
+		}));
 });
 
 gulp.task('systemjs', () => {
-    return gulp.src(SYSTEMJS)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(gulp.dest('./build/scripts/systemjs'));
+	return gulp.src(SYSTEMJS)
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(gulp.dest('./build/scripts/systemjs'));
 });
 
 gulp.task('assists', () => {
-    return gulp.src(ASSISTS)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(gulp.dest('./build/scripts/assists'));
+	return gulp.src(ASSISTS)
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(gulp.dest('./build/scripts/assists'));
 });
 
 gulp.task('template', () => {
-    return gulp.src(HTML)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(templateCache({
-            standalone: true
-        }))
-        .pipe(rename("app.templates.js"))
-        .pipe(gulp.dest('./src/app/config/'));
+	return gulp.src(HTML)
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(templateCache({
+			standalone: true
+		}))
+		.pipe(rename("app.templates.js"))
+		.pipe(gulp.dest('./src/app/config/'));
 });
 
 gulp.task('generate-index', () => {
-    return gulp.src('./src/index.html')
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(gulp.dest('./build/'));
+	return gulp.src('./src/index.html')
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(gulp.dest('./build/'));
 });
 
 
 gulp.task('sass', () => {
-    const s = size({
-        onLast: true,
-        title: 'SASS -> ',
-        pretty: true
-    });
-    return gulp.src(SASS)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(sass().on('error', sass.logError))
-        .pipe(concat('style.css'))
-        .pipe(sourcemaps.init())
-        .pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
-        .pipe(sourcemaps.write())
-        .pipe(s)
-        .pipe(gulp.dest('./build/styles'))
-        .pipe(notify({
-            onLast: true,
-            message: () => `SASS - Total size ${s.prettySize}`
-        }));
+	const s = size({
+		onLast: true,
+		title: 'SASS -> ',
+		pretty: true
+	});
+	return gulp.src(SASS)
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(sass().on('error', sass.logError))
+		.pipe(concat('style.css'))
+		.pipe(sourcemaps.init())
+		.pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
+		.pipe(sourcemaps.write())
+		.pipe(s)
+		.pipe(gulp.dest('./build/styles'))
+		.pipe(notify({
+			onLast: true,
+			message: () => `SASS - Total size ${s.prettySize}`
+		}));
 });
 
 gulp.task('sass-prod', () => {
-    const s = size({
-        onLast: true,
-        title: 'SASS -> ',
-        pretty: false
-    });
-    return gulp.src(SASS)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(sass().on('error', sass.logError))
-        .pipe(concat('style.css'))
-        // .pipe(sourcemaps.init())
-        .pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
-        .pipe(cleanCSS())
-        // .pipe(sourcemaps.write())
-        .pipe(s)
-        .pipe(gulp.dest('./build/styles'))
-        .pipe(notify({
-            onLast: true,
-            message: () => `SASS(prod) - Total size ${s.prettySize}`
-        }));
+	const s = size({
+		onLast: true,
+		title: 'SASS -> ',
+		pretty: false
+	});
+	return gulp.src(SASS)
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(sass().on('error', sass.logError))
+		.pipe(concat('style.css'))
+		// .pipe(sourcemaps.init())
+		.pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
+		.pipe(cleanCSS())
+		// .pipe(sourcemaps.write())
+		.pipe(s)
+		.pipe(gulp.dest('./build/styles'))
+		.pipe(notify({
+			onLast: true,
+			message: () => `SASS(prod) - Total size ${s.prettySize}`
+		}));
 });
 
 
 gulp.task('font', () => {
-    gulp.src(FONT)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(gulp.dest('./build/fonts'));
+	gulp.src(FONT)
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(gulp.dest('./build/fonts'));
 });
 
 gulp.task('img', () => {
-    gulp.src(IMG)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(gulp.dest('./build/images'));
+	gulp.src(IMG)
+		.pipe(plumber(ERROR_MESSAGE))
+		.pipe(gulp.dest('./build/images'));
 });
 
 
 gulp.task('watch', () => {
-    gulp.watch(SASS, ['sass']);
-    gulp.watch(JS, ['js']);
-    gulp.watch(HTML, ['build-template']);
-    gulp.watch(FONT, ['font']);
-    gulp.watch(IMG, ['img']);
-    gulp.watch("src/index.html", ['generate-index']);
+	gulp.watch(SASS, ['sass']);
+	gulp.watch(JS, ['js']);
+	gulp.watch(HTML, ['build-template']);
+	gulp.watch(FONT, ['font']);
+	gulp.watch(IMG, ['img']);
+	gulp.watch("src/index.html", ['generate-index']);
 });
 
 gulp.task('clean', () => {
-    return del(['./build/**', '!./build/scripts/vendor/**', '!./build/scripts', '!./build']);
+	return del(['./build/**', '!./build/scripts/vendor/**', '!./build/scripts', '!./build']);
 });
 
 
 gulp.task('connect', () => {
-    connect.server({
-        root: './build/',
-        port: 8000,
-        livereload: true
-    });
+	connect.server({
+		root: './build/',
+		port: 8000,
+		livereload: true
+	});
 });
 
 
 gulp.task('build-template', (done) => {
-    sequence('template', 'js', done);
+	sequence('template', 'js', done);
 });
 
 gulp.task('prod', (done) => {
-    sequence('clean', ['generate-index', 'template', 'js-prod', 'assists', 'systemjs', 'sass-prod', 'font', 'img'], done);
+	sequence('clean', ['generate-index', 'template', 'js-prod', 'assists', 'systemjs', 'sass-prod', 'font', 'img'], done);
 });
 
 gulp.task('default', (done) => {
-    sequence('clean', ['generate-index', 'template', 'js', 'assists', 'systemjs', 'sass', 'font', 'img', 'connect', 'watch'], done);
+	sequence('clean', ['generate-index', 'template', 'js', 'assists', 'systemjs', 'sass', 'font', 'img', 'connect', 'watch'], done);
 });
