@@ -91,7 +91,8 @@
                                         <p class="area-label">{{!!$ctrl.files.profile.name ? $ctrl.files.profile.name : 'Drag or Click'}}</p>
                                     </div>
                                     <div class="required-field-actions margin-0-important">
-                                        <button type="button" class="btn btn-primary">browse</button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="document.querySelector('#profile-file').click()">browse</button>
                                     </div>
                                 </li>
                                 <li class="margin-top-40">
@@ -110,7 +111,7 @@
                                     </div>
                                     <div class="required-field-actions margin-0-important">
                                         <button type="button" class="btn btn-primary"
-                                                ng-click="document.querySelector('#cert-file').click()">browse</button>
+                                                onclick="document.querySelector('#cert-file').click()">browse</button>
                                     </div>
                                 </li>
                                 <li class="margin-top-40">
@@ -129,7 +130,8 @@
                                         <p class="area-label">{{ !!$ctrl.files.icon.name ? $ctrl.files.icon.name : 'Drag or Click' }}</p>
                                     </div>
                                     <div class="required-field-actions margin-0-important">
-                                        <button type="button" class="btn btn-primary">browse</button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="document.querySelector('#icon-file').click()">browse</button>
                                     </div>
                                 </li>
                             </ul>
