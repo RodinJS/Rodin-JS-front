@@ -15,7 +15,7 @@ const AppConstants = {
 		SITE: 'http://localhost:8000/#/',
 		PREVIEW: 'https://api.rodin.space/preview/',
 		PUBLIC: 'https://api.rodin.space/public/',
-		EDITOR: 'https://editor.rodin.space/',
+		EDITOR: 'http://localhost:8000/',
 	},
 	prod: {
 		COOKIEDOMAIN: ['.rodinapp.com', '.rodin.space'],
