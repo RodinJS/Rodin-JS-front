@@ -1,11 +1,12 @@
 class ProjectCtrl {
-    constructor (AppConstants, Project, $state, $scope, User) {
+    constructor (AppConstants, Project, ProjectTemplate, $state, $scope, User) {
         'ngInject';
 
         this.appName = AppConstants.appName;
         this.editorUrl = AppConstants.EDITOR;
         this.previewUrl = AppConstants.PREVIEW;
         this.Project = Project;
+        this.ProjectTemplate = ProjectTemplate;
         this.$state = $state;
         this.currentUser = User.current;
 
@@ -29,6 +30,13 @@ class ProjectCtrl {
         };
 
         this.template = 0;
+
+        this.projectTemplates = {
+            selected: null,
+            projects: []
+        };
+
+        this.getTemplates();
     }
 
     save () {
@@ -37,6 +45,7 @@ class ProjectCtrl {
         let projectInfo = {};
         angular.extend(projectInfo, this.project);
         projectInfo.tags = (projectInfo.tags && projectInfo.tags.split(",")) || [];
+        projectInfo.templateId = this.projectTemplates.selected._id;
 
         this.Project.create(projectInfo).then(
             data => {
@@ -45,6 +54,20 @@ class ProjectCtrl {
             },
             err => {
                 this.showLoader = false;
+            }
+        )
+    }
+
+    getTemplates () {
+        this.ProjectTemplate.getList().then(
+            data => {
+                this.projectTemplates = {
+                    projects: data,
+                    selected: data[0]
+                };
+            },
+            err => {
+
             }
         )
     }

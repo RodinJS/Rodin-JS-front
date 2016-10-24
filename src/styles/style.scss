@@ -2,7 +2,7 @@
 @import "_style";
 
 .form-wrapper .form-group.fixed-placeholder-group .form-control {
-  padding-left: 255px;
+  padding-left: 215px;
 }
 
 .loader {
@@ -341,16 +341,25 @@
   @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 }
 
-.selected-item {
-  .select-item-img-wrapper {
-    border: 1px solid #ff9a2b;
-  }
+.select-template-list {
+  li {
+    .select-item-img-wrapper {
+      border: 2px solid transparent;
+      transition: all .2s ease;
+    }
 
-  .template-title {
-    color: white !important;
-  }
+    &.selected-item {
+      .select-item-img-wrapper {
+        border: 2px solid #ff9a2b;
+      }
 
-  .empty-template-title {
-    color: white !important;
+      .template-title {
+        color: white !important;
+      }
+
+      .empty-template-title {
+        color: white !important;
+      }
+    }
   }
 }
