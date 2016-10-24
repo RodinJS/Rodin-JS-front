@@ -340,3 +340,17 @@
   @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
   @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 }
+
+.selected-item {
+  .select-item-img-wrapper {
+    border: 1px solid #ff9a2b;
+  }
+
+  .template-title {
+    color: white !important;
+  }
+
+  .empty-template-title {
+    color: white !important;
+  }
+}
