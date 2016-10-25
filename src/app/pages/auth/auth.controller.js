@@ -11,6 +11,7 @@ class AuthCtrl {
 
 	submitForm() {
 		this.isSubmitting = true;
+		this.errors = [];
 
 		if (this.authType === "login") {
 			this._User.login(this.formData).then(
@@ -32,6 +33,7 @@ class AuthCtrl {
 				})
 
 		} else if (this.authType === "forgot") {
+			this.isSubmitting = false;
 			console.log("forgot");
 		} else {
 			this.isSubmitting = false;
