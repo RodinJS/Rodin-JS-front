@@ -1,44 +1,44 @@
 class AuthCtrl {
-	constructor(User, $state) {
-		'ngInject';
+    constructor (User, $state) {
+        'ngInject';
 
-		this._User = User;
-		this._$state = $state;
+        this._User = User;
+        this._$state = $state;
 
-		this.title = $state.current.title;
-		this.authType = $state.current.name.replace('landing.', '');
-	}
+        this.title = $state.current.title;
+        this.authType = $state.current.name.replace('landing.', '');
+    }
 
-	submitForm() {
-		this.isSubmitting = true;
-		this.errors = [];
+    submitForm () {
+        this.isSubmitting = true;
+        this.errors = [];
 
-		if (this.authType === "login") {
-			this._User.login(this.formData).then(
-				(res) => {
-					this._$state.go('app.dashboard');
-				},
-				(err) => {
-					this.isSubmitting = false;
-					this.errors = err;
-				})
-		} else if (this.authType === "register") {
-			this._User.signUp(this.formData).then(
-				(res) => {
-					this._$state.go('app.dashboard');
-				},
-				(err) => {
-					this.isSubmitting = false;
-					this.errors = err;
-				})
+        if (this.authType === "login") {
+            this._User.login(this.formData).then(
+                (res) => {
+                    this._$state.go('app.dashboard');
+                },
+                (err) => {
+                    this.isSubmitting = false;
+                    this.errors = err;
+                })
+        } else if (this.authType === "register") {
+            this._User.signUp(this.formData).then(
+                (res) => {
+                    this._$state.go('app.dashboard');
+                },
+                (err) => {
+                    this.isSubmitting = false;
+                    this.errors = err;
+                })
 
-		} else if (this.authType === "forgot") {
-			this.isSubmitting = false;
-			console.log("forgot");
-		} else {
-			this.isSubmitting = false;
-		}
-	}
+        } else if (this.authType === "forgot") {
+            this.isSubmitting = false;
+            console.log("forgot");
+        } else {
+            this.isSubmitting = false;
+        }
+    }
 }
 
 export default AuthCtrl;
