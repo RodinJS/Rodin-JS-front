@@ -1,5 +1,5 @@
 class EditProjectAndroidCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
+    constructor (AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -23,10 +23,7 @@ class EditProjectAndroidCtrl {
         };
 
         this.files = {
-            profile: {
-                name: ""
-            },
-            cert: {
+            keystore: {
                 name: ""
             },
             icon: {
@@ -40,10 +37,12 @@ class EditProjectAndroidCtrl {
         this.openEvent = null;
         this.modals = {
             password: false
-        }
+        };
+
+        this.keyStoreFileUpload = true;
     }
 
-    getProject() {
+    getProject () {
         this.showLoader = true;
         this.Project.get(this.projectId, {device: 'android'}).then(
             project => {
@@ -56,7 +55,7 @@ class EditProjectAndroidCtrl {
         )
     }
 
-    update() {
+    update () {
         this.showLoader = true;
         this.Project.update(this.project._id, this.project).then(
             data => {
@@ -70,7 +69,7 @@ class EditProjectAndroidCtrl {
         )
     }
 
-    changeIcon(e) {
+    changeIcon (e) {
         if (window.FileReader && window.Blob) {
 
             var file = e.target.files[0];
@@ -94,7 +93,7 @@ class EditProjectAndroidCtrl {
         }
     }
 
-    isValidImage(file) {
+    isValidImage (file) {
         var defer = this.$q.defer();
         var result = {
             valid: true,
@@ -138,10 +137,10 @@ class EditProjectAndroidCtrl {
         return defer.promise;
     }
 
-    changeCert(e) {
+    changeKeyStore (e) {
         if (window.FileReader && window.Blob) {
             var file = e.target.files[0];
-            this.files.cert.name = file.name;
+            this.files.keystore.name = file.name;
             this._$scope.$apply();
 
         } else {
@@ -149,18 +148,7 @@ class EditProjectAndroidCtrl {
         }
     }
 
-    changeProfile(e) {
-        if (window.FileReader && window.Blob) {
-            var file = e.target.files[0];
-            this.files.profile.name = file.name;
-            this._$scope.$apply();
-
-        } else {
-            alert("It seems your browser doesn't support FileReader.");
-        }
-    }
-
-    build() {
+    build () {
         const e = this.openEvent;
         const ctrl = this;
         e.preventDefault();
@@ -194,12 +182,12 @@ class EditProjectAndroidCtrl {
         console.log(project);
     };
 
-    open(e) {
+    open (e) {
         this.modals.password = true;
         this.openEvent = e;
     }
 
-    download() {
+    download () {
         this.showLoader = true;
         this.Project.download(this.project._id, 'android').then(
             data => {

@@ -82,7 +82,42 @@
 
                                 <li class="margin-top-40">
                                     keyStore Settings
-                                    <div class="form-wrapper margin-top-20">
+
+                                    <div class="content-navbar margin-top-20">
+                                        <ul class="navbar-list list-style-none">
+                                            <li class=""
+                                                ng-class="{'active': !$ctrl.keyStoreFileUpload}">
+                                                <a role="button"
+                                                   data-ng-click="$ctrl.keyStoreFileUpload = false">Generate</a>
+                                            </li>
+                                            <li class=""
+                                                ng-class="{'active': $ctrl.keyStoreFileUpload}">
+                                                <a role="button"
+                                                   data-ng-click="$ctrl.keyStoreFileUpload = true">Upload</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="margin-top-20" ng-if="$ctrl.keyStoreFileUpload">
+                                        <div class="main-upload-area">
+                                            <label class="upload-area" ng-show="$ctrl.files.keystore.name === ''">
+                                                <div class="area-content">.png</div>
+                                                <input type="file"
+                                                       id="keystore-file"
+                                                       name="icon-h"
+                                                       onchange="angular.element(this).scope().$ctrl.changeKeyStore(event)">
+                                            </label>
+                                            <img ng-show="$ctrl.files.keystore.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
+                                                 class="uploaded-file-icon">
+                                            <p class="area-label">{{ !!$ctrl.files.keystore.name ? $ctrl.files.keystore.name : 'Drag or Click' }}</p>
+                                        </div>
+                                        <div class="required-field-actions margin-0-important">
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="document.querySelector('#keystore-file').click()">browse</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-wrapper margin-top-20" ng-if="!$ctrl.keyStoreFileUpload">
                                         <div class="form-group" custom-input
                                              data-ng-class="{'has-error': configs.KSName.$invalid && configs.KSName.focused, 'has-success': configs.KSName.$valid && configs.KSName.focused}">
                                             <input type="text" class="form-control" placeholder=""
