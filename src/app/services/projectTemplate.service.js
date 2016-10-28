@@ -4,7 +4,7 @@ class ProjectTemplate {
         this._JWT = JWT;
         this._AppConstants = AppConstants;
 
-        this._Projects = Restangular.all('projects/templates');
+        this._Projects = Restangular.all('project/templates');
         this._$state = $state;
         this._$q = $q;
         this._Validator = new Validator();
