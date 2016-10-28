@@ -10,15 +10,16 @@ const AppConstants = {
 
 	dev: {
 		COOKIEDOMAIN: ['localhost', '.rodin.space'],
-		// API: 'http://localhost:3000/api',
-		API: 'https://api.rodin.space/api',
+		API: 'http://localhost:3000/api',
+		// API: 'https://api.rodin.space/api',
+		// API: 'http://192.168.0.33:3000/api', // Xcho
 		SITE: 'http://localhost:8585/#/',
 		PREVIEW: 'https://api.rodin.space/preview/',
 		PUBLIC: 'https://api.rodin.space/public/',
 		EDITOR: 'http://localhost:8000/#/',
 	},
 	prod: {
-		COOKIEDOMAIN: ['.rodinapp.com'],
+		COOKIEDOMAIN: ['.rodinapp.com', '.rodin.space'],
 		API: `https://api.${window.extractDomain()}/api`,
 		SITE: `https://${window.extractDomain()}/`,
 		PREVIEW: `https://api.${window.extractDomain()}/preview/`,
