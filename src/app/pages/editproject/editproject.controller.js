@@ -38,8 +38,7 @@ class EditProjectCtrl {
                 this.showLoader = false;
                 this.project = project;
                 this.projectPublic = project.public === 'true';
-                this.editorUrl = this.EDITOR + this.project.root;
-                console.log(this.editorUrl);
+                this.project.editorUrl = this.EDITOR + this.project.root;
             },
             err => {
                 this.$state.go('landing.error');
