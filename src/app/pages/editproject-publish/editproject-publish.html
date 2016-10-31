@@ -14,12 +14,16 @@
                     <p class="description">Your project is published on
                     <a class="text-yellow" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a></p>
                     <p class="description">Last publish at {{$ctrl.project.publishDate | date: 'MMMM dd yyyy. h:mm:ss a'}}</p>
-                    <button class="btn btn-primary" ng-click="$ctrl.modals.updateVersion = true;">Update Version</button>
-                    <button class="btn btn-primary" ng-click="$ctrl.modals.unpublish = true;">Unpublish</button>
+                    <div class="margin-top-40">
+                        <button class="btn btn-primary" ng-click="$ctrl.modals.updateVersion = true;">Update Version</button>
+                        <button class="btn btn-primary" ng-click="$ctrl.modals.unpublish = true;">Unpublish</button>
+                    </div>
                 </div>
                 <div ng-hide="$ctrl.project.publishDate">
                     <p class="description">This project is not published.</p>
-                    <button class="btn btn-primary" ng-click="$ctrl.publish()">Publish</button>
+                    <div class="margin-top-40">
+                        <button class="btn btn-primary" ng-click="$ctrl.publish()">Publish</button>
+                    </div>
                 </div>
             </div>
         </div>
