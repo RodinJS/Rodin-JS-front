@@ -12,11 +12,12 @@ function EditorNavigation() {
     ];
 
     return {
-        restrict: 'AE',
+        restrict: 'E',
         templateUrl: 'components/editorNavigation/index.html',
         bindToController: true,
         controllerAs: 'vm',
-        controller:ControllerInjector
+        replace: true,
+        controller: ControllerInjector
     };
 }
 
