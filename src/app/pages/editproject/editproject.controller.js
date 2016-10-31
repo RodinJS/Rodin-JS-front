@@ -5,6 +5,7 @@ class EditProjectCtrl {
         this.appName = AppConstants.appName;
         this.Project = Project;
         this.PUBLIC = AppConstants.PUBLIC;
+        this.EDITOR = AppConstants.EDITOR;
         this.$state = $state;
         this.$q = $q;
         this._$scope = $scope;
@@ -37,6 +38,7 @@ class EditProjectCtrl {
                 this.showLoader = false;
                 this.project = project;
                 this.projectPublic = project.public === 'true';
+                this.editorUrl = this.EDITOR + this.project.root;
             },
             err => {
                 this.$state.go('landing.error');
