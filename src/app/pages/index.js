@@ -35,6 +35,8 @@ import './editproject-vive/index';
 
 import './editproject-web/index';
 
+import './editproject-publish/index';
+
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
 	'landing.auth',
@@ -52,6 +54,7 @@ let pagesModule = angular.module('app.pages', [
 	'app.editporjectOculus',
 	'app.editporjectVive',
 	'app.editporjectWeb',
+	'app.editporjectPublish',
 
 	'app.plans',
 	'app.billing',

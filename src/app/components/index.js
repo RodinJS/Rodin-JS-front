@@ -15,4 +15,7 @@ componentsModule.directive('checkForUnique', CheckForUnique);
 import CustomInput from './custom-input/index';
 componentsModule.directive('customInput', CustomInput);
 
+import EditorNavigation from './editorNavigation/index';
+componentsModule.directive('editorNavigation', EditorNavigation);
+
 export default componentsModule;

@@ -1,0 +1,21 @@
+<div class="page__wrapper">
+    <div class="main-container development-container">
+        <div class="main-title-wrapper">
+            <h1 class="main-title">Build/<i class="icon icon-lock"></i><span class="user-name text-white">{{$ctrl.project.name}}</span>
+            </h1>
+        </div>
+        <div class="page-content">
+            <div class="content-navbar">
+                <div editor-navigation></div>
+            </div>
+            <div class="section-wrapper">
+                <h2 class="section-title"> {{$ctrl.project.name}}</h2>
+                <p class="description">{{$ctrl.project.description}}</p>
+                <p class="description">Publish date {{$ctrl.project.publishDate}}</p>
+                <button class="btn btn-primary" ng-click="$ctrl.publish()">Publish</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+</div>
