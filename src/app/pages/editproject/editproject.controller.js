@@ -39,6 +39,7 @@ class EditProjectCtrl {
                 this.project = project;
                 this.projectPublic = project.public === 'true';
                 this.editorUrl = this.EDITOR + this.project.root;
+                console.log(this.editorUrl);
             },
             err => {
                 this.$state.go('landing.error');
