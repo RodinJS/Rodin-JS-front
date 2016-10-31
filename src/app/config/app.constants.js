@@ -18,7 +18,7 @@ const AppConstants = {
 		EDITOR: 'http://localhost:8000/#/',
 	},
 	prod: {
-		COOKIEDOMAIN: ['.rodinapp.com'],
+		COOKIEDOMAIN: ['.rodinapp.com', '.rodin.space'],
 		API: `https://api.${window.extractDomain()}/api`,
 		SITE: `https://${window.extractDomain()}/`,
 		PREVIEW: `https://api.${window.extractDomain()}/preview/`,
