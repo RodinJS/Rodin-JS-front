@@ -1,0 +1,24 @@
+<div class="page__wrapper">
+    <div class="main-container development-container">
+        <div class="main-title-wrapper">
+            <h1 class="main-title">Build/<i class="icon icon-lock"></i><span class="user-name text-white">{{$ctrl.project.name}}</span>
+            </h1>
+        </div>
+        <div class="page-content">
+            <div class="content-navbar">
+                <div editor-navigation></div>
+            </div>
+            <div class="section-wrapper">
+                <h2 class="section-title">Publish project</h2>
+                <div ng-show="$ctrl.project.publishDate">
+                    <p class="description">Last publish at {{$ctrl.project.publishDate | date: 'MMMM dd yyyy. h:mm:ss a'}}</p>
+                </div>
+                <div ng-hide="$ctrl.project.publishDate">
+                    <p class="description">This project is not published.</p>
+                </div>
+                <button class="btn btn-primary" ng-click="$ctrl.publish()">Publish</button>
+            </div>
+        </div>
+    </div>
+    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+</div>

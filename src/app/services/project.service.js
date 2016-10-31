@@ -52,6 +52,27 @@ class Project {
 		return deferred.promise;
 	}
 
+
+	publish(projectId = null) {
+		let deferred = this._$q.defer();
+
+		this._Projects.one('publish/'+projectId).get().then((result) => {
+			this._Validator.validateHTTP(result);
+			if (this._Validator.isValidHTTP()) {
+				let response = this._Validator.getDataHTTP();
+				deferred.resolve(response);
+			} else {
+				deferred.reject(this._Validator.getErrorsHTTP());
+			}
+		}, (result) => {
+			this._Validator.validateHTTP(result.data);
+
+			deferred.reject(this._Validator.getErrorsHTTP());
+		});
+
+		return deferred.promise;
+	}
+
 	update(projectId = null, fields = {}) {
 		let deferred = this._$q.defer();
 
