@@ -11,14 +11,66 @@
             <div class="section-wrapper">
                 <h2 class="section-title">Publish project</h2>
                 <div ng-show="$ctrl.project.publishDate">
+                    <p class="description">Your project is published on
+                    <a class="text-yellow" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a></p>
                     <p class="description">Last publish at {{$ctrl.project.publishDate | date: 'MMMM dd yyyy. h:mm:ss a'}}</p>
+                    <button class="btn btn-primary" ng-click="$ctrl.modals.updateVersion = true;">Update Version</button>
+                    <button class="btn btn-primary" ng-click="$ctrl.modals.unpublish = true;">Unpublish</button>
                 </div>
                 <div ng-hide="$ctrl.project.publishDate">
                     <p class="description">This project is not published.</p>
+                    <button class="btn btn-primary" ng-click="$ctrl.publish()">Publish</button>
                 </div>
-                <button class="btn btn-primary" ng-click="$ctrl.publish()">Publish</button>
             </div>
         </div>
     </div>
     <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+</div>
+
+<div class="modal" ng-class="{'display-block': $ctrl.modals.updateVersion, 'display-none': !$ctrl.modals.updateVersion}">
+    <div class="modal-content">
+        <span class="close" data-ng-click="$ctrl.modals.updateVersion = false"> ×</span>
+        <div class="modal-header">
+            <h1>Warning</h1>
+        </div>
+        <div class="modal-body padding-0-important">
+            <p class="description">
+                You are about to update published project to the current project version. Previous version will lost. <br>
+                Are you sure you want to continue?
+            </p>
+        </div>
+        <div class="modal-footer padding-bottom-40-important">
+            <div class="required-field-actions clearfix">
+                <button class="btn btn-primary"
+                        data-ng-click="$ctrl.publish()">Update</button>
+                <a href="" class="btn btn-save"
+                   data-ng-click="$ctrl.modals.updateVersion = false">cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" ng-class="{'display-block': $ctrl.modals.unpublish, 'display-none': !$ctrl.modals.unpublish}">
+    <div class="modal-content">
+        <span class="close" data-ng-click="$ctrl.modals.unpublish = false"> ×</span>
+        <div class="modal-header">
+            <h1>Warning</h1>
+        </div>
+        <div class="modal-body padding-0-important">
+            <p class="description">
+                Your project will no longer be available on
+                <span class="text-yellow">{{$ctrl.project.publishedUrl}}</span>, your apps for
+                <span class="text-yellow">"{{$ctrl.project.name}}"</span> will stop working !<br>
+                Are you sure you want to continue?
+            </p>
+        </div>
+        <div class="modal-footer padding-bottom-40-important">
+            <div class="required-field-actions clearfix">
+                <button class="btn btn-primary"
+                        data-ng-click="$ctrl.unpublish()">Unpublish</button>
+                <a href="" class="btn btn-save"
+                   data-ng-click="$ctrl.modals.unpublish = false">cancel</a>
+            </div>
+        </div>
+    </div>
 </div>

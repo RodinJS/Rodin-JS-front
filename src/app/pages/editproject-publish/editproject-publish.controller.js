@@ -3,6 +3,7 @@ class EditProjectPublishCtrl {
         'ngInject';
 
         this.appName = AppConstants.appName;
+        this.domain = AppConstants.SITE;
         this._AppConstants = AppConstants;
         this._JWT = JWT;
         this.Project = Project;
@@ -16,6 +17,11 @@ class EditProjectPublishCtrl {
         this.getProject();
 
         this.user = User.current;
+
+        this.modals =  {
+            updateVersion: false,
+            unpublish: false
+        }
     }
 
     getProject() {
@@ -24,6 +30,7 @@ class EditProjectPublishCtrl {
             project => {
                 this.showLoader = false;
                 this.project = project;
+                this.project.publishedUrl = `${this.domain}publish/${this.user.username}/${this.project.name}`;
             },
             err => {
                 this.showLoader = false;
@@ -32,6 +39,7 @@ class EditProjectPublishCtrl {
     }
 
     publish() {
+        this.modals.updateVersion = false;
         this.showLoader = true;
         this.Project.publish(this.projectId).then(
             data => {
@@ -39,9 +47,12 @@ class EditProjectPublishCtrl {
             },
             err => {
                 this.showLoader = false;
-                console.log(err);
             }
         )
+    }
+
+    unpublish() {
+        this.modals.unpublish = false;
     }
 }
 
