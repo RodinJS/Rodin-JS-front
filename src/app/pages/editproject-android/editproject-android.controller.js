@@ -40,11 +40,10 @@ class EditProjectAndroidCtrl {
 
         this.keyStoreFileUpload = true;
 
-        const self = this;
         this.eventBus = EventBus;
-        // ProjectStore.subscribeAndInit($scope, ()=> {
-        //     self.getProject();
-        // });
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            this.project = ProjectStore.gerProject();
+        });
         this.getProject();
     }
 
@@ -53,8 +52,7 @@ class EditProjectAndroidCtrl {
         this.Project.get(this.projectId, {device: 'android'}).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
-                // this.eventBus.emit(this.eventBus.project.SET, project);
+                this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
                 this.$state.go('landing.error');

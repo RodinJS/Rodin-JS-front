@@ -23,33 +23,33 @@ class EditProjectPublishCtrl {
             unpublish: false
         };
 
-        const self = this;
         this.eventBus = EventBus;
-        // ProjectStore.subscribeAndInit($scope, ()=> {
-        //     self.project = ProjectStore.gerProject();
-        //     if(!self.project)
-        //         self.getProject();
-        //     else {
-        //         self.showLoader = false;
-        //         self.project.publishedUrl = `${self._AppConstants.PUBLISH}/${self.user.username}/${self.project.name}`;
-        //     }
-        // });
-        this.getProject();
+        ProjectStore.subscribeAndInit($scope, () => {
+            this.project = ProjectStore.gerProject();
+            if(!this.project)
+                this.getProject();
+            else {
+                this.finaliseRequest();
+            }
+        });
     }
 
     getProject() {
         this.showLoader = true;
         this.Project.get(this.projectId).then(
             project => {
-                this.showLoader = false;
-                // this.eventBus.emit(this.eventBus.project.SET, project);
-                this.project = project;
-                this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
+                this.finaliseRequest();
+                this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
                 this.showLoader = false;
             }
         );
+    }
+
+    finaliseRequest() {
+        this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
+        this.showLoader = false;
     }
 
     publish() {

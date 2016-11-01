@@ -42,12 +42,10 @@ class EditProjectViveCtrl {
         this.submiting = false;
         this.openEvent = null;
 
-
-        const self = this;
         this.eventBus = EventBus;
-        // ProjectStore.subscribeAndInit($scope, ()=> {
-        //     self.getProject();
-        // });
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            this.project = ProjectStore.gerProject();
+        });
         this.getProject();
     }
 
@@ -56,8 +54,7 @@ class EditProjectViveCtrl {
         this.Project.get(this.projectId).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
-                // this.eventBus.emit(this.eventBus.project.SET, project);
+                this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
                 this.$state.go('landing.error');
