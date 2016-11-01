@@ -38,8 +38,8 @@ class EditProjectPublishCtrl {
         this.showLoader = true;
         this.Project.get(this.projectId).then(
             project => {
-                this.finaliseRequest();
                 this.eventBus.emit(this.eventBus.project.SET, project);
+                this.finaliseRequest();
             },
             err => {
                 this.showLoader = false;

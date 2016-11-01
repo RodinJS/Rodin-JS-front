@@ -35,7 +35,7 @@ class EditProjectCtrl {
             if(!this.project)
                 this.getProject();
             else
-                this.showLoader = false;
+                this.finaliseRequest();
         });
     }
 
@@ -43,15 +43,19 @@ class EditProjectCtrl {
         this.showLoader = true;
         this.Project.get(this.projectId).then(
             project => {
-                this.showLoader = false;
-                this.projectPublic = project.public === 'true';
-                this.project.editorUrl = this.EDITOR + this.project.root;
                 this.eventBus.emit(this.eventBus.project.SET, project);
+                this.finaliseRequest();
             },
             err => {
                 this.$state.go('landing.error');
             }
         )
+    }
+
+    finaliseRequest() {
+        this.project.editorUrl = this.EDITOR + this.project.root;
+        this.projectPublic = this.project.public === 'true';
+        this.showLoader = false;
     }
 
     toggleStatus() {
