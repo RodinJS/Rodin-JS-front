@@ -44,11 +44,7 @@ class EditProjectIosCtrl {
         const self = this;
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, ()=> {
-            self.project = ProjectStore.gerProject();
-            if(!self.project)
-                self.getProject();
-            else
-                self.showLoader = false;
+            self.getProject();
         });
     }
 
@@ -70,6 +66,7 @@ class EditProjectIosCtrl {
         this.Project.update(this.project._id, this.project).then(
             data => {
                 this.showLoader = false;
+                this.eventBus.emit(this.eventBus.project.SET, this.project);
                 console.log(data);
             },
             err => {

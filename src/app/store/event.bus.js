@@ -6,7 +6,7 @@ function EventBus($rootScope) {
         },
         emit: emit,
         on: on
-    }
+    };
 
     function emit(event) {
         return $rootScope.$broadcast.apply($rootScope, arguments);

@@ -46,11 +46,7 @@ class EditProjectViveCtrl {
         const self = this;
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, ()=> {
-            self.project = ProjectStore.gerProject();
-            if(!self.project)
-                self.getProject();
-            else
-                self.showLoader = false;
+            self.getProject();
         });
 
     }

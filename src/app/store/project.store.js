@@ -7,7 +7,7 @@ function ProjectStore(EventBus, BaseStore) {
     'ngInject';
 
     const factory = BaseStore(EventBus);
-    factory.id = 'Porject';
+    factory.id = 'Project';
 
     EventBus.on(EventBus.project.SET, function (scope, data) {
         factory.data.project = data;

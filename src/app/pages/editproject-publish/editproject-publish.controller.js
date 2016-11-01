@@ -21,7 +21,7 @@ class EditProjectPublishCtrl {
         this.modals =  {
             updateVersion: false,
             unpublish: false
-        }
+        };
 
         const self = this;
         this.eventBus = EventBus;
@@ -40,7 +40,7 @@ class EditProjectPublishCtrl {
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                this.project.publishedUrl = `${this.domain}publish/${this.user.username}/${this.project.name}`;
+                this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
             },
             err => {
                 this.showLoader = false;
@@ -69,7 +69,7 @@ class EditProjectPublishCtrl {
             err => {
                 this.showLoader = false;
             }
-        )
+        );
         this.modals.unpublish = false;
 
     }

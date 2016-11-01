@@ -16,6 +16,7 @@ const AppConstants = {
 		SITE: 'http://localhost:8585/#/',
 		PREVIEW: 'https://api.rodin.space/preview/',
 		PUBLIC: 'https://api.rodin.space/public/',
+		PUBLISH: 'https://api.rodin.space/publish',
 		EDITOR: 'http://localhost:8000/#/',
 	},
 	prod: {
@@ -24,6 +25,7 @@ const AppConstants = {
 		SITE: `https://${window.extractDomain()}/`,
 		PREVIEW: `https://api.${window.extractDomain()}/preview/`,
 		PUBLIC: `https://api.${window.extractDomain()}/public/`,
+		PUBLISH: `https://api.${window.extractDomain()}/publish`,
 		EDITOR: `https://editor.${window.extractDomain()}/`,
 	},
 
@@ -41,6 +43,10 @@ const AppConstants = {
 
 	get PUBLIC() {
 		return this[this.env].PUBLIC;
+	},
+
+	get PUBLISH() {
+		return this[this.env].PUBLISH;
 	},
 
 	get EDITOR() {
