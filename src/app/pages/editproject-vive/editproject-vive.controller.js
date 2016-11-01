@@ -1,5 +1,5 @@
 class EditProjectViveCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -41,6 +41,18 @@ class EditProjectViveCtrl {
 
         this.submiting = false;
         this.openEvent = null;
+
+
+        const self = this;
+        this.eventBus = EventBus;
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            self.project = ProjectStore.gerProject();
+            if(!self.project)
+                self.getProject();
+            else
+                self.showLoader = false;
+        });
+
     }
 
     getProject() {
@@ -48,7 +60,7 @@ class EditProjectViveCtrl {
         this.Project.get(this.projectId).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
+                this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
                 this.$state.go('landing.error');

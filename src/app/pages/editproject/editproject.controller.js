@@ -1,5 +1,5 @@
 class EditProjectCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -14,21 +14,32 @@ class EditProjectCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.getProject();
 
         this.tinymceOptions = {
-            menubar:false,
+            menubar: false,
             statusbar: false,
             toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist',
             inline: false,
-            plugins : 'advlist autolink link image lists charmap print preview',
-            theme : "modern"
+            plugins: 'advlist autolink link image lists charmap print preview',
+            theme: "modern"
         };
 
         this.modals = {
             remove: false,
             share: false
         };
+
+
+        const self = this;
+        this.eventBus = EventBus;
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            self.project = ProjectStore.gerProject();
+            if(!self.project)
+                self.getProject();
+            else
+                self.showLoader = false;
+        });
+
     }
 
     getProject() {
@@ -36,7 +47,8 @@ class EditProjectCtrl {
         this.Project.get(this.projectId).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
+                //this.project = project;
+                this.eventBus.emit(this.eventBus.project.SET, project);
                 this.projectPublic = project.public === 'true';
                 this.project.editorUrl = this.EDITOR + this.project.root;
             },

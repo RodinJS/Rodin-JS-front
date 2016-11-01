@@ -14,7 +14,6 @@ export default class JWT {
 
 	save(token) {
 		let domains = this._AppConstants.COOKIEDOMAIN || [];
-
 		for (let i = 0; i < domains.length; ++i) {
 			Cookies.set(this._AppConstants.jwtKey, token, {
 				expires: 7,

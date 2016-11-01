@@ -1,5 +1,5 @@
 class EditProjectAndroidCtrl {
-    constructor (AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
+    constructor (AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -13,7 +13,6 @@ class EditProjectAndroidCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.getProject();
 
         this.user = User.current;
 
@@ -40,6 +39,16 @@ class EditProjectAndroidCtrl {
         };
 
         this.keyStoreFileUpload = true;
+
+        const self = this;
+        this.eventBus = EventBus;
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            self.project = ProjectStore.gerProject();
+            if(!self.project)
+                self.getProject();
+            else
+                self.showLoader = false;
+        });
     }
 
     getProject () {
@@ -47,7 +56,8 @@ class EditProjectAndroidCtrl {
         this.Project.get(this.projectId, {device: 'android'}).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
+                //this.project = project;
+                this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
                 this.$state.go('landing.error');

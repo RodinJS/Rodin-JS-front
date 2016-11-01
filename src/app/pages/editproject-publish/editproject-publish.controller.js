@@ -1,5 +1,5 @@
 class EditProjectPublishCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -22,6 +22,16 @@ class EditProjectPublishCtrl {
             updateVersion: false,
             unpublish: false
         }
+
+        const self = this;
+        this.eventBus = EventBus;
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            self.project = ProjectStore.gerProject();
+            if(!self.project)
+                self.getProject();
+            else
+                self.showLoader = false;
+        });
     }
 
     getProject() {
@@ -29,7 +39,7 @@ class EditProjectPublishCtrl {
         this.Project.get(this.projectId).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
+                this.eventBus.emit(this.eventBus.project.SET, project);
                 this.project.publishedUrl = `${this.domain}publish/${this.user.username}/${this.project.name}`;
             },
             err => {
@@ -52,7 +62,16 @@ class EditProjectPublishCtrl {
     }
 
     unpublish() {
+        this.Project.unPublish(this.projectId).then(
+            data => {
+                this.getProject();
+            },
+            err => {
+                this.showLoader = false;
+            }
+        )
         this.modals.unpublish = false;
+
     }
 }
 

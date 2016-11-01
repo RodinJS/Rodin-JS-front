@@ -31,6 +31,7 @@ import './config/app.templates';
 
 // Import our app functionaity
 import './services/index';
+import './store/index';
 import './components/index';
 import './layout/index';
 import './pages/index';
@@ -47,6 +48,7 @@ const requires = [
 	'templates',
 	'ui.bootstrap',
 	'app.services',
+	'app.store',
 	'app.components',
 	'app.layout',
 	'app.pages',

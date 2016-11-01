@@ -1,5 +1,5 @@
 class EditProjectIosCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -13,7 +13,6 @@ class EditProjectIosCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.getProject();
 
         this.user = User.current;
 
@@ -41,6 +40,16 @@ class EditProjectIosCtrl {
 
         this.submiting = false;
         this.openEvent = null;
+
+        const self = this;
+        this.eventBus = EventBus;
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            self.project = ProjectStore.gerProject();
+            if(!self.project)
+                self.getProject();
+            else
+                self.showLoader = false;
+        });
     }
 
     getProject() {
@@ -48,7 +57,7 @@ class EditProjectIosCtrl {
         this.Project.get(this.projectId, {device: 'ios'}).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
+                this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
                 this.$state.go('landing.error');
