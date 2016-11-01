@@ -29,8 +29,10 @@ class EditProjectPublishCtrl {
             self.project = ProjectStore.gerProject();
             if(!self.project)
                 self.getProject();
-            else
+            else {
                 self.showLoader = false;
+                self.project.publishedUrl = `${self._AppConstants.PUBLISH}/${self.user.username}/${self.project.name}`;
+            }
         });
     }
 
