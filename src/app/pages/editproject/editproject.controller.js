@@ -32,14 +32,14 @@ class EditProjectCtrl {
 
         const self = this;
         this.eventBus = EventBus;
-        ProjectStore.subscribeAndInit($scope, ()=> {
-            self.project = ProjectStore.gerProject();
-            if(!self.project)
-                self.getProject();
-            else
-                self.showLoader = false;
-        });
-
+        // ProjectStore.subscribeAndInit($scope, ()=> {
+        //     self.project = ProjectStore.gerProject();
+        //     if(!self.project)
+        //         self.getProject();
+        //     else
+        //         self.showLoader = false;
+        // });
+        this.getProject();
     }
 
     getProject() {
@@ -47,8 +47,8 @@ class EditProjectCtrl {
         this.Project.get(this.projectId).then(
             project => {
                 this.showLoader = false;
-                //this.project = project;
-                this.eventBus.emit(this.eventBus.project.SET, project);
+                this.project = project;
+                // this.eventBus.emit(this.eventBus.project.SET, project);
                 this.projectPublic = project.public === 'true';
                 this.project.editorUrl = this.EDITOR + this.project.root;
             },

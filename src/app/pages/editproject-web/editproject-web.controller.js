@@ -44,9 +44,10 @@ class EditProjectWebCtrl {
 
         const self = this;
         this.eventBus = EventBus;
-        ProjectStore.subscribeAndInit($scope, ()=> {
-            self.getProject();
-        });
+        // ProjectStore.subscribeAndInit($scope, ()=> {
+        //     self.getProject();
+        // });
+        this.getProject();
     }
 
     getProject() {
@@ -54,7 +55,8 @@ class EditProjectWebCtrl {
         this.Project.get(this.projectId).then(
             project => {
                 this.showLoader = false;
-                this.eventBus.emit(this.eventBus.project.SET, project);
+                this.project = project;
+                // this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
                 this.$state.go('landing.error');

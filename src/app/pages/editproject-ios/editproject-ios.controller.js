@@ -43,9 +43,10 @@ class EditProjectIosCtrl {
 
         const self = this;
         this.eventBus = EventBus;
-        ProjectStore.subscribeAndInit($scope, ()=> {
-            self.getProject();
-        });
+        // ProjectStore.subscribeAndInit($scope, ()=> {
+        //     self.getProject();
+        // });
+        this.getProject();
     }
 
     getProject() {

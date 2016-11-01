@@ -25,15 +25,16 @@ class EditProjectPublishCtrl {
 
         const self = this;
         this.eventBus = EventBus;
-        ProjectStore.subscribeAndInit($scope, ()=> {
-            self.project = ProjectStore.gerProject();
-            if(!self.project)
-                self.getProject();
-            else {
-                self.showLoader = false;
-                self.project.publishedUrl = `${self._AppConstants.PUBLISH}/${self.user.username}/${self.project.name}`;
-            }
-        });
+        // ProjectStore.subscribeAndInit($scope, ()=> {
+        //     self.project = ProjectStore.gerProject();
+        //     if(!self.project)
+        //         self.getProject();
+        //     else {
+        //         self.showLoader = false;
+        //         self.project.publishedUrl = `${self._AppConstants.PUBLISH}/${self.user.username}/${self.project.name}`;
+        //     }
+        // });
+        this.getProject();
     }
 
     getProject() {
@@ -41,7 +42,8 @@ class EditProjectPublishCtrl {
         this.Project.get(this.projectId).then(
             project => {
                 this.showLoader = false;
-                this.eventBus.emit(this.eventBus.project.SET, project);
+                // this.eventBus.emit(this.eventBus.project.SET, project);
+                this.project = project;
                 this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
             },
             err => {
