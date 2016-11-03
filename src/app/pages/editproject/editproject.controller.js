@@ -89,15 +89,17 @@ class EditProjectCtrl {
     }
 
     update() {
+        let projectInfo = {};
+        angular.extend(projectInfo, this.project);
+        projectInfo.tags = projectInfo.tags.map(i => i.text);
         this.showLoader = true;
-        this.Project.update(this.project._id, this.project).then(
+        this.Project.update(this.project._id, projectInfo).then(
             data => {
+                this.eventBus.emit(this.eventBus.project.SET, this.project);
                 this.showLoader = false;
-                console.log(data);
             },
             err => {
                 this.showLoader = false;
-                console.log(err);
             }
         )
     }

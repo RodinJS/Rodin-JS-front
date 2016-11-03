@@ -15,7 +15,8 @@ class ProjectCtrl {
         this.project = {
             name: "",
             description: $scope.projectDescription,
-            templateOf: "empty"
+            templateOf: "empty",
+            tags: []
         };
 
         this.showLoader = false;
@@ -44,8 +45,8 @@ class ProjectCtrl {
 
         let projectInfo = {};
         angular.extend(projectInfo, this.project);
-        projectInfo.tags = (projectInfo.tags && projectInfo.tags.split(",")) || [];
         projectInfo.templateId = this.projectTemplates.selected._id;
+        projectInfo.tags = projectInfo.tags.map(i => i.text);
 
         this.Project.create(projectInfo).then(
             data => {

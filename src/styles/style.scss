@@ -1,4 +1,5 @@
 @import "../../build/scripts/vendor/angular-ui-switch/angular-ui-switch.min";
+@import "../../build/scripts/vendor/ng-tags-input/ng-tags-input.min";
 @import "_style";
 
 .form-wrapper .form-group.fixed-placeholder-group .form-control {
@@ -389,6 +390,41 @@
   li {
     &:before {
       display: none;
+    }
+  }
+}
+
+tags-input {
+  padding: 0 !important;
+
+  .host {
+    margin: 0 !important;
+
+    .tags {
+      background-color: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+
+      .tag-list {
+        li {
+          background: rgba(255,255,255,.2);
+          height: 36px;
+          line-height: 36px;
+          padding: 0 10px;
+          border-radius: 0 !important;
+          border: 0 !important;
+
+          .remove-button {
+            color: white !important;
+          }
+        }
+      }
+      input {
+        width: 70px;
+        background: transparent;
+        height: 100%;
+        margin: 0px !important;
+      }
     }
   }
 }
