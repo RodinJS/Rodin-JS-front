@@ -3,7 +3,7 @@
  */
 
 
-function ProjectStore(EventBus, BaseStore) {
+function ProjectStore(EventBus, BaseStore, $stateParams, $state, Project) {
     'ngInject';
 
     const factory = BaseStore(EventBus);
@@ -14,7 +14,16 @@ function ProjectStore(EventBus, BaseStore) {
         factory.emitChanges();
     });
 
-    factory.gerProject = function () {
+    factory.getProject = function () {
+        if(factory.data.project && factory.data.project._id != $stateParams.projectId){
+            Project.get($stateParams.projectId).then(
+                project => {
+                    EventBus.emit(EventBus.project.SET, project);
+                },
+                err => {
+                    $state.go('landing.error');
+                });
+        }
         return factory.data.project;
     };
 

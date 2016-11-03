@@ -14,7 +14,6 @@ class EditProjectPublishCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.getProject();
 
         this.user = User.current;
 
@@ -25,9 +24,10 @@ class EditProjectPublishCtrl {
 
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, () => {
-            this.project = ProjectStore.gerProject();
-            if(!this.project)
+            this.project = ProjectStore.getProject();
+            if(!this.project){
                 this.getProject();
+            }
             else {
                 this.finaliseRequest();
             }

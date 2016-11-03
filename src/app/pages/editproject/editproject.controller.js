@@ -31,7 +31,7 @@ class EditProjectCtrl {
 
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, ()=> {
-            this.project = ProjectStore.gerProject();
+            this.project = ProjectStore.getProject();
             if(!this.project)
                 this.getProject();
             else
