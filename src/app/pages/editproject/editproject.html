@@ -211,7 +211,11 @@
                             <tr>
                                 <td class="text-primary"><span>Last Published</span>
                                 </td>
-                                <td class="text-primary"><span>Never</span>
+                                <td class="text-primary">
+                                    <span ng-hide="!!$ctrl.project.publishDate">Never</span>
+                                    <span ng-show="!!$ctrl.project.publishDate">
+                                        {{$ctrl.project.publishDate | date: 'MMMM dd yyyy. h:mm:ss a'}}
+                                    </span>
                                 </td>
                             </tr>
                             <tr>

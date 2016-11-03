@@ -64,6 +64,7 @@ class EditProjectCtrl {
         this.showLoader = true;
         this.Project.toggleStatus(this.project._id, this.project.public).then(
             res => {
+                this.eventBus.emit(this.eventBus.project.SET, this.project);
                 this.showLoader = false;
             },
             err => {
