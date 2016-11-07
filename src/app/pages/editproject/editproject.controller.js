@@ -10,6 +10,7 @@ class EditProjectCtrl {
         this.$q = $q;
         this._$scope = $scope;
         this.user = User.current;
+        this._AppConstants = AppConstants;
 
         this.projectId = $stateParams.projectId;
         this.project = {};
@@ -54,6 +55,7 @@ class EditProjectCtrl {
 
     finaliseRequest() {
         this.project.editorUrl = this.EDITOR + this.project.root;
+        this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
         this.projectPublic = this.project.public === 'true';
         this.showLoader = false;
     }

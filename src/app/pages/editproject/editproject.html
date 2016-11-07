@@ -304,9 +304,17 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
-            <h1>Delete this project ?</h1>
+            <h1 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h1>
+            <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
         </div>
-        <div class="modal-body"></div>
+        <div class="modal-body padding-0-important" ng-if="!!$ctrl.project.publishDate">
+            <p class="description">
+                Your project will no longer be available on
+                <span class="text-yellow">{{$ctrl.project.publishedUrl}}</span>, your apps for
+                <span class="text-yellow">"{{$ctrl.project.name}}"</span> will stop working !<br>
+                Are you sure you want to continue?
+            </p>
+        </div>
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <button type="button" class="btn btn-primary"
