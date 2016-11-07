@@ -132,7 +132,12 @@ class User {
 		if (this.current) {
 			deferred.resolve(true);
 		} else {
-			this._User.one("me").get().then((res) => {
+			this._User.one("me").get(
+				{
+					projectsCount: true,
+					usedStorage: true
+				}
+			).then((res) => {
 				this.current = res.data;
 				deferred.resolve(true);
 			}, (err) => {

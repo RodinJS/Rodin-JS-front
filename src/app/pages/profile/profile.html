@@ -28,7 +28,7 @@
 
             <div class="section-wrapper">
 
-                <form name="profile" data-ng-submit="$ctrl.updateProfile(profile.$valid)" novalidate>
+                <form name="profile" novalidate>
                     <div class="section section-account-info">
                         <h2 class="section-title">Account Info</h2>
                         <div class="row">
@@ -71,8 +71,9 @@
                                     </div>
                                     <div class="checkbox">
                                         <label class="text-small">
-                                            <input type="checkbox" checked>I want to receive notifications on this
-                                            email
+                                            <input type="checkbox"
+                                                    ng-model="$ctrl.profile.emailNotification">
+                                            I want to receive notifications on this email
                                             <span class="custom-check"></span>
                                         </label>
                                     </div>
@@ -88,7 +89,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group" custom-input>
-                                                <input type="text" class="form-control" placeholder="">
+                                                <input type="text" class="form-control" placeholder=""
+                                                        ng-model="$ctrl.currentUser.profile.city">
                                                 <label class="control-label float-label">City</label>
                                             </div>
                                         </div>
@@ -114,20 +116,28 @@
                                         Prospective clients can find you by searching you location.
                                     </p>
                                     <div class="form-group" custom-input>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" placeholder=""
+                                                ng-model="$ctrl.currentUser.profile.website">
                                         <label class="control-label float-label">Personal Website</label>
                                     </div>
+                                    <div></div>
                                     <div class="form-group area-group" custom-input>
-                                        <textarea class="form-control" maxlength="520"></textarea>
+                                        <textarea ng-model="$ctrl.currentUser.profile.about"
+                                                  ng-maxlength="520" class="form-control" maxlength="520"></textarea>
                                         <label class="control-label float-label">Write briefly about yourself</label>
                                     </div>
                                     <p class="text-small description">
                                         Your short bio will show up on your profile page. Let the world know
                                         a little about you!
-                                        <span class="textarea-description"><strong>520</strong> symbols left</span>
+                                        <span class="textarea-description">
+                                            <strong>
+                                                {{520 - $ctrl.currentUser.profile.about.length}}
+                                            </strong>
+                                            symbols left
+                                        </span>
                                     </p>
                                     <div class="form-group" custom-input>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <tags-input class="form-control" ng-model="$ctrl.currentUser.profile.skills"></tags-input>
                                         <label class="control-label float-label">Your skills</label>
                                     </div>
                                     <p class="text-small description">Your skills will show up on you profile page. Let
@@ -138,7 +148,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-wrapper">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary"
+                                            ng-click="$ctrl.updateProfile()">
                                         Update Profile
                                     </button>
                                 </div>
@@ -223,21 +234,21 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-primary"><span>Non-showcased sites</span>
+                                    <td class="text-primary"><span>Published projects</span>
                                     </td>
-                                    <td class="text-primary">8<span></span>
+                                    <td class="text-primary">{{$ctrl.currentUser.projects.published}}<span></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-primary"><span>Showcased sites</span>
+                                    <td class="text-primary"><span>Unpublished sites</span>
                                     </td>
-                                    <td class="text-primary">0<span></span>
+                                    <td class="text-primary">{{$ctrl.currentUser.projects.unpublished}}<span></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="text-primary"><span>Storage Used (Sites)</span>
                                     </td>
-                                    <td class="text-primary">1821 Mb<span></span>
+                                    <td class="text-primary">{{$ctrl.currentUser.usedStorage | bytes: 'MB'}}<span></span>
                                     </td>
                                 </tr>
                                 </tbody>

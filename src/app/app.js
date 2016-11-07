@@ -36,6 +36,7 @@ import './store/index';
 import './components/index';
 import './layout/index';
 import './pages/index';
+import './filters/index';
 
 // Create and bootstrap application
 const requires = [
@@ -53,6 +54,7 @@ const requires = [
 	'app.components',
 	'app.layout',
 	'app.pages',
+	'app.filters',
 	'uiSwitch',
 	'ui.tinymce',
 	'ngTagsInput'

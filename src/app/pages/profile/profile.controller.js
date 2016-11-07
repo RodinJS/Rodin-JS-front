@@ -1,5 +1,5 @@
 class ProfileCtrl {
-    constructor(AppConstants, User, $scope, Validator, Error) {
+    constructor (AppConstants, User, $scope, Validator, Error) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -23,56 +23,28 @@ class ProfileCtrl {
         this.passwordChangeResponse = '';
     }
 
-    updateProfile(isValidForm = true) {
-        if (!isValidForm) {
-            return;
-        }
+    updateProfile () {
+        this.showLoader = true;
+        let currentUser = {
+            email: this.currentUser.email,
+            profile: this.currentUser.profile,
+            username: this.currentUser.username
+        };
 
-        const Validator = new this._Validator();
+        currentUser.profile.skills = currentUser.profile.skills.map(i => i.text);
 
-        Validator.validate([
-            {
-                name: "profile.firstName",
-                value: this.currentUser.profile.firstName,
-                conditions: {}
+        this._User.update(null, currentUser).then(
+            data => {
+                this.showLoader = false;
             },
-            {
-                name: "profile.lastName",
-                value: this.currentUser.profile.lastName,
-                conditions: {}
-            },
-            {
-                name: 'email',
-                value: this.currentUser.email,
-                conditions: {
-                    pattern: this.patterns.email,
-                    required: true
-                }
-            },
-            {
-                name: 'username',
-                value: this.currentUser.username,
-                conditions: {}
+            err => {
+                this.showLoader = false;
             }
-        ]);
-
-        if (Validator.isValid()) {
-            var data = Validator.getData();
-
-            this.showLoader = true;
-            this._User.update(null, data).then((data) => {
-                this.showLoader = false;
-                console.log("success");
-            }, (data) => {
-                this.showLoader = false;
-                console.log("error");
-            });
-        } else {
-            console.log(Validator.getErrors());
-        }
+        );
     }
 
-    updatePassword(isValidForm = true) {
+
+    updatePassword (isValidForm = true) {
         if (!isValidForm) {
             return;
         }
@@ -112,7 +84,7 @@ class ProfileCtrl {
         }
     }
 
-    confirmPassword() {
+    confirmPassword () {
         this._$scope.changePasswordForm.confirmPassword.$setValidity('match', this.newPassword.password == this.newPassword.confirm);
     }
 }
