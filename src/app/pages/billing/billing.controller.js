@@ -6,6 +6,8 @@ class BillingCrtl {
 		this.currentUser = User.current;
 		this.formData = {};
 
+
+
 		$scope.$watch('User.current', (newUser) => {
 			this.currentUser = newUser;
 		});

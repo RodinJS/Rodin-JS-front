@@ -18,4 +18,7 @@ componentsModule.directive('customInput', CustomInput);
 import EditorNavigation from './editorNavigation/index';
 componentsModule.directive('editorNavigation', EditorNavigation);
 
+import StripeDirective from './payments/stripe/index';
+componentsModule.directive('stripeDirective', StripeDirective);
+
 export default componentsModule;
