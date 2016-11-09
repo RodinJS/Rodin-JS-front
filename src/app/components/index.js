@@ -21,4 +21,7 @@ componentsModule.directive('editorNavigation', EditorNavigation);
 import StripeDirective from './payments/stripe/index';
 componentsModule.directive('stripeDirective', StripeDirective);
 
+import OnlyNum from './utils/onlyNum';
+componentsModule.directive('onlyNum', OnlyNum);
+
 export default componentsModule;

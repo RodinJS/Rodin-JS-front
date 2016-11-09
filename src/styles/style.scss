@@ -407,7 +407,7 @@ tags-input {
 
       .tag-list {
         li {
-          background: rgba(255,255,255,.2);
+          background: rgba(255, 255, 255, .2);
           height: 36px;
           line-height: 36px;
           padding: 0 10px;
@@ -424,6 +424,38 @@ tags-input {
         background: transparent;
         height: 100%;
         margin: 0px !important;
+      }
+    }
+  }
+}
+
+.stripeWrapper {
+  .list-group {
+    .list-group-item {
+      margin: 0;
+      padding: 10px;
+      border-radius: 0;
+      h4 {
+        margin: 10px 0;
+      }
+      a {
+        display: block;
+        margin: 6px 0;
+        text-decoration: none;
+        font-size: 16px
+      }
+    }
+  }
+}
+
+.form-wrapper{
+  .form-group{
+    &.has-col{
+      &.has-success,
+      &.has-error{
+        &:before{
+          right:25px
+        }
       }
     }
   }

@@ -59,6 +59,7 @@ let pagesModule = angular.module('app.pages', [
 	'app.plans',
 	'app.billing',
 	'app.purchases'
+
 ]);
 
 

@@ -22,5 +22,8 @@ servicesModule.service('Project', ProjectService);
 import ProjectTemplate from './projectTemplate.service';
 servicesModule.service('ProjectTemplate', ProjectTemplate);
 
+import StripeService from './stripe.service';
+servicesModule.service('stripeService', StripeService);
+
 
 export default servicesModule;
