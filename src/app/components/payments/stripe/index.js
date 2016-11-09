@@ -77,13 +77,13 @@ function stripeController($scope,
             let card = success.sources ? success.sources.data : success;
             if (!vm.customerCards) vm.customerCards = [];
             vm.customerCards.push(mapCard(card));
+            resetForm();
         }
         else{
             vm.customerCards.splice(vm.removableCardIndex, 1);
             delete vm.removableCardIndex;
         }
         vm.submitInProgress = false;
-        resetForm();
     }
 
     function resetForm(){
