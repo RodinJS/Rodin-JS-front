@@ -25,16 +25,24 @@
 				</ul>
 			</div>
 			<div class="section-wrapper section-plan-wrapper">
+				<div class="main-alert alert-warning">
+					<p class="text-action">
+						<i class="icon icon-info"></i> You have 6 locked sites. Upgrade your account to unlock sites. Subscribe to a plan in order to start designing again!
+					</p>
+				</div>
+				<div class="main-alert alert-danger">
+					<p class="text-action">
+						<i class="icon icon-error"></i> Please update your credit card information. Looks like your subscription is past due.
+					</p>
+				</div>
 				<div class="content-title-wrapper">
 					<h1 class="main-title">Let’s get you on the right plan!</h1>
 					<p class="description text-small">You’re currently on the Free plan — upgrade, downgrade or cancel at any time.</p>
 				</div>
 				<ul class="plan-content-navbar">
-					<li class="active">
-						<a href="#" class="btn-billing-plan btn-yearly-plan text-primary">Yearly Billing</a>
+					<li class="active"><a href="#" class="btn-billing-plan btn-yearly-plan text-primary">Yearly Billing</a>
 					</li>
-					<li>
-						<a href="#" class="btn-billing-plan btn-mounthly-plan text-primary">Mounthly Billing</a>
+					<li><a href="#" class="btn-billing-plan btn-mounthly-plan text-primary">Mounthly Billing</a>
 					</li>
 				</ul>
 				<div class="plan-content-wrapper">
@@ -85,12 +93,12 @@
 									<li class="text-primary">Advanced Features</li>
 								</ul>
 								<div class="plan-price-wrapper">
-									<span class="price">
-										<sup>$</sup>70<sub>/mo</sub>
-									</span>
+                                            <span class="price">
+                                                <sup>$</sup>70<sub>/mo</sub>
+                                            </span>
 								</div>
 								<div class="btn-wrapper">
-									<a href="" class="btn btn-primary" ng-click="$ctrl.openSubscription('subscribe')">Upgrade Plan</a>
+									<a href="" class="btn btn-primary">Upgrade Plan</a>
 								</div>
 							</div>
 						</div>
@@ -114,9 +122,9 @@
 									<li class="text-primary">Team Dashboard</li>
 								</ul>
 								<div class="plan-price-wrapper">
-									<span class="price">
-										<sup>$</sup>250<sub>/mo</sub>
-									</span>
+                                            <span class="price">
+                                                <sup>$</sup>250<sub>/mo</sub>
+                                            </span>
 								</div>
 								<div class="btn-wrapper">
 									<a href="" class="btn btn-primary">See Team Plans</a>
@@ -125,41 +133,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-
-</div>
-
-
-<div class="modal" ng-class="{'display-block': $ctrl.modals.subscribe, 'display-none': !$ctrl.modals.subscribe}">
-	<div class="modal-content" style="max-width:50%">
-		<div class="modal-header">
-			<span class="close" data-ng-click="$ctrl.modals.subscribe = false">×</span>
-			<h1>Select card for subscription</h1>
-		</div>
-		<div class="modal-body">
-			<ul class="list-group" style="color:#000">
-				<li class="list-group-item row" ng-repeat="(index, card) in $ctrl.customerCards">
-					<div class="col-md-2 col-sm-2 col-sx-2">
-						<i class="fa fa-cc-{{card.brand}} fa-2x" aria-hidden="true"></i>
-					</div>
-					<div class="col-md-3 col-sm-3 col-sx-3">
-						<h4>**** {{card.last4}}</h4>
-					</div>
-					<div class="col-md-3 col-sm-3 col-sx-3">
-						<h4>{{card.exp_month}}/{{card.exp_year}}</h4>
-					</div>
-					<div class="col-sm-3 col-sx-3 col-md-3 col-sm-offset-1 col-sx-offset-1 col-md-offset-1 text-right">
-						<input type="radio" ng-model="$ctrl.selectedCard" ng-value="card">
-					</div>
-				</li>
-			</ul>
-		</div>
-		<div class="modal-footer padding-bottom-20-important">
-			<div class="required-field-actions clearfix">
-				<button type="button" ng-disabled="!$ctrl.selectedCard" class="btn btn-primary" data-ng-click="$ctrl.startSubscription()">Subscribe</button>
-				<a href="" class="btn btn-save" data-ng-click="$ctrl.modals.subscribe = false">cancel</a>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,5 @@
 <div class="stripeWrapper">
+
     <div class="section" ng-if="vm.customerCards">
         <h2 class="section-title"> Cards List </h2>
         <ul class="list-group">
@@ -9,15 +10,30 @@
                 <div class="col-md-3 col-sm-3 col-sx-3">
                     <h4>**** {{card.last4}}</h4>
                 </div>
-                <div class="col-md-3 col-sm-3 col-sx-3">
+                <div class="col-md-2 col-sm-2 col-sx-2">
                     <h4>{{card.exp_month}}/{{card.exp_year}}</h4>
                 </div>
-                <div class="col-sm-3 col-sx-3 col-md-3 col-sm-offset-1 col-sx-offset-1 col-md-offset-1 text-right">
+                <div class="col-md-3 col-sm-3 col-xs-3 text-center">
+
+                    <i ng-show="card.settingDefaultInProgress" class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+                    <div ng-hide="card.settingDefaultInProgress">
+                        <h4 class="label label-info" style="top: 5px; position: relative;"
+                            ng-if="card.id == vm.customer.default_source">Default</h4>
+
+                        <a ng-if="card.id != vm.customer.default_source" href=""
+                           ng-click="vm.setDefaultCard(index, card.id); card.settingDefaultInProgress = true">
+                            <i class="icon icon-edit"></i>
+                            <span>Set default</span>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col-sm-2 col-sx-2 col-md-2   text-right">
                     <a ng-if="vm.customerCards.length > 1"
                        ng-hide="card.deleteInProgress"
                        href=""
                        ng-click="vm.removeCard(index, card.id); card.deleteInProgress = true">
-                        <i class="fa fa-times" aria-hidden="true"></i>
+                        <i class="icon icon-delete" aria-hidden="true"></i>
                         <span>Delete</span>
                     </a>
                     <i ng-show="card.deleteInProgress" class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
@@ -28,7 +44,6 @@
 
     <div class="section">
         <h2 class="section-title">Add new Card</h2>
-
         <form id="stripeFrom" name="vm.stripe"  ng-submit="vm.formSumbit()">
 
             <div class="form-group" custom-input
@@ -89,6 +104,6 @@
             <input type="submit" ng-disabled="vm.submitInProgress || vm.stripe.$invalid" class="btn btn-primary" value="Add card">
             <i ng-show="vm.submitInProgress" style="vertical-align: middle;color: #fff;margin-left: 10px;" class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
         </form>
-
     </div>
+
 </div>

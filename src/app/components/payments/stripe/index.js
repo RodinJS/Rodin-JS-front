@@ -32,15 +32,12 @@ function stripeController($scope,
                           stripeService) {
     const vm = this;
 
-    Stripe.setPublishableKey(AppConstants.STRIPEKEY);
-
-    stripeService.getCostumer().then(init, onError);
-
+    stripeService.getCustomer().then(init, onError);
 
     vm.formSumbit = function () {
         let form = angular.element('#stripeFrom');
         vm.submitInProgress = true;
-        Stripe.card.createToken(form, stripeResponseHandler);
+        stripeService.createToken(form, stripeResponseHandler);
     };
 
     vm.removeCard = function (index, cardId) {
@@ -48,13 +45,17 @@ function stripeController($scope,
         stripeService.deleteCard(cardId).then(onSuccess, onError);
     };
 
+
+    vm.setDefaultCard = function(index, cardId){
+        stripeService.updateCustomer({default_source:cardId}).then(init, onError);
+    };
+
     function init(customer) {
         vm.cardForm = {};
         if (customer && !customer.deleted) {
             vm.customer = customer;
-            vm.customerCards = _.map(customer.sources.data, mapCard);
+            vm.customerCards = _.map(customer.sources.data, stripeService.mapCard);
         }
-
     }
 
     function onError(error) {
@@ -62,21 +63,12 @@ function stripeController($scope,
         console.log(error);
     }
 
-    function mapCard(card){
-        card.brand = card.brand.toLowerCase();
-        switch(card.brand){
-            case 'american express' : card.brand = 'amex'; break;
-            case 'diners club' : card.brand = 'diners-club'; break;
-        }
-        return _.pick(card, ['brand', 'exp_month', 'exp_year', 'last4', 'id']);
-    }
-
     function onSuccess(success) {
 
         if (_.isObject(success)) {
             let card = success.sources ? success.sources.data : success;
             if (!vm.customerCards) vm.customerCards = [];
-            vm.customerCards.push(mapCard(card));
+            vm.customerCards.push(stripeService.mapCard(card));
             resetForm();
         }
         else{

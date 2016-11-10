@@ -1,6 +1,6 @@
 class Stripe {
 
-    constructor(JWT, AppConstants, Restangular, Validator, $state, $q) {
+    constructor(JWT, AppConstants, Restangular, Validator, $state, $q, $window) {
         'ngInject';
         this._JWT = JWT;
         this._AppConstants = AppConstants;
@@ -11,17 +11,44 @@ class Stripe {
         this._Validator = new Validator();
         this.onSuccess = this.onSuccess.bind(this);
         this.onError = this.onError.bind(this);
+        $window.Stripe.setPublishableKey(AppConstants.STRIPEKEY);
+
     }
 
-    getCostumer() {
+    createToken(form, cb){
+        $window.Stripe.card.createToken(form, cb);
+    }
+
+    mapCard(card){
+        card.brand = card.brand.toLowerCase();
+        switch(card.brand){
+            case 'american express' : card.brand = 'amex'; break;
+            case 'diners club' : card.brand = 'diners-club'; break;
+        }
+        return _.pick(card, ['brand', 'exp_month', 'exp_year', 'last4', 'id']);
+    }
+
+    getCustomer() {
         this.deferred = this._$q.defer();
         this._Stripe.one('customer').get().then(this.onSuccess, this.onError);
+        return this.deferred.promise;
+    }
+
+    updateCustomer(fields) {
+        this.deferred = this._$q.defer();
+        this._Stripe.one('customer').put(fields).then(this.onSuccess, this.onError);
         return this.deferred.promise;
     }
 
     createCustomer(fields) {
         this.deferred = this._$q.defer();
         this._Stripe.one('customer').customPOST(fields).then(this.onSuccess, this.onError);
+        return this.deferred.promise;
+    }
+
+    createSubscription(planId){
+        this.deferred = this._$q.defer();
+        this._Stripe.one('subscription').customPOST({planId:planId}).then(this.onSuccess, this.onError);
         return this.deferred.promise;
     }
 
