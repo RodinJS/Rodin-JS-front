@@ -3,7 +3,8 @@
     <div class="section" ng-if="vm.customerCards">
         <h2 class="section-title"> Cards List </h2>
         <ul class="list-group">
-            <li class="list-group-item row" ng-repeat="(index, card) in vm.customerCards">
+            <li class="list-group-item row" ng-repeat="(index, card) in vm.customerCards"
+            ng-class="card.id == vm.customer.default_source ? 'active' : ''">
                 <div class="col-md-2 col-sm-2 col-sx-2">
                     <i class="fa fa-cc-{{card.brand}} fa-2x" aria-hidden="true"></i>
                 </div>
@@ -32,6 +33,7 @@
                     <a ng-if="vm.customerCards.length > 1"
                        ng-hide="card.deleteInProgress"
                        href=""
+                       class="remove-card"
                        ng-click="vm.removeCard(index, card.id); card.deleteInProgress = true">
                         <i class="icon icon-delete" aria-hidden="true"></i>
                         <span>Delete</span>

@@ -51,6 +51,17 @@ class Stripe {
         this._Stripe.one('subscription').customPOST({planId:planId}).then(this.onSuccess, this.onError);
         return this.deferred.promise;
     }
+    updateSubscription(planId){
+        this.deferred = this._$q.defer();
+        this._Stripe.one('subscription').customPOST({planId:planId}).then(this.onSuccess, this.onError);
+        return this.deferred.promise;
+    }
+
+    deleteSubscription(subscriptionI){
+        this.deferred = this._$q.defer();
+        this._Stripe.one('subscription').remove().then(this.onSuccess, this.onError);
+        return this.deferred.promise;
+    }
 
     createCard(fields) {
         this.deferred = this._$q.defer();

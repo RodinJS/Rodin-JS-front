@@ -29,101 +29,44 @@
 					<h1 class="main-title">Let’s get you on the right plan!</h1>
 					<p class="description text-small">You’re currently on the Free plan — upgrade, downgrade or cancel at any time.</p>
 				</div>
-				<ul class="plan-content-navbar">
-					<li class="active">
-						<a href="#" class="btn-billing-plan btn-yearly-plan text-primary">Yearly Billing</a>
-					</li>
-					<li>
-						<a href="#" class="btn-billing-plan btn-mounthly-plan text-primary">Mounthly Billing</a>
-					</li>
-				</ul>
+
 				<div class="plan-content-wrapper">
+
 					<div class="plan-content">
-						<div class="plan-content-item-box current-item-box">
+
+						<div ng-repeat="plan in $ctrl.plans" class="plan-content-item-box">
 							<div class="plan-content-item">
-								<i class="icon icon-monocle"></i>
-								<h2>STARTER</h2>
-								<p class="text-small">
-									Most unlimited sites wthout paying us a dime with Client Billing.
-								</p>
+								<i ng-class="plan.icon"></i>
+								<h2>{{plan.title}}</h2>
+								<p class="text-small">{{plan.description}}</p>
 								<ul class="plan-item-info-list">
-									<li class="text-primary">2 Unhosted Sites</li>
-									<li class="text-primary">Unlimited Hosted Sites</li>
-									<li class="text-primary">Client Billing</li>
-									<li class="text-primary">$15 Basic Hosting</li>
-									<li class="text-primary">$20 CM S Hosting</li>
-									<li class="text-primary">Custom Fonts</li>
-									<li class="text-primary">Forum & Email Support</li>
+									<li class="text-primary"  ng-repeat="feature in plan.features">{{feature}}</li>
 								</ul>
 								<div class="plan-price-wrapper">
 									<span class="price">
-										<sup>$</sup>0<sub>/mo</sub>
+										<sup>{{plan.price.currency}}</sup>{{plan.price.month}}<sub>/mo</sub>
 									</span>
 								</div>
-								<div class="btn-wrapper">
-									<a href="" class="btn btn-current">Current Plan</a>
+
+								<div ng-if="$ctrl.currentPlan == plan.id">
+									<div class="btn-wrapper">
+										<a href="" ng-if="plan.id == 'Free'" class="btn btn-current">Current Plan</a>
+										<a href="" ng-if="plan.id != 'Free'" ng-click="$ctrl.unsubscribe()" class="btn btn-primary">Unsubscribe</a>
+									</div>
+								</div>
+
+								<div ng-if="$ctrl.currentPlan != plan.id">
+									<div class="btn-wrapper">
+										<a href="" class="btn btn-primary" ng-click="$ctrl.openSubscription(plan.id)">
+											{{$ctrl.subscription ? 'Change plan' : 'Subscribe'}}
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="plan-content-item-box recommended-item-box">
-							<div class="plan-content-item">
-								<span class="recommended text-small">Recommended</span>
-								<i class="icon icon-glasses"></i>
-								<h2>PROFESSIONAL</h2>
-								<p class="text-small">
-									For professionals that need unbranded, advanced features
-								</p>
-								<ul class="plan-item-info-list">
-									<li class="text-primary">100 Unhosted Sites</li>
-									<li class="text-primary">Unlimited Hosted Sites</li>
-									<li class="text-primary">Client Billing</li>
-									<li class="text-primary">$15 Basic Hosting</li>
-									<li class="text-primary">$20 CM S Hosting</li>
-									<li class="text-primary">Custom Fonts</li>
-									<li class="text-primary">Unlimited Code Export</li>
-									<li class="text-primary">Forum & Email Support</li>
-									<li class="text-primary">Advanced Features</li>
-								</ul>
-								<div class="plan-price-wrapper">
-									<span class="price">
-										<sup>$</sup>70<sub>/mo</sub>
-									</span>
-								</div>
-								<div class="btn-wrapper">
-									<a href="" class="btn btn-primary" ng-click="$ctrl.openSubscription('subscribe')">Upgrade Plan</a>
-								</div>
-							</div>
-						</div>
-						<div class="plan-content-item-box">
-							<div class="plan-content-item">
-								<i class="icon icon-oculus"></i>
-								<h2>Team</h2>
-								<p class="text-small">
-									For small agencies and companies.
-								</p>
-								<ul class="plan-item-info-list">
-									<li class="text-primary">100 Unhosted Sites</li>
-									<li class="text-primary">Unlimited Hosted Sites</li>
-									<li class="text-primary">Client Billing</li>
-									<li class="text-primary">$15 Basic Hosting</li>
-									<li class="text-primary">$20 CM S Hosting</li>
-									<li class="text-primary">Custom Fonts</li>
-									<li class="text-primary">Unlimited Code Export</li>
-									<li class="text-primary">Forum & Email Support</li>
-									<li class="text-primary">Advanced Features</li>
-									<li class="text-primary">Team Dashboard</li>
-								</ul>
-								<div class="plan-price-wrapper">
-									<span class="price">
-										<sup>$</sup>250<sub>/mo</sub>
-									</span>
-								</div>
-								<div class="btn-wrapper">
-									<a href="" class="btn btn-primary">See Team Plans</a>
-								</div>
-							</div>
-						</div>
+
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -132,7 +75,7 @@
 </div>
 
 
-<div class="modal" ng-class="{'display-block': $ctrl.modals.subscribe, 'display-none': !$ctrl.modals.subscribe}">
+<div class="modal stripeWrapper" ng-class="{'display-block': $ctrl.modals.subscribe, 'display-none': !$ctrl.modals.subscribe}">
 	<div class="modal-content" style="max-width:50%">
 		<div class="modal-header">
 			<span class="close" data-ng-click="$ctrl.modals.subscribe = false">×</span>
@@ -151,7 +94,7 @@
 						<h4>{{card.exp_month}}/{{card.exp_year}}</h4>
 					</div>
 					<div class="col-sm-3 col-sx-3 col-md-3 col-sm-offset-1 col-sx-offset-1 col-md-offset-1 text-right">
-						<input type="radio" ng-model="$ctrl.selectedCard" ng-value="card">
+						<input type="radio" style="margin-top:10px" ng-model="$ctrl.selectedCard" ng-value="card">
 					</div>
 				</li>
 			</ul>

@@ -435,14 +435,32 @@ tags-input {
       margin: 0;
       padding: 10px;
       border-radius: 0;
+      background: rgba(255, 255, 255, 0.02);
+      color: #fff;
+      border: none;
+      &.active{
+        border:1px solid rgba(51, 222, 255, 0.4)
+      }
       h4 {
         margin: 10px 0;
+        &.label{
+          top: 5px;
+          position: relative;
+          background: transparent;
+          border: 1px solid #5bc0de;
+          font-weight: normal;
+          font-size: 13px;
+        }
       }
       a {
         display: block;
         margin: 6px 0;
         text-decoration: none;
-        font-size: 16px
+        font-size: 16px;
+        color:#00c0e6;
+        &.remove-card{
+          font-size:14px;
+        }
       }
     }
   }

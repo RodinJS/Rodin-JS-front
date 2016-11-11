@@ -1,50 +1,86 @@
 class PlansCrtl {
+
     constructor(AppConstants, User, $scope, stripeService, Validator, Error) {
         'ngInject';
 
         this.appName = AppConstants.appName;
-        this.currentUser = User.current;
+        this.plans = AppConstants.PLANS;
+
         this.formData = {};
         this.modals = [];
         this.stripeService = stripeService;
         this.customerCards = [];
         this.getCustomerInfo();
+        this.initUser = this.initUser.bind(this);
+        this.subscriptionError = this.subscriptionError.bind(this);
+        this.initUser(User.current);
 
+    }
 
+    initUser(user) {
+        console.log(user);
+        this.currentUser = user;
+        this.currentPlan = this.currentUser.role;
+        this.subscription = this.currentUser.stripe && this.currentUser.stripe.subscriptionId  ? true : false;
+        console.log(this.currentUser.stripe);
+        console.log(this.currentUser.stripe.subscriptionId);
+        console.log(this.subscription);
     }
 
     getCustomerInfo() {
 
-        this.stripeService.getCustomer().then(customerInfo => {
-                console.log(customerInfo);
-                this.customerCards  = _.map(customerInfo.sources.data, this.stripeService.mapCard);
+        this.stripeService.getCustomer().then(
+            customerInfo => {
+                this.customerCards = _.map(customerInfo.sources.data, this.stripeService.mapCard);
             },
             err => {
                 console.log(err);
                 //this.$state.go('landing.error');
             }
+        );
+    }
+
+    subscriptionSuccess(){
+
+    }
+
+    subscriptionError(error){
+        console.log(error);
+    }
+
+    startSubscription() {
+        this.stripeService.updateCustomer({default_source: this.selectedCard.id}).then(
+            customer=> {
+
+                if(this.subscription){
+                    return this.stripeService.updateSubscription(this.selectedPlanId).then(this.initUser, this.subscriptionError)
+                }
+
+                return this.stripeService.createSubscription(this.selectedPlanId).then(this.initUser, this.subscriptionError)
+
+            },
+            error=> {
+                console.log(error);
+            });
+    }
+
+    unsubscribe() {
+        this.stripeService.deleteSubscription().then(
+            user=> {
+                this.initUser(user);
+            },
+            error=> {
+                console.log(error);
+            }
         )
-
     }
 
-    startSubscription(){
-        this.stripeService.updateCustomer({default_source:this.selectedCard.id}).then(customer=>{
-
-             this.stripeService.createSubscription('some-plan').then(subscription=>{
-                     console.log(subscription);
-                 },
-             error=>{
-                 console.log(error);
-             })
-
-        },
-        error=>{
-
-        });
-    }
-
-    openSubscription(name){
-      this.modals[name] = true;
+    openSubscription(planId) {
+        if (planId == 'Free') {
+            return this.unsubscribe();
+        }
+        this.selectedPlanId = planId;
+        this.modals['subscribe'] = true;
     }
 
 
