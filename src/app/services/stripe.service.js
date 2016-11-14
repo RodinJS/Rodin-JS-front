@@ -53,7 +53,7 @@ class Stripe {
     }
     updateSubscription(planId){
         this.deferred = this._$q.defer();
-        this._Stripe.one('subscription').customPOST({planId:planId}).then(this.onSuccess, this.onError);
+        this._Stripe.one('subscription').customPUT({planId:planId}).then(this.onSuccess, this.onError);
         return this.deferred.promise;
     }
 

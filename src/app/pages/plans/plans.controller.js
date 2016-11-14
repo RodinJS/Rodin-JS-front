@@ -22,9 +22,8 @@ class PlansCrtl {
         this.currentUser = user;
         this.currentPlan = this.currentUser.role;
         this.subscription = this.currentUser.stripe && this.currentUser.stripe.subscriptionId  ? true : false;
-        console.log(this.currentUser.stripe);
-        console.log(this.currentUser.stripe.subscriptionId);
         console.log(this.subscription);
+        this.modals['subscribe'] = false;
     }
 
     getCustomerInfo() {
@@ -40,10 +39,6 @@ class PlansCrtl {
         );
     }
 
-    subscriptionSuccess(){
-
-    }
-
     subscriptionError(error){
         console.log(error);
     }
@@ -51,28 +46,18 @@ class PlansCrtl {
     startSubscription() {
         this.stripeService.updateCustomer({default_source: this.selectedCard.id}).then(
             customer=> {
-
                 if(this.subscription){
                     return this.stripeService.updateSubscription(this.selectedPlanId).then(this.initUser, this.subscriptionError)
                 }
+               this.stripeService.createSubscription(this.selectedPlanId).then(this.initUser, this.subscriptionError)
 
-                return this.stripeService.createSubscription(this.selectedPlanId).then(this.initUser, this.subscriptionError)
 
             },
-            error=> {
-                console.log(error);
-            });
+            this.subscriptionError);
     }
 
     unsubscribe() {
-        this.stripeService.deleteSubscription().then(
-            user=> {
-                this.initUser(user);
-            },
-            error=> {
-                console.log(error);
-            }
-        )
+        this.stripeService.deleteSubscription().then(this.initUser, this.subscriptionError)
     }
 
     openSubscription(planId) {
