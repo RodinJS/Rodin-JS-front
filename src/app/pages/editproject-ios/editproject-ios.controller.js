@@ -55,6 +55,7 @@ class EditProjectIosCtrl {
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
+                this.project = project;
             },
             err => {
                 this.$state.go('landing.error');
@@ -64,7 +65,7 @@ class EditProjectIosCtrl {
 
     update() {
         this.showLoader = true;
-        this.Project.update(this.project._id, this.project).then(
+        this.Project.update(this.projectId, this.project).then(
             data => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, this.project);
@@ -173,7 +174,7 @@ class EditProjectIosCtrl {
         e.preventDefault();
         let project = {
             userId: this.user.username,
-            appId: this.project._id,
+            appId: this.projectId,
             url: "http://google.com",
             appName: this.project.ios.name,
             ios: {
@@ -183,11 +184,11 @@ class EditProjectIosCtrl {
                 certPassword: this.project.ios.certPassword
             }
         };
-
+console.log("this.project", this.project)
         ctrl.showLoader = true;
         $("#configs").ajaxForm({
             dataType: "json",
-            url: this._AppConstants.API + '/project/' + this.project._id + '/build/ios',
+            url: this._AppConstants.API + '/project/' + this.projectId + '/build/ios',
             headers: {
                 "x-access-token": this._JWT.get()
             },
@@ -211,7 +212,7 @@ class EditProjectIosCtrl {
 
     download() {
         this.showLoader = true;
-        this.Project.download(this.project._id, 'ios').then(
+        this.Project.download(this.projectId, 'ios').then(
             data => {
                 this.showLoader = false;
                 window.location = data.downloadUrl;
