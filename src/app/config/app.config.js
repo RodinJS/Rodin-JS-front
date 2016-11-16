@@ -2,7 +2,7 @@
  * Created by kh.levon98 on 13-Sep-16.
  */
 
-function AppConfig(RestangularProvider, $stateProvider, $locationProvider, $urlRouterProvider, AppConstants) {
+function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $urlRouterProvider, AppConstants) {
 	'ngInject';
 
 	RestangularProvider.setBaseUrl(AppConstants.API);
@@ -22,7 +22,7 @@ function AppConfig(RestangularProvider, $stateProvider, $locationProvider, $urlR
 			templateUrl: 'layout/main/app-view.html',
 			resolve: {
 				auth: function (User) {
-					return User.verifyAuth(true);
+					return User.verifyPermission(true);
 				}
 			}
 		})

@@ -21,6 +21,8 @@
 <div data-ui-view class="page__wrapper"></div>
 
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script src="https://apis.google.com/js/platform.js"></script>
+<script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript" src="/scripts/systemjs/system.js"></script>
 <script>
 
@@ -93,8 +95,17 @@ if(host.indexOf("rodin.space") == -1 && host.indexOf("localhost") == -1){
 	ga('create', 'UA-52972530-2', 'auto');
 	ga('send', 'pageview');
 }
+<!-- End Google Analytics -->
+
+// Load the SDK asynchronously
+/*(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));*/
 
 </script>
-<!-- End Google Analytics -->
 </body>
 </html>

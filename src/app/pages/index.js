@@ -11,6 +11,8 @@ import './home/index';
 
 import './error/index';
 
+import './userConfirm/index';
+
 import './dashboard/index';
 
 import './profile/index';
@@ -43,6 +45,7 @@ let pagesModule = angular.module('app.pages', [
 	'landing.home',
 	'landing.demo',
 	'landing.error',
+	'landing.userconfirm',
 
 	'app.dashboard',
 	'app.profile',

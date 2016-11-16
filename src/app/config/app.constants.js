@@ -18,6 +18,8 @@ const AppConstants = {
 		PUBLIC: 'https://api.rodin.space/public/',
 		PUBLISH: 'https://api.rodin.space/publish',
 		EDITOR: 'http://localhost:8000/#/',
+		FB:'216861662081500', //'216861662081500' '216982868736046'
+		GOOGLE:'442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com'
 	},
 	prod: {
 		COOKIEDOMAIN: ['.rodinapp.com', '.rodin.space'],
@@ -27,6 +29,16 @@ const AppConstants = {
 		PUBLIC: `https://api.${window.extractDomain()}/public/`,
 		PUBLISH: `https://api.${window.extractDomain()}/publish`,
 		EDITOR: `https://editor.${window.extractDomain()}/`,
+		FB:'214577345643265',
+		GOOGLE:'442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com'
+	},
+
+	get FB(){
+		return this[this.env].FB;
+	},
+
+	get GOOGLE(){
+		return this[this.env].GOOGLE;
 	},
 
 	get API() {
