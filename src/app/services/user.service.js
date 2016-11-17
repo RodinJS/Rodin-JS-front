@@ -48,8 +48,7 @@ class User {
             if (!response || response.error)
                 return this.onLoginError(response);
 
-            response.type = 'facebook';
-            this._Auth.one("socialAuth").customPOST(response).then(this.onLoginSuccess, this.onError);
+            this._Auth.one("social/facebook").customPOST(response).then(this.onLoginSuccess, this.onError);
         })
     }
 
@@ -69,7 +68,7 @@ class User {
 
     googleAuth(data) {
         this.deferred = this._$q.defer();
-        this._Auth.one("socialAuth").customPOST(data).then(this.onLoginSuccess, this.onError);
+        this._Auth.one("social/google").customPOST(data).then(this.onLoginSuccess, this.onError);
         return this.deferred.promise;
     }
 
@@ -120,7 +119,6 @@ class User {
 
         this.verifyAuth().then(
             result=> {
-                console.log(_.isUndefined(this.current.usernameConfirmed), this.current.usernameConfirmed);
                 if (!this.current) {
                     deferred.reject(false);
                 }
