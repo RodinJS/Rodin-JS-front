@@ -65,7 +65,6 @@ class User {
         return this.deferred.promise;
     }
 
-
     googleAuth(data) {
         this.deferred = this._$q.defer();
         this._Auth.one("social/google").customPOST(data).then(this.onLoginSuccess, this.onError);
@@ -122,7 +121,7 @@ class User {
                 if (!this.current) {
                     deferred.reject(false);
                 }
-                else if (!_.isUndefined(this.current.usernameConfirmed) && this.current.usernameConfirmed) {
+                else if (_.isUndefined(this.current.usernameConfirmed) || this.current.usernameConfirmed) {
                     deferred.resolve(true);
                 }
                 else {

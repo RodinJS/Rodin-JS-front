@@ -98,7 +98,7 @@ class EditProjectCtrl {
         this.showLoader = true;
         this.Project.update(this.project._id, projectInfo).then(
             data => {
-                this.eventBus.emit(this.eventBus.project.SET, this.project);
+                this.eventBus.emit(this.eventBus.project.SET, data);
                 this.showLoader = false;
             },
             err => {
