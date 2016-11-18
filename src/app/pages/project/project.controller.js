@@ -42,7 +42,7 @@ class ProjectCtrl {
 
     save () {
         this.showLoader = true;
-
+        this.projectExist = false;
         let projectInfo = {};
         angular.extend(projectInfo, this.project);
         projectInfo.templateId = this.projectTemplates.selected._id;
@@ -54,6 +54,8 @@ class ProjectCtrl {
                 this.$state.go('app.dashboard');
             },
             err => {
+                if(err[0].code  && err[0].code === 309)
+                    this.projectExist = true;
                 this.showLoader = false;
             }
         )

@@ -431,3 +431,19 @@ tags-input {
     }
   }
 }
+
+.section-project-content{
+  .btn-wrapper{
+    .btn{
+      float:left;
+    }
+    .help-block {
+      float: left;
+      margin-top: 8px;
+      margin-left: 10px;
+      &.error-help-block{
+        color:#f95957;
+      }
+    }
+  }
+}
