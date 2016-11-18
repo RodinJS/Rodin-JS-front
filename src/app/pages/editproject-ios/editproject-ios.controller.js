@@ -43,10 +43,10 @@ class EditProjectIosCtrl {
 
         const self = this;
         this.eventBus = EventBus;
-        // ProjectStore.subscribeAndInit($scope, ()=> {
-        //     self.getProject();
-        // });
         this.getProject();
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            this.project = ProjectStore.getProject();
+        });
     }
 
     getProject() {
@@ -68,8 +68,7 @@ class EditProjectIosCtrl {
         this.Project.update(this.projectId, this.project).then(
             data => {
                 this.showLoader = false;
-                this.eventBus.emit(this.eventBus.project.SET, this.project);
-                console.log(data);
+                this.eventBus.emit(this.eventBus.project.SET, data);
             },
             err => {
                 this.showLoader = false;

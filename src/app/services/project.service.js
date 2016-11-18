@@ -12,185 +12,85 @@ class Project {
 		this._$state = $state;
 		this._$q = $q;
 		this._Validator = new Validator();
+		this.onSuccess = this.onSuccess.bind(this);
+		this.onError = this.onError.bind(this);
 	}
 
 	get(projectId = null, fields) {
-		let deferred = this._$q.defer();
-		this._Projects.one(projectId).get(fields).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
+		//if(this.deferred) return;
+		this.deferred = this._$q.defer();
+		this._Projects.one(projectId).get(fields).then(this.onSuccess, this.onError);
+		return this.deferred.promise;
 	}
 
 	getList(fields = {}) {
-		let deferred = this._$q.defer();
-		this._Projects.one('').get(fields).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
+		this.deferred = this._$q.defer();
+		this._Projects.one('').get(fields).then(this.onSuccess, this.onError);
+		return this.deferred.promise;
 	}
 
 	unPublish(projectId = null) {
-		let deferred = this._$q.defer();
-
-		this._Projects.one('publish/'+projectId).remove().then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
+		this.deferred = this._$q.defer();
+		this._Projects.one('publish/'+projectId).remove().then(this.onSuccess, this.onError);
+		return this.deferred.promise;
 	}
 
 	publish(projectId = null) {
-		let deferred = this._$q.defer();
-
-		this._Projects.one('publish/'+projectId).get().then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
+		this.deferred = this._$q.defer();
+		this._Projects.one('publish/'+projectId).get().then(this.onSuccess, this.onError);
+		return this.deferred.promise;
 	}
 
 	update(projectId = null, fields = {}) {
-		let deferred = this._$q.defer();
-
-		this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags'])).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
+		this.deferred = this._$q.defer();
+		this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags']))
+			.then(this.onSuccess, this.onError);
+		return this.deferred.promise;
 	}
 
 	create(fields = {}) {
-		let deferred = this._$q.defer();
-
-		this._Projects.post(fields).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
+		this.deferred = this._$q.defer();
+		this._Projects.post(fields).then(this.onSuccess, this.onError);
+		return this.deferred.promise;
 	}
 
 	remove(projectId = null, fields = {}) {
-		let deferred = this._$q.defer();
-
-		this._Projects.one(projectId).remove(fields).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
+		this.deferred = this._$q.defer();
+		this._Projects.one(projectId).remove(fields).then(this.onSuccess, this.onError);
+		return this.deferred.promise;
 	}
 
 	toggleStatus(projectId = null, status = 'false') {
-		let deferred = this._$q.defer();
-
-		this._Projects.one('pp').one(projectId).customPOST({status: status}).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
+		this.deferred = this._$q.defer();
+		this._Projects.one('pp').one(projectId).customPOST({status: status}).then(this.onSuccess, this.onError);
+		return this.deferred.promise;
 	}
 
 	download(projectId = "", target = "") {
-		let deferred = this._$q.defer();
+		this.deferred = this._$q.defer();
+		this._Projects.one(projectId).one('download').one(target).customGET().then(this.onSuccess, this.onError);
+		return this.deferred.promise;
+	}
 
-		this._Projects.one(projectId).one('download').one(target).customGET().then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
+	onSuccess(result){
+		this._Validator.validateHTTP(result);
+		if (this._Validator.isValidHTTP()) {
+			let response = this._Validator.getDataHTTP();
+			if(this.deferred)
+				this.deferred.resolve(response);
+		}
+		else {
+			if(this.deferred)
+				this.deferred.reject(this._Validator.getErrorsHTTP());
+		}
+		delete this.deferred;
+	}
 
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
+	onError(result){
+		this._Validator.validateHTTP(result.data);
+		if(this.deferred)
+			this.deferred.reject(this._Validator.getErrorsHTTP());
+		delete this.deferred;
 	}
 }
 

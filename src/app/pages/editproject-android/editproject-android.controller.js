@@ -41,10 +41,10 @@ class EditProjectAndroidCtrl {
         this.keyStoreFileUpload = true;
 
         this.eventBus = EventBus;
+        this.getProject();
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
         });
-        this.getProject();
     }
 
     getProject () {
@@ -65,7 +65,7 @@ class EditProjectAndroidCtrl {
         this.Project.update(this.project._id, this.project).then(
             data => {
                 this.showLoader = false;
-                console.log(data);
+                this.eventBus.emit(this.eventBus.project.SET, data);
             },
             err => {
                 this.showLoader = false;
