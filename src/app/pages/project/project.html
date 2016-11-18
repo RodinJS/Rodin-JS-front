@@ -56,10 +56,20 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-wrapper">
-							<div class="form-group fixed-placeholder-group is-focused">
-								<input type="text" class="form-control" placeholder="typehereprojectname" value="" data-ng-model="$ctrl.project.name">
-								<span class="text-primary fixed-placeholder">{{$ctrl.previewUrl+$ctrl.currentUser.username}}/</span>
-								<label class="control-label float-label">Project Name</label>
+							<div class="form-group fixed-placeholder-group is-focused"
+								 data-ng-class="{'has-error': !$ctrl.project.name && $ctrl.projectFocused, 'has-success': $ctrl.project.name && $ctrl.projectFocused}">
+								<input type="text"
+									   class="form-control"
+									   style="font-size:12px;padding-top:11px"
+									   ng-style="{'padding-left':$ctrl.inputPadding}"
+									   placeholder="typehereprojectname"
+									   value=""
+									   ng-click="$ctrl.projectFocused = true"
+									   data-ng-model="$ctrl.project.name">
+								<span class="project-path-label text-primary fixed-placeholder">{{$ctrl.previewUrl+$ctrl.currentUser.username}}/</span>
+								<label class="control-label float-label">
+									Project Name <span ng-if="!$ctrl.project.name && $ctrl.projectFocused">is required</span>
+								</label>
 							</div>
 							<p class="text-small description">Is the name of your project, which will be displayed in the URL</p>
 							<div class="form-group" custom-input>

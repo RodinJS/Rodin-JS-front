@@ -67,8 +67,12 @@
                                                data-ng-pattern="$ctrl.patterns.email"
                                                required
                                                data-ng-focus="profile.email.focused = true">
-                                        <label class="control-label float-label">Email</label>
+                                        <label class="control-label float-label">
+                                            Email  <span ng-if="profile.email.$invalid && profile.email.focused">is required</span>
+                                        </label>
+                                        <div style="clear:both"></div>
                                     </div>
+
                                     <div class="checkbox">
                                         <label class="text-small">
                                             <input type="checkbox"
@@ -205,8 +209,7 @@
                                             data-ng-disabled="!changePasswordForm.$valid"
                                             class="btn btn-primary">Update Password
                                     </button>
-                                    <p class="help-block text-small error-help-block">Something went wrong. Please try
-                                        again later</p>
+                                    <p class="help-block text-small error-help-block">Something went wrong.</p>
                                     <p class="help-block text-small success-help-block">Excellent. Password
                                         changed.</p>
                                 </div>

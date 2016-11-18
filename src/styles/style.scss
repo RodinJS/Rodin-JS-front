@@ -432,7 +432,7 @@ tags-input {
   }
 }
 
-.section-project-content{
+.section-project-content:not(.login){
   .btn-wrapper{
     .btn{
       float:left;

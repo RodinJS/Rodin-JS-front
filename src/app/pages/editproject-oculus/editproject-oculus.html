@@ -26,7 +26,9 @@
                                                    name="displayName"
                                                    required
                                                    data-ng-focus="configs.displayName.focused = true">
-                                            <label class="control-label float-label">Display name</label>
+                                            <label class="control-label float-label">
+                                                Display name <span ng-if="configs.displayName.$invalid && configs.displayName.focused">is required</span>
+                                            </label>
                                         </div>
                                         <p class="text-small description">App Name - Display name of your app</p>
                                     </div>

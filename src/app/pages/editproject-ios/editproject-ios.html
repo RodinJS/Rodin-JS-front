@@ -26,7 +26,9 @@
                                                    name="displayName"
                                                    required
                                                    data-ng-focus="configs.displayName.focused = true">
-                                            <label class="control-label float-label">Display name</label>
+                                            <label class="control-label float-label">
+                                                Display name <span ng-if="configs.displayName.$invalid && configs.displayName.focused">is required</span>
+                                            </label>
                                         </div>
                                         <p class="text-small description">App Name - Display name of your app</p>
                                     </div>
@@ -41,7 +43,9 @@
                                                required
                                                ng-pattern="$ctrl.patterns.bundle"
                                                data-ng-focus="configs.bundle.focused = true">
-                                        <label class="control-label float-label">Bundle Identifier</label>
+                                        <label class="control-label float-label">
+                                            Bundle Identifier  <span ng-if="configs.bundle.$invalid && configs.bundle.focused">is required</span>
+                                        </label>
                                         </div>
                                         <p class="text-small description">Bundle Identifier - A bundle ID precisely
                                             identifies a single app.
@@ -59,7 +63,9 @@
                                                    name="developerId"
                                                    required
                                                    data-ng-focus="configs.developerId.focused = true">
-                                            <label class="control-label float-label">Developer ID.</label>
+                                            <label class="control-label float-label">
+                                                Developer ID. <span ng-if="configs.developerId.$invalid && configs.developerId.focused">is required</span>
+                                            </label>
                                         </div>
                                         <p class="text-small description">Developer ID.</p>
                                     </div>

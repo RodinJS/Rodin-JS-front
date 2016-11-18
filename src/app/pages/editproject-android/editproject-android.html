@@ -26,7 +26,9 @@
                                                    name="displayName"
                                                    required
                                                    data-ng-focus="configs.displayName.focused = true">
-                                            <label class="control-label float-label">Display name</label>
+                                            <label class="control-label float-label">
+                                                Display name <span ng-if="configs.displayName.$invalid && configs.displayName.focused">is required</span>
+                                            </label>
                                         </div>
                                         <p class="text-small description">App Name - Display name of your app</p>
                                     </div>
@@ -41,7 +43,9 @@
                                                required
                                                ng-pattern="$ctrl.patterns.package"
                                                data-ng-focus="configs.package.focused = true">
-                                        <label class="control-label float-label">Package</label>
+                                        <label class="control-label float-label">
+                                            Package <span ng-if="configs.package.$invalid && configs.package.focused">is required</span>
+                                        </label>
                                         </div>
                                         <p class="text-small description">Package</p>
                                     </div>
@@ -114,7 +118,9 @@
                                                    required
                                                    ng-pattern="$ctrl.patterns.package"
                                                    data-ng-focus="configs.KSName.focused = true">
-                                            <label class="control-label float-label">Name</label>
+                                            <label class="control-label float-label">
+                                                Name <span ng-if="configs.KSName.$invalid && configs.KSName.focused">is required</span>
+                                            </label>
                                         </div>
                                         <p class="text-small description">Name</p>
                                         <div class="form-group" custom-input
@@ -125,7 +131,9 @@
                                                    required
                                                    ng-pattern="$ctrl.patterns.package"
                                                    data-ng-focus="configs.KSFLName.focused = true">
-                                            <label class="control-label float-label">First Last Name</label>
+                                            <label class="control-label float-label">
+                                                First Last Name <span ng-if="configs.KSFLName.$invalid && configs.KSFLName.focused">are required</span>
+                                            </label>
                                         </div>
                                         <p class="text-small description">First and Last Names</p>
                                         <div class="form-group" custom-input
@@ -176,7 +184,9 @@
                                                    required
                                                    ng-pattern="$ctrl.patterns.package"
                                                    data-ng-focus="configs.KSAlias.focused = true">
-                                            <label class="control-label float-label">Alias</label>
+                                            <label class="control-label float-label">
+                                                Alias <span ng-if="configs.KSAlias.$invalid && configs.KSAlias.focused">is required</span>
+                                            </label>
                                         </div>
                                         <p class="text-small description">Alias</p>
                                     </div>
