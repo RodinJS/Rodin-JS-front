@@ -22,5 +22,8 @@ servicesModule.service('Project', ProjectService);
 import ProjectTemplate from './projectTemplate.service';
 servicesModule.service('ProjectTemplate', ProjectTemplate);
 
+import SocketService from './socket.service';
+servicesModule.factory('SocketService', SocketService);
+
 
 export default servicesModule;

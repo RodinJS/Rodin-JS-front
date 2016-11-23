@@ -167,39 +167,14 @@ class EditProjectWebCtrl {
     }
 
     build(e) {
-        const ctrl = this;
-        e.preventDefault();
-        let project = {
-            userId: this.user.username,
-            appId: this.project._id,
-            url: "http://google.com",
-            appName: this.project.web.name,
-            web: {
-                exportMethod: "ad-hoc",
-                bundleIdentifier: this.project.web.bundle,
-                developerId: this.project.web.developerId,
-                certPassword: this.project.web.certPassword
-            }
-        };
-
-        ctrl.showLoader = true;
-        $("#configs").ajaxForm({
-            dataType: "json",
-            url: this._AppConstants.API + '/project/' + this.project._id + '/build/web',
-            headers: {
-                "x-access-token": this._JWT.get()
-            },
-            data: {
-                project: angular.toJson(project)
-            },
-            success: function (data) {
-                ctrl.modals.password = false;
-                ctrl.getProject();
-            },
-            error: function (data) {
-                ctrl.showLoader = false;
-            }
-        }).submit();
+       this.Project.transpile(this.projectId).then(
+           data=>{
+               console.log(data);
+           },
+           err=>{
+               console.log(err);
+           }
+       )
     };
 
     open(e) {

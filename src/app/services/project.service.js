@@ -41,6 +41,12 @@ class Project {
 		return this.deferred.promise;
 	}
 
+	transpile(projectId = null){
+		this.deferred = this._$q.defer();
+		this._Projects.one(projectId+'/build/transpile').get().then(this.onSuccess, this.onError);
+		return this.deferred.promise;
+	}
+
 	update(projectId = null, fields = {}) {
 		this.deferred = this._$q.defer();
 		this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags']))

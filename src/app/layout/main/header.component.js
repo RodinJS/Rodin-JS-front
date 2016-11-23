@@ -1,5 +1,5 @@
 class AppHeaderCtrl {
-	constructor(AppConstants, User, $scope) {
+	constructor(AppConstants, User, $scope, SocketService) {
 		'ngInject';
 		this.appName = AppConstants.appName;
 		this.currentUser = User.current;
@@ -12,6 +12,7 @@ class AppHeaderCtrl {
 		});
 
 		this.user = User.current;
+		console.log(SocketService);
 	}
 }
 
