@@ -2,7 +2,7 @@
  * Created by kh.levon98 on 20-Sep-16.
  */
 class User {
-    constructor(JWT, AppConstants, Restangular, Validator, $state, $q, $timeout) {
+    constructor(JWT, AppConstants, Restangular, Validator, $state, $q, $timeout, Analyser) {
         'ngInject';
 
         this._JWT = JWT;
@@ -17,9 +17,9 @@ class User {
 
         this.current = null;
         this._inProgress = false;
+        this._Analyser = Analyser;
 
         this.onLoginSuccess = this.onLoginSuccess.bind(this);
-        this.onSuccess = this.onSuccess.bind(this);
         this.onError = this.onError.bind(this);
         this.fbLogin = this.fbLogin.bind(this);
         this.fbMe = this.fbMe.bind(this);
@@ -82,27 +82,27 @@ class User {
     }
 
     update(userId = null, fields = {}) {
-        this.deferred = this._$q.defer();
+        let Analyser = new this._Analyser();
 
-        this._User.one(fields.username).customPUT(fields).then(this.onSuccess, this.onError);
+        this._User.one(fields.username).customPUT(fields).then(Analyser.resolve, Analyser.reject);
 
-        return this.deferred.promise;
+        return Analyser.promise;
     }
 
     updatePassword(fields = {}) {
-        this.deferred = this._$q.defer();
+        let Analyser = new this._Analyser();
 
-        this._User.one('password').customPUT(fields).then(this.onSuccess, this.onError);
+        this._User.one('password').customPUT(fields).then(Analyser.resolve, Analyser.reject);
 
-        return this.deferred.promise;
+        return Analyser.promise;
     }
 
     create(fields = {}) {
-        this.deferred = this._$q.defer();
+        let Analyser = new this._Analyser();
 
-        this._User.post(fields).then(this.onSuccess, this.onError);
+        this._User.post(fields).then(Analyser.resolve, Analyser.reject);
 
-        return this.deferred.promise;
+        return Analyser.promise;
     }
 
     logout() {
@@ -176,16 +176,6 @@ class User {
         return deferred.promise;
     }
 
-    onSuccess(result) {
-        this._Validator.validateHTTP(result);
-        if (this._Validator.isValidHTTP()) {
-            let response = this._Validator.getDataHTTP();
-            this.deferred.resolve(response);
-        } else {
-            this.deferred.reject(this._Validator.getErrorsHTTP());
-        }
-        delete this.deferred;
-    }
 
     onError(result) {
         this._Validator.validateHTTP(result.data);
