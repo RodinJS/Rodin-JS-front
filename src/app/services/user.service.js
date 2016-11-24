@@ -40,14 +40,13 @@ class User {
     }
 
     fbLogin(cb) {
-        FB.login((response) => this.fbMe(cb));
+        FB.login((response) => this.fbMe(cb), {scope: 'email'});
     }
 
     fbMe() {
         FB.api('/me', 'get', {fields: 'email, first_name, last_name'}, (response)=> {
             if (!response || response.error)
-                return this.onLoginError(response);
-
+                return this.onError(response);
             this._Auth.one("social/facebook").customPOST(response).then(this.onLoginSuccess, this.onError);
         })
     }

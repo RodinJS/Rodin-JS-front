@@ -12,7 +12,6 @@ class AppHeaderCtrl {
 		});
 
 		this.user = User.current;
-		console.log(SocketService);
 	}
 }
 

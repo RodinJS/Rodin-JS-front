@@ -5,6 +5,8 @@ function SocketService(AppConstants, User, $rootScope){
 
 	const socket = io(AppConstants.API+"/", {query: "token=" + User._JWT._$cookies.get('token') + ""});
 
+    console.log(socket);
+
     const Factory = {
 		on: listener,
 		emit: emitter

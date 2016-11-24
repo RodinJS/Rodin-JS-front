@@ -18,7 +18,7 @@ const AppConstants = {
 		PUBLIC: 'https://api.rodin.space/public/',
 		PUBLISH: 'https://api.rodin.space/publish',
 		EDITOR: 'http://localhost:8000/#/',
-		FB:'216861662081500', //'216861662081500' '216982868736046'
+		FB:'216982868736046', //'216861662081500' '216982868736046'
 		GOOGLE:'442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com'
 	},
 	prod: {
