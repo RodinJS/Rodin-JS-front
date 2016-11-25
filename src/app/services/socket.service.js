@@ -3,7 +3,7 @@ import io from 'socket.io-client/socket.io';
 function SocketService(AppConstants, User, $rootScope){
 	'ngInject';
 
-	const socket = io(AppConstants.API+"/", {query: "token=" + User._JWT._$cookies.get('token') + ""});
+	const socket = io("http://178.62.229.191/api/", {query: "token=" + User._JWT._$cookies.get('token') + ""});
 
     console.log(socket);
 
