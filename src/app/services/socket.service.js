@@ -3,7 +3,7 @@ import io from 'socket.io-client/socket.io';
 function SocketService(AppConstants, User, $rootScope){
 	'ngInject';
 
-	const socket = io("https://api.rodin.space/api/", {query: "token=" + User._JWT._$cookies.get('token') + ""});
+	const socket = io(AppConstants.API+"/", {transports: ['websocket', 'polling'],  query: "token=" + User._JWT._$cookies.get('token') + ""});
 
     console.log(socket);
 
