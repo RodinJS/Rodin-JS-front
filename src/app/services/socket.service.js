@@ -1,4 +1,4 @@
-import io from 'socket.io-client/socket.io';
+import io from 'socket.io-client/dist/socket.io';
 
 function SocketService(AppConstants, User, $rootScope){
 	'ngInject';
