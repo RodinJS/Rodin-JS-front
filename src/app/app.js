@@ -6,6 +6,8 @@ import './helpers';
 import angular from 'angular/index';
 import 'jquery/dist/jquery.min';
 import '/scripts/assists/jquery.form';
+import '/scripts/vendor/tinymce/tinymce.min.js';
+
 
 // Import our app config files
 import constants  from './config/app.constants';
@@ -40,24 +42,24 @@ import './filters/index';
 
 // Create and bootstrap application
 const requires = [
-	'ngAnimate',
-	'ngTouch',
-	'ngCookies',
+  'ngAnimate',
+  'ngTouch',
+  'ngCookies',
 
-	'ui.router',
-	'angular-storage',
-	'restangular',
-	'templates',
-	'ui.bootstrap',
-	'app.services',
-	'app.store',
-	'app.components',
-	'app.layout',
-	'app.pages',
-	'app.filters',
-	'uiSwitch',
-	'ui.tinymce',
-	'ngTagsInput'
+  'ui.router',
+  'angular-storage',
+  'restangular',
+  'templates',
+  'ui.bootstrap',
+  'app.services',
+  'app.store',
+  'app.components',
+  'app.layout',
+  'app.pages',
+  'app.filters',
+  'uiSwitch',
+  'ui.tinymce',
+  'ngTagsInput'
 ];
 
 // Mount on window for testing
@@ -70,5 +72,5 @@ angular.module('app').config(appConfig);
 angular.module('app').run(appRun);
 
 angular.bootstrap(document, ['app'], {
-	strictDi: true
+  strictDi: true
 });

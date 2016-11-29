@@ -1,5 +1,5 @@
 class ProjectCtrl {
-    constructor (AppConstants, Project, ProjectTemplate, $state, $scope, User) {
+    constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -27,7 +27,8 @@ class ProjectCtrl {
             toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist',
             inline: false,
             plugins: 'advlist autolink link image lists charmap print preview',
-            theme: "modern"
+            theme: "modern",
+            baseURL: `${AppConstants.SITE}scripts/vendor/tinymce`
         };
 
         this.template = 0;
@@ -38,10 +39,11 @@ class ProjectCtrl {
         };
 
         this.getTemplates();
+
         this.inputPadding = (angular.element('.project-path-label').width() + 3);
     }
 
-    save () {
+    save() {
         this.showLoader = true;
         this.projectExist = false;
         let projectInfo = {};
@@ -55,14 +57,14 @@ class ProjectCtrl {
                 this.$state.go('app.dashboard');
             },
             err => {
-                if(err[0].code  && err[0].code === 309)
+                if (err[0].code && err[0].code === 309)
                     this.projectExist = true;
                 this.showLoader = false;
             }
         )
     }
 
-    getTemplates () {
+    getTemplates() {
         this.ProjectTemplate.getList().then(
             data => {
                 this.projectTemplates = {
