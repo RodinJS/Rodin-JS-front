@@ -7,6 +7,7 @@ import angular from 'angular/index';
 import 'jquery/dist/jquery.min';
 import '/scripts/assists/jquery.form';
 import '/scripts/vendor/tinymce/tinymce.min.js';
+import moment from '/scripts/vendor/moment/min/moment.min.js';
 
 
 // Import our app config files
@@ -59,13 +60,16 @@ const requires = [
   'app.filters',
   'uiSwitch',
   'ui.tinymce',
-  'ngTagsInput'
+  'ngTagsInput',
+  //'angularMoment'
 ];
 
 // Mount on window for testing
 const app = angular.module('app', requires);
 
 angular.module('app').constant('AppConstants', constants);
+
+app.constant("moment", moment);
 
 angular.module('app').config(appConfig);
 

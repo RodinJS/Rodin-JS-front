@@ -57,7 +57,7 @@
   .section-project-content {
     padding: 0;
     border: 0;
-    .btn-wrapper{
+    .btn-wrapper {
       padding-top: 20px;
     }
   }
@@ -410,7 +410,7 @@ tags-input {
 
       .tag-list {
         li {
-          background: rgba(255,255,255,.2);
+          background: rgba(255, 255, 255, .2);
           height: 36px;
           line-height: 36px;
           padding: 0 10px;
@@ -432,17 +432,78 @@ tags-input {
   }
 }
 
-.section-project-content:not(.login){
-  .btn-wrapper{
-    .btn{
-      float:left;
+.section-project-content:not(.login) {
+  .btn-wrapper {
+    .btn {
+      float: left;
     }
     .help-block {
       float: left;
       margin-top: 8px;
       margin-left: 10px;
-      &.error-help-block{
-        color:#f95957;
+      &.error-help-block {
+        color: #f95957;
+      }
+    }
+  }
+}
+
+.header {
+  .navbar {
+    .nav {
+      .dropdown-menu.dropdown-menu-notifi {
+        ul {
+          & > li {
+            &:hover,
+            &.readed {
+              background-color: rgba(37, 37, 39, 0.7);
+              a{
+                &:hover{
+                  background: transparent;
+                }
+              }
+            }
+            a {
+              padding-top: 0;
+
+            }
+            p {
+              word-wrap: break-word;
+              a {
+                color: #ff9a2b;
+              }
+            }
+            &::before {
+              top: 30px;
+            }
+            &:first-child {
+              & > a {
+                padding-top: 0;
+              }
+              &::before {
+                top: 30px;
+              }
+            }
+            .events {
+              padding: 1px 15px 0;
+              margin-bottom: 5px;
+              color: #fff;
+              i {
+                margin: 0 2px;
+                cursor: pointer;
+                font-size: 12px;
+                &:hover {
+                  color: #ff9a2b
+                }
+                &.in-progress{
+                  font-size: 13px;
+                  cursor: default;
+                  color: #ff9a2b;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

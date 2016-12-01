@@ -35,41 +35,31 @@
 				<!--</li>-->
 			</ul>
 			<ul class="nav navbar-nav navbar-right navbar-account">
-				<li class="new-notifi" uib-dropdown>
+				<li class="new-notifi" uib-dropdown  auto-close="outsideClick">
 					<a href="" class="dropdown-toggle btn-notifi" uib-dropdown-toggle role="button">
 						<i class="icon icon-notifi"></i>
-						<!--<span class="new-notifi-badge">-->
-						<!--<i class="icon icon-dot"></i>-->
-						<!--</span>-->
+						<span class="new-notifi-badge" ng-if="$ctrl.notificationsCount">
+							<i class="icon icon-dot"></i>
+						</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-notifi" uib-dropdown-menu>
 						<h5>Notifications</h5>
-						<!--<ul>-->
-						<!--<li class="red">-->
-						<!--<a href="">-->
-						<!--<p>It sometimes seems everyone on the planet is using Windows.</p>-->
-						<!--<span class="notifi-date text-small">6 hours ago</span>-->
-						<!--</a>-->
-						<!--</li>-->
-						<!--<li class="orange">-->
-						<!--<a href="">-->
-						<!--<p>Photographs are a way of preserving a moment in our lives for the rest of our lives. Many of us have at least been</p>-->
-						<!--<span class="notifi-date text-small">2 hours ago</span>-->
-						<!--</a>-->
-						<!--</li>-->
-						<!--<li class="blue">-->
-						<!--<a href="">-->
-						<!--<p>Many of us have at least been</p>-->
-						<!--<span class="notifi-date text-small">6 hours ago</span>-->
-						<!--</a>-->
-						<!--</li>-->
-						<!--<li class="orange">-->
-						<!--<a href="">-->
-						<!--<p>Photographs are a way of preserving a moment in our lives for the rest of our lives. Many of us have at least been</p>-->
-						<!--<span class="notifi-date text-small">2 hours ago</span>-->
-						<!--</a>-->
-						<!--</li>-->
-						<!--</ul>-->
+						<ul ng-if="$ctrl.notifications">
+							<li ng-repeat="(index, notification) in $ctrl.notifications"
+								ng-class="notification.typeClass +' '+ notification.readClass">
+								<div class="pull-right events">
+									<i class="icon icon-check" ng-if="!notification.isRead"  ng-click="$ctrl.updateNotification(notification.id, index, $event)"></i>
+									<i class="icon icon-delete" ng-click="$ctrl.deleteNotification(notification.id, index)"></i>
+									<i ng-if="notification.inProgress" class="in-progress fa fa-refresh fa-spin"></i>
+								</div>
+								<div style="clear:both"></div>
+								<a href="">
+									<p compile="notification.label"></p>
+									<span class="notifi-date text-small">{{notification.date}}</span>
+								</a>
+
+							</li>
+						</ul>
 					</div>
 				</li>
 				<li class="dropdown" data-uib-dropdown>

@@ -18,4 +18,7 @@ componentsModule.directive('customInput', CustomInput);
 import EditorNavigation from './editorNavigation/index';
 componentsModule.directive('editorNavigation', EditorNavigation);
 
+import Compile from './compile/index';
+componentsModule.directive('compile', Compile);
+
 export default componentsModule;

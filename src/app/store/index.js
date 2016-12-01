@@ -18,5 +18,8 @@ storeModules.factory('EventBus', EventBus);
 import ProjectStore from './project.store';
 storeModules.factory('ProjectStore', ProjectStore);
 
+import NotificationsStore from './notifications.store';
+storeModules.factory('NotificationsStore', NotificationsStore);
+
 
 export default storeModules;

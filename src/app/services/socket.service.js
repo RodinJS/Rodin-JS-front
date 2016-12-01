@@ -5,16 +5,10 @@ function SocketService(AppConstants, User, $rootScope){
 
 	const socket = io(AppConstants.API+"/", {transports: ['websocket', 'polling'],  query: "token=" + User._JWT._$cookies.get('token') + ""});
 
-    console.log(socket);
-
     const Factory = {
 		on: listener,
 		emit: emitter
 	};
-
-	Factory.on('projectTranspiled', (data)=>{
-		console.log(data);
-	});
 
 	return Factory;
 

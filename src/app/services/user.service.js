@@ -10,6 +10,7 @@ class User {
 
         this._User = Restangular.all('user');
         this._Auth = Restangular.all('auth');
+        this._Notifications = Restangular.all('notifications');
         this._$state = $state;
         this._$q = $q;
         this._$timeout = $timeout;
@@ -173,6 +174,31 @@ class User {
         });
 
         return deferred.promise;
+    }
+
+
+    getNotifications(fields = {}){
+        let Analyser = new this._Analyser();
+
+        this._Notifications.one('/').get(fields).then(Analyser.resolve, Analyser.reject);
+
+        return Analyser.promise;
+    }
+
+    deleteNotification(fields){
+        let Analyser = new this._Analyser();
+
+        this._Notifications.one('/?'+fields).remove(fields).then(Analyser.resolve, Analyser.reject);
+
+        return Analyser.promise;
+    }
+
+    updateNotification(fields = {}){
+        let Analyser = new this._Analyser();
+
+        this._Notifications.one('/').put(fields).then(Analyser.resolve, Analyser.reject);
+
+        return Analyser.promise;
     }
 
 

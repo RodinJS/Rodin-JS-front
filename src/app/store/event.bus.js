@@ -1,8 +1,13 @@
 function EventBus($rootScope) {
     'ngInject';
     const factory = {
-        'project': {
+        project: {
             SET: 'projectObject'
+        },
+        notifications:{
+          SET:'notificationsObj',
+          DELETE:'notificationIndex',
+          UPDATE:'notificationUpdateIndex'
         },
         emit: emit,
         on: on
