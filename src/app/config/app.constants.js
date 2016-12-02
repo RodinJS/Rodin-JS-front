@@ -10,7 +10,7 @@ const AppConstants = {
 
 	dev: {
 		COOKIEDOMAIN: ['localhost', '.rodin.space'],
-		 API: 'http://localhost:3000/api',
+		API: 'http://localhost:3000/api',
 		//API: 'https://api.rodin.space/api',
 		// API: 'http://192.168.0.33:3000/api', // Xcho
 		SITE: 'http://localhost:8585/#/',
@@ -19,6 +19,7 @@ const AppConstants = {
 		PUBLISH: 'https://api.rodin.space/publish',
 		EDITOR: 'http://localhost:8000/#/',
 		FB:'216982868736046', //'216861662081500' '216982868736046'
+		GITHUB:'2350afe57c144672285b',
 		GOOGLE:'442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com'
 	},
 	prod: {
@@ -30,12 +31,17 @@ const AppConstants = {
 		PUBLISH: `https://api.${window.extractDomain()}/publish`,
 		EDITOR: `https://editor.${window.extractDomain()}/`,
 		FB:'214577345643265',
-		GOOGLE:'442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com'
+        GITHUB:'2350afe57c144672285b',
+        GOOGLE:'442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com'
 	},
 
 	get FB(){
 		return this[this.env].FB;
 	},
+
+    get GITHUB(){
+	    return this[this.env].GITHUB;
+    },
 
 	get GOOGLE(){
 		return this[this.env].GOOGLE;

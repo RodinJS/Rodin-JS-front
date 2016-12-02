@@ -1,9 +1,10 @@
 class AuthCtrl {
-    constructor(User, $state, AppConstants) {
+    constructor(User, $state, AppConstants, $window) {
         'ngInject';
         this._Constants = AppConstants;
         this._User = User;
         this._$state = $state;
+        this._$window = $window;
 
         this.title = $state.current.title;
         this.authType = $state.current.name.replace('landing.', '');
@@ -16,7 +17,7 @@ class AuthCtrl {
             version: 'v2.8' // use graph api version 2.8
         });
 
-        gapi.load('auth2', ()=> {
+        gapi.load('auth2', () => {
             gapi.auth2.init({
                 client_id: AppConstants.GOOGLE,
                 scope: 'profile'
@@ -55,30 +56,33 @@ class AuthCtrl {
     }
 
     fbLogin() {
-        this._User.fbAuth().then((res)=> {
+        this._User.fbAuth().then((res) => {
             this._$state.go('app.dashboard');
-        }, (err)=> {
+        }, (err) => {
             this.isSubmitting = false;
             this.errors = err;
         })
     }
 
-    googleLogin(){
+    googleLogin() {
         const auth2 = gapi.auth2.getAuthInstance();
-        auth2.signIn().then(()=> {
+        auth2.signIn().then(() => {
             const BasicProfile = auth2.currentUser.get().getBasicProfile();
             const requestData = {
-                first_name:BasicProfile.getGivenName(),
-                last_name:BasicProfile.getFamilyName(),
-                id:BasicProfile.getId(),
-                email:BasicProfile.getEmail(),
-                type:'google'
+                first_name: BasicProfile.getGivenName(),
+                last_name: BasicProfile.getFamilyName(),
+                id: BasicProfile.getId(),
+                email: BasicProfile.getEmail(),
+                type: 'google'
             };
             this._User.googleAuth(requestData);
         });
     }
 
+    gitLogin() {
+        this._$window.location.href = `https://github.com/login/oauth/authorize?client_id=${this._Constants.GITHUB}&redirect_uri=${this._Constants.API}/git&scope=user%20repo`;
 
+    }
 }
 
 export default AuthCtrl;
