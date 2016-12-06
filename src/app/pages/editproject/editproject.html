@@ -31,6 +31,11 @@
                 <switch id="enabled" data-name="enabled" data-ng-change="$ctrl.toggleStatus()" data-ng-model="$ctrl.projectPublic" data-on="ON" data-off="OFF" class="green"></switch>
                 <h5 class="switch-box-title">Showcase This Space</h5>
                 <p class="description text-small text-down">Showcased sites appear in your public profile.</p>
+                <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
+                    <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
+                        {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
+                    </a>
+                </p>
             </div>
             <div class="section section-general-setting">
                 <h2 class="section-title">General Settings</h2>
@@ -336,7 +341,7 @@
                 project settingsy lini orangevi link vor sghmi miangamic baci et projecti settingsy</p>
             <div class="form-wrapper margin-top-20" data-ng-if="$ctrl.project.public === 'true'">
                 <div class="form-group" custom-input>
-                    <input id="projectUrl" type="text" class="form-control" value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name}}" disabled>
+                    <input id="projectUrl" type="text" class="form-control" value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" disabled>
                     <label class="control-label float-label">Url of project</label>
                 </div>
             </div>
