@@ -6,8 +6,8 @@ import './helpers';
 import angular from 'angular/index';
 import 'jquery/dist/jquery.min';
 import '/scripts/assists/jquery.form';
-import '/scripts/vendor/tinymce/tinymce.min.js';
-import moment from '/scripts/vendor/moment/min/moment.min.js';
+import 'tinymce/tinymce.min.js';
+import moment from 'moment/min/moment.min.js';
 
 
 // Import our app config files
