@@ -40,7 +40,7 @@ class ProjectCtrl {
 
         this.getTemplates();
 
-        this.inputPadding = (angular.element('.project-path-label').width() + 3);
+        this.inputPadding = (angular.element('.project-path-label').width() - 20);
     }
 
     save() {
