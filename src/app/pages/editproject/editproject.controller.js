@@ -16,14 +16,18 @@ class EditProjectCtrl {
         this.project = {};
         this.showLoader = true;
 
-        this.tinymceOptions = {
+        /*this.tinymceOptions = {
             menubar: false,
             statusbar: false,
             toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist',
             inline: false,
             plugins: 'advlist autolink link image lists charmap print preview',
             theme: "modern"
-        };
+        };*/
+
+        this.wysiwygOptions =  [
+            ['bold', 'italic', 'underline', 'ordered-list', 'unordered-list', 'font-size', 'link']
+        ];
 
         this.modals = {
             remove: false,

@@ -21,8 +21,9 @@ class AppHeaderCtrl {
             if(!this.notifications) return this.getNotifications();
         });
 
-        SocketService.on('probjectBuild', (data)=>{
-            EventBus.emit(this.eventBus.notifications.SET, [data]);
+        SocketService.on('projectBuild', (data)=>{
+            console.log(data);
+            EventBus.emit(this.eventBus.notifications.SET_ONE, data);
         });
 
     }

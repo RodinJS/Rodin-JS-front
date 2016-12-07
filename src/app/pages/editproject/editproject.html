@@ -286,7 +286,13 @@
                         <!--<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">-->
                             <!--<a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>-->
                         <!--</div>-->
-                        <textarea ui-tinymce="$ctrl.tinymceOptions" ng-model="$ctrl.project.description"></textarea>
+                        <wysiwyg textarea-id="projectDescription"
+                                 textarea-class="form-control"
+                                 textarea-height="80px"
+                                 textarea-name="projectDescription"
+                                 ng-model="$ctrl.project.description"
+                                 enable-bootstrap-title="true"
+                                 textarea-menu="$ctrl.wysiwygOptions"></wysiwyg>
                         <div class="btn-wrapper">
                             <button type="button" ng-click="$ctrl.update()" class="btn btn-primary">Update</button>
                         </div>

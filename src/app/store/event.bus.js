@@ -6,6 +6,7 @@ function EventBus($rootScope) {
         },
         notifications:{
           SET:'notificationsObj',
+          SET_ONE:'notificationsObjOne',
           DELETE:'notificationIndex',
           UPDATE:'notificationUpdateIndex'
         },

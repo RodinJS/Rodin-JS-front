@@ -9,7 +9,7 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
     const factory = BaseStore(EventBus);
     factory.id = 'Notifications';
 
-    EventBus.on(EventBus.notifications.SET, function (scope, data) {
+    EventBus.on(EventBus.notifications.SET,  (scope, data) => {
         if(factory.data.notifications){
             factory.data.notifications = _.sortBy(_.uniqBy(_.concat(factory.data.notifications, mapNotifications(data)), 'id'), (notification)=>{
                 return -notification.originDate
@@ -23,12 +23,18 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
         factory.emitChanges();
     });
 
-    EventBus.on(EventBus.notifications.DELETE, function (scope, index) {
+
+    EventBus.on(EventBus.notifications.SET_ONE,  (scope, data) => {
+        factory.data.notifications.unshift(mapNotifications([data])[0]);
+        factory.emitChanges();
+    });
+
+    EventBus.on(EventBus.notifications.DELETE,  (scope, index) => {
         factory.data.notifications.splice(index, 1);
         factory.emitChanges();
     });
 
-    EventBus.on(EventBus.notifications.UPDATE, function (scope, index) {
+    EventBus.on(EventBus.notifications.UPDATE,  (scope, index)  =>{
         factory.data.notifications[index].isRead = true;
         factory.data.notifications[index].readClass = 'readed';
         factory.emitChanges();
