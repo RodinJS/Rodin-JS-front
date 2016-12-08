@@ -13,6 +13,8 @@ import './error/index';
 
 import './userConfirm/index';
 
+import './resetPassword/index';
+
 import './dashboard/index';
 
 import './profile/index';
@@ -46,6 +48,7 @@ let pagesModule = angular.module('app.pages', [
 	'landing.demo',
 	'landing.error',
 	'landing.userconfirm',
+	'landing.resetpassword',
 
 	'app.dashboard',
 	'app.profile',

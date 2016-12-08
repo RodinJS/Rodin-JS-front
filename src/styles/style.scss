@@ -509,6 +509,16 @@ tags-input {
   }
 }
 
+
+.help-block{
+  &.success-help-block{
+    color:#33deff
+  }
+  &.error-help-block {
+    color: #f95957;
+  }
+}
+
 /**WYSIWYG**/
 
 div{

@@ -39,6 +39,16 @@ class User {
         this._User.one("confirmUsername").customPOST(fields).then(this.onLoginSuccess, this.onError);
         return this.deferred.promise;
     }
+    resetPassword(fields = {}) {
+        let Analyser = new this._Analyser();
+        this._User.one("resetPassword").customPOST(fields).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+    changePassword(fields = {}) {
+        this.deferred = this._$q.defer();
+        this._User.one("resetPassword").customPUT(fields).then(this.onLoginSuccess, this.onError);
+        return this.deferred.promise;
+    }
 
     fbLogin(cb) {
         FB.login((response) => this.fbMe(cb), {scope: 'email'});
@@ -176,7 +186,6 @@ class User {
         return deferred.promise;
     }
 
-
     getNotifications(fields = {}){
         let Analyser = new this._Analyser();
 
@@ -200,7 +209,6 @@ class User {
 
         return Analyser.promise;
     }
-
 
     onError(result) {
         this._Validator.validateHTTP(result.data);
