@@ -38,7 +38,7 @@ class EditProjectAndroidCtrl {
             password: false
         };
 
-        this.keyStoreFileUpload = true;
+        this.keyStoreFileUpload = false;
 
         this.eventBus = EventBus;
         this.getProject();
