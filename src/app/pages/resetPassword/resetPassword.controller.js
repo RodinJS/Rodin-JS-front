@@ -20,6 +20,7 @@ class ResetPasswordCtrl {
 
     submitForm() {
         this.isSubmitting = true;
+        this.resetError = false;
         this.User.resetPassword(this.formData).then(
             response=> {
                 this.successfulySend = true;
@@ -28,7 +29,7 @@ class ResetPasswordCtrl {
             },
             err=> {
                 this.isSubmitting = false;
-                console.log(err);
+                this.resetError = err[0].message || 'User not exist';
             })
     }
 
