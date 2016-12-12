@@ -89,7 +89,13 @@
 						<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
 							<a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
 						</div>
-						<textarea data-ui-tinymce="$ctrl.tinymceOptions" id="project_description" data-ng-model="projectDescription"></textarea>
+						<wysiwyg textarea-id="projectDescription"
+								 textarea-class="form-control"
+								 textarea-height="80px"
+								 textarea-name="projectDescription"
+								 ng-model="projectDescription"
+								 enable-bootstrap-title="true"
+								 textarea-menu="$ctrl.wysiwygOptions"></wysiwyg>
 						<div class="btn-wrapper" ng-class="$ctrl.projectExist ? 'has-error' : ''">
 							<button type="button" data-ng-click="$ctrl.save()" class="btn btn-primary">Save</button>
 							<p ng-if="$ctrl.projectExist" class="help-block text-small error-help-block">

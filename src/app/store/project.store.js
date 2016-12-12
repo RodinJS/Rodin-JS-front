@@ -16,7 +16,7 @@ function ProjectStore(EventBus, BaseStore, $stateParams, $state, Project) {
 
     factory.getProject = function () {
         if(factory.data.project && factory.data.project._id != $stateParams.projectId){
-            Project.get($stateParams.projectId).then(
+            Project.get($stateParams.projectId, {projectSize:true}).then(
                 project => {
                     EventBus.emit(EventBus.project.SET, project);
                 },

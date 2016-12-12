@@ -84,6 +84,10 @@ const AppConstants = {
 
 
 	ERRORCODES: {
+        "500": {
+            "message": "INTERNAL_SERVER_ERROR",
+            "field": ""
+        },
 		"400": {
 			"message": "BAD_REQUEST",
 			"field": ""

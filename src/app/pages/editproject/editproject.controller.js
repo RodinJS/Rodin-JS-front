@@ -1,6 +1,7 @@
 class EditProjectCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore, $window) {
         'ngInject';
+        $window.scrollTo(0, 0);
 
         this.appName = AppConstants.appName;
         this.Project = Project;
@@ -16,14 +17,6 @@ class EditProjectCtrl {
         this.project = {};
         this.showLoader = true;
 
-        /*this.tinymceOptions = {
-            menubar: false,
-            statusbar: false,
-            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist',
-            inline: false,
-            plugins: 'advlist autolink link image lists charmap print preview',
-            theme: "modern"
-        };*/
 
         this.wysiwygOptions =  [
             ['bold', 'italic', 'underline', 'ordered-list', 'unordered-list', 'font-size', 'link']
@@ -41,12 +34,13 @@ class EditProjectCtrl {
                 this.getProject();
             else
                 this.finaliseRequest();
+
         });
     }
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId).then(
+        this.Project.get(this.projectId, {projectSize:true}).then(
             project => {
                 this.eventBus.emit(this.eventBus.project.SET, project);
                 this.finaliseRequest();

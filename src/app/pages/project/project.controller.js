@@ -21,15 +21,9 @@ class ProjectCtrl {
 
         this.showLoader = false;
 
-        this.tinymceOptions = {
-            menubar: false,
-            statusbar: false,
-            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist',
-            inline: false,
-            plugins: 'advlist autolink link image lists charmap print preview',
-            theme: "modern",
-            baseURL: `${AppConstants.SITE}scripts/vendor/tinymce`
-        };
+        this.wysiwygOptions =  [
+            ['bold', 'italic', 'underline', 'ordered-list', 'unordered-list', 'font-size', 'link']
+        ];
 
         this.template = 0;
 

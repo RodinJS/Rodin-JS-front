@@ -33,7 +33,7 @@ class DashboardCtrl {
 				this.projects = data;
 			},
 			err => {
-				this.showLoader = false;
+                this.showLoader = false;
 			}
 		)
 	}

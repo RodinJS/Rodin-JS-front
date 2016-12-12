@@ -11,19 +11,20 @@
                             <i class="icon icon-more"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>
-                            <li><a href="{{$ctrl.project.editorUrl}}">Editor</a>
+                            <li>
+                                <a href="{{$ctrl.project.editorUrl}}">Editor</a>
                             </li>
-                            <li><a href="#">Designer</a>
+                            <li class="disabled">
+                                <a href="#">Designer</a>
                             </li>
-                            <li><a href="#">Duplicate</a>
+                            <li class="disabled">
+                                <a href="#">Duplicate</a>
                             </li>
                         </ul>
                     </li>
                     <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
                     </li>
-                    <li class="other-links" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>
-                    </li>
-                    <li class="other-links"><a><i class="icon icon-publish"></i></a><span>Publish</span>
+                    <li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>
                     </li>
                 </ul>
             </div>
@@ -66,69 +67,6 @@
 
             <div class="section section-vr-space">
                 <h2 class="section-title">VR space icons</h2>
-                <!--<div class="drag-cont">
-            <div class="drag-item first">
-                <h5 class="section-small-title">Webclip</h5>
-                <p class="text-small description">Upload a <span>256 x 256 pixel</span> nebdip image. The icon
-                    shows up when your websrte
-                    link s saved to an iPhone home screen</p>
-                <div class="drag-area first">
-                    <p class="center-row">256 x 256</p>
-                    <p class="drag-instruct">Drag or <span>Click</span></p>
-                </div>
-            </div>
-            <div class="drag-item">
-                <h5 class="section-small-title">Favicon</h5>
-                <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon
-                    image Supported image formats are .ico, .png, .gif and .jpg</p>
-                <div class="drag-area first">
-                    <p class="center-row">32 x 32</p>
-                    <p class="drag-instruct">Drag or Click </p>
-                </div>
-            </div>
-        </div>-->
-                <!--<div class="drag-cont">
-            <div class="drag-item first">
-                <h5 class="section-small-title">Webclip</h5>
-                <p class="text-small description">Upload a <span>256 x 256 pixel</span> nebdip image. The icon
-                    shows up when your websrte
-                    link s saved to an iPhone home screen</p>
-                <div class="drag-area drag-area-loading first">
-                    <div class="loaded"></div>
-                    <p class="drag-instruct">Loading</p>
-                </div>
-            </div>
-            <div class="drag-item">
-                <h5 class="section-small-title">Favicon</h5>
-                <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon
-                    image Supported image formats are .ico, .png, .gif and .jpg</p>
-                <div class="drag-area drag-area-loading first">
-                    <div class="loaded"></div>
-                    <p class="drag-instruct">Loading</p>
-                </div>
-            </div>
-        </div>-->
-                <!--<div class="drag-cont">
-            <div class="drag-item first">
-                <h5 class="section-small-title">Webclip</h5>
-                <p class="text-small description">Upload a <span>256 x 256 pixel</span> nebdip image. The icon
-                    shows up when your websrte
-                    link s saved to an iPhone home screen</p>
-                <div class="drag-area drag-area-loading add-img first">
-                    <img src="static/img/general/256img.png">
-                    <p class="drag-instruct">Imagename.png</p>
-                </div>
-            </div>
-            <div class="drag-item">
-                <h5 class="section-small-title">Favicon</h5>
-                <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon
-                    image Supported image formats are .ico, .png, .gif and .jpg</p>
-                <div class="drag-area drag-area-loading add-img first">
-                    <img src="static/img/general/32img.png">
-                    <p class="drag-instruct">Imagename.png</p>
-                </div>
-            </div>
-        </div>-->
                 <div class="drag-cont">
                     <div class="drag-item first">
                         <h5 class="section-small-title">Webclip</h5>
@@ -159,48 +97,6 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="section sit-time-zone">-->
-                <!--<h2 class="section-title">Site Time Zone</h2>-->
-                <!--<div class="form-wrapper">-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-6">-->
-                            <!--<div class="form-group loaded col-md-6 col-sm-12 col-sm-12 col-xs-12 clearfix select-group">-->
-                                <!--<select class="form-control selectpicker">-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                    <!--<option value="">Choose the time zone from this list</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="btn-primary-cont">-->
-                                <!--<span class="divider">or</span>-->
-                                <!--<button type="button" class="btn btn-primary active">Detect my time zone</button>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<p class="col-md-7 text-small description">Time zone defaults to UTC, so setting it to your local time zone will improve any dat&'hme remind features of your dynamic content including relative date tillerng. It will also update any datedime-relaled elements-->
-                                    <!--of your existing dynamic content</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
             <div class="section overview">
                 <h2 class="section-title">Overview</h2>
                 <div class="row">
@@ -210,7 +106,7 @@
                             <tr>
                                 <td class="text-primary"><span>Total Asset Size</span>
                                 </td>
-                                <td class="text-primary"><span>10.8 mb ( Files. Fonts, and Backups)</span>
+                                <td class="text-primary"><span>{{$ctrl.project.projectSize}} ( Files. Fonts, and Backups)</span>
                                 </td>
                             </tr>
                             <tr>
@@ -241,24 +137,13 @@
                                 <td class="text-primary"><span>{{$ctrl.project.createdAt | date: 'MMMM dd yyyy. h:mm:ss a'}}</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="text-primary"><span>Pages</span>
-                                </td>
-                                <td class="text-primary"><span>1</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-primary"><span>Form Submissions</span>
-                                </td>
-                                <td class="text-primary"><span>0</span>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="section traffic-statistics last-section">
+            <!-- TODO: traffic statistics -->
+           <!-- <div class="section traffic-statistics last-section">
                 <h2 class="section-title">Traffic Statistics</h2>
                 <p class="text-small description">
                     Statistics from the past <span>30 days</span> of traffic data
@@ -283,14 +168,11 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="section section-project-content last-section">
                 <h2 class="section-title">Description</h2>
                 <div class="row">
                     <div class="col-md-6">
-                        <!--<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">-->
-                            <!--<a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>-->
-                        <!--</div>-->
                         <wysiwyg textarea-id="projectDescription"
                                  textarea-class="form-control"
                                  textarea-height="80px"
@@ -343,8 +225,9 @@
             <h1>Share this project</h1>
         </div>
         <div class="modal-body">
-            <p data-ng-if="$ctrl.project.public === 'false'" class="text-small description">This project is not public, you can change this from project settings.
-                project settingsy lini orangevi link vor sghmi miangamic baci et projecti settingsy</p>
+            <p data-ng-if="$ctrl.project.public === 'false'" class="text-small description">
+                This project is not public, you can change this from project settings.
+            </p>
             <div class="form-wrapper margin-top-20" data-ng-if="$ctrl.project.public === 'true'">
                 <div class="form-group" custom-input>
                     <input id="projectUrl" type="text" class="form-control" value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" disabled>
