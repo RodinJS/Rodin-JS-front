@@ -154,11 +154,11 @@ class User {
             deferred.resolve(false);
             return deferred.promise;
         }
-
         if (this.current) {
             deferred.resolve(true);
-        } else {
-            this._User.one("me").get().then((res) => {
+        }
+        else {
+            this._User.one("me").get({usedStorage:true, projectsCount:true}).then((res) => {
                 this.current = res.data;
                 deferred.resolve(true);
             }, (err) => {

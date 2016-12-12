@@ -22,7 +22,6 @@ class AppHeaderCtrl {
         });
 
         SocketService.on('projectBuild', (data)=>{
-            console.log(data);
             EventBus.emit(this.eventBus.notifications.SET_ONE, data);
         });
 
