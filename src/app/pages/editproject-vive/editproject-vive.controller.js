@@ -171,8 +171,8 @@ class EditProjectViveCtrl {
         let project = {
             userId: this.user.username,
             appId: this.project._id,
-            url: "http://google.com",
             appName: this.project.vive.name,
+            version:this.project.oculus.version,
             vive: {
                 exportMethod: "ad-hoc",
                 bundleIdentifier: this.project.vive.bundle,

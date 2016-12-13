@@ -36,6 +36,25 @@
                                 <li>
                                     <div class="form-wrapper">
                                         <div class="form-group" custom-input
+                                             data-ng-class="{'has-error': configs.version.$invalid && configs.version.focused, 'has-success': configs.version.$valid && configs.version.focused}">
+                                            <input type="text" class="form-control" placeholder=""
+                                                   data-ng-model="$ctrl.project.android.version"
+                                                   name="version"
+                                                   required
+                                                   data-ng-focus="configs.version.focused = true">
+                                            <label class="control-label float-label">
+                                                Version <span ng-if="configs.version.$invalid && configs.version.focused">is required</span>
+                                            </label>
+                                        </div>
+                                        <p class="text-small description">Version of your app</p>
+                                        <p ng-if="configs.version.error">
+                                            The current version for this project is 3.1.2, please select a higher version for the new build.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-wrapper">
+                                        <div class="form-group" custom-input
                                              data-ng-class="{'has-error': configs.package.$invalid && configs.package.focused, 'has-success': configs.package.$valid && configs.package.focused}">
                                         <input type="text" class="form-control" placeholder=""
                                                data-ng-model="$ctrl.project.android.package"

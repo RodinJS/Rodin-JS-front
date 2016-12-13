@@ -171,8 +171,8 @@ class EditProjectOculusCtrl {
         let project = {
             userId: this.user.username,
             appId: this.project._id,
-            url: "http://google.com",
             appName: this.project.oculus.name,
+            version:this.project.oculus.version,
             oculus: {
                 exportMethod: "ad-hoc",
                 bundleIdentifier: this.project.oculus.bundle,

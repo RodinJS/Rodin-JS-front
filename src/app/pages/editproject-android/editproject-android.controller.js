@@ -162,7 +162,8 @@ class EditProjectAndroidCtrl {
             appId: this.project._id,
             url: "http://google.com",
             appName: this.project.android.name,
-            android: this.project.android
+            android: this.project.android,
+            version:this.project.android.version,
         };
 
         this.showLoader = true;

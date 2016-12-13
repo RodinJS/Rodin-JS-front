@@ -33,6 +33,22 @@
                                         <p class="text-small description">App Name - Display name of your app</p>
                                     </div>
                                 </li>
+                                <li>
+                                    <div class="form-wrapper">
+                                        <div class="form-group" custom-input
+                                             data-ng-class="{'has-error': configs.version.$invalid && configs.version.focused, 'has-success': configs.version.$valid && configs.version.focused}">
+                                            <input type="text" class="form-control" placeholder=""
+                                                   data-ng-model="$ctrl.project.oculus.version"
+                                                   name="version"
+                                                   required
+                                                   data-ng-focus="configs.version.focused = true">
+                                            <label class="control-label float-label">
+                                                Version <span ng-if="configs.version.$invalid && configs.version.focused">is required</span>
+                                            </label>
+                                        </div>
+                                        <p class="text-small description">Version of your app</p>
+                                    </div>
+                                </li>
                             </ul>
                             <div class="required-field-actions">
                                 <button type="button" class="btn btn-primary"

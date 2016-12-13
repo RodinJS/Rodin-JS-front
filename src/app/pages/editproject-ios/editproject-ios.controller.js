@@ -174,8 +174,8 @@ class EditProjectIosCtrl {
         let project = {
             userId: this.user.username,
             appId: this.projectId,
-            url: "http://google.com",
             appName: this.project.ios.name,
+            version:this.project.ios.version,
             ios: {
                 exportMethod: "ad-hoc",
                 bundleIdentifier: this.project.ios.bundle,
