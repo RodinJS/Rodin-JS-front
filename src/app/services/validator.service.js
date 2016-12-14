@@ -248,4 +248,17 @@ function Validator(AppConstants, $log) {
     }
 }
 
+Validator.checkVersion = (_old, _new) => {
+    _old = _old.split('.').map(i => parseInt(i));
+    _new = _new.split('.').map(i => parseInt(i));
+
+    for(let i = 0; i < _old.length; i ++) {
+        if(_old[i] >= _new[i]) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
 export default Validator;
