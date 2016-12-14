@@ -26,6 +26,53 @@
                 </ul>
             </div>
 
+            <div class="section section-connected-accounts">
+                <h2 class="section-title">Connected Accounts</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group title">Facebook</div>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" ng-if="!$ctrl.currentUser.facebook"
+                                        ng-click="$ctrl.fbSync()"
+                                        class="btn btn-primary border-orange">Sync with Facebook</button>
+                                <div class="synced" ng-if="$ctrl.currentUser.facebook">
+                                    <i  class=" icon icon-send"></i> Synced
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group title">Google</div>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" ng-if="!$ctrl.currentUser.google"
+                                        ng-click="$ctrl.googleSync()"
+                                        class="btn btn-primary border-orange">Sync with Google</button>
+                                <div class="synced" ng-if="$ctrl.currentUser.google">
+                                    <i  class=" icon icon-send"></i> Synced
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group title">Github</div>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" ng-if="!$ctrl.currentUser.github"
+                                        ng-click="$ctrl.gitSync()"
+                                        class="btn btn-primary border-orange">Sync with Github</button>
+                                <div class="synced" ng-if="$ctrl.currentUser.github">
+                                    <i  class=" icon icon-send"></i> Synced
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="section-wrapper">
 
                 <form name="profile" novalidate>

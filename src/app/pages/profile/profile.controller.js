@@ -1,8 +1,10 @@
 class ProfileCtrl {
-    constructor (AppConstants, User, $scope, Validator, Error) {
+    constructor (AppConstants, User, $scope, Validator, Error, $stateParams, $state, $window) {
         'ngInject';
 
         this.appName = AppConstants.appName;
+        this._Constants = AppConstants;
+        this._$window = $window;
         this.currentUser = User.current;
         this._Validator = Validator;
         this._User = User;
@@ -21,6 +23,42 @@ class ProfileCtrl {
         };
 
         this.passwordChangeResponse = '';
+
+        FB.init({
+            appId: AppConstants.FB,
+            cookie: true,  // enable cookies to allow the server to access
+                           // the session
+            xfbml: true,  // parse social plugins on this page
+            version: 'v2.8' // use graph api version 2.8
+        });
+
+        gapi.load('auth2', () => {
+            gapi.auth2.init({
+                client_id: AppConstants.GOOGLE,
+                scope: 'profile'
+            });
+        });
+
+        if($stateParams.token && $stateParams.id && this.currentUser) {
+
+            let data = {
+                id:$stateParams.id,
+                token:$stateParams.token,
+                email:this.currentUser.email,
+                sync:true
+            };
+
+            this._User.gitAuth(data).then((res) => {
+                this.currentUser.github = true;
+                $state.go('app.profile', {token:undefined, id:undefined});
+
+            }, (err) => {
+                this.isSubmitting = false;
+                this.errors = err;
+            })
+
+        }
+
     }
 
     updateProfile () {
@@ -43,6 +81,41 @@ class ProfileCtrl {
         );
     }
 
+    fbSync() {
+        this._User.fbAuth(true).then((res) => {
+            console.log(res);
+            this.currentUser.facebook = true;
+        }, (err) => {
+            this.isSubmitting = false;
+            this.errors = err;
+        })
+    }
+
+    gitSync(){
+        this._$window.location.href = `https://github.com/login/oauth/authorize?client_id=${this._Constants.GITHUB}&redirect_uri=${this._Constants.API}/git/sync&scope=user%20repo`;
+    }
+
+    googleSync() {
+        const auth2 = gapi.auth2.getAuthInstance();
+        auth2.signIn().then(() => {
+            const BasicProfile = auth2.currentUser.get().getBasicProfile();
+            const requestData = {
+                first_name: BasicProfile.getGivenName(),
+                last_name: BasicProfile.getFamilyName(),
+                id: BasicProfile.getId(),
+                email: this.currentUser.email,
+                sync: true
+
+            };
+            this._User.googleAuth(requestData).then((res) => {
+                this.currentUser.google = true;
+            }, (err) => {
+                this.isSubmitting = false;
+                this.errors = err;
+            })
+
+        });
+    }
 
     updatePassword (isValidForm = true) {
         if (!isValidForm) {

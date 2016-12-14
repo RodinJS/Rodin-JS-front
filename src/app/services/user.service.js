@@ -22,6 +22,7 @@ class User {
 
         this.onLoginSuccess = this.onLoginSuccess.bind(this);
         this.onError = this.onError.bind(this);
+        this.onSyncSuccess = this.onSyncSuccess.bind(this);
         this.fbLogin = this.fbLogin.bind(this);
         this.fbMe = this.fbMe.bind(this);
         this.fbAuth = this.fbAuth.bind(this);
@@ -39,37 +40,46 @@ class User {
         this._User.one("confirmUsername").customPOST(fields).then(this.onLoginSuccess, this.onError);
         return this.deferred.promise;
     }
+
     resetPassword(fields = {}) {
         let Analyser = new this._Analyser();
         this._User.one("resetPassword").customPOST(fields).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
+
     changePassword(fields = {}) {
         this.deferred = this._$q.defer();
         this._User.one("resetPassword").customPUT(fields).then(this.onLoginSuccess, this.onError);
         return this.deferred.promise;
     }
 
-    fbLogin(cb) {
-        FB.login((response) => this.fbMe(cb), {scope: 'email'});
+    fbLogin(sync) {
+        FB.login((response) => this.fbMe(sync), {scope: 'email'});
     }
 
-    fbMe() {
+    fbMe(sync) {
         FB.api('/me', 'get', {fields: 'email, first_name, last_name'}, (response)=> {
+
+            let responseMethods = [this.onLoginSuccess, this.onError];
             if (!response || response.error)
                 return this.onError(response);
-            this._Auth.one("social/facebook").customPOST(response).then(this.onLoginSuccess, this.onError);
+
+            if(sync){
+                response.email = this.current.email;
+                response.sync = true;
+                responseMethods = [this.onSyncSuccess, this.onError];
+            }
+            return this._Auth.one("social/facebook").customPOST(response).then(responseMethods[0], responseMethods[1]);
         })
     }
 
-    fbAuth() {
-
+    fbAuth(sync) {
         this.deferred = this._$q.defer();
         FB.getLoginStatus((response)=> {
             if (response.status == 'connected')
-                return this.fbMe();
+                return this.fbMe(sync);
             else
-                return this.fbLogin();
+                return this.fbLogin(sync);
 
         });
         return this.deferred.promise;
@@ -77,7 +87,14 @@ class User {
 
     googleAuth(data) {
         this.deferred = this._$q.defer();
-        this._Auth.one("social/google").customPOST(data).then(this.onLoginSuccess, this.onError);
+        let responseMethods = data.sync ? [this.onSyncSuccess, this.onError] : [this.onLoginSuccess, this.onError];
+        this._Auth.one("social/google").customPOST(data).then(responseMethods[0], responseMethods[1]);
+        return this.deferred.promise;
+    }
+
+    gitAuth(data) {
+        this.deferred = this._$q.defer();
+        this._Auth.one("social/github").customPOST(data).then(this.onSyncSuccess, this.onError);
         return this.deferred.promise;
     }
 
@@ -226,6 +243,21 @@ class User {
             this.current = response.user;
             this._$state.go('app.dashboard');
             this.deferred.resolve(response);
+        }
+        else {
+            this.deferred.reject(this._Validator.getErrorsHTTP());
+        }
+        delete this.deferred;
+    }
+
+    onSyncSuccess(result){
+        this._Validator.validateHTTP(result);
+
+        if (this._Validator.isValidHTTP()) {
+            let response = this._Validator.getDataHTTP();
+            this.current = response.user;
+            this.deferred.resolve(response);
+
         }
         else {
             this.deferred.reject(this._Validator.getErrorsHTTP());
