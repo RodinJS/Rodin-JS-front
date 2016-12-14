@@ -1,5 +1,5 @@
 class EditProjectIosCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -15,6 +15,7 @@ class EditProjectIosCtrl {
         this.showLoader = true;
 
         this.user = User.current;
+        this._checkVersion = Validator.checkVersion;
 
         this.fileChoosen = {
             profile: false,

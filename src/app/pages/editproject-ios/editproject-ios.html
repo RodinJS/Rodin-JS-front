@@ -41,12 +41,20 @@
                                                    data-ng-model="$ctrl.project.ios.version"
                                                    name="version"
                                                    required
-                                                   data-ng-focus="configs.version.focused = true">
+                                                   ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/"
+                                                   data-ng-focus="configs.version.focused = true"
+                                                   data-ng-init="isVersionValid = true"
+                                                   data-ng-change="$ctrl.project.build.ios.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.ios.version, $ctrl.project.ios.version))">
                                             <label class="control-label float-label">
-                                                Version <span ng-if="configs.version.$invalid && configs.version.focused">is required</span>
+                                                Version <span ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.required">is required</span>
+                                                <span ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern">must be in x.x.x format</span>
+                                                <span ng-if="!isVersionValid">must be higher than current. Current version is {{$ctrl.project.build.ios.version}}</span>
                                             </label>
                                         </div>
                                         <p class="text-small description">Version of your app</p>
+                                        <p ng-if="configs.version.error">
+                                            The current version for this project is 3.1.2, please select a higher version for the new build.
+                                        </p>
                                     </div>
                                 </li>
                                 <li>
@@ -148,7 +156,7 @@
                             <div class="required-field-actions">
                                 <button type="button" class="btn btn-primary"
                                         ng-click="$ctrl.open($event)"
-                                        ng-disabled="!configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name">build</button>
+                                        ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name">build</button>
                                 <!--<a href="" class="btn btn-save" disabled>remove</a>-->
                             </div>
                         </div>
