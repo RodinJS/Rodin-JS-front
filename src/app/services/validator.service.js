@@ -2,14 +2,27 @@
  * Created by kh.levon98 on 15-Sep-16.
  */
 
-function Validator(AppConstants, $log) {
+function Validator (AppConstants, $log) {
     'ngInject';
 
     const ERRORCODES = AppConstants.ERRORCODES;
 
+    Factory.checkVersion = (_old = '0.0.0', _new = '0.0.0') => {
+        _old = _old.split('.').map(i => parseInt(i));
+        _new = _new.split('.').map(i => parseInt(i));
+
+        for (let i = 0; i < _old.length; i++) {
+            if(_new[i] === _old[i])
+                continue;
+            return _new[i] > _old[i];
+        }
+
+        return false;
+    };
+
     return Factory;
 
-    function Factory() {
+    function Factory () {
         const self = this;
 
         let isValidData;
@@ -40,7 +53,7 @@ function Validator(AppConstants, $log) {
          * @param data {Object}
          * @return {Boolean}
          * */
-        function validate(data) {
+        function validate (data) {
             // reset data information
             errors.splice(0, errors.length);
             isValidData = false;
@@ -63,7 +76,7 @@ function Validator(AppConstants, $log) {
                         let tmp = validData;
                         for (let i = 0; i < fields.length - 1; i++) {
                             const field = fields[i];
-                            if(!tmp.hasOwnProperty(field)) {
+                            if (!tmp.hasOwnProperty(field)) {
                                 tmp[field] = {};
                             }
                             tmp = tmp[field];
@@ -78,7 +91,7 @@ function Validator(AppConstants, $log) {
                                 let tmp = validData;
                                 for (let i = 0; i < fields.length - 1; i++) {
                                     const field = fields[i];
-                                    if(!tmp.hasOwnProperty(field)) {
+                                    if (!tmp.hasOwnProperty(field)) {
                                         tmp[field] = {};
                                     }
                                     tmp = tmp[field];
@@ -106,7 +119,7 @@ function Validator(AppConstants, $log) {
          * Is valid latest validated data.
          * @return {Boolean}
          * */
-        function isValid() {
+        function isValid () {
             return isValidData;
         }
 
@@ -115,7 +128,7 @@ function Validator(AppConstants, $log) {
          * Latest validated data errors.
          * @return {Array}
          * */
-        function getErrors() {
+        function getErrors () {
             return errors;
         }
 
@@ -124,7 +137,7 @@ function Validator(AppConstants, $log) {
          * Latest validated data.
          * @return {Object}
          * */
-        function getData() {
+        function getData () {
             return validData;
         }
 
@@ -136,7 +149,7 @@ function Validator(AppConstants, $log) {
          * @param data {Object}
          * @return {Boolean}
          * */
-        function validateHTTP(data) {
+        function validateHTTP (data) {
             // reset data information
             errors.splice(0, errors.length);
             isValidData = false;
@@ -172,7 +185,7 @@ function Validator(AppConstants, $log) {
          * Is valid latest validated data.
          * @return {Boolean}
          * */
-        function isValidHTTP() {
+        function isValidHTTP () {
             return isValidData;
         }
 
@@ -181,7 +194,7 @@ function Validator(AppConstants, $log) {
          * Latest validated data errors.
          * @return {Array}
          * */
-        function getErrorsHTTP() {
+        function getErrorsHTTP () {
             console.error("\n---------------\n")
             console.log(errors)
             return errors;
@@ -192,7 +205,7 @@ function Validator(AppConstants, $log) {
          * Latest validated data.
          * @return {Object}
          * */
-        function getDataHTTP() {
+        function getDataHTTP () {
             return validData;
         }
 
@@ -206,7 +219,7 @@ function Validator(AppConstants, $log) {
          * @param field {Any}
          * @param allFields {Array}
          * */
-        function isValidField(type, value, field, allFields) {
+        function isValidField (type, value, field, allFields) {
             let comparedField;
             switch (type) {
                 case 'required':
@@ -248,17 +261,5 @@ function Validator(AppConstants, $log) {
     }
 }
 
-Validator.checkVersion = (_old, _new) => {
-    _old = _old.split('.').map(i => parseInt(i));
-    _new = _new.split('.').map(i => parseInt(i));
-
-    for(let i = 0; i < _old.length; i ++) {
-        if(_old[i] >= _new[i]) {
-            return false;
-        }
-    }
-
-    return true;
-};
 
 export default Validator;

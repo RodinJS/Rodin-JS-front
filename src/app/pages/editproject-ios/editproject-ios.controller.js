@@ -16,6 +16,7 @@ class EditProjectIosCtrl {
 
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
+        console.log(Validator.checkVersion);
 
         this.fileChoosen = {
             profile: false,
