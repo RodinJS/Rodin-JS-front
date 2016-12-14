@@ -14,12 +14,12 @@
                             <li>
                                 <a href="{{$ctrl.project.editorUrl}}">Editor</a>
                             </li>
-                            <li class="disabled">
-                                <a href="#">Designer</a>
-                            </li>
-                            <li class="disabled">
-                                <a href="#">Duplicate</a>
-                            </li>
+                            <!--<li class="disabled">-->
+                                <!--<a href="#">Designer</a>-->
+                            <!--</li>-->
+                            <!--<li class="disabled">-->
+                                <!--<a href="#">Duplicate</a>-->
+                            <!--</li>-->
                         </ul>
                     </li>
                     <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
@@ -201,7 +201,7 @@
             <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
         </div>
         <div class="modal-body padding-0-important" ng-if="!!$ctrl.project.publishDate">
-            <p class="description">
+            <p class="description word-wrap">
                 Your project will no longer be available on
                 <span class="text-yellow">{{$ctrl.project.publishedUrl}}</span>, your apps for
                 <span class="text-yellow">"{{$ctrl.project.name}}"</span> will stop working !<br>
