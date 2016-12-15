@@ -1,11 +1,12 @@
 class ProjectCtrl {
-    constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User) {
+    constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User, VCS) {
         'ngInject';
 
         this.appName = AppConstants.appName;
         this.editorUrl = AppConstants.EDITOR;
         this.previewUrl = AppConstants.PREVIEW;
         this.Project = Project;
+        this.VCS = VCS;
         this.ProjectTemplate = ProjectTemplate;
         this.$state = $state;
         this.currentUser = User.current;
@@ -47,8 +48,16 @@ class ProjectCtrl {
 
         this.Project.create(projectInfo).then(
             data => {
-                this.showLoader = false;
-                this.$state.go('app.dashboard');
+                this.VCS.create(data._id, {
+                    root: data.root,
+                    name: data.name
+                }).then(()=>{
+                    this.showLoader = false;
+                    this.$state.go('app.dashboard');
+                }, err=>{
+                    /// TODO: stex petqa cuc tal error vorovhetev github repo chi sarqve
+                    this.showLoader = false;
+                });
             },
             err => {
                 if (err[0].code && err[0].code === 309)
