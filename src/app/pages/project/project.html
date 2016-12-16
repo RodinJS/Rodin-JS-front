@@ -64,6 +64,9 @@
 									   ng-style="{'padding-left':$ctrl.inputPadding}"
 									   placeholder="typehereprojectname"
 									   value=""
+									   ng-minlength="3"
+									   ng-maxlength="16"
+                                       limit-to="16"
 									   ng-click="$ctrl.projectFocused = true"
 									   data-ng-model="$ctrl.project.name">
 								<span class="project-path-label text-primary fixed-placeholder">{{$ctrl.previewUrl+$ctrl.currentUser.username}}/</span>
@@ -73,7 +76,7 @@
 							</div>
 							<p class="text-small description">Is the name of your project, which will be displayed in the URL</p>
 							<div class="form-group" custom-input>
-								<tags-input class="form-control" ng-model="$ctrl.project.tags"></tags-input>
+								<tags-input max-length="32" min-length="3" class="form-control" ng-model="$ctrl.project.tags"></tags-input>
 								<label class="control-label float-label">Metaa Tags</label>
 							</div>
 							<p class="text-small description">Meta tags are a great way for webmasters to provide search engines with information about their

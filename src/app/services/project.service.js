@@ -28,15 +28,33 @@ class Project {
         return Analyser.promise;
     }
 
-    unPublish(projectId = null) {
+    getPublishedHistory(projectId = null){
         let Analyser = new this._Analyser();
-        this._Projects.one('publish/' + projectId).remove().then(Analyser.resolve, Analyser.reject);
+        this._Projects.one('publish/' + projectId).get().then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 
     publish(projectId = null) {
         let Analyser = new this._Analyser();
-        this._Projects.one('publish/' + projectId).get().then(Analyser.resolve, Analyser.reject);
+        this._Projects.one('publish/' + projectId).post().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    rollBack(projectId = null, fields = null) {
+        let Analyser = new this._Analyser();
+        this._Projects.one('publish/rollback/' + projectId).customPOST(fields).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    updatePublish(projectId = null) {
+        let Analyser = new this._Analyser();
+        this._Projects.one('publish/' + projectId).put().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    unPublish(projectId = null) {
+        let Analyser = new this._Analyser();
+        this._Projects.one('publish/' + projectId).remove().then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 

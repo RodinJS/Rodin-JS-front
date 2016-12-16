@@ -227,9 +227,18 @@
                         ngModelController.$setViewValue(html);
                     });
                     textarea.on('keydown', function (event) {
+
+                        if(event.keyCode != 8){
+                            var html = textarea.html();
+                            let pureText = html.replace(/<[^>]*>/g, "");
+                            console.log(pureText.length);
+                            if(pureText.length >= 256){
+                                event.preventDefault();
+                            }
+                        }
+
                         if (event.keyCode == 9) {
                             var TAB_SPACES = 4;
-                            var html = textarea.html();
                             var selection = window.getSelection();
                             var position = selection.anchorOffset;
                             event.preventDefault();  // html = insertTab(html, position);
