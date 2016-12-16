@@ -41,6 +41,16 @@ import './editproject-web/index';
 
 import './editproject-publish/index';
 
+import './discover/index';
+
+import './tutorials/index';
+
+import './store/index';
+
+import './faq/index';
+
+import './privacy/index';
+
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
 	'landing.auth',
@@ -49,6 +59,11 @@ let pagesModule = angular.module('app.pages', [
 	'landing.error',
 	'landing.userconfirm',
 	'landing.resetpassword',
+    'landing.discover',
+    'landing.tutorials',
+    'landing.store',
+    'landing.faq',
+    'landing.privacy',
 
 	'app.dashboard',
 	'app.profile',

@@ -17,22 +17,21 @@
 		<div class="collapse navbar-collapse" uib-collapse="isNavbarCollapsed">
 			<ul class="nav navbar-nav">
 				<li><a data-ui-sref-active="active" data-ui-sref="app.dashboard">Dashboard</a></li>
-				<!--<li><a href="">Discover</a></li>-->
-				<!--<li><a href="">Store</a></li>-->
-				<!--<li><a href="">Doc</a></li>-->
-				<!--<li class="dropdown" uib-dropdown>-->
-					<!--<a href="" class="dropdown-toggle" role="button" uib-dropdown-toggle>-->
-						<!--More <i class="fa fa-angle-down"></i>-->
-					<!--</a>-->
-					<!--<ul class="dropdown-menu dropdown-menu-more" uib-dropdown-menu>-->
-						<!--<li><a href="">Tutorials</a></li>-->
-						<!--<li><a href="">Courses</a></li>-->
+				<li><a ui-sref="landing.discover">Discover</a></li>
+				<li><a ui-sref="landing.store">Store</a></li>
+				<!--<li><a href="https://docs.rodin.space/">Doc</a></li>-->
+				<li class="dropdown" uib-dropdown>
+					<a href="" class="dropdown-toggle" role="button" uib-dropdown-toggle>
+						More <i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-more" uib-dropdown-menu>
+						<li><a ui-sref="landing.tutorials">Tutorials</a></li>
+						<li><a ui-sref="landing.faq">FAQ</a></li>
 						<!--<li><a href="">Forum</a></li>-->
 						<!--<li><a href="">Blog</a></li>-->
-						<!--<li class="terms"><a href="">Privacy Policy</a></li>-->
-						<!--<li class="terms"><a href="">Terms of Service</a></li>-->
-					<!--</ul>-->
-				<!--</li>-->
+						<li class="terms"><a ui-sref="landing.privacy">Privacy Policy</a></li>
+					</ul>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right navbar-account">
 				<li class="new-notifi" uib-dropdown  auto-close="outsideClick">
