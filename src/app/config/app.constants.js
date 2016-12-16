@@ -103,7 +103,7 @@ const AppConstants = {
 		//////
 		"310": {
 			"message": "WRONG_USERNAME_OR_PASSWORD",
-			"field": ["username", "email"]
+			"field": ""//["username", "email"]
 		},
 		"311": {
 			"message": "EMAIL_EXISTS",

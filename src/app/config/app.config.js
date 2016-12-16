@@ -2,7 +2,7 @@
  * Created by kh.levon98 on 13-Sep-16.
  */
 
-function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $urlRouterProvider, AppConstants) {
+function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $urlRouterProvider, AppConstants, NotificationProvider) {
 	'ngInject';
 
 	RestangularProvider.setBaseUrl(AppConstants.API);
@@ -37,6 +37,17 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
 		});
 
 	$urlRouterProvider.otherwise('/error');
+
+    NotificationProvider.setOptions({
+        delay: 3000,
+        startTop: 10,
+        startRight: 10,
+        verticalSpacing: 10,
+        horizontalSpacing: 10,
+        positionX: 'right',
+        positionY: 'top',
+        replaceMessage: false,
+    });
 
 }
 

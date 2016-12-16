@@ -1,7 +1,7 @@
 class ProfileCtrl {
-    constructor (AppConstants, User, $scope, Validator, Error, $stateParams, $state, $window) {
+    constructor (AppConstants, User, $scope, Validator, Error, $stateParams, $state, $window, Notification) {
         'ngInject';
-
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._Constants = AppConstants;
         this._$window = $window;
@@ -83,11 +83,14 @@ class ProfileCtrl {
 
     fbSync() {
         this._User.fbAuth(true).then((res) => {
-            console.log(res);
             this.currentUser.facebook = true;
+            this.Notification.success('Facebook synced');
         }, (err) => {
             this.isSubmitting = false;
             this.errors = err;
+            _.each(err, (val, key)=>{
+                this.Notification.error(val.fieldName);
+            });
         })
     }
 
@@ -109,9 +112,13 @@ class ProfileCtrl {
             };
             this._User.googleAuth(requestData).then((res) => {
                 this.currentUser.google = true;
+                this.Notification.success('Google synced');
             }, (err) => {
                 this.isSubmitting = false;
                 this.errors = err;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             })
 
         });
@@ -133,8 +140,12 @@ class ProfileCtrl {
                 this.currentUser[this.syncType] = true;
                 delete this.syncType;
                 this.syncModal = false;
+                this.Notification.success(`${this.syncType} synced`)
             }, (err)=>{
                 console.log(err);
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             })
     }
 
@@ -173,6 +184,7 @@ class ProfileCtrl {
             }, (data) => {
                 this.showLoader = false;
                 this.passwordChangeResponse = 'error';
+
             });
         } else {
             console.log(Validator.getErrors());
