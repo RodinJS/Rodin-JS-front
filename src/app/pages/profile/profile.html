@@ -7,6 +7,7 @@
             <!--</a>-->
         </h1>
         <div class="page-content">
+
             <div class="content-navbar">
                 <ul class="navbar-list">
                     <li class="active"><a ui-sref="app.profile">Profile</a>
@@ -65,6 +66,32 @@
                                         ng-click="$ctrl.gitSync()"
                                         class="btn btn-primary border-orange">Sync with Github</button>
                                 <div class="synced" ng-if="$ctrl.currentUser.github">
+                                    <i  class=" icon icon-send"></i> Synced
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group title">Oculus</div>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" ng-if="!$ctrl.currentUser.oculus"
+                                        ng-click="$ctrl.openSyncModal('oculus')"
+                                        class="btn btn-primary border-orange">Sync with Oculus</button>
+                                <div class="synced" ng-if="$ctrl.currentUser.oculus">
+                                    <i  class=" icon icon-send"></i> Synced
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group title">Steam</div>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" ng-if="!$ctrl.currentUser.steam"
+                                        ng-click="$ctrl.openSyncModal('steam')"
+                                        class="btn btn-primary border-orange">Sync with Steam</button>
+                                <div class="synced" ng-if="$ctrl.currentUser.steam">
                                     <i  class=" icon icon-send"></i> Synced
                                 </div>
                             </div>
@@ -312,4 +339,27 @@
 
     <div class="loader" data-ng-if="$ctrl.showLoader"></div>
 
+</div>
+
+
+<div class="modal model-confirm" ng-class="{'display-block': $ctrl.syncModal, 'display-none': !$ctrl.syncModal}" tabindex="-1" id="modalSync" role="dialog" aria-labelledby="modalSyncLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2 class="modal-title">Please enter your {{$ctrl.syncType}} id</h2>
+                <form name="oculusSteamSync" class="modal-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="" required
+                               data-ng-model="$ctrl.oculusSteamId">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" ng-disabled="oculusSteamSync.$invalid" class="btn btn-primary"
+                                ng-click="$ctrl.syncOculusSteam()">Sync</button>
+                        <a href="" class="btn btn-save" data-ng-click="$ctrl.syncModal = false">cancel</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

@@ -98,6 +98,12 @@ class User {
         return this.deferred.promise;
     }
 
+    oculusSteamSync(data, type){
+        this.deferred = this._$q.defer();
+        this._Auth.one(`social/${type}`).customPOST(data).then(this.onSyncSuccess, this.onError);
+        return this.deferred.promise;
+    }
+
     signUp(fields = {}) {
         return this.create(fields).then((res)=> {
             this._JWT.save(res.token);

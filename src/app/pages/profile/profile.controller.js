@@ -12,7 +12,7 @@ class ProfileCtrl {
         this.formData = {};
 
         this.showLoader = false;
-
+        this.syncModal = false;
         this.patterns = {
             email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         };
@@ -116,6 +116,28 @@ class ProfileCtrl {
 
         });
     }
+
+    openSyncModal(type){
+       this.syncModal = true;
+       this.syncType = type;
+
+    }
+
+    syncOculusSteam(){
+        let requestData = {
+            email:this.currentUser.email,
+            id:this.oculusSteamId
+        };
+        this._User.oculusSteamSync(requestData, this.syncType)
+            .then(user=>{
+                this.currentUser[this.syncType] = true;
+                delete this.syncType;
+                this.syncModal = false;
+            }, (err)=>{
+                console.log(err);
+            })
+    }
+
 
     updatePassword (isValidForm = true) {
         if (!isValidForm) {
