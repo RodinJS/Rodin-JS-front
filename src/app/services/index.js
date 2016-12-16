@@ -28,5 +28,7 @@ servicesModule.factory('SocketService', SocketService);
 import AnalyserService from './analyser.service';
 servicesModule.factory('Analyser', AnalyserService);
 
+import VCSService from './vcs.service';
+servicesModule.service('VCS', VCSService);
 
 export default servicesModule;
