@@ -1,8 +1,9 @@
 class EditProjectCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore, $window) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore, $window, Notification) {
         'ngInject';
         $window.scrollTo(0, 0);
 
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this.Project = Project;
         this.PUBLIC = AppConstants.PUBLIC;
@@ -46,6 +47,9 @@ class EditProjectCtrl {
                 this.finaliseRequest();
             },
             err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
                 this.$state.go('landing.error');
             }
         )
@@ -68,6 +72,9 @@ class EditProjectCtrl {
                 this.showLoader = false;
             },
             err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
                 this.projectPublic = !this.projectPublic;
                 this.project.public = this.projectPublic.toString();
                 this.showLoader = false;
@@ -80,10 +87,14 @@ class EditProjectCtrl {
 
         this.Project.remove(this.project._id).then(
             data => {
+                this.Notification.success('Project deleted');
                 this.showLoader = false;
                 this.$state.go('app.dashboard');
             },
             err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
                 this.showLoader = false;
             }
         );
@@ -96,11 +107,15 @@ class EditProjectCtrl {
         this.showLoader = true;
         this.Project.update(this.project._id, projectInfo).then(
             data => {
+                this.Notification.success('Project updated');
                 this.eventBus.emit(this.eventBus.project.SET, data);
                 this.showLoader = false;
             },
             err => {
                 this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         )
     }
@@ -119,12 +134,13 @@ class EditProjectCtrl {
                     };
                     reader.readAsDataURL(file);
                 }, (result) => {
-                    alert('Unsupported image type');
+                    this.Notification.error('Unsupported image type');
                 });
             }
 
         } else {
-            alert("It seems your browser doesn't support FileReader.");
+            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
+
         }
     }
 

@@ -578,3 +578,12 @@ div{
 .word-wrap {
   word-wrap: break-word;
 }
+
+body{
+  .ui-notification{
+    width: auto;
+    min-width:100px;
+    font-size:14px;
+    text-transform: capitalize;
+  }
+}

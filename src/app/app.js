@@ -27,6 +27,7 @@ import 'restangular/dist/restangular.min';
 import 'angular-bootstrap/ui-bootstrap.min';
 import 'angular-ui-switch/angular-ui-switch.min';
 import 'angular-ui-tinymce/src/tinymce';
+import 'angular-ui-notification/dist/angular-ui-notification';
 import 'ng-tags-input/ng-tags-input.min';
 
 import 'app/components/wysiwyg/bootstrap-colorpicker-module'
@@ -63,8 +64,8 @@ const requires = [
   'app.filters',
   'uiSwitch',
   'ngTagsInput',
-  'wysiwyg.module'
-  //'angularMoment'
+  'wysiwyg.module',
+  'ui-notification'
 ];
 
 // Mount on window for testing

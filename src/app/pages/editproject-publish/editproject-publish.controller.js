@@ -1,7 +1,8 @@
 class EditProjectPublishCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, moment) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, moment, Notification) {
         'ngInject';
 
+        this.Notification = Notification;
         this._moment = moment;
         this.appName = AppConstants.appName;
         this.domain = AppConstants.SITE;
@@ -45,6 +46,9 @@ class EditProjectPublishCtrl {
             },
             err => {
                 this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         );
     }
@@ -59,6 +63,9 @@ class EditProjectPublishCtrl {
             },
             err => {
                 this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         )
     }
@@ -67,10 +74,13 @@ class EditProjectPublishCtrl {
         if(!this.rollBackDate) return;
         this.Project.rollBack(this.projectId, {date:this.rollBackDate}).then(
             data => {
+                this.Notification.success(`Project rolled back to ${this._moment.unix(parseInt(this.rollBackDate)/1000).format('YYYY-MM-DD HH:mm:ss')}`);
                 this.modals.rollBack = false;
             },
             err => {
-
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         )
     }
@@ -89,6 +99,9 @@ class EditProjectPublishCtrl {
             },
             err => {
                 this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         )
     }
@@ -99,10 +112,14 @@ class EditProjectPublishCtrl {
         this.showLoader = true;
         this.Project.updatePublish(this.projectId).then(
             data => {
+                this.Notification.success('Project updated');
                 this.getProject();
             },
             err => {
                 this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         )
     }
@@ -110,9 +127,13 @@ class EditProjectPublishCtrl {
     unpublish() {
         this.Project.unPublish(this.projectId).then(
             data => {
+                this.Notification.success('Project unpublished');
                 this.getProject();
             },
             err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
                 this.showLoader = false;
             }
         );
