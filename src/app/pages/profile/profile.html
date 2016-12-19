@@ -27,6 +27,48 @@
                 </ul>
             </div>
 
+            <div class="section section-account-details ">
+                <h2 class="section-title">Account Details</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table main-table">
+                            <tbody>
+                            <tr>
+                                <td class="text-primary"><span>Account Created</span>
+                                </td>
+                                <td class="text-primary">{{$ctrl.currentUser.creationDate | date : 'MMMM dd yyyy'}}<span></span>
+                                </td>
+                            </tr>
+                            <!--<tr>-->
+                            <!--<td class="text-primary"><span>Total number of exports</span>-->
+                            <!--</td>-->
+                            <!--<td class="text-primary">42<span></span>-->
+                            <!--</td>-->
+                            <!--</tr>-->
+                            <tr>
+                                <td class="text-primary"><span>Published projects</span>
+                                </td>
+                                <td class="text-primary">{{$ctrl.currentUser.projects.published}}<span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Unpublished sites</span>
+                                </td>
+                                <td class="text-primary">{{$ctrl.currentUser.projects.unpublished}}<span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Storage Used (Sites)</span>
+                                </td>
+                                <td class="text-primary">{{$ctrl.currentUser.usedStorage | bytes: 'MB'}}<span></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <div class="section section-connected-accounts">
                 <h2 class="section-title">Connected Accounts</h2>
                 <div class="row">
@@ -39,8 +81,15 @@
                                 <button type="button" ng-if="!$ctrl.currentUser.facebook"
                                         ng-click="$ctrl.fbSync()"
                                         class="btn btn-primary border-orange">Sync with Facebook</button>
-                                <div class="synced" ng-if="$ctrl.currentUser.facebook">
-                                    <i  class=" icon icon-send"></i> Synced
+                                <div class="synced row" ng-if="$ctrl.currentUser.facebook">
+                                    <div class="col-md-6">
+                                        <i  class=" icon icon-send"></i> Synced
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button"
+                                                ng-click="$ctrl.openUnSync('facebook')"
+                                                class="btn btn-primary border-orange">Unsync from Facebook</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -52,8 +101,15 @@
                                 <button type="button" ng-if="!$ctrl.currentUser.google"
                                         ng-click="$ctrl.googleSync()"
                                         class="btn btn-primary border-orange">Sync with Google</button>
-                                <div class="synced" ng-if="$ctrl.currentUser.google">
-                                    <i  class=" icon icon-send"></i> Synced
+                                <div class="synced row" ng-if="$ctrl.currentUser.google">
+                                    <div class="col-md-6">
+                                        <i  class=" icon icon-send"></i> Synced
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button"
+                                                ng-click="$ctrl.openUnSync('google')"
+                                                class="btn btn-primary border-orange">Unsync from Google</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -65,8 +121,15 @@
                                 <button type="button" ng-if="!$ctrl.currentUser.github"
                                         ng-click="$ctrl.gitSync()"
                                         class="btn btn-primary border-orange">Sync with Github</button>
-                                <div class="synced" ng-if="$ctrl.currentUser.github">
-                                    <i  class=" icon icon-send"></i> Synced
+                                <div class="synced row"  ng-if="$ctrl.currentUser.github">
+                                    <div class="col-md-6">
+                                        <i  class=" icon icon-send"></i> Synced
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button"
+                                                ng-click="$ctrl.openUnSync('github')"
+                                                class="btn btn-primary border-orange">Unsync from Github</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,8 +141,15 @@
                                 <button type="button" ng-if="!$ctrl.currentUser.oculus"
                                         ng-click="$ctrl.openSyncModal('oculus')"
                                         class="btn btn-primary border-orange">Sync with Oculus</button>
-                                <div class="synced" ng-if="$ctrl.currentUser.oculus">
-                                    <i  class=" icon icon-send"></i> Synced
+                                <div class="synced row" ng-if="$ctrl.currentUser.oculus">
+                                    <div class="col-md-6">
+                                        <i  class=" icon icon-send"></i> Synced
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button"
+                                                ng-click="$ctrl.openUnSync('oculus')"
+                                                class="btn btn-primary border-orange">Unsync from Oculus</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -91,8 +161,15 @@
                                 <button type="button" ng-if="!$ctrl.currentUser.steam"
                                         ng-click="$ctrl.openSyncModal('steam')"
                                         class="btn btn-primary border-orange">Sync with Steam</button>
-                                <div class="synced" ng-if="$ctrl.currentUser.steam">
-                                    <i  class=" icon icon-send"></i> Synced
+                                <div class="synced row" ng-if="$ctrl.currentUser.steam">
+                                    <div class="col-md-6">
+                                        <i  class=" icon icon-send"></i> Synced
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button"
+                                                ng-click="$ctrl.openUnSync('steam')"
+                                                class="btn btn-primary border-orange">Unsync from Steam</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +313,7 @@
                     </div>
                 </form>
 
-                <div class="section section-password">
+                <div class="section section-password last-section">
                     <h2 class="section-title">Change Password</h2>
                     <div class="row">
                         <div class="col-md-6">
@@ -292,47 +369,6 @@
                     </div>
                 </div>
 
-                <div class="section section-account-details last-section">
-                    <h2 class="section-title">Account Details</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <table class="table main-table">
-                                <tbody>
-                                <tr>
-                                    <td class="text-primary"><span>Account Created</span>
-                                    </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.creationDate | date : 'MMMM dd yyyy'}}<span></span>
-                                    </td>
-                                </tr>
-                                <!--<tr>-->
-                                    <!--<td class="text-primary"><span>Total number of exports</span>-->
-                                    <!--</td>-->
-                                    <!--<td class="text-primary">42<span></span>-->
-                                    <!--</td>-->
-                                <!--</tr>-->
-                                <tr>
-                                    <td class="text-primary"><span>Published projects</span>
-                                    </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.projects.published}}<span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-primary"><span>Unpublished sites</span>
-                                    </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.projects.unpublished}}<span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-primary"><span>Storage Used (Sites)</span>
-                                    </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.usedStorage | bytes: 'MB'}}<span></span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -342,7 +378,7 @@
 </div>
 
 
-<div class="modal model-confirm" ng-class="{'display-block': $ctrl.syncModal, 'display-none': !$ctrl.syncModal}" tabindex="-1" id="modalSync" role="dialog" aria-labelledby="modalSyncLabel">
+<div class="modal model-confirm" close-modal="sync"   ng-class="{'display-block': $ctrl.modal.sync, 'display-none': !$ctrl.modals.sync}" tabindex="-1" id="modalSync" role="dialog" aria-labelledby="modalSyncLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -355,10 +391,26 @@
                     <div class="form-actions">
                         <button type="button" ng-disabled="oculusSteamSync.$invalid" class="btn btn-primary"
                                 ng-click="$ctrl.syncOculusSteam()">Sync</button>
-                        <a href="" class="btn btn-save" data-ng-click="$ctrl.syncModal = false">cancel</a>
+                        <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.sync = false">cancel</a>
 
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal model-confirm" close-modal="unsync"  ng-class="{'display-block': $ctrl.modals.unsync, 'display-none': !$ctrl.modals.unsync}" tabindex="-1" id="modalUnSync" role="dialog" aria-labelledby="modalSyncLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2 class="modal-title">Unsync from {{$ctrl.unSyncType}}</h2>
+                <h3>Are you sure want to unsync?</h3>
+                <div class="form-actions">
+                    <button type="button"  class="btn btn-primary"
+                            ng-click="$ctrl.confirmUnsync()">Unsync</button>
+                    <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.unsync = false">cancel</a>
+
+                </div>
             </div>
         </div>
     </div>

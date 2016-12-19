@@ -82,6 +82,7 @@ function CustomInput($timeout) {
         restrict: 'A',
         link: function (scope, element, attrs, ngModel) {
             let dirty = false;
+            let searcDirty = true;
             const $elem = $(element);
             const $i = $elem.find('i.search');
             const $input = $elem.find('input');
@@ -104,7 +105,10 @@ function CustomInput($timeout) {
                 }
             });
 
-            $i.on('click', () => dirty ? $input.blur() : $input.focus());
+            $i.on('click', () => {
+                searcDirty = !searcDirty;
+                searcDirty ? $input.blur() : $input.focus()
+            });
 
             scope.$watch(() => $input.val(), (newValue, oldValue) => {
                 if(newValue !== '' && !dirty) {
@@ -115,5 +119,23 @@ function CustomInput($timeout) {
     };
 }
 
+function CloseModal(){
+    'ngInject';
 
-export default {limitTo, Compile, CheckForUnique, ShowAuthed, CustomInput};
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs, ngModel) {
+            let $elem = element;
+            $elem.on('click', (e)=>{
+                const hasClassModal = angular.element(e.target).hasClass('modal');
+                if(!hasClassModal) return;
+                scope.$ctrl.modals[attrs.closeModal] = false;
+                scope.$apply();
+            })
+
+        }
+    };
+}
+
+
+export default {limitTo, Compile, CheckForUnique, ShowAuthed, CustomInput, CloseModal};

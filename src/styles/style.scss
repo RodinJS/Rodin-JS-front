@@ -660,3 +660,14 @@ h3{
     }
   }
 }
+
+.projects-container{
+  &.project-create{
+    h3{
+      &.section-title{
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+}

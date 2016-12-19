@@ -34,7 +34,7 @@
     <div class="loader" data-ng-if="$ctrl.showLoader"></div>
 </div>
 
-<div class="modal" ng-class="{'display-block': $ctrl.modals.updateVersion, 'display-none': !$ctrl.modals.updateVersion}">
+<div class="modal" close-modal="updateVersion" ng-click="$ctrl.modals.updateVersion = false" ng-class="{'display-block': $ctrl.modals.updateVersion, 'display-none': !$ctrl.modals.updateVersion}">
     <div class="modal-content">
         <span class="close" data-ng-click="$ctrl.modals.updateVersion = false"> ×</span>
         <div class="modal-header">
@@ -57,7 +57,7 @@
     </div>
 </div>
 
-<div class="modal" ng-class="{'display-block': $ctrl.modals.rollBack, 'display-none': !$ctrl.modals.rollBack}">
+<div class="modal" close-modal="rollBack" ng-click="$ctrl.modals.rollBack = false" ng-class="{'display-block': $ctrl.modals.rollBack, 'display-none': !$ctrl.modals.rollBack}">
     <div class="modal-content">
         <span class="close" data-ng-click="$ctrl.modals.rollBack = false"> ×</span>
         <div class="modal-header">
@@ -84,7 +84,7 @@
     </div>
 </div>
 
-<div class="modal" ng-class="{'display-block': $ctrl.modals.unpublish, 'display-none': !$ctrl.modals.unpublish}">
+<div class="modal" close-modal="unpublish"  ng-class="{'display-block': $ctrl.modals.unpublish, 'display-none': !$ctrl.modals.unpublish}">
     <div class="modal-content">
         <span class="close" data-ng-click="$ctrl.modals.unpublish = false"> ×</span>
         <div class="modal-header">

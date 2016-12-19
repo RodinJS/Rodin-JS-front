@@ -193,7 +193,7 @@
     <div class="loader" data-ng-if="$ctrl.showLoader"></div>
 </div>
 
-<div class="modal" ng-class="{'display-block': $ctrl.modals.password, 'display-none': !$ctrl.modals.password}">
+<div class="modal" close-modal="password"  ng-class="{'display-block': $ctrl.modals.password, 'display-none': !$ctrl.modals.password}">
     <div class="modal-content">
         <span class="close" data-ng-click="$ctrl.modals.password = false"> ×</span>
         <div class="modal-header">

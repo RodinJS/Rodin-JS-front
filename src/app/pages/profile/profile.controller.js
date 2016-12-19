@@ -1,5 +1,5 @@
 class ProfileCtrl {
-    constructor (AppConstants, User, $scope, Validator, Error, $stateParams, $state, $window, Notification) {
+    constructor(AppConstants, User, $scope, Validator, Error, $stateParams, $state, $window, Notification) {
         'ngInject';
         this.Notification = Notification;
         this.appName = AppConstants.appName;
@@ -22,6 +22,11 @@ class ProfileCtrl {
             confirm: ""
         };
 
+        this.modals = {
+            sync:false,
+            unsync:false
+        }
+
         this.passwordChangeResponse = '';
 
         FB.init({
@@ -39,18 +44,18 @@ class ProfileCtrl {
             });
         });
 
-        if($stateParams.token && $stateParams.id && this.currentUser) {
+        if ($stateParams.token && $stateParams.id && this.currentUser) {
 
             let data = {
-                id:$stateParams.id,
-                token:$stateParams.token,
-                email:this.currentUser.email,
-                sync:true
+                id: $stateParams.id,
+                token: $stateParams.token,
+                email: this.currentUser.email,
+                sync: true
             };
 
             this._User.gitAuth(data).then((res) => {
                 this.currentUser.github = true;
-                $state.go('app.profile', {token:undefined, id:undefined});
+                $state.go('app.profile', {token: undefined, id: undefined});
 
             }, (err) => {
                 this.isSubmitting = false;
@@ -61,7 +66,7 @@ class ProfileCtrl {
 
     }
 
-    updateProfile () {
+    updateProfile() {
         this.showLoader = true;
         let currentUser = {
             email: this.currentUser.email,
@@ -69,7 +74,9 @@ class ProfileCtrl {
             username: this.currentUser.username
         };
 
-        currentUser.profile.skills = currentUser.profile.skills.map(i => i.text);
+        if (currentUser.profile.skills) {
+            currentUser.profile.skills = currentUser.profile.skills.map(i => i.text);
+        }
 
         this._User.update(null, currentUser).then(
             data => {
@@ -88,13 +95,13 @@ class ProfileCtrl {
         }, (err) => {
             this.isSubmitting = false;
             this.errors = err;
-            _.each(err, (val, key)=>{
+            _.each(err, (val, key) => {
                 this.Notification.error(val.fieldName);
             });
         })
     }
 
-    gitSync(){
+    gitSync() {
         this._$window.location.href = `https://github.com/login/oauth/authorize?client_id=${this._Constants.GITHUB}&redirect_uri=${this._Constants.API}/git/sync&scope=user%20repo`;
     }
 
@@ -116,7 +123,7 @@ class ProfileCtrl {
             }, (err) => {
                 this.isSubmitting = false;
                 this.errors = err;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             })
@@ -124,33 +131,38 @@ class ProfileCtrl {
         });
     }
 
-    openSyncModal(type){
-       this.syncModal = true;
-       this.syncType = type;
+    openSyncModal(type) {
+        this.modals.sync = true;
+        this.syncType = type;
 
     }
 
-    syncOculusSteam(){
+    openUnSync(type){
+        this.modals.unsync = true;
+        this.unSyncType = type;
+    }
+
+    syncOculusSteam() {
         let requestData = {
-            email:this.currentUser.email,
-            id:this.oculusSteamId
+            email: this.currentUser.email,
+            id: this.oculusSteamId
         };
         this._User.oculusSteamSync(requestData, this.syncType)
-            .then(user=>{
+            .then(user => {
                 this.currentUser[this.syncType] = true;
                 delete this.syncType;
-                this.syncModal = false;
+                this.modals.unsync = false;
                 this.Notification.success(`${this.syncType} synced`)
-            }, (err)=>{
+            }, (err) => {
                 console.log(err);
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             })
     }
 
 
-    updatePassword (isValidForm = true) {
+    updatePassword(isValidForm = true) {
         if (!isValidForm) {
             return;
         }
@@ -191,7 +203,7 @@ class ProfileCtrl {
         }
     }
 
-    confirmPassword () {
+    confirmPassword() {
         this._$scope.changePasswordForm.confirmPassword.$setValidity('match', this.newPassword.password == this.newPassword.confirm);
     }
 }

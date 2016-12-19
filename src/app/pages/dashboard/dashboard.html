@@ -9,7 +9,7 @@
 				<div class="form-wrapper pull-right search-form">
 					<div class="row">
 						<div class="form-group pass-group" custom-input>
-							<input type="text" class="form-control" placeholder="" data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
+							<input type="text" class="form-control dashboard-search" placeholder="" data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
 							<label class="control-label float-label">Name, Description or Meta tags</label>
 							<i class="icon icon-search search"></i>
 						</div>
@@ -103,7 +103,7 @@
 </div>
 
 
-<div class="modal" data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
+<div class="modal" close-modal="share" data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
 	<div class="modal-content">
 		<div class="modal-header">
 			<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>
@@ -133,7 +133,7 @@
 	</div>
 </div>
 
-<div class="modal model-confirm" ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+<div class="modal model-confirm" close-modal="remove" ng-click="$ctrl.modals.remove = false" ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>

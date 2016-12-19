@@ -193,7 +193,7 @@
 
 </div>
 
-<div class="modal model-confirm" ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+<div class="modal model-confirm" close-modal="remove"  ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
@@ -218,7 +218,7 @@
     </div>
 </div>
 
-<div class="modal" ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
+<div class="modal" close-modal="share" ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.share = false">×</span>

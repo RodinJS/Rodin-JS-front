@@ -73,11 +73,16 @@ class DashboardCtrl {
     deleteProject() {
         this.showLoader = true;
 
+        let projectIndex = _.findIndex(this.projects, (project)=>{
+            return project._id === this.currentModalProject._id;
+        });
+
         this.Project.remove(this.currentModalProject._id).then(
             data => {
                 this.modals.remove = false;
                 this.Notification.success(`Project ${this.currentModalProject.name} deleted`);
                 this.showLoader = false;
+                this.projects.splice(projectIndex, 1);
             },
             err => {
                 _.each(err, (val, key)=>{
