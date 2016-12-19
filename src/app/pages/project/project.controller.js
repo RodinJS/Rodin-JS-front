@@ -63,6 +63,8 @@ class ProjectCtrl {
                     _.each(err, (val, key)=>{
                         this.Notification.warning(val.fieldName);
                     });
+                    this.Notification.success("Project created");
+                    this.$state.go('app.dashboard');
                     /// TODO: stex petqa cuc tal error vorovhetev github repo chi sarqve
                     this.showLoader = false;
                 });

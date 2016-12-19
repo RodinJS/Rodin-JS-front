@@ -624,6 +624,7 @@ h3{
       }
     }
     .item-content-wrapper{
+      cursor: pointer;
       &.create-project{
         cursor: pointer;
         .item-description{
@@ -644,6 +645,15 @@ h3{
         }
         .dashboard-content-img{
           border :1px dashed #ff9a2b;
+        }
+      }
+      &:hover{
+        .item-description{
+          h5{
+            a{
+              border-bottom: 1px solid #ff9a2b;
+            }
+          }
         }
       }
 
