@@ -12,8 +12,8 @@ const AppConstants = {
 		COOKIEDOMAIN: ['localhost', '.rodin.space'],
 		SOCKET: 'http://localhost:4000/api',
         //SOCKET: `https://ss.rodin.space/api`,
-        // API: 'http://localhost:3000/api',
-		API: 'https://api.rodin.space/api',
+        API: 'http://localhost:3000/api',
+		//API: 'https://api.rodin.space/api',
 		// API: 'http://192.168.0.33:3000/api', // Xcho
 		SITE: 'http://localhost:8585/',
 		PREVIEW: 'https://api.rodin.space/preview/',
@@ -172,6 +172,10 @@ const AppConstants = {
 		"327": {
 			"message": "SOMETHING_WENT_WRONG",
 			"field": ""
+		},
+		"350":{
+        	message:"NO_GITHUB_ACCOUNT",
+			field:""
 		},
 		"601": {
 			"message": "UNKNOWN_SOCKET_CHANNEL",
