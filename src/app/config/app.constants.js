@@ -11,14 +11,13 @@ const AppConstants = {
   dev: {
     COOKIEDOMAIN: ['localhost', '.rodin.space'],
     SOCKET: 'https://ss.rodin.space/api',
-    //SOCKET: `https://ss.rodin.space/api`,
     // API: 'http://localhost:3000/api',
     API: 'https://api.rodin.space/api',
     // API: 'http://192.168.0.33:3000/api', // Xcho
     SITE: 'http://localhost:8585/',
-    PREVIEW: 'https://api.rodin.space/preview/',
-    PUBLIC: 'https://api.rodin.space/public/',
-    PUBLISH: 'https://api.rodin.space/publish',
+    PREVIEW: 'https://rodin.space/projects/',
+    PUBLIC: 'https://rodin.space/public/',
+    PUBLISH: 'https://rodin.space',
     EDITOR: 'http://localhost:8000/#/',
     FB: '216982868736046', //'216861662081500' '216982868736046'
     GITHUB: '2350afe57c144672285b',
@@ -29,7 +28,7 @@ const AppConstants = {
     API: `${window.location.protocol}//api.${window.extractDomain()}/api`,
     SOCKET: `${window.location.protocol}//ss.rodin.space/api`,
     SITE: `${window.location.protocol}//${window.extractDomain()}/`,
-    PREVIEW: `${window.location.protocol}//${window.extractDomain()}/dev/`,
+    PREVIEW: `${window.location.protocol}//${window.extractDomain()}/projects/`,
     PUBLIC: `${window.location.protocol}//${window.extractDomain()}/public/`,
     PUBLISH: `${window.location.protocol}//${window.extractDomain()}`,
     EDITOR: `${window.location.protocol}//editor.${window.extractDomain()}/`,
