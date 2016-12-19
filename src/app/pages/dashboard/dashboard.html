@@ -65,12 +65,28 @@
 							</div>
 						</div>
 						<a href="" class="dashboard-item-link">
-							<h1 class="box-title"><i data-ng-if="!project.public" class="icon icon-lock"></i>{{project.name}}
-							</h1>
+							<h3 class="box-title"><i data-ng-if="!project.public" class="icon icon-lock"></i>{{project.name}}
+							</h3>
 							<p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
 							</p>
 						</a>
 					</div>
+				</div>
+				<div class="col-md-3">
+                    <div class="dashboard-content-item">
+                        <div class="item-content-wrapper create-project" data-ui-sref="app.project">
+                           <div class="dashboard-content-img">
+                           </div>
+                            <div class="item-description">
+                                <a class="btn-add"><i class="icon icon-add"></i></a>
+                            </div>
+                        </div>
+                        <a href="" class="dashboard-item-link">
+                            <h3 class="box-title">
+                                Create new Project
+                            </h3>
+                        </a>
+                    </div>
 				</div>
 			</div>
 		</div>

@@ -231,7 +231,6 @@
                         if(event.keyCode != 8){
                             var html = textarea.html();
                             let pureText = html.replace(/<[^>]*>/g, "");
-                            console.log(pureText.length);
                             if(pureText.length >= 256){
                                 event.preventDefault();
                             }

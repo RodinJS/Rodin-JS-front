@@ -1,7 +1,7 @@
 class ProjectCtrl {
     constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User, VCS, Notification, $timeout) {
         'ngInject';
-
+        this._$scope = $scope;
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this.editorUrl = AppConstants.EDITOR;
@@ -12,11 +12,10 @@ class ProjectCtrl {
         this.$state = $state;
         this.currentUser = User.current;
 
-        $scope.projectDescription = "Project description.";
+        $scope.projectDescription = "";
 
         this.project = {
             name: "",
-            description: $scope.projectDescription,
             templateOf: "empty",
             tags: []
         };
@@ -49,7 +48,8 @@ class ProjectCtrl {
         angular.extend(projectInfo, this.project);
         projectInfo.templateId = this.projectTemplates.selected._id;
         projectInfo.tags = projectInfo.tags.map(i => i.text);
-
+        projectInfo.description = this._$scope.projectDescription;
+        console.log(projectInfo);
         this.Project.create(projectInfo).then(
             data => {
                 this.VCS.create(data._id, {

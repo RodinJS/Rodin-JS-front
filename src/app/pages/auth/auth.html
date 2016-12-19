@@ -54,11 +54,16 @@
 							<div class="row">
 								<div class="center-block">
 									<div class="btn-wrapper">
-										<button type="submit" class="btn btn-primary border-orange">Sign in</button>
+										<button type="submit" style="margin-right:10px" class="btn btn-primary border-orange">Sign in</button>
 										<button type="button" ui-sref="landing.register" class="btn btn-primary border-orange">Register</button>
-										<button type="button" ui-sref="landing.resetpassword" class="btn btn-primary border-orange">Forgot password</button>
 									</div>
 								</div>
+								<div class="center-block">
+                                    <div class="btn-wrapper">
+                                        <a  ui-sref="landing.resetpassword" class="btn link">Forgot password</a>
+                                    </div>
+                                </div>
+
 								<!--<div class="center-block">
 									<div class="btn-wrapper">
 										<button type="button" ng-click="$ctrl.fbLogin()" class="btn btn-primary border-orange">Login via Facebook</button>

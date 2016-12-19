@@ -30,8 +30,8 @@
             </div>
             <div class="section section-switch">
                 <switch id="enabled" data-name="enabled" data-ng-change="$ctrl.toggleStatus()" data-ng-model="$ctrl.projectPublic" data-on="ON" data-off="OFF" class="green"></switch>
-                <h5 class="switch-box-title">Showcase This Space</h5>
-                <p class="description text-small text-down">Showcased sites appear in your public profile.</p>
+                <h5 class="switch-box-title">Make {{$ctrl.project.public === 'true' ? 'Private' : 'Public'}}</h5>
+                <p class="description text-small text-down">Public project will be visible for others</p>
                 <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
                     <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
                         {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
