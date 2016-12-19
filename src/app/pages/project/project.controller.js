@@ -61,7 +61,7 @@ class ProjectCtrl {
                     this.$state.go('app.dashboard');
                 }, err=>{
                     _.each(err, (val, key)=>{
-                        this.Notification.error(val.fieldName);
+                        this.Notification.warning(val.fieldName);
                     });
                     /// TODO: stex petqa cuc tal error vorovhetev github repo chi sarqve
                     this.showLoader = false;
