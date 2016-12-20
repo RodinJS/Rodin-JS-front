@@ -33,7 +33,6 @@ class DashboardCtrl {
 			data => {
 				this.showLoader = false;
 				this.projects = data;
-                console.log(this.projects);
             },
 			err => {
                 this.showLoader = false;

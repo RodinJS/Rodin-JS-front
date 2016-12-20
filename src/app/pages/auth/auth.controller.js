@@ -1,13 +1,17 @@
 class AuthCtrl {
-    constructor(User, $state, AppConstants, $window) {
+    constructor(User, $state, AppConstants, $window, Notification) {
         'ngInject';
         this._Constants = AppConstants;
         this._User = User;
         this._$state = $state;
         this._$window = $window;
-
+        this.Notification = Notification;
         this.title = $state.current.title;
         this.authType = $state.current.name.replace('landing.', '');
+
+        this.patterns = {
+            email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        };
 
         FB.init({
             appId: AppConstants.FB,
@@ -38,19 +42,30 @@ class AuthCtrl {
                     this.isSubmitting = false;
                     this.errors = err;
                 })
-        } else if (this.authType === "register") {
+        }
+        else if (this.authType === "register") {
             this._User.signUp(this.formData).then(
-                (res) => {
+                res=>{
+
+                    this.isSubmitting = false;
+                    if(res[0]){
+                        _.each(res, (val, key) => {
+                            this.Notification.error(val.fieldName);
+                        });
+                        return;
+                    }
                     this._$state.go('app.dashboard');
                 },
-                (err) => {
+                err=>{
                     this.isSubmitting = false;
-                    this.errors = err;
-                })
-
-        } else if (this.authType === "forgot") {
+                    console.log(err);
+                }
+            );
+        }
+        else if (this.authType === "forgot") {
             console.log("forgot");
-        } else {
+        }
+        else {
             this.isSubmitting = false;
         }
     }
