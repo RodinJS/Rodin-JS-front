@@ -1,7 +1,7 @@
 {
   "name": "Rodin-JS-front",
-  "version": "0.0.1",
-  "description": "Build system for Rodin-JS-front project, based on Gulp.js",
+  "version": "0.1.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,22 +9,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grigorkh/Rodin-JS-front.git"
+    "url": "git+https://github.com/RodinJS/Rodin-JS-front.git"
   },
   "keywords": [
     "Rodin",
+    "Rodin dashboard",
+    "dashboard",
     "Rodinjs",
     "gulp",
     "library",
     "vr",
     "ar"
   ],
-  "author": "Grigor Khachatryan <g@yvn.io>",
+  "author": "RodinVR <suport@rodin.io>",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/grigorkh/Rodin-JS-front/issues"
+    "url": "https://github.com/RodinJS/Rodin-JS-front/issues"
   },
-  "homepage": "https://github.com/grigorkh/Rodin-JS-front#readme",
+  "homepage": "https://github.com/RodinJS/Rodin-JS-front#readme",
   "devDependencies": {
     "babel-core": "^6.16.0",
     "babel-plugin-angularjs-annotate": "^0.5.1",
@@ -50,5 +52,25 @@
     "gulp-uglify": "^2.0.0",
     "gulp-watch": "^4.3.9",
     "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "angular": "1.5.9",
+    "angular-animate": "1.5.9",
+    "angular-ui-bootstrap": "^2.3.1",
+    "angular-cookies": "1.5.9",
+    "angular-sanitize": "1.5.9",
+    "angular-storage": "0.0.15",
+    "angular-touch": "1.5.9",
+    "angular-ui-notification": "^0.2.0",
+    "angular-ui-router": "^0.3.2",
+    "angular-ui-switch": "^0.1.1",
+    "bootstrap-sass": "^3.3.7",
+    "restangular": "^1.5.2",
+    "font-awesome": "^4.7.0",
+    "socket.io-client": "^1.7.2",
+    "jquery-form": "git+https://github.com/malsup/form#master",
+    "ng-tags-input": "^3.1.1",
+    "moment": "^2.17.1",
+    "systemjs": "^0.19.41"
   }
 }

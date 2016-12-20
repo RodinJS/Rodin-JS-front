@@ -5,8 +5,7 @@ import './helpers';
 
 import angular from 'angular/index';
 import 'jquery/dist/jquery.min';
-import '/scripts/assists/jquery.form';
-import 'tinymce/tinymce.min.js';
+import '/scripts/vendor/assists/jquery.form';
 import moment from 'moment/min/moment.min.js';
 
 
@@ -21,14 +20,13 @@ import 'angular-touch/angular-touch.min';
 import 'angular-cookies/angular-cookies.min';
 
 import 'angular-ui-router/release/angular-ui-router.min';
-import 'a0-angular-storage/dist/angular-storage.min';
-import 'lodash/dist/lodash.min';
+import 'angular-storage/dist/angular-storage.min';
+import 'lodash/lodash.min';
 import 'restangular/dist/restangular.min';
-import 'angular-bootstrap/ui-bootstrap.min';
+import 'angular-ui-bootstrap/dist/ui-bootstrap-tpls';
 import 'angular-ui-switch/angular-ui-switch.min';
-import 'angular-ui-tinymce/src/tinymce';
 import 'angular-ui-notification/dist/angular-ui-notification';
-import 'ng-tags-input/ng-tags-input.min';
+import 'ng-tags-input/build/ng-tags-input.min';
 
 import 'app/components/wysiwyg/bootstrap-colorpicker-module'
 import 'app/components/wysiwyg/angular-wysiwyg'
