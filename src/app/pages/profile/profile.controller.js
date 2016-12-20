@@ -149,18 +149,36 @@ class ProfileCtrl {
         };
         this._User.oculusSteamSync(requestData, this.syncType)
             .then(user => {
+                this.Notification.success(`${this.syncType} synced`);
                 this.currentUser[this.syncType] = true;
                 delete this.syncType;
-                this.modals.unsync = false;
-                this.Notification.success(`${this.syncType} synced`)
+                this.modals.sync = false;
             }, (err) => {
-                console.log(err);
                 _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             })
     }
 
+    confirmUnsync(){
+        let fields = {
+            username: this.currentUser.username,
+            socialName : this.unSyncType
+        };
+        this._User.unSync(null, fields).then(
+            data => {
+                this.Notification.success(`${this.unSyncType} unsynced`);
+                this.currentUser[this.unSyncType] = false;
+                delete this.unSyncType;
+                this.modals.unsync = false;
+            },
+            err => {
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        );
+    }
 
     updatePassword(isValidForm = true) {
         if (!isValidForm) {

@@ -66,7 +66,7 @@ class Project {
 
     update(projectId = null, fields = {}) {
         let Analyser = new this._Analyser();
-        this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags']))
+        this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName']))
             .then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }

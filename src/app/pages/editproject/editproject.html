@@ -1,7 +1,7 @@
 <div class="page__wrapper">
 
     <div class="main-container">
-        <h1 class="main-title">Space/<i class="icon icon-lock"></i><span class="user-name">{{$ctrl.project.name}}</span></h1>
+        <h1 class="main-title">Space/<i class="icon icon-lock"></i><span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
         <div class="page-content">
             <div class="content-navbar">
                 <ul class="navbar-list">
@@ -30,12 +30,16 @@
             </div>
             <div class="section section-switch">
                 <switch id="enabled" data-name="enabled" data-ng-change="$ctrl.toggleStatus()" data-ng-model="$ctrl.projectPublic" data-on="ON" data-off="OFF" class="green"></switch>
-                <h5 class="switch-box-title">Make {{$ctrl.project.public === 'true' ? 'Private' : 'Public'}}</h5>
-                <p class="description text-small text-down">Public project will be visible for others</p>
+                <h5 class="switch-box-title">Public</h5>
                 <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
+                   Current version:
                     <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
                         {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
                     </a>
+                </p>
+                <p ng-if="$ctrl.project.publishedUrl" class="description text-small text-down">
+                   Published version:
+                    <a class="text-yellow" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
                 </p>
             </div>
             <div class="section section-general-setting">
@@ -43,14 +47,24 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-wrapper">
-                            <div class="form-group" custom-input>
-                                <input type="text" class="form-control" placeholder="" data-ng-model="$ctrl.project.name" disabled>
-                                <label class="control-label float-label">Space Name</label>
+                            <div class="form-group" custom-input style="margin-bottom:20px"
+                                 data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="" required
+                                       ng-click="$ctrl.displayNameFocused = true"
+                                       ng-model="$ctrl.project.displayName">
+                                <label class="control-label float-label">
+                                    Project name  <span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">is required</span>
+                                </label>
                             </div>
-                            <p class="text-small description">This is the Space title.</p>
+                            <div class="form-group" custom-input style="margin-bottom:20px">
+                                <input type="text" class="form-control" placeholder="" value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}" disabled>
+                                <label class="control-label float-label">Project url</label>
+                            </div>
                             <div class="form-group" custom-input>
                                 <tags-input max-length="32" min-length="3" class="form-control" ng-model="$ctrl.project.tags"></tags-input>
-                                <label class="control-label float-label">Metaa Tags</label>
+                                <label class="control-label float-label">Meta Tags</label>
                             </div>
                             <!--<div class="form-group" custom-input>-->
                                 <!--<input type="email" class="form-control" placeholder="" value="" ng-disabled="true">-->

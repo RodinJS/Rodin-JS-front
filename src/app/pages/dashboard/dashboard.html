@@ -34,6 +34,22 @@
 				</p>
 			</div>
 			<div class="row">
+				<div class="col-md-3">
+					<div class="dashboard-content-item">
+						<div class="item-content-wrapper create-project" data-ui-sref="app.project">
+							<div class="dashboard-content-img">
+							</div>
+							<div class="item-description">
+								<a class="btn-add"><i class="icon icon-add"></i></a>
+							</div>
+						</div>
+						<a href="" class="dashboard-item-link">
+							<h3 class="box-title">
+								Create new Project
+							</h3>
+						</a>
+					</div>
+				</div>
 				<div data-ng-repeat="project in $ctrl.projects" class="col-md-3">
 					<div class="dashboard-content-item">
 						<div class="item-content-wrapper" ng-click="$ctrl.goToProject($event, $ctrl.editorUrl + project.root)">
@@ -54,9 +70,9 @@
 										</a>
 									</li>
 									<li>
-										<a data-ng-href="{{$ctrl.editorUrl + project.root}}">
-											<i class="icon icon-edit"></i>
-										</a>
+                                        <a class="icon-href" ng-class="project.public == 'true' ? 'unlocked' : 'locked'">
+                                            <i class="icon icon-lock" aria-hidden="true"></i>
+                                        </a>
 									</li>
 									<li>
                                         <a data-ui-sref="app.editproject({projectId: project._id})"><i
@@ -71,28 +87,14 @@
 							</div>
 						</div>
 						<a href="" class="dashboard-item-link">
-							<h3 class="box-title"><i data-ng-if="!project.public" class="icon icon-lock"></i>{{project.name}}
+							<h3 class="box-title">
+								<i data-ng-if="!project.public" class="icon icon-lock"></i>
+								{{project.displayName || project.name}}
 							</h3>
 							<p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
 							</p>
 						</a>
 					</div>
-				</div>
-				<div class="col-md-3">
-                    <div class="dashboard-content-item">
-                        <div class="item-content-wrapper create-project" data-ui-sref="app.project">
-                           <div class="dashboard-content-img">
-                           </div>
-                            <div class="item-description">
-                                <a class="btn-add"><i class="icon icon-add"></i></a>
-                            </div>
-                        </div>
-                        <a href="" class="dashboard-item-link">
-                            <h3 class="box-title">
-                                Create new Project
-                            </h3>
-                        </a>
-                    </div>
 				</div>
 			</div>
 		</div>

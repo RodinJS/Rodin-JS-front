@@ -8,6 +8,7 @@ class EditProjectCtrl {
         this.Project = Project;
         this.PUBLIC = AppConstants.PUBLIC;
         this.EDITOR = AppConstants.EDITOR;
+        this.previewUrl = AppConstants.PREVIEW;
         this.$state = $state;
         this.$q = $q;
         this._$scope = $scope;
@@ -34,7 +35,7 @@ class EditProjectCtrl {
             if(!this.project)
                 this.getProject();
             else
-                this.finaliseRequest();
+                this.finalizeRequest();
 
         });
     }
@@ -44,7 +45,7 @@ class EditProjectCtrl {
         this.Project.get(this.projectId, {projectSize:true}).then(
             project => {
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                this.finaliseRequest();
+                this.finalizeRequest();
             },
             err => {
                 _.each(err, (val, key)=>{
@@ -55,9 +56,10 @@ class EditProjectCtrl {
         )
     }
 
-    finaliseRequest() {
+    finalizeRequest() {
         this.project.editorUrl = this.EDITOR + this.project.root;
-        this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
+        if(this.project.publishedPublic)
+            this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
         this.projectPublic = this.project.public === 'true';
         this.showLoader = false;
     }

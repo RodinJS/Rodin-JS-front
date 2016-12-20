@@ -49,7 +49,6 @@ class ProjectCtrl {
         projectInfo.templateId = this.projectTemplates.selected._id;
         projectInfo.tags = projectInfo.tags.map(i => i.text);
         projectInfo.description = this._$scope.projectDescription;
-        console.log(projectInfo);
         this.Project.create(projectInfo).then(
             data => {
                 this.VCS.create(data._id, {

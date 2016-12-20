@@ -122,6 +122,14 @@ class User {
         return Analyser.promise;
     }
 
+    unSync(userId = null, fields = {}) {
+        let Analyser = new this._Analyser();
+
+        this._User.one(`unsync/${fields.username}/${fields.socialName}`).get().then(Analyser.resolve, Analyser.reject);
+
+        return Analyser.promise;
+    }
+
     updatePassword(fields = {}) {
         let Analyser = new this._Analyser();
 

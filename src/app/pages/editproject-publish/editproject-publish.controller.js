@@ -95,7 +95,8 @@ class EditProjectPublishCtrl {
         this.showLoader = true;
         this.Project.publish(this.projectId).then(
             data => {
-                this.getProject();
+                console.log(data);
+                this.eventBus.emit(this.eventBus.project.SET, data);
             },
             err => {
                 this.showLoader = false;
@@ -105,7 +106,6 @@ class EditProjectPublishCtrl {
             }
         )
     }
-
 
     update() {
         this.modals.updateVersion = false;
@@ -128,7 +128,7 @@ class EditProjectPublishCtrl {
         this.Project.unPublish(this.projectId).then(
             data => {
                 this.Notification.success('Project unpublished');
-                this.getProject();
+                this.eventBus.emit(this.eventBus.project.SET, data);
             },
             err => {
                 _.each(err, (val, key)=>{

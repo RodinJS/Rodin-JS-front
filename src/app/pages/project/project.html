@@ -52,32 +52,57 @@
 				</div>
 			</div>
 			<div class="section section-settings">
-				<h3 class="section-title">Settings</h3>
+				<h3 class="section-title">Project name</h3>
 				<div class="row">
 					<div class="col-md-6">
-						<div class="form-wrapper">
-							<div class="form-group fixed-placeholder-group is-focused"
-								 data-ng-class="{'has-error': !$ctrl.project.name && $ctrl.projectFocused, 'has-success': $ctrl.project.name && $ctrl.projectFocused}">
-								<input type="text"
-									   class="form-control"
-									   style="font-size:12px;padding-top:11px"
-									   ng-style="{'padding-left':$ctrl.inputPadding}"
-									   placeholder="typehereprojectname"
-									   value=""
-									   ng-minlength="3"
-									   ng-maxlength="16"
+                        <div class="form-wrapper">
+                            <div  custom-input class="form-group"
+                                 data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
+                                <input type="text"
+                                       class="form-control"
+                                       style="font-size:12px;padding-top:11px"
+                                       placeholder="Rodin VR awesome project"
+                                       value=""
+                                       ng-minlength="3"
+                                       ng-maxlength="16"
                                        limit-to="16"
-									   ng-click="$ctrl.projectFocused = true"
-									   data-ng-model="$ctrl.project.name">
-								<span class="project-path-label text-primary fixed-placeholder">{{$ctrl.previewUrl+$ctrl.currentUser.username}}/</span>
-								<label ng-if="!$ctrl.project.name && $ctrl.projectFocused" class="control-label float-label">
-									Project Name <span ng-if="!$ctrl.project.name && $ctrl.projectFocused">is required</span>
-								</label>
-							</div>
-							<p class="text-small description">Is the name of your project, which will be displayed in the URL</p>
-						</div>
+                                       ng-click="$ctrl.displayNameFocused = true"
+                                       data-ng-model="$ctrl.project.displayName">
+                                <label class="control-label float-label" ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">
+                                    Project name is required</span>
+                                </label>
+                                <label class="control-label float-label" ng-if="!$ctrl.project.displayName && !$ctrl.displayNameFocused">
+                                    Rodin VR awesome project</span>
+                                </label>
+                            </div>
+                        </div>
 					</div>
 				</div>
+                <h3 class="section-title">Project url</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-wrapper">
+                            <div class="form-group fixed-placeholder-group"
+                                 data-ng-class="{'has-error': !$ctrl.project.name && $ctrl.projectFocused, 'has-success': $ctrl.project.name && $ctrl.projectFocused}">
+                                <input type="text"
+                                       class="form-control"
+                                       style="font-size:12px;padding-top:11px"
+                                       ng-style="{'padding-left':$ctrl.inputPadding}"
+                                       placeholder="projectURL"
+                                       value=""
+                                       ng-minlength="3"
+                                       ng-maxlength="16"
+                                       limit-to="16"
+                                       ng-click="$ctrl.projectFocused = true"
+                                       data-ng-model="$ctrl.project.name">
+                                <span class="project-path-label text-primary fixed-placeholder">{{$ctrl.previewUrl+$ctrl.currentUser.username}}/</span>
+                                <label ng-if="!$ctrl.project.name && $ctrl.projectFocused" class="control-label float-label">
+                                    Project URL <span ng-if="!$ctrl.project.name && $ctrl.projectFocused">is required</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <h3 class="section-title">Meta tags</h3>
                 <div class="row">
                     <div class="col-md-6">
