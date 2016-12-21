@@ -16,8 +16,8 @@ class EditProjectPublishCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-
-        this.user = User.current;
+        this.userService = User;
+        this.user = this.userService.current;
 
         this.modals =  {
             updateVersion: false,
@@ -95,8 +95,8 @@ class EditProjectPublishCtrl {
         this.showLoader = true;
         this.Project.publish(this.projectId).then(
             data => {
-                console.log(data);
                 this.eventBus.emit(this.eventBus.project.SET, data);
+                this.userService.getMe()
             },
             err => {
                 this.showLoader = false;
@@ -129,6 +129,7 @@ class EditProjectPublishCtrl {
             data => {
                 this.Notification.success('Project unpublished');
                 this.eventBus.emit(this.eventBus.project.SET, data);
+                this.userService.getMe()
             },
             err => {
                 _.each(err, (val, key)=>{

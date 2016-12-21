@@ -53,6 +53,15 @@ class User {
         return this.deferred.promise;
     }
 
+    getMe(){
+        let Analyser = new this._Analyser();
+        this._User.one("me").get({usedStorage:true, projectsCount:true}).then((res) => {
+            this.current = res.data;
+            Analyser.resolve(res);
+        }, Analyser.reject);
+        return Analyser.promise;
+    }
+
     fbLogin(sync) {
         FB.login((response) => this.fbMe(sync), {scope: 'email'});
     }
