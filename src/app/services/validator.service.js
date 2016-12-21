@@ -2,7 +2,7 @@
  * Created by kh.levon98 on 15-Sep-16.
  */
 
-function Validator (AppConstants, $log) {
+function Validator(AppConstants, $log) {
     'ngInject';
 
     const ERRORCODES = AppConstants.ERRORCODES;
@@ -12,7 +12,7 @@ function Validator (AppConstants, $log) {
         _new = _new.split('.').map(i => parseInt(i));
 
         for (let i = 0; i < _old.length; i++) {
-            if(_new[i] === _old[i])
+            if (_new[i] === _old[i])
                 continue;
             return _new[i] > _old[i];
         }
@@ -22,7 +22,7 @@ function Validator (AppConstants, $log) {
 
     return Factory;
 
-    function Factory () {
+    function Factory() {
         const self = this;
 
         let isValidData;
@@ -53,7 +53,7 @@ function Validator (AppConstants, $log) {
          * @param data {Object}
          * @return {Boolean}
          * */
-        function validate (data) {
+        function validate(data) {
             // reset data information
             errors.splice(0, errors.length);
             isValidData = false;
@@ -81,8 +81,8 @@ function Validator (AppConstants, $log) {
                             }
                             tmp = tmp[field];
                         }
-
-                        tmp[fields.last()] = field.value;
+                        let ln = fields.length;
+                        tmp[fields[ln - 1]] = field.value;
                     } else {
                         for (let j in field.conditions) {
                             if (isValidField(j, field.conditions[j], field.value, data) && field.value !== undefined) {
@@ -96,8 +96,8 @@ function Validator (AppConstants, $log) {
                                     }
                                     tmp = tmp[field];
                                 }
-
-                                tmp[fields.last()] = field.value;
+                                let ln = fields.length;
+                                tmp[fields[ln - 1]] = field.value;
                             } else {
                                 errors.push({
                                     fieldName: field.name,
@@ -119,7 +119,7 @@ function Validator (AppConstants, $log) {
          * Is valid latest validated data.
          * @return {Boolean}
          * */
-        function isValid () {
+        function isValid() {
             return isValidData;
         }
 
@@ -128,7 +128,7 @@ function Validator (AppConstants, $log) {
          * Latest validated data errors.
          * @return {Array}
          * */
-        function getErrors () {
+        function getErrors() {
             return errors;
         }
 
@@ -137,7 +137,7 @@ function Validator (AppConstants, $log) {
          * Latest validated data.
          * @return {Object}
          * */
-        function getData () {
+        function getData() {
             return validData;
         }
 
@@ -149,7 +149,7 @@ function Validator (AppConstants, $log) {
          * @param data {Object}
          * @return {Boolean}
          * */
-        function validateHTTP (data) {
+        function validateHTTP(data) {
             // reset data information
             errors.splice(0, errors.length);
             isValidData = false;
@@ -185,7 +185,7 @@ function Validator (AppConstants, $log) {
          * Is valid latest validated data.
          * @return {Boolean}
          * */
-        function isValidHTTP () {
+        function isValidHTTP() {
             return isValidData;
         }
 
@@ -194,7 +194,7 @@ function Validator (AppConstants, $log) {
          * Latest validated data errors.
          * @return {Array}
          * */
-        function getErrorsHTTP () {
+        function getErrorsHTTP() {
             console.log(errors);
             return errors;
         }
@@ -204,7 +204,7 @@ function Validator (AppConstants, $log) {
          * Latest validated data.
          * @return {Object}
          * */
-        function getDataHTTP () {
+        function getDataHTTP() {
             return validData;
         }
 
@@ -218,7 +218,7 @@ function Validator (AppConstants, $log) {
          * @param field {Any}
          * @param allFields {Array}
          * */
-        function isValidField (type, value, field, allFields) {
+        function isValidField(type, value, field, allFields) {
             let comparedField;
             switch (type) {
                 case 'required':
