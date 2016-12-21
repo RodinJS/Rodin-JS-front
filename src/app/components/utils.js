@@ -82,7 +82,7 @@ function CustomInput($timeout) {
         restrict: 'A',
         link: function (scope, element, attrs, ngModel) {
             let dirty = false;
-            let searcDirty = true;
+            let searcDirty = false;
             const $elem = $(element);
             const $i = $elem.find('i.search');
             const $input = $elem.find('input');
@@ -106,8 +106,8 @@ function CustomInput($timeout) {
             });
 
             $i.on('click', () => {
+                searcDirty ? $input.blur() : $input.focus();
                 searcDirty = !searcDirty;
-                searcDirty ? $input.blur() : $input.focus()
             });
 
             scope.$watch(() => $input.val(), (newValue, oldValue) => {
