@@ -562,6 +562,7 @@ div {
   background-color: rgba(255, 255, 255, 0.05);
   color: #fff;
   margin-top: 5px;
+  padding: 5px;
   resize: none !important;
   &:focus {
     border-color: #ff9a2b;
@@ -689,4 +690,14 @@ h3 {
     }
   }
 
+}
+
+tags-input {
+  .host {
+    .tags {
+      input{
+        min-height: 44px;
+      }
+    }
+  }
 }
