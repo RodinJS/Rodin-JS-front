@@ -187,13 +187,15 @@
                 <h2 class="section-title">Description</h2>
                 <div class="row">
                     <div class="col-md-6">
-                        <wysiwyg textarea-id="projectDescription"
+                     <!--   <wysiwyg textarea-id="projectDescription"
                                  textarea-class="form-control"
                                  textarea-height="80px"
                                  textarea-name="projectDescription"
                                  ng-model="$ctrl.project.description"
                                  enable-bootstrap-title="true"
-                                 textarea-menu="$ctrl.wysiwygOptions"></wysiwyg>
+                                 textarea-menu="$ctrl.wysiwygOptions"></wysiwyg>-->
+                        <textarea limit-to="256" style="height: 80px; width:100%" ng-model="$ctrl.project.description" class="wysiwyg-textarea"></textarea>
+
                         <div class="btn-wrapper">
                             <button type="button" ng-click="$ctrl.update()" class="btn btn-primary">Update</button>
                         </div>

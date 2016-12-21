@@ -61,6 +61,8 @@ class EditProjectCtrl {
         this.project.editorUrl = this.EDITOR + this.project.root;
         if(this.project.publishedPublic)
             this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
+        if(this.project.description)
+            this.project.description = $('<div/>').html(this.project.description).text();
         this.projectPublic = this.project.public === 'true';
         this.showLoader = false;
     }

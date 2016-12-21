@@ -123,14 +123,15 @@
 						<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
 							<a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
 						</div>
-						<wysiwyg textarea-id="projectDescription"
+						<!--<wysiwyg textarea-id="projectDescription"
 								 textarea-class="form-control"
 								 textarea-height="80px"
                                  textarea-placeholder="Project description"
 								 textarea-name="projectDescription"
 								 ng-model="projectDescription"
 								 enable-bootstrap-title="true"
-								 textarea-menu="$ctrl.wysiwygOptions"></wysiwyg>
+								 textarea-menu="$ctrl.wysiwygOptions"></wysiwyg>-->
+                        <textarea limit-to="256" style="height: 80px; width:100%" ng-model="projectDescription" class="wysiwyg-textarea"></textarea>
 						<div class="btn-wrapper" ng-class="$ctrl.projectExist ? 'has-error' : ''">
 							<button type="button" data-ng-click="$ctrl.save()" class="btn btn-primary">Save</button>
 							<p ng-if="$ctrl.projectExist" class="help-block text-small error-help-block">
