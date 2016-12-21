@@ -1,6 +1,7 @@
 class EditProjectCtrl {
     constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore, $window, Notification) {
         'ngInject';
+
         $window.scrollTo(0, 0);
 
         this.Notification = Notification;
@@ -21,7 +22,7 @@ class EditProjectCtrl {
 
 
         this.wysiwygOptions =  [
-            ['bold', 'italic', 'underline', 'ordered-list', 'unordered-list', 'font-size', 'link']
+            []
         ];
 
         this.modals = {
@@ -107,6 +108,7 @@ class EditProjectCtrl {
         angular.extend(projectInfo, this.project);
         projectInfo.tags = projectInfo.tags.map(i => i.text);
         this.showLoader = true;
+        console.log(projectInfo);
         this.Project.update(this.project._id, projectInfo).then(
             data => {
                 this.Notification.success('Project updated');

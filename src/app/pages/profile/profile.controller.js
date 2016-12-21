@@ -10,7 +10,7 @@ class ProfileCtrl {
         this._User = User;
         this._$scope = $scope;
         this.formData = {};
-
+        this.privacy = false;
         this.showLoader = false;
         this.syncModal = false;
         this.patterns = {

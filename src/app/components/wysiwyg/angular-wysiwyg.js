@@ -326,7 +326,8 @@
 
                 // model -> view
                 ngModelController.$render = function () {
-                    textarea.html(ngModelController.$viewValue);
+                    let decoded = $('<div/>').html(ngModelController.$viewValue).text();
+                    textarea.html(decoded);
                 };
                 scope.format = function (cmd, arg) {
                     document.execCommand(cmd, false, arg);

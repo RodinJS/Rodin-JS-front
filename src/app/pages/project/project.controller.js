@@ -23,7 +23,7 @@ class ProjectCtrl {
         this.showLoader = false;
 
         this.wysiwygOptions =  [
-            ['bold', 'italic', 'underline', 'ordered-list', 'unordered-list', 'font-size', 'link']
+            []
         ];
 
         this.template = 0;
