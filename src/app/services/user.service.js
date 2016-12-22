@@ -82,15 +82,15 @@ class User {
         })
     }
 
-    fbAuth(sync) {
-        this.deferred = this._$q.defer();
-        FB.getLoginStatus((response)=> {
-            if (response.status == 'connected')
-                return this.fbMe(sync);
-            else
-                return this.fbLogin(sync);
+    fbAuth(sync, fbConnected) {
 
-        });
+        this.deferred = this._$q.defer();
+
+        if(fbConnected)
+            this.fbMe(sync);
+        else
+            this.fbLogin(sync);
+
         return this.deferred.promise;
     }
 

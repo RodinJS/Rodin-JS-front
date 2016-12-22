@@ -44,6 +44,14 @@ class ProfileCtrl {
             });
         });
 
+        FB.getLoginStatus((response)=> {
+            if (response.status == 'connected')
+               this.fbConnected = true;
+            else
+                this.fbConnected = false;
+
+        });
+
         if ($stateParams.token && $stateParams.id && this.currentUser) {
 
             let data = {
@@ -89,7 +97,7 @@ class ProfileCtrl {
     }
 
     fbSync() {
-        this._User.fbAuth(true).then((res) => {
+        this._User.fbAuth(true, this.fbConnected).then((res) => {
             this.currentUser.facebook = true;
             this.Notification.success('Facebook synced');
         }, (err) => {
