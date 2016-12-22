@@ -12,7 +12,7 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
 		id: "_id"
 	});
 
-	if (AppConstants.env == "prod") {
+	if (AppConstants.env == "prod" || AppConstants.env == "dev") {
 		$locationProvider.html5Mode(true);
 	}
 
