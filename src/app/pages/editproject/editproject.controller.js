@@ -1,47 +1,70 @@
 class EditProjectCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore, $window, Notification) {
         'ngInject';
 
+        $window.scrollTo(0, 0);
+
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this.Project = Project;
         this.PUBLIC = AppConstants.PUBLIC;
+        this.EDITOR = AppConstants.EDITOR;
+        this.previewUrl = AppConstants.PREVIEW;
         this.$state = $state;
         this.$q = $q;
         this._$scope = $scope;
         this.user = User.current;
+        this._AppConstants = AppConstants;
 
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.getProject();
 
-        this.tinymceOptions = {
-            menubar:false,
-            statusbar: false,
-            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist',
-            inline: false,
-            plugins : 'advlist autolink link image lists charmap print preview',
-            theme : "modern"
-        };
+
+        this.wysiwygOptions =  [
+            []
+        ];
 
         this.modals = {
             remove: false,
             share: false
         };
+
+        this.eventBus = EventBus;
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            this.project = ProjectStore.getProject();
+            if(!this.project)
+                this.getProject();
+            else
+                this.finalizeRequest();
+
+        });
     }
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId).then(
+        this.Project.get(this.projectId, {projectSize:true}).then(
             project => {
-                this.showLoader = false;
-                this.project = project;
-                this.projectPublic = project.public === 'true';
+                this.eventBus.emit(this.eventBus.project.SET, project);
+                this.finalizeRequest();
             },
             err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
                 this.$state.go('landing.error');
             }
         )
+    }
+
+    finalizeRequest() {
+        this.project.editorUrl = this.EDITOR + this.project.root;
+        if(this.project.publishedPublic)
+            this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
+        if(this.project.description)
+            this.project.description = $('<div/>').html(this.project.description).text();
+        this.projectPublic = this.project.public === 'true';
+        this.showLoader = false;
     }
 
     toggleStatus() {
@@ -50,9 +73,13 @@ class EditProjectCtrl {
         this.showLoader = true;
         this.Project.toggleStatus(this.project._id, this.project.public).then(
             res => {
+                this.eventBus.emit(this.eventBus.project.SET, this.project);
                 this.showLoader = false;
             },
             err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
                 this.projectPublic = !this.projectPublic;
                 this.project.public = this.projectPublic.toString();
                 this.showLoader = false;
@@ -65,25 +92,36 @@ class EditProjectCtrl {
 
         this.Project.remove(this.project._id).then(
             data => {
+                this.Notification.success('Project deleted');
                 this.showLoader = false;
                 this.$state.go('app.dashboard');
             },
             err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
                 this.showLoader = false;
             }
         );
     }
 
     update() {
+        let projectInfo = {};
+        angular.extend(projectInfo, this.project);
+        projectInfo.tags = projectInfo.tags.map(i => i.text);
         this.showLoader = true;
-        this.Project.update(this.project._id, this.project).then(
+        console.log(projectInfo);
+        this.Project.update(this.project._id, projectInfo).then(
             data => {
+                this.Notification.success('Project updated');
+                this.eventBus.emit(this.eventBus.project.SET, data);
                 this.showLoader = false;
-                console.log(data);
             },
             err => {
                 this.showLoader = false;
-                console.log(err);
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         )
     }
@@ -102,12 +140,13 @@ class EditProjectCtrl {
                     };
                     reader.readAsDataURL(file);
                 }, (result) => {
-                    alert('Unsupported image type');
+                    this.Notification.error('Unsupported image type');
                 });
             }
 
         } else {
-            alert("It seems your browser doesn't support FileReader.");
+            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
+
         }
     }
 

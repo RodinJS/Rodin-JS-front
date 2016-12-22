@@ -1,5 +1,5 @@
 class DashboardCtrl {
-	constructor(AppConstants, Project, User, $state) {
+	constructor(AppConstants, Project, User, $state, Notification) {
 		'ngInject';
 		this.user = User.current;
 		this.appName = AppConstants.appName;
@@ -7,6 +7,7 @@ class DashboardCtrl {
 		this.PUBLIC = AppConstants.PUBLIC;
 		this.Project = Project;
 		this.$state = $state;
+		this.Notification = Notification;
 
 		this.getProjects();
 		this.projects = [];
@@ -21,7 +22,8 @@ class DashboardCtrl {
 
 		this.currentModalProject = null;
 		this.modals = {
-			share: false
+			share: false,
+            remove:false,
 		}
 	}
 
@@ -31,9 +33,9 @@ class DashboardCtrl {
 			data => {
 				this.showLoader = false;
 				this.projects = data;
-			},
+            },
 			err => {
-				this.showLoader = false;
+                this.showLoader = false;
 			}
 		)
 	}
@@ -53,14 +55,42 @@ class DashboardCtrl {
 		}, 500);
 	}
 
-	open(project) {
+	open(project, remove) {
 		this.currentModalProject = project;
-		this.modals.share = true;
+		this.modals[remove ? 'remove' : 'share'] = true;
 	}
 
 	goToSettings() {
 		this.$state.go('app.editproject', {projectId: this.currentModalProject._id});
 	}
+
+	goToProject($event, projectURL){
+        if($event.target.className !== 'item-description') return;
+        location.href = projectURL;
+	}
+
+    deleteProject() {
+        this.showLoader = true;
+
+        let projectIndex = _.findIndex(this.projects, (project)=>{
+            return project._id === this.currentModalProject._id;
+        });
+
+        this.Project.remove(this.currentModalProject._id).then(
+            data => {
+                this.modals.remove = false;
+                this.Notification.success(`Project ${this.currentModalProject.name} deleted`);
+                this.showLoader = false;
+                this.projects.splice(projectIndex, 1);
+            },
+            err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
+                this.showLoader = false;
+            }
+        );
+    }
 
 	copyUrl() {
 		var $temp = $("<input>");

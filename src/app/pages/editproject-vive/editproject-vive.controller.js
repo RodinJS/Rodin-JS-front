@@ -1,5 +1,5 @@
 class EditProjectViveCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator) {
         'ngInject';
 
         this.appName = AppConstants.appName;
@@ -16,6 +16,7 @@ class EditProjectViveCtrl {
         this.getProject();
 
         this.user = User.current;
+        this._checkVersion = Validator.checkVersion;
 
         this.fileChoosen = {
             profile: false,
@@ -41,6 +42,11 @@ class EditProjectViveCtrl {
 
         this.submiting = false;
         this.openEvent = null;
+
+        this.eventBus = EventBus;
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            this.project = ProjectStore.getProject();
+        });
     }
 
     getProject() {
@@ -48,7 +54,7 @@ class EditProjectViveCtrl {
         this.Project.get(this.projectId).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
+                this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
                 this.$state.go('landing.error');
@@ -61,7 +67,7 @@ class EditProjectViveCtrl {
         this.Project.update(this.project._id, this.project).then(
             data => {
                 this.showLoader = false;
-                console.log(data);
+                this.eventBus.emit(this.eventBus.project.SET, data);
             },
             err => {
                 this.showLoader = false;
@@ -166,8 +172,8 @@ class EditProjectViveCtrl {
         let project = {
             userId: this.user.username,
             appId: this.project._id,
-            url: "http://google.com",
             appName: this.project.vive.name,
+            version:this.project.oculus.version,
             vive: {
                 exportMethod: "ad-hoc",
                 bundleIdentifier: this.project.vive.bundle,

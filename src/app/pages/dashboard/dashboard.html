@@ -9,7 +9,7 @@
 				<div class="form-wrapper pull-right search-form">
 					<div class="row">
 						<div class="form-group pass-group" custom-input>
-							<input type="text" class="form-control" placeholder="" data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
+							<input type="text" class="form-control dashboard-search" placeholder="" data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
 							<label class="control-label float-label">Name, Description or Meta tags</label>
 							<i class="icon icon-search search"></i>
 						</div>
@@ -34,39 +34,63 @@
 				</p>
 			</div>
 			<div class="row">
+				<div class="col-md-3">
+					<div class="dashboard-content-item">
+						<div class="item-content-wrapper create-project" data-ui-sref="app.project">
+							<div class="dashboard-content-img">
+							</div>
+							<div class="item-description">
+								<a class="btn-add"><i class="icon icon-add"></i></a>
+							</div>
+						</div>
+						<a href="" class="dashboard-item-link">
+							<h3 class="box-title">
+								Create new Project
+							</h3>
+						</a>
+					</div>
+				</div>
 				<div data-ng-repeat="project in $ctrl.projects" class="col-md-3">
 					<div class="dashboard-content-item">
-						<div class="item-content-wrapper">
+						<div class="item-content-wrapper" ng-click="$ctrl.goToProject($event, $ctrl.editorUrl + project.root)">
 							<div data-ng-if="!project.thumbnail" class="dashboard-content-img"
 							     style="background-image: url(images/content/dashboard-content-img.jpg);"></div>
 							<div data-ng-if="!!project.thumbnail" class="dashboard-content-img"
 							     style="background-image: url({{project.thumbnail}})"></div>
 							<div class="item-description">
+                                <ul class="item-action-list pull-left">
+                                    <li>
+                                        <a ng-click="$ctrl.open(project, true)"><i class="icon icon-delete"></i></a>
+                                    </li>
+                                </ul>
 								<ul class="item-action-list">
-									<li>
+									<li ng-if="project.public == 'true'">
 										<a style="cursor:pointer;" data-ng-click="$ctrl.open(project)">
 											<i class="icon icon-link"></i>
 										</a>
 									</li>
 									<li>
-										<a data-ng-href="{{$ctrl.editorUrl + project.root}}">
-											<i class="icon icon-edit"></i>
-										</a>
+                                        <a class="icon-href" ng-class="project.public == 'true' ? 'unlocked' : 'locked'">
+                                            <i class="icon icon-lock" aria-hidden="true"></i>
+                                        </a>
 									</li>
-									<li><a data-ui-sref="app.editproject({projectId: project._id})"><i
+									<li>
+                                        <a data-ui-sref="app.editproject({projectId: project._id})"><i
 										class="icon icon-settings"></i></a>
 									</li>
 								</ul>
 								<h5>
-									<a data-ng-href="{{$ctrl.editorUrl + project.root}}" class="item-title-link">
+									<a  data-ng-href="{{$ctrl.editorUrl + project.root}}" class="item-title-link">
 										Open in Editor
 									</a>
 								</h5>
 							</div>
 						</div>
 						<a href="" class="dashboard-item-link">
-							<h1 class="box-title"><i data-ng-if="!project.public" class="icon icon-lock"></i>{{project.name}}
-							</h1>
+							<h3 class="box-title">
+								<i data-ng-if="!project.public" class="icon icon-lock"></i>
+								{{project.displayName || project.name}}
+							</h3>
 							<p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
 							</p>
 						</a>
@@ -81,7 +105,7 @@
 </div>
 
 
-<div class="modal" data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
+<div class="modal" close-modal="share" data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
 	<div class="modal-content">
 		<div class="modal-header">
 			<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>
@@ -110,4 +134,30 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal model-confirm" close-modal="remove" ng-click="$ctrl.modals.remove = false" ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
+            <h1 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h1>
+            <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
+        </div>
+        <div class="modal-body padding-0-important" ng-if="!!$ctrl.currentModalProject.publishDate">
+            <p class="description word-wrap">
+                Your project will no longer be available on
+                <span class="text-yellow">{{$ctrl.currentModalProject.publishedUrl}}</span>, your apps for
+                <span class="text-yellow">"{{$ctrl.currentModalProject.name}}"</span> will stop working !<br>
+                Are you sure you want to continue?
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <button type="button" class="btn btn-primary"
+                        ng-click="$ctrl.deleteProject()">delete</button>
+                <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.remove = false">cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 

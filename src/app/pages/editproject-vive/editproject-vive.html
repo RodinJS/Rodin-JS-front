@@ -1,25 +1,13 @@
 <div class="page__wrapper">
     <div class="main-container development-container">
         <div class="main-title-wrapper">
-            <h1 class="main-title">Build/<i class="icon icon-lock"></i><span class="user-name text-white">{{$ctrl.project.name}}</span>
+            <h1 class="main-title">Build/<i class="icon icon-lock"></i><span class="user-name text-white">{{$ctrl.project.displayName || $ctrl.project.name}}</span>
             </h1>
         </div>
         <div class="page-content">
             <div class="content-navbar">
                 <ul class="navbar-list">
-                    <li class=""><a ui-sref="app.editproject({projectId: $ctrl.project._id})">Settings</a>
-                    </li>
-
-                    <li class=""><a ui-sref="app.editprojectIos({projectId: $ctrl.project._id})">IOS</a>
-                    </li>
-                    <li class=""><a ui-sref="app.editprojectAndroid({projectId: $ctrl.project._id})">Android</a>
-                    </li>
-                    <li class=""><a ui-sref="app.editprojectOculus({projectId: $ctrl.project._id})">Oculus</a>
-                    </li>
-                    <li class="active"><a ui-sref="app.editprojectVive({projectId: $ctrl.project._id})">VIVE</a>
-                    </li>
-                    <li class=""><a ui-sref="app.editprojectWeb({projectId: $ctrl.project._id})">Web</a>
-                    </li>
+                    <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
                 </ul>
             </div>
             <div class="section-wrapper">
@@ -34,20 +22,46 @@
                                         <div class="form-group" custom-input
                                              data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
                                             <input type="text" class="form-control" placeholder=""
-                                                   data-ng-model="$ctrl.project.oculus.name"
+                                                   data-ng-model="$ctrl.project.vive.name"
                                                    name="displayName"
                                                    required
                                                    data-ng-focus="configs.displayName.focused = true">
-                                            <label class="control-label float-label">Display name</label>
+                                            <label class="control-label float-label">
+                                                Display name <span ng-if="configs.displayName.$invalid && configs.displayName.focused">is required</span>
+                                            </label>
                                         </div>
                                         <p class="text-small description">App Name - Display name of your app</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-wrapper">
+                                        <div class="form-group" custom-input
+                                             data-ng-init="isVersionValid = true"
+                                             data-ng-class="{'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused, 'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
+                                            <input type="text" class="form-control" placeholder=""
+                                                   data-ng-model="$ctrl.project.vive.version"
+                                                   name="version"
+                                                   required
+                                                   ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/"
+                                                   data-ng-focus="configs.version.focused = true"
+                                                   data-ng-change="$ctrl.project.build.vive.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.vive.version, $ctrl.project.vive.version))">
+                                            <label class="control-label float-label">
+                                                Version <span ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.required">is required</span>
+                                                <span ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern">must be in x.x.x format</span>
+                                                <span ng-if="!isVersionValid">must be higher than current. Current version is {{$ctrl.project.build.vive.version}}</span>
+                                            </label>
+                                        </div>
+                                        <p class="text-small description">Version of your app</p>
+                                        <p ng-if="configs.version.error">
+                                            The current version for this project is 3.1.2, please select a higher version for the new build.
+                                        </p>
                                     </div>
                                 </li>
                             </ul>
                             <div class="required-field-actions">
                                 <button type="button" class="btn btn-primary"
                                         ng-click="$ctrl.build($event)"
-                                        ng-disabled="!configs.$valid || ($ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built)">
+                                        ng-disabled="!isVersionValid || !configs.$valid || ($ctrl.project.build.vive.requested && !$ctrl.project.build.vive.built)">
                                     build
                                 </button>
                                 <!--<a href="" class="btn btn-save" disabled>remove</a>-->
@@ -55,30 +69,30 @@
                         </div>
                     </div>
                 </form>
-                <form action="" ng-if="$ctrl.project.build.oculus.requested">
+                <form action="" ng-if="$ctrl.project.build.vive.requested">
                     <div class="section">
                         <div class="required-field-item">
                             <div class="small-loader"
-                                 data-ng-if="$ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built">
+                                 data-ng-if="$ctrl.project.build.vive.requested && !$ctrl.project.build.vive.built">
                                 <div class="image"></div>
                             </div>
                             <div class="main-upload-area"
-                                 data-ng-if="$ctrl.project.build.oculus.built">
+                                 data-ng-if="$ctrl.project.build.vive.built">
                                 <img src="images/general/file_icon_placeholder.png" alt="" width="60"
                                      class="uploaded-file-icon">
                                 <p class="area-label"></p>
                             </div>
-                            <p data-ng-if="!$ctrl.project.build.oculus.built"
+                            <p data-ng-if="!$ctrl.project.build.vive.built"
                                class="description margin-top-20 text-white">We are now building your installation
                                 package, the download link will appear here once done.</p>
-                            <p data-ng-if="$ctrl.project.build.oculus.built"
+                            <p data-ng-if="$ctrl.project.build.vive.built"
                                class="description margin-top-20 text-white">Package ready</p>
                             <div class="required-field-actions">
-                                <button data-ng-if="$ctrl.project.build.oculus.built"
+                                <button data-ng-if="$ctrl.project.build.vive.built"
                                         type="button" class="btn btn-primary"
                                         ng-click="$ctrl.download()">download
                                 </button>
-                                <a data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">cancel</a>
+                                <a data-ng-if="!$ctrl.project.build.vive.built" class="btn btn-save">cancel</a>
                             </div>
                         </div>
                     </div>

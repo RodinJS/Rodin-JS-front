@@ -1,7 +1,8 @@
 class EditProjectOculusCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
 
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
         this._JWT = JWT;
@@ -16,6 +17,7 @@ class EditProjectOculusCtrl {
         this.getProject();
 
         this.user = User.current;
+        this._checkVersion = Validator.checkVersion;
 
         this.fileChoosen = {
             profile: false,
@@ -41,6 +43,11 @@ class EditProjectOculusCtrl {
 
         this.submiting = false;
         this.openEvent = null;
+
+        this.eventBus = EventBus;
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            this.project = ProjectStore.getProject();
+        });
     }
 
     getProject() {
@@ -48,7 +55,7 @@ class EditProjectOculusCtrl {
         this.Project.get(this.projectId, {device: 'oculus'}).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
+                this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
                 this.$state.go('landing.error');
@@ -61,7 +68,7 @@ class EditProjectOculusCtrl {
         this.Project.update(this.project._id, this.project).then(
             data => {
                 this.showLoader = false;
-                console.log(data);
+                this.eventBus.emit(this.eventBus.project.SET, data);
             },
             err => {
                 this.showLoader = false;
@@ -85,12 +92,12 @@ class EditProjectOculusCtrl {
                     };
                     reader.readAsDataURL(file);
                 }, (result) => {
-                    alert('Unsupported image type');
+                    this.Notification.error('Unsupported image type');
                 });
             }
 
         } else {
-            alert("It seems your browser doesn't support FileReader.");
+            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
     }
 
@@ -145,7 +152,7 @@ class EditProjectOculusCtrl {
             this._$scope.$apply();
 
         } else {
-            alert("It seems your browser doesn't support FileReader.");
+            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
     }
 
@@ -156,7 +163,7 @@ class EditProjectOculusCtrl {
             this._$scope.$apply();
 
         } else {
-            alert("It seems your browser doesn't support FileReader.");
+            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
     }
 
@@ -166,8 +173,8 @@ class EditProjectOculusCtrl {
         let project = {
             userId: this.user.username,
             appId: this.project._id,
-            url: "http://google.com",
             appName: this.project.oculus.name,
+            version:this.project.oculus.version,
             oculus: {
                 exportMethod: "ad-hoc",
                 bundleIdentifier: this.project.oculus.bundle,
@@ -210,7 +217,9 @@ class EditProjectOculusCtrl {
             },
             err => {
                 this.showLoader = false;
-                console.log(err);
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         )
     }

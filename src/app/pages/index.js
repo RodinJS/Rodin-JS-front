@@ -11,6 +11,10 @@ import './home/index';
 
 import './error/index';
 
+import './userConfirm/index';
+
+import './resetPassword/index';
+
 import './dashboard/index';
 
 import './profile/index';
@@ -35,12 +39,31 @@ import './editproject-vive/index';
 
 import './editproject-web/index';
 
+import './editproject-publish/index';
+
+import './discover/index';
+
+import './tutorials/index';
+
+import './store/index';
+
+import './faq/index';
+
+import './privacy/index';
+
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
 	'landing.auth',
 	'landing.home',
 	'landing.demo',
 	'landing.error',
+	'landing.userconfirm',
+	'landing.resetpassword',
+    'landing.discover',
+    'landing.tutorials',
+    'landing.store',
+    'landing.faq',
+    'landing.privacy',
 
 	'app.dashboard',
 	'app.profile',
@@ -52,6 +75,7 @@ let pagesModule = angular.module('app.pages', [
 	'app.editporjectOculus',
 	'app.editporjectVive',
 	'app.editporjectWeb',
+	'app.editporjectPublish',
 
 	'app.plans',
 	'app.billing',

@@ -1,7 +1,7 @@
 class EditProjectIosCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
-
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
         this._JWT = JWT;
@@ -13,9 +13,9 @@ class EditProjectIosCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.getProject();
 
         this.user = User.current;
+        this._checkVersion = Validator.checkVersion;
 
         this.fileChoosen = {
             profile: false,
@@ -41,6 +41,13 @@ class EditProjectIosCtrl {
 
         this.submiting = false;
         this.openEvent = null;
+
+        const self = this;
+        this.eventBus = EventBus;
+        this.getProject();
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            this.project = ProjectStore.getProject();
+        });
     }
 
     getProject() {
@@ -48,9 +55,13 @@ class EditProjectIosCtrl {
         this.Project.get(this.projectId, {device: 'ios'}).then(
             project => {
                 this.showLoader = false;
+                this.eventBus.emit(this.eventBus.project.SET, project);
                 this.project = project;
             },
             err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
                 this.$state.go('landing.error');
             }
         )
@@ -58,14 +69,16 @@ class EditProjectIosCtrl {
 
     update() {
         this.showLoader = true;
-        this.Project.update(this.project._id, this.project).then(
+        this.Project.update(this.projectId, this.project).then(
             data => {
                 this.showLoader = false;
-                console.log(data);
+                this.eventBus.emit(this.eventBus.project.SET, data);
             },
             err => {
                 this.showLoader = false;
-                console.log(err);
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         )
     }
@@ -85,12 +98,12 @@ class EditProjectIosCtrl {
                     };
                     reader.readAsDataURL(file);
                 }, (result) => {
-                    alert('Unsupported image type');
+                    this.Notification.error('Unsupported image type');
                 });
             }
 
         } else {
-            alert("It seems your browser doesn't support FileReader.");
+            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
     }
 
@@ -145,7 +158,7 @@ class EditProjectIosCtrl {
             this._$scope.$apply();
 
         } else {
-            alert("It seems your browser doesn't support FileReader.");
+            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
     }
 
@@ -156,7 +169,7 @@ class EditProjectIosCtrl {
             this._$scope.$apply();
 
         } else {
-            alert("It seems your browser doesn't support FileReader.");
+            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
     }
 
@@ -166,9 +179,9 @@ class EditProjectIosCtrl {
         e.preventDefault();
         let project = {
             userId: this.user.username,
-            appId: this.project._id,
-            url: "http://google.com",
+            appId: this.projectId,
             appName: this.project.ios.name,
+            version:this.project.ios.version,
             ios: {
                 exportMethod: "ad-hoc",
                 bundleIdentifier: this.project.ios.bundle,
@@ -176,11 +189,11 @@ class EditProjectIosCtrl {
                 certPassword: this.project.ios.certPassword
             }
         };
-
+console.log("this.project", this.project)
         ctrl.showLoader = true;
         $("#configs").ajaxForm({
             dataType: "json",
-            url: this._AppConstants.API + '/project/' + this.project._id + '/build/ios',
+            url: this._AppConstants.API + '/project/' + this.projectId + '/build/ios',
             headers: {
                 "x-access-token": this._JWT.get()
             },
@@ -204,14 +217,16 @@ class EditProjectIosCtrl {
 
     download() {
         this.showLoader = true;
-        this.Project.download(this.project._id, 'ios').then(
+        this.Project.download(this.projectId, 'ios').then(
             data => {
                 this.showLoader = false;
                 window.location = data.downloadUrl;
             },
             err => {
                 this.showLoader = false;
-                console.log(err);
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
             }
         )
     }

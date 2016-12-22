@@ -1,96 +1,89 @@
 <nav class="navbar">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" ng-click="isNavbarCollapsed = !isNavbarCollapsed">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" data-ui-sref="app.dashboard">
-				<img src="images/rodin-logo.png" width="90" alt="logo">
-			</a>
-		</div>
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" ng-click="isNavbarCollapsed = !isNavbarCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" data-ui-sref="app.dashboard">
+                <img src="images/rodin-logo.png" width="90" alt="logo">
+            </a>
+        </div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" uib-collapse="isNavbarCollapsed">
-			<ul class="nav navbar-nav">
-				<li><a data-ui-sref-active="active" data-ui-sref="app.dashboard">Dashboard</a></li>
-				<li><a href="">Discover</a></li>
-				<li><a href="">Store</a></li>
-				<li><a href="">Doc</a></li>
-				<li class="dropdown" uib-dropdown>
-					<a href="" class="dropdown-toggle" role="button" uib-dropdown-toggle>
-						More <i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="dropdown-menu dropdown-menu-more" uib-dropdown-menu>
-						<li><a href="">Tutorials</a></li>
-						<li><a href="">Courses</a></li>
-						<li><a href="">Forum</a></li>
-						<li><a href="">Blog</a></li>
-						<li class="terms"><a href="">Privacy Policy</a></li>
-						<li class="terms"><a href="">Terms of Service</a></li>
-					</ul>
-				</li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right navbar-account">
-				<li class="new-notifi" uib-dropdown>
-					<a href="" class="dropdown-toggle btn-notifi" uib-dropdown-toggle role="button">
-						<i class="icon icon-notifi"></i>
-						<!--<span class="new-notifi-badge">-->
-						<!--<i class="icon icon-dot"></i>-->
-						<!--</span>-->
-					</a>
-					<div class="dropdown-menu dropdown-menu-notifi" uib-dropdown-menu>
-						<h5>Notifications</h5>
-						<!--<ul>-->
-						<!--<li class="red">-->
-						<!--<a href="">-->
-						<!--<p>It sometimes seems everyone on the planet is using Windows.</p>-->
-						<!--<span class="notifi-date text-small">6 hours ago</span>-->
-						<!--</a>-->
-						<!--</li>-->
-						<!--<li class="orange">-->
-						<!--<a href="">-->
-						<!--<p>Photographs are a way of preserving a moment in our lives for the rest of our lives. Many of us have at least been</p>-->
-						<!--<span class="notifi-date text-small">2 hours ago</span>-->
-						<!--</a>-->
-						<!--</li>-->
-						<!--<li class="blue">-->
-						<!--<a href="">-->
-						<!--<p>Many of us have at least been</p>-->
-						<!--<span class="notifi-date text-small">6 hours ago</span>-->
-						<!--</a>-->
-						<!--</li>-->
-						<!--<li class="orange">-->
-						<!--<a href="">-->
-						<!--<p>Photographs are a way of preserving a moment in our lives for the rest of our lives. Many of us have at least been</p>-->
-						<!--<span class="notifi-date text-small">2 hours ago</span>-->
-						<!--</a>-->
-						<!--</li>-->
-						<!--</ul>-->
-					</div>
-				</li>
-				<li class="dropdown" data-uib-dropdown>
-					<a href="" class="dropdown-toggle text-action btn-account-drop" data-uib-dropdown-toggle role="button">
-            <span class="avatar">
-              <span class="avatar-name">R</span>
-            </span>
-						{{$ctrl.user.username}}
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="dropdown-menu dropdown-menu-account" data-uib-dropdown-menu>
-						<li>
-							<h2>{{$ctrl.user.username}}</h2>
-							<a role="button" class="mail-link">{{$ctrl.user.email}}</a>
-						</li>
-						<li><a data-ui-sref-active="active" data-ui-sref="app.profile">EDIT Profile</a></li>
-						<!--<li><a data-ui-sref-active="active" href="" ui-sref="app.plans" class="plan-link">Upgrade Your Plan</a></li>-->
-						<li><a data-ui-sref-active="active" href="" data-ng-click="$ctrl.logout()" class="signout-link">Sign Out</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div><!-- /.navbar-collapse -->
-	</div><!-- /.container-fluid -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" uib-collapse="isNavbarCollapsed">
+            <ul class="nav navbar-nav">
+                <li><a data-ui-sref-active="active" data-ui-sref="app.dashboard">Dashboard</a></li>
+                <li><a ui-sref="landing.discover">Discover</a></li>
+                <li><a ui-sref="landing.store">Store</a></li>
+                <!--<li><a href="https://docs.rodin.space/">Doc</a></li>-->
+                <li class="dropdown" uib-dropdown auto-close="outsideClick">
+                    <a class="dropdown-toggle" role="button" uib-dropdown-toggle>
+                        More <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-more" uib-dropdown-menu>
+                        <li><a ui-sref="landing.tutorials">Tutorials</a></li>
+                        <li><a ui-sref="landing.faq">FAQ</a></li>
+                        <!--<li><a href="">Forum</a></li>-->
+                        <!--<li><a href="">Blog</a></li>-->
+                        <li class="terms"><a ui-sref="landing.privacy">Privacy Policy</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navbar-account">
+                <li class="new-notifi" uib-dropdown auto-close="outsideClick">
+                    <a href="" class="dropdown-toggle btn-notifi" uib-dropdown-toggle role="button">
+                        <i class="icon icon-notifi"></i>
+                        <span class="new-notifi-badge" ng-if="$ctrl.notificationsCount">
+							<i class="icon icon-dot"></i>
+						</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-notifi" uib-dropdown-menu>
+                        <h5>Notifications</h5>
+                        <ul ng-if="$ctrl.notifications">
+                            <li ng-repeat="(index, notification) in $ctrl.notifications"
+                                ng-class="notification.typeClass +' '+ notification.readClass">
+                                <div class="pull-right events">
+                                    <i class="icon icon-check" ng-if="!notification.isRead"
+                                       ng-click="$ctrl.updateNotification(notification.id, index, $event)"></i>
+                                    <i class="icon icon-delete"
+                                       ng-click="$ctrl.deleteNotification(notification.id, index)"></i>
+                                    <i ng-if="notification.inProgress" class="in-progress fa fa-refresh fa-spin"></i>
+                                </div>
+                                <div style="clear:both"></div>
+                                <a href="">
+                                    <p compile="notification.label"></p>
+                                    <span class="notifi-date text-small">{{notification.date}}</span>
+                                </a>
+
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="dropdown" data-uib-dropdown auto-close="outsideClick">
+                    <a href="" class="dropdown-toggle text-action btn-account-drop" data-uib-dropdown-toggle
+                       role="button">
+                        <span class="avatar">
+                          <span class="avatar-name">R</span>
+                        </span>
+                        {{$ctrl.user.username}}
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-account" uib-dropdown-menu>
+                        <li>
+                            <h2>{{$ctrl.user.username}}</h2>
+                            <a role="button" class="mail-link">{{$ctrl.user.email}}</a>
+                        </li>
+                        <li><a data-ui-sref-active="active" data-ui-sref="app.profile">EDIT Profile</a></li>
+                        <!--<li><a data-ui-sref-active="active" href="" ui-sref="app.plans" class="plan-link">Upgrade Your Plan</a></li>-->
+                        <li><a data-ui-sref-active="active" href="" data-ng-click="$ctrl.logout()" class="signout-link">Sign
+                            Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
