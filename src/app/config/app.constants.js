@@ -30,7 +30,7 @@ const AppConstants = {
         PREVIEW: 'https://rodin.space/projects/',
         PUBLIC: 'https://rodin.space/public/',
         PUBLISH: 'https://rodin.space',
-        EDITOR: 'http://localhost:8000/#/',
+        EDITOR: 'https://editor.rodin.space/',
         FB: '216982868736046', //'216861662081500' '216982868736046'
         GITHUB: 'fa69c03ad5758fce1f10',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com'
