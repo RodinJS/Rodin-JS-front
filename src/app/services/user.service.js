@@ -278,7 +278,8 @@ class User {
 
         if (this._Validator.isValidHTTP()) {
             let response = this._Validator.getDataHTTP();
-            this.current = response.user;
+            //console.log(response);
+            //this.current = response;
             this.deferred.resolve(response);
 
         }
