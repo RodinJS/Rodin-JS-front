@@ -10,11 +10,18 @@ class Project {
         this._Analyser = Analyser;
 
         this._Projects = Restangular.all('project');
+        this._ProjectDomains = Restangular.all('domains');
         this._$state = $state;
         this._$q = $q;
         this._Validator = new Validator();
 
 
+    }
+
+    setDomain(fields = {}){
+        let Analyser = new this._Analyser();
+        this._ProjectDomains.post(fields).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
     }
 
     get(projectId = null, fields) {

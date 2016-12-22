@@ -1,7 +1,8 @@
 class EditProjectWebCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Notification) {
         'ngInject';
 
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
         this._JWT = JWT;
@@ -45,8 +46,11 @@ class EditProjectWebCtrl {
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
+            if(!this.project)
+                this.getProject();
+            //else
+                //this.finalizeRequest();
         });
-        this.getProject();
     }
 
     getProject() {
@@ -57,140 +61,23 @@ class EditProjectWebCtrl {
                 this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
                 this.$state.go('landing.error');
             }
         )
     }
 
-    update() {
-        this.showLoader = true;
-        this.Project.update(this.project._id, this.project).then(
-            data => {
-                this.showLoader = false;
-                console.log(data);
+    addDomain(){
+        this.Project.setDomain({id:this.projectId, domain:this.domainName}).then(
+            response =>{
+                console.log(response);
             },
-            err => {
-                this.showLoader = false;
-                console.log(err);
-            }
-        )
-    }
-
-    changeIcon(e) {
-        if (window.FileReader && window.Blob) {
-
-            var file = e.target.files[0];
-
-            if (file) {
-                this.isValidImage(file).then((result) => {
-                    var reader = new FileReader();
-                    reader.onloadend = (e) => {
-                        this.files.icon.name = file.name;
-                        this.files.icon.src = reader.result;
-                        this._$scope.$apply();
-                    };
-                    reader.readAsDataURL(file);
-                }, (result) => {
-                    alert('Unsupported image type');
+            err=>{
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
                 });
-            }
-
-        } else {
-            alert("It seems your browser doesn't support FileReader.");
-        }
-    }
-
-    isValidImage(file) {
-        var defer = this.$q.defer();
-        var result = {
-            valid: true,
-            message: ""
-        };
-
-        if (file.size > 1024 * 1024) {
-            result.valid = false;
-            result.message = "FIle size must be less than 1mb";
-            var tim = $timeout(function () {
-                defer.reject(result);
-                $timeout.cancel(tim);
-            });
-        } else {
-            var fileReader = new FileReader();
-            fileReader.onloadend = function (e) {
-                var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
-                var header = "";
-                for (var i = 0; i < arr.length; i++) {
-                    header += arr[i].toString(16);
-                }
-
-                switch (header) {
-                    case "89504e47":
-                        break;
-                    default:
-                        result.valid = false;
-                        result.message = "Allowed only .jpg .jpeg and .png file types.";
-                        break;
-                }
-
-                if (result.valid) {
-                    defer.resolve(result);
-                } else {
-                    defer.reject(result);
-                }
-            };
-            fileReader.readAsArrayBuffer(file);
-        }
-
-        return defer.promise;
-    }
-
-    changeCert(e) {
-        if (window.FileReader && window.Blob) {
-            var file = e.target.files[0];
-            this.files.cert.name = file.name;
-            this._$scope.$apply();
-
-        } else {
-            alert("It seems your browser doesn't support FileReader.");
-        }
-    }
-
-    changeProfile(e) {
-        if (window.FileReader && window.Blob) {
-            var file = e.target.files[0];
-            this.files.profile.name = file.name;
-            this._$scope.$apply();
-
-        } else {
-            alert("It seems your browser doesn't support FileReader.");
-        }
-    }
-
-    build(e) {
-       this.Project.transpile(this.projectId).then(
-           data=>{
-               console.log(data);
-           },
-           err=>{
-               console.log(err);
-           }
-       )
-    };
-
-    open(e) {
-        this.modals.password = true;
-        this.openEvent = e;
-    }
-
-    download() {
-        this.showLoader = true;
-        this.Project.download(this.project._id, 'web').then(
-            data => {
-                this.showLoader = false;
-                window.location = data.downloadUrl;
-            },
-            err => {
-                this.showLoader = false;
                 console.log(err);
             }
         )
