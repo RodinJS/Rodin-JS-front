@@ -1,9 +1,11 @@
 const FiltersModule = angular.module('app.filters', []);
 
-import bytesFilter from './bytes/index';
-FiltersModule.filter('bytes', bytesFilter);
+import Filters from './filters';
 
-import objLimitTo from './objLimitTo/index';
-FiltersModule.filter('objLimitTo', objLimitTo);
+FiltersModule.filter('bytes', Filters.bytesFilter);
+
+FiltersModule.filter('objLimitTo', Filters.objLimitTo);
+
+FiltersModule.filter('formatDate', ['moment', Filters.formatDate]);
 
 export default FiltersModule;

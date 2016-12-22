@@ -45,8 +45,8 @@
                                 <tr>
                                     <td class="text-primary"><span>Account Created</span>
                                     </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.creationDate | date : 'MMMM dd
-                                        yyyy'}}<span></span>
+                                    <td class="text-primary">
+                                        {{$ctrl.currentUser.creationDate | formatDate : 'DD MMMM YYYY'}}<span></span>
                                     </td>
                                 </tr>
                                 <!--<tr>-->
@@ -64,7 +64,7 @@
                                 <tr>
                                     <td class="text-primary"><span>Unpublished sites</span>
                                     </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.projects.unpublished}}<span></span>
+                                    <td class="text-primary">{{$ctrl.currentUser.projects.unpublished || 0}}<span></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -258,8 +258,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-wrapper">
+                                        <button type="submit" class="btn btn-primary"
+                                                ng-click="$ctrl.updateProfile()">
+                                            Update Profile
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="section section-profile-info">
+                        <!--<div class="section section-profile-info">
                             <h2 class="section-title">Profile Info</h2>
                             <div class="row">
                                 <div class="col-md-6">
@@ -290,7 +300,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--<p class="text-small description">Displayed on your public profile and website pages.
+                                        &lt;!&ndash;<p class="text-small description">Displayed on your public profile and website pages.
                                             Prospective clients can find you by searching you location.
                                         </p>
                                         <div class="form-group" custom-input>
@@ -319,21 +329,12 @@
                                             <label class="control-label float-label">Your skills</label>
                                         </div>
                                         <p class="text-small description">Your skills will show up on you profile page. Let
-                                            people know your top strengths</p>-->
+                                            people know your top strengths</p>&ndash;&gt;
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="btn-wrapper">
-                                        <button type="submit" class="btn btn-primary"
-                                                ng-click="$ctrl.updateProfile()">
-                                            Update Profile
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                        </div>-->
                     </form>
 
                 </div>

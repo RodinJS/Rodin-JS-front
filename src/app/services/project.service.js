@@ -13,8 +13,9 @@ class Project {
         this._$state = $state;
         this._$q = $q;
         this._Validator = new Validator();
-    }
 
+
+    }
 
     get(projectId = null, fields) {
         let Analyser = new this._Analyser();
