@@ -72,7 +72,7 @@ class EditProjectWebCtrl {
     addDomain(){
         this.Project.setDomain({id:this.projectId, domain:this.domainName}).then(
             response =>{
-                console.log(response);
+                this.Notification.success(response.message);
             },
             err=>{
                 _.each(err, (val, key)=>{
