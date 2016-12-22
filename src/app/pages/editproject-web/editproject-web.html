@@ -26,10 +26,10 @@
                                                data-ng-focus="addDomain.url.focused = true">
                                         <label class="control-label float-label">somedomain.example.com</label>
                                     </div>
-                                    <p class="text-small description">Add your custom Domain</p>
+                                    <p class="text-small description">Add your custom Domain Make sure you published this project</p>
                                     <button type="submit" class="btn btn-primary"
                                             ng-click="$ctrl.addDomain($event)"
-                                            ng-disabled="!addDomain.$valid">
+                                            ng-disabled="!addDomain.$valid || !$ctrl.project.publishedPublic">
                                         Submit
                                     </button>
                                 </div>
