@@ -132,6 +132,7 @@
 								 enable-bootstrap-title="true"
 								 textarea-menu="$ctrl.wysiwygOptions"></wysiwyg>-->
                         <textarea limit-to="256" style="height: 80px; width:100%" ng-model="projectDescription" class="wysiwyg-textarea"></textarea>
+						<span class="pull-right" style=" font-size: 14px; color: #ff9a2b;">256 / {{256-projectDescription.length}}</span>
 						<div class="btn-wrapper" ng-class="$ctrl.projectExist ? 'has-error' : ''">
 							<button type="button" data-ng-click="$ctrl.save()" class="btn btn-primary">Save</button>
 							<p ng-if="$ctrl.projectExist" class="help-block text-small error-help-block">
