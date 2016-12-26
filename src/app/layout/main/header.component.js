@@ -50,8 +50,9 @@ class AppHeaderCtrl {
         )
     }
 
-    updateNotification(param, index, $event){
-        this.User.updateNotification({id:param}).then(
+    updateNotification(notification, index, $event){
+        if(notification.isRead) return;
+        this.User.updateNotification({id:notification._id}).then(
             notification=>{
                 this.eventBus.emit(this.eventBus.notifications.UPDATE, index);
             },

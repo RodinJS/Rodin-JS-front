@@ -10,23 +10,33 @@
                     <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
                 </ul>
             </div>
-            <div class="section-wrapper">
-                <form name="addDomain" id="configs">
+            <div class="section section-switch">
+                <switch id="enabled" data-ng-change="$ctrl.switchDomainTrigger()" data-name="enabled" data-ng-model="$ctrl.customDomainTrigger" data-on="ON" data-off="OFF" class="green"></switch>
+                <h5 class="switch-box-title">Add custom domain</h5>
+                <p ng-if="$ctrl.project.publishedUrl && !$ctrl.customDomainTrigger" class="description text-small text-down">
+                    Your project current url:
+                    <a class="text-yellow" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
+                </p>
+                <form name="addDomain" id="configs" ng-if="$ctrl.customDomainTrigger">
                     <div class="section">
+
                         <h2 class="section-title">Project URL</h2>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-wrapper">
+                                    <p class="text-small description">Add your custom Domain Make sure you published this project</p>
                                     <div class="form-group" custom-input
-                                         data-ng-class="{'has-error': addDomain.url.$invalid && configs.url.focused, 'has-success': configs.url.$valid && configs.url.focused}">
+                                         data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': configs.url.$valid && addDomain.url.focused}">
                                         <input type="text" class="form-control" placeholder=""
-                                               data-ng-model="$ctrl.domainName"
+                                               data-ng-model="$ctrl.project.domain"
+                                               ng-pattern="$ctrl.domainPattern"
                                                name="url"
                                                required
                                                data-ng-focus="addDomain.url.focused = true">
-                                        <label class="control-label float-label">somedomain.example.com</label>
+                                        <label class="control-label float-label">
+                                            {{addDomain.url.focused || $ctrl.project.domain ? 'Project url' : 'example.com'}} {{addDomain.url.$invalid ? 'invalid' : ''}}
+                                        </label>
                                     </div>
-                                    <p class="text-small description">Add your custom Domain Make sure you published this project</p>
                                     <button type="submit" class="btn btn-primary"
                                             ng-click="$ctrl.addDomain($event)"
                                             ng-disabled="!addDomain.$valid || !$ctrl.project.publishedPublic">
@@ -42,4 +52,26 @@
         </div>
     </div>
     <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+</div>
+
+<div class="modal model-confirm" close-modal="notPublished"  ng-class="{'display-block': $ctrl.modals.notPublished, 'display-none': !$ctrl.modals.notPublished}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
+            <h1>Warning</h1>
+        </div>
+        <div class="modal-body padding-0-important">
+            <p class="description word-wrap">
+                Your project not published.
+                Please publish your project then connect URL
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <button type="button" class="btn btn-primary"
+                        ng-click="$ctrl.gotToPublish()">Publish project</button>
+                <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.notPublished = false">cancel</a>
+            </div>
+        </div>
+    </div>
 </div>

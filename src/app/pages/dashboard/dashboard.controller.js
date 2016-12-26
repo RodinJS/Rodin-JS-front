@@ -24,7 +24,18 @@ class DashboardCtrl {
 		this.modals = {
 			share: false,
             remove:false,
+		};
+
+        if(this.user.projects.total >= this.user.allowProjectsCount){
+        	this.cantCreateProject = true;
 		}
+    }
+
+    createProject(){
+		if(this.cantCreateProject){
+			return this.Notification.error(`Maximum projects count exceeded, allowend project count ${this.user.allowProjectsCount}`);
+		}
+		this.$state.go('app.project');
 	}
 
 	getProjects() {

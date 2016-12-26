@@ -1,6 +1,8 @@
 class ProjectCtrl {
     constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User, VCS, Notification, $timeout) {
         'ngInject';
+
+
         this._$scope = $scope;
         this.Notification = Notification;
         this.appName = AppConstants.appName;
@@ -10,7 +12,14 @@ class ProjectCtrl {
         this.VCS = VCS;
         this.ProjectTemplate = ProjectTemplate;
         this.$state = $state;
-        this.currentUser = User.current;
+        this.User = User;
+        this.currentUser = this.User.current;
+
+
+        if(this.currentUser.projects.total >= this.currentUser.allowProjectsCount){
+           this.Notification.error(`Maximum projects count exceeded, allowend project count ${this.currentUser.allowProjectsCount}`);
+           return this.$state.go('app.dashboard');
+        }
 
         $scope.projectDescription = "";
 
@@ -34,6 +43,7 @@ class ProjectCtrl {
         };
 
         this.getTemplates();
+        this.createFinalize = this.createFinalize.bind(this);
 
         $timeout(()=>{
             this.inputPadding = (angular.element('.project-path-label').width() + 10);
@@ -54,19 +64,7 @@ class ProjectCtrl {
                 this.VCS.create(data._id, {
                     root: data.root,
                     name: data.name
-                }).then(()=>{
-                    this.showLoader = false;
-                    this.Notification.success("Project created");
-                    this.$state.go('app.dashboard');
-                }, err=>{
-                    _.each(err, (val, key)=>{
-                        this.Notification.warning(val.fieldName);
-                    });
-                    this.Notification.success("Project created");
-                    this.$state.go('app.dashboard');
-                    /// TODO: stex petqa cuc tal error vorovhetev github repo chi sarqve
-                    this.showLoader = false;
-                });
+                }).then(this.createFinalize, this.createFinalize);
             },
             err => {
                 _.each(err, (val, key)=>{
@@ -93,6 +91,20 @@ class ProjectCtrl {
                 });
             }
         )
+    }
+
+
+    createFinalize(err){
+      if(err){
+          _.each(err, (val, key)=>{
+              this.Notification.warning(val.fieldName);
+          });
+      }
+        this.Notification.success("Project created");
+        this.User.current.projects.total +=1;
+        this.$state.go('app.dashboard');
+        /// TODO: stex petqa cuc tal error vorovhetev github repo chi sarqve
+        this.showLoader = false;
     }
 }
 

@@ -42,16 +42,19 @@
 						</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-notifi" uib-dropdown-menu>
-                        <h5>Notifications</h5>
-                        <ul ng-if="$ctrl.notifications">
+                        <h5 class="pull-left">Notifications</h5>
+                        <small class="pull-right" style="padding: 10px;">
+                            <a href="" ng-click="$ctrl.deleteNotification()" style="color: #33deff;font-size: 11px;">Delete all</a>
+                        </small>
+                        <div style="clear:both"></div>
+                        <ul ng-if="$ctrl.notifications.length > 0">
                             <li ng-repeat="(index, notification) in $ctrl.notifications"
+                                ng-click="$ctrl.updateNotification(notification, index, $event)"
                                 ng-class="notification.typeClass +' '+ notification.readClass">
                                 <div class="pull-right events">
-                                    <i class="icon icon-check" ng-if="!notification.isRead"
-                                       ng-click="$ctrl.updateNotification(notification.id, index, $event)"></i>
-                                    <i class="icon icon-delete"
+                                  <!--  <i class="icon icon-delete"
                                        ng-click="$ctrl.deleteNotification(notification.id, index)"></i>
-                                    <i ng-if="notification.inProgress" class="in-progress fa fa-refresh fa-spin"></i>
+                                    <i ng-if="notification.inProgress" class="in-progress fa fa-refresh fa-spin"></i>-->
                                 </div>
                                 <div style="clear:both"></div>
                                 <a href="">
@@ -61,6 +64,9 @@
 
                             </li>
                         </ul>
+                        <div ng-if="!$ctrl.notifications.length > 0">
+                            <h3 class="no-notifications">No new notifications</h3>
+                        </div>
                     </div>
                 </li>
                 <li class="dropdown" data-uib-dropdown auto-close="outsideClick">

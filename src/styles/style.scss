@@ -475,6 +475,7 @@ tags-input {
               }
             }
             a {
+              border-bottom: none;
               padding-top: 0;
 
             }
@@ -485,14 +486,14 @@ tags-input {
               }
             }
             &::before {
-              top: 30px;
+              top: 12px;
             }
             &:first-child {
               & > a {
                 padding-top: 0;
               }
               &::before {
-                top: 30px;
+                top: 12px;
               }
             }
             .events {
@@ -606,6 +607,11 @@ h3 {
     color: #fff;
     font-size: 16px;
   }
+  &.no-notifications{
+    padding: 30px 10px 50px;
+    font-size: 22px;
+    text-align: center;
+  }
 }
 
 .dashboard-content {
@@ -698,6 +704,29 @@ tags-input {
       input{
         min-height: 44px;
       }
+    }
+  }
+}
+
+
+.page{
+  &.page-settings{
+    .page__wrapper {
+      .main-container {
+        .page-content {
+
+        }
+      }
+    }
+  }
+  h5{
+    &.switch-box-title {
+      color: #fff;
+      font-weight: 400;
+      margin: 0 0 0 10px;
+      display: inline-block;
+      line-height: 1.7;
+      vertical-align: top;
     }
   }
 }
