@@ -42,9 +42,12 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
         factory.emitChanges();
     });
 
-
     factory.getNotifications = function () {
         return factory.data.notifications;
+    };
+
+    factory.deleteAllNotifications = function(){
+        factory.data.notifications = [];
     };
 
     factory.getUndreadNotificationsCount = function(){

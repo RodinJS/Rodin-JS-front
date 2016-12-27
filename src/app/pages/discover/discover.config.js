@@ -2,7 +2,7 @@ function DiscoverConfig($stateProvider) {
 	'ngInject';
 	$stateProvider
 		.state('landing.discover', {
-			url: '/discover',
+			url: '/howitworks',
 			controller: 'DiscoverCtrl as $ctrl',
 			templateUrl: 'pages/discover/discover.html',
 			title: 'Discover'

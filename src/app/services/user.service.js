@@ -2,12 +2,12 @@
  * Created by kh.levon98 on 20-Sep-16.
  */
 class User {
-    constructor(JWT, AppConstants, Restangular, Validator, $state, $q, $timeout, Analyser) {
+    constructor(JWT, AppConstants, Restangular, Validator, $state, $q, $timeout, Analyser, NotificationsStore) {
         'ngInject';
 
         this._JWT = JWT;
         this._AppConstants = AppConstants;
-
+        this._NotificationsStore = NotificationsStore;
         this._User = Restangular.all('user');
         this._Auth = Restangular.all('auth');
         this._Notifications = Restangular.all('notifications');
@@ -158,6 +158,7 @@ class User {
     logout() {
         this.current = null;
         this._JWT.destroy();
+        this._Notifications.deleteAllNotifications();
         this._$timeout(()=> {
             this._$state.go(this._$state.$current, null, {reload: true});
         }, 100);
