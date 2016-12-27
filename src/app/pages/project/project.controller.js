@@ -61,6 +61,7 @@ class ProjectCtrl {
         projectInfo.description = this._$scope.projectDescription;
         this.Project.create(projectInfo).then(
             data => {
+                this.Project.transpile(data._id);
                 this.VCS.create(data._id, {
                     root: data.root,
                     name: data.name
@@ -95,11 +96,11 @@ class ProjectCtrl {
 
 
     createFinalize(err){
-      if(err){
-          _.each(err, (val, key)=>{
-              this.Notification.warning(val.fieldName);
-          });
-      }
+        if (err) {
+            _.each(err, (val, key) => {
+                this.Notification.warning(val.fieldName);
+            });
+        }
         this.Notification.success("Project created");
         this.User.current.projects.total +=1;
         this.$state.go('app.dashboard');
