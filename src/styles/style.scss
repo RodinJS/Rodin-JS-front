@@ -459,58 +459,69 @@ tags-input {
   }
 }
 
+//.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover
+
 .header {
   .navbar {
     .nav {
-      .dropdown-menu.dropdown-menu-notifi {
-        ul {
-          & > li {
-            &:hover,
-            &.readed {
-              background-color: rgba(37, 37, 39, 0.7);
-              a {
-                &:hover {
-                  background: transparent;
+      .dropdown-menu{
+        li{
+          a{
+            &:focus{
+              background: transparent;
+            }
+          }
+        }
+        &.dropdown-menu-notifi {
+          ul {
+            & > li {
+              &:hover,
+              &.readed {
+                background-color: rgba(37, 37, 39, 0.7);
+                a {
+                  &:hover {
+                    background: transparent;
+                  }
                 }
               }
-            }
-            a {
-              border-bottom: none;
-              padding-top: 0;
-
-            }
-            p {
-              word-wrap: break-word;
               a {
-                color: #ff9a2b;
-              }
-            }
-            &::before {
-              top: 12px;
-            }
-            &:first-child {
-              & > a {
+                border-bottom: none;
                 padding-top: 0;
+
+              }
+              p {
+                word-wrap: break-word;
+                a {
+                  color: #ff9a2b;
+                }
               }
               &::before {
                 top: 12px;
               }
-            }
-            .events {
-              padding: 1px 15px 0;
-              margin-bottom: 5px;
-              color: #fff;
-              i {
-                margin: 0 2px;
-                cursor: pointer;
-                font-size: 12px;
-                &:hover {
-                  color: #ff9a2b
+              &:first-child {
+                & > a {
+                  padding-top: 0;
                 }
-                &.in-progress {
-                  font-size: 13px;
-                  cursor: default;
-                  color: #ff9a2b;
+                &::before {
+                  top: 12px;
+                }
+              }
+              .events {
+                padding: 1px 15px 0;
+                margin-bottom: 5px;
+                color: #fff;
+                i {
+                  margin: 0 2px;
+                  cursor: pointer;
+                  font-size: 12px;
+                  &:hover {
+                    color: #ff9a2b
+                  }
+                  &.in-progress {
+                    font-size: 13px;
+                    cursor: default;
+                    color: #ff9a2b;
+                  }
                 }
               }
             }
@@ -707,6 +718,7 @@ tags-input {
     }
   }
 }
+
 
 
 
