@@ -213,11 +213,13 @@ class User {
 
     ensureAuthIs(bool = false) {
         let deferred = this._$q.defer();
+
         this.verifyAuth().then((authValid) => {
             if (authValid !== bool) {
                 this._$state.go('landing.login');
                 deferred.resolve(false);
-            } else {
+            }
+            else {
                 deferred.resolve(true);
             }
 

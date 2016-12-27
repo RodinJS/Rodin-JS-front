@@ -709,6 +709,7 @@ tags-input {
 }
 
 
+
 .page{
   &.page-settings{
     .page__wrapper {
@@ -728,5 +729,21 @@ tags-input {
       line-height: 1.7;
       vertical-align: top;
     }
+  }
+}
+
+.discover-page{
+  color:#fff;
+  h3{
+    margin-bottom: 30px;
+  }
+  ol{
+    li{
+      margin: 0 0 10px 0;
+    }
+  }
+  img{
+    margin: 20px 0 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 }

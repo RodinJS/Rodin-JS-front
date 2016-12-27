@@ -15,16 +15,18 @@ class AppHeaderCtrl {
         });
 
         this.user = User.current;
-        this.notificationsStore.subscribeAndInit($scope, ()=>{
-            this.notifications = this.notificationsStore.getNotifications();
-            this.notificationsCount = this.notificationsStore.getUndreadNotificationsCount();
-            if(!this.notifications) return this.getNotifications();
-        });
 
-        SocketService.on('projectBuild', (data)=>{
-            EventBus.emit(this.eventBus.notifications.SET_ONE, data);
-        });
+        if(this.user){
+            this.notificationsStore.subscribeAndInit($scope, ()=>{
+                this.notifications = this.notificationsStore.getNotifications();
+                this.notificationsCount = this.notificationsStore.getUndreadNotificationsCount();
+                if(!this.notifications) return this.getNotifications();
+            });
 
+            SocketService.on('projectBuild', (data)=>{
+                EventBus.emit(this.eventBus.notifications.SET_ONE, data);
+            });
+        }
     }
 
     getNotifications() {

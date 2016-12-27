@@ -10,7 +10,7 @@
 					<div class="row">
 						<div class="form-group pass-group" custom-input>
 							<input type="text" class="form-control dashboard-search" placeholder="" data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
-							<label class="control-label float-label">Name, Description or Meta tags</label>
+							<label class="control-label float-label">Url, Description or project name</label>
 							<i class="icon icon-search search"></i>
 						</div>
 					</div>
@@ -69,11 +69,11 @@
 											<i class="icon icon-link"></i>
 										</a>
 									</li>
-									<li>
+									<!--<li>
                                         <a class="icon-href" ng-class="project.public == 'true' ? 'unlocked' : 'locked'">
                                             <i class="icon icon-lock" aria-hidden="true"></i>
                                         </a>
-									</li>
+									</li>-->
 									<li>
                                         <a data-ui-sref="app.editproject({projectId: project._id})"><i
 										class="icon icon-settings"></i></a>
@@ -88,7 +88,7 @@
 						</div>
 						<a href="" class="dashboard-item-link">
 							<h3 class="box-title">
-								<i data-ng-if="!project.public" class="icon icon-lock"></i>
+								<i style="margin-right:5px" ng-if="!project.public || project.public == 'false'" class="icon icon-lock" aria-hidden="true"></i>
 								{{project.displayName || project.name}}
 							</h3>
 							<p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>

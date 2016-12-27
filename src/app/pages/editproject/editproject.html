@@ -33,13 +33,13 @@
                 <h5 class="switch-box-title">Public</h5>
                 <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
                    Current version:
-                    <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
+                    <a  class="text-yellow" ta ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
                         {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
                     </a>
                 </p>
                 <p ng-if="$ctrl.project.publishedUrl" class="description text-small text-down">
                    Published version:
-                    <a class="text-yellow" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
+                    <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
                 </p>
             </div>
             <div class="section section-general-setting">
