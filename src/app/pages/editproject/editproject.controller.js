@@ -33,6 +33,7 @@ class EditProjectCtrl {
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
+
             if(!this.project)
                 this.getProject();
             else
@@ -90,10 +91,13 @@ class EditProjectCtrl {
     deleteProject() {
         this.showLoader = true;
 
-        this.Project.remove(this.project._id).then(
+        this.Project.remove(this.project).then(
             data => {
                 this.Notification.success('Project deleted');
                 this.showLoader = false;
+                if(this.user.projects.total > 0){
+                    this.user.projects.total--;
+                }
                 this.$state.go('app.dashboard');
             },
             err => {

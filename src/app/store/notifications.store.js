@@ -23,14 +23,16 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
         factory.emitChanges();
     });
 
-
     EventBus.on(EventBus.notifications.SET_ONE,  (scope, data) => {
         factory.data.notifications.unshift(mapNotifications([data])[0]);
         factory.emitChanges();
     });
 
     EventBus.on(EventBus.notifications.DELETE,  (scope, index) => {
-        factory.data.notifications.splice(index, 1);
+        if(index)
+            factory.data.notifications.splice(index, 1);
+        else
+            factory.data.notifications = [];
         factory.emitChanges();
     });
 
@@ -40,9 +42,12 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
         factory.emitChanges();
     });
 
-
     factory.getNotifications = function () {
         return factory.data.notifications;
+    };
+
+    factory.deleteAllNotifications = function(){
+        factory.data.notifications = [];
     };
 
     factory.getUndreadNotificationsCount = function(){

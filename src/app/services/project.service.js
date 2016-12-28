@@ -24,6 +24,20 @@ class Project {
         return Analyser.promise;
     }
 
+    deleteDomain(projectId, fields = {}){
+        let Analyser = new this._Analyser();
+        let deletingDomain = fields.domain;
+        fields.domain = '';
+        this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName', 'domain']))
+            .then(
+                data=>{
+                    return this._ProjectDomains.remove({domain:deletingDomain}).then(Analyser.resolve, Analyser.reject);
+                },
+                Analyser.reject
+            );
+        return Analyser.promise;
+    }
+
     get(projectId = null, fields) {
         let Analyser = new this._Analyser();
         this._Projects.one(projectId).get(fields).then(Analyser.resolve, Analyser.reject);
@@ -85,9 +99,16 @@ class Project {
         return Analyser.promise;
     }
 
-    remove(projectId = null, fields = {}) {
+    remove(project = {}, fields = {}) {
         let Analyser = new this._Analyser();
-        this._Projects.one(projectId).remove(fields).then(Analyser.resolve, Analyser.reject);
+        console.log(project);
+        this._Projects.one(project._id).remove(fields).then(
+            data=>{
+                if(project.domain){
+                    return this._ProjectDomains.remove({domain:project.domain}).then(Analyser.resolve, Analyser.reject);
+                }
+                return Analyser.resolve(data);
+            }, Analyser.reject);
         return Analyser.promise;
     }
 

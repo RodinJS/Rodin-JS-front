@@ -14,18 +14,18 @@ function SocketService(AppConstants, User, $rootScope){
 
 
 	function listener(eventName, callback) {
-		socket.on(eventName, function (data) {
+		socket.on(eventName,  (data) => {
 			var args = arguments;
-			$rootScope.$apply(function () {
+			$rootScope.$apply( () => {
 				callback.apply(socket, args);
 			});
 		});
 	}
 
 	function emitter(eventName, data, callback) {
-		socket.emit(eventName, data, function () {
+		socket.emit(eventName, data,  () => {
 			var args = arguments;
-			$rootScope.$apply(function () {
+			$rootScope.$apply( () => {
 				if (callback) {
 					callback.apply(socket, args);
 				}
@@ -35,36 +35,4 @@ function SocketService(AppConstants, User, $rootScope){
 
 }
 
-
-/*class SocketService {
-	constructor(AppConstants, User) {
-		'ngInject';
-
-		this._AppConstants = AppConstants;
-		this.User = User;
-
-	}
-
-
-	/!*listener(eventName, callback) {
-		socket.on(eventName, function (data) {
-			var args = arguments;
-			$rootScope.$apply(function () {
-				callback.apply(socket, args);
-			});
-		});
-	}
-
-	emitter(eventName, data, callback) {
-		socket.emit(eventName, data, function () {
-			var args = arguments;
-			$rootScope.$apply(function () {
-				if (callback) {
-					callback.apply(socket, args);
-				}
-			});
-		})
-	}*!/
-
-}*/
 export default SocketService;

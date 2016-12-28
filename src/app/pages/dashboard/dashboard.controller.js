@@ -24,7 +24,18 @@ class DashboardCtrl {
 		this.modals = {
 			share: false,
             remove:false,
+		};
+
+        if(this.user.projects.total >= this.user.allowProjectsCount){
+        	this.cantCreateProject = true;
 		}
+    }
+
+    createProject(){
+		if(this.cantCreateProject){
+			return this.Notification.error(`Maximum projects count exceeded, allowend project count ${this.user.allowProjectsCount}`);
+		}
+		this.$state.go('app.project');
 	}
 
 	getProjects() {
@@ -76,12 +87,19 @@ class DashboardCtrl {
             return project._id === this.currentModalProject._id;
         });
 
-        this.Project.remove(this.currentModalProject._id).then(
+        this.Project.remove(this.currentModalProject).then(
             data => {
                 this.modals.remove = false;
                 this.Notification.success(`Project ${this.currentModalProject.name} deleted`);
                 this.showLoader = false;
                 this.projects.splice(projectIndex, 1);
+
+                if(this.user.projects.total > 0){
+                    this.user.projects.total--;
+				}
+                if(this.user.projects.total < this.user.allowProjectsCount){
+                    this.cantCreateProject = false;
+                }
             },
             err => {
                 _.each(err, (val, key)=>{

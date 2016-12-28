@@ -188,6 +188,10 @@ const AppConstants = {
             message: "NO_GITHUB_ACCOUNT",
             field: ""
         },
+        "352": {
+            message: "REPO_NAME_EXISTS",
+            field: ""
+        },
         "601": {
             "message": "UNKNOWN_SOCKET_CHANNEL",
             "field": ""

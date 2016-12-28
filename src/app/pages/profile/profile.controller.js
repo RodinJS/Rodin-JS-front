@@ -25,9 +25,8 @@ class ProfileCtrl {
         this.modals = {
             sync:false,
             unsync:false
-        }
+        };
 
-        this.passwordChangeResponse = '';
 
         FB.init({
             appId: AppConstants.FB,
@@ -82,9 +81,6 @@ class ProfileCtrl {
             username: this.currentUser.username
         };
 
-        if (currentUser.profile.skills) {
-            currentUser.profile.skills = currentUser.profile.skills.map(i => i.text);
-        }
 
         this._User.update(null, currentUser).then(
             data => {

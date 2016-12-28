@@ -19,8 +19,20 @@ function limitTo() {
     return {
         restrict: "A",
         require: 'ngModel',
-        link: function (scope, elem, attrs) {
+
+        link: (scope, elem, attrs) => {
             let limit = parseInt(attrs.limitTo);
+
+            elem.bind('paste',  (e) => {
+
+                let pastedData = e.originalEvent.clipboardData.getData('text');
+                let totalSymbolsLength = elem[0].value.length+pastedData.length;
+
+                if(totalSymbolsLength >= limit){
+                    e.preventDefault();
+                    return false;
+                }
+            });
             elem.bind('keypress', (e) => {
                 if (e.keyCode != 8 && elem[0].value.length >= limit) {
                     e.preventDefault();

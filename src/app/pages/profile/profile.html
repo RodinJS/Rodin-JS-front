@@ -16,7 +16,7 @@
                     <li ng-class="!$ctrl.privacy ? 'active' : ''">
                         <a href="" ng-click="$ctrl.privacy = false">Profile</a>
                     <li ng-class="$ctrl.privacy ? 'active' : ''">
-                        <a ng-click="$ctrl.privacy = true">Privacy</a>
+                        <a  href="" ng-click="$ctrl.privacy = true">Privacy</a>
                     </li>
                     <!--
                     <li class=""><a ui-sref="app.plans">Plans</a>
@@ -34,7 +34,7 @@
             </div>
 
 
-            <div ng-if="!$ctrl.privacy">
+            <div ng-show="!$ctrl.privacy">
 
                 <div class="section section-account-details ">
                     <h2 class="section-title">Account Details</h2>
@@ -58,7 +58,7 @@
                                 <tr>
                                     <td class="text-primary"><span>Published projects</span>
                                     </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.projects.published}}<span></span>
+                                    <td class="text-primary">{{$ctrl.currentUser.projects.published || 0}}<span></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -70,8 +70,9 @@
                                 <tr>
                                     <td class="text-primary"><span>Storage Used (Sites)</span>
                                     </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.usedStorage | bytes:
-                                        'MB'}}<span></span>
+                                    <td class="text-primary">
+                                        <span ng-if="$ctrl.currentUser.usedStorage"> {{$ctrl.currentUser.usedStorage | bytes:'MB'}}</span>
+                                        <span ng-if="!$ctrl.currentUser.usedStorage">0.00 MB</span>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -340,7 +341,7 @@
                 </div>
             </div>
 
-            <div ng-if="$ctrl.privacy">
+            <div ng-show="$ctrl.privacy">
                 <div class="section section-password last-section">
                     <h2 class="section-title">Change Password</h2>
                     <div class="row">

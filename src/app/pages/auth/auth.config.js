@@ -8,8 +8,9 @@ function AuthConfig($stateProvider) {
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'pages/auth/auth.html',
 			title: 'Sign in',
-			resolve: {
-				auth: function (User) {
+            redirectToWhenAuthenticated: "app.dashboard",
+            resolve: {
+				auth: function (User, $state, $timeout) {
 					return User.ensureAuthIs(false);
 				}
 			}
@@ -20,24 +21,13 @@ function AuthConfig($stateProvider) {
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'pages/auth/auth.html',
 			title: 'Sign up',
-			resolve: {
+            redirectToWhenAuthenticated: "app.dashboard",
+            resolve: {
 				auth: function (User) {
 					return User.ensureAuthIs(false);
 				}
 			}
 		})
-
-		.state('landing.forgot', {
-			url: '/forgot',
-			controller: 'AuthCtrl as $ctrl',
-			templateUrl: 'pages/auth/auth.html',
-			title: 'Forgot Password',
-			resolve: {
-				auth: function (User) {
-					return User.ensureAuthIs(false);
-				}
-			}
-		});
 
 };
 

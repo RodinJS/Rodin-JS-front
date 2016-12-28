@@ -33,13 +33,13 @@
                 <h5 class="switch-box-title">Public</h5>
                 <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
                    Current version:
-                    <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
+                    <a  class="text-yellow" ta ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
                         {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
                     </a>
                 </p>
                 <p ng-if="$ctrl.project.publishedUrl" class="description text-small text-down">
                    Published version:
-                    <a class="text-yellow" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
+                    <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
                 </p>
             </div>
             <div class="section section-general-setting">
@@ -84,7 +84,9 @@
                 <div class="drag-cont">
                     <div class="drag-item first">
                         <h5 class="section-small-title">Webclip</h5>
-                        <p class="text-small description">Upload a <span>256 x 256 pixel</span> nebdip image. The icon shows up when your websrte link s saved to an iPhone home screen</p>
+                        <p class="text-small description">Upload a
+                            <span>1024 x 1024 pixel</span> image.
+                            This image will be the project's thumbnail.</p>
                         <div class="drag-area first">
                             <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#thumbnail-img').click()">
                                 <i ng-if="!$ctrl.project.thumbnail" class="icon icon-invalid"></i>
@@ -187,14 +189,8 @@
                 <h2 class="section-title">Description</h2>
                 <div class="row">
                     <div class="col-md-6">
-                     <!--   <wysiwyg textarea-id="projectDescription"
-                                 textarea-class="form-control"
-                                 textarea-height="80px"
-                                 textarea-name="projectDescription"
-                                 ng-model="$ctrl.project.description"
-                                 enable-bootstrap-title="true"
-                                 textarea-menu="$ctrl.wysiwygOptions"></wysiwyg>-->
-                        <textarea limit-to="256" style="height: 80px; width:100%" ng-model="$ctrl.project.description" class="wysiwyg-textarea"></textarea>
+                        <textarea limit-to="256"  style="height: 80px; width:100%" ng-model="$ctrl.project.description" class="wysiwyg-textarea"></textarea>
+                        <span class="pull-right" style=" font-size: 14px; color: #ff9a2b;">256 / {{256-$ctrl.project.description.length}}</span>
 
                         <div class="btn-wrapper">
                             <button type="button" ng-click="$ctrl.update()" class="btn btn-primary">Update</button>
