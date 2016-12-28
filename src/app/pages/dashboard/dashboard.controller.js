@@ -93,6 +93,13 @@ class DashboardCtrl {
                 this.Notification.success(`Project ${this.currentModalProject.name} deleted`);
                 this.showLoader = false;
                 this.projects.splice(projectIndex, 1);
+
+                if(this.user.projects.total > 0){
+                    this.user.projects.total--;
+				}
+                if(this.user.projects.total < this.user.allowProjectsCount){
+                    this.cantCreateProject = false;
+                }
             },
             err => {
                 _.each(err, (val, key)=>{

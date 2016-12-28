@@ -135,17 +135,19 @@
 	</div>
 </div>
 
-<div class="modal model-confirm" close-modal="remove" ng-click="$ctrl.modals.remove = false" ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+<div class="modal model-confirm" close-modal="remove"  ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
             <h1 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h1>
             <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
         </div>
-        <div class="modal-body padding-0-important" ng-if="!!$ctrl.currentModalProject.publishDate">
+        <div class="modal-body padding-0-important">
             <p class="description word-wrap">
-                Your project will no longer be available on
-                <span class="text-yellow">{{$ctrl.currentModalProject.publishedUrl}}</span>, your apps for
+                <span ng-if="$ctrl.currentModalProject.publishedUrl">
+                     Your project will no longer be available on
+                     <span class="text-yellow">{{$ctrl.currentModalProject.publishedUrl}}</span>, your apps for
+                </span>
                 <span class="text-yellow">"{{$ctrl.currentModalProject.name}}"</span> will stop working !<br>
                 Are you sure you want to continue?
             </p>
