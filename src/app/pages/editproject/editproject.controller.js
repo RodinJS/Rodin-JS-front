@@ -91,7 +91,7 @@ class EditProjectCtrl {
     deleteProject() {
         this.showLoader = true;
 
-        this.Project.remove(this.project._id).then(
+        this.Project.remove(this.project).then(
             data => {
                 this.Notification.success('Project deleted');
                 this.showLoader = false;

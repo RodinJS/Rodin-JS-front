@@ -85,9 +85,16 @@ class Project {
         return Analyser.promise;
     }
 
-    remove(projectId = null, fields = {}) {
+    remove(project = {}, fields = {}) {
         let Analyser = new this._Analyser();
-        this._Projects.one(projectId).remove(fields).then(Analyser.resolve, Analyser.reject);
+        console.log(project);
+        this._Projects.one(project._id).remove(fields).then(
+            data=>{
+                if(project.domain){
+                    return this._ProjectDomains.remove({domain:project.domain}).then(Analyser.resolve, Analyser.reject);
+                }
+                return Analyser.resolve(data);
+            }, Analyser.reject);
         return Analyser.promise;
     }
 

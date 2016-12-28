@@ -166,7 +166,6 @@ class User {
 
     verifyPermission() {
         let deferred = this._$q.defer();
-
         this.verifyAuth().then(
             result=> {
                 if (!this.current) {
@@ -190,7 +189,6 @@ class User {
     verifyAuth() {
         let deferred = this._$q.defer();
         // check for JWT token
-        // console.log("verifyAuth", this._JWT.get())
         if (!this._JWT.get()) {
             deferred.resolve(false);
             return deferred.promise;

@@ -87,7 +87,7 @@ class DashboardCtrl {
             return project._id === this.currentModalProject._id;
         });
 
-        this.Project.remove(this.currentModalProject._id).then(
+        this.Project.remove(this.currentModalProject).then(
             data => {
                 this.modals.remove = false;
                 this.Notification.success(`Project ${this.currentModalProject.name} deleted`);
