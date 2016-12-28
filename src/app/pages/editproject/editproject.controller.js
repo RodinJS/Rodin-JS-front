@@ -95,6 +95,9 @@ class EditProjectCtrl {
             data => {
                 this.Notification.success('Project deleted');
                 this.showLoader = false;
+                if(this.user.projects.total > 0){
+                    this.user.projects.total--;
+                }
                 this.$state.go('app.dashboard');
             },
             err => {
