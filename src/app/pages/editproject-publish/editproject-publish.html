@@ -34,7 +34,7 @@
     <div class="loader" data-ng-if="$ctrl.showLoader"></div>
 </div>
 
-<div class="modal" close-modal="updateVersion" ng-click="$ctrl.modals.updateVersion = false" ng-class="{'display-block': $ctrl.modals.updateVersion, 'display-none': !$ctrl.modals.updateVersion}">
+<div class="modal" close-modal="updateVersion" ng-class="{'display-block': $ctrl.modals.updateVersion, 'display-none': !$ctrl.modals.updateVersion}">
     <div class="modal-content">
         <span class="close" data-ng-click="$ctrl.modals.updateVersion = false"> ×</span>
         <div class="modal-header">
@@ -57,7 +57,7 @@
     </div>
 </div>
 
-<div class="modal" close-modal="rollBack" ng-click="$ctrl.modals.rollBack = false" ng-class="{'display-block': $ctrl.modals.rollBack, 'display-none': !$ctrl.modals.rollBack}">
+<div class="modal" close-modal="rollBack" ng-class="{'display-block': $ctrl.modals.rollBack, 'display-none': !$ctrl.modals.rollBack}">
     <div class="modal-content">
         <span class="close" data-ng-click="$ctrl.modals.rollBack = false"> ×</span>
         <div class="modal-header">
@@ -68,9 +68,11 @@
                 Select which saved date version you want to rollback
             </p>
             <div class="form-group select-group">
-                <select class="form-control" ng-model="$ctrl.rollBackDate">
+                {{$ctrl.rollBackDate.length}}
+                <select ng-if="$ctrl.rollbackDates.length > 0" class="form-control" ng-model="$ctrl.rollBackDate">
                     <option ng-repeat="rollBackDate in $ctrl.rollbackDates" value="{{rollBackDate.origin}}">{{rollBackDate.formated}}</option>
                 </select>
+                <span ng-if="$ctrl.rollbackDates.length <= 0 ">Currently you don't have saved versions</span>
             </div>
         </div>
         <div class="modal-footer padding-bottom-40-important">
@@ -95,6 +97,7 @@
                 Your project will no longer be available on
                 <span class="text-yellow">{{$ctrl.project.publishedUrl}}</span>, your apps for
                 <span class="text-yellow">"{{$ctrl.project.name}}"</span> will stop working !<br>
+                and your roll back history will be removed as well.
                 Are you sure you want to continue?
             </p>
         </div>

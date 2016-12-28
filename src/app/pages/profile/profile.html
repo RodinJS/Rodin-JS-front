@@ -58,7 +58,7 @@
                                 <tr>
                                     <td class="text-primary"><span>Published projects</span>
                                     </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.projects.published}}<span></span>
+                                    <td class="text-primary">{{$ctrl.currentUser.projects.published || 0}}<span></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -70,7 +70,9 @@
                                 <tr>
                                     <td class="text-primary"><span>Storage Used (Sites)</span>
                                     </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.usedStorage ? $ctrl.currentUser.usedStorage | bytes:'MB' : '0.00 MB'}}<span></span>
+                                    <td class="text-primary">
+                                        <span ng-if="$ctrl.currentUser.usedStorage"> {{$ctrl.currentUser.usedStorage | bytes:'MB'}}</span>
+                                        <span ng-if="!$ctrl.currentUser.usedStorage">0.00 MB</span>
                                     </td>
                                 </tr>
                                 </tbody>
