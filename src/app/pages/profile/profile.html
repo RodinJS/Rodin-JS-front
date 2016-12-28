@@ -16,7 +16,7 @@
                     <li ng-class="!$ctrl.privacy ? 'active' : ''">
                         <a href="" ng-click="$ctrl.privacy = false">Profile</a>
                     <li ng-class="$ctrl.privacy ? 'active' : ''">
-                        <a ng-click="$ctrl.privacy = true">Privacy</a>
+                        <a  href="" ng-click="$ctrl.privacy = true">Privacy</a>
                     </li>
                     <!--
                     <li class=""><a ui-sref="app.plans">Plans</a>
@@ -34,7 +34,7 @@
             </div>
 
 
-            <div ng-if="!$ctrl.privacy">
+            <div ng-show="!$ctrl.privacy">
 
                 <div class="section section-account-details ">
                     <h2 class="section-title">Account Details</h2>
@@ -341,7 +341,7 @@
                 </div>
             </div>
 
-            <div ng-if="$ctrl.privacy">
+            <div ng-show="$ctrl.privacy">
                 <div class="section section-password last-section">
                     <h2 class="section-title">Change Password</h2>
                     <div class="row">

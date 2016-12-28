@@ -24,17 +24,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-wrapper">
-                                    <p class="text-small description">Add your custom Domain Make sure you published this project</p>
+                                    <p class="text-small description">Add your custom Domain.</p>
                                     <div class="form-group" custom-input
                                          data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': configs.url.$valid && addDomain.url.focused}">
                                         <input type="text" class="form-control" placeholder=""
-                                               data-ng-model="$ctrl.project.domain"
+                                               data-ng-model="$ctrl.domain"
                                                ng-pattern="$ctrl.domainPattern"
                                                name="url"
                                                required
                                                data-ng-focus="addDomain.url.focused = true">
                                         <label class="control-label float-label">
-                                            {{addDomain.url.focused || $ctrl.project.domain ? 'Project url' : 'example.com'}} {{addDomain.url.$invalid ? 'invalid' : ''}}
+                                            {{addDomain.url.focused || $ctrl.domain ? 'Project url' : 'example.com'}} {{addDomain.url.$invalid ? 'invalid' : ''}}
                                         </label>
                                     </div>
                                     <button type="submit" class="btn btn-primary"
@@ -42,6 +42,9 @@
                                             ng-disabled="!addDomain.$valid || !$ctrl.project.publishedPublic">
                                         Submit
                                     </button>
+                                    <a href="" class="btn link" ng-if="$ctrl.project.domain" ng-click="$ctrl.deleteDomain($event)">
+                                        Delete domain
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -58,14 +58,6 @@
     padding: 0;
     border: 0;
     &.login {
-      .btn {
-        &.link {
-          color: #ff9a2b;
-          &:hover {
-            color: #ff9a2b;
-          }
-        }
-      }
     }
     .btn-wrapper {
       padding-top: 20px;
@@ -757,5 +749,14 @@ tags-input {
   img{
     margin: 20px 0 0 0;
     border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+}
+
+.btn {
+  &.link {
+    color: #ff9a2b;
+    &:hover {
+      color: #ff9a2b;
+    }
   }
 }
