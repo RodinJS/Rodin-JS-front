@@ -15,7 +15,7 @@
                 <h5 class="switch-box-title">Add custom domain</h5>
                 <p ng-if="$ctrl.project.publishedUrl && !$ctrl.customDomainTrigger" class="description text-small text-down">
                     Your project current url:
-                    <a class="text-yellow" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
+                    <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
                 </p>
                 <form name="addDomain" id="configs" ng-if="$ctrl.customDomainTrigger">
                     <div class="section">
