@@ -68,7 +68,6 @@
                 Select which saved date version you want to rollback
             </p>
             <div class="form-group select-group">
-                {{$ctrl.rollBackDate.length}}
                 <select ng-if="$ctrl.rollbackDates.length > 0" class="form-control" ng-model="$ctrl.rollBackDate">
                     <option ng-repeat="rollBackDate in $ctrl.rollbackDates" value="{{rollBackDate.origin}}">{{rollBackDate.formated}}</option>
                 </select>
