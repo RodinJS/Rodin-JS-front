@@ -182,7 +182,7 @@
                                 <button data-ng-if="$ctrl.project.build.ios.built"
                                         type="button" class="btn btn-primary"
                                         ng-click="$ctrl.download()">download</button>
-                                <a data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">cancel</a>
+                                <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">cancel</a>
                             </div>
                         </div>
                     </div>

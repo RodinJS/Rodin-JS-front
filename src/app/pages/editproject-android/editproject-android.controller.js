@@ -195,6 +195,40 @@ class EditProjectAndroidCtrl {
         console.log(project);
     };
 
+    cancelBuild (e) {
+        const ctrl = this;
+        e.preventDefault();
+        let project = {
+            userId: this.user.username,
+            appId: this.project._id,
+
+        };
+
+        this.showLoader = true;
+        $("#configs").ajaxForm({
+            dataType: "json",
+            type: 'DELETE',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/android',
+            headers: {
+                "x-access-token": this._JWT.get()
+            },
+            data: {
+                project: angular.toJson(project)
+            },
+            success: function (data) {
+                ctrl.getProject();
+                ctrl.showLoader = false;
+                ctrl._$scope.$apply();
+            },
+            error: function (data) {
+                ctrl.showLoader = false;
+                ctrl._$scope.$apply();
+            }
+        }).submit();
+
+        console.log(project);
+    };
+
     open (e) {
         this.modals.password = true;
         this.openEvent = e;

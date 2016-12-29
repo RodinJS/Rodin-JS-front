@@ -64,7 +64,9 @@
                                         ng-disabled="!isVersionValid || !configs.$valid || ($ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built)">
                                     build
                                 </button>
-                                <!--<a href="" class="btn btn-save" disabled>remove</a>-->
+<!--
+                                <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">cancel</a>
+-->
                             </div>
                         </div>
                     </div>
@@ -92,7 +94,7 @@
                                         type="button" class="btn btn-primary"
                                         ng-click="$ctrl.download()">download
                                 </button>
-                                <a data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">cancel</a>
+                                <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">cancel</a>
                             </div>
                         </div>
                     </div>

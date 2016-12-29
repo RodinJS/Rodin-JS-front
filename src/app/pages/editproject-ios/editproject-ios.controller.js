@@ -1,7 +1,7 @@
 class EditProjectIosCtrl {
     constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
-        this.Notification = Notification;
+        this.Notificatio = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
         this._JWT = JWT;
@@ -189,7 +189,7 @@ class EditProjectIosCtrl {
                 certPassword: this.project.ios.certPassword
             }
         };
-console.log("this.project", this.project)
+        console.log("this.project", this.project)
         ctrl.showLoader = true;
         $("#configs").ajaxForm({
             dataType: "json",
@@ -205,7 +205,39 @@ console.log("this.project", this.project)
                 ctrl.getProject();
             },
             error: function (data) {
+                console.log(data);
                 ctrl.showLoader = false;
+            }
+        }).submit();
+    };
+
+    cancelBuild(e) {
+        const ctrl = this;
+        e.preventDefault();
+        let project = {
+            userId: this.user.username,
+            appId: this.projectId,
+        };
+        console.log("this.project", this.project);
+        ctrl.showLoader = true;
+        $("#configs").ajaxForm({
+            dataType: "json",
+            type: 'DELETE',
+            url: this._AppConstants.API + '/project/' + this.projectId + '/build/ios',
+            headers: {
+                "x-access-token": this._JWT.get()
+            },
+            data: {
+                project: angular.toJson(project)
+            },
+            success: function (data) {
+                ctrl.getProject();
+                ctrl.showLoader = false;
+                ctrl._$scope.$apply();
+            },
+            error: function (data) {
+                ctrl.showLoader = false;
+                ctrl._$scope.$apply();
             }
         }).submit();
     };

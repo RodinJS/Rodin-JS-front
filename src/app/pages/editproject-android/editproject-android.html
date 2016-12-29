@@ -245,7 +245,7 @@
                                 <button data-ng-if="$ctrl.project.build.android.built"
                                         type="button" class="btn btn-primary"
                                         ng-click="$ctrl.download()">download</button>
-                                <a data-ng-if="!$ctrl.project.build.android.built" class="btn btn-save">cancel</a>
+                                <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.android.built" class="btn btn-save">cancel</a>
                             </div>
                         </div>
                     </div>
@@ -273,6 +273,7 @@
                         <input type="password" class="form-control" placeholder=""
                                data-ng-model="$ctrl.project.android.keyStore.password"
                                name="password"
+                               ng-minlength="6"
                                required
                                data-ng-focus="password.password.focused = true">
                         <label class="control-label float-label">KeyStore Password</label>
@@ -285,6 +286,7 @@
                                data-ng-model="$ctrl.project.android.keyStore.aliasPassword"
                                name="aliasPassword"
                                required
+                               ng-minlength="6"
                                data-ng-focus="password.aliasPassword.focused = true">
                         <label class="control-label float-label">Alias Password</label>
                     </div>

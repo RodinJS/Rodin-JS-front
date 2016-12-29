@@ -173,8 +173,8 @@ class EditProjectViveCtrl {
             userId: this.user.username,
             appId: this.project._id,
             appName: this.project.vive.name,
-            version:this.project.oculus.version,
-            vive: {
+            version:this.project.vive.version,
+            oculus: {
                 exportMethod: "ad-hoc",
                 bundleIdentifier: this.project.vive.bundle,
                 developerId: this.project.vive.developerId,
@@ -185,7 +185,7 @@ class EditProjectViveCtrl {
         ctrl.showLoader = true;
         $("#configs").ajaxForm({
             dataType: "json",
-            url: this._AppConstants.API + '/project/' + this.project._id + '/build/vive',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
             headers: {
                 "x-access-token": this._JWT.get()
             },
@@ -202,6 +202,41 @@ class EditProjectViveCtrl {
         }).submit();
     };
 
+    cancelBuild(e) {
+        const ctrl = this;
+        e.preventDefault();
+        let project = {
+            userId: this.user.username,
+            appId: this.project._id,
+            //appName: this.project.vive.name,
+            //version:this.project.oculus.version,
+            oculus: {
+            }
+        };
+
+        ctrl.showLoader = true;
+        $("#configs").ajaxForm({
+            dataType: "json",
+            type:'DELETE',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
+            headers: {
+                "x-access-token": this._JWT.get()
+            },
+            data: {
+                project: angular.toJson(project)
+            },
+            success: function (data) {
+                ctrl.getProject();
+                ctrl.showLoader = false;
+                ctrl._$scope.$apply();
+            },
+            error: function (data) {
+                ctrl.showLoader = false;
+                ctrl._$scope.$apply();
+            }
+        }).submit();
+    };
+
     open(e) {
         this.modals.password = true;
         this.openEvent = e;
@@ -209,7 +244,7 @@ class EditProjectViveCtrl {
 
     download() {
         this.showLoader = true;
-        this.Project.download(this.project._id, 'vive').then(
+        this.Project.download(this.project._id, 'oculus').then(
             data => {
                 this.showLoader = false;
                 window.location = data.downloadUrl;

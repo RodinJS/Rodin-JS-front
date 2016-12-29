@@ -203,6 +203,38 @@ class EditProjectOculusCtrl {
         }).submit();
     };
 
+    cancelBuild(e) {
+        const ctrl = this;
+        e.preventDefault();
+        let project = {
+            userId: this.user.username,
+            appId: this.project._id,
+            oculus: {}
+        };
+
+        ctrl.showLoader = true;
+        $("#configs").ajaxForm({
+            dataType: "json",
+            type: 'DELETE',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
+            headers: {
+                "x-access-token": this._JWT.get()
+            },
+            data: {
+                project: angular.toJson(project)
+            },
+            success: function (data) {
+                ctrl.getProject();
+                ctrl.showLoader = false;
+                ctrl._$scope.$apply();
+            },
+            error: function (data) {
+                ctrl.showLoader = false;
+                ctrl._$scope.$apply();
+            }
+        }).submit();
+    };
+
     open(e) {
         this.modals.password = true;
         this.openEvent = e;
