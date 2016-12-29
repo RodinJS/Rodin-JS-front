@@ -1,9 +1,10 @@
 class EditProjectCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore, $window, Notification) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore, $window, $timeout, Notification) {
         'ngInject';
 
         $window.scrollTo(0, 0);
 
+        this.$timeout = $timeout;
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this.Project = Project;
@@ -164,9 +165,9 @@ class EditProjectCtrl {
         if (file.size > 1024 * 1024) {
             result.valid = false;
             result.message = "FIle size must be less than 1mb";
-            var tim = $timeout(function () {
+            var tim = this.$timeout(function () {
                 defer.reject(result);
-                $timeout.cancel(tim);
+                this.$timeout.cancel(tim);
             });
         } else {
             var fileReader = new FileReader();
