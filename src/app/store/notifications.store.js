@@ -74,8 +74,6 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
                     return val.label.indexOf(s) !== -1;
                 });
 
-                /// TODO: Xch stex editori buildi depqnel dnenq syntax errora qcum
-
                 let url = '';
                 switch(device){
                     case 'ios':

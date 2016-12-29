@@ -14,18 +14,18 @@ function SocketService(AppConstants, User, $rootScope){
 
 
 	function listener(eventName, callback) {
-		socket.on(eventName,  (data) => {
-			var args = arguments;
-			$rootScope.$apply( () => {
-				callback.apply(socket, args);
-			});
-		});
+        socket.on(eventName, function () {
+            var args = arguments;
+            $rootScope.$apply(function () {
+                callback.apply(socket, args);
+            });
+        });
 	}
 
 	function emitter(eventName, data, callback) {
-		socket.emit(eventName, data,  () => {
+		socket.emit(eventName, data,  function()  {
 			var args = arguments;
-			$rootScope.$apply( () => {
+			$rootScope.$apply( function() {
 				if (callback) {
 					callback.apply(socket, args);
 				}
