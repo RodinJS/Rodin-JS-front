@@ -58,7 +58,10 @@ class EditProjectViveCtrl {
                 this.eventBus.emit(this.eventBus.project.SET, project);
             },
             err => {
-                this.$state.go('landing.error');
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
+                //this.$state.go('landing.error');
             }
         )
     }

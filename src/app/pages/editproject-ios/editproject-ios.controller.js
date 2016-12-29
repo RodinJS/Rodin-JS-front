@@ -62,7 +62,7 @@ class EditProjectIosCtrl {
                 _.each(err, (val, key)=>{
                     this.Notification.error(val.fieldName);
                 });
-                this.$state.go('landing.error');
+                //this.$state.go('landing.error');
             }
         )
     }
