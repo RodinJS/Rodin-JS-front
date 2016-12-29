@@ -185,10 +185,22 @@ class EditProjectAndroidCtrl {
             },
             success: function (data) {
                 ctrl.modals.password = false;
+                ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.version.focused = false;
+                ctrl._$scope.configs.package.focused = false;
+                ctrl._$scope.configs.KSFLName.focused = false;
+                ctrl._$scope.configs.KSOrganization.focused = false;
+                ctrl._$scope.configs.KSCity.focused = false;
+                ctrl._$scope.configs.KSState.focused = false;
+                ctrl._$scope.configs.KSCC.focused = false;
+                ctrl._$scope.configs.KSAlias.focused = false;
                 ctrl.getProject();
+                ctrl._$scope.$apply();
+                ctrl.Notification.success('Android build start');
             },
             error: function (data) {
                 ctrl.modals.password = false;
+                ctrl._$scope.$apply();
             }
         }).submit();
 

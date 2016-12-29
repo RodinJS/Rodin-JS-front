@@ -1,7 +1,8 @@
 class EditProjectViveCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
 
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
         this._JWT = JWT;
@@ -193,8 +194,12 @@ class EditProjectViveCtrl {
                 project: angular.toJson(project)
             },
             success: function (data) {
+                ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.version.focused = false;
                 ctrl.modals.password = false;
                 ctrl.getProject();
+                ctrl._$scope.$apply();
+                ctrl.Notification.success('Vive build start');
             },
             error: function (data) {
                 ctrl.showLoader = false;

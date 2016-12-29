@@ -1,7 +1,7 @@
 class EditProjectIosCtrl {
     constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
-        this.Notificatio = Notification;
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
         this._JWT = JWT;
@@ -189,7 +189,7 @@ class EditProjectIosCtrl {
                 certPassword: this.project.ios.certPassword
             }
         };
-        console.log("this.project", this.project)
+        console.log("this.project", this.project);
         ctrl.showLoader = true;
         $("#configs").ajaxForm({
             dataType: "json",
@@ -202,7 +202,13 @@ class EditProjectIosCtrl {
             },
             success: function (data) {
                 ctrl.modals.password = false;
+                ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.version.focused = false;
+                ctrl._$scope.configs.bundle.focused = false;
+                ctrl._$scope.configs.developerId.focused = false;
                 ctrl.getProject();
+                ctrl.Notification.success('iOS build start');
+                ctrl._$scope.$apply();
             },
             error: function (data) {
                 console.log(data);

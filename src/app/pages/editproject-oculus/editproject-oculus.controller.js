@@ -194,8 +194,13 @@ class EditProjectOculusCtrl {
                 project: angular.toJson(project)
             },
             success: function (data) {
+                ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.version.focused = false;
                 ctrl.modals.password = false;
                 ctrl.getProject();
+                ctrl._$scope.$apply();
+                ctrl.Notification.success('Oculus build start');
+
             },
             error: function (data) {
                 ctrl.showLoader = false;
