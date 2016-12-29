@@ -61,6 +61,7 @@ class EditProjectViveCtrl {
                 _.each(err, (val, key)=>{
                     this.Notification.error(val.fieldName);
                 });
+                this.showLoader = false;
                 //this.$state.go('landing.error');
             }
         )
