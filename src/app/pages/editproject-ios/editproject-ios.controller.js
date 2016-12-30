@@ -212,8 +212,10 @@ class EditProjectIosCtrl {
                 ctrl._$scope.$apply();
             },
             error: function (data) {
-                console.log(data);
+                if(data.responseJSON && data.responseJson.error.message)
+                    ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
+                ctrl._$scope.$apply();
             }
         }).submit();
     };
