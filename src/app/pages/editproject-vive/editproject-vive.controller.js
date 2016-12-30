@@ -206,7 +206,10 @@ class EditProjectViveCtrl {
                 ctrl.Notification.success('Vive build start');
             },
             error: function (data) {
+                if(data.responseJSON && data.responseJson.error.message)
+                    ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
+                ctrl._$scope.$apply();
             }
         }).submit();
     };

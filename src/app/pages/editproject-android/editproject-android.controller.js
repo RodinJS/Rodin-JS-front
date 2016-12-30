@@ -200,7 +200,9 @@ class EditProjectAndroidCtrl {
                 ctrl.Notification.success('Android build start');
             },
             error: function (data) {
-                ctrl.modals.password = false;
+                if(data.responseJSON && data.responseJson.error.message)
+                    ctrl.Notification.error(data.responseJSON.error.message);
+                ctrl.showLoader = false;
                 ctrl._$scope.$apply();
             }
         }).submit();
