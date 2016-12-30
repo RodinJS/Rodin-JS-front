@@ -45,6 +45,8 @@ import './discover/index';
 
 import './tutorials/index';
 
+import './docs/index';
+
 import './store/index';
 
 import './faq/index';
@@ -61,6 +63,7 @@ let pagesModule = angular.module('app.pages', [
 	'landing.resetpassword',
     'landing.discover',
     'landing.tutorials',
+	'landing.docs',
     'landing.store',
     'landing.faq',
     'landing.privacy',
