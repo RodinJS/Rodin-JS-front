@@ -14,7 +14,6 @@ class EditProjectViveCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.getProject();
 
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
@@ -48,11 +47,12 @@ class EditProjectViveCtrl {
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
         });
+        this.getProject();
     }
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId).then(
+        this.Project.get(this.projectId, {device: 'oculus'}).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
