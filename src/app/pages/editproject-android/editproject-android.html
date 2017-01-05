@@ -83,6 +83,7 @@
                                             <input type="file"
                                                    id="icon-file"
                                                    name="icon-h"
+                                                   accept="image/*"
                                                    onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                         </label>
                                         <img ng-show="$ctrl.files.icon.name !== ''"
