@@ -111,7 +111,7 @@ class EditProjectWebCtrl {
     }
 
     finalizeRequest() {
-        this.project.editorUrl = this.EDITOR + this.project.root;
+        this.project.editorUrl = `${this.EDITOR}${this.user.username}/${this.project.root}`;
         if(this.project.publishedPublic)
             this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
         if(this.project.description)
