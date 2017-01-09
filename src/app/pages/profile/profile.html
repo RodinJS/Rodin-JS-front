@@ -84,19 +84,19 @@
                 <div class="section section-connected-accounts">
                     <h2 class="section-title">Connected Accounts</h2>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group title">Facebook</div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <button type="button" ng-if="!$ctrl.currentUser.facebook"
                                             ng-click="$ctrl.fbSync()"
                                             class="btn btn-primary border-orange">Sync with Facebook
                                     </button>
                                     <div class="synced row" ng-if="$ctrl.currentUser.facebook">
-                                        <div class="col-md-6">
-                                            <i class=" icon icon-send"></i> Synced
+                                        <div class="col-md-4" style="font-size: 14px">
+                                            <i class=" icon icon-send"></i> Synced as ({{$ctrl.currentUser.facebook}})
                                         </div>
                                         <div class="col-md-6">
                                             <button type="button"
@@ -108,17 +108,17 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group title">Google</div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <button type="button" ng-if="!$ctrl.currentUser.google"
                                             ng-click="$ctrl.googleSync()"
                                             class="btn btn-primary border-orange">Sync with Google
                                     </button>
                                     <div class="synced row" ng-if="$ctrl.currentUser.google">
-                                        <div class="col-md-6">
-                                            <i class=" icon icon-send"></i> Synced
+                                        <div class="col-md-4" style="font-size: 14px;">
+                                            <i class=" icon icon-send"></i> Synced as ({{$ctrl.currentUser.google}})
                                         </div>
                                         <div class="col-md-6">
                                             <button type="button"
@@ -130,17 +130,17 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group title">Github</div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <button type="button" ng-if="!$ctrl.currentUser.github"
                                             ng-click="$ctrl.gitSync()"
                                             class="btn btn-primary border-orange">Sync with Github
                                     </button>
                                     <div class="synced row" ng-if="$ctrl.currentUser.github">
-                                        <div class="col-md-6">
-                                            <i class=" icon icon-send"></i> Synced
+                                        <div class="col-md-4" style="font-size: 14px;">
+                                            <i class=" icon icon-send"></i> Synced as ({{$ctrl.currentUser.github}})
                                         </div>
                                         <div class="col-md-6">
                                             <button type="button"
@@ -152,16 +152,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group title">Oculus</div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <button type="button" ng-if="!$ctrl.currentUser.oculus"
                                             ng-click="$ctrl.openSyncModal('oculus')"
                                             class="btn btn-primary border-orange">Sync with Oculus
                                     </button>
                                     <div class="synced row" ng-if="$ctrl.currentUser.oculus">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <i class=" icon icon-send"></i> Synced
                                         </div>
                                         <div class="col-md-6">
@@ -174,16 +174,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group title">Steam</div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <button type="button" ng-if="!$ctrl.currentUser.steam"
                                             ng-click="$ctrl.openSyncModal('steam')"
                                             class="btn btn-primary border-orange">Sync with Steam
                                     </button>
                                     <div class="synced row" ng-if="$ctrl.currentUser.steam">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <i class=" icon icon-send"></i> Synced
                                         </div>
                                         <div class="col-md-6">
@@ -231,8 +231,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p class="text-small description">Deployed on your public profile, notifications
-                                            and other places.
+                                        <p class="text-small description">
+                                            Deployed on your public profile, notifications and other places.
                                         </p>
                                         <div class="form-group" custom-input
                                              data-ng-class="{'has-error': profile.email.$invalid && profile.email.focused, 'has-success': profile.email.$valid && profile.email.focused}">
@@ -246,6 +246,16 @@
                                                 Email <span ng-if="profile.email.$invalid && profile.email.focused">is required</span>
                                             </label>
                                             <div style="clear:both"></div>
+                                        </div>
+                                        <br/>
+                                        <div class="form-group" custom-input>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   placeholder=""
+                                                   ng-autocomplete
+                                                   options="$ctrl.autocompleteOptions"
+                                                   ng-model="$ctrl.currentUser.profile.city">
+                                            <label class="control-label float-label">Country (City)</label>
                                         </div>
 
                                         <div class="checkbox">
@@ -270,7 +280,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="section section-profile-info">
+                       <!-- <div class="section section-profile-info">
                             <h2 class="section-title">Profile Info</h2>
                             <div class="row">
                                 <div class="col-md-6">
@@ -278,26 +288,13 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group" custom-input>
-                                                    <input type="text" class="form-control" placeholder=""
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           placeholder=""
+                                                           ng-autocomplete
+                                                           options="$ctrl.autocompleteOptions"
                                                            ng-model="$ctrl.currentUser.profile.city">
-                                                    <label class="control-label float-label">City</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group select-group">
-                                                    <select class="form-control selectpicker">
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                        <option value="">Country</option>
-                                                    </select>
+                                                    <label class="control-label float-label">Country (City)</label>
                                                 </div>
                                             </div>
                                         </div>

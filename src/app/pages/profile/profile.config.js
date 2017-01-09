@@ -3,7 +3,7 @@ function ProfileConfig($stateProvider) {
 
 	$stateProvider
 		.state('app.profile', {
-			url: '/profile?token&id',
+			url: '/profile?token&id&socialEmail',
 			controller: 'ProfileCtrl',
 			controllerAs: '$ctrl',
 			templateUrl: 'pages/profile/profile.html',
