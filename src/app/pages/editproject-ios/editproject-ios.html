@@ -98,10 +98,11 @@
                                     <div class="padding-bottom-20">Provisioning Profile</div>
                                     <div class="main-upload-area">
                                         <label class="upload-area" ng-show="$ctrl.files.profile.name === ''">
-                                            <div class="area-content">.provision</div>
+                                            <div class="area-content">.mobileprovision</div>
                                             <input type="file"
                                                    id="profile-file"
                                                    name="profile"
+                                                   accept=".mobileprovision"
                                                    onchange="angular.element(this).scope().$ctrl.changeProfile(event)">
                                         </label>
                                         <img ng-show="$ctrl.files.profile.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
@@ -121,6 +122,7 @@
                                             <input type="file"
                                                    id="cert-file"
                                                    name="cert"
+                                                   accept=".p12"
                                                    onchange="angular.element(this).scope().$ctrl.changeCert(event)">
                                         </label>
                                         <img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
@@ -140,6 +142,7 @@
                                             <input type="file"
                                                    id="icon-file"
                                                    name="icon-h"
+                                                   accept="image/*"
                                                    onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                         </label>
                                         <img ng-show="$ctrl.files.icon.name !== ''"

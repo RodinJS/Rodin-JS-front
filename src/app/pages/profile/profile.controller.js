@@ -27,6 +27,10 @@ class ProfileCtrl {
             unsync:false
         };
 
+        this.autocompleteOptions = {
+            types: '(cities)'
+        };
+
 
         FB.init({
             appId: AppConstants.FB,
@@ -56,13 +60,14 @@ class ProfileCtrl {
             let data = {
                 id: $stateParams.id,
                 token: $stateParams.token,
+                socialEmail:$stateParams.socialEmail,
                 email: this.currentUser.email,
                 sync: true
             };
 
             this._User.gitAuth(data).then((res) => {
-                this.currentUser.github = true;
-                $state.go('app.profile', {token: undefined, id: undefined});
+                this.currentUser.github = $stateParams.socialEmail;
+                $state.go('app.profile', {token: undefined, id: undefined, socialEmail:undefined});
 
             }, (err) => {
                 this.isSubmitting = false;
@@ -94,7 +99,7 @@ class ProfileCtrl {
 
     fbSync() {
         this._User.fbAuth(true, this.fbConnected).then((res) => {
-            this.currentUser.facebook = true;
+            this.currentUser.facebook = res.facebook;
             this.Notification.success('Facebook synced');
         }, (err) => {
             this.isSubmitting = false;
@@ -117,12 +122,13 @@ class ProfileCtrl {
                 first_name: BasicProfile.getGivenName(),
                 last_name: BasicProfile.getFamilyName(),
                 id: BasicProfile.getId(),
+                socialEmail:BasicProfile.getEmail(),
                 email: this.currentUser.email,
                 sync: true
 
             };
             this._User.googleAuth(requestData).then((res) => {
-                this.currentUser.google = true;
+                this.currentUser.google = res.google;
                 this.Notification.success('Google synced');
             }, (err) => {
                 this.isSubmitting = false;

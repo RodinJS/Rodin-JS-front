@@ -190,7 +190,7 @@ class EditProjectIosCtrl {
                 certPassword: this.project.ios.certPassword
             }
         };
-        console.log("this.project", this.project);
+
         ctrl.showLoader = true;
         $("#configs").ajaxForm({
             dataType: "json",
@@ -227,7 +227,7 @@ class EditProjectIosCtrl {
             userId: this.user.username,
             appId: this.projectId,
         };
-        console.log("this.project", this.project);
+
         ctrl.showLoader = true;
         $("#configs").ajaxForm({
             dataType: "json",

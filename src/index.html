@@ -14,14 +14,14 @@
 
   <link rel="stylesheet" href="/scripts/vendor/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="/scripts/vendor/angular-ui-notification/dist/angular-ui-notification.css">
-  <link rel="stylesheet" href="/styles/style.css?v=0.1.7">
+  <link rel="stylesheet" href="/styles/style.css?v=0.1.10">
   <base href="/">
 </head>
 <body class="page" data-ng-class="pageClass">
 
 <div data-ui-view class="page__wrapper"></div>
 
-
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyA6Y8RlBTByatge6Ufdk4279cFABWBnm9Q"></script>
 <script src="//apis.google.com/js/platform.js"></script>
 <script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript" src="/scripts/vendor/systemjs/dist/system.js"></script>
@@ -55,7 +55,7 @@
       return address + System.cacheBust;
     });
   };
-  System.cacheBust = '?v=0.1.7';
+  System.cacheBust = '?v=0.1.10';
 
   System.config({
     packages: {

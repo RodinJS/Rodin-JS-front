@@ -74,6 +74,7 @@ class User {
                 return this.onError(response);
 
             if(sync){
+                response.socialEmail = response.email;
                 response.email = this.current.email;
                 response.sync = true;
                 responseMethods = [this.onSyncSuccess, this.onError];

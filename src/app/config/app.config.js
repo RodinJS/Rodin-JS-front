@@ -47,6 +47,7 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
         positionX: 'right',
         positionY: 'top',
         replaceMessage: false,
+        maxCount:5
     });
 
 }
