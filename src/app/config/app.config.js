@@ -39,7 +39,7 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
 	$urlRouterProvider.otherwise('/error');
 
     NotificationProvider.setOptions({
-        delay: 50000,
+        delay: 5000,
         startTop: 30,
         startRight: 30,
         verticalSpacing: 10,
