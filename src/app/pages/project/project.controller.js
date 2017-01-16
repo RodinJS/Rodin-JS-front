@@ -44,6 +44,7 @@ class ProjectCtrl {
 
         this.getTemplates();
         this.createFinalize = this.createFinalize.bind(this);
+        this.createFinalizeError = this.createFinalizeError.bind(this);
 
         $timeout(()=>{
             this.inputPadding = (angular.element('.project-path-label').width() + 10);
@@ -65,7 +66,7 @@ class ProjectCtrl {
                 this.VCS.create(data._id, {
                     root: data.root,
                     name: data.name
-                }).then(this.createFinalize, this.createFinalize);
+                }).then(this.createFinalize, this.createFinalizeError);
             },
             err => {
                 _.each(err, (val, key)=>{
@@ -95,16 +96,17 @@ class ProjectCtrl {
     }
 
 
-    createFinalize(err){
-        if (err) {
-            _.each(err, (val, key) => {
-                this.Notification.warning(val.fieldName);
-            });
-        }
+    createFinalize(){
         this.Notification.success("Project created");
         this.User.current.projects.total +=1;
         this.$state.go('app.dashboard');
-        /// TODO: stex petqa cuc tal error vorovhetev github repo chi sarqve
+        this.showLoader = false;
+    }
+
+    createFinalizeError(err){
+        _.each(err, (val, key) => {
+            this.Notification.warning(val.fieldName);
+        });
         this.showLoader = false;
     }
 }
