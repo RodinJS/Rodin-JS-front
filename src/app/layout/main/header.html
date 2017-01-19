@@ -19,31 +19,23 @@
                 <li ng-if="$ctrl.user">
                     <a data-ui-sref-active="active" data-ui-sref="app.dashboard">Dashboard</a>
                 </li>
+                <li><a ui-sref="landing.store">Store</a></li>
                 <li>
                     <a ui-sref="landing.discover">How it works</a>
                 </li>
-                <!--<li><a ui-sref="landing.store">Store</a></li>-->
-                <!--<li><a href="https://docs.rodin.space/">Doc</a></li>-->
-                <li class="dropdown" uib-dropdown auto-close="outsideClick">
-                    <a class="dropdown-toggle" role="button" uib-dropdown-toggle>
-                        More <i class="fa fa-angle-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-more" uib-dropdown-menu>
-                        <li>
-                            <a ui-sref="landing.docs">Docs</a>
-                        </li>
-                        <li>
-                            <a ui-sref="landing.tutorials">Tutorials</a>
-                        </li>
-                        <li>
-                            <a ui-sref="landing.faq">FAQ</a>
-                        </li>
-                        <!--<li><a href="">Forum</a></li>-->
-                        <!--<li><a href="">Blog</a></li>-->
-                        <li class="terms">
-                            <a ui-sref="landing.privacy">Terms and Conditions</a>
-                        </li>
-                    </ul>
+                <li>
+                    <a ui-sref="landing.docs">Docs</a>
+                </li>
+                <li>
+                    <a ui-sref="landing.tutorials">Tutorials</a>
+                </li>
+                <li>
+                    <a ui-sref="landing.faq">FAQ</a>
+                </li>
+                <!--<li><a href="">Forum</a></li>-->
+                <!--<li><a href="">Blog</a></li>-->
+                <li class="terms">
+                    <a ui-sref="landing.privacy">Terms and Conditions</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-account" ng-if="$ctrl.user">

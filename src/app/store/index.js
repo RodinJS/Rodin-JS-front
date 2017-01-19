@@ -21,5 +21,8 @@ storeModules.factory('ProjectStore', ProjectStore);
 import NotificationsStore from './notifications.store';
 storeModules.factory('NotificationsStore', NotificationsStore);
 
+import ModulesStore from './modules.store';
+storeModules.factory('ModulesStore', ModulesStore);
+
 
 export default storeModules;

@@ -4,6 +4,9 @@ function EventBus($rootScope) {
         project: {
             SET: 'projectObject'
         },
+        modules:{
+            SET:'modulesArray'
+        },
         notifications:{
           SET:'notificationsObj',
           SET_ONE:'notificationsObjOne',
