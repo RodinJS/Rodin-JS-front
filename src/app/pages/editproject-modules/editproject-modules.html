@@ -1,0 +1,58 @@
+<div class="page__wrapper">
+    <div class="main-container development-container">
+        <div class="main-title-wrapper">
+            <h1 class="main-title">
+                Modules / <i class="icon icon-lock"></i>
+                {{$ctrl.project.displayName || $ctrl.project.name}}
+            </h1>
+        </div>
+        <div class="page-content">
+            <div class="content-navbar">
+                <ul class="navbar-list">
+                    <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
+                </ul>
+            </div>
+            <div class="section-wrapper  page-store">
+                <div class="col-lg-3 col-md-4 col-sm-4" ng-repeat="module in $ctrl.modulesList">
+                    <div class="module-wrapper">
+                        <img ng-src="{{module.thumbnail}}" class="img-responsive"/>
+                        <div class="module-content short">
+                            <div class="module-header">
+                                <p class="pull-left module-title">{{module.title}}</p>
+                            </div>
+                        </div>
+                        <div class="module-content long">
+                            <div class="module-header">
+                                <p class="module-title turn-blue">{{module.title}}</p>
+                                <p class="turn-blue" style="font-size:12px">by {{module.author}}</p>
+                            </div>
+                            <div class="content">
+                                {{module.description}}
+                                <div class="content-bottom">
+                                    <p class="pull-left">
+                                        <a class="circle"
+                                           popover-placement="top-left"
+                                           popover-class="store-popover"
+                                           uib-popover="{{module.script ? 'Assigned' : 'Assign'}}"
+                                           popover-trigger="'mouseenter'"
+                                           ng-click="$ctrl.moduleAssign(module)"
+                                           href="" >
+                                            <i style="position: relative; top:1px" class="fa fa-plus" aria-hidden="true"></i>
+                                        </a>
+                                        <a class="circle" popover-placement="top-left" popover-class="store-popover"  uib-popover="Example" popover-trigger="'mouseenter'">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--
+                <a href="" ng-click="$ctrl.assign(module)" ng-repeat="module in $ctrl.modulesList">{{module.title}}</a>
+-->
+            </div>
+        </div>
+    </div>
+    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+</div>

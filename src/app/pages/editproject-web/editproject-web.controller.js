@@ -20,24 +20,24 @@ class EditProjectWebCtrl {
 
         this.fileChoosen = {
             profile: false,
-            p12: false
+            p12: false,
         };
 
         this.files = {
             profile: {
-                name: ""
+                name: '',
             },
             cert: {
-                name: ""
+                name: '',
             },
             icon: {
-                name: "",
-                src: ""
-            }
+                name: '',
+                src: '',
+            },
         };
 
         this.modals = {
-            notPublished: false
+            notPublished: false,
         };
 
         this.submiting = false;
@@ -47,7 +47,7 @@ class EditProjectWebCtrl {
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
-            if(!this.project)
+            if (!this.project)
                 this.getProject();
             else
                 this.finalizeRequest();
@@ -61,50 +61,54 @@ class EditProjectWebCtrl {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
             },
+
             err => {
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
                 this.$state.go('landing.error');
             }
-        )
+        );
     }
 
-    gotToPublish(){
-        this.$state.go('app.editprojectPublish',  {projectId:this.project._id})
+    gotToPublish() {
+        this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
     }
 
-    addDomain(){
-        this.domain = this.domain.replace(/.*?:\/\//g, "");
-        this.Project.setDomain({id:this.projectId, domain:this.domain}).then(
-            response =>{
+    addDomain() {
+        this.domain = this.domain.replace(/.*?:\/\//g, '');
+        this.Project.setDomain({ id: this.projectId, domain: this.domain }).then(
+            response => {
                 this.Notification.success(response.message);
                 this.project.domain = this.domain;
             },
-            err=>{
-                _.each(err, (val, key)=>{
+
+            err=> {
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
                 console.log(err);
             }
-        )
-    }
-    deleteDomain(){
-        this.Project.deleteDomain(this.projectId, this.project).then(
-            response =>{
-                this.Notification.success(response.message);
-            },
-            err=>{
-                _.each(err, (val, key)=>{
-                    this.Notification.error(val.fieldName);
-                });
-                console.log(err);
-            }
-        )
+        );
     }
 
-    switchDomainTrigger(){
-        if(!this.project.publishedPublic){
+    deleteDomain() {
+        this.Project.deleteDomain(this.projectId, this.project).then(
+            response => {
+                this.Notification.success(response.message);
+            },
+
+            err=> {
+                _.each(err, (val, key)=> {
+                    this.Notification.error(val.fieldName);
+                });
+                console.log(err);
+            }
+        );
+    }
+
+    switchDomainTrigger() {
+        if (!this.project.publishedPublic) {
             this.modals.notPublished = true;
             this.customDomainTrigger = false;
         }
@@ -112,9 +116,9 @@ class EditProjectWebCtrl {
 
     finalizeRequest() {
         this.project.editorUrl = `${this.EDITOR}${this.user.username}/${this.project.root}`;
-        if(this.project.publishedPublic)
+        if (this.project.publishedPublic)
             this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
-        if(this.project.description)
+        if (this.project.description)
             this.project.description = $('<div/>').html(this.project.description).text();
         this.projectPublic = this.project.public === 'true';
         this.showLoader = false;

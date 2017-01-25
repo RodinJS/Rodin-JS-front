@@ -41,6 +41,8 @@ import './editproject-web/index';
 
 import './editproject-publish/index';
 
+import './editproject-modules/index';
+
 import './discover/index';
 
 import './tutorials/index';
@@ -55,35 +57,35 @@ import './privacy/index';
 
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
-	'landing.auth',
-	'landing.home',
-	'landing.demo',
-	'landing.error',
-	'landing.userconfirm',
-	'landing.resetpassword',
-    'landing.discover',
-    'landing.tutorials',
-	'landing.docs',
-    'landing.store',
-    'landing.faq',
-    'landing.privacy',
+  'landing.auth',
+  'landing.home',
+  'landing.demo',
+  'landing.error',
+  'landing.userconfirm',
+  'landing.resetpassword',
+  'landing.discover',
+  'landing.tutorials',
+  'landing.docs',
+  'landing.store',
+  'landing.faq',
+  'landing.privacy',
 
-	'app.dashboard',
-	'app.profile',
+  'app.dashboard',
+  'app.profile',
 
-	'app.project',
-	'app.editproject',
-	'app.editporjectIos',
-	'app.editprojectAndroid',
-	'app.editporjectOculus',
-	'app.editporjectVive',
-	'app.editporjectWeb',
-	'app.editporjectPublish',
+  'app.project',
+  'app.editproject',
+  'app.editporjectIos',
+  'app.editporjectModules',
+  'app.editprojectAndroid',
+  'app.editporjectOculus',
+  'app.editporjectVive',
+  'app.editporjectWeb',
+  'app.editporjectPublish',
 
-	'app.plans',
-	'app.billing',
-	'app.purchases'
+  'app.plans',
+  'app.billing',
+  'app.purchases',
 ]);
-
 
 export default pagesModule;

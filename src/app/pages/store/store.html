@@ -4,32 +4,38 @@
 
             <h2 class="col-md-12">Modules</h2>
 
-            <div class="col-sm-3 col-lg-4 col-xs-6" ng-repeat="module in $ctrl.modulesList">
-                <div class="module-wrapper" style="background-image:url({{module.thumbnail}})">
+            <div class="col-lg-3 col-md-4 col-sm-4" ng-repeat="module in $ctrl.modulesList">
+                <div class="module-wrapper">
+                    <img ng-src="{{module.thumbnail}}" class="img-responsive"/>
                     <div class="module-content short">
                         <div class="module-header">
                             <p class="pull-left module-title">{{module.title}}</p>
-                            <p class="pull-right">$ 0.00</p>
+                            <p class="pull-right">$ {{module.price || '0.0'}}</p>
                         </div>
                     </div>
                     <div class="module-content long">
                         <div class="module-header">
                             <p class="module-title turn-blue">{{module.title}}</p>
-                            <p class="turn-blue">{{module.author}}</p>
+                            <p class="turn-blue" style="font-size:12px">by {{module.author}}</p>
                         </div>
-                        <div style="clear:both"></div>
                         <div class="content">
                             {{module.description}}
                             <div class="content-bottom">
                                 <p class="pull-left">
-                                    <a class="circle" popover-class="store-popover"  uib-popover="Purchase" popover-trigger="'mouseenter'">
+                                    <a class="circle"
+                                       popover-placement="top-left"
+                                       popover-class="store-popover"
+                                       uib-popover="Subscribe"
+                                       popover-trigger="'mouseenter'"
+                                       ng-click="$ctrl.moduleSubscribe(module)"
+                                       href="" >
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </a>
-                                    <a class="circle disabled">
+                                    <a class="circle" popover-placement="top-left" popover-class="store-popover"  uib-popover="Example" popover-trigger="'mouseenter'">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
                                 </p>
-                                <p class="pull-right oval">$ 0.00</p>
+                                <p class="pull-right oval">$ {{module.price || '0.0'}}</p>
                             </div>
                         </div>
                     </div>

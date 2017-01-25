@@ -62,7 +62,7 @@ const requires = [
   'app.filters',
   'uiSwitch',
   'ngTagsInput',
-  'ui-notification'
+  'ui-notification',
 ];
 
 // Mount on window for testing

@@ -753,6 +753,11 @@ tags-input {
 }
 
 .btn {
+  &.btn-primary{
+    &.blue{
+      border-color:#33deff;
+    }
+  }
   &.link {
     color: #ff9a2b;
     &:hover {

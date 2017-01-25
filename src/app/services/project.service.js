@@ -1,3 +1,4 @@
+// jscs:disable
 /**
  * Created by kh.levon98 on 20-Sep-16.
  */
