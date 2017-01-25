@@ -47,7 +47,8 @@ class StoreCtrl {
     purchaseModule(module) {
         this._ModulesService.subscribe({ moduleId: module._id })
             .then(subscribedModule =>  {
-                this._Notification.success('Module purchased');
+                this._Notification.success('Module Subscribed');
+                this.modalInstance.close();
                 console.log(subscribedModule);
             })
             .catch(err => this.onError(err));
