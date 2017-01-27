@@ -18,9 +18,10 @@ function ModulesStore(EventBus, BaseStore) {
     });
 
     EventBus.on(EventBus.modules.UPDATE, (scope, data) => {
-        let findModuleIndex = _.findIndex(factory.data.modules, (module) => module._id == data._id);
-        if (findModuleIndex.length > 0) {
-            factory.data.modules[findModuleIndex] = data;
+        let findModuleIndex = _.findIndex(factory.data.myModules, (module) => module._id == data._id);
+
+        if (findModuleIndex > -1) {
+            factory.data.myModules[findModuleIndex] = data;
         }
 
         factory.emitChanges();
@@ -37,6 +38,12 @@ function ModulesStore(EventBus, BaseStore) {
 
     factory.getModules = function () {
         return factory.data.modules;
+    };
+
+    factory.getMyModulesByPrjectId = function (module, projectId) {
+        return _.find(module.projects, (project)=> {
+            return project.projectId == projectId;
+        });
     };
 
     factory.getMyModules = function () {

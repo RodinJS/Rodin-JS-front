@@ -21,10 +21,10 @@
             <p class="text-small description">copy and paste this script into index.html.</p>
         </div>
     </div>
-    <div ng-if="!$ctrl.module.script">
+    <div >
         <div class="form-wrapper">
             <div class="form-group" custom-input>
-                <tags-input  class="form-control" ng-model="$ctrl.allowedHosts"></tags-input>
+                <tags-input style="height:100%; min-height:44px"   class="form-control" ng-model="$ctrl.allowedHosts"></tags-input>
             </div>
             <p class="text-small description">Please add hosts without http:// or https://</p>
         </div>
@@ -33,6 +33,7 @@
 <div class="modal-footer padding-bottom-20-important">
     <div class="required-field-actions clearfix">
         <button type="button" ng-if="!$ctrl.module.script" class="btn btn-primary blue" data-ng-click="$ctrl.assign($ctrl.module)">Assign</button>
+        <button type="button" ng-if="$ctrl.module.script" class="btn btn-primary blue" data-ng-click="$ctrl.updateHosts($ctrl.module)">Update allowed hosts</button>
         <a href="" class="btn btn-save" data-ng-click="$ctrl.modalInstance.close()">{{$ctrl.module.script ? 'Close' : 'Cancel'}}</a>
     </div>
 </div>

@@ -20,9 +20,10 @@ class EditProjectModulesCtrl {
             this.modulesList = this._ModulesStore.getMyModules();
             if (!this.modulesList)
                 return this.getMyModules();
+
         });
 
-        this._ProjectStore.subscribeAndInit($scope, ()=> {
+        this._ProjectStore.subscribeAndInit($scope, () => {
             this.project = this._ProjectStore.getProject();
             if (!this.project)
                 this.getProject();
@@ -39,7 +40,7 @@ class EditProjectModulesCtrl {
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this._Notification.error(val.fieldName);
                 });
                 this.$state.go('landing.error');
@@ -58,7 +59,13 @@ class EditProjectModulesCtrl {
             return this.onError([{ fieldName: 'You should logged in to purchase module' }]);
         }
 
-        this.module = module;
+        this.module = angular.copy(module);
+        let assignedToProject = this._ModulesStore.getMyModulesByPrjectId(module, this._$stateParams.projectId);
+        if (assignedToProject) {
+            this.module.script = assignedToProject.script;
+            this.allowedHosts = assignedToProject.allowedHosts;
+        }
+
         this.modalInstance = this._$uibModal.open({
             animation: this.animationsEnabled,
             ariaLabelledBy: 'modal-title',
@@ -82,8 +89,43 @@ class EditProjectModulesCtrl {
         this._ModulesService.assign(data)
             .then(assignedModule => {
                 this.module.script = assignedModule;
+                this.module.projects.push({
+                    projectId: this._$stateParams.projectId,
+                    allowedHosts: _.map(this.allowedHosts, (host) => host.text),
+                    script: assignedModule,
+                });
                 this._EventBus.emit(this._EventBus.modules.UPDATE, this.module);
+                let assignedToProject = this._ModulesStore.getMyModulesByPrjectId(this.module, this._$stateParams.projectId);
+                if (assignedToProject) {
+                    this.module.script = assignedToProject.script;
+                    this.allowedHosts = assignedToProject.allowedHosts;
+                };
+
                 this._Notification.success('Module assigned');
+            })
+            .catch(err => this.onError(err));
+    }
+
+    updateHosts(module) {
+
+        const data = {
+            projectId: this._$stateParams.projectId,
+            moduleId: module._id,
+            allowedHosts: _.map(this.allowedHosts, (host) => host.text),
+        };
+
+        this._ModulesService.update(data)
+            .then(assignedModule => {
+                let findProjectInModule = _.findIndex(this.module.projects, (project) => {
+                    return project.projectId == this._$stateParams.projectId;
+                });
+
+                if (findProjectInModule > -1) {
+                    this.module.projects[findProjectInModule].allowedHosts = data.allowedHosts;
+                }
+
+                this._EventBus.emit(this._EventBus.modules.UPDATE, this.module);
+                this._Notification.success('Allowed hosts updated');
             })
             .catch(err => this.onError(err));
     }
