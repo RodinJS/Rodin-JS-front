@@ -774,3 +774,36 @@ tags-input {
   width: 100%;
   height: 100%;
 }
+
+
+
+.rodin-menu{
+  .rodin-dropdown{
+    display: none;
+  }
+  .rodin-hide{
+    display: block;
+  }
+}
+
+@media (max-width: 1070px) {
+  .rodin-menu{
+    .rodin-dropdown{
+      display: block;
+    }
+    .rodin-hide{
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 1071px) {
+  .rodin-menu{
+    .rodin-dropdown{
+      display: none;
+    }
+    .rodin-hide{
+      display: block;
+    }
+  }
+}
