@@ -14,8 +14,19 @@ class StoreCtrl {
         this.moduleSubscribe = this.moduleSubscribe.bind(this);
         this._ModulesStore.subscribeAndInit($scope, () => {
             this.modulesList = this._ModulesStore.getModules();
-            if (!this.modulesList)
-              return this.getModulesList();
+            this.myModules = this._ModulesStore.getMyModules();
+
+            if (!this.modulesList) return this.getModulesList();
+
+            if (this._User.current && !this.myModules) {
+                return this.getMyModules();
+            }
+
+            if (this.modulesList && this.myModules) {
+                this.modulesList = this._ModulesStore.handleMyModules();
+
+            }
+
         });
     }
 
@@ -25,10 +36,20 @@ class StoreCtrl {
           .catch(err => this.onError(err));
     }
 
+    getMyModules() {
+        this._ModulesService.getMyModules()
+            .then(modules => this._EventBus.emit(this._EventBus.modules.MYMODULESSET, modules))
+            .catch(err => this.onError(err));
+    }
+
     moduleSubscribe(module) {
         if (!this._User.current) {
             return this.onError([{ fieldName: 'You should logged in to purchase module' }]);
         }
+
+        this.modalTitle = module.subscribed && !module.unsubscribed ? 'Unsubscribe'  : 'Subscribe';
+        this.modalContent = module.subscribed && !module.unsubscribed ?  'Are you sure you want to unsubscribe... ?' : module.description;
+        this.activateSubscribeButton = module.subscribed && !module.unsubscribed ? false : true;
 
         this.module = module;
         this.modalInstance = this._$uibModal.open({
@@ -48,8 +69,21 @@ class StoreCtrl {
         this._ModulesService.subscribe({ moduleId: module._id })
             .then(subscribedModule =>  {
                 this._Notification.success('Module Subscribed');
+                module.subscribed = true;
+                module.unsubscribed = false;
+                this._EventBus.emit(this._EventBus.modules.UPDATE, module);
                 this.modalInstance.close();
-                console.log(subscribedModule);
+            })
+            .catch(err => this.onError(err));
+    }
+
+    unsubscribeModule(module) {
+        this._ModulesService.unsubscribe({ moduleId: module._id })
+            .then(unsubscribedModule =>  {
+                this._Notification.success('Module Unsubscribed');
+                this.modalInstance.close();
+                module.unsubscribed = true;
+                this._EventBus.emit(this._EventBus.modules.UPDATE, module);
             })
             .catch(err => this.onError(err));
     }

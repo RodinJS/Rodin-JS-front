@@ -39,6 +39,12 @@ class Modules {
         return Analyser.promise;
     }
 
+    unsubscribe(fields = {}) {
+        let Analyser = new this._Analyser();
+        this._Modules.one(`subscribe?moduleId=${fields.moduleId}`).customDELETE().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
     assign(fields = {}) {
         let Analyser = new this._Analyser();
         this._Modules.one('assign').customPOST(fields).then(Analyser.resolve, Analyser.reject);

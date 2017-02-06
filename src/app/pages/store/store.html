@@ -19,19 +19,22 @@
                             <p class="turn-blue" style="font-size:12px">by {{module.author}}</p>
                         </div>
                         <div class="content">
-                            {{module.description}}
+                            {{module.description.substring(0, 60)}}...
                             <div class="content-bottom">
                                 <p class="pull-left">
-                                    <a class="circle"
+                                    <a class="circle" ng-class="module.subscribed && !module.unsubscribed ? 'active' : ''"
                                        popover-placement="top-left"
                                        popover-class="store-popover"
-                                       uib-popover="Subscribe"
+                                       uib-popover="{{module.subscribed && !module.unsubscribed ? 'Unsubscribe' : 'Subscribe'}}"
                                        popover-trigger="'mouseenter'"
                                        ng-click="$ctrl.moduleSubscribe(module)"
                                        href="" >
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </a>
-                                    <a class="circle" popover-placement="top-left" popover-class="store-popover"  uib-popover="Example" popover-trigger="'mouseenter'">
+                                    <a class="circle" popover-placement="top-left"
+                                       popover-class="store-popover"
+                                       uib-popover="Example"
+                                       popover-trigger="'mouseenter'">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
                                 </p>

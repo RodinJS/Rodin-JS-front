@@ -38,7 +38,7 @@
       position: absolute;
       width: 100%;
       transition: all 0.3s ease;
-      cursor: pointer;
+      //cursor: pointer;
       &.short {
         background: rgba(0, 0, 0, 0.7);
         opacity: 1;
@@ -94,6 +94,7 @@
     display: inline-block;
     border-radius: 50%;
     border: 1px solid;
+    &.active,
     &:hover {
       border: 1px solid;
       border-color: #2b9af3;
