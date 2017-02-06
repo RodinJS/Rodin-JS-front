@@ -17,10 +17,11 @@ class EditProjectModulesCtrl {
         this.getProject = this.getProject.bind(this);
 
         this._ModulesStore.subscribeAndInit($scope, () => {
-            this.modulesList = this._ModulesStore.getMyModules();
-            if (!this.modulesList)
+            this.modulesList = this._ModulesStore.getMyModules($stateParams.projectId);
+            if (!this.modulesList || this.modulesList.length <= 0)
                 return this.getMyModules();
 
+            console.log(this.modulesList);
         });
 
         this._ProjectStore.subscribeAndInit($scope, () => {
@@ -63,7 +64,6 @@ class EditProjectModulesCtrl {
         let assignedToProject = this._ModulesStore.getMyModulesByPrjectId(module, this._$stateParams.projectId);
         if (assignedToProject) {
             this.module.script = assignedToProject.script;
-            this.allowedHosts = assignedToProject.allowedHosts;
         }
 
         this.modalInstance = this._$uibModal.open({
@@ -89,6 +89,9 @@ class EditProjectModulesCtrl {
         this._ModulesService.assign(data)
             .then(assignedModule => {
                 this.module.script = assignedModule;
+                if(!this.module.projects)
+                    this.module.projects = [];
+
                 this.module.projects.push({
                     projectId: this._$stateParams.projectId,
                     allowedHosts: _.map(this.allowedHosts, (host) => host.text),
@@ -102,30 +105,6 @@ class EditProjectModulesCtrl {
                 };
 
                 this._Notification.success('Module assigned');
-            })
-            .catch(err => this.onError(err));
-    }
-
-    updateHosts(module) {
-
-        const data = {
-            projectId: this._$stateParams.projectId,
-            moduleId: module._id,
-            allowedHosts: _.map(this.allowedHosts, (host) => host.text),
-        };
-
-        this._ModulesService.update(data)
-            .then(assignedModule => {
-                let findProjectInModule = _.findIndex(this.module.projects, (project) => {
-                    return project.projectId == this._$stateParams.projectId;
-                });
-
-                if (findProjectInModule > -1) {
-                    this.module.projects[findProjectInModule].allowedHosts = data.allowedHosts;
-                }
-
-                this._EventBus.emit(this._EventBus.modules.UPDATE, this.module);
-                this._Notification.success('Allowed hosts updated');
             })
             .catch(err => this.onError(err));
     }

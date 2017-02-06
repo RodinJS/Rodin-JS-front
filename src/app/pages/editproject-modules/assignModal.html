@@ -18,22 +18,16 @@
                     <i class="fa fa-clipboard" aria-hidden="true"></i>
                 </a>
             </div>
-            <p class="text-small description">copy and paste this script into index.html.</p>
+            <p class="text-small description">copy and paste this script tag into index.html.</p>
         </div>
     </div>
-    <div >
-        <div class="form-wrapper">
-            <div class="form-group" custom-input>
-                <tags-input style="height:100%; min-height:44px"   class="form-control" ng-model="$ctrl.allowedHosts"></tags-input>
-            </div>
-            <p class="text-small description">Please add hosts without http:// or https://</p>
-        </div>
+    <div ng-if="!$ctrl.module.script">
+        <h2 style="font-weight:400">Are you sure you want assign a module to current project?</h2>
     </div>
 </div>
 <div class="modal-footer padding-bottom-20-important">
     <div class="required-field-actions clearfix">
-        <button type="button" ng-if="!$ctrl.module.script" class="btn btn-primary blue" data-ng-click="$ctrl.assign($ctrl.module)">Assign</button>
-        <button type="button" ng-if="$ctrl.module.script" class="btn btn-primary blue" data-ng-click="$ctrl.updateHosts($ctrl.module)">Update allowed hosts</button>
+        <button type="button" ng-if="!$ctrl.module.script" class="btn btn-primary blue" data-ng-click="$ctrl.assign($ctrl.module)">Generate script</button>
         <a href="" class="btn btn-save" data-ng-click="$ctrl.modalInstance.close()">{{$ctrl.module.script ? 'Close' : 'Cancel'}}</a>
     </div>
 </div>
