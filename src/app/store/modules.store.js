@@ -41,15 +41,14 @@ function ModulesStore(EventBus, BaseStore) {
     };
 
     factory.getMyModulesByPrjectId = function (module, projectId) {
-        return _.find(module.projects, (project)=> {
-            return project.projectId == projectId;
-        });
+        return _.find(module.projects, (project)=>  project.projectId == projectId);
     };
 
     factory.getMyModules = function (projectId) {
         if (!projectId) return factory.data.myModules;
+        const modules = _.filter(factory.data.myModules, (module) => (new Date() < new Date(module.expiredAt)));
 
-        return _.map(factory.data.myModules, (module)=> {
+        return _.map(modules, (module)=> {
             let assignedToProject = factory.getMyModulesByPrjectId(module, projectId);
             if (assignedToProject) {
                 module.script = assignedToProject.script;
