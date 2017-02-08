@@ -180,3 +180,8 @@ body {
     }
   }
 }
+
+*:focus,
+*:hover{
+  outline: none !important;
+}
