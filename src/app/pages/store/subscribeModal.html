@@ -5,6 +5,9 @@
     <p class="text-small description">
         {{$ctrl.modalContent}}
     </p>
+    <p class="alert alert-warning" ng-if="$ctrl.subscribtionWarning">
+        {{$ctrl.subscribtionWarning}}
+    </p>
 </div>
 <div class="modal-footer padding-bottom-20-important">
     <div class="required-field-actions clearfix">

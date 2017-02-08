@@ -21,7 +21,6 @@ class EditProjectModulesCtrl {
             if (!this.modulesList || this.modulesList.length <= 0)
                 return this.getMyModules();
 
-            console.log(this.modulesList);
         });
 
         this._ProjectStore.subscribeAndInit($scope, () => {

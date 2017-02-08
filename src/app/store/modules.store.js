@@ -65,7 +65,7 @@ function ModulesStore(EventBus, BaseStore) {
             const findMyModule = _.find(factory.data.myModules, (myModule) => (module._id == myModule._id || module._id == myModule.moduleId));
             if (findMyModule) {
                 module.subscribed = true;
-                module.expired = findMyModule.expiredAt;
+                module.expiredAt = findMyModule.expiredAt;
                 module.unsubscribed = findMyModule.unsubscribed;
             }
 

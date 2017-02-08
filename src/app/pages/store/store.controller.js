@@ -1,6 +1,7 @@
 class StoreCtrl {
-    constructor($scope, AppConstants, ModulesService, ModulesStore, ProjectStore, EventBus, Notification, User, $uibModal) {
+    constructor($scope, AppConstants, ModulesService, ModulesStore, ProjectStore, EventBus, Notification, User, $uibModal, moment) {
         'ngInject';
+        this._moment = moment;
         this._AppConstants = AppConstants;
         this._ModulesService = ModulesService;
         this._ModulesStore = ModulesStore;
@@ -24,8 +25,9 @@ class StoreCtrl {
 
             if (this.modulesList && this.myModules) {
                 this.modulesList = this._ModulesStore.handleMyModules();
-
             }
+
+            console.log(this.modulesList);
 
         });
     }
@@ -46,10 +48,14 @@ class StoreCtrl {
         if (!this._User.current) {
             return this.onError([{ fieldName: 'You should logged in to purchase module' }]);
         }
-
+        this.subscribtionWarning = false;
         this.modalTitle = module.subscribed && !module.unsubscribed ? 'Unsubscribe'  : 'Subscribe';
-        this.modalContent = module.subscribed && !module.unsubscribed ?  'Are you sure you want to unsubscribe... ?' : module.description;
+        this.modalContent = module.subscribed && !module.unsubscribed ?  `Are you sure you want to unsubscribe? Your subscription will still be valid until ${this._moment(module.expiredAt).format('YYYY-MM-DD')} ` : module.description;
         this.activateSubscribeButton = module.subscribed && !module.unsubscribed ? false : true;
+
+        if (module && module.unsubscribed && (new Date() < new Date(module.expiredAt))) {
+            this.subscribtionWarning = `Your current subscription is valid until ${this._moment(module.expiredAt).format('YYYY-MM-DD')}. If you subscribe now we wil prolong your subscription until ${this._moment(new Date(module.expiredAt)).add(1, 'months').format('YYYY-MM-DD')} `;
+        }
 
         this.module = module;
         this.modalInstance = this._$uibModal.open({
@@ -71,6 +77,7 @@ class StoreCtrl {
                 this._Notification.success('Module Subscribed');
                 module.subscribed = true;
                 module.unsubscribed = false;
+                module.expiredAt = subscribedModule.expiredAt;
                 this._EventBus.emit(this._EventBus.modules.UPDATE, module);
                 this.modalInstance.close();
             })
