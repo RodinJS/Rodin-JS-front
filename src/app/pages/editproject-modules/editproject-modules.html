@@ -27,7 +27,7 @@
                                 <p class="turn-blue" style="font-size:12px">by {{module.author}}</p>
                             </div>
                             <div class="content">
-                                {{module.description}}
+                                {{module.description.substring(0, 60)}}...
                                 <div class="content-bottom">
                                     <p class="pull-left">
                                         <a class="circle" ng-class="module.script ? 'active' : ''"
