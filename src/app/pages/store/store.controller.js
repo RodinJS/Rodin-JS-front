@@ -54,7 +54,7 @@ class StoreCtrl {
         this.activateSubscribeButton = module.subscribed && !module.unsubscribed ? false : true;
 
         if (module && module.unsubscribed && (new Date() < new Date(module.expiredAt))) {
-            this.subscribtionWarning = `Your current subscription is valid until ${this._moment(module.expiredAt).format('YYYY-MM-DD')}. If you subscribe now we wil prolong your subscription until ${this._moment(new Date(module.expiredAt)).add(1, 'months').format('YYYY-MM-DD')} `;
+            this.subscribtionWarning = `Your current subscription is valid until ${this._moment(module.expiredAt).format('YYYY-MM-DD')}. If you subscribe now we will charge you $0.00 and prolong your subscription until ${this._moment(new Date(module.expiredAt)).add(1, 'months').format('YYYY-MM-DD')} `;
         }
 
         this.module = module;

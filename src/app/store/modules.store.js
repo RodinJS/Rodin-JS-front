@@ -41,7 +41,7 @@ function ModulesStore(EventBus, BaseStore) {
     };
 
     factory.getMyModulesByPrjectId = function (module, projectId) {
-        return _.find(module.projects, (project)=>  project.projectId == projectId);
+        return _.find(module.projects, (project) =>  project.projectId == projectId);
     };
 
     factory.getMyModules = function (projectId) {
@@ -53,6 +53,8 @@ function ModulesStore(EventBus, BaseStore) {
             if (assignedToProject) {
                 module.script = assignedToProject.script;
             }
+            else
+                delete module.script;
 
             return module;
         });

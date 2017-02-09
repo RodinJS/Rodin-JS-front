@@ -24,18 +24,22 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-wrapper">
-                                    <p class="text-small description">Add your custom Domain.</p>
+                                    <p class="text-small description">Please make "A record" redirect of your domain/subdomain to "178.62.211.113" IP address</p>
                                     <div class="form-group" custom-input
+                                         style="margin-bottom:20px"
                                          data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': configs.url.$valid && addDomain.url.focused}">
+
                                         <input type="text" class="form-control" placeholder=""
                                                data-ng-model="$ctrl.domain"
                                                ng-pattern="$ctrl.domainPattern"
                                                name="url"
                                                required
                                                data-ng-focus="addDomain.url.focused = true">
+
                                         <label class="control-label float-label">
-                                            {{addDomain.url.focused || $ctrl.domain ? 'Project url' : 'example.com'}} {{addDomain.url.$invalid ? 'invalid' : ''}}
+                                            {{addDomain.url.focused || $ctrl.domain ? 'Project url' : 'example.com'}} {{addDomain.url.$invalid && addDomain.url.focused  ? 'invalid' : ''}}
                                         </label>
+
                                     </div>
                                     <button type="submit" class="btn btn-primary"
                                             ng-click="$ctrl.addDomain($event)"
