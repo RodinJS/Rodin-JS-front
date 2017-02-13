@@ -12,4 +12,5 @@ homeModule.config(HomeConfig);
 import HomeCtrl from './home.controller';
 homeModule.controller('HomeCtrl', HomeCtrl);
 
+
 export default homeModule;

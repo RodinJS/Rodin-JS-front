@@ -1,6 +1,8 @@
 class HomeCtrl {
-    constructor(AppConstants, $state, $window, $scope) {
+    constructor(AppConstants, $state, $window, $scope, $timeout) {
         'ngInject';
+
+        if (RODIN && Object.keys(RODIN).length >= 8) return location.reload();
 
         this._$window = $window;
         this._$scope = $scope;
@@ -27,6 +29,16 @@ class HomeCtrl {
         document.body.addEventListener('wheel', this.scrollHandler, false);
 
         this.hoveredIframe = false;
+
+        $scope.$on('$viewContentLoaded', () => {
+            $(document).ready(()=> {
+                RODIN.landing();
+                $('.code').each(function (i, block) {
+                    hljs.highlightBlock(block);
+                });
+            });
+
+        });
 
     }
 

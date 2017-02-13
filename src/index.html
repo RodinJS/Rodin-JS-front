@@ -18,11 +18,11 @@
 
     <link rel="stylesheet" href="/scripts/vendor/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/scripts/vendor/angular-ui-notification/dist/angular-ui-notification.css">
-    <link rel="stylesheet" ng-href="/styles/{{pageClass == 'home'  ? 'landing' : 'style' }}.css?v=0.1.10">
+    <link rel="stylesheet"  href="/styles/style.css?v=0.1.10">
+
     <base href="/">
 </head>
 <body class="page" data-ng-class="pageClass">
-
     <div data-ui-view class="page__wrapper"></div>
 
     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyA6Y8RlBTByatge6Ufdk4279cFABWBnm9Q"></script>
@@ -77,18 +77,18 @@
             }
         });
 
-        //System.import('app/app.js');
+       /* System.import('app/app.js');
 
-        //System.import('app/pages/home/highlight.pack.js');
-        //System.import('app/pages/home/mainz3a5m8eh2etu1md1b57b9.min.js')
+        System.import('app/pages/home/highlight.pack.js');
+        System.import('app/pages/home/mainz3a5m8eh2etu1md1b57b9.min.js')*/
 
 
-        System.import('app/app.js').then(function (e) {
+        System.import('app/pages/home/landing.js').then( (e) => {
             Promise.all([
                 System.import('app/pages/home/highlight.pack.js'),
-                System.import('app/pages/home/mainz3a5m8eh2etu1md1b57b9.min.js'),
+                System.import('app/app.js'),
             ])
-        });
+        })
 
 
     </script>

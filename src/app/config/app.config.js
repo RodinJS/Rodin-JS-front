@@ -34,7 +34,7 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
                 return User.verifyAuth(false);
             },
         },
-    });
+    })
 
     $urlRouterProvider.otherwise('/error');
 

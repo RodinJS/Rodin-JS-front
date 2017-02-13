@@ -25,8 +25,7 @@ const VENDORMAP = require('./vendor.json');
 
 const JS = ['src/app/**/*.js', '!src/systemjs-module/**', '!src/assists/**'];
 const HTML = ['src/app/**/*.html', 'src/app/**/**/*.html'];
-const SASS = ['src/styles/**/*.scss', '!src/styles/{vendor,vendor/**}', '!src/styles/home.scss'];
-const LANDING = ['src/styles/**/home.scss'];
+const SASS = ['src/styles/**/*.scss', '!src/styles/{vendor,vendor/**}'];
 const FONT = ['src/fonts/**/*.{ttf,woff,woff2,eof,svg,eot,json,otf}'];
 const IMG = ['src/images/**/*.{jpg,jpeg,ico,png,svg,gif,json,xml}'];
 const VIDEO = ['src/video/**/*.{mp4,webm}'];
@@ -207,7 +206,6 @@ gulp.task('sass:landing', () => {
 });
 
 
-
 gulp.task('sass-prod', () => {
     const s = size({
         onLast: true,
@@ -249,7 +247,6 @@ gulp.task('video', () => {
 
 gulp.task('watch', () => {
     gulp.watch(SASS, ['sass']);
-    gulp.watch(LANDING, ['sass:landing']);
     gulp.watch(JS, ['js']);
     gulp.watch(HTML, ['build-template']);
     gulp.watch(FONT, ['font']);
@@ -274,9 +271,9 @@ gulp.task('build-template', (done) => {
 });
 
 gulp.task('prod', (done) => {
-    sequence('clean', 'vendor', ['generate-index', 'template', 'js-prod', 'sass-prod', 'sass:landing', 'font', 'img', 'video'], done);
+    sequence('clean', 'vendor', ['generate-index', 'template', 'js-prod', 'sass-prod',  'font', 'img', 'video'], done);
 });
 
 gulp.task('default', (done) => {
-    sequence('clean', 'vendor', ['generate-index', 'template', 'js', 'sass', 'sass:landing', 'font', 'img', 'video', 'connect', 'watch'], done);
+    sequence('clean', 'vendor', ['generate-index', 'template', 'js', 'sass',  'font', 'img', 'video', 'connect', 'watch'], done);
 });
