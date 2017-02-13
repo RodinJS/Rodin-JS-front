@@ -83,3 +83,4 @@ Temporary Items
 /build
 #/build/scripts/vendor/
 /src/app/config/app.templates.js
+!/src/fonts/landing/icon/
