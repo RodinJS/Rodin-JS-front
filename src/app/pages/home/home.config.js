@@ -1,15 +1,16 @@
 function HomeConfig($stateProvider) {
-	'ngInject';
+    'ngInject';
 
-	$stateProvider
-		.state('landing.home', {
-			url: '/',
-			controller: 'HomeCtrl',
-			controllerAs: '$ctrl',
-			templateUrl: 'pages/home/home.html',
-			title: 'Home',
-			redirectToWhenAuthenticated: "app.dashboard"
-		});
+    $stateProvider
+     .state('landing.home', {
+        url: '/',
+        controller: 'HomeCtrl',
+        controllerAs: '$ctrl',
+        templateUrl: 'pages/home/home.html',
+        title: 'Home',
+        pageClass: 'home',
+        //redirectToWhenAuthenticated: 'app.dashboard',
+    });
 
 }
 

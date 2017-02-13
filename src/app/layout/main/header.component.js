@@ -16,17 +16,18 @@ class AppHeaderCtrl {
 
         this.user = User.current;
 
-        if(this.user){
-            this.notificationsStore.subscribeAndInit($scope, ()=>{
+        if (this.user) {
+            this.notificationsStore.subscribeAndInit($scope, ()=> {
                 this.notifications = this.notificationsStore.getNotifications();
                 this.notificationsCount = this.notificationsStore.getUndreadNotificationsCount();
-                if(!this.notifications) return this.getNotifications();
+                if (!this.notifications) return this.getNotifications();
             });
 
-            SocketService.on('projectBuild', (data)=>{
+            SocketService.on('projectBuild', (data)=> {
                 EventBus.emit(this.eventBus.notifications.SET_ONE, data);
             });
         }
+
     }
 
     getNotifications() {
@@ -34,41 +35,44 @@ class AppHeaderCtrl {
             notifications => {
                 this.eventBus.emit(this.eventBus.notifications.SET, notifications);
             },
+
             error => {
                 console.log(error);
             }
-        )
+        );
     }
 
-    deleteNotification(param, index){
-        param = !param  ? 'all=true' : 'id='+param+'';
+    deleteNotification(param, index) {
+        param = !param  ? 'all=true' : 'id=' + param + '';
         this.User.deleteNotification(param).then(
-            notification=>{
+            notification=> {
                 this.eventBus.emit(this.eventBus.notifications.DELETE, index);
             },
-            error=>{
+
+            error=> {
                 console.log(error);
             }
-        )
+        );
     }
 
-    updateNotification(notification, index, $event){
-        if(notification.isRead) return;
-        this.User.updateNotification({id:notification._id}).then(
-            notification=>{
+    updateNotification(notification, index, $event) {
+        if (notification.isRead) return;
+        this.User.updateNotification({ id: notification._id }).then(
+            notification=> {
                 this.eventBus.emit(this.eventBus.notifications.UPDATE, index);
             },
-            error=>{
+
+            error=> {
                 console.log(error);
             }
-        )
+        );
     }
 
 }
 
 let AppHeader = {
     controller: AppHeaderCtrl,
-    templateUrl: 'layout/main/header.html'
+    templateUrl: 'layout/main/header.html',
 };
 
 export default AppHeader;

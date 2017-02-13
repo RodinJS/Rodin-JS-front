@@ -25,9 +25,11 @@ const VENDORMAP = require('./vendor.json');
 
 const JS = ['src/app/**/*.js', '!src/systemjs-module/**', '!src/assists/**'];
 const HTML = ['src/app/**/*.html', 'src/app/**/**/*.html'];
-const SASS = ['src/styles/**/*.scss', '!src/styles/{vendor,vendor/**}'];
+const SASS = ['src/styles/**/*.scss', '!src/styles/{vendor,vendor/**}', '!src/styles/home.scss'];
+const LANDING = ['src/styles/**/home.scss'];
 const FONT = ['src/fonts/**/*.{ttf,woff,woff2,eof,svg,eot,json,otf}'];
 const IMG = ['src/images/**/*.{jpg,jpeg,ico,png,svg,gif,json,xml}'];
+const VIDEO = ['src/video/**/*.{mp4,webm}'];
 
 const AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -182,6 +184,30 @@ gulp.task('sass', () => {
     }));
 });
 
+gulp.task('sass:landing', () => {
+    const s = size({
+        onLast: true,
+        title: 'SASS -> ',
+        pretty: true,
+    });
+    return gulp.src(LANDING)
+        .pipe(plumber(ERROR_MESSAGE))
+        .pipe(sass().on('error', sass.logError))
+        .pipe(concat('landing.css'))
+        .pipe(sourcemaps.init())
+        .pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
+        .pipe(sourcemaps.write())
+        .pipe(s)
+        .pipe(plumber.stop())
+        .pipe(gulp.dest('./build/styles'))
+        .pipe(notify({
+            onLast: true,
+            message: () => `SASS - Total size ${s.prettySize}`,
+        }));
+});
+
+
+
 gulp.task('sass-prod', () => {
     const s = size({
         onLast: true,
@@ -215,9 +241,15 @@ gulp.task('img', () => {
       .pipe(plumber(ERROR_MESSAGE))
       .pipe(gulp.dest('./build/images'));
 });
+gulp.task('video', () => {
+    gulp.src(VIDEO)
+      .pipe(plumber(ERROR_MESSAGE))
+      .pipe(gulp.dest('./build/video'));
+});
 
 gulp.task('watch', () => {
     gulp.watch(SASS, ['sass']);
+    gulp.watch(LANDING, ['sass:landing']);
     gulp.watch(JS, ['js']);
     gulp.watch(HTML, ['build-template']);
     gulp.watch(FONT, ['font']);
@@ -242,9 +274,9 @@ gulp.task('build-template', (done) => {
 });
 
 gulp.task('prod', (done) => {
-    sequence('clean', 'vendor', ['generate-index', 'template', 'js-prod', 'sass-prod', 'font', 'img'], done);
+    sequence('clean', 'vendor', ['generate-index', 'template', 'js-prod', 'sass-prod', 'sass:landing', 'font', 'img', 'video'], done);
 });
 
 gulp.task('default', (done) => {
-    sequence('clean', 'vendor', ['generate-index', 'template', 'js', 'sass', 'font', 'img', 'connect', 'watch'], done);
+    sequence('clean', 'vendor', ['generate-index', 'template', 'js', 'sass', 'sass:landing', 'font', 'img', 'video', 'connect', 'watch'], done);
 });
