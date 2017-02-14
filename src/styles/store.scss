@@ -1,5 +1,6 @@
 body{
-  &:not(.home){
+  &:not(.home),
+  &:not(.login-register){
     &.page-store {
       .main-container {
         padding-left: 150px;

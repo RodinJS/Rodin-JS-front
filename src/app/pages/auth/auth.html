@@ -1,178 +1,171 @@
-<div class="auth-page">
-	<div class="container page">
-		<div class="row" style="text-align: center">
+<div class="auth-container signup-container">
+    <div class="container">
+        <div class="auth-content">
+            <h3 class="title" style="margin-bottom:30px !important;">SIGN IN</h3>
 
-			<div class="offset-md-6 col-xs-12">
-				<h1 class="text-xs-center" data-ng-bind="::$ctrl.title"></h1>
-				<p class="text-xs-center">
-					<a data-ui-sref="landing.login"
-					   data-ng-show="$ctrl.authType === 'register'">
-						Have an account?
-					</a>
-					<!--<a data-ui-sref="landing.register"
-					   data-ng-show="$ctrl.authType === 'login'">
-						Need an account?
-					</a>-->
-				</p>
 
-				<form data-ng-submit="$ctrl.submitForm()" name="register">
+            <form data-ng-submit="$ctrl.submitForm()" class="main-form" name="register">
 
-					<fieldset data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'login'">
+                <div data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'login'">
 
-						<fieldset class="form-group">
-							<div class="row">
-								<div class="center-block landing-input-block margin-top-20">
-									<div class="form-wrapper">
-										<div class="form-group" custom-input>
-											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.username">
-											<label class="control-label float-label">Username</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</fieldset>
+                    <div class="form-group" custom-input>
+                        <input type="text"
+                               class="form-control"
+                               ng-class="$ctrl.formData.username ? 'active' : ''"
+                               placeholder=""
+                               value=""
+                               data-ng-model="$ctrl.formData.username">
 
-						<fieldset class="form-group">
-							<div class="row">
-								<div class="center-block landing-input-block">
-									<div class="form-wrapper">
-										<div class="form-group" custom-input>
-											<input type="password" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.password">
-											<label class="control-label float-label">Password</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</fieldset>
+                        <label class="control-label float-label">Username</label>
+                    </div>
 
-						<p class="text-center text-danger"
-							 	ng-if="$ctrl.errors[0]">
-							Wrong username or password
-						</p>
+                    <div class="form-group" custom-input>
+                        <input type="password"
+                               class="form-control"
+                               ng-class="$ctrl.formData.password ? 'active' : ''"
+                               placeholder=""
+                               value=""
+                               data-ng-model="$ctrl.formData.password">
 
-						<div class="section section-project-content login">
-							<div class="row">
-								<div class="center-block">
-									<div class="btn-wrapper">
-										<button type="submit" style="margin-right:10px" class="btn btn-primary border-orange">Sign in</button>
-										<button type="button" ui-sref="landing.register" class="btn btn-primary border-orange">Register</button>
-									</div>
-								</div>
-								<div class="center-block">
-                                    <div class="btn-wrapper">
-                                        <a  ui-sref="landing.resetpassword" class="btn link">Forgot password</a>
-                                    </div>
+                        <label class="control-label float-label">Password</label>
+                    </div>
+
+                    <p class="text-center text-danger"
+                       ng-if="$ctrl.errors[0]">
+                        Wrong username or password
+                    </p>
+
+                    <div class="btn-wrapper">
+                        <button type="submit" style="margin-right:10px" class="btn btn-default btn-submit">Sign in</button>
+                        <button type="button" ui-sref="landing.register" class="btn btn-default btn-submit">Register</button>
+                    </div>
+
+                 <!--   <div class="section section-project-content login">
+                        <div class="row">
+                            <div class="center-block">
+                                <div class="btn-wrapper">
+                                    <button type="submit" style="margin-right:10px" class="btn btn-primary border-orange">Sign in</button>
+                                    <button type="button" ui-sref="landing.register" class="btn btn-primary border-orange">Register</button>
                                 </div>
+                            </div>
+                            <div class="center-block">
+                                <div class="btn-wrapper">
+                                    <a  ui-sref="landing.resetpassword" class="btn link">Forgot password</a>
+                                </div>
+                            </div>
 
-								<!--<div class="center-block">
-									<div class="btn-wrapper">
-										<button type="button" ng-click="$ctrl.fbLogin()" class="btn btn-primary border-orange">Login via Facebook</button>
-										<button type="button" ng-click="$ctrl.googleLogin()" class="btn btn-primary border-orange">Login via Google</button>
-										<button type="button" ng-click="$ctrl.gitLogin()" class="btn btn-primary border-orange">Login via Github</button>
-									</div>
-								</div>-->
-							</div>
-						</div>
+                            &lt;!&ndash;<div class="center-block">
+                                <div class="btn-wrapper">
+                                    <button type="button" ng-click="$ctrl.fbLogin()" class="btn btn-primary border-orange">Login via Facebook</button>
+                                    <button type="button" ng-click="$ctrl.googleLogin()" class="btn btn-primary border-orange">Login via Google</button>
+                                    <button type="button" ng-click="$ctrl.gitLogin()" class="btn btn-primary border-orange">Login via Github</button>
+                                </div>
+                            </div>&ndash;&gt;
+                        </div>
+                    </div>-->
 
-					</fieldset>
+                </div>
 
-					<fieldset data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'register'">
+                <div data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'register'">
 
-							<fieldset class="form-group">
-								<div class="row">
-									<div class="center-block landing-input-block margin-top-20">
-										<div class="form-wrapper">
-											<div class="form-group" custom-input
-												 data-ng-class="{'has-error': register.username.$invalid && register.username.focused, 'has-success': register.username.$valid && register.username.focused}">
-												<input type="text"
-													   class="form-control"
-													   placeholder=""
-													   value=""
-													   ng-minlength="3"
-													   ng-maxlength="32"
-													   name="username"
-													   data-ng-model="$ctrl.formData.username" required
-													   data-ng-focus="register.username.focused = true">
-												<label class="control-label float-label">Username</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</fieldset>
+                    <div class="form-group" custom-input
+                         data-ng-class="{'has-error': register.username.$invalid && register.username.focused, 'has-success': register.username.$valid && register.username.focused}">
+                        <input type="text"
+                               class="form-control"
+                               placeholder=""
+                               value=""
+                               ng-minlength="3"
+                               ng-maxlength="32"
+                               name="username"
+                               data-ng-model="$ctrl.formData.username" required
+                               data-ng-focus="register.username.focused = true">
+                        <label class="control-label float-label">Username</label>
+                    </div>
 
-							<fieldset class="form-group">
-								<div class="row">
-									<div class="center-block landing-input-block">
-										<div class="form-wrapper">
-											<div class="form-group" custom-input
-												 data-ng-class="{'has-error': register.email.$invalid && register.email.focused, 'has-success': register.email.$valid && register.email.focused}">
-												<input type="text"
-													   class="form-control"
-													   placeholder=""
-													   value=""
-													   name="email"
-													   data-ng-pattern="$ctrl.patterns.email"
-													   data-ng-focus="register.email.focused = true"
-													   data-ng-model="$ctrl.formData.email" required>
-												<label class="control-label float-label">Email</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</fieldset>
+                    <div class="form-group" custom-input
+                         data-ng-class="{'has-error': register.email.$invalid && register.email.focused, 'has-success': register.email.$valid && register.email.focused}">
+                        <input type="text"
+                               class="form-control"
+                               placeholder=""
+                               value=""
+                               name="email"
+                               data-ng-pattern="$ctrl.patterns.email"
+                               data-ng-focus="register.email.focused = true"
+                               data-ng-model="$ctrl.formData.email" required>
+                        <label class="control-label float-label">Email</label>
+                    </div>
 
-							<fieldset class="form-group">
-								<div class="row">
-									<div class="center-block landing-input-block">
-										<div class="form-wrapper">
-											<div class="form-group" custom-input
-												 data-ng-class="{'has-error': register.password.$invalid && register.password.focused, 'has-success': register.password.$valid && register.password.focused}">
-												<input type="password"
-													   class="form-control"
-													   name="password"
-													   placeholder="" value=""
-													   data-ng-model="$ctrl.formData.password"
-													   data-ng-focus="register.email.focused = true"
-												 	   required>
-												<label class="control-label float-label">Password</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</fieldset>
+                    <div class="form-group" custom-input
+                         data-ng-class="{'has-error': register.password.$invalid && register.password.focused, 'has-success': register.password.$valid && register.password.focused}">
+                        <input type="password"
+                               class="form-control"
+                               name="password"
+                               placeholder="" value=""
+                               data-ng-model="$ctrl.formData.password"
+                               data-ng-focus="register.email.focused = true"
+                               required>
+                        <label class="control-label float-label">Password</label>
+                    </div>
 
-							<fieldset class="form-group">
-								<div class="row">
-									<div class="center-block landing-input-block">
-										<div class="form-wrapper">
-											<div class="form-group" custom-input>
-												<input type="text"
-													   class="form-control"
-													   placeholder=""
-													   value=""
-													   data-ng-model="$ctrl.formData.invitationCode"
-													   required>
-												<label class="control-label float-label">Invitation Code</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</fieldset>
+                    <div class="form-group" custom-input>
+                        <input type="text"
+                               class="form-control"
+                               placeholder=""
+                               value=""
+                               data-ng-model="$ctrl.formData.invitationCode"
+                               required>
+                        <label class="control-label float-label">Invitation Code</label>
+                    </div>
 
-							<div class="center-block">
-								<p class="text-small description pass-description">
-									Password must be at least 8 characters long, contain a number and letter
-								</p>
-								<div class="btn-wrapper">
-									<button type="submit" ng-disabled="$ctrl.authType === 'register' && register.$invalid" class="btn btn-primary border-orange">Sign up</button>
-								</div>
-							</div>
+                    <div class="btn-wrapper">
+                        <button type="submit"
+                                ng-disabled="$ctrl.authType === 'register' && register.$invalid"
+                                class="btn btn-default btn-submit">Sign up</button>
 
-					</fieldset>
+                    </div>
 
-				</form>
-			</div>
+                    <div class="center-block">
+                        <p class="text-small description pass-description">
+                            Password must be at least 8 characters long, contain a number and letter
+                        </p>
+                        <div class="btn-wrapper">
+                            <button type="submit" ng-disabled="$ctrl.authType === 'register' && register.$invalid" class="btn btn-primary border-orange">Sign up</button>
+                        </div>
+                    </div>
 
-		</div>
-	</div>
+                </div>
+
+
+            </form>
+
+
+
+           <!-- <form class="main-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="" placeholder="">
+                    <label class="float-label">Username</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="" placeholder="">
+                    <label class="float-label">hello@nasoku.com</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="" placeholder="">
+                    <label class="float-label">Password</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="" placeholder="">
+                    <label class="float-label">Invitation Code</label>
+                </div>
+                <div class="form-group">
+                    <p class="password-description">
+                        Passwords must be at least 8 characters long, containing a number and letter
+                    </p>
+                </div>
+                <div class="btn-wrapper">
+                    <button type="submit" class="btn btn-default btn-submit">Sign up</button>
+                </div>
+            </form>-->
+        </div>
+    </div>
 </div>

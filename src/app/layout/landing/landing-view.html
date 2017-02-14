@@ -1,4 +1,5 @@
-<app-header ng-show="pageClass !== 'home'"  class="header"></app-header>
+<app-header ng-if="pageClass !== 'home' && pageClass !=='login-register' "  class="header"></app-header>
+<landing-header ng-if="pageClass === 'login-register'"  class="header"></landing-header>
 
 <div data-ui-view></div>
 

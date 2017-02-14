@@ -1,55 +1,140 @@
-<nav class="navbar">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-ng-click="isNavbarCollapsed = !isNavbarCollapsed">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" data-ui-sref="landing.home">
-				<img src="images/rodin-logo.png" width="90" alt="logo">
+<header>
+	<div class="header-auth">
+		<div class="container">
+			<a href="" class="btn-mobile-menu visible-xs">
+                            <span class="btn-bars">
+            					<i></i>
+            					<i></i>
+            					<i></i>
+            					<i></i>
+            					<i></i>
+            					<i></i>
+            				</span>
 			</a>
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" data-uib-collapse="isNavbarCollapsed">
-
-			<ul class="nav navbar-nav">
-				<li><a ui-sref="landing.discover">How it works</a></li>
+			<a href="index.html" class="logo">
+				<img alt="Rodin" src="/images/landing/general/logo.svg">
+			</a>
+			<div class="header-menu">
+				<ul class="menu-list">
+					<li ng-if="$ctrl.user">
+						<a data-ui-sref-active="active" data-ui-sref="app.dashboard">Dashboard</a>
+					</li>
+					<li>
+						<a ui-sref="landing.store">Store</a>
+					</li>
+					<li class="rodin-hide">
+						<a ui-sref="landing.discover">How it works</a>
+					</li>
+					<li class="dropdown">
+						<a href="" id="moreLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							More <i class="rd rd-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel">
+                            <li>
+                                <a ui-sref="landing.docs">Docs</a>
+                            </li>
+                            <li>
+                                <a ui-sref="landing.tutorials">Tutorials</a>
+                            </li>
+                            <li>
+                                <a ui-sref="landing.faq">FAQ</a>
+                            </li>
+                            <li>
+                                <a ui-sref="landing.privacy">Terms and Conditions</a>
+                            </li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+          <!--  <div class="header-menu pull-right" ng-if="!$ctrl.user">
+                <ul class="menu-list">
+                    <li>
+                        <a class="nav-link" data-ui-sref-active="active" data-ui-sref="landing.login">
+                            Sign in
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" data-ui-sref-active="active" data-ui-sref="landing.register">
+                            Register
+                        </a>
+                    </li>
+                </ul>
+            </div>-->
 <!--
-				<li><a ui-sref="landing.store">Store</a></li>
+			<div class="account-action">
+				<ul>
+					<li class="dropdown notifi-dropdown">
+						<a href="" class="btn-notifi new" id="notifiLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<i class="rd rd-notifi"></i>
+						</a>
+						<div class="dropdown-menu notifi-dropdown-menu" aria-labelledby="notifiLabel">
+							<h5>Notifications</h5>
+							<ul class="notifi-list">
+								<li>
+									<a href="">
+										<p>
+											It sometimes seems everyone on the planet is using Windows. Lorem ipsum dolor.
+										</p>
+										<span class="notifi-date">3 hours ago</span>
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<p>
+											It sometimes seems everyone on the planet is using Windows. Lorem ipsum dolor.
+										</p>
+										<span class="notifi-date">3 hours ago</span>
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<p>
+											It sometimes seems everyone on the planet is using Windows. Lorem ipsum dolor.
+										</p>
+										<span class="notifi-date">3 hours ago</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="dropdown account-dropdown">
+						<a href="" class="btn-account" id="accountLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<span class="hidden-xs">Username</span>
+							<span class="accout-img-wrapper">
+            								<span class="account-img" style="background-image: url(static/img/content/account-img.jpg);"></span>
+                                        </span>
+							<i class="rd rd-angle-down hidden-xs"></i>
+						</a>
+						<div class="dropdown-menu account-dropdown-menu" aria-labelledby="accountLabel">
+							<h4>Account Name</h4>
+							<ul class="account-action-list">
+								<li>
+									<a href="">Edit profile</a>
+								</li>
+								<li>
+									<a href="">Lorem ipsum</a>
+								</li>
+								<li>
+									<a href="">Sign out</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
 -->
-				<!--<li><a href="https://docs.rodin.space/">Doc</a></li>-->
-				<li class="dropdown" uib-dropdown>
-					<a href="" class="dropdown-toggle" role="button" uib-dropdown-toggle>
-						More <i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="dropdown-menu dropdown-menu-more" uib-dropdown-menu>
-						<li><a ui-sref="landing.tutorials">Tutorials</a></li>
-						<li><a ui-sref="landing.faq">FAQ</a></li>
-						<!--<li><a href="">Forum</a></li>-->
-						<!--<li><a href="">Blog</a></li>-->
-						<li class="terms"><a ui-sref="landing.privacy">Privacy Policy</a></li>
-					</ul>
-				</li>
-			</ul>
-
-			<ul class="nav navbar-nav navbar-right navbar-account">
-				<li>
-					<a class="nav-link" data-ui-sref-active="active" data-ui-sref="landing.login">
-						Sign in
-					</a>
-				</li>
-
-				<!--<li>
-						<a class="nav-link" data-ui-sref-active="active" data-ui-sref="landing.register">
-		Sign up
-	</a>
-				</li>-->
-			</ul>
 		</div>
-		<!-- /.navbar-collapse -->
 	</div>
-	<!-- /.container-fluid -->
-</nav>
+	<!--<div class="header-search-box">
+		<div class="container">
+			<form action="">
+				<div class="form-group">
+					<input type="search" class="header-search" placeholder="Search for Projects">
+					<button type="submit" class="btn-search">
+						<i class="rd rd-search"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>-->
+</header>

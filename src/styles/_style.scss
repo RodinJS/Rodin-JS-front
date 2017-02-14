@@ -50,7 +50,7 @@
 }
 
 body {
-  &:not(.home) {
+  &:not(.home){
     margin: 0;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
@@ -4261,7 +4261,7 @@ body {
     }
 
     fieldset {
-      border: 1px solid silver;
+      //border: 1px solid silver;
       margin: 0 2px;
       padding: .35em .625em .75em
     }

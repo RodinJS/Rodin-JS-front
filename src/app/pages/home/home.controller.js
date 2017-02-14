@@ -65,28 +65,24 @@ class HomeCtrl {
     scrollHandler(e) {
         const scrollPos = angular.element(document).scrollTop();
 
-        //TODO tmp solution
-        angular.forEach(angular.element('.sections'), (value, key) => {
-            const section = angular.element(value);
-            if (section.position().top <= scrollPos && section.position().top + section.height() > scrollPos) {
-                section.addClass('active');
-            }else {
-                section.removeClass('active');
-            }
-        });
-
+        const lastSlider = angular.element('.swiper-slide').last();
         const iframe = angular.element('#iframe');
         const innerWidth = iframe.innerWidth();
-        const sectionSlider = angular.element('#sectionSlider');
+        const innerHeight = iframe.innerHeight();
 
         if (!this.initialIframeWidth)
             this.initialIframeWidth = iframe.innerWidth();
 
         // incerase iframe size
-        if (sectionSlider.hasClass('active') && e.deltaY > 0 && iframe.innerWidth() <= this.windowWidth) {
+        if (lastSlider.hasClass('swiper-slide-active') && e.deltaY > 0 && (iframe.innerWidth() <= this.windowWidth)) {
             this.disablePointer = true;
+            angular.element('.img-wrapper.iframe-wrapper').css( { 'position':'initial' } );
+            //console.log('height', this.windowHeight);
+            //console.log('width', this.windowWidth);
+
             angular.element('body').css({ overflow: 'auto' });
-            iframe.width(innerWidth + 20);
+            iframe.width(innerWidth + 30);
+            //iframe.height(innerHeight + 30);
         }
 
         //Stop parent events works in iframe
@@ -103,6 +99,10 @@ class HomeCtrl {
             }
 
             iframe.width(innerWidth - 20);
+
+            if (!lastSlider.hasClass('swiper-slide-active'))
+                iframe.width(600).height(400);
+
         }
 
         this._$scope.$apply();
