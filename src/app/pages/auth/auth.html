@@ -1,7 +1,10 @@
 <div class="auth-container signup-container">
     <div class="container">
         <div class="auth-content">
-            <h3 class="title" style="margin-bottom:30px !important;">SIGN IN</h3>
+
+            <h3 class="title" style="margin-bottom:30px !important;">{{$ctrl.authType === 'login' ? 'SIGN IN' : 'SIGN UP'}}</h3>
+
+            <p ng-if="$ctrl.authType === 'register'" class="title-description">Have an account?</p>
 
 
             <form data-ng-submit="$ctrl.submitForm()" class="main-form" name="register">
@@ -117,6 +120,12 @@
                         <label class="control-label float-label">Invitation Code</label>
                     </div>
 
+                    <div class="form-group">
+                        <p class="password-description">
+                            Passwords must be at least 8 characters long, containing a number and letter
+                        </p>
+                    </div>
+
                     <div class="btn-wrapper">
                         <button type="submit"
                                 ng-disabled="$ctrl.authType === 'register' && register.$invalid"
@@ -124,14 +133,14 @@
 
                     </div>
 
-                    <div class="center-block">
+                  <!--  <div class="center-block">
                         <p class="text-small description pass-description">
                             Password must be at least 8 characters long, contain a number and letter
                         </p>
                         <div class="btn-wrapper">
                             <button type="submit" ng-disabled="$ctrl.authType === 'register' && register.$invalid" class="btn btn-primary border-orange">Sign up</button>
                         </div>
-                    </div>
+                    </div>-->
 
                 </div>
 

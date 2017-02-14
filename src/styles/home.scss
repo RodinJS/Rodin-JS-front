@@ -65,7 +65,7 @@ body{
     &.page {
       font-family: "Roboto", sans-serif;
       font-weight: 400;
-      background-color: #09192E;
+      background-color: #09192E !important;
       &.overflow {
         overflow: hidden;
       }
