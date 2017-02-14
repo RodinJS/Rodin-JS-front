@@ -29,9 +29,10 @@ class HomeCtrl {
         document.body.addEventListener('wheel', this.scrollHandler, false);
 
         this.hoveredIframe = false;
+        this.animatingIframe = false;
 
         $scope.$on('$viewContentLoaded', () => {
-            $(document).ready(()=> {
+            $(document).ready(() => {
                 RODIN.landing();
                 $('.code').each(function (i, block) {
                     hljs.highlightBlock(block);
@@ -39,7 +40,6 @@ class HomeCtrl {
             });
 
         });
-
     }
 
     handleIframeMessage(e) {
@@ -52,7 +52,7 @@ class HomeCtrl {
         if (typeof wheeler === 'boolean') {
 
             if (this.hoveredIframe) {
-                angular.element('body').css({ overflow: 'auto' });
+                angular.element('body').css({overflow: 'auto'});
                 this.disablePointer = true;
             } else {
                 this.disablePointer = false;
@@ -67,6 +67,13 @@ class HomeCtrl {
 
         const lastSlider = angular.element('.swiper-slide').last();
         const iframe = angular.element('#iframe');
+        const iframeBox = angular.element('#iframe-box');
+        const btnNextSlide = angular.element('.btn-next-slide');
+
+        iframeBox.css({
+            background: 'red'
+        });
+
         const innerWidth = iframe.innerWidth();
         const innerHeight = iframe.innerHeight();
 
@@ -74,35 +81,57 @@ class HomeCtrl {
             this.initialIframeWidth = iframe.innerWidth();
 
         // incerase iframe size
-        if (lastSlider.hasClass('swiper-slide-active') && e.deltaY > 0 && (iframe.innerWidth() <= this.windowWidth)) {
-            this.disablePointer = true;
-            angular.element('.img-wrapper.iframe-wrapper').css( { 'position':'initial' } );
-            //console.log('height', this.windowHeight);
-            //console.log('width', this.windowWidth);
+        const isBottom = btnNextSlide.hasClass('last') && lastSlider.hasClass('swiper-slide-active');
+        if (isBottom && e.deltaY > 0 && (iframeBox.innerWidth() < this.windowWidth) && !this.animatingIframe) {
+            this.animatingIframe = true;
 
-            angular.element('body').css({ overflow: 'auto' });
-            iframe.width(innerWidth + 30);
-            //iframe.height(innerHeight + 30);
+            this.disablePointer = true;
+
+            let x = $(iframeBox[0]).offset().left - $('.slide-content.slide3').offset().left;
+            let y = $(iframeBox[0]).offset().top - $('.slide-content.slide3').offset().top;
+
+            if (!window.initialTransform)
+                window.initialTransform = {x: x, y: y, w: iframeBox.width(), h: iframeBox.height()};
+
+            angular.element('.img-wrapper.iframe-wrapper').css({'position': 'initial'});
+            angular.element('.iframe-holder').css({'position': 'initial'});
+            angular.element('body').css({overflow: 'auto'});
+
+
+            $(iframeBox[0]).width(window.initialTransform.w);
+            $(iframeBox[0]).height(window.initialTransform.h);
+            $(iframeBox[0]).css({
+                top: window.initialTransform.y,
+                left: window.initialTransform.x,
+            });
+
+            $(iframeBox[0]).animate({
+                top: 0,
+                left: 0,
+                width: window.innerWidth,
+                height: window.innerHeight
+            }, 500, () => {
+                this.animatingIframe = false;
+            });
         }
 
         //Stop parent events works in iframe
         if (iframe.innerWidth() >= this.windowWidth) {
-            angular.element('body').css({ overflow: 'hidden' });
+            angular.element('body').css({overflow: 'hidden'});
             this.disablePointer = false;
         }
 
-        //decrease iframe size;
-        if (e.deltaY < 0 && (iframe.innerWidth() > this.initialIframeWidth)) {
-            angular.element('body').css({ overflow: 'auto' });
-            if (!this.disablePointer) {
-                this.disablePointer = true;
-            }
+        if (isBottom && e.deltaY < 0 && window.initialTransform && !this.animatingIframe) {
 
-            iframe.width(innerWidth - 20);
-
-            if (!lastSlider.hasClass('swiper-slide-active'))
-                iframe.width(600).height(400);
-
+            this.animatingIframe = true;
+            $(iframeBox[0]).animate({
+                top: window.initialTransform.y,
+                left: window.initialTransform.x,
+                width: window.initialTransform.w,
+                height: window.initialTransform.h
+            }, 500, () => {
+                this.animatingIframe = false;
+            });
         }
 
         this._$scope.$apply();
