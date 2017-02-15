@@ -24,12 +24,13 @@ class HomeCtrl {
 
         this.scrollHandler = this.scrollHandler.bind(this);
         this.handleIframeMessage = this.handleIframeMessage.bind(this);
+        this.initIframeData = this.initIframeData.bind(this);
+        this.resetInitalPosition = this.resetInitalPosition.bind(this);
 
         window.addEventListener('message', this.handleIframeMessage, false);
         document.body.addEventListener('wheel', this.scrollHandler, false);
 
         this.hoveredIframe = false;
-        this.animatingIframe = false;
 
         $scope.$on('$viewContentLoaded', () => {
             $(document).ready(() => {
@@ -37,9 +38,46 @@ class HomeCtrl {
                 $('.code').each(function (i, block) {
                     hljs.highlightBlock(block);
                 });
+
+                $(document).on('click', '.back-home-btn',  () => {
+                    RODIN.projectSlider.unlockSwipeToPrev();
+                    RODIN.projectSlider._slideTo(0, 500);
+                    this.resetInitalPosition();
+                    var modal = $('.project-modal');
+                    modal.removeClass('show animationEnd');
+                    $(window).scrollTop($(window).scrollTop() - 10);
+                });
+
             });
 
         });
+    }
+
+    initIframeData() {
+        this.$iframeBox = $('#iframe-box');
+        const $slide3 = $('.slide-content.slide3');
+        const x = this.$iframeBox.offset().left - $slide3.offset().left;
+        const y = this.$iframeBox.offset().top - $slide3.offset().top;
+        this.initialTransform = { x: x, y: y, w: this.$iframeBox.width(), h: this.$iframeBox.height() };
+        this.$iframeBox.css({
+            width: this.initialTransform.w,
+            height: this.initialTransform.h,
+            top: this.initialTransform.y,
+            left: this.initialTransform.x,
+        });
+
+    }
+
+    resetInitalPosition() {
+        if (this.initialTransform) {
+            $('#iframe-box').css({
+                width: this.initialTransform.w,
+                height: this.initialTransform.h,
+                top: this.initialTransform.y,
+                left: this.initialTransform.x,
+            });
+        }
+
     }
 
     handleIframeMessage(e) {
@@ -52,7 +90,7 @@ class HomeCtrl {
         if (typeof wheeler === 'boolean') {
 
             if (this.hoveredIframe) {
-                angular.element('body').css({overflow: 'auto'});
+                angular.element('body').css({ overflow: 'auto' });
                 this.disablePointer = true;
             } else {
                 this.disablePointer = false;
@@ -63,75 +101,91 @@ class HomeCtrl {
     }
 
     scrollHandler(e) {
-        const scrollPos = angular.element(document).scrollTop();
 
         const lastSlider = angular.element('.swiper-slide').last();
         const iframe = angular.element('#iframe');
-        const iframeBox = angular.element('#iframe-box');
+        const $iframeBox = $('#iframe-box');
         const btnNextSlide = angular.element('.btn-next-slide');
 
-        iframeBox.css({
-            background: 'red'
-        });
-
-        const innerWidth = iframe.innerWidth();
-        const innerHeight = iframe.innerHeight();
+        if (!this.initialLeft && !this.initialTop) {
+            this.initialLeft = $iframeBox[0].offsetLeft;
+            this.initialTop = $iframeBox[0].offsetTop;
+            if (!this.$iframeBox) this.initIframeData();
+            $('.img-wrapper.iframe-wrapper').css({ position: 'initial' });
+            $('.iframe-holder').css({ position: 'initial' });
+        }
 
         if (!this.initialIframeWidth)
             this.initialIframeWidth = iframe.innerWidth();
 
         // incerase iframe size
         const isBottom = btnNextSlide.hasClass('last') && lastSlider.hasClass('swiper-slide-active');
-        if (isBottom && e.deltaY > 0 && (iframeBox.innerWidth() < this.windowWidth) && !this.animatingIframe) {
-            this.animatingIframe = true;
+
+        if (!btnNextSlide.hasClass('last')) {
+            $('body').css({ overflow: 'auto' });
+            $('.slide-number').show();
+            $('.pagination-wrapper').show();
+            return btnNextSlide.show();
+        }
+
+        if (isBottom && e.deltaY > 0 && ($iframeBox.innerWidth() < this.windowWidth)) {
 
             this.disablePointer = true;
 
-            let x = $(iframeBox[0]).offset().left - $('.slide-content.slide3').offset().left;
-            let y = $(iframeBox[0]).offset().top - $('.slide-content.slide3').offset().top;
+            $('body').css({ overflow: 'auto' });
+            $('.slide-number').hide();
+            $('.pagination-wrapper').hide();
+            btnNextSlide.hide();
 
-            if (!window.initialTransform)
-                window.initialTransform = {x: x, y: y, w: iframeBox.width(), h: iframeBox.height()};
+            const calcTop = $iframeBox[0].offsetTop - (this.initialTop / 2);
+            const calcLeft = $iframeBox[0].offsetLeft - (this.initialLeft / 2);
+            const calcWidth = this.$iframeBox.width() + ((this.windowWidth - this.initialTransform.w) / 6);
+            const calcHeigth = this.$iframeBox.height() + ((this.windowHeight - this.initialTransform.h) / 6);
 
-            //angular.element('.img-wrapper.iframe-wrapper').css({'position': 'initial'});
-            //angular.element('.iframe-holder').css({'position': 'initial'});
-            //angular.element('body').css({overflow: 'auto'});
+            const top = calcTop <= 0 ? 0 : calcTop;
+            const left = calcLeft <= 0 ? 0 : calcLeft;
+            const width = calcWidth < this.windowWidth ? calcWidth : this.windowWidth;
+            const height = calcHeigth < this.windowWidth ? calcHeigth : this.windowHeight;
 
-
-            $(iframeBox[0]).width(window.initialTransform.w);
-            $(iframeBox[0]).height(window.initialTransform.h);
-            $(iframeBox[0]).css({
-                top: window.initialTransform.y,
-                left: window.initialTransform.x,
+            $iframeBox.css({
+                width: width,
+                height: height,
+                top: top,
+                left: left,
             });
 
-            $(iframeBox[0]).animate({
-                top: 0,
-                left: 0,
-                width: window.innerWidth,
-                height: window.innerHeight
-            }, 500, () => {
-                this.animatingIframe = false;
-            });
+            RODIN.projectSlider.lockSwipeToPrev();
+
         }
 
         //Stop parent events works in iframe
-        if (iframe.innerWidth() >= this.windowWidth) {
-            //angular.element('body').css({overflow: 'hidden'});
+        if ($iframeBox.innerWidth() >= this.windowWidth) {
+            angular.element('body').css({ overflow: 'hidden' });
             this.disablePointer = false;
         }
 
-        if (isBottom && e.deltaY < 0 && window.initialTransform && !this.animatingIframe) {
+        if (isBottom && e.deltaY < 0) {
+            const calcTop = this.$iframeBox[0].offsetTop + (this.initialTop / 2);
+            const calcLeft = this.$iframeBox[0].offsetLeft + (this.initialLeft / 2);
+            const calcWidth = this.$iframeBox.width() - ((this.windowWidth - this.initialTransform.w) / 6);
+            const calcHeigth = this.$iframeBox.height() - ((this.windowHeight - this.initialTransform.h) / 6);
 
-            this.animatingIframe = true;
-            $(iframeBox[0]).animate({
-                top: window.initialTransform.y,
-                left: window.initialTransform.x,
-                width: window.initialTransform.w,
-                height: window.initialTransform.h
-            }, 500, () => {
-                this.animatingIframe = false;
+            const top = calcTop < this.initialTransform.y ? calcTop : this.initialTransform.y;
+            const left = calcLeft < this.initialTransform.x ? calcLeft : this.initialTransform.x;
+            const width = calcWidth > this.initialTransform.w ? calcWidth : this.initialTransform.w;
+            const height = calcHeigth > this.initialTransform.h ? calcHeigth : this.initialTransform.h;
+
+            $iframeBox.css({
+                width: width,
+                height: height,
+                left: left,
+                top: top,
             });
+
+            if ($iframeBox.width() <= this.initialTransform.w) {
+                RODIN.projectSlider.unlockSwipeToPrev();
+            }
+
         }
 
         this._$scope.$apply();
