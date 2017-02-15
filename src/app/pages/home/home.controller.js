@@ -93,9 +93,9 @@ class HomeCtrl {
             if (!window.initialTransform)
                 window.initialTransform = {x: x, y: y, w: iframeBox.width(), h: iframeBox.height()};
 
-            angular.element('.img-wrapper.iframe-wrapper').css({'position': 'initial'});
-            angular.element('.iframe-holder').css({'position': 'initial'});
-            angular.element('body').css({overflow: 'auto'});
+            //angular.element('.img-wrapper.iframe-wrapper').css({'position': 'initial'});
+            //angular.element('.iframe-holder').css({'position': 'initial'});
+            //angular.element('body').css({overflow: 'auto'});
 
 
             $(iframeBox[0]).width(window.initialTransform.w);
@@ -117,7 +117,7 @@ class HomeCtrl {
 
         //Stop parent events works in iframe
         if (iframe.innerWidth() >= this.windowWidth) {
-            angular.element('body').css({overflow: 'hidden'});
+            //angular.element('body').css({overflow: 'hidden'});
             this.disablePointer = false;
         }
 
