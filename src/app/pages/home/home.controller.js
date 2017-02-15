@@ -26,7 +26,8 @@ class HomeCtrl {
         this.handleIframeMessage = this.handleIframeMessage.bind(this);
         this.initIframeData = this.initIframeData.bind(this);
         this.resetInitalPosition = this.resetInitalPosition.bind(this);
-
+        this.outToSlider = this.outToSlider.bind(this);
+        this.lastExecution = false;
         window.addEventListener('message', this.handleIframeMessage, false);
         document.body.addEventListener('wheel', this.scrollHandler, false);
 
@@ -39,18 +40,21 @@ class HomeCtrl {
                     hljs.highlightBlock(block);
                 });
 
-                $(document).on('click', '.back-home-btn',  () => {
-                    RODIN.projectSlider.unlockSwipeToPrev();
-                    RODIN.projectSlider._slideTo(0, 500);
-                    this.resetInitalPosition();
-                    var modal = $('.project-modal');
-                    modal.removeClass('show animationEnd');
-                    $(window).scrollTop($(window).scrollTop() - 10);
-                });
+                $('.back-home-btn').on('click', () =>  this.outToSlider());
 
             });
 
         });
+    }
+
+    outToSlider() {
+        RODIN.projectSlider.unlockSwipeToPrev();
+        RODIN.projectSlider._slideTo(0, 500);
+        this.resetInitalPosition();
+        $('.project-modal').removeClass('show animationEnd');
+        //$(window).scrollTop($(window).scrollTop() - 10);
+        this.canOutFromSlider = false;
+
     }
 
     initIframeData() {
@@ -102,6 +106,10 @@ class HomeCtrl {
 
     scrollHandler(e) {
 
+        const now = Date.now();
+        if (now - this.lastExecution < 17) return; // ~60Hz
+        this.lastExecution = now;
+
         const lastSlider = angular.element('.swiper-slide').last();
         const iframe = angular.element('#iframe');
         const $iframeBox = $('#iframe-box');
@@ -121,7 +129,14 @@ class HomeCtrl {
         // incerase iframe size
         const isBottom = btnNextSlide.hasClass('last') && lastSlider.hasClass('swiper-slide-active');
 
+        if (this.canOutFromSlider){
+           return this.outToSlider();
+        }
+
+
         if (!btnNextSlide.hasClass('last')) {
+            this.canOutFromSlider = e.deltaY < 0 && RODIN.projectSlider.isBeginning && btnNextSlide.hasClass('first');
+
             $('body').css({ overflow: 'auto' });
             $('.slide-number').show();
             $('.pagination-wrapper').show();
