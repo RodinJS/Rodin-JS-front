@@ -1,6 +1,7 @@
 class PrivacyCtrl {
-    constructor() {
+    constructor($window) {
         'ngInject';
+        $window.scrollTo(0, 0);
     }
 }
 export default PrivacyCtrl;

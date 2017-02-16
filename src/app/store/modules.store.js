@@ -46,14 +46,14 @@ function ModulesStore(EventBus, BaseStore) {
 
     factory.getMyModules = function (projectId) {
         if (!projectId) return factory.data.myModules;
-        const modules = _.filter(factory.data.myModules, (module) => (new Date() < new Date(module.expiredAt)));
+        //const modules = _.filter(factory.data.myModules, (module) => (new Date() < new Date(module.expiredAt)));
 
-        return _.map(modules, (module)=> {
-            let assignedToProject = factory.getMyModulesByPrjectId(module, projectId);
-            if (assignedToProject) {
+        return _.map(factory.data.myModules, (module)=> {
+            const assignedToProject = factory.getMyModulesByPrjectId(module, projectId);
+            const validDate = (new Date() < new Date(module.expiredAt));
+            if (assignedToProject && validDate) {
                 module.script = assignedToProject.script;
-            }
-            else
+            } else
                 delete module.script;
 
             return module;

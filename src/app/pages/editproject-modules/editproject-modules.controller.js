@@ -18,10 +18,9 @@ class EditProjectModulesCtrl {
 
         this._ModulesStore.subscribeAndInit($scope, () => {
             this.modulesList = this._ModulesStore.getMyModules($stateParams.projectId);
+
             if (!this.modulesList || this.modulesList.length <= 0)
                 return this.getMyModules();
-
-            console.log(this.modulesList);
 
         });
 
@@ -30,6 +29,7 @@ class EditProjectModulesCtrl {
             if (!this.project)
                 this.getProject();
         });
+        return this.getMyModules();
 
     }
 

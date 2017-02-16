@@ -9,7 +9,7 @@ function HomeConfig($stateProvider) {
         templateUrl: 'pages/home/home.html',
         title: 'Home',
         pageClass: 'home',
-        //redirectToWhenAuthenticated: 'app.dashboard',
+        redirectToWhenAuthenticated: 'app.dashboard',
     });
 
 }

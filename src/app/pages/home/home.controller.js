@@ -27,7 +27,6 @@ class HomeCtrl {
         this.initIframeData = this.initIframeData.bind(this);
         this.resetInitalPosition = this.resetInitalPosition.bind(this);
         this.outToSlider = this.outToSlider.bind(this);
-        this.lastExecution = false;
         window.addEventListener('message', this.handleIframeMessage, false);
         document.body.addEventListener('wheel', this.scrollHandler, false);
 
@@ -52,7 +51,7 @@ class HomeCtrl {
         RODIN.projectSlider._slideTo(0, 500);
         this.resetInitalPosition();
         $('.project-modal').removeClass('show animationEnd');
-        //$(window).scrollTop($(window).scrollTop() - 10);
+        $(window).scrollTop($(window).scrollTop() - 10);
         this.canOutFromSlider = false;
 
     }
@@ -106,10 +105,6 @@ class HomeCtrl {
 
     scrollHandler(e) {
 
-        const now = Date.now();
-        if (now - this.lastExecution < 17) return; // ~60Hz
-        this.lastExecution = now;
-
         const lastSlider = angular.element('.swiper-slide').last();
         const iframe = angular.element('#iframe');
         const $iframeBox = $('#iframe-box');
@@ -152,7 +147,7 @@ class HomeCtrl {
             $('.pagination-wrapper').hide();
             btnNextSlide.hide();
 
-            const calcTop = $iframeBox[0].offsetTop - (this.initialTop / 2);
+           /* const calcTop = $iframeBox[0].offsetTop - (this.initialTop / 2);
             const calcLeft = $iframeBox[0].offsetLeft - (this.initialLeft / 2);
             const calcWidth = this.$iframeBox.width() + ((this.windowWidth - this.initialTransform.w) / 6);
             const calcHeigth = this.$iframeBox.height() + ((this.windowHeight - this.initialTransform.h) / 6);
@@ -160,13 +155,13 @@ class HomeCtrl {
             const top = calcTop <= 0 ? 0 : calcTop;
             const left = calcLeft <= 0 ? 0 : calcLeft;
             const width = calcWidth < this.windowWidth ? calcWidth : this.windowWidth;
-            const height = calcHeigth < this.windowWidth ? calcHeigth : this.windowHeight;
+            const height = calcHeigth < this.windowWidth ? calcHeigth : this.windowHeight;*/
 
             $iframeBox.css({
-                width: width,
-                height: height,
-                top: top,
-                left: left,
+                width: this.windowWidth,
+                height: this.windowHeight,
+                left: 0,
+                top: 0,
             });
 
             RODIN.projectSlider.lockSwipeToPrev();
@@ -180,7 +175,7 @@ class HomeCtrl {
         }
 
         if (isBottom && e.deltaY < 0) {
-            const calcTop = this.$iframeBox[0].offsetTop + (this.initialTop / 2);
+           /* const calcTop = this.$iframeBox[0].offsetTop + (this.initialTop / 2);
             const calcLeft = this.$iframeBox[0].offsetLeft + (this.initialLeft / 2);
             const calcWidth = this.$iframeBox.width() - ((this.windowWidth - this.initialTransform.w) / 6);
             const calcHeigth = this.$iframeBox.height() - ((this.windowHeight - this.initialTransform.h) / 6);
@@ -188,13 +183,13 @@ class HomeCtrl {
             const top = calcTop < this.initialTransform.y ? calcTop : this.initialTransform.y;
             const left = calcLeft < this.initialTransform.x ? calcLeft : this.initialTransform.x;
             const width = calcWidth > this.initialTransform.w ? calcWidth : this.initialTransform.w;
-            const height = calcHeigth > this.initialTransform.h ? calcHeigth : this.initialTransform.h;
+            const height = calcHeigth > this.initialTransform.h ? calcHeigth : this.initialTransform.h;*/
 
             $iframeBox.css({
-                width: width,
-                height: height,
-                left: left,
-                top: top,
+                width: this.initialTransform.w,
+                height: this.initialTransform.h,
+                left: this.initialTransform.x,
+                top: this.initialTransform.y,
             });
 
             if ($iframeBox.width() <= this.initialTransform.w) {
