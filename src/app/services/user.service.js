@@ -31,31 +31,31 @@ class User {
 
     login(fields = {}) {
         this.deferred = this._$q.defer();
-        this._Auth.all("login").post(fields).then(this.onLoginSuccess, this.onError);
+        this._Auth.all('login').post(fields).then(this.onLoginSuccess, this.onError);
         return this.deferred.promise;
     }
 
     confirmUsername(fields = {}) {
         this.deferred = this._$q.defer();
-        this._User.one("confirmUsername").customPOST(fields).then(this.onLoginSuccess, this.onError);
+        this._User.one('confirmUsername').customPOST(fields).then(this.onLoginSuccess, this.onError);
         return this.deferred.promise;
     }
 
     resetPassword(fields = {}) {
         let Analyser = new this._Analyser();
-        this._User.one("resetPassword").customPOST(fields).then(Analyser.resolve, Analyser.reject);
+        this._User.one('resetPassword').customPOST(fields).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 
     changePassword(fields = {}) {
         this.deferred = this._$q.defer();
-        this._User.one("resetPassword").customPUT(fields).then(this.onLoginSuccess, this.onError);
+        this._User.one('resetPassword').customPUT(fields).then(this.onLoginSuccess, this.onError);
         return this.deferred.promise;
     }
 
-    getMe(){
+    getMe() {
         let Analyser = new this._Analyser();
-        this._User.one("me").get({usedStorage:true, projectsCount:true}).then((res) => {
+        this._User.one('me').get({ usedStorage: true, projectsCount: true }).then((res) => {
             this.current = res.data;
             Analyser.resolve(res);
         }, Analyser.reject);
@@ -63,31 +63,32 @@ class User {
     }
 
     fbLogin(sync) {
-        FB.login((response) => this.fbMe(sync), {scope: 'email'});
+        FB.login((response) => this.fbMe(sync), { scope: 'email' });
     }
 
     fbMe(sync) {
-        FB.api('/me', 'get', {fields: 'email, first_name, last_name'}, (response)=> {
+        FB.api('/me', 'get', { fields: 'email, first_name, last_name' }, (response)=> {
 
             let responseMethods = [this.onLoginSuccess, this.onError];
             if (!response || response.error)
                 return this.onError(response);
 
-            if(sync){
+            if (sync) {
                 response.socialEmail = response.email;
                 response.email = this.current.email;
                 response.sync = true;
                 responseMethods = [this.onSyncSuccess, this.onError];
             }
-            return this._Auth.one("social/facebook").customPOST(response).then(responseMethods[0], responseMethods[1]);
-        })
+
+            return this._Auth.one('social/facebook').customPOST(response).then(responseMethods[0], responseMethods[1]);
+        });
     }
 
     fbAuth(sync, fbConnected) {
 
         this.deferred = this._$q.defer();
 
-        if(fbConnected)
+        if (fbConnected)
             this.fbMe(sync);
         else
             this.fbLogin(sync);
@@ -98,17 +99,17 @@ class User {
     googleAuth(data) {
         this.deferred = this._$q.defer();
         let responseMethods = data.sync ? [this.onSyncSuccess, this.onError] : [this.onLoginSuccess, this.onError];
-        this._Auth.one("social/google").customPOST(data).then(responseMethods[0], responseMethods[1]);
+        this._Auth.one('social/google').customPOST(data).then(responseMethods[0], responseMethods[1]);
         return this.deferred.promise;
     }
 
     gitAuth(data) {
         this.deferred = this._$q.defer();
-        this._Auth.one("social/github").customPOST(data).then(this.onSyncSuccess, this.onError);
+        this._Auth.one('social/github').customPOST(data).then(this.onSyncSuccess, this.onError);
         return this.deferred.promise;
     }
 
-    oculusSteamSync(data, type){
+    oculusSteamSync(data, type) {
         this.deferred = this._$q.defer();
         this._Auth.one(`social/${type}`).customPOST(data).then(this.onSyncSuccess, this.onError);
         return this.deferred.promise;
@@ -120,8 +121,9 @@ class User {
             this.current = res.user;
             return res;
         }, err=> {
+
             return err;
-        })
+        });
     }
 
     update(userId = null, fields = {}) {
@@ -161,7 +163,7 @@ class User {
         this._JWT.destroy();
         this._NotificationsStore.deleteAllNotifications();
         this._$timeout(()=> {
-            this._$state.go(this._$state.$current, null, {reload: true});
+            this._$state.go(this._$state.$current, null, { reload: true });
         }, 100);
     }
 
@@ -171,15 +173,14 @@ class User {
             result=> {
                 if (!this.current) {
                     deferred.reject(false);
-                }
-                else if (_.isUndefined(this.current.usernameConfirmed) || this.current.usernameConfirmed) {
+                } else if (_.isUndefined(this.current.usernameConfirmed) || this.current.usernameConfirmed) {
                     deferred.resolve(true);
-                }
-                else {
+                } else {
                     this._$state.go('landing.userconfirm');
                     deferred.reject(false);
                 }
             },
+
             err=> {
                 deferred.reject(false);
             });
@@ -194,11 +195,11 @@ class User {
             deferred.resolve(false);
             return deferred.promise;
         }
+
         if (this.current) {
             deferred.resolve(true);
-        }
-        else {
-            this._User.one("me").get({usedStorage:true, projectsCount:true}).then((res) => {
+        } else {
+            this._User.one('me').get({ usedStorage: true, projectsCount: true }).then((res) => {
                 this.current = res.data;
                 deferred.resolve(true);
             }, (err) => {
@@ -208,6 +209,7 @@ class User {
                 }, 100);
             });
         }
+
         return deferred.promise;
     }
 
@@ -218,8 +220,7 @@ class User {
             if (authValid !== bool) {
                 this._$state.go('landing.login');
                 deferred.resolve(false);
-            }
-            else {
+            } else {
                 deferred.resolve(true);
             }
 
@@ -228,7 +229,7 @@ class User {
         return deferred.promise;
     }
 
-    getNotifications(fields = {}){
+    getNotifications(fields = {}) {
         let Analyser = new this._Analyser();
 
         this._Notifications.one('/').get(fields).then(Analyser.resolve, Analyser.reject);
@@ -236,15 +237,15 @@ class User {
         return Analyser.promise;
     }
 
-    deleteNotification(fields){
+    deleteNotification(fields) {
         let Analyser = new this._Analyser();
 
-        this._Notifications.one('/?'+fields).remove(fields).then(Analyser.resolve, Analyser.reject);
+        this._Notifications.one('/?' + fields).remove(fields).then(Analyser.resolve, Analyser.reject);
 
         return Analyser.promise;
     }
 
-    updateNotification(fields = {}){
+    updateNotification(fields = {}) {
         let Analyser = new this._Analyser();
 
         this._Notifications.one('/').put(fields).then(Analyser.resolve, Analyser.reject);
@@ -268,14 +269,14 @@ class User {
             this.current = response.user;
             this._$state.go('app.dashboard');
             this.deferred.resolve(response);
-        }
-        else {
+        } else {
             this.deferred.reject(this._Validator.getErrorsHTTP());
         }
+
         delete this.deferred;
     }
 
-    onSyncSuccess(result){
+    onSyncSuccess(result) {
         this._Validator.validateHTTP(result);
 
         if (this._Validator.isValidHTTP()) {
@@ -284,10 +285,10 @@ class User {
             //this.current = response;
             this.deferred.resolve(response);
 
-        }
-        else {
+        } else {
             this.deferred.reject(this._Validator.getErrorsHTTP());
         }
+
         delete this.deferred;
     }
 

@@ -4,6 +4,10 @@ function EventBus($rootScope) {
         project: {
             SET: 'projectObject',
         },
+        pages: {
+            SET: 'pagesArray',
+            SET_CONTENT: 'pageContent',
+        },
         modules: {
             SET: 'modulesArray',
             UPDATE: 'modulesObject',

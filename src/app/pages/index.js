@@ -55,6 +55,8 @@ import './faq/index';
 
 import './privacy/index';
 
+import './contentPages/index';
+
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
   'landing.auth',
@@ -69,6 +71,7 @@ let pagesModule = angular.module('app.pages', [
   'landing.store',
   'landing.faq',
   'landing.privacy',
+  'landing.pages',
 
   'app.dashboard',
   'app.profile',

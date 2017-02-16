@@ -1,14 +1,28 @@
 class AppHeaderCtrl {
-    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus) {
+    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus, PagesService, PagesStore) {
         'ngInject';
         this.appName = AppConstants.appName;
         this.currentUser = User.current;
         this.notificationsStore = NotificationsStore;
         this.eventBus = EventBus;
+        this.try = false;
+
+        this._PagesService = PagesService;
+        this._PagesStore = PagesStore;
+
         this.User = User;
         this.logout = () => {
             User.logout(...arguments);
         };
+
+        this._PagesStore.subscribeAndInit($scope, () => {
+            this.pagesList = this._PagesStore.getPagesList();
+            console.log(this.pagesList);
+            if (this.pagesList.length <= 0 && !this.try) {
+                this.try = true;
+                return this.getPagesList();
+            }
+        });
 
         $scope.$watch('User.current', (newUser) => {
             this.currentUser = newUser;
@@ -28,6 +42,18 @@ class AppHeaderCtrl {
             });
         }
 
+    }
+
+    getPagesList() {
+        this._PagesService.getList().then(
+            pagesList => {
+                console.log(pagesList);
+                this.eventBus.emit(this.eventBus.pages.SET, pagesList);
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 
     getNotifications() {
