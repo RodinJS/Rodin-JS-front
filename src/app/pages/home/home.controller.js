@@ -90,15 +90,21 @@ class HomeCtrl {
         if (typeof scroller === 'boolean')
             this.hoveredIframe = scroller;
 
+        //console.log('wheel', wheeler);
+        //console.log('scroller', scroller);
+        //console.log('this.hoveredIframe', this.hoveredIframe);
+
         if (typeof wheeler === 'boolean') {
 
             if (this.hoveredIframe) {
                 angular.element('body').css({ overflow: 'auto' });
                 this.disablePointer = true;
             } else {
+                //angular.element('body').css({ overflow: 'hidden' });
                 this.disablePointer = false;
             }
 
+            angular.element("#iframe").focus();
             this._$scope.$apply();
         }
     }
@@ -142,7 +148,7 @@ class HomeCtrl {
 
             this.disablePointer = true;
 
-            $('body').css({ overflow: 'auto' });
+            $('body').css({ overflow: 'hidden' });
             $('.slide-number').hide();
             $('.pagination-wrapper').hide();
             btnNextSlide.hide();
@@ -163,6 +169,8 @@ class HomeCtrl {
                 left: 0,
                 top: 0,
             });
+
+            iframe.focus();
 
             RODIN.projectSlider.lockSwipeToPrev();
 
@@ -194,6 +202,7 @@ class HomeCtrl {
 
             if ($iframeBox.width() <= this.initialTransform.w) {
                 RODIN.projectSlider.unlockSwipeToPrev();
+                angular.element('body').css({ overflow: 'auto' });
             }
 
         }
