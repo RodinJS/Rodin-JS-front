@@ -10,6 +10,7 @@ class HomeCtrl {
 
         this.windowHeight = this._$window.innerHeight;
         this.windowWidth = this._$window.innerWidth;
+        this.listenerAdded = false;
 
 
         //TODO temp stuff
@@ -90,23 +91,22 @@ class HomeCtrl {
         if (typeof scroller === 'boolean')
             this.hoveredIframe = scroller;
 
-        //console.log('wheel', wheeler);
-        //console.log('scroller', scroller);
-        //console.log('this.hoveredIframe', this.hoveredIframe);
+        console.log('wheel', wheeler);
+        console.log('scroller', scroller);
+        console.log('this.hoveredIframe', this.hoveredIframe);
 
         if (typeof wheeler === 'boolean') {
 
             if (this.hoveredIframe) {
-                angular.element('body').css({ overflow: 'auto' });
+                //angular.element('body').css({ overflow: 'auto' });
                 this.disablePointer = true;
             } else {
                 //angular.element('body').css({ overflow: 'hidden' });
                 this.disablePointer = false;
             }
 
-            angular.element("#iframe").focus();
-            this._$scope.$apply();
         }
+        this._$scope.$apply();
     }
 
     scrollHandler(e) {
@@ -180,6 +180,7 @@ class HomeCtrl {
         if ($iframeBox.innerWidth() >= this.windowWidth) {
             angular.element('body').css({ overflow: 'hidden' });
             this.disablePointer = false;
+            this.hoveredIframe = false;
         }
 
         if (isBottom && e.deltaY < 0) {
