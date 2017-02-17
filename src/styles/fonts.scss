@@ -1,0 +1,65 @@
+$path: "../fonts/landing" !default;
+
+
+// ==========================================================
+// San Francisco
+// ==========================================================
+@font-face {
+	font-family: 'SF UI Display';
+	src: url('#{$path}/SF/SFUIDisplay-Regular.eot');
+	src: local('SF UI Display Regular'), local('SFUIDisplay-Regular'),
+		url('#{$path}/SF/SFUIDisplay-Regular.eot?#iefix') format('embedded-opentype'),
+		url('#{$path}/SF/SFUIDisplay-Regular.woff') format('woff'),
+		url('#{$path}/SF/SFUIDisplay-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'SF UI Display';
+	src: url('#{$path}/SF/SFUIDisplay-Semibold.eot');
+	src: local('SF UI Display Semibold'), local('SFUIDisplay-Semibold'),
+		url('#{$path}/SF/SFUIDisplay-Semibold.eot?#iefix') format('embedded-opentype'),
+		url('#{$path}/SF/SFUIDisplay-Semibold.woff') format('woff'),
+		url('#{$path}/SF/SFUIDisplay-Semibold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF UI Display';
+	src: url('#{$path}/SF/SFUIDisplay-Medium.eot');
+	src: local('SF UI Display Medium'), local('SFUIDisplay-Medium'),
+		url('#{$path}/SF/SFUIDisplay-Medium.eot?#iefix') format('embedded-opentype'),
+		url('#{$path}/SF/SFUIDisplay-Medium.woff') format('woff'),
+		url('#{$path}/SF/SFUIDisplay-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+// ==========================================================
+// Roboto
+// ==========================================================
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto:400,500,700');
+
+
+// ==========================================================
+// icons
+// ==========================================================
+
+@font-face {
+  font-family: 'RODIN';
+  src:  url('#{$path}/icon/RODIN.eot?poo9e');
+  src:  url('#{$path}/icon/RODIN.eot?poo9e#iefix') format('embedded-opentype'),
+    url('#{$path}/icon/RODIN.ttf?poo9e') format('truetype'),
+    url('#{$path}/icon/RODIN.woff?poo9e') format('woff'),
+    url('#{$path}/icon/RODIN.svg?poo9e#RODIN') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$Roboto: 'Roboto', sans-serif;
+$RobotoCond: 'Roboto Condensed', sans-serif;
+$SF: 'SF UI Display', monospace;

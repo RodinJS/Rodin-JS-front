@@ -1,0 +1,188 @@
+.section-app{
+	padding-bottom: 150px;
+	.img-wrapper{
+		margin-bottom: 30px;
+	}
+	h3{
+		margin-top: 0;
+		margin-bottom: 8px;
+	}
+	p{
+		margin-top: 0;
+		margin-bottom: 15px;
+	}
+	.title-wrapper{
+		text-align: center;
+		padding-bottom: 75px;
+	}
+	.device-app-list{
+		font-size: 0;
+		li{
+			width: 16.65%;
+			display: inline-block;
+			vertical-align: top;
+			position: relative;
+			padding: 0 9px 50px;
+		}
+		h6{
+			font-size: 16px;
+			font-weight: 400;
+			color: #A6A6A6;
+			text-align: center;
+			transition: all .3s;
+		}
+		.app-logo-wrapper{
+			min-height: 95px;
+			margin-bottom: 25px;
+			position: relative;
+			img{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate3d(-50%, -50%, 0);
+			}
+		}
+		.btn-app{
+			position: absolute;
+			bottom: 0;
+			left: 9px;
+			right: 9px;
+			font-family: 'SF UI Display';
+			font-weight: 600;
+			color: white;
+			font-size: 16px;
+			text-align: left;
+			padding: 11px 20px;
+			border-width: 1px;
+			width: 160px;
+			margin: 0 auto;
+			transition: all .3s;
+			&:hover{
+				background-color: $color-primary;
+			}
+			img{
+				position: relative;
+				top: -2px;
+				margin-right: 10px;
+			}
+		}
+		.btn-app:hover + h6{
+			color: white;
+			font-weight: 500;
+		}
+	}
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+	.section-app {
+		.device-app-list {
+			.btn-app {
+				font-size: 15px;
+				width: 140px;
+				padding: 11px 15px;
+				img{
+					margin-right: 5px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.section-app {
+		padding-top: 30px;
+		padding-bottom: 80px;
+		.title-wrapper{
+			padding-bottom: 45px;
+		}
+		.img-wrapper{
+			img{
+				width: 75px;
+			}
+		}
+		.device-app-list {
+			li {
+				width: 33.33333%;
+				margin-bottom: 30px;
+			}
+			.app-logo-wrapper{
+				min-height: 55px;
+				margin-bottom: 15px;
+			}
+			h6{
+				margin-bottom: 20px;
+			}
+			.btn-app {
+				font-size: 13px;
+				padding-top: 8px;
+				padding-bottom: 8px;
+				img{
+					width: 20px;
+					&.google-play{
+						width: 15px;
+					}
+					&.app-store{
+						width: 15px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+	.section-app {
+		padding-bottom: 58px;
+		.title-wrapper{
+			padding-bottom: 20px;
+			.img-wrapper{
+				img{
+					width: 70px;
+				}
+			}
+			p{
+				font-size: 13px;
+			}
+		}
+		.device-app-list {
+			li {
+				width: 50%;
+				margin-bottom: 47px;
+				padding-bottom: 37px;
+			}
+			.app-logo-wrapper{
+				min-height: 70px;
+				margin-bottom: 15px;
+				img{
+					width: 30%;
+				}
+			}
+			h6{
+				font-size: 13px;
+				margin-bottom: 10px;
+			}
+			.btn-app {
+				font-size: 13px;
+				width: auto;
+				margin: 0 auto;
+				height: 37px;
+				left: 50%;
+				right: auto;
+				transform: translateX(-50%);
+				padding: 0 22px;
+				line-height: 35px;
+				img{
+					width: 20px;
+					top: -1px;
+					margin-right: 5px;
+					&.google-play{
+						width: 17px;
+					}
+					&.app-store{
+						width: 18px;
+					}
+				}
+			}
+		}
+	}
+}

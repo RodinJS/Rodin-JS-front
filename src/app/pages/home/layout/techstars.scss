@@ -1,0 +1,49 @@
+.section-techstars{
+	padding-bottom: 150px;
+	.img-wrapper{
+		text-align: center;
+		padding-bottom: 20px;
+		position: relative;
+		&:after{
+			content: "";
+			width: 285px;
+			height: 1px;
+			background-color: $color-primary;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			margin-left: -142px;
+		}
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.section-techstars{
+		.img-wrapper{
+			&:after{
+				width: 200px;
+				margin-left: -100px;
+			}
+			img{
+				width: 120px;
+			}
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+	.section-techstars{
+		padding-bottom: 15px;
+		margin-bottom: 15px;
+		.img-wrapper{
+			padding-bottom: 11px;
+			&:after{
+				width: 142px;
+				margin-left: -71px;
+			}
+			img{
+				width: 74px;
+			}
+		}
+	}
+}

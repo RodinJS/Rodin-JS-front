@@ -1,0 +1,55 @@
+.required-field-actions {
+	margin-top: 40px;
+    .btn {
+        text-transform: uppercase;
+        font-weight: bold;
+        + .btn {
+        	margin-left: 20px;
+        }
+        &.btn-save {
+            border: none;
+            color: $colorOrange;
+        }
+        &.btn-primary {
+            border-color: $colorOrange;
+            background-color: rgba($white, .02);
+            &:hover {
+                background-color: rgba($white, .05);
+            }
+        }
+        &[disabled],
+        &:disabled {
+            color: rgba(white, .5);
+            border-color: rgba($white, .2);
+            opacity: 1;
+        }
+    }
+}
+
+.field-intruction {
+	max-width: 450px;
+	color: white;
+	font-size: 14px;
+	line-height: 1.58;
+	margin-bottom: 40px;
+	padding-left: 24px;
+	li {
+		list-style-type: none;
+		position: relative;
+		&:before {
+			content: "";
+			position: absolute;
+			right: 100%;
+			margin-right: 20px;
+			top: 9px;
+			display: block;
+			width: 4px;
+			height: 4px;
+			border-radius: 50%;
+			background-color: rgba(white, .3);
+		}
+		+ li {
+			margin-top: 10px;
+		}
+	}
+}

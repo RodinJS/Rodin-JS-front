@@ -1,0 +1,150 @@
+.banner-section {
+    padding-top: 95px;
+    min-height: 100vh;
+    padding-bottom: 90px;
+    .title {
+        margin-top: 28px;
+    }
+    .form {
+        max-width: 440px;
+        margin: 45px auto 0;
+    }
+    .swiper-container {
+        padding-bottom: 58px;
+        margin-top: 40px;
+        .swiper-slide {
+            .slider-desc {
+                margin: auto;
+                display: block;
+                max-width: 600px;
+                svg {
+                    width: 100%;
+                    display: block;
+                }
+            }
+            &[data-devicename="vive"] {
+                .slider-desc {
+                    max-width: 480px;
+                }
+            }
+        }
+    }
+    .swiper-pagination {
+        bottom: 0;
+        text-align: center;
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            opacity: 0.26;
+            background-color: transparent;
+            margin: 0 15px;
+            cursor: pointer;
+            &.swiper-pagination-bullet-active {
+                opacity: 1;
+            }
+        }
+    }
+    .code-block-wrapper {
+        position: absolute;
+        top: 0;
+        z-index: 1000;
+        color: #fff;
+        margin: 0;
+        overflow: hidden;
+        pre {
+        	display: block;
+        	position: absolute;
+        	top: 0;
+        	left: 0;
+        	bottom: 0;
+        	right: -20px;
+        	margin: -20px 0 0;
+        	overflow-y: scroll;
+	        overflow-x: hidden;
+	        -ms-overflow-style: none;
+	        -webkit-overflow-scrolling: touch;
+	        text-align: left;
+	        border-radius: 30px;
+	        &::-webkit-scrollbar {
+	            width: 0 !important;
+	        }
+        }
+
+        &.round {
+            border-radius: 80px;
+        }
+
+        .code {
+            background-color: transparent;
+            font-size: 14px;
+            padding: 0;
+            overflow: hidden !important;
+            margin-left: -20px;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .banner-section {
+        .swiper-container {
+            .swiper-slide {
+                .slider-desc {
+                    height: 270px;
+                    width: 495px;
+                }
+            }
+        }
+        .form {
+            bottom: 25%;
+        }
+    }
+}
+
+// phone
+@media (max-width: $screen-xs-max) {
+    .banner-section {
+        padding-top: 10px;
+        .title {
+            margin-top: 15px;
+        }
+        .form {
+            max-width: 90%;
+            margin: 35px auto 0;
+            .input-group {
+	            .form-control {
+	                height: 37px;
+	                font-size: 13px;
+	                padding-top: 8px;
+	                padding-bottom: 8px;
+	                padding-left: 25px;
+	            }
+	            .btn {
+	                height: 37px;
+	                padding-top: 8px;
+	                padding-bottom: 8px;
+	                font-size: 13px;
+	            }
+	        }
+        }
+        .swiper-container {
+            padding-bottom: 40px;
+            margin-top: 30px;
+            .swiper-slide {
+                .slider-desc {}
+            }
+        }
+        .swiper-pagination {
+            span {
+                margin: 0 6px;
+            }
+        }
+        .code-block {
+            width: 300px;
+            min-height: 90px;
+            .code {
+                margin-left: 0px;
+                font-size: 12px;
+            }
+        }
+    }
+}

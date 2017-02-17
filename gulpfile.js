@@ -25,7 +25,7 @@ const VENDORMAP = require('./vendor.json');
 
 const JS = ['src/app/**/*.js', '!src/systemjs-module/**', '!src/assists/**'];
 const HTML = ['src/app/**/*.html', 'src/app/**/**/*.html'];
-const SASS = ['src/styles/**/*.scss', '!src/styles/{vendor,vendor/**}'];
+const SASS = ['src/styles/main.scss', '!src/styles/{vendor,vendor/**}'];
 const FONT = ['src/fonts/**/*.{ttf,woff,woff2,eof,svg,eot,json,otf}'];
 const IMG = ['src/images/**/*.{jpg,jpeg,ico,png,svg,gif,json,xml}'];
 const VIDEO = ['src/video/**/*.{mp4,webm}'];
@@ -182,29 +182,6 @@ gulp.task('sass', () => {
         message: () => `SASS - Total size ${s.prettySize}`,
     }));
 });
-
-gulp.task('sass:landing', () => {
-    const s = size({
-        onLast: true,
-        title: 'SASS -> ',
-        pretty: true,
-    });
-    return gulp.src(LANDING)
-        .pipe(plumber(ERROR_MESSAGE))
-        .pipe(sass().on('error', sass.logError))
-        .pipe(concat('landing.css'))
-        .pipe(sourcemaps.init())
-        .pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
-        .pipe(sourcemaps.write())
-        .pipe(s)
-        .pipe(plumber.stop())
-        .pipe(gulp.dest('./build/styles'))
-        .pipe(notify({
-            onLast: true,
-            message: () => `SASS - Total size ${s.prettySize}`,
-        }));
-});
-
 
 gulp.task('sass-prod', () => {
     const s = size({

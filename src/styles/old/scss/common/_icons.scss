@@ -1,0 +1,196 @@
+[class^="icon-"], [class*=" icon-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'rodin-icon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fullscreen {
+    &:before {
+        content: $icon-fullscreen;
+    }
+}
+.icon-reload {
+    &:before {
+        content: $icon-reload;
+    }
+}
+.icon-download {
+	&:before {
+		content: $icon-download;
+	}
+}
+.icon-glasses-bold {
+	&:before {
+		content: $icon-glasses-bold;
+	}
+}
+.icon-eye {
+	&:before {
+		content: $icon-eye;
+	}
+}
+.icon-eye-close {
+	&:before {
+		content: $icon-eye-close;
+	}
+}
+.icon-check {
+	&:before {
+		content: $icon-check;
+	}
+}
+.icon-oculus {
+	&:before {
+		content: $icon-oculus;
+	}
+}
+.icon-glasses {
+	&:before {
+		content: $icon-glasses;
+	}
+}
+.icon-invalid {
+	&:before {
+		content: $icon-invalid;
+	}
+}
+.icon-delete {
+	&:before {
+		content: $icon-delete;
+	}
+}
+.icon-publish {
+	&:before {
+		content: $icon-publish;
+	}
+}
+.icon-delete-space {
+	&:before {
+		content: $icon-delete-space;
+	}
+}
+.icon-more {
+	&:before {
+		content: $icon-more;
+	}
+}
+.icon-send {
+	&:before {
+		content: $icon-send;
+	}
+}
+.icon-error {
+	&:before {
+		content: $icon-error;
+	}
+}
+.icon-monocle {
+	&:before {
+		content: $icon-monocle;
+	}
+}
+.icon-notifi {
+	&:before {
+		content: $icon-notifi;
+	}
+}
+.icon-dot {
+	&:before {
+		content: $icon-dot;
+	}
+}
+.icon-lock {
+	&:before {
+		content: $icon-lock;
+	}
+}
+.icon-angle-down {
+	&:before {
+		content: $icon-angle-down;
+	}
+}
+.icon-search {
+	&:before {
+		content: $icon-search;
+	}
+}
+.icon-add {
+	&:before {
+		content: $icon-add;
+	}
+}
+.icon-info {
+	&:before {
+		content: $icon-info;
+	}
+}
+.icon-link {
+	&:before {
+		content: $icon-link;
+	}
+}
+.icon-edit {
+	&:before {
+		content: $icon-edit;
+	}
+}
+.icon-settings {
+	&:before {
+		content: $icon-settings;
+	}
+}
+
+// Material Icon Font
+.material-icons {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;  /* Preferred icon size */
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing: antialiased;
+	/* Support for Safari and Chrome. */
+	text-rendering: optimizeLegibility;
+
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing: grayscale;
+
+	/* Support for IE. */
+	font-feature-settings: 'liga';
+}
+// Material Icon Font End
+
+@import '../main-icons/ionicons-icons';
+
+// medium
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+
+}
+// tablet
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+}
+// phone + tablet
+@media (max-width: $screen-sm-max) {
+
+}
+// phone
+@media (max-width: $screen-xs-max) {
+
+}

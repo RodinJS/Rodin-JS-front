@@ -1,13 +1,14 @@
 function EditProjectModulesConfig($stateProvider) {
     'ngInject';
 
+
     $stateProvider
       .state('app.editprojectModules', {
         url: '/project/:projectId/modules',
         controller: 'EditProjectModulesCtrl',
         controllerAs: '$ctrl',
         templateUrl: 'pages/editproject-modules/editproject-modules.html',
-        title: 'EditProjectModules',
+        title: 'Edit Project Modules',
         pageClass: 'page-account',
         resolve: {
             auth: function (User) {

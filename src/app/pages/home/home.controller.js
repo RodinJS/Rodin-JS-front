@@ -1,8 +1,10 @@
+import  './scripts/main';
+
 class HomeCtrl {
     constructor(AppConstants, $state, $window, $scope, $timeout) {
         'ngInject';
 
-        if (RODIN && Object.keys(RODIN).length >= 8) return location.reload();
+        if (LANDING && Object.keys(LANDING).length >= 8) return location.reload();
 
         this._$window = $window;
         this._$scope = $scope;
@@ -36,7 +38,7 @@ class HomeCtrl {
 
         $scope.$on('$viewContentLoaded', () => {
             $(document).ready(() => {
-                RODIN.landing();
+                LANDING.landing();
                 $('.code').each(function (i, block) {
                     hljs.highlightBlock(block);
                 });
@@ -49,8 +51,8 @@ class HomeCtrl {
     }
 
     outToSlider() {
-        RODIN.projectSlider.unlockSwipeToPrev();
-        RODIN.projectSlider._slideTo(0, 500);
+        LANDING.projectSlider.unlockSwipeToPrev();
+        LANDING.projectSlider._slideTo(0, 500);
         this.resetInitalPosition();
         $('.project-modal').removeClass('show animationEnd');
         $(window).scrollTop($(window).scrollTop() - 10);
@@ -137,7 +139,7 @@ class HomeCtrl {
 
 
         if (!btnNextSlide.hasClass('last')) {
-            this.canOutFromSlider = e.deltaY < 0 && RODIN.projectSlider.isBeginning && btnNextSlide.hasClass('first');
+            this.canOutFromSlider = e.deltaY < 0 && LANDING.projectSlider.isBeginning && btnNextSlide.hasClass('first');
 
             $('body').css({ overflow: 'auto' });
             $('.slide-number').show();
@@ -163,7 +165,7 @@ class HomeCtrl {
 
                 iframe.focus();
 
-                RODIN.projectSlider.lockSwipeToPrev();
+                LANDING.projectSlider.lockSwipeToPrev();
 
             }
 
@@ -183,7 +185,7 @@ class HomeCtrl {
                 });
 
                 if ($iframeBox.width() <= this.initialTransform.w) {
-                    RODIN.projectSlider.unlockSwipeToPrev();
+                    LANDING.projectSlider.unlockSwipeToPrev();
                     angular.element('body').css({ overflow: 'auto' });
                 }
 

@@ -9,7 +9,7 @@ function AuthConfig($stateProvider) {
             templateUrl: 'pages/auth/auth.html',
             title: 'Sign in',
             redirectToWhenAuthenticated: 'app.dashboard',
-            pageClass: 'login-register',
+            pageClass: 'login-register new',
             resolve: {
                 auth: function (User, $state, $timeout) {
                     return User.ensureAuthIs(false);
@@ -23,7 +23,7 @@ function AuthConfig($stateProvider) {
             templateUrl: 'pages/auth/auth.html',
             title: 'Sign up',
             redirectToWhenAuthenticated: 'app.dashboard',
-            pageClass: 'login-register',
+            pageClass: 'login-register new',
             resolve: {
                 auth: function (User) {
                     return User.ensureAuthIs(false);

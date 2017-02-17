@@ -25,8 +25,8 @@
                     <li class="rodin-hide">
                         <a ui-sref="landing.discover">How it works</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="" id="moreLabel" data-target="#" data-toggle="dropdown" role="button"
+                    <li class="dropdown" uib-dropdown auto-close="outsideClick">
+                        <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">
                             More <i class="rd rd-angle-down"></i>
                         </a>
@@ -47,7 +47,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="header-menu pull-right" ng-if="!$ctrl.user">
+            <div class="header-menu pull-right"  style="float:right" ng-if="!$ctrl.user">
                 <ul class="menu-list">
                     <li>
                         <a class="nav-link" data-ui-sref-active="active" data-ui-sref="landing.login">

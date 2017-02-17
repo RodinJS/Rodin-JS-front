@@ -2,8 +2,8 @@
     <div class="main-container development-container">
         <div class="main-title-wrapper">
             <h1 class="main-title">
-                Modules / <i class="icon icon-lock"></i>
-                {{$ctrl.project.displayName || $ctrl.project.name}}
+                Modules/<i class="icon icon-lock"></i>
+                <span class="user-name text-white">{{$ctrl.project.displayName || $ctrl.project.name}}</span>
             </h1>
         </div>
         <div class="page-content">
@@ -31,7 +31,7 @@
                                 <div class="content-bottom">
                                     <p class="pull-left">
                                         <a class="circle" ng-class="module.script ? 'active' : ''"
-                                           popover-placement="top-left"
+                                           popover-placement="top"
                                            popover-class="store-popover"
                                            uib-popover="{{module.script ? 'Assigned' : 'Assign'}}"
                                            popover-trigger="'mouseenter'"
@@ -39,7 +39,7 @@
                                            href="" >
                                             <i style="position: relative; top:1px" class="fa fa-plus" aria-hidden="true"></i>
                                         </a>
-                                        <a class="circle" popover-placement="top-left" popover-class="store-popover"  uib-popover="Example" popover-trigger="'mouseenter'">
+                                        <a class="circle" popover-placement="top" popover-class="store-popover"  uib-popover="Example" popover-trigger="'mouseenter'">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                     </p>

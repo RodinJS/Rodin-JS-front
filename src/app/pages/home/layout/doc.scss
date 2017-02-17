@@ -1,0 +1,116 @@
+.doc-section {
+	padding-bottom: 120px;
+	.doc-action-row {
+		text-align: center;
+		margin-top: 75px;
+		margin-bottom: 0;
+		a {
+			i {
+				vertical-align: middle;
+				position: relative;
+				top: -2px;
+			}
+		}
+	}
+}
+
+.doc-items {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 945px;
+	margin: 50px auto 0;
+	padding-left: 55px;
+	padding-right: 5px;
+	>li {
+		flex: 1;
+		>a {
+			display: block;
+			padding: 30px 0;
+			color: #DEDEDE;
+			background-color: transparent;
+			border: 1px solid transparent;
+			transition: all .3s ease;
+			font-size: 16px;
+			text-align: center;
+			i {
+				display: block;
+				font-size: 40px;
+				color: #C7CAD0;
+				margin: 0 auto 40px;
+			}
+		}
+		&:hover {
+			 > a {
+				background-color: #051223;
+				border-color: $color-primary;
+				color: $color-primary;
+				svg {
+					path {
+						fill: #000;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.doc-section {
+		padding-bottom: 40px;
+		.doc-action-row {
+			margin-top: 40px;
+		}
+	}
+	.doc-items{
+		margin-top: 40px;
+		align-items: flex-start;
+		padding: 0;
+		> li {
+			> a {
+				padding: 20px 5px;
+				i {
+					font-size: 30px;
+					margin-bottom: 20px;
+				}
+				span{
+					min-height: 35px;
+					display: block;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+	.doc-section {
+		padding-bottom: 40px;
+		.doc-action-row {
+			margin-top: 39px;
+			font-size: 14px;
+		}
+	}
+	.doc-items{
+		font-size: 0;
+		max-width: 280px;
+		margin: 33px auto 0;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 0;
+		>li{
+			flex: 0 1 46%;
+			>a{
+				font-size: 14px;
+				text-align: left;
+				padding: 10px;
+				i{
+					display: inline-block;
+					font-size: 19px;
+					vertical-align: middle;
+					margin-bottom: 0;
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,133 @@
+.benefits-section {
+	padding-bottom: 97px;
+	.benefits-row {
+		margin-top: 43px;
+	}
+}
+.benefits-item {
+	text-align: center;
+	padding: 0 20px;
+	.benefits-icon {
+		width: 200px;
+		height: 200px;
+		margin: auto;
+		border-radius: 50%;
+		background-color: #07172A;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 44px;
+		> i {
+			font-size: 30px;
+		}
+	}
+	.benefits-title {
+		font-family: $RobotoCond;
+		color: #E0E0E0;
+		font-size: 24px;
+		position: relative;
+		padding-bottom: 10px;
+		margin-bottom: 32px;
+		&:after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			margin-left: -12px;
+			width: 24px;
+			height: 2px;
+			border-top: 2px solid $color-primary;
+		}
+	}
+	p {
+		text-align: left;
+		font-size: 16px;
+		color: $text-gray;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.benefits-section{
+		padding-bottom: 40px;
+	}
+	.benefits-item {
+		padding: 0;
+		.benefits-icon {
+			width: 130px;
+			height: 130px;
+			margin-bottom: 25px;
+			.javascript{
+				width: 50px;
+				height: 40px;
+			}
+			.multiplatform{
+				width: 70px;
+				height: 42px;
+			}
+			.extensibly{
+				height: 40px;
+				width: 40px;
+			}
+		}
+		.benefits-title{
+			font-size: 22px;
+		}
+		p{
+			text-align: center;
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+	.benefits-section{
+		padding-left: 14px;
+		padding-right: 14px;
+		padding-bottom: 73px;
+		h2{
+			margin-bottom: 24px;
+		}
+		h3{
+			margin-top: 0;
+		}
+		.benefits-row{
+			margin-top: 60px;
+		}
+		.benefits-item{
+			position: relative;
+			padding: 0 0 0 105px;
+			margin-bottom: 27px;
+			.benefits-title{
+				font-size: 17px;
+				padding-bottom: 0;
+				margin-top: 0;
+				margin-bottom: 5px;
+				text-align: left;
+				&:after{
+					display: none;
+				}
+			}
+			p{
+				font-size: 13px;
+				margin-top: 0;
+				margin-bottom: 10px;
+			}
+			.benefits-icon{
+				width: 82px;
+				height: 82px;
+				position: absolute;
+				top: 50%;
+				left: 0;
+				margin-top: -41px;
+				.javascript{
+					width: 27px;
+				}
+				.multiplatform{
+					width: 39px;
+				}
+				.extensibly{
+					width: 24px;
+				}
+			}
+		}
+	}
+}
