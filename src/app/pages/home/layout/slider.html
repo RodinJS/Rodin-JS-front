@@ -60,7 +60,7 @@
                                         <div class="img"
                                              style="background-image: url(images/landing/content/slide3-img1.png);"></div>
                                         <div class="iframe-box" id="iframe-box">
-                                            <iframe style="border:0px #ffffff none;"
+                                            <iframe ng-if="!$ctrl.isMobile" style="border:0px #ffffff none;"
                                                     ng-style="{'pointer-events' : $ctrl.disablePointer ? 'none' : 'auto'}"
                                                     id="iframe" src="https://app.rodinapp.com/"
                                                     name="rodin" scrolling="no" frameborder="1" marginheight="0px"

@@ -75,6 +75,13 @@ body{
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        .btn {
+          border-radius: 50px!important;
+          border-color: #008BF2!important;
+          color: #008BF2;
+          border-width: 2px!important;
+          padding: 12px 30px!important;
+        }
     }
     
     /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -83,6 +90,7 @@ body{
  * 2. Prevent iOS and IE text size adjust after device orientation change,
  *    without disabling user zoom.
  */
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto:400,500,700");
 html {
   font-family: sans-serif;
   /* 1 */
@@ -521,6 +529,10 @@ figure {
 
 img {
   vertical-align: middle;
+}
+
+.section{
+  border:none !important;
 }
 
 .img-responsive {
@@ -3960,25 +3972,25 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   background-repeat: no-repeat;
 }
 
- .btn {
-      border-radius: 50px !important;
-      border-color: #008BF2 !important;
-      color: #008BF2;
-      border-width: 2px !important;
-      padding: 12px 30px !important;
-    }
+.btn {
+  border-radius: 50px ;
+    border-color: #008BF2;
+    color: #008BF2;
+    border-width: 2px;
+    padding: 12px 30px;
+}
 
-    .btn:hover {
-      color: #fff !important;
-    }
+.btn:hover {
+  color: #0576C9;
+}
 
-    .btn:focus, .btn:active {
-      color: #fff;
-    }
+.btn:focus, .btn:active {
+  color: #034a7e;
+}
 
-    .btn:focus:hover, .btn:active:hover {
-      color: #045997;
-    }
+.btn:focus:hover, .btn:active:hover {
+  color: #045997;
+}
 
 a {
   text-decoration: none;
@@ -4000,6 +4012,8 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   background-color: #09192E;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .page.overflow {
@@ -4023,6 +4037,7 @@ h5,
 h6 {
   color: #FFFFFF;
   margin: 8px 0;
+  font-weight: 400;
 }
 
 h1,
@@ -5156,7 +5171,6 @@ div.tagsinput div {
 
 .header-auth .header-menu .menu-list > li > a:hover {
   color: #d6d6d6;
-  text-decoration: none;
 }
 
 .header-auth .header-menu .menu-list > li.dropdown.open i {
@@ -5782,13 +5796,24 @@ div.tagsinput div {
   opacity: 1;
 }
 
-.banner-section .code-block {
+.banner-section .code-block-wrapper {
   position: absolute;
   top: 0;
   z-index: 1000;
   color: #fff;
   margin: 0;
-  overflow-y: auto;
+  overflow: hidden;
+}
+
+.banner-section .code-block-wrapper pre {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: -20px;
+  margin: -20px 0 0;
+  overflow-y: scroll;
   overflow-x: hidden;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
@@ -5796,19 +5821,20 @@ div.tagsinput div {
   border-radius: 30px;
 }
 
-.banner-section .code-block.round {
-  border-radius: 80px;
-}
-
-.banner-section .code-block::-webkit-scrollbar {
+.banner-section .code-block-wrapper pre::-webkit-scrollbar {
   width: 0 !important;
 }
 
-.banner-section .code-block .code {
+.banner-section .code-block-wrapper.round {
+  border-radius: 80px;
+}
+
+.banner-section .code-block-wrapper .code {
   background-color: transparent;
   font-size: 14px;
   padding: 0;
   overflow: hidden !important;
+  margin-left: -20px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -5830,7 +5856,20 @@ div.tagsinput div {
   }
   .banner-section .form {
     max-width: 90%;
-    margin: 30px auto 0;
+    margin: 35px auto 0;
+  }
+  .banner-section .form .input-group .form-control {
+    height: 37px;
+    font-size: 13px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 25px;
+  }
+  .banner-section .form .input-group .btn {
+    height: 37px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 13px;
   }
   .banner-section .swiper-container {
     padding-bottom: 40px;
@@ -5859,6 +5898,7 @@ div.tagsinput div {
 
 .benefits-item {
   text-align: center;
+  padding: 0 20px;
 }
 
 .benefits-item .benefits-icon {
@@ -5913,6 +5953,9 @@ div.tagsinput div {
   .benefits-section {
     padding-bottom: 40px;
   }
+  .benefits-item {
+    padding: 0;
+  }
   .benefits-item .benefits-icon {
     width: 130px;
     height: 130px;
@@ -5955,7 +5998,7 @@ div.tagsinput div {
   }
   .benefits-section .benefits-item {
     position: relative;
-    padding-left: 105px;
+    padding: 0 0 0 105px;
     margin-bottom: 27px;
   }
   .benefits-section .benefits-item .benefits-title {
@@ -6044,7 +6087,7 @@ div.tagsinput div {
 
 .doc-items > li > a i {
   display: block;
-  font-size: 45px;
+  font-size: 40px;
   color: #C7CAD0;
   margin: 0 auto 40px;
 }
@@ -6071,6 +6114,7 @@ div.tagsinput div {
     -webkit-box-align: start;
         -ms-flex-align: start;
             align-items: flex-start;
+    padding: 0;
   }
   .doc-items > li > a {
     padding: 20px 5px;
@@ -6102,6 +6146,7 @@ div.tagsinput div {
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
+    padding: 0;
   }
   .doc-items > li {
     -webkit-box-flex: 0;
@@ -6111,7 +6156,7 @@ div.tagsinput div {
   .doc-items > li > a {
     font-size: 13px;
     text-align: left;
-    padding: 10px 0;
+    padding: 10px;
   }
   .doc-items > li > a i {
     display: inline-block;
@@ -6613,12 +6658,10 @@ div.tagsinput div {
   bottom: 0px;
   left: 47.9%;
   background-color: #181818;
-  -khtml-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition:all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+  -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
 }
 
 .slide-content .img-wrapper .iframe-box iframe {
@@ -6741,10 +6784,6 @@ div.tagsinput div {
   .slide-content p {
     font-size: 12px;
   }
-}
-
-.section{
-  border:none !important;
 }
 
 .section-features {
@@ -7155,8 +7194,8 @@ div.tagsinput div {
   }
   .section-app .device-app-list .btn-app {
     font-size: 13px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
     width: 135px;
     margin: 0 auto;
     height: 37px;
@@ -7479,7 +7518,7 @@ div.tagsinput div {
 /* Pages style */
 /* Page style */
 .page.page-auth {
-  background-image: url(/images/landing/content/auth-main-bg.jpg);
+  background-image: url(../img//content/auth-main-bg.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -7778,9 +7817,9 @@ div.tagsinput div {
   transition: all .3s;
 }
 
- .main-form .btn-submit:hover {
-    border-color: #0d98ff !important;
-    background-color: #0d98ff !important;
+.main-form .btn-submit:hover {
+  border-color: #0d98ff;
+  background-color: #0d98ff;
 }
 
 .main-form .form-control,
@@ -7913,6 +7952,7 @@ div.tagsinput div {
     padding: 8px 20px;
   }
 }
+
 
   }
 }
