@@ -17,6 +17,10 @@
 //@import './old/scss/entry/partials/_plugins.scss';
 //OLD
 
+html{
+  height: 100%;
+}
+
 body{
   &.new{
     &.page {
@@ -72,6 +76,7 @@ body{
       -moz-osx-font-smoothing: grayscale;
       background-color: $colorBodyBg;
       position: relative;
+      height: 100%;
       &.page-create-project {
         background-color: #28282B;
       }
