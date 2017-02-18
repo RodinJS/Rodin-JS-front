@@ -48,13 +48,13 @@ const BANNER = {
                 let devicePath = $(slide.slides[slide.activeIndex]).find('.devices-svg .deviceScreen');
                 BANNER.lastActivePath = devicePath;
 
-                setTimeout( () => {
+                setTimeout(() => {
                     BANNER.showCodeBlock(codeBlock, devicePath, true);
 
-                    setTimeout(()=>{
+                    setTimeout(()=> {
                         code.scrollLeft(60);
                         codeBlock.scrollTop(35);
-                    }, 10)
+                    }, 10);
 
                 }, 500);
 
@@ -68,8 +68,7 @@ const BANNER = {
             onSlideChangeEnd: function (slide) {
                 let slideItem = $(slide.slides[slide.activeIndex]);
                 let deviceName = slideItem.data('devicename');
-                let devicePath = slideItem.find(
-                    '.devices-svg .deviceScreen');
+                let devicePath = slideItem.find('.devices-svg .deviceScreen');
                 if (deviceName === 'vive' || deviceName === 'daydream' ||
                     deviceName === 'samsungGear') {
                     codeBlock.addClass('round');
@@ -128,13 +127,10 @@ const BANNER = {
 
     showCodeBlock: function (block, devicePath, init) {
 
-        //console.log(devicePath[0].getBoundingClientRect());
-
-
         let params = {
             width: devicePath[0].getBoundingClientRect().width - 10,
             height: devicePath[0].getBoundingClientRect().height - 20,
-            top: devicePath[0].getBoundingClientRect().top,
+            top: devicePath[0].getBoundingClientRect().top + window.pageYOffset,
             left: devicePath[0].getBoundingClientRect().left + 5,
         };
         if (init) {
@@ -143,9 +139,9 @@ const BANNER = {
             block.animate(params);
         }
 
-        if(codeBlock.length <= 0)
-            codeBlock = $('.code-block-wrapper')
-        if(code.length <= 0)
+        if (codeBlock.length <= 0)
+            codeBlock = $('.code-block-wrapper');
+        if (code.length <= 0)
             code = $('#rodinCode code');
 
         codeBlock.css({ opacity: 1 });
@@ -163,16 +159,24 @@ const BANNER = {
     },
 
     wResize: function () {
-        let resize; let _this = this;
-        $(window).resize(function () {
-            // if (resize) {
-            //     clearTimeout(resize);
-            // }
-            // resize = setTimeout(function() {
-            //     _this.showCodeBlock(codeBlock, BANNER.lastActivePath, true);
-            // }, 5);
-            _this.showCodeBlock(codeBlock, BANNER.lastActivePath, true);
+        let windowWidth = $(window).width();
+        // Resize Event
+        $(window).resize(() => {
+            if ($(window).width() != windowWidth) {
+                windowWidth = $(window).width();
+                this.showCodeBlock(codeBlock, BANNER.lastActivePath, true);
+            }
         });
+
+        $(window).scroll(() => {
+            clearTimeout($.data(this, 'scrollCheck'));
+            window.a.stopAutoplay();
+            $.data(this, 'scrollCheck', setTimeout(() => {
+                window.a.startAutoplay();
+            }, 250));
+
+        });
+
     },
 };
 window.a = BANNER;
