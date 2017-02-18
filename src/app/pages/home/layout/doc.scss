@@ -99,6 +99,10 @@
 		padding: 0;
 		>li{
 			flex: 0 1 46%;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			letter-spacing: -0.6px;
 			>a{
 				font-size: 14px;
 				text-align: left;
@@ -108,7 +112,7 @@
 					font-size: 19px;
 					vertical-align: middle;
 					margin-bottom: 0;
-					margin-right: 10px;
+					margin-right: 7px;
 				}
 			}
 		}

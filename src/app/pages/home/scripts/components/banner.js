@@ -45,14 +45,18 @@ const BANNER = {
                 },
             },
             onInit: function (slide) {
-                let devicePath = $(slide.slides[slide.activeIndex]).find(
-                    '.devices-svg .deviceScreen');
+                let devicePath = $(slide.slides[slide.activeIndex]).find('.devices-svg .deviceScreen');
                 BANNER.lastActivePath = devicePath;
-                BANNER.showCodeBlock(codeBlock, devicePath, true);
-                setTimeout(function () {
-                    code.scrollLeft(60);
-                    codeBlock.scrollTop(35);
-                }, 10);
+
+                setTimeout( () => {
+                    BANNER.showCodeBlock(codeBlock, devicePath, true);
+
+                    setTimeout(()=>{
+                        code.scrollLeft(60);
+                        codeBlock.scrollTop(35);
+                    }, 10)
+
+                }, 500);
 
                 BANNER.wResize();
             },
@@ -123,10 +127,14 @@ const BANNER = {
     },
 
     showCodeBlock: function (block, devicePath, init) {
+
+        //console.log(devicePath[0].getBoundingClientRect());
+
+
         let params = {
             width: devicePath[0].getBoundingClientRect().width - 10,
             height: devicePath[0].getBoundingClientRect().height - 20,
-            top: devicePath.offset().top + 10,
+            top: devicePath[0].getBoundingClientRect().top,
             left: devicePath[0].getBoundingClientRect().left + 5,
         };
         if (init) {
