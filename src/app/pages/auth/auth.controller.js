@@ -1,4 +1,5 @@
 import footer from '../home/scripts/components/footer';
+import header from '../home/scripts/components/header';
 
 class AuthCtrl {
     constructor(User, $state, AppConstants, $window, Notification) {
@@ -12,7 +13,7 @@ class AuthCtrl {
         this.authType = $state.current.name.replace('landing.', '');
 
         this.patterns = {
-            email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         };
 
         console.log(User);
@@ -20,57 +21,60 @@ class AuthCtrl {
         FB.init({
             appId: AppConstants.FB,
             cookie: true,  // enable cookies to allow the server to access
-                           // the session
+            // the session
             xfbml: true,  // parse social plugins on this page
-            version: 'v2.8' // use graph api version 2.8
+            version: 'v2.8', // use graph api version 2.8
         });
 
         gapi.load('auth2', () => {
             gapi.auth2.init({
                 client_id: AppConstants.GOOGLE,
-                scope: 'profile'
+                scope: 'profile',
             });
         });
-        footer.init();
+        $(document).ready(()=> {
+            footer.init();
+            header.init();
+        });
 
     }
 
     submitForm() {
         this.isSubmitting = true;
 
-        if (this.authType === "login") {
+        if (this.authType === 'login') {
             this._User.login(this.formData).then(
                 (res) => {
                     this._$state.go('app.dashboard');
                 },
+
                 (err) => {
                     this.isSubmitting = false;
                     this.errors = err;
-                })
-        }
-        else if (this.authType === "register") {
+                });
+        } else if (this.authType === 'register') {
             this._User.signUp(this.formData).then(
-                res=>{
+                res=> {
 
                     this.isSubmitting = false;
-                    if(res[0]){
+                    if (res[0]) {
                         _.each(res, (val, key) => {
                             this.Notification.error(val.fieldName);
                         });
                         return;
                     }
+
                     this._$state.go('app.dashboard');
                 },
-                err=>{
+
+                err=> {
                     this.isSubmitting = false;
                     console.log(err);
                 }
             );
-        }
-        else if (this.authType === "forgot") {
-            console.log("forgot");
-        }
-        else {
+        } else if (this.authType === 'forgot') {
+            console.log('forgot');
+        } else {
             this.isSubmitting = false;
         }
     }
@@ -81,7 +85,7 @@ class AuthCtrl {
         }, (err) => {
             this.isSubmitting = false;
             this.errors = err;
-        })
+        });
     }
 
     googleLogin() {
@@ -93,7 +97,7 @@ class AuthCtrl {
                 last_name: BasicProfile.getFamilyName(),
                 id: BasicProfile.getId(),
                 email: BasicProfile.getEmail(),
-                type: 'google'
+                type: 'google',
             };
             this._User.googleAuth(requestData);
         });

@@ -60,14 +60,14 @@ window.LANDING = {
                 swipe.activeIndex === 0 ?  $('.btn-next-slide').addClass('first') : $('.btn-next-slide').removeClass('first');
             },
         });
-        $(document).on('click', '.btn-next-slide:not(.last)', function (e) {
+        $(document).on('click touch', '.btn-next-slide:not(.last)', function (e) {
             e.preventDefault();
             swiper.slideNext();
         });
 
-        $(document).on('click', '.btn-next-slide.last', function (e) {
+        $(document).on('click touch', '.btn-next-slide.last', function (e) {
             e.preventDefault();
-            swiper.slidePrev();
+           // swiper.slidePrev();
         });
 
         this.projectSlider = swiper;
@@ -88,7 +88,7 @@ window.LANDING = {
 
     clicks: function () {
         footer.init();
-        $(document).on('click', '.back-home-btn', function () {
+        $(document).on('click touch', '.back-home-btn', function () {
             let modal = $('.project-modal');
             modal.removeClass('show animationEnd');
             $(window).scrollTop($(window).scrollTop() - 10);
