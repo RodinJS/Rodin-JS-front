@@ -43,6 +43,11 @@
                 opacity: 1;
             }
         }
+        .icon-oculus{
+          &:before{
+            content:""
+          }
+        }
     }
     .code-block-wrapper {
         position: absolute;

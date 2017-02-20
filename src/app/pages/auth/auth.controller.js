@@ -2,7 +2,7 @@ import footer from '../home/scripts/components/footer';
 import header from '../home/scripts/components/header';
 
 class AuthCtrl {
-    constructor(User, $state, AppConstants, $window, Notification) {
+    constructor(User, $scope, $state, AppConstants, $window, Notification) {
         'ngInject';
         this._Constants = AppConstants;
         this._User = User;
@@ -32,10 +32,15 @@ class AuthCtrl {
                 scope: 'profile',
             });
         });
-        $(document).ready(()=> {
-            footer.init();
-            header.init();
+        $scope.$on('$viewContentLoaded', () => {
+            $(document).ready(()=> {
+               setTimeout(()=>{
+                   footer.init();
+                   header.init();
+               }, 500)
+            });
         });
+
 
     }
 
