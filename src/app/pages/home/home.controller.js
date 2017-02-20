@@ -52,7 +52,7 @@ class HomeCtrl {
                     $('.sendgrid-subscription-widget form').find("input[type='submit']").remove();
                     $('.sendgrid-subscription-widget').css({opacity:1});
 
-                }, 300);
+                }, 1000);
             });
 
         });
