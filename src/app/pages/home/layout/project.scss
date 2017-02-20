@@ -103,7 +103,7 @@
         }
         &.last {
         	i {
-        		transform: rotateX(180deg);
+        		//transform: rotateX(180deg);
         	}
         }
     }
@@ -170,6 +170,7 @@
         background-color: $color-primary;
         color: $color-text-primary;
         outline: none !important;
+        padding: 6px 20px 6px 6px;
         i {
             font-size: 32px;
             color: #fff;

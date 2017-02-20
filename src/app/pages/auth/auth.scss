@@ -18,13 +18,13 @@
 	&.selet-template-container{
 		display: block;
 		height: auto;
-		padding-top: 230px;
+		padding-top: 100px;
 		padding-bottom: 160px;
 	}
 	&.signup-container{
 		display: block;
 		height: auto;
-		padding-top: 230px;
+		padding-top: 100px;
 		padding-bottom: 160px;
 		.auth-content{
 			max-width: 335px;
@@ -34,7 +34,8 @@
 				padding-left: 15px;
 				@include placeholder($color: rgba(white, .45));
 			}
-			.form-control:focus + .float-label{
+			.form-control:focus + .float-label,
+			.form-control.active + .float-label{
 				font-size: 12px;
 				color: rgba(white, .45);
 				left: 0;
@@ -43,7 +44,7 @@
 			}
 			.float-label{
 				font-size: 16px;
-				color: transparent;
+				//color: transparent;
 				position: absolute;
 				top: 50%;
 				left: 15px;

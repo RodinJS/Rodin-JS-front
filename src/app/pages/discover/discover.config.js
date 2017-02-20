@@ -5,8 +5,9 @@ function DiscoverConfig($stateProvider) {
 			url: '/howitworks',
 			controller: 'DiscoverCtrl as $ctrl',
 			templateUrl: 'pages/discover/discover.html',
-			title: 'Discover'
-		})
+			title: 'Discover',
+            pageClass:'',
+        })
 }
 
 export default DiscoverConfig;

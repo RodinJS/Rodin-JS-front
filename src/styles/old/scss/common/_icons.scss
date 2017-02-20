@@ -13,6 +13,13 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-github:before {
+	content: "\e91b";
+}
+.icon-tutorial:before {
+	content: "\e91c";
+}
+
 .icon-fullscreen {
     &:before {
         content: $icon-fullscreen;

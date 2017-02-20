@@ -13,7 +13,6 @@ import './plugins/jquery.tagsinput.min.js';
 import header from './components/header';
 import banner from './components/banner';
 import features from './components/features';
-import vision from './components/vision';
 import footer from './components/footer';
 
 // main function
@@ -28,7 +27,6 @@ window.LANDING = {
         header.stickyHeader();
         banner.init();
         features.init();
-        vision.init();
     },
 
     template: function () {

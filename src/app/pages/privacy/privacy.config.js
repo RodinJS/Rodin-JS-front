@@ -5,8 +5,9 @@ function PrivacyConfig($stateProvider) {
 			url: '/terms',
 			controller: 'PrivacyCtrl as $ctrl',
 			templateUrl: 'pages/privacy/privacy.html',
-			title: 'Privacy'
-		})
+			title: 'Privacy',
+            pageClass:'new',
+        })
 }
 
 export default PrivacyConfig;

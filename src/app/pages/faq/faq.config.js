@@ -5,8 +5,9 @@ function FaqConfig($stateProvider) {
 			url: '/faq',
 			controller: 'FaqCtrl as $ctrl',
 			templateUrl: 'pages/faq/faq.html',
-			title: 'Faq'
-		})
+			title: 'Faq',
+            pageClass:'new',
+        })
 }
 
 export default FaqConfig;

@@ -7,7 +7,12 @@
             </div>
             <div class="video-wrapper">
                 <div class="video-box">
-                    <video id='rodinVision'
+                    <iframe id='rodinVision'
+                            class="video"
+                            ng-src="{{$ctrl.activeVideo}}"
+                            frameborder="0" allowfullscreen>
+                    </iframe>
+                   <!-- <video id='rodinVision'
                            preload='none'
                            controls
                            mediagroup='createProject'
@@ -17,18 +22,18 @@
                         <p>Your user agent does not support the HTML5 Video element.</p>
                     </video>
                     <button class="video-play-btn"><i class="rd-play"></i>
-                    </button>
+                    </button>-->
                 </div>
             </div>
             <div class="video-nav-wrapper">
                 <div class="video-nav">
-                    <a href="" class="video-play-btn left" data-videoname="createProject">
+                    <a href="" class="video-play-btn left" ng-click="$ctrl.changeVideo('createProject')">
                         <span>Create your project</span>
                     </a>
-                    <a href="" class="video-play-btn middle" data-videoname="createProject">
+                    <a href="" class="video-play-btn middle"  ng-click="$ctrl.changeVideo('develope')">
                         <span>Develop with help of our library and moddives</span>
                     </a>
-                    <a href="" class="video-play-btn right" data-videoname="createProject">
+                    <a href="" class="video-play-btn right" ng-click="$ctrl.changeVideo('deploy')">
                         <span>Deploy to all platforms</span>
                     </a>
                 </div>

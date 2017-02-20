@@ -5,8 +5,9 @@ function TutorialsConfig($stateProvider) {
 			url: '/tutorials',
 			controller: 'TutorialsCtrl as $ctrl',
 			templateUrl: 'pages/tutorials/tutorials.html',
-			title: 'Tutorials'
-		})
+			title: 'Tutorials',
+            pageClass:'new',
+        })
 }
 
 export default TutorialsConfig;

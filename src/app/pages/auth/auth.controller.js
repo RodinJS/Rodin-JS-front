@@ -1,3 +1,5 @@
+import footer from '../home/scripts/components/footer';
+
 class AuthCtrl {
     constructor(User, $state, AppConstants, $window, Notification) {
         'ngInject';
@@ -29,6 +31,7 @@ class AuthCtrl {
                 scope: 'profile'
             });
         });
+        footer.init();
 
     }
 

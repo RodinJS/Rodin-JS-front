@@ -20,7 +20,7 @@ const BANNER = {
             bulletClass: 'devices-logo',
             speed: 1200,
             loop: true,
-            autoplay: 3500,
+            autoplay: 3500,//3500
             autoplayDisableOnInteraction: false,
             coverflow: {
                 rotate: -5,
@@ -47,10 +47,8 @@ const BANNER = {
             onInit: function (slide) {
                 let devicePath = $(slide.slides[slide.activeIndex]).find('.devices-svg .deviceScreen');
                 BANNER.lastActivePath = devicePath;
-
                 setTimeout(() => {
                     BANNER.showCodeBlock(codeBlock, devicePath, true);
-
                     setTimeout(()=> {
                         code.scrollLeft(60);
                         codeBlock.scrollTop(35);
@@ -61,7 +59,7 @@ const BANNER = {
                 BANNER.wResize();
             },
 
-            onSlideChangeStart: function (slide) {
+            onTransitionStart: function (slide) {
                 codeBlock.animate({ opacity: 1 }, 300);
             },
 
@@ -75,7 +73,6 @@ const BANNER = {
                 } else {
                     codeBlock.removeClass('round');
                 }
-
                 BANNER.showCodeBlock(codeBlock, devicePath);
                 BANNER.lastActivePath = devicePath;
             },
@@ -127,11 +124,34 @@ const BANNER = {
 
     showCodeBlock: function (block, devicePath, init) {
 
+        //console.log(devicePath[0].getBoundingClientRect());
+        //console.log(devicePath[0].parentNode.id);
+
+        let additionalParams = { l: 0, t: 0, w: 0, h: 0 };
+        switch (devicePath[0].parentNode.id){
+            case 'samsungGear':
+                additionalParams.l = 15;
+                additionalParams.w = -15;
+                break;
+            case 'oculus':
+                additionalParams.l = 10;
+                additionalParams.w = -15;
+                break;
+            case 'vive':
+                additionalParams.l = 10;
+                additionalParams.t = 10;
+                additionalParams.w = -10;
+                break;
+            case 'daydream':
+                additionalParams.l = 10;
+                break;
+        }
+
         let params = {
-            width: devicePath[0].getBoundingClientRect().width - 10,
+            width: devicePath[0].getBoundingClientRect().width - 20 + additionalParams.w,
             height: devicePath[0].getBoundingClientRect().height - 20,
-            top: devicePath[0].getBoundingClientRect().top + window.pageYOffset,
-            left: devicePath[0].getBoundingClientRect().left + 5,
+            top: devicePath[0].getBoundingClientRect().top + window.pageYOffset + additionalParams.t,
+            left: devicePath[0].getBoundingClientRect().left + 10 + additionalParams.l,
         };
         if (init) {
             block.css(params);

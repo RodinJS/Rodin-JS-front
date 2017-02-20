@@ -1,6 +1,5 @@
-<app-header ng-if="pageClass.indexOf('home') < 0 && pageClass.indexOf('login-register') < 0 "  class="header"></app-header>
-<landing-header ng-if="pageClass.indexOf('login-register') > -1"  class="header"></landing-header>
-
+<app-header ng-if="pageClass.indexOf('new') < 0 && pageClass.indexOf('home') < 0"  class="header"></app-header>
+<landing-header ng-if="pageClass.indexOf('new') > -1  && pageClass.indexOf('home') < 0"  class="header"></landing-header>
 <div data-ui-view></div>
 
 <!-- <landing-footer></landing-footer> -->
