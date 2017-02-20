@@ -46,6 +46,13 @@ class HomeCtrl {
 
                 $('.back-home-btn').on('click', () =>  this.outToSlider());
 
+                setTimeout(()=>{
+
+                    $('.sendgrid-subscription-widget form').find('label').remove();
+                    $('.sendgrid-subscription-widget form').find("input[type='submit']").remove();
+                    $('.sendgrid-subscription-widget').css({opacity:1});
+
+                }, 300);
             });
 
         });

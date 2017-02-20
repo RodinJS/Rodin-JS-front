@@ -77,9 +77,11 @@
                         <li class="hidden-xs">
                             <a ui-sref="landing.login">Login</a>
                         </li>
-                          <li>
-                              <a style="margin:0" href="//knoxlabs.us8.list-manage.com/subscribe/post?u=d91d4ff82ed3e8edb816c66ec&amp;id=e8644a7f06" class="btn sign-up-btn">Sign up</a>
-                          </li>
+                       <!-- <li>
+                            <a style="margin:0"
+                               href="//knoxlabs.us8.list-manage.com/subscribe/post?u=d91d4ff82ed3e8edb816c66ec&amp;id=e8644a7f06"
+                               class="btn sign-up-btn">Sign up</a>
+                        </li>-->
                     </ul>
                 </div>
             </div>
@@ -88,10 +90,10 @@
     </header>
 
     <section class="section banner-section">
-        <h2 class="title">THE FASTEST WAY TO BUILD INTERACTIVE VR EXPERIENCES</h1>
-<!--
-            <h3 class="subtitle">Easily and instantly deploy across all major platforms</h2>
--->
+        <h1 class="title">THE FASTEST WAY TO BUILD INTERACTIVE VR EXPERIENCES</h1>
+        <!--
+                    <h3 class="subtitle">Easily and instantly deploy across all major platforms</h2>
+        -->
         <div class="swiper-container" id="devicesSlider">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" data-devicename="samsungGear">
@@ -227,31 +229,37 @@
         </div>
 
         <!-- begin form -->
-        <form action="//knoxlabs.us8.list-manage.com/subscribe/post?u=d91d4ff82ed3e8edb816c66ec&amp;id=e8644a7f06"
-              method="post" id="mc-embedded-subscribe-form"
-              name="mc-embedded-subscribe-form"
-              class="form" target="_blank" novalidate>
+        <script>!function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = p + '://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, 'script', 'sendgrid-subscription-widget-js');</script>
+        <div style="opacity: 0" class="sendgrid-subscription-widget form"
+             data-token="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">
             <div class="input-group">
                 <input type="email"
                        value=""
-                       name="EMAIL"
+                       name="email"
                        placeholder="Get notified when we launch"
                        style="text-transform: none"
-                       class="required email form-control" id="mce-EMAIL">
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                    <input type="text" name="b_d91d4ff82ed3e8edb816c66ec_e8644a7f06" tabindex="-1" value="">
-                </div>
+                       class="required email form-control">
+
                 <span class="input-group-btn">
-                    <button class="btn btn-default"
-                            style="border-bottom-left-radius:0 !important; border-top-left-radius:0 !important"
-                            type="submit" name="subscribe" id="mc-embedded-subscribe"
-                    >
-                        <span class="text">Sign Up</span>
-                    </button>
-                </span>
+                        <button class="btn btn-default"
+                                style="border-bottom-left-radius:0 !important; border-top-left-radius:0 !important"
+                                type="submit" name="subscribe"
+                        >
+                            <span class="text">Sign Up</span>
+                        </button>
+                    </span>
             </div>
-        </form>
-        <!-- end form -->
+        </div>
+
+
         <ul id="parallax">
             <li class="layer" data-depth="0.00"></li>
             <li class="layer" data-depth="0.03"></li>

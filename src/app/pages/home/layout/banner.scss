@@ -82,6 +82,13 @@
             margin-left: -20px;
         }
     }
+    .sendgrid-subscription-widget{
+      &.form{
+        .response{
+          margin:10px 0;
+        }
+      }
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
