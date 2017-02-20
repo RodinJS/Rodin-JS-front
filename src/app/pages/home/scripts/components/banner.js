@@ -191,14 +191,14 @@ const BANNER = {
             }
         });
 
-        $(window).scroll(() => {
+       /* $(window).scroll(() => {
             clearTimeout($.data(this, 'scrollCheck'));
             window.a.stopAutoplay();
             $.data(this, 'scrollCheck', setTimeout(() => {
                 window.a.startAutoplay();
             }, 250));
 
-        });
+        });*/
 
     },
     checkMobile() {
