@@ -6,8 +6,6 @@ class AppHeaderCtrl {
         this._$location = $location;
         this.appName = AppConstants.appName;
 
-        console.log($scope);
-
     }
 
     gotToHome(){

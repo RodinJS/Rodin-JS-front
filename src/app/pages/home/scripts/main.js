@@ -85,7 +85,6 @@ window.LANDING = {
         $(document).on('click touch', '.btn-next-slide.last', function (e) {
             e.preventDefault();
             // swiper.slidePrev();
-            console.log('aaa');
             $('body').scope().$root.$broadcast('scrollDown', {});
         });
 
