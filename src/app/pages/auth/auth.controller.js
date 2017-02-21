@@ -2,15 +2,18 @@ import footer from '../home/scripts/components/footer';
 import header from '../home/scripts/components/header';
 
 class AuthCtrl {
-    constructor(User, $scope, $state, AppConstants, $window, Notification) {
+    constructor(User, $scope, $state, $stateParams, AppConstants, $window, Notification) {
         'ngInject';
         this._Constants = AppConstants;
+        this._$state = $state;
         this._User = User;
         this._$state = $state;
+        this._$stateParams = $stateParams;
         this._$window = $window;
         this.Notification = Notification;
         this.title = $state.current.title;
         this.authType = $state.current.name.replace('landing.', '');
+        //this.gotToHome = this.gotToHome.bind(this);
 
         this.patterns = {
             email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -34,10 +37,8 @@ class AuthCtrl {
         });
         $scope.$on('$viewContentLoaded', () => {
             $(document).ready(()=> {
-               setTimeout(()=>{
-                   footer.init();
-                   header.init();
-               }, 500)
+                footer.init();
+                header.init();
             });
         });
 

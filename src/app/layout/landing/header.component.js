@@ -1,9 +1,17 @@
 class AppHeaderCtrl {
-    constructor(AppConstants, $scope) {
+    constructor(AppConstants, $scope, $state, $stateParams, $location) {
         'ngInject';
-
+        this._$state = $state;
+        this._$stateParams = $stateParams;
+        this._$location = $location;
         this.appName = AppConstants.appName;
 
+        console.log($scope);
+
+    }
+
+    gotToHome(){
+        window.location.href = '/';
     }
 }
 

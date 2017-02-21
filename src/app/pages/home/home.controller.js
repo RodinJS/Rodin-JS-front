@@ -1,15 +1,19 @@
 import  './scripts/main';
 
 class HomeCtrl {
-    constructor(AppConstants, $state, $sce, $window, $scope, $timeout) {
+    constructor(AppConstants, $state, $sce, $window, $scope, $rootScope, $timeout) {
         'ngInject';
 
-        if (LANDING && Object.keys(LANDING).length >= 8) return location.reload();
+        // if (LANDING && Object.keys(LANDING).length >= 8) {
+        //     return location.reload();
+        // }
 
         this._$window = $window;
         this._$scope = $scope;
         this._$sce = $sce;
         this.appName = AppConstants.appName;
+
+        this.sendGrid = AppConstants.SENDGRID;
 
         this.windowHeight = this._$window.innerHeight;
         this.windowWidth = this._$window.innerWidth;
@@ -38,6 +42,7 @@ class HomeCtrl {
 
         this.changeVideo('createProject');
         $scope.$on('$viewContentLoaded', () => {
+
             $(document).ready(() => {
                 LANDING.landing();
                 $('.code').each(function (i, block) {
@@ -46,20 +51,32 @@ class HomeCtrl {
 
                 $('.back-home-btn').on('click', () =>  this.outToSlider());
 
-                setTimeout(()=>{
 
-                    $('.sendgrid-subscription-widget form').find('label').remove();
-                    $('.sendgrid-subscription-widget form').find("input[type='submit']").remove();
-                    $('.sendgrid-subscription-widget').css({opacity:1});
-
-                }, 1000);
+                !function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = p + '://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js';
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                    js.onload = function(){
+                        // remote script has loaded
+                        $('.sendgrid-subscription-widget form').find('label').remove();
+                        $('.sendgrid-subscription-widget form').find("input[type='submit']").remove();
+                        $('.sendgrid-subscription-widget').css({ opacity: 1 });
+                    };
+                }(document, 'script', 'sendgrid-subscription-widget-js');
             });
 
         });
+
+        $scope.$on('scrollDown', (event, data)=> this.scrollHandler({ deltaY: 1 }));
     }
 
     changeVideo(videoName) {
         this.activeVideo = this._$sce.trustAsResourceUrl(this.videos[videoName]);
+        this.videoTrigger = videoName;
     }
 
     outToSlider() {
@@ -106,10 +123,6 @@ class HomeCtrl {
         if (typeof scroller === 'boolean')
             this.hoveredIframe = scroller;
 
-        console.log('wheel', wheeler);
-        console.log('scroller', scroller);
-        console.log('this.hoveredIframe', this.hoveredIframe);
-
         if (typeof wheeler === 'boolean') {
 
             if (this.hoveredIframe) {
@@ -154,8 +167,6 @@ class HomeCtrl {
             this.canOutFromSlider = e.deltaY < 0 && LANDING.projectSlider.isBeginning && btnNextSlide.hasClass('first');
 
             $('body').css({ overflow: 'auto' });
-            $('.slide-number').show();
-            $('.pagination-wrapper').show();
             return btnNextSlide.show();
         }
 
@@ -195,6 +206,9 @@ class HomeCtrl {
                     left: this.initialTransform.x,
                     top: this.initialTransform.y,
                 });
+                $('.slide-number').show();
+                $('.pagination-wrapper').show();
+                $('.btn-next-slide').show();
 
                 if ($iframeBox.width() <= this.initialTransform.w) {
                     LANDING.projectSlider.unlockSwipeToPrev();

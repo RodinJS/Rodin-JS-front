@@ -27,6 +27,7 @@ window.LANDING = {
         header.stickyHeader();
         banner.init();
         features.init();
+
     },
 
     template: function () {
@@ -55,9 +56,25 @@ window.LANDING = {
             speed: 1000,
             mousewheelControl: true,
             onTransitionEnd: function (swipe) {
-                $('.slide-number').html('0' + (swipe.activeIndex + 1)),
-                    swipe.activeIndex + 1 === swipe.slides.length ? $('.btn-next-slide').addClass('last') : $('.btn-next-slide').removeClass('last');
+                $('.slide-number').html('0' + (swipe.activeIndex + 1));
+                if (swipe.activeIndex + 1 === swipe.slides.length) {
+                    $('.btn-next-slide').addClass('last');
+                } else {
+                    $('.btn-next-slide').removeClass('last');
+                }
+
+                if (!swipe.isEnd) {
+                    $('.slide-number').show();
+                    $('.pagination-wrapper').show();
+                    $('.btn-next-slide').show();
+                }
+
+               /* if(swipe.isEnd){
+                    $('.btn-next-slide').hide();
+                }*/
+
                 swipe.activeIndex === 0 ?  $('.btn-next-slide').addClass('first') : $('.btn-next-slide').removeClass('first');
+
             },
         });
         $(document).on('click touch', '.btn-next-slide:not(.last)', function (e) {
@@ -67,7 +84,9 @@ window.LANDING = {
 
         $(document).on('click touch', '.btn-next-slide.last', function (e) {
             e.preventDefault();
-           // swiper.slidePrev();
+            // swiper.slidePrev();
+            console.log('aaa');
+            $('body').scope().$root.$broadcast('scrollDown', {});
         });
 
         this.projectSlider = swiper;

@@ -15,20 +15,30 @@
 	text-align: center;
 	display: flex;
 	align-items: center;
+
 	&.selet-template-container{
 		display: block;
 		height: auto;
-		padding-top: 100px;
+		padding-top: 25px;
 		padding-bottom: 160px;
 	}
 	&.signup-container{
 		display: block;
 		height: auto;
-		padding-top: 100px;
+		padding-top: 24px;
 		padding-bottom: 160px;
 		.auth-content{
-			max-width: 335px;
+			max-width: 450px;
+            &.sign-in{
+              padding-top:80px;
+              .title{
+                margin-bottom: 32px !important;
+              }
+            }
 		}
+        .title{
+          margin-bottom:10px
+        }
 		.main-form{
 			.form-control{
 				padding-left: 15px;
@@ -78,7 +88,7 @@
 		line-height: 1.5;
 		color: #008BF2;
 		margin-top: 0;
-		margin-bottom: 33px;
+		margin-bottom: 18px;
 	}
 	.btn-wrapper{
 		.btn-create-project{

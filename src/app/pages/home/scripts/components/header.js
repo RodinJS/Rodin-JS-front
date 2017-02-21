@@ -35,7 +35,6 @@ const header = {
     },
 
     toggleHeaderAuth: function () {
-        console.log($('.btn-mobile-menu'));
         $('.btn-mobile-menu').on('click', function (event) {
             console.log(event);
             event.preventDefault();

@@ -20,7 +20,7 @@ const BANNER = {
             bulletClass: 'devices-logo',
             speed: 1200,
             loop: true,
-            autoplay: 3500,//
+            autoplay: 2500,//
             autoplayDisableOnInteraction: false,
             coverflow: {
                 rotate: -5,
@@ -60,6 +60,10 @@ const BANNER = {
             },
 
             onTransitionStart: function (slide) {
+                if (codeBlock.length <= 0)
+                    codeBlock = $('.code-block-wrapper');
+                if (code.length <= 0)
+                    code = $('#rodinCode code');
                 codeBlock.animate({ opacity: 1 }, 300);
             },
 
@@ -124,8 +128,6 @@ const BANNER = {
 
     showCodeBlock: function (block, devicePath, init) {
 
-        //console.log(devicePath[0].getBoundingClientRect());
-        //console.log(devicePath[0].parentNode.id);
 
         let additionalParams = { l: 0, t: 0, w: 0, h: 0 };
         //console.log(this.checkMobile());

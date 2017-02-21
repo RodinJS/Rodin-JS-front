@@ -2,6 +2,8 @@
 
 const footer = {
     init: function () {
+        if(this.inited) return;
+        this.inited = false;
         this.toggleFooter();
     },
 
@@ -17,6 +19,7 @@ const footer = {
                 footer.addClass('open');
             }
         });
+        this.inited = true;
     },
 };
 
