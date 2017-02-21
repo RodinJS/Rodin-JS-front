@@ -107,8 +107,13 @@
 				margin-bottom: 45px;
 				a {
 					padding: 0;
-					&.active{
+					border: none;
+					background: transparent;
+					&.active,
+					&:focus,
+					&:hover{
 						border: none;
+						background: transparent;
 					}
 					.icon-wrapper {
 						flex: 1 0 75px;
