@@ -36,7 +36,6 @@ const header = {
 
     toggleHeaderAuth: function () {
         $('.btn-mobile-menu').on('click', function (event) {
-            console.log(event);
             event.preventDefault();
             $('.header-menu').css({float:'inherit'});
             if ($(this).hasClass('active')) {
