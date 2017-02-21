@@ -4,9 +4,9 @@ class HomeCtrl {
     constructor(AppConstants, $state, $sce, $window, $scope, $rootScope, $timeout) {
         'ngInject';
 
-        // if (LANDING && Object.keys(LANDING).length >= 8) {
-        //     return location.reload();
-        // }
+        if (LANDING && Object.keys(LANDING).length >= 8) {
+            return location.reload();
+        }
 
         this._$window = $window;
         this._$scope = $scope;

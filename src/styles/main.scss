@@ -21,10 +21,11 @@ html{
   height: 100%;
 }
 
-*:focus,
-*:hover,
-*:active{
-  outline: none;
+
+button:focus,
+button:hover,
+button:active{
+  outline: none !important;
 }
 
 body{
