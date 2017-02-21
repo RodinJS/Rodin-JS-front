@@ -111,7 +111,6 @@ class AuthCtrl {
 
     gitLogin() {
         this._$window.location.href = `https://github.com/login/oauth/authorize?client_id=${this._Constants.GITHUB}&redirect_uri=${this._Constants.API}/git&scope=user%20repo`;
-
     }
 }
 
