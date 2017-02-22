@@ -20,7 +20,7 @@ const BANNER = {
             bulletClass: 'devices-logo',
             speed: 1200,
             loop: true,
-            autoplay: false,//2500
+            autoplay: 2500,
             autoplayDisableOnInteraction: false,
             coverflow: {
                 rotate: -5,
