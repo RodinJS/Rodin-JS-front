@@ -58,25 +58,7 @@ class HomeCtrl {
                 $('.code').each(function (i, block) {
                     hljs.highlightBlock(block);
                 });
-
                 $('.back-home-btn').on('click', () =>  this.outToSlider());
-
-                !function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                    if (!d.getElementById(id)) {
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = p + '://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js';
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }
-
-                    js.onload = function () {
-                        // remote script has loaded
-                        $('.sendgrid-subscription-widget form').find('label').remove();
-                        $('.sendgrid-subscription-widget form').find("input[type='submit']").remove();
-                        $('.sendgrid-subscription-widget').css({ opacity: 1 });
-                    };
-                }(document, 'script', 'sendgrid-subscription-widget-js');
             });
 
         });
@@ -89,12 +71,13 @@ class HomeCtrl {
         this.videoTrigger = videoName;
     }
 
-    outToSlider() {
+    outToSlider(disableScroll) {
         LANDING.projectSlider.unlockSwipeToPrev();
         LANDING.projectSlider._slideTo(0, 500);
         this.resetInitalPosition();
         $('.project-modal').removeClass('show animationEnd');
-        $(window).scrollTop($(window).scrollTop() - 10);
+        if(!disableScroll)
+            $(window).scrollTop($(window).scrollTop() - 10);
         this.canOutFromSlider = false;
 
     }
@@ -149,7 +132,6 @@ class HomeCtrl {
     }
 
     scrollHandler(e) {
-
         const lastSlider = angular.element('.swiper-slide').last();
         const iframe = angular.element('#iframe');
         const $iframeBox = $('#iframe-box');
@@ -170,7 +152,7 @@ class HomeCtrl {
         const isBottom = btnNextSlide.hasClass('last') && lastSlider.hasClass('swiper-slide-active');
 
         if (this.canOutFromSlider) {
-            return this.outToSlider();
+            return this.outToSlider(true);
         }
 
         if (!btnNextSlide.hasClass('last')) {
