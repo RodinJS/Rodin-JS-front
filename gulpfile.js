@@ -28,7 +28,6 @@ const HTML = ['src/app/**/*.html', 'src/app/**/**/*.html'];
 const SASS = ['src/styles/main.scss', '!src/styles/{vendor,vendor/**}'];
 const FONT = ['src/fonts/**/*.{ttf,woff,woff2,eof,svg,eot,json,otf}'];
 const IMG = ['src/images/**/*.{jpg,jpeg,ico,png,svg,gif,json,xml}'];
-const VIDEO = ['src/video/**/*.{mp4,webm}'];
 
 const AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -216,11 +215,6 @@ gulp.task('img', () => {
       .pipe(plumber(ERROR_MESSAGE))
       .pipe(gulp.dest('./build/images'));
 });
-gulp.task('video', () => {
-    gulp.src(VIDEO)
-      .pipe(plumber(ERROR_MESSAGE))
-      .pipe(gulp.dest('./build/video'));
-});
 
 gulp.task('watch', () => {
     gulp.watch(SASS, ['sass']);
@@ -248,9 +242,9 @@ gulp.task('build-template', (done) => {
 });
 
 gulp.task('prod', (done) => {
-    sequence('clean', 'vendor', ['generate-index', 'template', 'js-prod', 'sass-prod',  'font', 'img', 'video'], done);
+    sequence('clean', 'vendor', ['generate-index', 'template', 'js-prod', 'sass-prod',  'font', 'img'], done);
 });
 
 gulp.task('default', (done) => {
-    sequence('clean', 'vendor', ['generate-index', 'template', 'js', 'sass',  'font', 'img', 'video', 'connect', 'watch'], done);
+    sequence('clean', 'vendor', ['generate-index', 'template', 'js', 'sass',  'font', 'img', 'connect', 'watch'], done);
 });

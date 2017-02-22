@@ -166,7 +166,7 @@ class HomeCtrl {
         if (!btnNextSlide.hasClass('last')) {
             this.canOutFromSlider = e.deltaY < 0 && LANDING.projectSlider.isBeginning && btnNextSlide.hasClass('first');
 
-            $('body').css({ overflow: 'auto' });
+            $('body').removeAttr('style')
             return btnNextSlide.show();
         }
 
@@ -211,7 +211,7 @@ class HomeCtrl {
 
                 if ($iframeBox.width() <= this.initialTransform.w) {
                     LANDING.projectSlider.unlockSwipeToPrev();
-                    angular.element('body').css({ overflow: 'auto' });
+                    angular.element('body').removeAttr('style')
                 }
 
             }

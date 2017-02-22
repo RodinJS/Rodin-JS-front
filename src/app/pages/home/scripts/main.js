@@ -69,8 +69,8 @@ window.LANDING = {
                     $('.btn-next-slide').show();
                 }
 
-                if(swipe.isEnd){
-                    if(checkMobile()){
+                if (swipe.isEnd) {
+                    if (checkMobile()) {
                         $('.btn-next-slide').hide();
                     }
                 }
@@ -87,7 +87,7 @@ window.LANDING = {
         $(document).on('click touch', '.btn-next-slide.last', function (e) {
             e.preventDefault();
             // swiper.slidePrev();
-            $('body').scope().$root.$emit('scrollDown', {});
+            $('body').scope().$root.$broadcast('scrollDown', {});
         });
 
         this.projectSlider = swiper;
