@@ -24,6 +24,7 @@ window.LANDING = {
         this.verticalSlider();
         this.scroll();
         this.clicks();
+        this.focus();
         header.stickyHeader();
         banner.init();
         features.init();
@@ -135,6 +136,18 @@ window.LANDING = {
             }
         });
     },
+
+    focus: function () {
+        var toggleCls = 'focus';
+        $(document).on('focus', '#emailControl', function () {
+            $(this).addClass(toggleCls).closest('.input-group').addClass(toggleCls);
+        });
+
+        $(document).on('click', '.form-backdrop', function (e) {
+            $('#emailControl').removeClass(toggleCls).closest('.input-group').removeClass(toggleCls);
+        });
+    },
+
 };
 
 function checkMobile() {

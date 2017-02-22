@@ -77,11 +77,11 @@
                         <li class="hidden-xs">
                             <a ui-sref="landing.login">Login</a>
                         </li>
-                       <!-- <li>
-                            <a style="margin:0"
-                               href="//knoxlabs.us8.list-manage.com/subscribe/post?u=d91d4ff82ed3e8edb816c66ec&amp;id=e8644a7f06"
-                               class="btn sign-up-btn">Sign up</a>
-                        </li>-->
+                        <!-- <li>
+                             <a style="margin:0"
+                                href="//knoxlabs.us8.list-manage.com/subscribe/post?u=d91d4ff82ed3e8edb816c66ec&amp;id=e8644a7f06"
+                                class="btn sign-up-btn">Sign up</a>
+                         </li>-->
                     </ul>
                 </div>
             </div>
@@ -230,7 +230,88 @@
             </div>
 
             <!-- begin form -->
-            <div style="opacity: 0"
+
+            <div class="form">
+                <div class="input-group">
+                    <input type="email"
+                           class="form-control"
+                           id="emailControl"
+                           ng-model="$ctrl.subscribe.email"
+                           placeholder="Get notified when we launch"
+                           ng-pattern="$ctrl.patterns.email"
+                           value="">
+                    <span class="input-group-btn">
+					<button class="btn btn-default"
+                            ng-disabled="!$ctrl.subscribe.email || !$ctrl.subscribe.userType || $ctrl.subscribe.position.length <= 0"
+                            ng-click="$ctrl.submitSubscribe()"
+                            type="submit">
+						<span class="text">Subscribe</span>
+					</button>
+				</span>
+                    <div class="form-action-wrapper">
+                        <div class="radio-wrapper">
+                            <label class="raido-inline">
+                                <input type="radio"
+                                       name="Individual"
+                                       value="Individual" checked
+                                       ng-init="$ctrl.subscribe.userType = 'Individual'"
+                                       ng-model="$ctrl.subscribe.userType">
+                                <span class="custom-radio"></span>
+                                <span class="name">Individual</span>
+                            </label>
+                            <label class="raido-inline">
+                                <input type="radio" name="Agency" value="Agency"  ng-model="$ctrl.subscribe.userType">
+                                <span class="custom-radio"></span>
+                                <span class="name">Agency</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-wrapper">
+                            <label class="checkbox-inline">
+                                <input type="checkbox"
+                                       name="$ctrl.subscribe.position[]"
+                                       value="3D engineer"
+                                       ng-click="$ctrl.toggle('3D Engineer')"
+                                       ng-checked="$ctrl.subscribe.position.indexOf('3D Engineer') > -1">
+                                <span class="custom-checkbox"></span>
+                                <span class="name">3D engineer</span>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"
+                                       name="$ctrl.subscribe.position[]"
+                                       value="Designer"
+                                       ng-click="$ctrl.toggle('Designer')"
+                                       ng-checked="$ctrl.subscribe.position.indexOf('Designer') > -1">
+                                <span class="custom-checkbox"></span>
+                                <span class="name">Designer</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-wrapper">
+                            <label class="checkbox-inline">
+                                <input type="checkbox"
+                                       name="$ctrl.subscribe.position[]"
+                                       value="Web dev"
+                                       ng-click="$ctrl.toggle('Web dev')"
+                                       ng-checked="$ctrl.subscribe.position.indexOf('Web dev') > -1">
+                                <span class="custom-checkbox"></span>
+                                <span class="name">Web dev</span>
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"
+                                       name="$ctrl.subscribe.position[]"
+                                       value="Game dev"
+                                       ng-click="$ctrl.toggle('Game dev')"
+                                       ng-checked="$ctrl.subscribe.position.indexOf('Game dev') > -1">
+                                <span class="custom-checkbox"></span>
+                                <span class="name">Game dev</span>
+                            </label>
+                        </div>
+                        <div class="form-backdrop"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<div style="opacity: 0"
                  class="sendgrid-subscription-widget form"
                 data-token="{{$ctrl.sendGrid}}">
                 <div class="input-group">
@@ -250,7 +331,7 @@
                             </button>
                         </span>
                 </div>
-            </div>
+            </div>-->
         </div>
 
 
