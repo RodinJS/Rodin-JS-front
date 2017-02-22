@@ -70,7 +70,12 @@ class HomeCtrl {
     scrollToSignUp() {
         $('html,body').animate({
             scrollTop: $('.form').offset().top - 100,
-        }, 500);
+        }, {
+            duration: 500,
+            complete: function () {
+                $('#emailControl').focus();
+            },
+        });
     }
 
     changeVideo(videoName) {
