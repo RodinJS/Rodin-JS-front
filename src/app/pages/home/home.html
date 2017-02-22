@@ -77,11 +77,7 @@
                         <li class="hidden-xs">
                             <a ui-sref="landing.login">Login</a>
                         </li>
-                        <!-- <li>
-                             <a style="margin:0"
-                                href="//knoxlabs.us8.list-manage.com/subscribe/post?u=d91d4ff82ed3e8edb816c66ec&amp;id=e8644a7f06"
-                                class="btn sign-up-btn">Sign up</a>
-                         </li>-->
+                        <li><a href="" ng-click="$ctrl.scrollToSignUp()" class="btn sign-up-btn">Sign up</a></li>
                     </ul>
                 </div>
             </div>
@@ -237,15 +233,17 @@
                            class="form-control"
                            id="emailControl"
                            ng-model="$ctrl.subscribe.email"
-                           placeholder="Get notified when we launch"
+                           placeholder="{{$ctrl.emailFocused ? 'Provide email' : 'Get notified when we launch'}}"
                            ng-pattern="$ctrl.patterns.email"
+                           data-ng-focus="$ctrl.emailFocused = true"
+                           data-ng-blur="$ctrl.emailFocused = false"
                            value="">
                     <span class="input-group-btn">
 					<button class="btn btn-default"
-                            ng-disabled="!$ctrl.subscribe.email || !$ctrl.subscribe.userType || $ctrl.subscribe.position.length <= 0"
+                            ng-disabled="!$ctrl.subscribe.email || !$ctrl.subscribe.userType"
                             ng-click="$ctrl.submitSubscribe()"
                             type="submit">
-						<span class="text">Subscribe</span>
+						<span class="text">Sign up</span>
 					</button>
 				</span>
                     <div class="form-action-wrapper">

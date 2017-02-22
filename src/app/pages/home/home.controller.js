@@ -35,7 +35,7 @@ class HomeCtrl {
         this.isMobile = this.checkMobile();
 
         this.patterns = {
-            email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         };
 
         this.videos = {
@@ -58,12 +58,19 @@ class HomeCtrl {
                 $('.code').each(function (i, block) {
                     hljs.highlightBlock(block);
                 });
+
                 $('.back-home-btn').on('click', () =>  this.outToSlider());
             });
 
         });
 
         $scope.$on('scrollDown', (event, data)=> this.scrollHandler({ deltaY: 1 }));
+    }
+
+    scrollToSignUp() {
+        $('html,body').animate({
+            scrollTop: $('.form').offset().top - 100,
+        }, 500);
     }
 
     changeVideo(videoName) {
@@ -76,7 +83,7 @@ class HomeCtrl {
         LANDING.projectSlider._slideTo(0, 500);
         this.resetInitalPosition();
         $('.project-modal').removeClass('show animationEnd');
-        if(!disableScroll)
+        if (!disableScroll)
             $(window).scrollTop($(window).scrollTop() - 10);
         this.canOutFromSlider = false;
 
