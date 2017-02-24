@@ -8,7 +8,7 @@ function EditProjectWebConfig($stateProvider) {
       controllerAs: '$ctrl',
       templateUrl: 'pages/editproject-web/editproject-web.html',
       title: 'EditProjectWeb',
-      pageClass: 'page-account',
+      pageClass: 'page-account new',
       resolve: {
         auth: function (User) {
           return User.ensureAuthIs(true);

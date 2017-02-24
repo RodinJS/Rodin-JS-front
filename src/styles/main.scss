@@ -36,6 +36,11 @@ body{
       background-color: $bg-primary;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      height: 100%;
+      background-image: url(/images/landing/content/auth-main-bg.jpg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
       &.overflow {
         overflow: hidden;
       }
@@ -58,6 +63,7 @@ body{
     @import "normalize";
     @import "GUI";
     @import "common";
+    @import "utils";
     @import "../../src/app/pages/auth/auth";
     @import "../../src/app/layout/header";
     @import "../../src/app/pages/home/layout/banner";
@@ -71,11 +77,16 @@ body{
     @import "../../src/app/pages/home/layout/vision";
     @import "../../src/app/pages/home/layout/techstars";
     @import "../../src/app/pages/home/layout/app";
+    @import "../../src/app/pages/dashboard/dashboard";
+    @import "../../src/app/pages/project/project";
+    @import "../../src/app/pages/discover/discover";
+    @import "../../src/app/pages/store/store";
   }
   &:not(.new){
 
     @import "./old/scss/entry/main";
     @import "./old/style";
+    @import "../../src/app/layout/header";
     &.page {
       font-size: $font-base;
       font-family: $fontOpenSans;

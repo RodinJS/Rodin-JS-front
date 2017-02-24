@@ -19,6 +19,7 @@ class HomeCtrl {
         this.windowWidth = this._$window.innerWidth;
 
         this.iframe = angular.element('#iframe');
+        this.requestInProgress = false;
         this.initialIframeWidth = false;
         this.iframe.height(this.windowHeight);
 
@@ -247,8 +248,9 @@ class HomeCtrl {
     }
 
     submitSubscribe() {
+        if(this.requestInProgress) return;
         const subscribe = angular.copy(this.subscribe);
-
+        this.requestInProgress = true;
         subscribe.position = subscribe.position.join(', ');
         this._User.subscribe(subscribe).then((result)=> {
             this._Notification.success('You have successfully subscribed to notification list');
@@ -263,6 +265,7 @@ class HomeCtrl {
             _.each(err, (val, key) => {
                 this._Notification.error(val.fieldName);
             });
+            this.requestInProgress = false;
         });
     }
 

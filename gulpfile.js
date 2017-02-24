@@ -26,6 +26,7 @@ const VENDORMAP = require('./vendor.json');
 const JS = ['src/app/**/*.js', '!src/systemjs-module/**', '!src/assists/**'];
 const HTML = ['src/app/**/*.html', 'src/app/**/**/*.html'];
 const SASS = ['src/styles/main.scss', '!src/styles/{vendor,vendor/**}'];
+const SASSWATCHER = ['src/**/**.scss', '!src/styles/{vendor,vendor/**}'];
 const FONT = ['src/fonts/**/*.{ttf,woff,woff2,eof,svg,eot,json,otf}'];
 const IMG = ['src/images/**/*.{jpg,jpeg,ico,png,svg,gif,json,xml}'];
 
@@ -218,6 +219,7 @@ gulp.task('img', () => {
 
 gulp.task('watch', () => {
     gulp.watch(SASS, ['sass']);
+    gulp.watch(SASSWATCHER, ['sass']);
     gulp.watch(JS, ['js']);
     gulp.watch(HTML, ['build-template']);
     gulp.watch(FONT, ['font']);

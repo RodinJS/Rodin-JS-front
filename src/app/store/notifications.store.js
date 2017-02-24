@@ -90,7 +90,7 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
                 }
                 url+="({ projectId:'"+val.project._id+"'})";
 
-                notification.label = '<a ui-sref=" '+url+'">'+val.label+'</a>';
+                notification.label = '<span ui-sref=" '+url+'">'+val.label+'</span>';
             }
 
             return notification;

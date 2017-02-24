@@ -1,6 +1,6 @@
 .header {
 	min-height: 70px;
-	padding-top: 25px;
+	padding-top: 0;
 	transition: padding .3s ease;
 	&.sticky {
 		padding-top: 10px;
@@ -192,18 +192,28 @@
 			min-width: 230px;
 			left: auto;
 			right: 0;
-			h5{
-				font-size: 16px;
+			.notification-wrapper{
 				font-weight: 400;
 				color: white;
 				margin: 0;
 				padding: 6px 15px;
-				background-color: rgba(216, 216, 216, .3)
+				background-color: rgba(216, 216, 216, .3);
+				h5{
+					font-size: 16px;
+				}
+				small{
+					padding: 10px 0 0 0;
+					a{
+						padding: 0;
+						color: $color-primary;
+					}
+				}
 			}
 			.notifi-list{
 				li{
 					margin-left: 0;
 					position: relative;
+					width: 100%;
 					&:before{
 						content: "";
 						width: 6px;
@@ -246,6 +256,12 @@
 					font-size: 9px;
 					color: #787878;
 					margin-top: 3px;
+				}
+			}
+			h3{
+				&.no-notifications{
+					font-size: 16px;
+					text-align: center;
 				}
 			}
 		}

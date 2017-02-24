@@ -1,7 +1,19 @@
+<div class="header-search-box">
+	<div class="container">
+		<form action="">
+			<div class="form-group">
+				<input type="search" class="header-search" placeholder="Search for Projects"  data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
+				<button type="submit" class="btn-search" ng-click="$ctrl.search()">
+					<i class="rd rd-search"></i>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
 <div class="page__wrapper">
 
 	<div class="main-container">
-		<div class="section-dashboard-action">
+		<!--<div class="section-dashboard-action">
 			<div class="btn-action-wrapper clearfix">
 				<div class="pull-right">
 					<a href="" ng-click="$ctrl.createProject()" class="btn-add"><i class="icon icon-add"></i></a>
@@ -16,13 +28,18 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>-->
 		<div data-ng-if="$ctrl.projects.length === 0" class="empty-dashboard-space">
-			<p class="text-primary">At this point you do not have more than one project</p>
-			<h2>
+			<h3 class="title">
 				<a data-ui-sref="app.project">CREATE A NEW PROJECT</a>
-			</h2>
-		</div>
+			</h3>
+            <p class="title-description">At this point you do not have more than one project</p>
+            <div class="btn-wrapper">
+                <a href="#" class="btn-create-project">
+                    <i class="rd rd-plus"></i>
+                </a>
+            </div>
+        </div>
 		<div data-ng-if="$ctrl.projects.length !== 0" class="dashboard-content">
 			<div class="main-alert alert-warning hidden">
 				<p class="text-action">
@@ -109,7 +126,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>
-			<h1>Share this project</h1>
+			<h2>Share this project</h2>
 		</div>
 		<div class="modal-body">
 			<p data-ng-if="!$ctrl.currentModalProject.public" class="text-small description">
@@ -139,8 +156,8 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
-            <h1 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h1>
-            <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
+            <h2 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h2>
+            <h2 ng-show="!!$ctrl.project.publishDate">Warning</h2>
         </div>
         <div class="modal-body padding-0-important">
             <p class="description word-wrap">
