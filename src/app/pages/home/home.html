@@ -235,8 +235,8 @@
                            ng-model="$ctrl.subscribe.email"
                            placeholder="{{$ctrl.emailFocused ? 'Provide email' : 'Get notified when we launch'}}"
                            ng-pattern="$ctrl.patterns.email"
-                           data-ng-focus="$ctrl.emailFocused = true"
-                           data-ng-blur="$ctrl.emailFocused = false"
+
+                           ng-click="$ctrl.notificationBoxTrigger($event)"
                            value="">
                     <span class="input-group-btn">
 					<button class="btn btn-default"
@@ -303,7 +303,7 @@
                                 <span class="name">Game dev</span>
                             </label>
                         </div>
-                        <div class="form-backdrop"></div>
+                        <div class="form-backdrop" ng-click="$ctrl.notificationBoxTrigger(false, true)"></div>
                     </div>
                 </div>
             </div>
@@ -355,6 +355,6 @@
 
     <footer class="footer" ng-include="'pages/home/layout/footer.html'"></footer>
 
-    <div class="project-modal" ng-include="'pages/home/layout/slider.html'"></div>
+    <div ng-if="!$ctrl.isMobile" class="project-modal" ng-include="'pages/home/layout/slider.html'"></div>
 
 </div>

@@ -24,7 +24,7 @@ window.LANDING = {
         this.verticalSlider();
         this.scroll();
         this.clicks();
-        this.focus();
+        //this.focus();
         header.stickyHeader();
         banner.init();
         features.init();

@@ -28,12 +28,13 @@ class HomeCtrl {
         this.resetInitalPosition = this.resetInitalPosition.bind(this);
         this.outToSlider = this.outToSlider.bind(this);
         this.changeVideo = this.changeVideo.bind(this);
+        this.notificationBoxTrigger = this.notificationBoxTrigger.bind(this);
         window.addEventListener('message', this.handleIframeMessage, false);
         document.body.addEventListener('wheel', this.scrollHandler, false);
 
         this.hoveredIframe = false;
         this.emailFocused = false;
-        this.isMobile = this.checkMobile();
+        this.isMobile = true; //this.checkMobile();
 
         this.patterns = {
             email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -68,13 +69,29 @@ class HomeCtrl {
         $scope.$on('scrollDown', (event, data)=> this.scrollHandler({ deltaY: 1 }));
     }
 
+    notificationBoxTrigger($event, backdropClick) {
+        const toggleClass = 'focus';
+        const target = $event.target  || '#emailControl';
+        if (!backdropClick) {
+            this.emailFocused = true;
+            angular.element(target).addClass(toggleClass).closest('.input-group').addClass(toggleClass);
+        } else {
+            this.emailFocused = false;
+            angular.element(target).removeClass(toggleClass).closest('.input-group').removeClass(toggleClass);
+        }
+    }
+
     scrollToSignUp() {
+        if (this.emailFocused) return;
+        const _this = this;
         $('html,body').animate({
             scrollTop: $('.form').offset().top - 100,
         }, {
             duration: 500,
             complete: function () {
                 $('#emailControl').focus();
+                _this.notificationBoxTrigger('#emailControl');
+                _this._$scope.$apply();
             },
         });
     }
@@ -150,7 +167,7 @@ class HomeCtrl {
         const $iframeBox = $('#iframe-box');
         const btnNextSlide = angular.element('.btn-next-slide');
 
-        if (!this.initialLeft && !this.initialTop && $iframeBox) {
+        if (!this.initialLeft && !this.initialTop && $iframeBox.length > 0) {
             this.initialLeft = $iframeBox[0].offsetLeft;
             this.initialTop = $iframeBox[0].offsetTop;
             if (!this.$iframeBox) this.initIframeData();
@@ -260,6 +277,7 @@ class HomeCtrl {
                 position: [],
             };
         }, (err)=> {
+            this.subscribe.email = '';
             _.each(err, (val, key) => {
                 this._Notification.error(val.fieldName);
             });

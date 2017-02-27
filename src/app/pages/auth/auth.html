@@ -134,6 +134,25 @@
                         <label class="control-label float-label">Password</label>
                     </div>
 
+                    <div class="form-group" custom-input
+                         data-ng-focus="register.passwordConfirm.focused"
+                         data-ng-class="{
+                         'has-error': register.passwordConfirm.$invalid && register.passwordConfirm.focused,
+                         'has-success': register.passwordConfirm.$valid && register.passwordConfirm.focused,
+
+                         }">
+                        <input type="password"
+                               data-ng-class="{'active':register.passwordConfirm.$viewValue}"
+                               class="form-control"
+                               name="passwordConfirm"
+                               placeholder="" value=""
+                               data-ng-model="$ctrl.formData.confirmPassword"
+                               ng-minlength="8"
+                               data-ng-focus="register.passwordConfirm.focused = true"
+                               required>
+                        <label class="control-label float-label">Confirm Password</label>
+                    </div>
+
                     <div class="form-group"
                          data-ng-focus="register.email.invitationCode = true"
                          custom-input>
@@ -164,7 +183,7 @@
                     </div>
                     <div class="btn-wrapper">
                         <button type="submit"
-                                ng-disabled="($ctrl.authType === 'register' && register.$invalid) || !$ctrl.agree"
+                                ng-disabled="($ctrl.authType === 'register' && register.$invalid) || !$ctrl.agree || ($ctrl.formData.confirmPassword != $ctrl.formData.password)"
                                 class="btn btn-default btn-submit">Sign up</button>
 
                     </div>
