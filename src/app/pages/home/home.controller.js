@@ -217,7 +217,7 @@ class HomeCtrl {
             if ($iframeBox.innerWidth() >= this.windowWidth) {
                 angular.element('body').css({ overflow: 'hidden' });
                 this.disablePointer = false;
-                this.hoveredIframe = false;
+                this.hoveredIframe = true;
             }
 
             if (isBottom && e.deltaY < 0) {
@@ -232,6 +232,7 @@ class HomeCtrl {
                 $('.btn-next-slide').show();
 
                 if ($iframeBox.width() <= this.initialTransform.w) {
+                    this.disablePointer = true;
                     LANDING.projectSlider.unlockSwipeToPrev();
                     angular.element('body').removeAttr('style');
                 }
