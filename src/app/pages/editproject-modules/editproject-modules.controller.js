@@ -17,7 +17,7 @@ class EditProjectModulesCtrl {
         this.getProject = this.getProject.bind(this);
 
         this._ModulesStore.subscribeAndInit($scope, () => {
-            this.modulesList = this._ModulesStore.getMyModules($stateParams.projectId);
+            this.modulesList =  _.chunk(this._ModulesStore.getMyModules($stateParams.projectId), 4);
 
             if (!this.modulesList || this.modulesList.length <= 0)
                 return this.getMyModules();

@@ -7,6 +7,9 @@
   .page__wrapper {
     display: flex;
     flex-direction: column;
+    .container-padding {
+      padding-top: 30px;
+    }
   }
   .main-container {
     position: relative;
@@ -122,6 +125,16 @@
       overflow: hidden;
       white-space: nowrap;
       &.box-title {
+        color: $color-primary;
+        font-size: 18px;
+        line-height: 1.333;
+      }
+    }
+    p {
+      &.box-title {
+        padding-top: 15px;
+        text-align: center;
+        color: $color-primary;
         font-size: 18px;
         line-height: 1.333;
       }
@@ -159,6 +172,8 @@
               color: $white;
               text-decoration: none;
               transition: all .3s;
+              padding: 0px 5px 5px 5px;
+
               &:hover {
                 color:$color-primary;
               }
@@ -210,7 +225,7 @@
       }
     }
     .dashboard-content-img {
-      background-repeat: no-repeat;
+      //background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
       height: 0;

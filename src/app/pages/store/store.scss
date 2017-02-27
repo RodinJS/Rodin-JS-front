@@ -1,22 +1,31 @@
 .store-page {
- /* .main-container {
-    padding-left: 150px;
-    padding-right: 150px;
-  }*/
- /* h2 {
-    font-weight: 500;
-    font-family: "Open Sans", sans-serif;
-    font-size: 24px;
-    color: #fff;
-  }*/
-
+  /* .main-container {
+     padding-left: 150px;
+     padding-right: 150px;
+   }*/
+  /* h2 {
+     font-weight: 500;
+     font-family: "Open Sans", sans-serif;
+     font-size: 24px;
+     color: #fff;
+   }*/
+  h1 {
+    margin: 0px !important;
+  }
+  .line {
+    border: 1px solid #008af1;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    //top: 104px;
+  }
   .module-content {
     padding: 10px;
     position: absolute;
     width: 100%;
     transition: all 0.3s ease;
     //cursor: pointer;
-    p{
+    p {
       margin-bottom: 5px;
     }
     &.short {
@@ -37,16 +46,17 @@
       bottom: 0;
       opacity: 1;
       height: 100%;
-      .content{
+      .content {
+        font-size: 16px;
         overflow: hidden;
         max-height: 100px;
-        color:#fff;
-        margin-bottom:10px;
+        color: #fff;
+        margin-bottom: 10px;
       }
       .content-bottom {
         position: absolute;
         bottom: 5px;
-        width: calc(100% - 40px);
+        width: calc(100% - 20px);
       }
       .module-title {
         font-size: 21px;
@@ -56,9 +66,8 @@
     }
   }
 
-
   .radio-list {
-    padding-top: 44px;
+    padding-top: 34px;
     padding-bottom: 30px;
     margin: 0;
     @include cf();
@@ -136,12 +145,11 @@
     }
   }
 
-
   @media (min-width: 992px) {
-    .module-wrapper{
-      .module-content{
-        &.long{
-          .content{
+    .module-wrapper {
+      .module-content {
+        &.long {
+          .content {
             font-size: 13px;
             max-height: 55px;
           }
@@ -151,10 +159,10 @@
   }
 
   @media (min-width: 1200px) and (max-width: 1449px) {
-    .module-wrapper{
-      .module-content{
-        &.long{
-          .content{
+    .module-wrapper {
+      .module-content {
+        &.long {
+          .content {
             font-size: 13px;
             max-height: 55px;
           }
@@ -164,10 +172,10 @@
   }
 
   @media (min-width: 1450px) {
-    .module-wrapper{
-      .module-content{
-        &.long{
-          .content{
+    .module-wrapper {
+      .module-content {
+        &.long {
+          .content {
             font-size: 16px;
             max-height: 100px;
           }
@@ -197,9 +205,8 @@
   }
 }
 
-
 &.page-store,
-&.page-account{
+&.page-account {
   .module-wrapper {
     position: relative;
     background-repeat: no-repeat;

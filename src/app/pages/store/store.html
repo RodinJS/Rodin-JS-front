@@ -3,7 +3,8 @@
         <div class="selet-template-container">
             <div class="main-container">
                 <div class="store-page main-form">
-                    <h3 class="title">MODULES</h3>
+                    <h1 class="title text-center">MODULES</h1>
+                    <span class="line"></span>
                     <ul class="radio-list" ng-repeat="list in $ctrl.modulesList">
                         <li ng-repeat="module in list">
                             <div class="radio-wrapper">
@@ -18,7 +19,8 @@
                                         </div>
                                          <div class="content">
                                              {{module.description.substring(0, 60)}}...
-                                             <div class="content-bottom">
+                                        </div>
+                        <div class="content-bottom">
                                                  <p class="pull-left">
                                                      <a class="circle"
                                                         ng-class="module.subscribed && !module.unsubscribed ? 'active' : ''"
@@ -39,10 +41,7 @@
                                                  </p>
                                                  <p class="pull-right oval">$ {{module.price || '0.0'}}</p>
                                              </div>
-                                        </div>
-
                                     </div>
-
                                 </span>
                                     <span class="template-name">{{project.name}}</span>
                                 </label>

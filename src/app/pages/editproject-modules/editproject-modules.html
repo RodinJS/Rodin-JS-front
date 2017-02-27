@@ -1,4 +1,68 @@
 <div class="page__wrapper">
+    <div class="container">
+        <div class="selet-template-container">
+            <div class="main-container">
+                <h3 class="title"><i class="icon icon-lock"></i><span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</h3>
+                <div class="main-form">
+
+                    <div class="content-navbar">
+                        <ul class="navbar-list">
+                            <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
+                        </ul>
+                    </div>
+                    <div class="section store-page">
+                        <ul class="radio-list" ng-repeat="list in $ctrl.modulesList">
+                            <li ng-repeat="module in list">
+
+                                <div class="radio-wrapper">
+                                    <label class="label-radio">
+                                        <input type="radio" name="template">
+                                        <span class="custom-radio" style="background-image: url({{module.thumbnail}});">
+                                    <div class="module-content long">
+                                         <div class="module-header">
+                                             <p class="module-title turn-blue">{{module.title}}</p>
+                                             <p class="turn-blue" style="font-size:12px">by {{module.author}}</p>
+                                        </div>
+                                         <div class="content">
+                                             {{module.description.substring(0, 60)}}...
+                                        </div>
+                                        <div class="content-bottom">
+                                                 <p class="pull-left">
+                                                      <a popover-placement="top"
+                                           popover-class="store-popover"
+                                           uib-popover="{{module.script ? 'Assigned' : 'Assign'}}"
+                                           popover-trigger="'mouseenter'"
+                                           ng-click="$ctrl.moduleAssign(module)"
+                                           href="" >
+                                            <i style="position: relative; top:1px" class="fa fa-plus" aria-hidden="true"></i>
+                                                     </a>
+                                                     <a class="circle" popover-placement="top"
+                                                        popover-class="store-popover"
+                                                        uib-popover="Example"
+                                                        popover-trigger="'mouseenter'">
+                                                         <i class="fa fa-eye" aria-hidden="true"></i>
+                                                     </a>
+                                                 </p>
+                                                 <p class="pull-right oval">$ {{module.price || '0.0'}}</p>
+                                             </div>
+                                    </div>
+
+                                </span>
+                                        <span class="template-name">{{project.name}}</span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+<div class="page__wrapper">
     <div class="main-container development-container">
         <div class="main-title-wrapper">
             <h1 class="main-title">
@@ -48,11 +112,12 @@
                         </div>
                     </div>
                 </div>
-<!--
+&lt;!&ndash;
                 <a href="" ng-click="$ctrl.assign(module)" ng-repeat="module in $ctrl.modulesList">{{module.title}}</a>
--->
+&ndash;&gt;
             </div>
         </div>
     </div>
     <div class="loader" data-ng-if="$ctrl.showLoader"></div>
 </div>
+-->

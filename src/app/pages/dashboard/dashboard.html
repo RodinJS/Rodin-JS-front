@@ -11,8 +11,7 @@
 	</div>
 </div>
 <div class="page__wrapper">
-
-	<div class="main-container">
+	<div class="container container-padding">
 		<!--<div class="section-dashboard-action">
 			<div class="btn-action-wrapper clearfix">
 				<div class="pull-right">
@@ -30,7 +29,7 @@
 			</div>
 		</div>-->
 		<div data-ng-if="$ctrl.projects.length === 0" class="empty-dashboard-space">
-			<h3 class="title">
+			<h3 class="title text-center">
 				<a data-ui-sref="app.project">CREATE A NEW PROJECT</a>
 			</h3>
             <p class="title-description">At this point you do not have more than one project</p>
@@ -61,9 +60,9 @@
 							</div>
 						</div>
 						<a href="" ng-click="$ctrl.createProject()" class="dashboard-item-link">
-							<h3 class="box-title">
+								<p class="box-title">
 								Create new Project
-							</h3>
+							</p>
 						</a>
 					</div>
 				</div>
@@ -105,7 +104,7 @@
 						</div>
 						<a href="" class="dashboard-item-link">
 							<h3 class="box-title">
-								<i style="margin-right:5px" ng-if="!project.public || project.public == 'false'" class="icon icon-lock" aria-hidden="true"></i>
+								<i style="margin-right:5px" ng-if="!project.public || project.public == 'false'" class="icon icon-private icon-private" aria-hidden="true"></i>
 								{{project.displayName || project.name}}
 							</h3>
 							<p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
