@@ -13,7 +13,7 @@
     margin: 0px !important;
   }
   .line {
-    border: 1px solid #008af1;
+    border-bottom: 1px solid #008af1;
     width: 100%;
     position: absolute;
     left: 0;
@@ -263,6 +263,9 @@
     }
   }
   .oval {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
     border: 1px solid;
     border-radius: 15px;
     border-color: #2b9af3;
