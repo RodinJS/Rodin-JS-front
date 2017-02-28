@@ -56,6 +56,7 @@
                     <a href=""
                        ng-mouseover="$ctrl.signUpHovered2 = true"
                        ng-mouseleave="$ctrl.signUpHovered2 = false"
+                       style=" max-width: 112px;min-width: 112px;"
                        class="visible-xs-inline-block btn-mobile-login" ng-click="$ctrl.scrollToSignUp()">
                         {{$ctrl.signUpHovered2 ? 'Sign up' : 'Big blue button'}}
                     </a>
@@ -85,6 +86,7 @@
                         </li>
                         <li>
                             <a href=""
+                               style=" max-width: 164px;min-width: 164px;"
                                ng-mouseover="$ctrl.signUpHovered = true"
                                ng-mouseleave="$ctrl.signUpHovered = false"
                                ng-click="$ctrl.scrollToSignUp()"
@@ -240,6 +242,7 @@
             <div class="form">
                 <div class="input-group">
                     <input type="email"
+                           style="font-size:17px"
                            class="form-control"
                            id="emailControl"
                            ng-model="$ctrl.subscribe.email"
@@ -250,6 +253,7 @@
                            value="">
                     <span class="input-group-btn">
 					<button class="btn btn-default"
+                            style="min-width: 182px;max-width: 182px;"
                             ng-mouseover="$ctrl.signUpHovered3 = true"
                             ng-mouseleave="$ctrl.signUpHovered3 = false"
                             ng-click="$ctrl.submitSubscribe()"
