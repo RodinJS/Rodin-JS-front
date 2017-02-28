@@ -265,6 +265,8 @@ class HomeCtrl {
     }
 
     submitSubscribe() {
+        if (!this.subscribe.email || !this.subscribe.userType) return;
+
         const subscribe = angular.copy(this.subscribe);
 
         subscribe.position = subscribe.position.join(', ');
