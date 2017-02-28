@@ -10,14 +10,6 @@
     .container-padding {
       padding-top: 30px;
     }
-  }
-  .main-container {
-    position: relative;
-    height: 100%;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 30px;
-    flex: 1;
     .empty-dashboard-space{
       position: absolute;
       top: 150px;
@@ -63,7 +55,14 @@
         }
       }
     }
-
+  }
+  .main-container {
+    position: relative;
+    height: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    flex: 1;
   }
 }
 

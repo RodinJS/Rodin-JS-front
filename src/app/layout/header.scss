@@ -2,7 +2,21 @@
 	min-height: 70px;
 	padding-top: 0;
 	transition: padding .3s ease;
+	.navbar-header{
+		width: 100%;
+	}
+	&.navbar-fixed-top{
+		padding-top: 25px;
+		.header-auth{
+			padding: 0;
+			min-height: 50px;
+			margin-bottom: 0;
+			background: transparent;
+
+		}
+	}
 	&.sticky {
+		background: rgba(9,25,46,.7);
 		padding-top: 10px;
 	}
 	.navbar{
@@ -62,6 +76,7 @@
 			}
 		}
 	}
+
 }
 
 .header-backdrop {
@@ -553,7 +568,8 @@
 	.header {
 		position: static;
 		padding-top: 0;
-		.navbar{
+		.navbar,
+		.header-auth{
 			border: none;
 			min-height: 66px;
 			.navbar-header{
@@ -578,8 +594,8 @@
 		}
 	}
 	.navbar-brand{
-		height: 66px;
-		padding: 23px 15px;
+		height: 66px !important;
+		padding: 23px 15px !important;
 	}
 	.navbar-collapse{
 		max-width: 326px;
