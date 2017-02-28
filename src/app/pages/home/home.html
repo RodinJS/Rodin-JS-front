@@ -53,7 +53,12 @@
                         <span class="icon-bar middle"></span>
                         <span class="icon-bar bottom"></span>
                     </button>
-                    <a href="" class="visible-xs-inline-block btn-mobile-login" ng-click="$ctrl.scrollToSignUp()">Sign up</a>
+                    <a href=""
+                       ng-mouseover="$ctrl.signUpHovered2 = true"
+                       ng-mouseleave="$ctrl.signUpHovered2 = false"
+                       class="visible-xs-inline-block btn-mobile-login" ng-click="$ctrl.scrollToSignUp()">
+                        {{$ctrl.signUpHovered2 ? 'Sign up' : 'Big blue button'}}
+                    </a>
                     <a ui-sref="landing.login" class="visible-xs-inline-block btn-mobile-login">Login</a>
                     <a class="navbar-brand">
                         <img alt="Rodin" src="images/landing/general/logo.svg">
@@ -78,7 +83,13 @@
                         <li class="hidden-xs">
                             <a ui-sref="landing.login">Login</a>
                         </li>
-                        <li><a href="" ng-click="$ctrl.scrollToSignUp()" class="btn sign-up-btn">Sign up</a></li>
+                        <li>
+                            <a href=""
+                               ng-mouseover="$ctrl.signUpHovered = true"
+                               ng-mouseleave="$ctrl.signUpHovered = false"
+                               ng-click="$ctrl.scrollToSignUp()"
+                               class="btn sign-up-btn">{{$ctrl.signUpHovered ? 'Sign up' : 'Big blue button'}}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -89,9 +100,7 @@
     <section class="section banner-section">
         <div class="banner-inner">
             <h1 class="title">THE FASTEST WAY TO BUILD INTERACTIVE VR EXPERIENCES</h1>
-            <!--
-                        <h3 class="subtitle">Easily and instantly deploy across all major platforms</h2>
-            -->
+            <h2 class="subtitle">Build once and deploy everywhere</h2>
             <div class="swiper-container" id="devicesSlider">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" data-devicename="samsungGear">
@@ -241,10 +250,12 @@
                            value="">
                     <span class="input-group-btn">
 					<button class="btn btn-default"
+                            ng-mouseover="$ctrl.signUpHovered3 = true"
+                            ng-mouseleave="$ctrl.signUpHovered3 = false"
                             ng-disabled="!$ctrl.subscribe.email || !$ctrl.subscribe.userType"
                             ng-click="$ctrl.submitSubscribe()"
                             type="submit">
-						<span class="text">Sign up</span>
+						<span class="text">{{$ctrl.signUpHovered3 ? 'Sign up' : 'Big blue button'}}</span>
 					</button>
 				</span>
                     <div class="form-action-wrapper">
