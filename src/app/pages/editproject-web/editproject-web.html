@@ -2,7 +2,10 @@
     <div class="container">
         <div class="selet-template-container">
             <div class="main-container">
-                <h3 class="title"><i class="icon icon-lock"></i><span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</h3>
+                <h1 class="title text-center">
+                    <i class="icon icon-private"></i>
+                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
+                <div class="main-form">
                 <div class="content-navbar">
                     <ul class="navbar-list">
                         <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
@@ -29,7 +32,7 @@
                     </ul>
                 </div>
                 <div class="section section-switch">
-                    <switch id="enabled" data-ng-change="$ctrl.switchDomainTrigger()" data-name="enabled" data-ng-model="$ctrl.customDomainTrigger" data-on="ON" data-off="OFF" class="green"></switch>
+                    <switch id="enabled" data-ng-change="$ctrl.switchDomainTrigger()" data-name="enabled" data-ng-model="$ctrl.customDomainTrigger"  class="green"></switch>
                     <h5 class="switch-box-title">Add custom domain</h5>
                     <p ng-if="$ctrl.project.publishedUrl && !$ctrl.customDomainTrigger" class="description text-small text-down">
                         Your project current url:
@@ -37,37 +40,39 @@
                     </p>
                 </div>
                 <form name="addDomain" id="configs" ng-if="$ctrl.customDomainTrigger" class="main-form">
-                    <h2 class="section-title">Project URL</h2>
-                    <div class="form-group" custom-input
-                         style="margin-bottom:20px"
-                         data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': configs.url.$valid && addDomain.url.focused}">
-                        <label >
-                            {{addDomain.url.focused || $ctrl.domain ? 'Project url' : 'example.com'}} {{addDomain.url.$invalid && addDomain.url.focused  ? 'invalid' : ''}}
-                        </label>
-                        <input type="text" class="form-control" placeholder=""
-                               data-ng-model="$ctrl.domain"
-                               ng-pattern="$ctrl.domainPattern"
-                               name="url"
-                               required
-                               data-ng-focus="addDomain.url.focused = true">
-                        <p class="form-description">Please make "A record" redirect of your domain/subdomain to "178.62.211.113" IP address</p>
-                    </div>
-                    <div class="btn-wrapper" style="text-align: center">
-                        <button type="submit" class="btn btn-default btn-submit"
-                                ng-click="$ctrl.addDomain($event)"
-                                ng-disabled="!addDomain.$valid || !$ctrl.project.publishedPublic">
-                            Submit
-                        </button>
-                        <a href="" class="btn link" ng-if="$ctrl.project.domain" ng-click="$ctrl.deleteDomain($event)">
-                            Delete domain
-                        </a>
+                    <div class="section">
+                        <h3 class="section-title">Project URL</h3>
+                        <div class="form-group" custom-input
+                             style="margin-bottom:20px"
+                             data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': configs.url.$valid && addDomain.url.focused}">
+                            <label >
+                                {{addDomain.url.focused || $ctrl.domain ? 'Project url' : 'example.com'}} {{addDomain.url.$invalid && addDomain.url.focused  ? 'invalid' : ''}}
+                            </label>
+                            <input type="text" class="form-control" placeholder=""
+                                   data-ng-model="$ctrl.domain"
+                                   ng-pattern="$ctrl.domainPattern"
+                                   name="url"
+                                   required
+                                   data-ng-focus="addDomain.url.focused = true">
+                            <p class="form-description">Please make "A record" redirect of your domain/subdomain to "178.62.211.113" IP address</p>
+                        </div>
+                        <div class="btn-wrapper" style="text-align: center">
+                            <button type="submit" class="btn btn-default btn-submit"
+                                    ng-click="$ctrl.addDomain($event)"
+                                    ng-disabled="!addDomain.$valid || !$ctrl.project.publishedPublic">
+                                Submit
+                            </button>
+                            <a href="" class="btn link" ng-if="$ctrl.project.domain" ng-click="$ctrl.deleteDomain($event)">
+                                Delete domain
+                            </a>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+</div>
 <div class="modal model-confirm" close-modal="notPublished"  ng-class="{'display-block': $ctrl.modals.notPublished, 'display-none': !$ctrl.modals.notPublished}">
     <div class="modal-content">
         <div class="modal-header">

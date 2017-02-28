@@ -2,9 +2,10 @@
     <div class="container">
         <div class="selet-template-container">
             <div class="main-container">
-                <h3 class="title"><i class="icon icon-private"></i><span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</h3>
+                <h1 class="title text-center">
+                    <i class="icon icon-private"></i>
+                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
                 <div class="main-form">
-
                     <div class="content-navbar">
                         <ul class="navbar-list">
                             <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>

@@ -2,246 +2,245 @@
     <div class="container">
         <div class="selet-template-container">
             <div class="main-container">
-                <h3 class="title"><i class="icon icon-lock"></i><span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</h3>
-                <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs" class="main-form">
-                    <div class="content-navbar">
-                        <ul class="navbar-list">
-                            <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
-                            <li class="other-links dropdown" uib-dropdown>
-                                <a id="dLabel" role="button" data-uib-dropdown-toggle>
-                                    <i class="icon icon-more"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>
-                                    <li>
-                                        <a href="{{$ctrl.project.editorUrl}}">Editor</a>
-                                    </li>
-                                    <!--<li class="disabled">-->
-                                    <!--<a href="#">Designer</a>-->
-                                    <!--</li>-->
-                                    <!--<li class="disabled">-->
-                                    <!--<a href="#">Duplicate</a>-->
-                                    <!--</li>-->
-                                </ul>
-                            </li>
-                            <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
-                            </li>
-                            <li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>
-                            </li>
-                        </ul>
-                    </div>
+                <h1 class="title text-center">
+                    <i class="icon icon-private"></i>
+                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
+                <div class="main-form">
+                    <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs" class="main-form">
+                        <div class="content-navbar">
+                            <ul class="navbar-list">
+                                <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
+                                <li class="other-links dropdown" uib-dropdown>
+                                    <a id="dLabel" role="button" data-uib-dropdown-toggle>
+                                        <i class="icon icon-more"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>
+                                        <li>
+                                            <a href="{{$ctrl.project.editorUrl}}">Editor</a>
+                                        </li>
+                                        <!--<li class="disabled">-->
+                                        <!--<a href="#">Designer</a>-->
+                                        <!--</li>-->
+                                        <!--<li class="disabled">-->
+                                        <!--<a href="#">Duplicate</a>-->
+                                        <!--</li>-->
+                                    </ul>
+                                </li>
+                                <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
+                                </li>
+                                <li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>
+                                </li>
+                            </ul>
+                        </div>
 
-                    <div class="section">
-                        <h2 class="section-title">Android required fields</h2>
-                        <div class="required-field-item">
+                        <div class="section">
+                            <h3 class="section-title">Android required fields</h3>
+                            <div class="required-field-item">
 
 
-                            <div class="form-group" custom-input
-                                 data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
-                                <label>
-                                    Display name <span ng-if="configs.displayName.$invalid && configs.displayName.focused">is required</span>
-                                </label>
-                                <input type="text" class="form-control" placeholder=""
-                                       data-ng-model="$ctrl.project.android.name"
-                                       name="displayName"
-                                       required
-                                       data-ng-focus="configs.displayName.focused = true">
-                                <p class="form-description">App Name - Display name of your app</p>
+                                <div class="form-group" custom-input
+                                     data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
+                                    <label>
+                                        Display name <span ng-if="configs.displayName.$invalid && configs.displayName.focused">is required</span>
+                                    </label>
+                                    <input type="text" class="form-control" placeholder=""
+                                           data-ng-model="$ctrl.project.android.name"
+                                           name="displayName"
+                                           required
+                                           data-ng-focus="configs.displayName.focused = true">
+                                    <p class="form-description">App Name - Display name of your app</p>
+                                </div>
+
+                                <div class="form-group" custom-input
+                                     data-ng-init="isVersionValid = true"
+                                     data-ng-class="{'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused, 'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
+                                    <label>
+                                        Version <span ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.required">is required</span>
+                                        <span ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern">must be in x.x.x format</span>
+                                        <span ng-if="!isVersionValid">must be higher than current. Current version is {{$ctrl.project.build.android.version}}</span>
+                                    </label>
+                                    <input type="text" class="form-control" placeholder=""
+                                           data-ng-model="$ctrl.project.android.version"
+                                           name="version"
+                                           required
+                                           ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/"
+                                           data-ng-focus="configs.version.focused = true"
+                                           data-ng-change="$ctrl.project.build.android.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.android.version, $ctrl.project.android.version))">
+
+                                    <p class="form-description">Version of your app</p>
+                                    <p class="form-description" ng-if="configs.version.error">
+                                        The current version for this project is 3.1.2, please select a higher version for the new build.
+                                    </p>
+                                </div>
+
+                                <div class="form-group" custom-input
+                                     data-ng-class="{'has-error': configs.package.$invalid && configs.package.focused, 'has-success': configs.package.$valid && configs.package.focused}">
+                                    <label>
+                                        Package <span ng-if="configs.package.$invalid && configs.package.focused">is required</span>
+                                    </label>
+                                    <input type="text" class="form-control" placeholder=""
+                                           data-ng-model="$ctrl.project.android.package"
+                                           name="package"
+                                           required
+                                           ng-pattern="$ctrl.patterns.package"
+                                           data-ng-focus="configs.package.focused = true">
+                                    <p class="form-description">Package</p>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>App icon - upload .png 1024x1024</label>
+                                    <div class="main-upload-area">
+                                        <label class="upload-area" ng-show="$ctrl.files.icon.name === ''">
+                                            <div class="area-content">.png</div>
+                                            <input type="file"
+                                                   id="icon-file"
+                                                   name="icon-h"
+                                                   accept="image/*"
+                                                   onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
+                                        </label>
+                                        <img ng-show="$ctrl.files.icon.name !== ''"
+                                             ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"
+                                             class="uploaded-file-icon">
+                                        <p class="area-label">{{ !!$ctrl.files.icon.name ? $ctrl.files.icon.name : 'Drag or Click' }}</p>
+                                    </div>
+                                    <div class="required-field-actions margin-0-important">
+                                        <button type="button" class="btn btn-default btn-submit"
+                                                onclick="document.querySelector('#icon-file').click()">browse</button>
+                                    </div>
+                                </div>
+
+
                             </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title">keyStore Settings</h3>
 
                             <div class="form-group" custom-input
-                                 data-ng-init="isVersionValid = true"
-                                 data-ng-class="{'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused, 'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
+                                 data-ng-class="{'has-error': configs.KSName.$invalid && configs.KSName.focused, 'has-success': configs.KSName.$valid && configs.KSName.focused}">
                                 <label>
-                                    Version <span ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.required">is required</span>
-                                    <span ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern">must be in x.x.x format</span>
-                                    <span ng-if="!isVersionValid">must be higher than current. Current version is {{$ctrl.project.build.android.version}}</span>
+                                    Name <span ng-if="configs.KSName.$invalid && configs.KSName.focused">is required</span>
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
-                                       data-ng-model="$ctrl.project.android.version"
-                                       name="version"
-                                       required
-                                       ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/"
-                                       data-ng-focus="configs.version.focused = true"
-                                       data-ng-change="$ctrl.project.build.android.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.android.version, $ctrl.project.android.version))">
-
-                                <p class="form-description">Version of your app</p>
-                                <p class="form-description" ng-if="configs.version.error">
-                                    The current version for this project is 3.1.2, please select a higher version for the new build.
-                                </p>
-                            </div>
-
-                            <div class="form-group" custom-input
-                                 data-ng-class="{'has-error': configs.package.$invalid && configs.package.focused, 'has-success': configs.package.$valid && configs.package.focused}">
-                                <label>
-                                    Package <span ng-if="configs.package.$invalid && configs.package.focused">is required</span>
-                                </label>
-                                <input type="text" class="form-control" placeholder=""
-                                       data-ng-model="$ctrl.project.android.package"
-                                       name="package"
+                                       data-ng-model="$ctrl.project.android.keyStore.name"
+                                       name="KSName"
                                        required
                                        ng-pattern="$ctrl.patterns.package"
-                                       data-ng-focus="configs.package.focused = true">
-                                <p class="form-description">Package</p>
+                                       data-ng-focus="configs.KSName.focused = true">
+                            </div>
+
+                            <div class="form-group" custom-input
+                                 data-ng-class="{'has-error': configs.KSFLName.$invalid && configs.KSFLName.focused, 'has-success': configs.KSFLName.$valid && configs.KSFLName.focused}">
+                                <label>
+                                    First Last Name <span ng-if="configs.KSFLName.$invalid && configs.KSFLName.focused">are required</span>
+                                </label>
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.project.android.keyStore.firstLastName"
+                                       name="KSFLName"
+                                       required
+                                       ng-pattern="$ctrl.patterns.package"
+                                       data-ng-focus="configs.KSFLName.focused = true">
+                                <p class="form-description">First and Last Names</p>
 
                             </div>
 
-                            <div class="form-group">
-                                <label>App icon - upload .png 1024x1024</label>
-                                <div class="main-upload-area">
-                                    <label class="upload-area" ng-show="$ctrl.files.icon.name === ''">
-                                        <div class="area-content">.png</div>
-                                        <input type="file"
-                                               id="icon-file"
-                                               name="icon-h"
-                                               accept="image/*"
-                                               onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
-                                    </label>
-                                    <img ng-show="$ctrl.files.icon.name !== ''"
-                                         ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"
+                            <div class="form-group" custom-input
+                                 data-ng-class="{'has-error': configs.KSOrganization.$invalid && configs.KSOrganization.focused, 'has-success': configs.KSOrganization.$valid && configs.KSOrganization.focused}">
+                                <label>Organization</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.project.android.keyStore.organization"
+                                       name="KSOrganization"
+                                       ng-pattern="$ctrl.patterns.package"
+                                       data-ng-focus="configs.KSOrganization.focused = true">
+                                <p class="form-description">Organization</p>
+
+                            </div>
+
+                            <div class="form-group" custom-input
+                                 data-ng-class="{'has-error': configs.KSCity.$invalid && configs.KSCity.focused, 'has-success': configs.KSCity.$valid && configs.KSCity.focused}">
+                                <label>City</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.project.android.keyStore.city"
+                                       name="KSCity"
+                                       ng-pattern="$ctrl.patterns.package"
+                                       data-ng-focus="configs.KSCity.focused = true">
+                                <p class="form-description">City</p>
+                            </div>
+
+                            <div class="form-group" custom-input
+                                 data-ng-class="{'has-error': configs.KSState.$invalid && configs.KSState.focused, 'has-success': configs.KSState.$valid && configs.KSState.focused}">
+                                <label>State</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.project.android.keyStore.state"
+                                       name="KSState"
+                                       ng-pattern="$ctrl.patterns.package"
+                                       data-ng-focus="configs.KSState.focused = true">
+                                <p class="form-description">State</p>
+                            </div>
+
+                            <div class="form-group" custom-input
+                                 data-ng-class="{'has-error': configs.KSCC.$invalid && configs.KSCC.focused, 'has-success': configs.KSCC.$valid && configs.KSCC.focused}">
+                                <label>Country Code</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.project.android.keyStore.countryCode"
+                                       name="KSCC"
+                                       ng-pattern="$ctrl.patterns.package"
+                                       data-ng-focus="configs.KSCC.focused = true">
+                                <p class="form-description">State</p>
+                            </div>
+
+                            <div class="form-group" custom-input
+                                 data-ng-class="{'has-error': configs.KSAlias.$invalid && configs.KSAlias.focused, 'has-success': configs.KSAlias.$valid && configs.KSAlias.focused}">
+                                <label>
+                                    Alias <span ng-if="configs.KSAlias.$invalid && configs.KSAlias.focused">is required</span>
+                                </label>
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.project.android.keyStore.alias"
+                                       name="KSAlias"
+                                       required
+                                       ng-pattern="$ctrl.patterns.package"
+                                       data-ng-focus="configs.KSAlias.focused = true">
+                                <p class="form-description">Alias</p>
+                            </div>
+
+                            <div class="btn-wrapper" style="text-align: center">
+                                <button type="button" class="btn btn-default btn-submit"
+                                        ng-click="$ctrl.open($event)"
+                                        ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.icon.name">Build</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="main-form" action="" style="margin-top:10px" ng-if="$ctrl.project.build.android.requested">
+                        <div class="section">
+                            <div class="required-field-item">
+                                <div class="small-loader" data-ng-if="$ctrl.project.build.android.requested && !$ctrl.project.build.android.built">
+                                    <div class="image"></div>
+                                </div>
+                                <div class="main-upload-area"
+                                     data-ng-if="$ctrl.project.build.android.built">
+                                    <img src="images/general/file_icon_placeholder.png" alt="" width="60"
                                          class="uploaded-file-icon">
-                                    <p class="area-label">{{ !!$ctrl.files.icon.name ? $ctrl.files.icon.name : 'Drag or Click' }}</p>
+                                    <p class="area-label"></p>
                                 </div>
-                                <div class="required-field-actions margin-0-important">
-                                    <button type="button" class="btn btn-default btn-submit"
-                                            onclick="document.querySelector('#icon-file').click()">browse</button>
+                                <p data-ng-if="!$ctrl.project.build.android.built"
+                                   class="description margin-top-20 text-white">We are now building your installation package, the download link will appear here once done.</p>
+                                <p data-ng-if="$ctrl.project.build.android.built"
+                                   class="description margin-top-20 text-white">Package ready</p>
+                                <div class="required-field-actions">
+                                    <button data-ng-if="$ctrl.project.build.android.built"
+                                            type="button" class="btn btn-primary"
+                                            ng-click="$ctrl.download()">download</button>
+                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.android.built" class="btn btn-save">cancel</a>
                                 </div>
                             </div>
-
-
                         </div>
-                    </div>
-
-                    <div class="section">
-                        <h2 class="section-title">keyStore Settings</h2>
-
-                        <div class="form-group" custom-input
-                             data-ng-class="{'has-error': configs.KSName.$invalid && configs.KSName.focused, 'has-success': configs.KSName.$valid && configs.KSName.focused}">
-                            <label>
-                                Name <span ng-if="configs.KSName.$invalid && configs.KSName.focused">is required</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder=""
-                                   data-ng-model="$ctrl.project.android.keyStore.name"
-                                   name="KSName"
-                                   required
-                                   ng-pattern="$ctrl.patterns.package"
-                                   data-ng-focus="configs.KSName.focused = true">
-                        </div>
-
-                        <div class="form-group" custom-input
-                             data-ng-class="{'has-error': configs.KSFLName.$invalid && configs.KSFLName.focused, 'has-success': configs.KSFLName.$valid && configs.KSFLName.focused}">
-                            <label>
-                                First Last Name <span ng-if="configs.KSFLName.$invalid && configs.KSFLName.focused">are required</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder=""
-                                   data-ng-model="$ctrl.project.android.keyStore.firstLastName"
-                                   name="KSFLName"
-                                   required
-                                   ng-pattern="$ctrl.patterns.package"
-                                   data-ng-focus="configs.KSFLName.focused = true">
-                            <p class="form-description">First and Last Names</p>
-
-                        </div>
-
-                        <div class="form-group" custom-input
-                             data-ng-class="{'has-error': configs.KSOrganization.$invalid && configs.KSOrganization.focused, 'has-success': configs.KSOrganization.$valid && configs.KSOrganization.focused}">
-                            <label>Organization</label>
-                            <input type="text" class="form-control" placeholder=""
-                                   data-ng-model="$ctrl.project.android.keyStore.organization"
-                                   name="KSOrganization"
-                                   ng-pattern="$ctrl.patterns.package"
-                                   data-ng-focus="configs.KSOrganization.focused = true">
-                            <p class="form-description">Organization</p>
-
-                        </div>
-
-                        <div class="form-group" custom-input
-                             data-ng-class="{'has-error': configs.KSCity.$invalid && configs.KSCity.focused, 'has-success': configs.KSCity.$valid && configs.KSCity.focused}">
-                            <label>City</label>
-                            <input type="text" class="form-control" placeholder=""
-                                   data-ng-model="$ctrl.project.android.keyStore.city"
-                                   name="KSCity"
-                                   ng-pattern="$ctrl.patterns.package"
-                                   data-ng-focus="configs.KSCity.focused = true">
-                            <p class="form-description">City</p>
-                        </div>
-
-                        <div class="form-group" custom-input
-                             data-ng-class="{'has-error': configs.KSState.$invalid && configs.KSState.focused, 'has-success': configs.KSState.$valid && configs.KSState.focused}">
-                            <label>State</label>
-                            <input type="text" class="form-control" placeholder=""
-                                   data-ng-model="$ctrl.project.android.keyStore.state"
-                                   name="KSState"
-                                   ng-pattern="$ctrl.patterns.package"
-                                   data-ng-focus="configs.KSState.focused = true">
-                            <p class="form-description">State</p>
-                        </div>
-
-                        <div class="form-group" custom-input
-                             data-ng-class="{'has-error': configs.KSCC.$invalid && configs.KSCC.focused, 'has-success': configs.KSCC.$valid && configs.KSCC.focused}">
-                            <label>Country Code</label>
-                            <input type="text" class="form-control" placeholder=""
-                                   data-ng-model="$ctrl.project.android.keyStore.countryCode"
-                                   name="KSCC"
-                                   ng-pattern="$ctrl.patterns.package"
-                                   data-ng-focus="configs.KSCC.focused = true">
-                            <p class="form-description">State</p>
-                        </div>
-
-                        <div class="form-group" custom-input
-                             data-ng-class="{'has-error': configs.KSAlias.$invalid && configs.KSAlias.focused, 'has-success': configs.KSAlias.$valid && configs.KSAlias.focused}">
-                            <label>
-                                Alias <span ng-if="configs.KSAlias.$invalid && configs.KSAlias.focused">is required</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder=""
-                                   data-ng-model="$ctrl.project.android.keyStore.alias"
-                                   name="KSAlias"
-                                   required
-                                   ng-pattern="$ctrl.patterns.package"
-                                   data-ng-focus="configs.KSAlias.focused = true">
-                            <p class="form-description">Alias</p>
-                        </div>
-
-                        <div class="btn-wrapper" style="text-align: center">
-                            <button type="button" class="btn btn-default btn-submit"
-                                    ng-click="$ctrl.open($event)"
-                                    ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.icon.name">Build</button>
-                        </div>
+                    </form>
                 </div>
-            </form>
-
-                <form class="main-form" action="" style="margin-top:10px" ng-if="$ctrl.project.build.android.requested">
-                    <div class="section">
-                        <div class="required-field-item">
-                            <div class="small-loader" data-ng-if="$ctrl.project.build.android.requested && !$ctrl.project.build.android.built">
-                                <div class="image"></div>
-                            </div>
-                            <div class="main-upload-area"
-                                 data-ng-if="$ctrl.project.build.android.built">
-                                <img src="images/general/file_icon_placeholder.png" alt="" width="60"
-                                     class="uploaded-file-icon">
-                                <p class="area-label"></p>
-                            </div>
-                            <p data-ng-if="!$ctrl.project.build.android.built"
-                               class="description margin-top-20 text-white">We are now building your installation package, the download link will appear here once done.</p>
-                            <p data-ng-if="$ctrl.project.build.android.built"
-                               class="description margin-top-20 text-white">Package ready</p>
-                            <div class="required-field-actions">
-                                <button data-ng-if="$ctrl.project.build.android.built"
-                                        type="button" class="btn btn-primary"
-                                        ng-click="$ctrl.download()">download</button>
-                                <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.android.built" class="btn btn-save">cancel</a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
             </div>
         </div>
     </div>
 </div>
-<!--
-    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
--->
 
 
 

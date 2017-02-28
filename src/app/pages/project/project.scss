@@ -1,8 +1,12 @@
 $distance: 34;
+.section-title {
+  margin: 30px 0px 30px 0px !important;
+}
+
 .selet-template-container {
   display: block;
   height: auto;
-  padding-top: $distance + px;
+  //padding-top: $distance + px;
   padding-bottom: $distance + px;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -74,7 +78,7 @@ $distance: 34;
   }
 
   .radio-list {
-    padding-top: 44px;
+    //padding-top: 44px;
     padding-bottom: 30px;
     margin: 0;
     @include cf();
@@ -195,7 +199,7 @@ $distance: 34;
         > a {
           text-transform: capitalize;
           display: block;
-          font-size: 14px;
+          font-size: 16px;
           line-height: 1.36;
           color: $colorSemiWhite;
           padding: 0 3px 20px 3px;
@@ -205,7 +209,7 @@ $distance: 34;
           transition: all .3s;
           cursor: pointer;
           &:hover {
-            color: $colorBlue;
+            color: $color-icon-primary;
             background-color: transparent;
           }
         }
@@ -313,12 +317,15 @@ $distance: 34;
   .switch {
     overflow: visible;
     margin: 0;
-    border-color: #DEDEDE !important;
-    background: #0B162A;
+    border: none;
+    //border-color: #DEDEDE !important;
+    background: black;
     box-shadow: #dfdfdf 0 0 0 0 inset;
     transition: .3s ease-out all;
     -webkit-transition: .3s ease-out all;
     top: -1px;
+    width: 44px;
+    height: 22px;
     &.off,
     &.on {
       z-index: 0;
@@ -336,8 +343,8 @@ $distance: 34;
         display: block
       }
       small {
-        top: 2px !important;
-        left: 22px
+        top: -2px !important;
+        left: 22px;
       }
     }
     &.wide {
@@ -354,12 +361,12 @@ $distance: 34;
       cursor: not-allowed
     }
     & small {
-      top: 1px !important;
+      top: -2px !important;
       width: 26px !important;
       height: 26px !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
       position: absolute;
-      left: 2px;
+      left: 0px;
       transition: .3s ease-out all;
       -webkit-transition: .3s ease-out all
     }
@@ -378,6 +385,7 @@ $distance: 34;
       left: 9%
     }
   }
+
   .section.section-vr-space {
     .drag-cont {
       .drag-item {
@@ -385,7 +393,8 @@ $distance: 34;
         max-width: 185px;
         padding-bottom: 40px;
         h5.section-small-title {
-          color: $white;
+          font-size: 13px;
+          color: $color-text-gray;
         }
         .text-small.description {
           span {
@@ -408,6 +417,24 @@ $distance: 34;
             color: $colorSemiWhite;
             i {
               font-size: 25px;
+            }
+            > .imgDescription {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              background: rgba(29, 106, 154, 0.72);
+              color: #fff;
+              visibility: hidden;
+              opacity: 0;
+              /*remove comment if you want a gradual transition between states
+                  -webkit-transition: visibility opacity 0.2s;
+                  */
+            }
+            > .thumbnail-image-tap:hover .imgDescription {
+              visibility: visible;
+              opacity: 1;
             }
           }
           .drag-instruct {
@@ -498,11 +525,9 @@ $distance: 34;
     }
   }
   .section {
-    .section-title {
-      margin: 30px 0px 30px 0px;
-    }
+    line-height: 32px;
     label {
-      font-size: 24px;
+      font-size: 16px;
     }
   }
 
@@ -563,5 +588,7 @@ $distance: 34;
     border-width: 2px;
     padding: 4px 30px;
   }
-
+  .form-description {
+    font-size: 13px !important;
+  }
 }
