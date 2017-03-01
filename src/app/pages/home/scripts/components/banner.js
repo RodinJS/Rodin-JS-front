@@ -50,7 +50,7 @@ const BANNER = {
                 setTimeout(() => {
                     BANNER.showCodeBlock(codeBlock, devicePath, true);
                     setTimeout(()=> {
-                        code.scrollLeft(60);
+                        code.scrollLeft(90);
                         codeBlock.scrollTop(35);
                     }, 10);
 
@@ -212,6 +212,13 @@ const BANNER = {
 
          });*/
 
+    },
+
+    orientationchange: function () {
+        var _this = this;
+        $(window).on('orientationchange', function (event) {
+            _this.showCodeBlock(codeBlock, BANNER.lastActivePath, true);
+        });
     },
 
     checkMobile() {

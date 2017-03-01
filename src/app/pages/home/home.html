@@ -56,8 +56,8 @@
                     <a href=""
                        ng-mouseover="$ctrl.signUpHovered2 = true"
                        ng-mouseleave="$ctrl.signUpHovered2 = false"
-                       style=" max-width: 112px;min-width: 112px;"
-                       class="visible-xs-inline-block btn-mobile-login" ng-click="$ctrl.scrollToSignUp()">
+                       style=" max-width: 120px;min-width: 120px;"
+                       class="visible-xs-inline-block btn-mobile-login subscribe" ng-click="$ctrl.scrollToSignUp()">
                         {{$ctrl.signUpHovered2 ? 'Sign up' : 'Big blue button'}}
                     </a>
                     <a ui-sref="landing.login" class="visible-xs-inline-block btn-mobile-login">Login</a>
@@ -252,8 +252,8 @@
                            ng-click="$ctrl.notificationBoxTrigger($event)"
                            value="">
                     <span class="input-group-btn">
-					<button class="btn btn-default"
-                            style="min-width: 182px;max-width: 182px;"
+					<button class="btn btn-default subscribe-btn"
+                            ng-class="!$ctrl.subscribe.email || !$ctrl.subscribe.userType ? 'disabled' : ''"
                             ng-mouseover="$ctrl.signUpHovered3 = true"
                             ng-mouseleave="$ctrl.signUpHovered3 = false"
                             ng-click="$ctrl.submitSubscribe()"
@@ -349,7 +349,7 @@
 
 
         <ul id="parallax">
-            <li class="layer" data-depth="0.00"></li>
+            <li class="layer" data-depth="0.01"></li>
             <li class="layer" data-depth="0.03"></li>
         </ul>
     </section>

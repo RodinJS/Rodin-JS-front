@@ -8,6 +8,7 @@ window.jQuery = window.$ = jQuery;
 import './plugins/parallax.js';
 import './plugins/swiper.js';
 import './plugins/jquery.tagsinput.min.js';
+import './plugins/jquery.slimscroll.js';
 
 // COMPONENTS
 import header from './components/header';
@@ -24,9 +25,11 @@ window.LANDING = {
         this.verticalSlider();
         this.scroll();
         this.clicks();
+        this.slimScroll();
         //this.focus();
         header.stickyHeader();
         banner.init();
+        banner.orientationchange();
         features.init();
 
     },
@@ -48,11 +51,13 @@ window.LANDING = {
         let swiper = new Swiper('#projectSlider', {
             pagination: '#projectSlider .swiper-pagination',
             direction: 'vertical',
-            height: $(window).height(),
-            width: $(window).width(),
+            // height: $(window).height(),
+            // width: $(window).width(),
+            // autoHeight: true,
             slidesPerView: 1,
             paginationClickable: true,
-            spaceBetween: 100,
+            // spaceBetween: 100,
+            updateOnImagesReady: true,
             keyboardControl: true,
             speed: 1000,
             mousewheelControl: true,
@@ -92,6 +97,11 @@ window.LANDING = {
         });
 
         this.projectSlider = swiper;
+        $(window).on('orientationchange', function (event) {
+            setTimeout(function () {
+                swiper.update();
+            }, 500);
+        });
     },
 
     tagsInput: function () {
@@ -118,6 +128,7 @@ window.LANDING = {
 
     scroll: function () {
         let win = $(window);
+        let _this = this;
         let txt = $('.footer .prompt-text');
         win.scroll(function () {
             if (win.scrollTop() + win.height() > $(document).height() - 74) {
@@ -134,6 +145,14 @@ window.LANDING = {
 
                 LANDING.projectSlider.update(true);
             }
+        });
+    },
+
+    slimScroll: function () {
+        $('#rodinCode').slimScroll({
+            opacity: 0,
+            height: '100%',
+            allowPageScroll: false,
         });
     },
 

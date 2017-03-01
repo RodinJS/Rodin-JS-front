@@ -84,3 +84,21 @@
 		}
 	}
 }
+
+@media (max-width: $screen-xs-max) and (orientation:landscape) {
+	.section{
+		&.section-developers{
+			.comany-name {
+				li {
+					span,
+					a{
+						img{
+							width: 40%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
