@@ -217,9 +217,11 @@ class HomeCtrl {
             }
 
             //Stop parent events works in iframe
+            //console.log(($iframeBox.width() - 100), this.windowWidth);
             if ($iframeBox.innerWidth() >= this.windowWidth) {
                 angular.element('body').css({ overflow: 'hidden' });
                 this.disablePointer = false;
+
                 //this.hoveredIframe = true;
 
             }
@@ -235,7 +237,7 @@ class HomeCtrl {
                 $('.pagination-wrapper').show();
                 $('.btn-next-slide').show();
 
-                if ($iframeBox.width() <= this.initialTransform.w) {
+                if (($iframeBox.width() - 100) <= this.initialTransform.w) {
                     this.disablePointer = true;
                     LANDING.projectSlider.unlockSwipeToPrev();
                     angular.element('body').removeAttr('style');
