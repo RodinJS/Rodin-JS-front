@@ -175,8 +175,8 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
-            <h1 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h1>
-            <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
+            <h3 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h3>
+            <h3 ng-show="!!$ctrl.project.publishDate">Warning</h3>
         </div>
         <div class="modal-body padding-0-important" ng-if="!!$ctrl.project.publishDate">
             <p class="description word-wrap">
@@ -200,7 +200,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.share = false">×</span>
-            <h1>Share this project</h1>
+            <h3>Share this project</h3>
         </div>
         <div class="modal-body">
             <p data-ng-if="$ctrl.project.public === 'false'" class="text-small description">

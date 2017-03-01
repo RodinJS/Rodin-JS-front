@@ -6,11 +6,13 @@
   .publish-buttons {
     margin-top: 17px;
     button {
+      color: $color-text-gray !important;
       height: 36px;
       margin-right: 14px;
       font-size: 16px;
       &:hover {
         background-color: #008BF2;
+        color: white !important;
       }
     }
   }
