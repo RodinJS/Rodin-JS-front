@@ -1,146 +1,173 @@
+<div class="header-search-box">
+    <div class="container">
+        <form action="">
+            <div class="form-group">
+                <input type="search" class="header-search" placeholder="Search for Projects"
+                       data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
+                <button type="submit" class="btn-search" ng-click="$ctrl.search()">
+                    <i class="rd rd-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="page__wrapper">
-
-	<div class="main-container">
-		<div class="section-dashboard-action">
-			<div class="btn-action-wrapper clearfix">
-				<div class="pull-right">
-					<a href="" ng-click="$ctrl.createProject()" class="btn-add"><i class="icon icon-add"></i></a>
-				</div>
-				<div class="form-wrapper pull-right search-form">
-					<div class="row">
-						<div class="form-group pass-group" custom-input>
-							<input type="text" class="form-control dashboard-search" placeholder="" data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
-							<label class="control-label float-label">Url, Description or project name</label>
-							<i class="icon icon-search search"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div data-ng-if="$ctrl.projects.length === 0" class="empty-dashboard-space">
-			<p class="text-primary">At this point you do not have more than one project</p>
-			<h2>
-				<a data-ui-sref="app.project">CREATE A NEW PROJECT</a>
-			</h2>
-		</div>
-		<div data-ng-if="$ctrl.projects.length !== 0" class="dashboard-content">
-			<div class="main-alert alert-warning hidden">
-				<p class="text-action">
-					<i class="icon icon-info"></i> You can access unlimited hosted sites but only 2 non hosted sites at
-					once
-					on your plan. To access your non hosted sites, <a href="" data-ui-sref="app.plans">upgrade your plan</a>
-					or
-					add hosting to an existing site.
-				</p>
-			</div>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="dashboard-content-item">
-						<div class="item-content-wrapper create-project" ng-click="$ctrl.createProject()">
-							<div class="dashboard-content-img">
-							</div>
-							<div class="item-description">
-								<a class="btn-add"><i class="icon icon-add"></i></a>
-							</div>
-						</div>
-						<a href="" ng-click="$ctrl.createProject()" class="dashboard-item-link">
-							<h3 class="box-title">
-								Create new Project
-							</h3>
-						</a>
-					</div>
-				</div>
-				<div data-ng-repeat="project in $ctrl.projects" class="col-md-3">
-					<div class="dashboard-content-item">
-						<div class="item-content-wrapper" ng-click="$ctrl.goToProject($event, $ctrl.editorUrl + $ctrl.user.username + '/' + project.root)">
-							<div data-ng-if="!project.thumbnail" class="dashboard-content-img"
-							     style="background-image: url(images/content/dashboard-content-img.jpg);"></div>
-							<div data-ng-if="!!project.thumbnail" class="dashboard-content-img"
-							     style="background-image: url({{project.thumbnail}})"></div>
-							<div class="item-description">
+    <div class="container container-padding">
+        <!--<div class="section-dashboard-action">
+            <div class="btn-action-wrapper clearfix">
+                <div class="pull-right">
+                    <a href="" ng-click="$ctrl.createProject()" class="btn-add"><i class="icon icon-add"></i></a>
+                </div>
+                <div class="form-wrapper pull-right search-form">
+                    <div class="row">
+                        <div class="form-group pass-group" custom-input>
+                            <input type="text" class="form-control dashboard-search" placeholder="" data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
+                            <label class="control-label float-label">Url, Description or project name</label>
+                            <i class="icon icon-search search"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div data-ng-if="$ctrl.projects.length === 0" class="empty-dashboard-space">
+            <h3 class="title text-center">
+                <a data-ui-sref="app.project">CREATE A NEW PROJECT</a>
+            </h3>
+            <p class="title-description">At this point you do not have more than one project</p>
+            <div class="btn-wrapper">
+                <a href="#" class="btn-create-project">
+                    <i class="rd rd-plus"></i>
+                </a>
+            </div>
+        </div>
+        <div data-ng-if="$ctrl.projects.length !== 0" class="dashboard-content">
+            <div class="main-alert alert-warning hidden">
+                <p class="text-action">
+                    <i class="icon icon-info"></i> You can access unlimited hosted sites but only 2 non hosted sites at
+                    once
+                    on your plan. To access your non hosted sites, <a href="" data-ui-sref="app.plans">upgrade your
+                    plan</a>
+                    or
+                    add hosting to an existing site.
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="dashboard-content-item">
+                        <div class="item-content-wrapper create-project" ng-click="$ctrl.createProject()">
+                            <div class="dashboard-content-img">
+                            </div>
+                            <div class="item-description">
+                                <a class="btn-add"><i class="icon icon-add"></i></a>
+                            </div>
+                        </div>
+                        <a href="" ng-click="$ctrl.createProject()" class="dashboard-item-link">
+                            <p class="box-title">
+                                Create new Project
+                            </p>
+                        </a>
+                    </div>
+                </div>
+                <div data-ng-repeat="project in $ctrl.projects" class="col-md-3">
+                    <div class="dashboard-content-item">
+                        <div class="item-content-wrapper"
+                             ng-click="$ctrl.goToProject($event, $ctrl.editorUrl + $ctrl.user.username + '/' + project.root)">
+                            <div data-ng-if="!project.thumbnail" class="dashboard-content-img"
+                                 style="background-image: url(images/content/dashboard-content-img.jpg);"></div>
+                            <div data-ng-if="!!project.thumbnail" class="dashboard-content-img"
+                                 style="background-image: url({{project.thumbnail}})"></div>
+                            <div class="item-description">
                                 <ul class="item-action-list pull-left">
                                     <li>
                                         <a ng-click="$ctrl.open(project, true)"><i class="icon icon-delete"></i></a>
                                     </li>
                                 </ul>
-								<ul class="item-action-list">
-									<li ng-if="project.public == 'true'">
-										<a style="cursor:pointer;" data-ng-click="$ctrl.open(project)">
-											<i class="icon icon-link"></i>
-										</a>
-									</li>
-									<!--<li>
+                                <ul class="item-action-list">
+                                    <li ng-if="project.public == 'true'">
+                                        <a style="cursor:pointer;" data-ng-click="$ctrl.open(project)">
+                                            <i class="icon icon-link"></i>
+                                        </a>
+                                    </li>
+                                    <!--<li>
                                         <a class="icon-href" ng-class="project.public == 'true' ? 'unlocked' : 'locked'">
                                             <i class="icon icon-lock" aria-hidden="true"></i>
                                         </a>
-									</li>-->
-									<li>
+                                    </li>-->
+                                    <li>
                                         <a data-ui-sref="app.editproject({projectId: project._id})"><i
-										class="icon icon-settings"></i></a>
-									</li>
-								</ul>
-								<h5>
-									<a  data-ng-href="{{$ctrl.editorUrl + $ctrl.user.username + '/' + project.root}}" class="item-title-link">
-										Open in Editor
-									</a>
-								</h5>
-							</div>
-						</div>
-						<a href="" class="dashboard-item-link">
-							<h3 class="box-title">
-								<i style="margin-right:5px" ng-if="!project.public || project.public == 'false'" class="icon icon-lock" aria-hidden="true"></i>
-								{{project.displayName || project.name}}
-							</h3>
-							<p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
-							</p>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                                class="icon icon-settings"></i></a>
+                                    </li>
+                                </ul>
+                                <h5>
+                                    <a data-ng-href="{{$ctrl.editorUrl + $ctrl.user.username + '/' + project.root}}"
+                                       class="item-title-link">
+                                        Open in Editor
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                        <a href="" class="dashboard-item-link">
+                            <h3 class="box-title">
+                                <i style="margin-right:5px" ng-if="!project.public || project.public == 'false'"
+                                   class="icon icon-private icon-private" aria-hidden="true"></i>
+                                {{project.displayName || project.name}}
+                            </h3>
+                            <p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<div class="loader" data-ng-if="$ctrl.showLoader"></div>
+    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
 
 </div>
 
 
-<div class="modal" close-modal="share" data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
-	<div class="modal-content">
-		<div class="modal-header">
-			<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>
-			<h1>Share this project</h1>
-		</div>
-		<div class="modal-body">
-			<p data-ng-if="!$ctrl.currentModalProject.public" class="text-small description">
-				This project is not public, you can change this from project settings.
-				project settingsy lini orangevi link vor sghmi miangamic baci et projecti settingsy</p>
-			<div class="form-wrapper margin-top-20" data-ng-if="$ctrl.currentModalProject.public">
-				<div class="form-group" custom-input>
-					<input id="projectUrl" type="text" class="form-control" value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.currentModalProject.name}}" disabled>
-					<label class="control-label float-label">Url of project</label>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer padding-bottom-20-important">
-			<div class="required-field-actions clearfix">
-				<button data-ng-hide="$ctrl.currentModalProject.public" type="button" class="btn btn-primary ng-hide" data-ng-click="$ctrl.goToSettings()">go to
-					settings
-				</button>
-				<button data-ng-show="$ctrl.currentModalProject.public" type="button" class="btn btn-primary ng-hide" data-ng-click="$ctrl.copyUrl()">copy this url
-				</button>
-				<a href="" class="btn btn-save" data-ng-click="$ctrl.modals.share = false">cancel</a>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal model-confirm" close-modal="remove"  ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+<div class="modal" close-modal="share"
+     data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
-            <h1 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h1>
-            <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
+            <h2>Share this project</h2>
+        </div>
+        <div class="modal-body">
+            <p data-ng-if="!$ctrl.currentModalProject.public" class="text-small description">
+                This project is not public, you can change this from project settings.
+                project settingsy lini orangevi link vor sghmi miangamic baci et projecti settingsy</p>
+            <div class="form-wrapper margin-top-20" data-ng-if="$ctrl.currentModalProject.public">
+                <div class="form-group" custom-input>
+                    <input id="projectUrl" type="text" class="form-control"
+                           value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.currentModalProject.name}}"
+                           disabled>
+                    <label class="control-label float-label">Url of project</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer padding-bottom-20-important">
+            <div class="required-field-actions clearfix">
+                <div class="pull-right">
+                    <button data-ng-hide="$ctrl.currentModalProject.public" type="button"
+                            class="btn btn-primary ng-hide" data-ng-click="$ctrl.goToSettings()">go to
+                        settings
+                    </button>
+                    <button data-ng-show="$ctrl.currentModalProject.public" type="button"
+                            class="btn btn-primary ng-hide" data-ng-click="$ctrl.copyUrl()">copy this url
+                    </button>
+                    <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.share = false">cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" close-modal="remove"
+     ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h2>
+            <h2 ng-show="!!$ctrl.project.publishDate">Warning</h2>
         </div>
         <div class="modal-body padding-0-important">
             <p class="description word-wrap">
@@ -154,9 +181,13 @@
         </div>
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <button type="button" class="btn btn-primary"
-                        ng-click="$ctrl.deleteProject()">delete</button>
-                <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.remove = false">cancel</a>
+                <div class="pull-right">
+
+                    <button type="button" class="btn btn-primary"
+                            ng-click="$ctrl.deleteProject()">Delete
+                    </button>
+                    <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.remove = false">cancel</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 class AppHeaderCtrl {
-    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus) {
+    constructor(AppConstants, User, $scope,  $state, $rootScope, SocketService, NotificationsStore, EventBus) {
         'ngInject';
         this.appName = AppConstants.appName;
         this.currentUser = User.current;
@@ -9,6 +9,8 @@ class AppHeaderCtrl {
         this.logout = () => {
             User.logout(...arguments);
         };
+
+        this.isHome = $rootScope.pageClass.indexOf('home') > -1;
 
         $scope.$watch('User.current', (newUser) => {
             this.currentUser = newUser;
@@ -27,6 +29,8 @@ class AppHeaderCtrl {
                 EventBus.emit(this.eventBus.notifications.SET_ONE, data);
             });
         }
+
+        console.log(this.isHome);
 
     }
 

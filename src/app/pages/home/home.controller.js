@@ -4,7 +4,7 @@ class HomeCtrl {
     constructor(AppConstants, $sce, $window, $scope, User, Notification) {
         'ngInject';
 
-        if (LANDING && Object.keys(LANDING).length >= 9) {
+        if (LANDING && Object.keys(LANDING).length >= 10) {
             return location.reload();
         }
 
@@ -19,6 +19,7 @@ class HomeCtrl {
         this.windowWidth = this._$window.innerWidth;
 
         this.iframe = angular.element('#iframe');
+        this.requestInProgress = false;
         this.initialIframeWidth = false;
         this.iframe.height(this.windowHeight);
 
@@ -267,8 +268,9 @@ class HomeCtrl {
     submitSubscribe() {
         if (!this.subscribe.email || !this.subscribe.userType) return;
 
+        if(this.requestInProgress) return;
         const subscribe = angular.copy(this.subscribe);
-
+        this.requestInProgress = true;
         subscribe.position = subscribe.position.join(', ');
         this._User.subscribe(subscribe).then((result)=> {
             this._Notification.success('You have successfully subscribed to notification list');
@@ -276,7 +278,7 @@ class HomeCtrl {
             this.emailFocused = false;
             this.subscribe = {
                 email: '',
-                userType: 'Individual',
+                userType: 'Personal',
                 position: [],
             };
         }, (err)=> {
@@ -284,6 +286,7 @@ class HomeCtrl {
             _.each(err, (val, key) => {
                 this._Notification.error(val.fieldName);
             });
+            this.requestInProgress = false;
         });
     }
 

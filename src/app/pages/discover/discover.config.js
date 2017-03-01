@@ -6,7 +6,7 @@ function DiscoverConfig($stateProvider) {
 			controller: 'DiscoverCtrl as $ctrl',
 			templateUrl: 'pages/discover/discover.html',
 			title: 'Discover',
-            pageClass:'',
+            pageClass:'new',
         })
 }
 

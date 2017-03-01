@@ -24,7 +24,7 @@ class StoreCtrl {
             }
 
             if (this.modulesList && this.myModules) {
-                this.modulesList = this._ModulesStore.handleMyModules();
+                this.modulesList = _.chunk(this._ModulesStore.handleMyModules(), 4);
             }
 
             console.log(this.modulesList);

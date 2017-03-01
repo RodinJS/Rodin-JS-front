@@ -40,6 +40,11 @@
         />
     </symbol>
 </svg>
+<style>
+    body.new .header .navbar-header{
+        width: auto;
+    }
+</style>
 <div class="page__wrapper">
 
     <header class="header navbar-fixed-top">
@@ -56,8 +61,8 @@
                     <a href=""
                        ng-mouseover="$ctrl.signUpHovered2 = true"
                        ng-mouseleave="$ctrl.signUpHovered2 = false"
-                       style=" max-width: 112px;min-width: 112px;"
-                       class="visible-xs-inline-block btn-mobile-login" ng-click="$ctrl.scrollToSignUp()">
+                       style=" max-width: 120px;min-width: 120px;"
+                       class="visible-xs-inline-block btn-mobile-login subscribe" ng-click="$ctrl.scrollToSignUp()">
                         {{$ctrl.signUpHovered2 ? 'Sign up' : 'Big blue button'}}
                     </a>
                     <a ui-sref="landing.login" class="visible-xs-inline-block btn-mobile-login">Login</a>
@@ -102,7 +107,7 @@
     <section class="section banner-section">
         <div class="banner-inner">
             <h1 class="title">THE FASTEST WAY TO BUILD INTERACTIVE VR EXPERIENCES</h1>
-            <h3 class="subtitle">Build once and deploy everywhere</h3>
+                        <h3 class="subtitle">Build once and deploy everywhere</h3>
             <div class="swiper-container" id="devicesSlider">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" data-devicename="samsungGear">
@@ -252,8 +257,8 @@
                            ng-click="$ctrl.notificationBoxTrigger($event)"
                            value="">
                     <span class="input-group-btn">
-					<button class="btn btn-default"
-                            style="min-width: 182px;max-width: 182px;"
+					<button class="btn btn-default subscribe-btn"
+                            ng-class="!$ctrl.subscribe.email || !$ctrl.subscribe.userType ? 'disabled' : ''"
                             ng-mouseover="$ctrl.signUpHovered3 = true"
                             ng-mouseleave="$ctrl.signUpHovered3 = false"
                             ng-click="$ctrl.submitSubscribe()"
@@ -265,12 +270,12 @@
                         <div class="radio-wrapper">
                             <label class="raido-inline">
                                 <input type="radio"
-                                       name="Individual"
-                                       value="Individual" checked
-                                       ng-init="$ctrl.subscribe.userType = 'Individual'"
+                                       name="Personal"
+                                       value="Personal" checked
+                                       ng-init="$ctrl.subscribe.userType = 'Personal'"
                                        ng-model="$ctrl.subscribe.userType">
                                 <span class="custom-radio"></span>
-                                <span class="name">Individual</span>
+                                <span class="name">Personal</span>
                             </label>
                             <label class="raido-inline">
                                 <input type="radio" name="Agency" value="Agency"  ng-model="$ctrl.subscribe.userType">
