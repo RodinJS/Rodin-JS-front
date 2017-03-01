@@ -158,7 +158,7 @@ const BANNER = {
                 break;
         }
 
-        const minusLeft = this.checkMobile() ? -20 : 0;
+        const minusLeft = this.checkMobile() ? 0 : 0;
 
         //console.log(devicePath[0].getBoundingClientRect());
 
