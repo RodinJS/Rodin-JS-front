@@ -100,7 +100,7 @@
                             <p class="form-description">Developer ID.</p>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-md-4 upload-label">
                             <label>Provisioning Profile</label>
                             <div class="main-upload-area">
                                 <label class="upload-area" ng-show="$ctrl.files.profile.name === ''">
@@ -113,15 +113,15 @@
                                 </label>
                                 <img ng-show="$ctrl.files.profile.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
                                      class="uploaded-file-icon">
-                                <p class="area-label">{{!!$ctrl.files.profile.name ? $ctrl.files.profile.name : 'Drag or Click'}}</p>
+                                <!--<p class="area-label">{{!!$ctrl.files.profile.name ? $ctrl.files.profile.name : 'Drag or Click'}}</p>-->
                             </div>
-                            <div class="required-field-actions margin-0-important">
-                                <button type="button" class="btn btn-primary"
-                                        onclick="document.querySelector('#profile-file').click()">browse</button>
-                            </div>
+                            <!--<div class="required-field-actions margin-0-important">-->
+                                <!--<button type="button" class="btn btn-primary"-->
+                                        <!--onclick="document.querySelector('#profile-file').click()">browse</button>-->
+                            <!--</div>-->
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-md-4 upload-label">
                             <label>Distribution/Development certificate.</label>
                             <div class="main-upload-area">
                                 <label class="upload-area" ng-show="$ctrl.files.cert.name === ''">
@@ -134,17 +134,17 @@
                                 </label>
                                 <img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
                                      class="uploaded-file-icon">
-                                <p class="area-label">{{ !!$ctrl.files.cert.name ? $ctrl.files.cert.name : 'Drag or Click' }}</p>
+                                <!--<p class="area-label">{{ !!$ctrl.files.cert.name ? $ctrl.files.cert.name : 'Drag or Click' }}</p>-->
                             </div>
-                            <div class="required-field-actions margin-0-important">
-                                <button type="button" class="btn btn-primary"
-                                        onclick="document.querySelector('#cert-file').click()">browse</button>
-                            </div>
+                            <!--<div class="required-field-actions margin-0-important">-->
+                                <!--<button type="button" class="btn btn-primary"-->
+                                        <!--onclick="document.querySelector('#cert-file').click()">browse</button>-->
+                            <!--</div>-->
                         </div>
 
-                        <div class="form-group">
-                            <label>App icon - upload .png 1024x1024</label>
-                            <div class="main-upload-area">
+                        <div class="form-group col-md-4 upload-label">
+                            <label>App icon</label>
+                            <div class="main-upload-area text-center">
                                 <label class="upload-area" ng-show="$ctrl.files.icon.name === ''">
                                     <div class="area-content">.png</div>
                                     <input type="file"
@@ -156,12 +156,13 @@
                                 <img ng-show="$ctrl.files.icon.name !== ''"
                                      ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"
                                      class="uploaded-file-icon">
-                                <p class="area-label">{{ !!$ctrl.files.icon.name ? $ctrl.files.icon.name : 'Drag or Click' }}</p>
+                                <p class="description">upload .png 1024x1024</p>
+                                <!--<p class="area-label">{{ !!$ctrl.files.icon.name ? $ctrl.files.icon.name : 'Drag or Click' }}</p>-->
                             </div>
-                            <div class="required-field-actions margin-0-important">
-                                <button type="button" class="btn btn-primary"
-                                        onclick="document.querySelector('#icon-file').click()">browse</button>
-                            </div>
+                            <!--<div class="required-field-actions margin-0-important">-->
+                                <!--<button type="button" class="btn btn-primary"-->
+                                        <!--onclick="document.querySelector('#icon-file').click()">browse</button>-->
+                            <!--</div>-->
                         </div>
 
                         <div class="btn-wrapper" style="text-align: center">

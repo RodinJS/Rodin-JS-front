@@ -279,3 +279,38 @@ body{
     }
   }
 }
+.page-404{
+  .main-container{
+    .page-404-content{
+      text-align: center;
+      position: absolute;
+      top: 150px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      a.btn-app:hover {
+        background: $color-primary;
+        color: white;
+      }
+    ;
+    }
+    h1{
+      font-size: 150px;
+      line-height: .78;
+      font-weight: 700;
+      color: rgba($white, .2);
+      margin: 0;
+      margin-bottom: 40px;
+    }
+    h5{
+      color: $white;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+    .btn-primary{
+      height: 42px;
+      padding: 12px;
+      font-size: 11px 12px;
+    }
+  }
+}

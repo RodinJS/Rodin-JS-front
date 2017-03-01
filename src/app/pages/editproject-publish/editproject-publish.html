@@ -33,13 +33,12 @@
                         </ul>
                     </div>
                     <h3 class="section-title">Publish project</h3>
-                    <div ng-show="$ctrl.project.publishDate">
+                    <div ng-show="$ctrl.project.publishDate" class="publish-date">
                         <p class="description">Your project is published on
                             <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
                         </p>
-                        <p class="description">Last publish at {{$ctrl.project.publishDate | date: 'MMMM dd yyyy.
-                            h:mm:ss a'}}</p>
-                        <div class="margin-top-40">
+                        <p class="description">Last publish at {{$ctrl.project.publishDate | date: 'MMMM dd yyyy.h:mm:ss a'}}</p>
+                        <div class="margin-top-40 publish-buttons">
                             <button class="btn btn-primary" ng-click="$ctrl.modals.updateVersion = true;">Update
                                 Version
                             </button>
@@ -47,9 +46,9 @@
                             <button class="btn btn-primary" ng-click="$ctrl.modals.unpublish = true;">Unpublish</button>
                         </div>
                     </div>
-                    <div ng-hide="$ctrl.project.publishDate">
+                    <div ng-hide="$ctrl.project.publishDate" class="publish-date">
                         <p class="description">This project is not published yet.</p>
-                        <div class="margin-top-40">
+                        <div class="margin-top-40 publish-buttons">
                             <button class="btn btn-primary" ng-click="$ctrl.publish()">Publish</button>
                         </div>
                     </div>
@@ -62,7 +61,7 @@
      ng-class="{'display-block': $ctrl.modals.updateVersion, 'display-none': !$ctrl.modals.updateVersion}">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Warning</h2>
+            <h3>Warning</h3>
         </div>
         <div class="modal-body padding-0-important">
             <p class="description">
@@ -89,7 +88,7 @@
      ng-class="{'display-block': $ctrl.modals.rollBack, 'display-none': !$ctrl.modals.rollBack}">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Roll back </h2>
+            <h3>Roll back </h3>
         </div>
         <div class="modal-body padding-0-important">
             <p class="description">
@@ -122,7 +121,7 @@
      ng-class="{'display-block': $ctrl.modals.unpublish, 'display-none': !$ctrl.modals.unpublish}">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Warning</h2>
+            <h3>Warning</h3>
         </div>
         <div class="modal-body padding-0-important">
             <p class="description">

@@ -43,6 +43,7 @@ p {
 }
 
 .modal-content {
+  border-radius: 6px;
   padding: 30px;
   position: relative;
   background-color: $bg-primary;
@@ -75,10 +76,14 @@ p {
   p.description {
     line-height: 24px;
     font-size: 16px;
+    margin-top: 24px;
   }
   select {
     border: 2px solid rgba(0, 139, 242, 0.4);
     background-color: rgba(216, 216, 216, 0.09);
+  }
+  .select-group {
+    color: white;
   }
   //padding: 2px 0;
 }
@@ -100,16 +105,22 @@ p {
     & button {
       background: $color-primary !important;
       color: white;
-      font-size: 16px ;
+      font-size: 16px;
       height: 35px !important;
       padding-top: 0;
       padding-bottom: 0;
       background: transparent;
+      border: none !important;
+      &:hover {
+        color: $color-text-primary;
+        background-color: #006ebf !important;
+        border: none;
+      }
     }
 
     & a {
       color: $color-text-gray;
-      font-size: 16px ;
+      font-size: 16px;
       line-height: 31px !important;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
@@ -189,7 +200,7 @@ p {
         &:first-child {
           color: $colorSemiWhite;
           padding-left: 0;
-          width: 35%;
+          width: 36%;
         }
         &:last-child {
           &:after {

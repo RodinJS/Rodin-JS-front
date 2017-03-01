@@ -70,11 +70,11 @@
                             <label>Project url</label>
                             <input type="text" class="form-control" placeholder="" value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}" disabled>
                         </div>
-                        <div class="form-group" custom-input>
+                        <!--<div class="form-group" custom-input>
                             <label>Meta Tags</label>
                             <tags-input style="height:100%; min-height:55px" max-length="32" min-length="3" class="form-control" ng-model="$ctrl.project.tags"></tags-input>
                             <p class="form-description">Meta tags are a great way for webmasters to provide search engines with information about their sites</p>
-                        </div>
+                        </div>-->
                     </div>
 
                     <div class="section section-vr-space">
@@ -83,10 +83,8 @@
                             <div class="drag-item first">
                                 <div class="drag-area first">
                                     <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#thumbnail-img').click()">
-                                        <!--<i ng-if="!$ctrl.project.thumbnail" class="icon icon-invalid"></i>-->
+                                        <i ng-if="!$ctrl.project.thumbnail" class="icon icon-invalid"></i>
                                         <img width="166" height="166" ng-src="{{$ctrl.project.thumbnail}}" ng-if="!!$ctrl.project.thumbnail" alt="">
-                                        <img width="166" height="166" class="thumbnail-image-tap" alt="">
-                                        <span class="imgDescription">Hello</span>
                                     </div>
                                     <p class="drag-instruct">
                                     <input class="hidden" type="file" id="thumbnail-img" data-ng-model="avatarUrl" accept="image/jpeg,image/jpg,image/png,"
@@ -154,7 +152,7 @@
                     <div class="section section-project-content last-section">
                         <h3 class="section-title">Description</h3>
                         <div class="form-group">
-                            <label for="area">Description</label>
+                            <!--<label for="area">Description</label>-->
                             <textarea id="area" limit-to="256" style="width:100%" ng-model="$ctrl.project.description" class="form-control area-control"></textarea>
                             <span class="letter-quantity">
                                 <span>{{256-projectDescription.length}}</span>/256

@@ -161,9 +161,16 @@ $distance: 34;
     }
   }
 
+  .upload-label {
+    text-align: center !important;
+  }
   .btn-wrapper {
     button {
+      color: $color-text-gray;
       padding: 12px 30px;
+      &:hover {
+        color: white;
+      }
     }
     padding-top: 5px;
   }
@@ -319,7 +326,7 @@ $distance: 34;
     margin: 0;
     border: none;
     //border-color: #DEDEDE !important;
-    background: black;
+    background: $color-text-gray;
     box-shadow: #dfdfdf 0 0 0 0 inset;
     transition: .3s ease-out all;
     -webkit-transition: .3s ease-out all;
@@ -525,12 +532,26 @@ $distance: 34;
     }
   }
   .section {
-    line-height: 32px;
     label {
       font-size: 16px;
     }
   }
-
+  .section-switch {
+    line-height: 32px;
+  }
+  .section-connected-accounts {
+    .title {
+      font-size: 16px;
+      color: white;
+    }
+    .synced {
+      cursor: pointer;
+      color: $color-primary;
+      &:hover {
+        color: white;
+      }
+    }
+  }
   .main-upload-area {
     display: block;
     font-size: 14px;
@@ -545,6 +566,8 @@ $distance: 34;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      margin: 0 auto;
+
       &.generate {
         border: 1px solid rgba(white, .2);
         background-color: rgba(white, .02);
@@ -577,6 +600,11 @@ $distance: 34;
       &:after {
         content: '\00a0';
       }
+    }
+    .description {
+      font-size: 13px;
+      color: $color-text-gray;
+      margin-top: 13px;
     }
   }
 

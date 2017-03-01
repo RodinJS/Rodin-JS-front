@@ -2,7 +2,7 @@
     <div class="container">
         <div class="selet-template-container">
             <div class="main-container">
-                <h3 class="title"> Account Settings</h3>
+                <h1 class="title"> Account Settings</h1>
                 <div class="main-form">
                     <div class="content-navbar">
                         <ul class="navbar-list">
@@ -15,7 +15,6 @@
                     </div>
 
                     <div ng-show="!$ctrl.privacy">
-                        <div class="section">
                             <h2 class="section-title">Account Details</h2>
                             <table class="table main-table">
                                 <tbody>
@@ -49,8 +48,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-                        </div>
-
                         <form name="profile" novalidate>
                             <div class="section section-connected-accounts">
                                 <h2 class="section-title">Connected Accounts</h2>
@@ -113,15 +110,15 @@
                                                 </button>
                                                 <div class="synced row" ng-if="$ctrl.currentUser.github">
                                                     <div class="col-md-4" style="font-size: 14px;">
-                                                        <i class=" icon icon-send"></i> Synced as
+                                                        <i class=" icon icon-send" ng-click="$ctrl.openUnSync('github')"></i> Synced as
                                                         ({{$ctrl.currentUser.github}})
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <button type="button"
-                                                                ng-click="$ctrl.openUnSync('github')"
-                                                                class="btn btn-primary border-orange">Unsync from Github
-                                                        </button>
-                                                    </div>
+                                                    <!--<div class="col-md-6">-->
+                                                        <!--<button type="button"-->
+                                                                <!--ng-click="$ctrl.openUnSync('github')"-->
+                                                                <!--class="btn btn-primary border-orange">Unsync from Github-->
+                                                        <!--</button>-->
+                                                    <!--</div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -173,7 +170,7 @@
                                 </div>
                             </div>
 
-                            <div class="section">
+                            <!--<div class="section">-->
                             <h2 class="section-title">Account Info</h2>
                             <div class="form-group" custom-input>
                                 <label>First Name</label>
@@ -231,20 +228,21 @@
                                 </label>
                             </div>
 
-                            <div class="btn-wrapper">
-                                <button type="submit" class="btn btn-primary"
+                            <div class="btn-wrapper text-center">
+                                <button type="submit" class="btn btn-submit btn-default"
                                         ng-click="$ctrl.updateProfile()">
                                     Update Profile
                                 </button>
                             </div>
 
 
-                        </div>
+                        <!--</div>-->
                         </form>
-
                     </div>
 
                     <div ng-show="$ctrl.privacy">
+                        <div class="section">
+
                         <h2 class="section-title">Change Password</h2>
 
                         <form class="form-wrapper" data-ng-submit="$ctrl.updatePassword()"
@@ -281,18 +279,18 @@
                             </p>
 
 
-                            <div class="btn-wrapper"
+                            <div class="btn-wrapper text-center"
                                  data-ng-class="{'has-error': $ctrl.passwordChangeResponse === 'error', 'has-success': $ctrl.passwordChangeResponse === 'success'}">
                                 <button type="submit"
                                         data-ng-disabled="!changePasswordForm.$valid"
-                                        class="btn btn-primary">Update Password
+                                        class="btn btn-submit btn-default">Update Password
                                 </button>
                               <!--  <p class="help-block text-small error-help-block">Something went wrong.</p>
                                 <p class="help-block text-small success-help-block">Excellent. Password
                                     changed.</p>-->
                             </div>
                         </form>
-
+                        </div>
                     </div>
 
                 </div>
