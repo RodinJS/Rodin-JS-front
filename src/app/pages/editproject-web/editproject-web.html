@@ -57,12 +57,12 @@
                             <p class="form-description">Please make "A record" redirect of your domain/subdomain to "178.62.211.113" IP address</p>
                         </div>
                         <div class="btn-wrapper" style="text-align: center">
-                            <button type="submit" class="btn btn-default btn-submit"
+                            <button type="submit" class="btn btn-default btn-submit" style="margin-right:10px"
                                     ng-click="$ctrl.addDomain($event)"
                                     ng-disabled="!addDomain.$valid || !$ctrl.project.publishedPublic">
                                 Submit
                             </button>
-                            <a href="" class="btn link" ng-if="$ctrl.project.domain" ng-click="$ctrl.deleteDomain($event)">
+                            <a href="" class="btn link" style="padding:12px 30px" ng-if="$ctrl.project.domain" ng-click="$ctrl.deleteDomain($event)">
                                 Delete domain
                             </a>
                         </div>
