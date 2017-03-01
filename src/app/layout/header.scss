@@ -7,6 +7,9 @@
   }
   &.navbar-fixed-top {
     padding-top: 25px;
+    .header-background{
+      display: none;
+    }
     .header-auth {
       padding: 0;
       min-height: 50px;
