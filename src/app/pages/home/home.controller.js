@@ -147,6 +147,8 @@ class HomeCtrl {
         if (typeof scroller === 'boolean')
             this.hoveredIframe = scroller;
 
+        //console.log(this.hoveredIframe);
+        //console.log(this.disablePointer);
         if (typeof wheeler === 'boolean') {
 
             if (this.hoveredIframe) {
@@ -218,7 +220,8 @@ class HomeCtrl {
             if ($iframeBox.innerWidth() >= this.windowWidth) {
                 angular.element('body').css({ overflow: 'hidden' });
                 this.disablePointer = false;
-                this.hoveredIframe = true;
+                //this.hoveredIframe = true;
+
             }
 
             if (isBottom && e.deltaY < 0) {
