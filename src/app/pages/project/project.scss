@@ -30,10 +30,10 @@ $distance: 34;
   p {
     &.title-description {
       line-height: 1.5;
-      color: $color-primary;
+      color: white;
       margin-top: 0;
       margin-bottom: 33px;
-      text-align: center;
+      //text-align: center;
     }
   }
 
@@ -79,7 +79,7 @@ $distance: 34;
 
   .radio-list {
     //padding-top: 44px;
-    padding-bottom: 30px;
+    padding-bottom: 45px;
     margin: 10px 0 0 0;
     @include cf();
     li {
@@ -130,6 +130,14 @@ $distance: 34;
             span {
               visibility: visible;
               opacity: 1;
+              z-index: 1;
+            }
+            .custom-radio-hover-background {
+              width: 100%;
+              height: 100%;
+              z-index: 0;
+              background: black;
+              opacity: .5;
             }
           }
           span {
@@ -154,6 +162,7 @@ $distance: 34;
           top: 100%;
           left: 0;
           right: 0;
+          font-weight: 400;
           text-align: center;
           margin-top: 15px;
         }
@@ -262,7 +271,8 @@ $distance: 34;
           top: 55px;
           left: -108px;
           width: 165px;
-          background-color: $black;
+          background-color: $bg-primary;
+          border: none;
           box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.50);
           padding: 10px 0;
           li {
@@ -276,7 +286,10 @@ $distance: 34;
               }
             }
             &:hover {
-              background-color: rgba(36, 36, 39, 0.70);
+              > a:hover {
+                color: $color-text-gray;
+              }
+              //background-color: rgba(36, 36, 39, 0.70);
             }
             &:focus {
               background: none;
@@ -415,6 +428,10 @@ $distance: 34;
           border-radius: 3px;
           border: 2px dashed $sectionBorder;
           display: table;
+          cursor: pointer;
+          &:hover {
+            border: 2px dashed $color-primary;
+          }
           .center-row {
             display: table-cell;
             vertical-align: middle;
@@ -543,12 +560,21 @@ $distance: 34;
     .title {
       font-size: 16px;
       color: white;
+      margin-top: 4px;
+      font-family: "Roboto";
     }
     .synced {
       cursor: pointer;
       color: $color-primary;
       &:hover {
         color: white;
+      }
+      span {
+        white-space: nowrap;
+        font-size: 14px;
+      }
+      > div {
+        padding-top: 2px;
       }
     }
   }
@@ -563,11 +589,15 @@ $distance: 34;
       border: 2px dashed rgba(white, .2);
       border-radius: 4px;
       position: relative;
+      transition: .3s ease-out all;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       margin: 0 auto;
-
+      cursor: pointer;
+      &:hover {
+        border: 2px dashed $color-primary;
+      }
       &.generate {
         border: 1px solid rgba(white, .2);
         background-color: rgba(white, .02);
@@ -616,7 +646,23 @@ $distance: 34;
     border-width: 2px;
     padding: 4px 30px;
   }
+  .form-username {
+    input {
+      color: $color-primary;
+    }
+  }
   .form-description {
     font-size: 13px !important;
+  }
+  .create-project {
+    label {
+      font-weight: 400;
+    }
+    .main-placeholder {
+      color: $color-primary !important;
+    }
+    ::-webkit-input-placeholder {
+      color: $color-text-gray;
+    }
   }
 }

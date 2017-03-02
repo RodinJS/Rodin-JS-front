@@ -7,7 +7,7 @@
   }
   &.navbar-fixed-top {
     padding-top: 25px;
-    .header-background{
+    .header-background {
       display: none;
     }
     .header-auth {
@@ -15,7 +15,6 @@
       min-height: 50px;
       margin-bottom: 0;
       background: transparent;
-
     }
   }
   &.sticky {
@@ -168,7 +167,7 @@
     float: left;
     padding-top: 7px;
     .menu-list {
-      display: inline-block;
+      display: none;
       vertical-align: middle;
       > li {
         display: inline-block;
@@ -206,8 +205,8 @@
   .dropdown-menu {
     // background-color: rgba(#D8D8D8, .2);
     background-color: #09192e;
-    box-shadow: 0 3px 8px 0 rgba(102, 175, 233, 0.3);
-    border-radius: 0;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px 0 black;
     border: none;
     padding: 8px 0;
     margin: 0;
@@ -220,7 +219,19 @@
       min-width: 230px;
       left: auto;
       right: 0;
+      .notification-list {
+        position: relative;
+        height: 120px;
+        padding: 6px 15px;
+        .no-notifications {
+          position: absolute;
+          top: 51px;
+          left: 42px;
+        }
+      }
       .notification-wrapper {
+        border-top-left-radius: 6px ;
+        border-top-right-radius: 6px ;
         font-weight: 400;
         color: white;
         margin: 0;
@@ -290,18 +301,21 @@
         &.no-notifications {
           font-size: 16px;
           text-align: center;
+          color: $color-primary;
+          opacity: 0.5;
         }
       }
     }
     &.account-dropdown-menu {
       left: auto;
       right: 0;
-      padding-top: 0;
       min-width: 230px;
       padding: 20px 30px;
+      line-height: 32px;
       h4 {
         font-size: 18px;
-        color: white;
+        color: $color-primary;
+        font-weight: 600;
         margin: 0;
         margin-bottom: 10px;
       }
@@ -313,6 +327,12 @@
             display: block;
             padding: 3px 0;
             font-weight: 400;
+            color: $color-text-secondary;
+          }
+          &:last-child {
+            a {
+              color: $color-text-gray !important;
+            }
           }
         }
       }
@@ -423,7 +443,7 @@
     width: 100%;
     background-color: transparent;
     font-size: 16px;
-    color: #787878;
+    color: white;
     padding-left: 10px;
     @include placeholder($color: #787878);
     &:focus {
@@ -595,7 +615,7 @@
           margin-top: 10px;
           padding: 15px 13px;
           margin-right: 3px;
-          &.subscribe{
+          &.subscribe {
             border: 1px solid #008BF2;
             border-radius: 50px;
             text-align: center;

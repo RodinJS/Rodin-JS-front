@@ -79,7 +79,7 @@
 
                     <div class="section section-vr-space">
                         <h3 class="section-title">Project Thumbnail</h3>
-                        <div class="drag-cont">
+                        <div class="drag-cont upload-label">
                             <div class="drag-item first">
                                 <div class="drag-area first">
                                     <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#thumbnail-img').click()">
@@ -91,7 +91,7 @@
                                            onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)" name="avatar"/>
                                     </p>
                                 </div>
-                                <h5 class="section-small-title">We recomend to upload a maximum of 2Mb size image.</h5>
+                                <h5 class="section-small-title text-left">We recomend to upload a maximum of 2Mb size image.</h5>
                             </div>
                             <div class="drag-item hidden">
                                 <h5 class="section-small-title">Favicon</h5>
@@ -176,7 +176,7 @@
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
             <h3 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h3>
-            <h3 ng-show="!!$ctrl.project.publishDate">Warning</h3>
+            <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
         </div>
         <div class="modal-body padding-0-important" ng-if="!!$ctrl.project.publishDate">
             <p class="description word-wrap">

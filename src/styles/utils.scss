@@ -153,6 +153,11 @@ p {
 }
 
 .main-table {
+  tr {
+    td.text-primary {
+      width: 40%;
+    }
+  }
   &.table-secondary {
     tbody {
       > tr {
