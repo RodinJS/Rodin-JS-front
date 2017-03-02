@@ -34,12 +34,13 @@
                    <li>
                        <a ui-sref="landing.store">example</a>
                    </li>-->
+
                    <li class="dropdown" uib-dropdown auto-close="outsideClick">
                        <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown" role="button"
                           aria-haspopup="true" aria-expanded="false">
                            More <i class="rd rd-angle-down"></i>
                        </a>
-                       <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel">
+                       <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel" ng-if="$ctrl.pagesList.length <= 0">
                            <li class="rodin-hide">
                                <a ui-sref="landing.discover">How it works</a>
                            </li>
@@ -54,6 +55,11 @@
                            </li>
                            <li class="rodin-hide">
                                <a ui-sref="landing.privacy">Terms and Conditions</a>
+                           </li>
+                       </ul>
+                       <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel" ng-if="$ctrl.pagesList.length > 0">
+                           <li class="rodin-hide" ng-repeat="pages in $ctrl.pagesList">
+                               <a ui-sref="landing.pages({pageURL:'{{pages.slug}}'})">{{pages.title}}</a>
                            </li>
                        </ul>
                    </li>
