@@ -14,6 +14,7 @@ componentsModule.directive('compile', Utils.Compile);
 componentsModule.directive('limitTo', Utils.limitTo);
 componentsModule.directive('closeModal', Utils.CloseModal);
 componentsModule.directive('ngAutocomplete', Utils.NgAutocomplete);
+componentsModule.directive('codify', ['$timeout', Utils.Codify]);
 
 import EditorNavigation from './editorNavigation/index';
 componentsModule.directive('editorNavigation', EditorNavigation);
