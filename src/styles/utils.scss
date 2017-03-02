@@ -232,3 +232,33 @@ p {
     }
   }
 }
+
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.margin-top-40 {
+  margin-top: 40px !important;
+}
+
+.margin-0-important {
+  margin: 0 !important;
+}
+
+.padding-bottom-20 {
+  padding-bottom: 20px;
+}
+
+.padding-bottom-20-important {
+  padding-bottom: 20px !important;
+}
+
+.padding-bottom-40-important {
+  padding-bottom: 40px !important;
+}
+
+.padding-0-important {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
