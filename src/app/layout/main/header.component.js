@@ -3,8 +3,10 @@ class AppHeaderCtrl {
         'ngInject';
         this.appName = AppConstants.appName;
         this.currentUser = User.current;
+        this._User = User;
         this.notificationsStore = NotificationsStore;
         this.eventBus = EventBus;
+        this._$state = $state;
         this.try = false;
 
         this._PagesService = PagesService;
@@ -17,11 +19,16 @@ class AppHeaderCtrl {
 
         this._PagesStore.subscribeAndInit($scope, () => {
             this.pagesList = this._PagesStore.getPagesList();
-            // console.log(this.pagesList);
             if (this.pagesList.length <= 0 && !this.try) {
                 this.try = true;
                 return this.getPagesList();
             }
+
+            if (this.pagesList.length > 0) {
+                this.pagesSection1 = _.slice(this.pagesList, 0, 3);
+                this.pagesSection2 = _.slice(this.pagesList, 3, this.pagesList.length);
+            }
+
         });
 
         $scope.$watch('User.current', (newUser) => {
@@ -50,6 +57,7 @@ class AppHeaderCtrl {
                 console.log(pagesList);
                 this.eventBus.emit(this.eventBus.pages.SET, pagesList);
             },
+
             err => {
                 console.log(err);
             }
@@ -92,6 +100,13 @@ class AppHeaderCtrl {
                 console.log(error);
             }
         );
+    }
+
+    gotToHome() {
+        if (this._User.current) {
+            return this._$state.go('app.dashboard');
+        }
+        return window.location.href = '/';
     }
 
 }

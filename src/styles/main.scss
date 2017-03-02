@@ -106,7 +106,7 @@ body{
       font-family: $fontOpenSans;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      background-color: $colorBodyBg;
+      background-color:  $bg-primary;
       position: relative;
       height: 100%;
       &.page-create-project {

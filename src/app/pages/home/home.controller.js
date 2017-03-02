@@ -69,6 +69,8 @@ class HomeCtrl {
         });
 
         $scope.$on('scrollDown', (event, data) => this.scrollHandler({ deltaY: 1 }));
+
+        $scope.$on('notificationBoxTrigger', (event, data)=> this.notificationBoxTrigger);
     }
 
     notificationBoxTrigger($event, backdropClick) {

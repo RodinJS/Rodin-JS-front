@@ -14,7 +14,7 @@
            </a>
            <a href="" ng-click="$ctrl.scrollToSignUp()" class="visible-xs-inline-block btn-mobile-login">Sign up</a>
            <a ui-sref="landing.login" class="visible-xs-inline-block btn-mobile-login">Login</a>
-           <a data-ui-sref="app.dashboard" class="logo navbar-brand">
+           <a ng-click="$ctrl.gotToHome()" class="logo navbar-brand">
                <img alt="Rodin" src="/images/landing/general/logo.svg">
            </a>
            <div class="header-menu">
@@ -25,22 +25,16 @@
                    <li>
                        <a ui-sref="landing.store">Store</a>
                    </li>
-                  <!-- <li>
-                       <a ui-sref="landing.store">example</a>
-                   </li>
-                   <li>
-                       <a ui-sref="landing.store">example</a>
-                   </li>
-                   <li>
-                       <a ui-sref="landing.store">example</a>
-                   </li>-->
+                    <li ng-repeat="page in $ctrl.pagesSection1">
+                        <a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+                    </li>
 
-                   <li class="dropdown" uib-dropdown auto-close="outsideClick">
+                   <li class="dropdown" uib-dropdown auto-close="outsideClick"  ng-if="$ctrl.pagesSection2.length > 0">
                        <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown" role="button"
                           aria-haspopup="true" aria-expanded="false">
                            More <i class="rd rd-angle-down"></i>
                        </a>
-                       <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel" ng-if="$ctrl.pagesList.length <= 0">
+                       <!--<ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel" ng-if="$ctrl.pagesList.length <= 0">
                            <li class="rodin-hide">
                                <a ui-sref="landing.discover">How it works</a>
                            </li>
@@ -56,9 +50,9 @@
                            <li class="rodin-hide">
                                <a ui-sref="landing.privacy">Terms and Conditions</a>
                            </li>
-                       </ul>
-                       <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel" ng-if="$ctrl.pagesList.length > 0">
-                           <li class="rodin-hide" ng-repeat="pages in $ctrl.pagesList">
+                       </ul>-->
+                       <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel" ng-if="$ctrl.pagesSection2.length > 0">
+                           <li class="rodin-hide" ng-repeat="pages in $ctrl.pagesSection2">
                                <a ui-sref="landing.pages({pageURL:'{{pages.slug}}'})">{{pages.title}}</a>
                            </li>
                        </ul>

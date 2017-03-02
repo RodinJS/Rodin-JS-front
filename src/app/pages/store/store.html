@@ -9,6 +9,7 @@
                         <li ng-repeat="module in list">
                             <div class="radio-wrapper">
                                 <label class="label-radio">
+
                                     <input type="radio" name="template">
                                     <span class="custom-radio" style="background-image: url({{module.thumbnail}});">
                                     <div class="module-content long">
@@ -20,26 +21,26 @@
                                          <div class="content">
                                              {{module.description.substring(0, 60)}}...
                                         </div>
-                        <div class="content-bottom">
-                                                 <p class="pull-left">
-                                                     <a class="circle"
-                                                        ng-class="module.subscribed && !module.unsubscribed ? 'active' : ''"
-                                                        popover-placement="top"
-                                                        popover-class="store-popover"
-                                                        uib-popover="{{module.subscribed && !module.unsubscribed ? 'Unsubscribe' : 'Subscribe'}}"
-                                                        popover-trigger="'mouseenter'"
-                                                        ng-click="$ctrl.moduleSubscribe(module)"
-                                                        href="">
-                                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                     </a>
-                                                     <a class="circle" popover-placement="top"
-                                                        popover-class="store-popover"
-                                                        uib-popover="Example"
-                                                        popover-trigger="'mouseenter'">
-                                                         <i class="fa fa-eye" aria-hidden="true"></i>
-                                                     </a>
-                                                 </p>
-                                                 <p class="pull-right oval">$ {{module.price || '0.0'}}</p>
+                                    <div class="content-bottom">
+                                             <p class="pull-left">
+                                                 <a class="circle"
+                                                    ng-class="module.subscribed && !module.unsubscribed ? 'active' : ''"
+                                                    popover-placement="top"
+                                                    popover-class="store-popover"
+                                                    uib-popover="{{module.subscribed && !module.unsubscribed ? 'Unsubscribe' : 'Subscribe'}}"
+                                                    popover-trigger="'mouseenter'"
+                                                    ng-click="$ctrl.moduleSubscribe(module)"
+                                                    href="">
+                                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                 </a>
+                                                 <a class="circle" popover-placement="top"
+                                                    popover-class="store-popover"
+                                                    uib-popover="Example"
+                                                    popover-trigger="'mouseenter'">
+                                                     <i class="fa fa-eye" aria-hidden="true"></i>
+                                                 </a>
+                                             </p>
+                                             <p class="pull-right oval">$ {{module.price || '0.0'}}</p>
                                              </div>
                                     </div>
                                 </span>
