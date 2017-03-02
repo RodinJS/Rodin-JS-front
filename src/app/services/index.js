@@ -34,4 +34,7 @@ servicesModule.service('VCS', VCSService);
 import ModulesService from './modules.service';
 servicesModule.service('ModulesService', ModulesService);
 
+import PagesService from './pages.service';
+servicesModule.service('PagesService', PagesService);
+
 export default servicesModule;

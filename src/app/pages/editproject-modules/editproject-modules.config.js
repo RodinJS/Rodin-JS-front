@@ -9,7 +9,7 @@ function EditProjectModulesConfig($stateProvider) {
         controllerAs: '$ctrl',
         templateUrl: 'pages/editproject-modules/editproject-modules.html',
         title: 'Edit Project Modules',
-        pageClass: 'page-account',
+        pageClass: 'page-account new',
         resolve: {
             auth: function (User) {
                 return User.ensureAuthIs(true);

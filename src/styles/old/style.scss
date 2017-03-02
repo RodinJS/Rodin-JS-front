@@ -715,6 +715,7 @@ h3 {
       cursor: pointer;
       &.create-project {
         cursor: pointer;
+        border: 1px dashed #ff9a2b;
         .item-description {
           background: transparent;
           visibility: visible;

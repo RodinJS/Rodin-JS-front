@@ -40,9 +40,14 @@
         />
     </symbol>
 </svg>
+<style>
+    body.new .header .navbar-header{
+        width: auto;
+    }
+</style>
 <div class="page__wrapper">
 
-    <header class="header navbar-fixed-top">
+    <!--<header class="header navbar-fixed-top">
         <nav class="navbar navbar-primary">
             <div class="container">
                 <div class="navbar-header">
@@ -67,7 +72,7 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-center" id="HeaderNavber">
                     <ul class="nav navbar-nav navbar-center">
-                        <!--  <li class="active"><a href="#">Store <span class="sr-only">(current)</span></a>
+                        &lt;!&ndash;  <li class="active"><a href="#">Store <span class="sr-only">(current)</span></a>
                           </li>
                           <li><a href="#">HowTo</a>
                           </li>
@@ -78,7 +83,7 @@
                           <li><a href="#">Support</a>
                           </li>
                           <li><a href="#">Blog</a>
-                          </li>-->
+                          </li>&ndash;&gt;
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="hidden-xs">
@@ -97,12 +102,12 @@
             </div>
         </nav>
         <div class="header-backdrop"></div>
-    </header>
+    </header>-->
 
     <section class="section banner-section">
         <div class="banner-inner">
             <h1 class="title">THE FASTEST WAY TO BUILD INTERACTIVE VR EXPERIENCES</h1>
-            <h3 class="subtitle">Build once and deploy everywhere</h3>
+                        <h3 class="subtitle">Build once and deploy everywhere</h3>
             <div class="swiper-container" id="devicesSlider">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" data-devicename="samsungGear">
@@ -265,12 +270,12 @@
                         <div class="radio-wrapper">
                             <label class="raido-inline">
                                 <input type="radio"
-                                       name="Individual"
-                                       value="Individual" checked
-                                       ng-init="$ctrl.subscribe.userType = 'Individual'"
+                                       name="Personal"
+                                       value="Personal" checked
+                                       ng-init="$ctrl.subscribe.userType = 'Personal'"
                                        ng-model="$ctrl.subscribe.userType">
                                 <span class="custom-radio"></span>
-                                <span class="name">Individual</span>
+                                <span class="name">Personal</span>
                             </label>
                             <label class="raido-inline">
                                 <input type="radio" name="Agency" value="Agency"  ng-model="$ctrl.subscribe.userType">

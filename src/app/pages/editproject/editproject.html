@@ -1,122 +1,116 @@
 <div class="page__wrapper">
-
-    <div class="main-container">
-        <h1 class="main-title">Space/<i class="icon icon-lock"></i><span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
-        <div class="page-content">
-            <div class="content-navbar">
-                <ul class="navbar-list">
-                    <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
-                    <li class="other-links dropdown" uib-dropdown>
-                        <a id="dLabel" role="button" data-uib-dropdown-toggle>
-                            <i class="icon icon-more"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>
-                            <li>
-                                <a href="{{$ctrl.project.editorUrl}}">Editor</a>
+    <div class="container">
+        <div class="selet-template-container">
+            <div class="main-container">
+                <h1 class="title text-center">
+                    <i class="icon icon-private"></i>
+                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
+                <div class="main-form">
+                    <div class="content-navbar">
+                        <ul class="navbar-list">
+                            <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
+                            <li class="other-links dropdown" uib-dropdown>
+                                <a id="dLabel" role="button" data-uib-dropdown-toggle>
+                                    <i class="icon icon-more"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>
+                                    <li>
+                                        <a href="{{$ctrl.project.editorUrl}}">Editor</a>
+                                    </li>
+                                    <!--<li class="disabled">-->
+                                    <!--<a href="#">Designer</a>-->
+                                    <!--</li>-->
+                                    <!--<li class="disabled">-->
+                                    <!--<a href="#">Duplicate</a>-->
+                                    <!--</li>-->
+                                </ul>
                             </li>
-                            <!--<li class="disabled">-->
-                                <!--<a href="#">Designer</a>-->
-                            <!--</li>-->
-                            <!--<li class="disabled">-->
-                                <!--<a href="#">Duplicate</a>-->
-                            <!--</li>-->
+                            <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
+                            </li>
+                            <li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>
+                            </li>
                         </ul>
-                    </li>
-                    <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
-                    </li>
-                    <li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="section section-switch">
-                <switch id="enabled" data-name="enabled" data-ng-change="$ctrl.toggleStatus()" data-ng-model="$ctrl.projectPublic" data-on="ON" data-off="OFF" class="green"></switch>
-                <h5 class="switch-box-title">Public</h5>
-                <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
-                   Current version:
-                    <a  class="text-yellow" ta ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
-                        {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
-                    </a>
-                </p>
-                <p ng-if="$ctrl.project.publishedUrl" class="description text-small text-down">
-                   Published version:
-                    <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
-                </p>
-            </div>
-            <div class="section section-general-setting">
-                <h2 class="section-title">General Settings</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-wrapper">
-                            <div class="form-group" custom-input style="margin-bottom:20px"
-                                 data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
-                                <input type="text"
-                                       class="form-control"
-                                       placeholder="" required
-                                       ng-click="$ctrl.displayNameFocused = true"
-                                       ng-model="$ctrl.project.displayName">
-                                <label class="control-label float-label">
-                                    Project name  <span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">is required</span>
-                                </label>
-                            </div>
-                            <div class="form-group" custom-input style="margin-bottom:20px">
-                                <input type="text" class="form-control" placeholder="" value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}" disabled>
-                                <label class="control-label float-label">Project url</label>
-                            </div>
-                            <div class="form-group" custom-input>
-                                <tags-input style="height:100%; min-height:44px" max-length="32" min-length="3" class="form-control" ng-model="$ctrl.project.tags"></tags-input>
-                                <label class="control-label float-label">Meta Tags</label>
-                            </div>
-                            <!--<div class="form-group" custom-input>-->
-                                <!--<input type="email" class="form-control" placeholder="" value="" ng-disabled="true">-->
-                                <!--<label class="control-label float-label">-->
-                                    <!--Url-->
-                                     <!--&lt;!&ndash;<span class="transparent-color">.rodin.io</span>&ndash;&gt;-->
-                                <!--</label>-->
-                            <!--</div>-->
-                            <!--<p class="text-small description">Must be alphanumeric (A-Z, 0-9) wilh dashes between words Th« site nasnT been published yet.</p>-->
-                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="section section-vr-space">
-                <h2 class="section-title">VR space icons</h2>
-                <div class="drag-cont">
-                    <div class="drag-item first">
-                        <h5 class="section-small-title">Webclip</h5>
-                        <p class="text-small description">Upload a
-                            <span>1024 x 1024 pixel</span> image.
-                            This image will be the project's thumbnail.</p>
-                        <div class="drag-area first">
-                            <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#thumbnail-img').click()">
-                                <i ng-if="!$ctrl.project.thumbnail" class="icon icon-invalid"></i>
-                                <img width="166" height="166" ng-src="{{$ctrl.project.thumbnail}}" ng-if="!!$ctrl.project.thumbnail" alt="">
-                            </div>
-                            <p class="drag-instruct">To try
-                                <span>
-                                    Again
+                    <div class="section section-switch">
+
+                        <switch
+                                id="enabled"
+                                data-name="enabled"
+                                data-ng-change="$ctrl.toggleStatus()"
+                                data-ng-model="$ctrl.projectPublic"
+                                class="blue"></switch>
+                        <h5 class="switch-box-title">Public</h5>
+                        <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
+                            Current version:
+                            <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
+                                {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
+                            </a>
+                        </p>
+                        <p ng-if="$ctrl.project.publishedUrl" class="description text-small text-down">
+                            Published version:
+                            <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
+                        </p>
+                    </div>
+
+                    <div class="section section-general-setting">
+                        <h3 class="section-title">General Settings</h3>
+                        <div class="form-group" custom-input
+                             data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
+                            <label>
+                                Project name  <span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">is required</span>
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="" required
+                                   ng-click="$ctrl.displayNameFocused = true"
+                                   ng-minlength="3"
+                                   ng-maxlength="64"
+                                   limit-to="64"
+                                   ng-model="$ctrl.project.displayName">
+                        </div>
+                        <div class="form-group" custom-input>
+                            <label>Project url</label>
+                            <input type="text" class="form-control" placeholder="" value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}" disabled>
+                        </div>
+                        <!--<div class="form-group" custom-input>
+                            <label>Meta Tags</label>
+                            <tags-input style="height:100%; min-height:55px" max-length="32" min-length="3" class="form-control" ng-model="$ctrl.project.tags"></tags-input>
+                            <p class="form-description">Meta tags are a great way for webmasters to provide search engines with information about their sites</p>
+                        </div>-->
+                    </div>
+
+                    <div class="section section-vr-space">
+                        <h3 class="section-title">Project Thumbnail</h3>
+                        <div class="drag-cont upload-label">
+                            <div class="drag-item first">
+                                <div class="drag-area first">
+                                    <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#thumbnail-img').click()">
+                                        <i ng-if="!$ctrl.project.thumbnail" class="icon icon-invalid"></i>
+                                        <img width="166" height="166" ng-src="{{$ctrl.project.thumbnail}}" ng-if="!!$ctrl.project.thumbnail" alt="">
+                                    </div>
+                                    <p class="drag-instruct">
                                     <input class="hidden" type="file" id="thumbnail-img" data-ng-model="avatarUrl" accept="image/jpeg,image/jpg,image/png,"
                                            onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)" name="avatar"/>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="drag-item hidden">
-                        <h5 class="section-small-title">Favicon</h5>
-                        <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon image Supported image formats are .ico, .png, .gif and .jpg</p>
-                        <div class="drag-area first">
-                            <div class="center-row"><i class="icon icon-invalid"></i>
+                                    </p>
+                                </div>
+                                <h5 class="section-small-title text-left">We recomend to upload a maximum of 2Mb size image.</h5>
                             </div>
-                            <p class="drag-instruct">To try <span>Again</span>
-                            </p>
+                            <div class="drag-item hidden">
+                                <h5 class="section-small-title">Favicon</h5>
+                                <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon image Supported image formats are .ico, .png, .gif and .jpg</p>
+                                <div class="drag-area first">
+                                    <div class="center-row"><i class="icon icon-invalid"></i>
+                                    </div>
+                                    <p class="drag-instruct">To try <span>Again</span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="section overview">
-                <h2 class="section-title">Overview</h2>
-                <div class="row">
-                    <div class="col-md-6">
+
+                    <div class="section overview">
+                        <h3 class="section-title">Overview</h3>
                         <table class="table main-table">
                             <tbody>
                             <tr>
@@ -156,60 +150,35 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-            <!-- TODO: traffic statistics -->
-           <!-- <div class="section traffic-statistics last-section">
-                <h2 class="section-title">Traffic Statistics</h2>
-                <p class="text-small description">
-                    Statistics from the past <span>30 days</span> of traffic data
-                </p>
-                <div class="row">
-                    <div class="col-md-6">
-                        <table class="table main-table">
-                            <tbody>
-                            <tr>
-                                <td class="text-primary"><span>Total views</span>
-                                </td>
-                                <td class="text-primary">0 views<span></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-primary"><span>Views by IP</span>
-                                </td>
-                                <td class="text-primary">0 views<span></span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>-->
-            <div class="section section-project-content last-section">
-                <h2 class="section-title">Description</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <textarea limit-to="256"  style="height: 80px; width:100%" ng-model="$ctrl.project.description" class="wysiwyg-textarea"></textarea>
-                        <span class="pull-right" style=" font-size: 14px; color: #ff9a2b;">256 / {{256-$ctrl.project.description.length}}</span>
 
-                        <div class="btn-wrapper">
-                            <button type="button" ng-click="$ctrl.update()" class="btn btn-primary">Update</button>
+
+                    <div class="section section-project-content last-section">
+                        <h3 class="section-title">Description</h3>
+                        <div class="form-group">
+                            <!--<label for="area">Description</label>-->
+                            <textarea id="area" limit-to="128" style="width:100%" ng-model="$ctrl.project.description" class="form-control area-control"></textarea>
+                            <span class="letter-quantity">
+                                <span>{{128-$ctrl.project.description.length}}</span>/128
+                            </span>
                         </div>
                     </div>
+
+                    <div class="btn-wrapper" style="text-align: center">
+                        <button type="button" ng-click="$ctrl.update()" class="btn btn-default btn-submit">Update</button>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
-
 </div>
+
 
 <div class="modal model-confirm" close-modal="remove"  ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
-            <h1 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h1>
+            <h3 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h3>
             <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
         </div>
         <div class="modal-body padding-0-important" ng-if="!!$ctrl.project.publishDate">
@@ -234,7 +203,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" data-ng-click="$ctrl.modals.share = false">×</span>
-            <h1>Share this project</h1>
+            <h3>Share this project</h3>
         </div>
         <div class="modal-body">
             <p data-ng-if="$ctrl.project.public === 'false'" class="text-small description">
