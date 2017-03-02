@@ -64,6 +64,9 @@
                                    class="form-control"
                                    placeholder="" required
                                    ng-click="$ctrl.displayNameFocused = true"
+                                   ng-minlength="3"
+                                   ng-maxlength="64"
+                                   limit-to="64"
                                    ng-model="$ctrl.project.displayName">
                         </div>
                         <div class="form-group" custom-input>
