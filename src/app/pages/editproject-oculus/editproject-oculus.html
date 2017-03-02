@@ -10,27 +10,27 @@
                     <div class="content-navbar">
                         <ul class="navbar-list">
                             <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
-                            <li class="other-links dropdown" uib-dropdown>
-                                <a id="dLabel" role="button" data-uib-dropdown-toggle>
-                                    <i class="icon icon-more"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>
-                                    <li>
-                                        <a href="{{$ctrl.project.editorUrl}}">Editor</a>
-                                    </li>
-                                    <!--<li class="disabled">-->
-                                    <!--<a href="#">Designer</a>-->
+                            <!--<li class="other-links dropdown" uib-dropdown>-->
+                                <!--<a id="dLabel" role="button" data-uib-dropdown-toggle>-->
+                                    <!--<i class="icon icon-more"></i>-->
+                                <!--</a>-->
+                                <!--<ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>-->
+                                    <!--<li>-->
+                                        <!--<a href="{{$ctrl.project.editorUrl}}">Editor</a>-->
                                     <!--</li>-->
-                                    <!--<li class="disabled">-->
-                                    <!--<a href="#">Duplicate</a>-->
-                                    <!--</li>-->
-                                </ul>
-                            </li>
-                            <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
-                            </li>
-                            <li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i
-                                    class="icon icon-link"></i></a><span>Share</span>
-                            </li>
+                                    <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="#">Designer</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="#">Duplicate</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>-->
+                            <!--</li>-->
+                            <!--<li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i-->
+                                    <!--class="icon icon-link"></i></a><span>Share</span>-->
+                            <!--</li>-->
                         </ul>
                     </div>
 
@@ -87,29 +87,37 @@
                     <form class="main-form" action="" ng-if="$ctrl.project.build.oculus.requested">
                         <div class="section">
                             <div class="required-field-item">
+                                <p data-ng-if="$ctrl.project.build.oculus.built"
+                                   class="description margin-top-40 text-white text-center">Package ready</p>
                                 <div class="small-loader"
                                      data-ng-if="$ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built">
                                     <div class="image"></div>
                                 </div>
-                                <div class="main-upload-area"
+                                <div class="main-upload-area "
                                      data-ng-if="$ctrl.project.build.oculus.built">
-                                    <img src="images/general/file_icon_placeholder.png" alt="" width="60"
-                                         class="uploaded-file-icon">
-                                    <p class="area-label"></p>
+                                    <div class="download-build">
+                                        <div class="dashed-bord" ng-click="$ctrl.download()">
+                                            <img src="images/general/file_icon_placeholder.png" alt="" width="60"
+                                                 class="uploaded-file-icon">
+                                        </div>
+                                        <!--<div class="download">-->
+                                            <!--Download-->
+                                        <!--</div>-->
+                                        <!--<p class="area-label"></p>-->
+                                    </div>
                                 </div>
                                 <p data-ng-if="!$ctrl.project.build.oculus.built"
-                                   class="description margin-top-20 text-white">We are now building your installation
+                                   class="description margin-top-40 text-white text-center">We are now building your installation
                                     package, the download link will appear here once done.</p>
-                                <p data-ng-if="$ctrl.project.build.oculus.built"
-                                   class="description margin-top-20 text-white">Package ready</p>
-                                <div class="required-field-actions">
-                                    <button data-ng-if="$ctrl.project.build.oculus.built"
-                                            type="button" class="btn btn-primary"
-                                            ng-click="$ctrl.download()">download
-                                    </button>
-                                    <a data-ng-click="$ctrl.cancelBuild($event)"
-                                       data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">cancel</a>
-                                </div>
+
+                                <!--<div class="required-field-actions">-->
+                                    <!--<button data-ng-if="$ctrl.project.build.oculus.built"-->
+                                            <!--type="button" class="btn btn-primary"-->
+                                            <!--ng-click="$ctrl.download()">download-->
+                                    <!--</button>-->
+                                    <!--<a data-ng-click="$ctrl.cancelBuild($event)"-->
+                                       <!--data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">cancel</a>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </form>

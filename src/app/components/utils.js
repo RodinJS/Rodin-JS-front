@@ -148,6 +148,22 @@ function CloseModal() {
     };
 }
 
+function Codify($timeout) {
+    'ngInject';
+
+    return {
+        restrict: 'A',
+        link: function (scope, element) {
+            let $elem = element;
+            $timeout(()=> {
+                $elem.find('.code').each(function (i, block) {
+                    hljs.highlightBlock(block);
+                });
+            }, 500);
+        },
+    };
+}
+
 function NgAutocomplete() {
     'ngInject';
     return {
@@ -285,7 +301,6 @@ function NgAutocomplete() {
 
         },
     };
-
 }
 
-export default { limitTo, Compile, CheckForUnique, ShowAuthed, CustomInput, CloseModal, NgAutocomplete };
+export default { limitTo, Compile, CheckForUnique, ShowAuthed, CustomInput, CloseModal, NgAutocomplete, Codify };

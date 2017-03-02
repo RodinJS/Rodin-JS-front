@@ -1,7 +1,8 @@
 class PageCtrl {
-    constructor(AppConstants, $scope, $state, $stateParams,  EventBus, PagesService, PagesStore) {
+    constructor(AppConstants, $scope, $state, $stateParams,  EventBus, PagesService, PagesStore, $window) {
         'ngInject';
 
+        $window.scrollTo(0, 0);
         this.pageURL = $stateParams.pageURL;
 
         this._$state = $state;
@@ -10,24 +11,23 @@ class PageCtrl {
         this._PagesService = PagesService;
         this._PagesStore = PagesStore;
 
-
-        console.log(this.pageURL);
+        //console.log(this.pageURL);
 
         if (!this.pageURL) return this.onFailedPage();
         this.getPageContent();
 
-       /* this._PagesStore.subscribeAndInit($scope, () => {
-            this.pagesList = this._PagesStore.getPagesList();
-            if (this.pagesList.length > 0) {
-                if (!_.find(this.pagesList, (page)=> page.slug === this.pageURL)) {
-                    return this.onFailedPage();
-                }
+        /* this._PagesStore.subscribeAndInit($scope, () => {
+             this.pagesList = this._PagesStore.getPagesList();
+             if (this.pagesList.length > 0) {
+                 if (!_.find(this.pagesList, (page)=> page.slug === this.pageURL)) {
+                     return this.onFailedPage();
+                 }
 
-                this.page = this._PagesStore.getPage(this.pageURL);
-                console.log(this.page);
-                if (!this.page) return this.getPageContent();
-            }
-        });*/
+                 this.page = this._PagesStore.getPage(this.pageURL);
+                 console.log(this.page);
+                 if (!this.page) return this.getPageContent();
+             }
+         });*/
     }
 
     getPageContent() {

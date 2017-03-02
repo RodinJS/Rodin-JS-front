@@ -162,12 +162,12 @@
     </div>
 </div>
 
-<div class="modal" close-modal="remove"
+<div class="modal negative" close-modal="remove"
      ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
     <div class="modal-content">
         <div class="modal-header">
-            <h2 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h2>
-            <h2 ng-show="!!$ctrl.project.publishDate">Warning</h2>
+            <p ng-hide="!!$ctrl.project.publishDate">Delete this project ?</p>
+            <p ng-show="!!$ctrl.project.publishDate">Warning</p>
         </div>
         <div class="modal-body padding-0-important">
             <p class="description word-wrap">

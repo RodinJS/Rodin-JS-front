@@ -9,29 +9,29 @@
                     <div class="content-navbar">
                         <ul class="navbar-list">
                             <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
-                            <li class="other-links dropdown" uib-dropdown>
-                                <a id="dLabel" role="button" data-uib-dropdown-toggle>
-                                    <i class="icon icon-more"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>
-                                    <li>
-                                        <a href="{{$ctrl.project.editorUrl}}">Editor</a>
-                                    </li>
-                                    <!--<li class="disabled">-->
-                                    <!--<a href="#">Designer</a>-->
+                            <!--<li class="other-links dropdown" uib-dropdown>-->
+                                <!--<a id="dLabel" role="button" data-uib-dropdown-toggle>-->
+                                    <!--<i class="icon icon-more"></i>-->
+                                <!--</a>-->
+                                <!--<ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>-->
+                                    <!--<li>-->
+                                        <!--<a href="{{$ctrl.project.editorUrl}}">Editor</a>-->
                                     <!--</li>-->
-                                    <!--<li class="disabled">-->
-                                    <!--<a href="#">Duplicate</a>-->
-                                    <!--</li>-->
-                                </ul>
-                            </li>
-                            <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
-                            </li>
-                            <li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>
-                            </li>
+                                    <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="#">Designer</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="#">Duplicate</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>-->
+                            <!--</li>-->
+                            <!--<li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>-->
+                            <!--</li>-->
                         </ul>
                     </div>
-                    <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs" class="main-form">
+                    <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs" class="main-form section">
                         <h3 class="section-title">iOS required fields</h3>
                         <div class="form-group" custom-input
                              data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
@@ -100,65 +100,121 @@
                             <p class="form-description">Developer ID.</p>
                         </div>
 
-                        <div class="form-group col-md-4 upload-label">
+                        <div class="form-group col-md-4 main-upload-area">
                             <label>Provisioning Profile</label>
-                            <div class="main-upload-area">
-                                <label class="upload-area" ng-show="$ctrl.files.profile.name === ''">
-                                    <div class="area-content">.mobileprovision</div>
-                                    <input type="file"
-                                           id="profile-file"
-                                           name="profile"
-                                           accept=".mobileprovision"
-                                           onchange="angular.element(this).scope().$ctrl.changeProfile(event)">
-                                </label>
-                                <img ng-show="$ctrl.files.profile.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
-                                     class="uploaded-file-icon">
-                                <!--<p class="area-label">{{!!$ctrl.files.profile.name ? $ctrl.files.profile.name : 'Drag or Click'}}</p>-->
-                            </div>
-                            <!--<div class="required-field-actions margin-0-important">-->
-                                <!--<button type="button" class="btn btn-primary"-->
-                                        <!--onclick="document.querySelector('#profile-file').click()">browse</button>-->
+                            <!--<div class="main-upload-area">-->
+                                <!--<label class="upload-area" ng-show="$ctrl.files.profile.name === ''">-->
+                                    <!--<div class="area-content">.mobileprovision</div>-->
+                                    <!--<input type="file"-->
+                                           <!--id="profile-file"-->
+                                           <!--name="profile"-->
+                                           <!--accept=".mobileprovision"-->
+                                           <!--onchange="angular.element(this).scope().$ctrl.changeProfile(event)">-->
+                                <!--</label>-->
+                                <!--<img ng-show="$ctrl.files.profile.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"-->
+                                     <!--class="uploaded-file-icon">-->
+                                <!--&lt;!&ndash;<p class="area-label">{{!!$ctrl.files.profile.name ? $ctrl.files.profile.name : 'Drag or Click'}}</p>&ndash;&gt;-->
                             <!--</div>-->
+                            <div class="drag-cont upload-label">
+                                <div class="drag-item first">
+                                    <div class="drag-area first">
+                                        <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#profile-file').click()">
+                                            <div class="area-content" ng-show="$ctrl.files.profile.name == ''">.mobileprovision</div>
+                                            <img ng-show="$ctrl.files.profile.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
+                                                 class="uploaded-file-icon">
+                                        </div>
+                                        <p class="drag-instruct">
+                                            <input type="file"
+                                                   class="hidden"
+                                                   id="profile-file"
+                                                   name="profile"
+                                                   accept=".mobileprovision"
+                                                   onchange="angular.element(this).scope().$ctrl.changeProfile(event)">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group col-md-4 upload-label">
                             <label>Distribution/Development certificate.</label>
-                            <div class="main-upload-area">
-                                <label class="upload-area" ng-show="$ctrl.files.cert.name === ''">
-                                    <div class="area-content">.p12</div>
-                                    <input type="file"
-                                           id="cert-file"
-                                           name="cert"
-                                           accept=".p12"
-                                           onchange="angular.element(this).scope().$ctrl.changeCert(event)">
-                                </label>
-                                <img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
-                                     class="uploaded-file-icon">
-                                <!--<p class="area-label">{{ !!$ctrl.files.cert.name ? $ctrl.files.cert.name : 'Drag or Click' }}</p>-->
-                            </div>
+                            <!--<div class="main-upload-area">-->
+                                <!--<label class="upload-area" ng-show="$ctrl.files.cert.name === ''">-->
+                                    <!--<div class="area-content">.p12</div>-->
+                                    <!--<input type="file"-->
+                                           <!--id="cert-file"-->
+                                           <!--name="cert"-->
+                                           <!--accept=".p12"-->
+                                           <!--onchange="angular.element(this).scope().$ctrl.changeCert(event)">-->
+                                <!--</label>-->
+                                <!--<img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"-->
+                                     <!--class="uploaded-file-icon">-->
+                                <!--&lt;!&ndash;<p class="area-label">{{ !!$ctrl.files.cert.name ? $ctrl.files.cert.name : 'Drag or Click' }}</p>&ndash;&gt;-->
+                            <!--</div>-->
                             <!--<div class="required-field-actions margin-0-important">-->
                                 <!--<button type="button" class="btn btn-primary"-->
                                         <!--onclick="document.querySelector('#cert-file').click()">browse</button>-->
                             <!--</div>-->
+                            <div class="drag-cont upload-label">
+                                <div class="drag-item first">
+                                    <div class="drag-area first">
+                                        <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#cert-file').click()">
+                                            <div class="area-content" ng-show="$ctrl.files.cert.name == ''">.p12</div>
+                                            <img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
+                                                 class="uploaded-file-icon">
+                                        </div>
+                                        <p class="drag-instruct">
+                                            <input type="file"
+                                                   class="hidden"
+                                                   id="cert-file"
+                                                   name="cert"
+                                                   accept=".p12"
+                                                   onchange="angular.element(this).scope().$ctrl.changeCert(event)">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group col-md-4 upload-label">
                             <label>App icon</label>
-                            <div class="main-upload-area text-center">
-                                <label class="upload-area" ng-show="$ctrl.files.icon.name === ''">
-                                    <div class="area-content">.png</div>
-                                    <input type="file"
-                                           id="icon-file"
-                                           name="icon-h"
-                                           accept="image/*"
-                                           onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
-                                </label>
-                                <img ng-show="$ctrl.files.icon.name !== ''"
-                                     ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"
-                                     class="uploaded-file-icon">
-                                <p class="description">upload .png 1024x1024</p>
-                                <!--<p class="area-label">{{ !!$ctrl.files.icon.name ? $ctrl.files.icon.name : 'Drag or Click' }}</p>-->
+                            <!--<div class="main-upload-area text-center">-->
+                                <!--<label class="upload-area" ng-show="$ctrl.files.icon.name === ''">-->
+                                    <!--<div class="area-content">.png</div>-->
+                                    <!--<input type="file"-->
+                                           <!--id="icon-file"-->
+                                           <!--name="icon-h"-->
+                                           <!--accept="image/*"-->
+                                           <!--onchange="angular.element(this).scope().$ctrl.changeIcon(event)">-->
+                                <!--</label>-->
+                                <!--<img ng-show="$ctrl.files.icon.name !== ''"-->
+                                     <!--ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"-->
+                                     <!--class="uploaded-file-icon">-->
+                                <!--<p class="description">upload .png 1024x1024</p>-->
+                                <!--&lt;!&ndash;<p class="area-label">{{ !!$ctrl.files.icon.name ? $ctrl.files.icon.name : 'Drag or Click' }}</p>&ndash;&gt;-->
+                            <!--</div>-->
+                            <div class="drag-cont upload-label">
+                                <div class="drag-item first">
+                                    <div class="drag-area first">
+                                        <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#icon-file').click()">
+                                            <div class="area-content" ng-show="$ctrl.files.icon.name == ''">.png</div>
+                                            <img ng-show="$ctrl.files.icon.name !== ''"
+                                                 ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"
+                                                 class="uploaded-file-icon">
+                                        </div>
+                                        <p class="drag-instruct">
+                                            <input type="file"
+                                                   class="hidden"
+                                                   id="icon-file"
+                                                   name="icon-h"
+                                                   accept="image/*"
+                                                   onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
+                                        </p>
+                                    </div>
+                                    <h5 class="section-small-title text-left">upload .png 1024x1024</h5>
+                                </div>
                             </div>
+
                             <!--<div class="required-field-actions margin-0-important">-->
                                 <!--<button type="button" class="btn btn-primary"-->
                                         <!--onclick="document.querySelector('#icon-file').click()">browse</button>-->
