@@ -11,9 +11,12 @@ class PageCtrl {
         this._PagesStore = PagesStore;
 
 
-        if (!this.pageURL) return this.onFailedPage();
+        console.log(this.pageURL);
 
-        this._PagesStore.subscribeAndInit($scope, () => {
+        if (!this.pageURL) return this.onFailedPage();
+        this.getPageContent();
+
+       /* this._PagesStore.subscribeAndInit($scope, () => {
             this.pagesList = this._PagesStore.getPagesList();
             if (this.pagesList.length > 0) {
                 if (!_.find(this.pagesList, (page)=> page.slug === this.pageURL)) {
@@ -24,13 +27,14 @@ class PageCtrl {
                 console.log(this.page);
                 if (!this.page) return this.getPageContent();
             }
-        });
+        });*/
     }
 
     getPageContent() {
         this._PagesService.get(this.pageURL).then(
             page => {
-                this._EventBus.emit(this._EventBus.pages.SET_CONTENT, page);
+                this.page = page;
+                //this._EventBus.emit(this._EventBus.pages.SET_CONTENT, page);
             },
 
             err => {
