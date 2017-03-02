@@ -29,6 +29,14 @@
 		padding-bottom: 160px;
 		.auth-content{
 			max-width: 450px;
+			.form-register {
+				.register-password {
+					margin-bottom: 10px;
+				}
+				.register-invitation {
+					margin-top: 50px;
+				}
+			}
             &.sign-in{
               padding-top:80px;
               .title{
@@ -63,15 +71,15 @@
 				pointer-events: none;
 				transition: all .3s;
 			}
-			.form-group{
 				p.password-description{
 					font-size: 12px;
-					color: rgba(white, .45);
+					color: rgba(255, 255, 255, 0.45);
 					margin: 0;
-					text-align: center;
 					max-width: 265px;
-					margin: 0 auto;
+					white-space: nowrap;
 				}
+			.text-wrong {
+				color: $color-primary;
 			}
 		}
 	}
@@ -372,6 +380,7 @@
 			}
 		}
 		.btn-submit{
+			border: none;
 			font-size: 13px;
 			padding: 8px 20px;
 		}

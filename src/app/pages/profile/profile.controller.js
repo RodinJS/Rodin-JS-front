@@ -89,6 +89,7 @@ class ProfileCtrl {
 
         this._User.update(null, currentUser).then(
             data => {
+                this.Notification.success('Profile Updated')
                 this.showLoader = false;
             },
             err => {

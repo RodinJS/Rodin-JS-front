@@ -29,6 +29,7 @@ class DashboardCtrl {
         if (this.user.projects.total >= this.user.allowProjectsCount) {
             this.cantCreateProject = true;
         }
+        this.copyUrl = this.copyUrl.bind(this);
     }
 
     createProject() {
@@ -126,6 +127,8 @@ class DashboardCtrl {
             document.getElementById('projectUrl').style['box-shadow'] = 'none';
             clearTimeout(t);
         }, 1000);
+	    this.modals.share = false;
+	    this.Notification.success('Copied Url')
     }
 }
 
