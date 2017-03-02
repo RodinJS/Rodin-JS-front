@@ -406,12 +406,15 @@ $distance: 34;
     }
   }
 
-  .section.section-vr-space {
+  .section {
     .drag-cont {
       .drag-item {
         display: inline-block;
         max-width: 185px;
         padding-bottom: 40px;
+        label {
+          color: white;
+        }
         h5.section-small-title {
           font-size: 13px;
           color: $color-text-gray;
@@ -540,7 +543,7 @@ $distance: 34;
         }
       }
       .drag-item.first {
-        margin-right: 105px;
+        //margin-right: 105px;
         .drag-area.first {
           width: 166px;
           height: 166px;
@@ -582,6 +585,35 @@ $distance: 34;
     display: block;
     font-size: 14px;
     text-align: center;
+    .download-build {
+      position: relative;
+      margin-top: 40px;
+      .dashed-bord {
+        position: relative;
+        margin: 0 auto;
+        width: 120px;
+        height: 120px;
+        border-radius: 3px;
+        border: 2px dashed $sectionBorder;
+        display: table;
+        cursor: pointer;
+        img {
+          margin-top: 20px;
+        }
+        &:hover {
+          .download {
+            position: absolute;
+            top: 0;
+            left: calc(50% - 60px);
+            width: 120px;
+            height: 120px;
+            background: black;
+            opacity: 0.25;
+          }
+          border: 2px dashed $color-primary;
+        }
+      }
+    }
     .upload-area {
       width: 166px;
       height: 166px;

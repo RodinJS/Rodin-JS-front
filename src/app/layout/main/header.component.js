@@ -17,7 +17,7 @@ class AppHeaderCtrl {
 
         this._PagesStore.subscribeAndInit($scope, () => {
             this.pagesList = this._PagesStore.getPagesList();
-            console.log(this.pagesList);
+            // console.log(this.pagesList);
             if (this.pagesList.length <= 0 && !this.try) {
                 this.try = true;
                 return this.getPagesList();

@@ -44,7 +44,7 @@ p {
 
 .modal-content {
   border-radius: 6px;
-  padding: 30px;
+  padding: 20px;
   position: relative;
   background-color: $bg-primary;
   margin: auto;
@@ -59,6 +59,8 @@ p {
 
 .modal-header {
   //padding: 2px 0;
+  font-family:"Roboto Condenced Bold";
+  font-size: 18px;;
   background-color: $bg-primary;
   color: white;
   border: 0 !important;
@@ -232,7 +234,6 @@ p {
     }
   }
 }
-
 
 .margin-top-20 {
   margin-top: 20px;
