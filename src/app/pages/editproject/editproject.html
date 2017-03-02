@@ -156,9 +156,9 @@
                         <h3 class="section-title">Description</h3>
                         <div class="form-group">
                             <!--<label for="area">Description</label>-->
-                            <textarea id="area" limit-to="256" style="width:100%" ng-model="$ctrl.project.description" class="form-control area-control"></textarea>
+                            <textarea id="area" limit-to="128" style="width:100%" ng-model="$ctrl.project.description" class="form-control area-control"></textarea>
                             <span class="letter-quantity">
-                                <span>{{256-projectDescription.length}}</span>/256
+                                <span>{{128-$ctrl.project.description.length}}</span>/128
                             </span>
                         </div>
                     </div>
