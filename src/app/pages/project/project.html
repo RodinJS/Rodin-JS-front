@@ -9,7 +9,7 @@
                 <div class="main-form">
                     <ul class="radio-list" ng-repeat="list in $ctrl.projectTemplates.projects">
                         <li  ng-repeat="project in list">
-                            <div class="radio-wrapper">
+                            <div class="radio-wrapper" ng-click="$ctrl.projectTemplates.selected = project">
                                 <label class="label-radio">
                                     <input type="radio" name="template">
                                     <span class="custom-radio" style="background-image: url({{project.thumbnail}});">
