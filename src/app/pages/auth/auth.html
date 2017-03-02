@@ -158,7 +158,7 @@
                         <label class="control-label float-label">Confirm Password</label>
                     </div>
 
-                    <div class="form-group register-invitation"
+                    <div class="form-group"
                          data-ng-focus="register.email.invitationCode = true"
                          custom-input>
                         <input type="text"
@@ -173,16 +173,24 @@
                         <label class="control-label float-label">Invitation Code</label>
                     </div>
 
-                    <div class="form-group" style="text-align: center">
+                    <div class="form-group">
                         <input style="margin-left:5px" type="checkbox"
                                ng-change="!$ctrl.agree"
                                name="agreement" ng-model="$ctrl.agree"/>
                         <span style="margin-left:10px; color:rgba(255, 255, 255, 0.45)"> By clicking this button, I agree to Rodin's
                             <a target="_blank" ui-sref="landing.betaAgreement">Terms of Services</a></span>
                     </div>
+                    <div class="form-group">
+                        <input style="margin-left:5px" type="checkbox"
+                               ng-change="!$ctrl.agree2"
+                               name="agreement" ng-model="$ctrl.agree2"/>
+                        <span style="margin-left:10px; color:rgba(255, 255, 255, 0.45)"> By clicking this button, I agree to
+                            <a target="_blank"
+                               ui-sref="landing.pages({pageURL:'beta-evaluation-agreement'})"> Pre-Release Evaluation Agreement.</a></span>
+                    </div>
                     <div class="btn-wrapper">
                         <button type="submit"
-                                ng-disabled="($ctrl.authType === 'register' && register.$invalid) || !$ctrl.agree || ($ctrl.formData.confirmPassword != $ctrl.formData.password)"
+                                ng-disabled="($ctrl.authType === 'register' && register.$invalid) || !$ctrl.agree || !$ctrl.agree2 || ($ctrl.formData.confirmPassword != $ctrl.formData.password)"
                                 class="btn btn-default btn-submit">Sign up
                         </button>
 

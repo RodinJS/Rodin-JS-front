@@ -21,8 +21,6 @@ class AppHeaderCtrl {
                 this.pagesSection1 = _.slice(this.pagesList, 0, 3);
                 this.pagesSection2 = _.slice(this.pagesList, 3, this.pagesList.length);
 
-                console.log(this.pagesSection1);
-                console.log(this.pagesSection2);
             }
 
         });
