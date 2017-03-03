@@ -185,7 +185,7 @@ const BANNER = {
         let params = {
             width: devicePath[0].getBoundingClientRect().width - 10,
             height: devicePath[0].getBoundingClientRect().height - 20,
-            top: devicePath[0].getBoundingClientRect().top + window.pageYOffset + 10,
+            top: devicePath[0].getBoundingClientRect().top + window.pageYOffset + 10 - 70,
             left: devicePath[0].getBoundingClientRect().left + 5,
         };
         if (init) {
