@@ -158,7 +158,7 @@ const BANNER = {
                 break;
         }
 
-        const minusLeft = this.checkMobile() ? 0 : 0;
+
 
         //console.log(devicePath[0].getBoundingClientRect());
 
@@ -182,10 +182,12 @@ const BANNER = {
         codeBlock.css({ opacity: 1 });
         */
 
+        const minusTop= this.checkMobile() ? - 70 : 0;
+
         let params = {
             width: devicePath[0].getBoundingClientRect().width - 10,
             height: devicePath[0].getBoundingClientRect().height - 20,
-            top: devicePath[0].getBoundingClientRect().top + window.pageYOffset + 10 - 70,
+            top: devicePath[0].getBoundingClientRect().top + window.pageYOffset + 10 + minusTop,
             left: devicePath[0].getBoundingClientRect().left + 5,
         };
         if (init) {
