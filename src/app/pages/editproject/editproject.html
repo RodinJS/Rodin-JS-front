@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group" custom-input>
                             <label>Project url</label>
-                            <input type="text" class="form-control" placeholder="" value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}" disabled>
+                            <input type="text" class="form-control input-blue" placeholder="" value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}" disabled>
                         </div>
                         <!--<div class="form-group" custom-input>
                             <label>Meta Tags</label>
@@ -93,6 +93,10 @@
                                     <input class="hidden" type="file" id="thumbnail-img" data-ng-model="avatarUrl" accept="image/jpeg,image/jpg,image/png,"
                                            onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)" name="avatar"/>
                                     </p>
+                                    <div class="drag-item-again" ng-if="$ctrl.project.thumbnail">
+                                        <div class="drag-board"></div>
+                                        <span>Tap To Replace</span>
+                                    </div>
                                 </div>
                                 <h5 class="section-small-title text-left">We recomend to upload a maximum of 2Mb size image.</h5>
                             </div>
