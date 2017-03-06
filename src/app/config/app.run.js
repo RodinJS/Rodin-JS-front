@@ -24,6 +24,8 @@ function AppRun(AppConstants, $rootScope, Restangular, JWT, $state, User, $timeo
     });
 
 
+    $rootScope.URL = AppConstants.SITE;
+
     // change page title based on state
     $rootScope.$on('$stateChangeSuccess', (event, toState) => {
         $rootScope.setPageTitle(toState.title);
