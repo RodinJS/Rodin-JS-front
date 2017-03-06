@@ -182,7 +182,7 @@ const BANNER = {
         codeBlock.css({ opacity: 1 });
         */
 
-        const minusTop= this.checkMobile() ? - 70 : 0;
+        const minusTop = this.checkMobile()  ? $('.header .navbar-collapse').hasClass('in') ? -316 : -70 : 0;
 
         let params = {
             width: devicePath[0].getBoundingClientRect().width - 10,

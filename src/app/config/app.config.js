@@ -28,6 +28,15 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
     })
      .state('landing', {
         abstract: true,
+        templateUrl: 'layout/main/app-view.html',
+        resolve: {
+            auth: function (User) {
+                return User.verifyAuth(false);
+            },
+        },
+    })
+    .state('home', {
+        abstract: true,
         templateUrl: 'layout/landing/landing-view.html',
         resolve: {
             auth: function (User) {
