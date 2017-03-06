@@ -1,6 +1,10 @@
 class EditProjectModulesCtrl {
     constructor($scope, $stateParams, AppConstants, ModulesService, ModulesStore, ProjectStore, EventBus, Notification, User, Project, $uibModal) {
         'ngInject';
+
+
+        if (!$stateParams.projectId) return $state.go('landing.error');
+
         this._AppConstants = AppConstants;
         this._ModulesService = ModulesService;
         this._ModulesStore = ModulesStore;

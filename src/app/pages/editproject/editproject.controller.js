@@ -2,6 +2,8 @@ class EditProjectCtrl {
     constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, EventBus, ProjectStore, $window, $timeout, Notification) {
         'ngInject';
 
+        if (!$stateParams.projectId) return $state.go('landing.error');
+
         $window.scrollTo(0, 0);
 
         this.$timeout = $timeout;
@@ -144,8 +146,8 @@ class EditProjectCtrl {
                 this.isValidImage(file).then((result) => {
                     var reader = new FileReader();
                     reader.onloadend = (e) => {
-                      this.project.thumbnail = reader.result;
-                      this._$scope.$apply();
+                        this.project.thumbnail = reader.result;
+                        this._$scope.$apply();
                     };
 
                     reader.readAsDataURL(file);
@@ -189,11 +191,11 @@ class EditProjectCtrl {
                 case 'ffd8ffe0'://"image/jpeg"
                 case 'ffd8ffe1':
                 case 'ffd8ffe2':
-                  break;
+                break;
                 default:
-                  result.valid = false;
-                  result.message = 'Allowed only .jpg .jpeg and .png file types.';
-                  break;
+                    result.valid = false;
+                    result.message = 'Allowed only .jpg .jpeg and .png file types.';
+                break;
             }
 
                 if (result.valid) {

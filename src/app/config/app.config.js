@@ -51,7 +51,6 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
         const hasTrailingSlash = path[path.length - 1] === '/';
 
         if (hasTrailingSlash) {
-
             //if last charcter is a slash, return the same url without the slash
             const newPath = path.substr(0, path.length - 1);
             return newPath;

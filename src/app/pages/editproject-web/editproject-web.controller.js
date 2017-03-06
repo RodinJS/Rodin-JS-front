@@ -2,6 +2,9 @@ class EditProjectWebCtrl {
     constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Notification) {
         'ngInject';
 
+        if (!$stateParams.projectId) return $state.go('landing.error');
+
+
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
