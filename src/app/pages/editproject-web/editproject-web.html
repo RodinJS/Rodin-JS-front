@@ -44,7 +44,7 @@
                         <h3 class="section-title">Project URL</h3>
                         <div class="form-group" custom-input
                              style="margin-bottom:20px"
-                             data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': configs.url.$valid && addDomain.url.focused}">
+                             data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': (configs.url.$valid || addDomain.url.$valid) && addDomain.url.focused}">
                             <label >
                                 {{addDomain.url.focused || $ctrl.domain ? 'Project url' : 'example.com'}} {{addDomain.url.$invalid && addDomain.url.focused  ? 'invalid' : ''}}
                             </label>

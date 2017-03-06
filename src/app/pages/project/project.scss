@@ -408,6 +408,13 @@ $distance: 34;
 
   .section {
     .drag-cont {
+      position: relative;
+
+      &:hover {
+        .drag-item-again {
+          visibility: visible;
+        }
+      }
       .drag-item {
         display: inline-block;
         max-width: 185px;
@@ -432,7 +439,34 @@ $distance: 34;
           border: 2px dashed $sectionBorder;
           display: table;
           cursor: pointer;
+          .drag-item-again {
+            visibility: hidden;
+            width: 166px;
+            height: 166px;
+            position: absolute;
+            left: 0;
+            .drag-board {
+              position: absolute;
+              top: 0;
+              left: 0;
+              background: black;
+              opacity: .5;
+              width: 166px;
+              height: 166px;
+              z-index: 1;
+            }
+            span {
+              color: $color-primary;
+              font-size: 14px;
+              position: absolute;
+              left: calc(50% - 43px);
+              top: calc(50% - 8px)
+            };
+          }
           &:hover {
+            .drag-item-again {
+              visibility: visible;
+            }
             border: 2px dashed $color-primary;
           }
           .center-row {
@@ -550,6 +584,9 @@ $distance: 34;
         }
       }
     }
+    .input-blue {
+      color: $color-primary;
+    }
   }
   .section {
     label {
@@ -601,16 +638,31 @@ $distance: 34;
           margin-top: 20px;
         }
         &:hover {
-          .download {
-            position: absolute;
-            top: 0;
-            left: calc(50% - 60px);
-            width: 120px;
-            height: 120px;
-            background: black;
-            opacity: 0.25;
-          }
           border: 2px dashed $color-primary;
+        }
+      }
+      .download {
+        position: absolute;
+        top: 0;
+        left: calc(50% - 60px);
+        color: white;
+        width: 120px;
+        height: 120px;
+
+        span {
+          visibility: hidden;
+        }
+        &:hover {
+          cursor: pointer;
+          background: black;
+          opacity: .5;
+          span {
+            visibility: visible;
+            position: absolute;
+            color: #008af1;
+            top: 52px;
+            left: 28px;
+          }
         }
       }
     }
