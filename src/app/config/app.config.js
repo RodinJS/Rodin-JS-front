@@ -35,7 +35,7 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
             },
         },
     })
-    .state('home', {
+     .state('home', {
         abstract: true,
         templateUrl: 'layout/landing/landing-view.html',
         resolve: {
@@ -43,7 +43,20 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
                 return User.verifyAuth(false);
             },
         },
-    })
+    });
+
+    $urlRouterProvider.rule(($injector, $location) => {
+
+        const path = $location.path();
+        const hasTrailingSlash = path[path.length - 1] === '/';
+
+        if (hasTrailingSlash) {
+
+            //if last charcter is a slash, return the same url without the slash
+            const newPath = path.substr(0, path.length - 1);
+            return newPath;
+        }
+    });
 
     $urlRouterProvider.otherwise('/error');
 
