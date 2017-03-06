@@ -62,7 +62,7 @@ import './contentPages/index';
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
     'landing.auth',
-    'landing.home',
+    'home.landing',
     'landing.demo',
     'landing.error',
     'landing.userconfirm',

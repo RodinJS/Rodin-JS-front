@@ -615,6 +615,13 @@
           margin-top: 10px;
           padding: 15px 13px;
           margin-right: 3px;
+          &.login{
+            padding: 0;
+            margin: 0;
+            position: relative;
+            right: 45px;
+            top: 5px;
+          }
           &.subscribe {
             border: 1px solid #008BF2;
             border-radius: 50px;
@@ -636,7 +643,7 @@
   }
   .navbar-brand {
     height: 66px !important;
-    padding: 23px 15px !important;
+    padding: 5px 15px !important;
   }
   .navbar-collapse {
     max-width: 326px;

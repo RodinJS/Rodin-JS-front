@@ -97,7 +97,7 @@ body{
     @import "../../src/app/pages/discover/discover";
     @import "../../src/app/pages/store/store";
   }
-  &:not(.new){
+  /*&:not(.new){
 
     @import "./old/scss/entry/main";
     @import "./old/style";
@@ -291,7 +291,7 @@ body{
         }
       }
     }
-  }
+  }*/
 }
 .page-404{
   .main-container{
