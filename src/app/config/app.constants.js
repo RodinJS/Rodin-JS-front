@@ -64,15 +64,10 @@ const AppConstants = {
         FB: '263064010794598',
         GITHUB: '5377f212205e0aa4b4cf',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
-        sendGrid:'mcwrQNFMdcJdWW6auoJpC%2FNvHxpdsRzyYVDgZiVgVm3Mi2RPdvhFzBw%2FFNujt6zllfUV4tf6Ug8kp1M%2BAe1TSK%2B9PrGofFUPJNhArMa7hsI%3D'
     },
 
     get FB() {
         return this[this.env].FB;
-    },
-
-    get SENDGRID() {
-        return this[this.env].sendGrid;
     },
 
     get GITHUB() {

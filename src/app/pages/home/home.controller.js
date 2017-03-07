@@ -32,6 +32,7 @@ class HomeCtrl {
         this.outToSlider = this.outToSlider.bind(this);
         this.changeVideo = this.changeVideo.bind(this);
         this.notificationBoxTrigger = this.notificationBoxTrigger.bind(this);
+        this.scrollToSignUp = this.scrollToSignUp.bind(this);
         window.addEventListener('message', this.handleIframeMessage, false);
         document.body.addEventListener('wheel', this.scrollHandler, false);
 
@@ -70,12 +71,12 @@ class HomeCtrl {
 
         $scope.$on('scrollDown', (event, data) => this.scrollHandler({ deltaY: 1 }));
 
-        $scope.$on('notificationBoxTrigger', (event, data)=> this.notificationBoxTrigger);
+        $scope.$on('notificationBoxTrigger', (event, data)=> this.notificationBoxTrigger());
     }
 
     notificationBoxTrigger($event, backdropClick) {
         const toggleClass = 'focus';
-        const target = $event.target || '#emailControl';
+        const target = $event ? $event.target : '#emailControl';
         if (!backdropClick) {
             this.emailFocused = true;
             angular.element(target).addClass(toggleClass).closest('.input-group').addClass(toggleClass);

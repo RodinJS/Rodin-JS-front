@@ -1,6 +1,9 @@
 class EditProjectIosCtrl {
     constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
+
+        if (!$stateParams.projectId) return $state.go('landing.error');
+
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
@@ -19,24 +22,24 @@ class EditProjectIosCtrl {
 
         this.fileChoosen = {
             profile: false,
-            p12: false
+            p12: false,
         };
 
         this.files = {
             profile: {
-                name: ""
+                name: '',
             },
             cert: {
-                name: ""
+                name: '',
             },
             icon: {
-                name: "",
-                src: ""
-            }
+                name: '',
+                src: '',
+            },
         };
 
         this.modals = {
-            password: false
+            password: false,
         };
 
         this.submiting = false;
@@ -52,20 +55,21 @@ class EditProjectIosCtrl {
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, {device: 'ios'}).then(
+        this.Project.get(this.projectId, { device: 'ios' }).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
                 this.project = project;
             },
+
             err => {
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
                 this.showLoader = false;
                 //this.$state.go('landing.error');
             }
-        )
+        );
     }
 
     update() {
@@ -75,13 +79,14 @@ class EditProjectIosCtrl {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, data);
             },
+
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
             }
-        )
+        );
     }
 
     changeIcon(e) {
@@ -97,6 +102,7 @@ class EditProjectIosCtrl {
                         this.files.icon.src = reader.result;
                         this._$scope.$apply();
                     };
+
                     reader.readAsDataURL(file);
                 }, (result) => {
                     this.Notification.error('Unsupported image type');
@@ -112,12 +118,12 @@ class EditProjectIosCtrl {
         var defer = this.$q.defer();
         var result = {
             valid: true,
-            message: ""
+            message: '',
         };
 
         if (file.size > 1024 * 1024) {
             result.valid = false;
-            result.message = "FIle size must be less than 1mb";
+            result.message = 'FIle size must be less than 1mb';
             var tim = $timeout(function () {
                 defer.reject(result);
                 $timeout.cancel(tim);
@@ -126,17 +132,17 @@ class EditProjectIosCtrl {
             var fileReader = new FileReader();
             fileReader.onloadend = function (e) {
                 var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
-                var header = "";
+                var header = '';
                 for (var i = 0; i < arr.length; i++) {
                     header += arr[i].toString(16);
                 }
 
                 switch (header) {
-                    case "89504e47":
+                    case '89504e47':
                         break;
                     default:
                         result.valid = false;
-                        result.message = "Allowed only .jpg .jpeg and .png file types.";
+                        result.message = 'Allowed only .jpg .jpeg and .png file types.';
                         break;
                 }
 
@@ -146,6 +152,7 @@ class EditProjectIosCtrl {
                     defer.reject(result);
                 }
             };
+
             fileReader.readAsArrayBuffer(file);
         }
 
@@ -182,24 +189,24 @@ class EditProjectIosCtrl {
             userId: this.user.username,
             appId: this.projectId,
             appName: this.project.ios.name,
-            version:this.project.ios.version,
+            version: this.project.ios.version,
             ios: {
-                exportMethod: "ad-hoc",
+                exportMethod: 'ad-hoc',
                 bundleIdentifier: this.project.ios.bundle,
                 developerId: this.project.ios.developerId,
-                certPassword: this.project.ios.certPassword
-            }
+                certPassword: this.project.ios.certPassword,
+            },
         };
 
         ctrl.showLoader = true;
-        $("#configs").ajaxForm({
-            dataType: "json",
+        $('#configs').ajaxForm({
+            dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.projectId + '/build/ios',
             headers: {
-                "x-access-token": this._JWT.get()
+                'x-access-token': this._JWT.get(),
             },
             data: {
-                project: angular.toJson(project)
+                project: angular.toJson(project),
             },
             success: function (data) {
                 ctrl.modals.password = false;
@@ -211,12 +218,13 @@ class EditProjectIosCtrl {
                 ctrl.Notification.success('iOS build start');
                 ctrl._$scope.$apply();
             },
+
             error: function (data) {
-                if(data.responseJSON && data.responseJson.error.message)
+                if (data.responseJSON && data.responseJson.error.message)
                     ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
-            }
+            },
         }).submit();
     };
 
@@ -229,25 +237,26 @@ class EditProjectIosCtrl {
         };
 
         ctrl.showLoader = true;
-        $("#configs").ajaxForm({
-            dataType: "json",
+        $('#configs').ajaxForm({
+            dataType: 'json',
             type: 'DELETE',
             url: this._AppConstants.API + '/project/' + this.projectId + '/build/ios',
             headers: {
-                "x-access-token": this._JWT.get()
+                'x-access-token': this._JWT.get(),
             },
             data: {
-                project: angular.toJson(project)
+                project: angular.toJson(project),
             },
             success: function (data) {
                 ctrl.getProject();
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
             },
+
             error: function (data) {
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
-            }
+            },
         }).submit();
     };
 
@@ -263,13 +272,14 @@ class EditProjectIosCtrl {
                 this.showLoader = false;
                 window.location = data.downloadUrl;
             },
+
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
             }
-        )
+        );
     }
 }
 
