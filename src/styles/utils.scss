@@ -74,15 +74,18 @@ p {
 }
 
 .modal-body {
+  .modal-form {
+    margin-top: 15px;
+  }
   .text-highlight {
     color: $color-primary;
     font-weight: 600;
   }
   #scriptInput {
-    width: 100%;
+    width: 100% !important;
   }
   #projectUrl, #scriptInput {
-    color: white;
+    color: $color-primary;
     border: 2px solid rgba(0, 139, 242, 0.4);
     background-color: rgba(216, 216, 216, 0.09);
   }
