@@ -2,7 +2,7 @@
 <div class="header-auth">
     <div class="container">
        <div class="navbar-header">
-           <a href="" class="btn-mobile-menu visible-xs" ng-if="!$ctrl.isHome">
+           <a href="" class="btn-mobile-menu visible-xs" ng-click="$ctrl.openMenu = !$ctrl.openMenu" ng-if="!$ctrl.isHome">
                 <span class="btn-bars">
                     <i></i>
                     <i></i>
@@ -17,7 +17,7 @@
                <img alt="Rodin" src="/images/landing/general/logo.svg">
            </a>
 
-           <div class="header-menu">
+           <div class="header-menu" ng-style="$ctrl.openMenu ? {display:'block', float:'inherit'} : {display:'none', float:'none'} ">
                <ul class="menu-list">
                    <li ng-if="$ctrl.user">
                        <a data-ui-sref-active="active" data-ui-sref="app.dashboard">Dashboard</a>
