@@ -131,6 +131,10 @@
                                                    accept=".mobileprovision"
                                                    onchange="angular.element(this).scope().$ctrl.changeProfile(event)">
                                         </p>
+                                        <div class="drag-item-again" ng-show="$ctrl.files.profile.name !== ''">
+                                            <div class="drag-board"></div>
+                                            <span>Tap To Replace</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -171,6 +175,10 @@
                                                    accept=".p12"
                                                    onchange="angular.element(this).scope().$ctrl.changeCert(event)">
                                         </p>
+                                        <div class="drag-item-again" ng-show="$ctrl.files.cert.name !== ''">
+                                            <div class="drag-board"></div>
+                                            <span>Tap To Replace</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +207,8 @@
                                         <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#icon-file').click()">
                                             <div class="area-content" ng-show="$ctrl.files.icon.name == ''">.png</div>
                                             <img ng-show="$ctrl.files.icon.name !== ''"
-                                                 ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"
+                                                 width="166" height="166"
+                                                 ng-src="{{$ctrl.files.icon.src}}" alt=""
                                                  class="uploaded-file-icon">
                                         </div>
                                         <p class="drag-instruct">
@@ -210,8 +219,12 @@
                                                    accept="image/*"
                                                    onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                         </p>
+                                        <div class="drag-item-again" ng-show="$ctrl.files.icon.name !== ''">
+                                            <div class="drag-board"></div>
+                                            <span>Tap To Replace</span>
+                                        </div>
                                     </div>
-                                    <h5 class="section-small-title text-left">upload .png 1024x1024</h5>
+                                    <h5 class="section-small-title text-center">upload .png 1024x1024</h5>
                                 </div>
                             </div>
 
@@ -224,7 +237,8 @@
                         <div class="btn-wrapper" style="text-align: center">
                             <button type="button"  class="btn btn-default btn-submit"
                                     ng-click="$ctrl.open($event)"
-                                    ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name">Build</button>
+                                    ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name"
+                            >Build</button>
                         </div>
 
                     </form>
@@ -261,12 +275,11 @@
 
 <div class="modal" close-modal="password"  ng-class="{'display-block': $ctrl.modals.password, 'display-none': !$ctrl.modals.password}">
     <div class="modal-content">
-        <span class="close" data-ng-click="$ctrl.modals.password = false"> ×</span>
         <div class="modal-header">
-            <h1>Certificate Password</h1>
-            <p class="description text-small">Certificate password when u generate the app</p>
+            <p>Certificate Password</p>
         </div>
         <div class="modal-body padding-0-important">
+            <p class="description text-small">Certificate password when u generate the app</p>
             <form name="password">
                 <div class="form-wrapper margin-top-20">
                     <div class="form-group" custom-input
@@ -281,13 +294,15 @@
                 </div>
             </form>
         </div>
-        <div class="modal-footer padding-bottom-40-important">
+        <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <button type="submit" class="btn btn-primary"
-                        data-ng-disabled="!password.$valid"
-                        data-ng-click="$ctrl.build()">build</button>
-                <a href="" class="btn btn-save"
-                   data-ng-click="$ctrl.modals.password = false">cancel</a>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-positive"
+                            data-ng-disabled="!password.$valid"
+                            data-ng-click="$ctrl.build()">build</button>
+                    <a href="" class="btn btn-cancel"
+                       data-ng-click="$ctrl.modals.password = false">cancel</a>
+                </div>
             </div>
         </div>
     </div>

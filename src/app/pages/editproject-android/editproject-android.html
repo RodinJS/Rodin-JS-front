@@ -87,8 +87,8 @@
                                     <!--<p class="form-description">Package</p>-->
 
                                 </div>
-                                <div class="drag-cont">
-                                    <div class="drag-item first">
+                                <div class="drag-cont text-center">
+                                    <div class="drag-item first text-center">
                                         <label>App icon</label>
                                         <div class="drag-area first">
                                             <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#icon-file').click()">
@@ -103,8 +103,12 @@
                                                 accept="image/*"
                                                 onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                          </p>
+                                            <div class="drag-item-again" ng-show="$ctrl.files.icon.name !== ''">
+                                                <div class="drag-board"></div>
+                                                <span>Tap To Replace</span>
+                                            </div>
                                      </div>
-                                     <h5 class="section-small-title text-left">upload .png 1024x1024</h5>
+                                     <h5 class="section-small-title text-center">upload .png 1024x1024</h5>
                                  </div>
                                  <div class="drag-item hidden">
                                      <h5 class="section-small-title">Favicon</h5>
@@ -271,8 +275,8 @@
 <div class="modal"  close-modal="password"  ng-class="{'display-block': $ctrl.modals.password, 'display-none': !$ctrl.modals.password}">
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close" data-ng-click="$ctrl.modals.password = false">×</span>
-            <h1>KeyStore password and Alias password</h1>
+            <!--<span class="close" data-ng-click="$ctrl.modals.password = false">×</span>-->
+            <p>KeyStore password and Alias password</p>
         </div>
         <div class="modal-body padding-0-important">
             <form name="password">
@@ -287,9 +291,9 @@
                                data-ng-focus="password.password.focused = true">
                         <label class="control-label float-label">KeyStore Password</label>
                     </div>
-                    <p class="text-small description">KeyStore Password.</p>
+                    <!--<p class="text-small description">KeyStore Password.</p>-->
 
-                    <div class="form-group" custom-input
+                    <div class="form-group margin-top-40" custom-input
                          data-ng-class="{'has-error': password.aliasPassword.$invalid && password.aliasPassword.focused, 'has-success': password.aliasPassword.$valid && password.aliasPassword.focused}">
                         <input type="password" class="form-control" placeholder=""
                                data-ng-model="$ctrl.project.android.keyStore.aliasPassword"
@@ -299,16 +303,18 @@
                                data-ng-focus="password.aliasPassword.focused = true">
                         <label class="control-label float-label">Alias Password</label>
                     </div>
-                    <p class="text-small description">Alias Password.</p>
+                    <!--<p class="text-small description">Alias Password.</p>-->
                 </div>
             </form>
         </div>
-        <div class="modal-footer padding-bottom-40-important">
+        <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <button type="button" class="btn btn-primary"
-                        ng-click="$ctrl.build()"
-                        data-ng-disabled="!password.$valid">build</button>
-                <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.password = false">cancel</a>
+                <div class="text-center">
+                    <button type="button" class="btn btn-positive"
+                            ng-click="$ctrl.build()"
+                            data-ng-disabled="!password.$valid">build</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.password = false">cancel</a>
+                </div>
             </div>
         </div>
     </div>

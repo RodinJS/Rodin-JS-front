@@ -34,12 +34,11 @@ p {
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.6);
-
-  &.model-confirm {
-    .modal-footer {
-      padding-bottom: 35px;
-    }
-  }
+  //&.model-confirm {
+  //  .modal-footer {
+  //    padding-bottom: 35px;
+  //  }
+  //}
 }
 
 .modal-content {
@@ -54,13 +53,11 @@ p {
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
-  animation-duration: 0.4s
+  animation-duration: 0.4s;
 }
 
 .modal-header {
   //padding: 2px 0;
-  font-family:"Roboto Condenced Bold";
-  font-size: 18px;;
   background-color: $bg-primary;
   color: white;
   border: 0 !important;
@@ -69,16 +66,41 @@ p {
     margin-top: 0px;
   }
   p {
-    font-size: 16px !important;
-    opacity: 0.5;
+    font-size: 18px !important;
+    font-family: $RobotoCond;
+    font-weight: 600;
+    //opacity: 0.5;
   }
 }
 
 .modal-body {
+  .text-highlight {
+    color: $color-primary;
+    font-weight: 600;
+  }
+  #scriptInput {
+    width: 100%;
+  }
+  #projectUrl, #scriptInput {
+    color: white;
+    border: 2px solid rgba(0, 139, 242, 0.4);
+    background-color: rgba(216, 216, 216, 0.09);
+  }
+  form {
+    input {
+       height: 54px;
+       border: 2px solid rgba(0, 139, 242, 0.4);
+       background-color: rgba(216, 216, 216, 0.09);
+       border-radius: 4px;
+       font-size: 16px;
+       color: white;
+       padding: 14px 20px;
+    }
+  }
   p.description {
     line-height: 24px;
-    font-size: 16px;
-    margin-top: 24px;
+    font-size: 14px !important;
+    margin-top: 20px;
   }
   select {
     border: 2px solid rgba(0, 139, 242, 0.4);
@@ -86,6 +108,11 @@ p {
   }
   .select-group {
     color: white;
+  }
+  .confirm {
+    font-size:14px !important;
+    margin-top: 20px;
+    margin-bottom: 0 !important;
   }
   //padding: 2px 0;
 }
@@ -104,31 +131,54 @@ p {
   .required-field-actions {
     //float: left;
     margin-top: 20px !important;
-    & button {
-      background: $color-primary !important;
+    .btn-negative {
+      background: $color-text-gray !important;
       color: white;
-      font-size: 16px;
-      height: 35px !important;
-      padding-top: 0;
-      padding-bottom: 0;
+      min-width: 100px;
+      font-size: 14px;
+      height: 30px !important;
+      padding: 0px 30px;
+      font-family: "Roboto", sans-serif;
       background: transparent;
       border: none !important;
       margin-right: 20px;
       &:hover {
         color: $color-text-primary;
-        background-color: #006ebf !important;
+        background-color: #bbbbbb !important;
         border: none;
       }
     }
-
-    & a {
-      color: $color-text-gray;
-      font-size: 16px;
-      line-height: 31px !important;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
+    .btn-positive {
+      background: #158def !important;
+      color: white;
+      font-size: 14px;
+      min-width: 100px;
+      height: 30px !important;
+      padding: 0px 30px;
+      font-family: "Roboto", sans-serif;
+      border: none !important;
+      margin-right: 20px;
       &:hover {
-        color: white;
+        color: $color-text-primary;
+        background-color: #44a4f2 !important;
+        border: none;
+      }
+      &:active {
+        background-color: #158def !important;
+      }
+    }
+    .btn-cancel {
+      min-width: 100px;
+      color: $color-text-secondary;
+      border: 2px solid $color-text-gray;
+      border-color: $color-text-gray;
+      font-size: 14px;
+      line-height: 26px !important;
+      padding: 0px 28px;
+      &:hover {
+        color: $color-text-primary;
+        border-color: $color-text-gray;
+        background-color: #bbbbbb !important;
       }
     }
   }

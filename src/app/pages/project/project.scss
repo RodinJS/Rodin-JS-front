@@ -460,7 +460,8 @@ $distance: 34;
               font-size: 14px;
               position: absolute;
               left: calc(50% - 43px);
-              top: calc(50% - 8px)
+              top: calc(50% - 8px);
+              z-index: 99;
             };
           }
           &:hover {
