@@ -1,8 +1,9 @@
 class AppHeaderCtrl {
-    constructor(AppConstants, $scope, $state, $stateParams, $location, PagesService, PagesStore, EventBus) {
+    constructor(AppConstants, $scope, $rootScope, $state, $stateParams, $location, PagesService, PagesStore, EventBus) {
         'ngInject';
         this._$state = $state;
         this._$scope = $scope;
+        this._$rootScope = $rootScope;
         this._PagesService = PagesService;
         this._PagesStore = PagesStore;
         this._$stateParams = $stateParams;
@@ -20,7 +21,6 @@ class AppHeaderCtrl {
             if (this.pagesList.length > 0) {
                 this.pagesSection1 = _.slice(this.pagesList, 0, 3);
                 this.pagesSection2 = _.slice(this.pagesList, 3, this.pagesList.length);
-
             }
 
         });
@@ -36,7 +36,7 @@ class AppHeaderCtrl {
             duration: 500,
             complete: function () {
                 $('#emailControl').focus();
-                _this._$scope.$broadcast('notificationBoxTrigger', {});
+                _this._$rootScope.$broadcast('notificationBoxTrigger', {});
                 _this._$scope.$apply();
             },
         });
