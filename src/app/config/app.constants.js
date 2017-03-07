@@ -134,7 +134,7 @@ const AppConstants = {
         },
         311: {
             message: 'EMAIL_EXISTS',
-            field: 'Email already exist',
+            field: 'Username or Email already exist',
         },
         312: {
             message: 'USER_WITH_ID_NOT_FOUND',
