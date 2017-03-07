@@ -130,7 +130,7 @@
      data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Share this project</h2>
+            <p>Share this project</p>
         </div>
         <div class="modal-body">
             <p data-ng-if="!$ctrl.currentModalProject.public" class="text-small description">
@@ -145,24 +145,24 @@
                 </div>
             </div>
         </div>
-        <div class="modal-footer padding-bottom-20-important">
+        <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <div class="pull-right">
+                <div class="text-center">
                     <button data-ng-hide="$ctrl.currentModalProject.public" type="button"
-                            class="btn btn-primary ng-hide" data-ng-click="$ctrl.goToSettings()">go to
+                            class="btn btn-positive ng-hide" data-ng-click="$ctrl.goToSettings()">go to
                         settings
                     </button>
                     <button data-ng-show="$ctrl.currentModalProject.public" type="button"
-                            class="btn btn-primary ng-hide" data-ng-click="$ctrl.copyUrl()">copy this url
+                            class="btn btn-positive ng-hide" data-ng-click="$ctrl.copyUrl()">copy this url
                     </button>
-                    <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.share = false">cancel</a>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">cancel</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal negative" close-modal="remove"
+<div class="modal" close-modal="remove"
      ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
     <div class="modal-content">
         <div class="modal-header">
@@ -173,20 +173,20 @@
             <p class="description word-wrap">
                 <span ng-if="$ctrl.currentModalProject.publishedUrl">
                      Your project will no longer be available on
-                     <span class="text-yellow">{{$ctrl.currentModalProject.publishedUrl}}</span>, your apps for
+                     <span class="text-highlight">{{$ctrl.currentModalProject.publishedUrl}}</span>, your apps for
                 </span>
-                <span class="text-yellow">"{{$ctrl.currentModalProject.name}}"</span> will stop working !<br>
-                Are you sure you want to continue?
+                <span class="text-highlight">"{{$ctrl.currentModalProject.name}}"</span> will stop working !<br>
+                <p class="confirm">Are you sure you want to continue?</p>
             </p>
         </div>
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <div class="pull-right">
+                <div class="text-center">
 
-                    <button type="button" class="btn btn-primary"
+                    <button type="button" class="btn btn-negative"
                             ng-click="$ctrl.deleteProject()">Delete
                     </button>
-                    <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.remove = false">cancel</a>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.remove = false">Cancel</a>
                 </div>
             </div>
         </div>

@@ -61,22 +61,22 @@
      ng-class="{'display-block': $ctrl.modals.updateVersion, 'display-none': !$ctrl.modals.updateVersion}">
     <div class="modal-content">
         <div class="modal-header">
-            <h3>Warning</h3>
+            <p>Warning</p>
         </div>
         <div class="modal-body padding-0-important">
             <p class="description">
                 You are about to update published project to the current project version. Previous version will be lost.
                 <br>
-                Are you sure you want to continue?
+                <p class="confirm">Are you sure you want to continue?</p>
             </p>
         </div>
-        <div class="modal-footer padding-bottom-40-important">
+        <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <div class="pull-right">
-                    <button class="btn btn-primary"
+                <div class="text-center">
+                    <button class="btn btn-positive"
                             data-ng-click="$ctrl.update()">Update
                     </button>
-                    <a href="" class="btn btn-save"
+                    <a href="" class="btn btn-cancel"
                        data-ng-click="$ctrl.modals.updateVersion = false">cancel</a>
                 </div>
             </div>
@@ -88,7 +88,7 @@
      ng-class="{'display-block': $ctrl.modals.rollBack, 'display-none': !$ctrl.modals.rollBack}">
     <div class="modal-content">
         <div class="modal-header">
-            <h3>Roll back </h3>
+            <p>Roll back </p>
         </div>
         <div class="modal-body padding-0-important">
             <p class="description">
@@ -100,13 +100,14 @@
                         {{rollBackDate.formated}}
                     </option>
                 </select>
-                <span ng-if="$ctrl.rollbackDates.length <= 0 ">Currently you don't have saved versions</span>
+                <p class="confirm" ng-if="$ctrl.rollbackDates.length <= 0 ">Currently you don't have saved versions</p>
             </div>
         </div>
-        <div class="modal-footer padding-bottom-40-important">
+        <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <div class="pull-right">
-                    <button class="btn btn-primary btn-action"
+                <div class="text-center">
+                    <button class="btn btn-primary btn-positive"
+                            ng-if="$ctrl.rollbackDates.length > 0 "
                             data-ng-click="$ctrl.rollback($ctrl.rollBackDate)">Roll back
                     </button>
                     <a href="" class="btn btn-cancel"
@@ -121,24 +122,24 @@
      ng-class="{'display-block': $ctrl.modals.unpublish, 'display-none': !$ctrl.modals.unpublish}">
     <div class="modal-content">
         <div class="modal-header">
-            <h3>Warning</h3>
+            <p>Warning</p>
         </div>
         <div class="modal-body padding-0-important">
             <p class="description">
                 Your project will no longer be available on
-                <span class="text-yellow">{{$ctrl.project.publishedUrl}}</span>, your apps for
-                <span class="text-yellow">"{{$ctrl.project.name}}"</span> will stop working !<br>
+                <span class="text-highlight">{{$ctrl.project.publishedUrl}}</span>, your apps for
+                <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !<br>
                 and your roll back history will be removed as well.
-                Are you sure you want to continue?
+                <p class="confirm">Are you sure you want to continue?</p>
             </p>
         </div>
-        <div class="modal-footer padding-bottom-40-important">
+        <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <div class="pull-right">
-                    <button class="btn btn-primary"
+                <div class="text-center">
+                    <button class="btn btn-negative"
                             data-ng-click="$ctrl.unpublish()">Unpublish
                     </button>
-                    <a href="" class="btn btn-save"
+                    <a href="" class="btn btn-cancel"
                        data-ng-click="$ctrl.modals.unpublish = false">cancel</a>
                 </div>
             </div>

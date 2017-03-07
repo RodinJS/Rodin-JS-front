@@ -158,9 +158,12 @@
 
                     <div class="section section-project-content last-section">
                         <h3 class="section-title">Description</h3>
-                        <div class="form-group">
+                        <div class="form-group"
+                             data-ng-class="{'has-error': !$ctrl.project.description, 'has-success': $ctrl.project.description.length > 0}">
                             <!--<label for="area">Description</label>-->
-                            <textarea id="area" limit-to="128" style="width:100%" ng-model="$ctrl.project.description" class="form-control area-control"></textarea>
+                            <textarea id="area" limit-to="128" style="width:100%"
+                                      ng-model="$ctrl.project.description"
+                                      class="form-control area-control"></textarea>
                             <span class="letter-quantity">
                                 <span>{{128-$ctrl.project.description.length}}</span>/128
                             </span>
@@ -178,19 +181,19 @@
 </div>
 
 
-<div class="modal model-confirm" close-modal="remove"  ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
-    <div class="modal-content">
+<div class="modal" close-modal="remove"  ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+    <div class="modal-content modal-negative">
         <div class="modal-header">
-            <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
-            <h3 ng-hide="!!$ctrl.project.publishDate">Delete this project ?</h3>
-            <h1 ng-show="!!$ctrl.project.publishDate">Warning</h1>
+            <!--<span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>-->
+            <p ng-hide="!!$ctrl.project.publishDate">Delete this project ?</p>
+            <p ng-show="!!$ctrl.project.publishDate">Warning</p>
         </div>
         <div class="modal-body padding-0-important" ng-if="!!$ctrl.project.publishDate">
             <p class="description word-wrap">
                 Your project will no longer be available on
-                <span class="text-yellow">{{$ctrl.project.publishedUrl}}</span>, your apps for
-                <span class="text-yellow">"{{$ctrl.project.name}}"</span> will stop working !<br>
-                Are you sure you want to continue?
+                <span class="text-highlight">{{$ctrl.project.publishedUrl}}</span>, your apps for
+                <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !<br>
+                <p class="confirm">Are you sure you want to continue?</p>
             </p>
         </div>
         <div class="modal-footer">
@@ -206,8 +209,8 @@
 <div class="modal" close-modal="share" ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close" data-ng-click="$ctrl.modals.share = false">×</span>
-            <h3>Share this project</h3>
+            <!--<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>-->
+            <p>Share this project</p>
         </div>
         <div class="modal-body">
             <p data-ng-if="$ctrl.project.public === 'false'" class="text-small description">
@@ -220,11 +223,13 @@
                 </div>
             </div>
         </div>
-        <div class="modal-footer padding-bottom-20-important">
+        <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-primary" data-ng-click="$ctrl.goToSettings()">go to settings</button>
-                <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-primary" data-ng-click="$ctrl.copyUrl()">copy this url</button>
-                <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.share = false">cancel</a>
+                <div class="text-center">
+                    <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">go to settings</button>
+                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl()">copy this url</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">cancel</a>
+                </div>
             </div>
         </div>
     </div>

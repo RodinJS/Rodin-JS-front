@@ -269,7 +269,7 @@
                                        ng-minlength="5"
                                        ng-change="$ctrl.confirmPassword()"
                                        data-ng-focus="changePasswordForm.password.focused = true">
-                                <button type="button" class="btn-view-pass show-pass"></button>
+                                <!--<button type="button" class="btn-view-pass show-pass"></button>-->
                             </div>
                             <div class="form-group pass-group" custom-input
                                  data-ng-class="{'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused, 'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
@@ -281,10 +281,10 @@
                                        ng-minlength="5"
                                        ng-change="$ctrl.confirmPassword()"
                                        data-ng-focus="changePasswordForm.confirmPassword.focused = true">
-                                <button type="button" class="btn-view-pass hide-pass"></button>
+                                <!--<button type="button" class="btn-view-pass hide-pass"></button>-->
                             </div>
 
-                            <p class="form-description">New password must be at least 8
+                            <p class="description">New password must be at least 8
                                 characters long,
                                 contain a number and letter
                             </p>

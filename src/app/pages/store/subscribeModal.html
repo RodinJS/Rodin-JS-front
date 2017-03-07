@@ -1,18 +1,20 @@
 <div class="modal-header">
-    <h1>{{$ctrl.modalTitle}}</h1>
+    <p>{{$ctrl.modalTitle}}</p>
 </div>
-<div class="modal-body padding-0-important">
-    <p class="text-small description">
+<div class="modal-body">
+    <p class="text-small description text-highlight">
         {{$ctrl.modalContent}}
     </p>
-    <p class="alert alert-rodin" ng-if="$ctrl.subscribtionWarning">
+    <p class="alert alert-rodin margin-top-20" ng-if="$ctrl.subscribtionWarning">
         {{$ctrl.subscribtionWarning}}
     </p>
 </div>
-<div class="modal-footer padding-bottom-20-important">
+<div class="modal-footer">
     <div class="required-field-actions clearfix">
-        <button ng-if="$ctrl.activateSubscribeButton" type="button" class="btn btn-primary" data-ng-click="$ctrl.purchaseModule($ctrl.module)">Subscribe</button>
-        <button ng-if="!$ctrl.activateSubscribeButton" type="button" class="btn btn-primary" data-ng-click="$ctrl.unsubscribeModule($ctrl.module)">Unsubscribe</button>
-        <a href="" class="btn btn-save" data-ng-click="$ctrl.modalInstance.close()">cancel</a>
+        <div class="text-center">
+            <button ng-if="$ctrl.activateSubscribeButton" type="button" class="btn btn-positive" data-ng-click="$ctrl.purchaseModule($ctrl.module)">Subscribe</button>
+            <button ng-if="!$ctrl.activateSubscribeButton" type="button" class="btn btn-negative" data-ng-click="$ctrl.unsubscribeModule($ctrl.module)">Unsubscribe</button>
+            <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modalInstance.close()">cancel</a>
+        </div>
     </div>
 </div>
