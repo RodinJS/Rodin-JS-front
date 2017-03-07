@@ -207,7 +207,8 @@
                                         <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#icon-file').click()">
                                             <div class="area-content" ng-show="$ctrl.files.icon.name == ''">.png</div>
                                             <img ng-show="$ctrl.files.icon.name !== ''"
-                                                 ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"
+                                                 width="166" height="166"
+                                                 ng-src="{{$ctrl.files.icon.src}}" alt=""
                                                  class="uploaded-file-icon">
                                         </div>
                                         <p class="drag-instruct">
@@ -223,7 +224,7 @@
                                             <span>Tap To Replace</span>
                                         </div>
                                     </div>
-                                    <h5 class="section-small-title text-left">upload .png 1024x1024</h5>
+                                    <h5 class="section-small-title text-center">upload .png 1024x1024</h5>
                                 </div>
                             </div>
 
@@ -236,7 +237,7 @@
                         <div class="btn-wrapper" style="text-align: center">
                             <button type="button"  class="btn btn-default btn-submit"
                                     ng-click="$ctrl.open($event)"
-                                    ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name"
+                                    <!--ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name"-->
                             >Build</button>
                         </div>
 
