@@ -103,7 +103,7 @@
                                                 accept="image/*"
                                                 onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                          </p>
-                                            <div class="drag-item-again" ng-show="$ctrl.files.icon.name !== ''">
+                                            <div class="drag-item-again" onclick="document.querySelector('#icon-file').click()" ng-show="$ctrl.files.icon.name !== ''">
                                                 <div class="drag-board"></div>
                                                 <span>Tap To Replace</span>
                                             </div>
@@ -235,7 +235,8 @@
                             <div class="btn-wrapper" style="text-align: center">
                                 <button type="button" class="btn btn-default btn-submit"
                                         ng-click="$ctrl.open($event)"
-                                        ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.icon.name">Build</button>
+                                        <!--ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.icon.name"-->
+                                >Build</button>
                             </div>
                         </div>
                     </form>
@@ -281,27 +282,25 @@
         <div class="modal-body padding-0-important">
             <form name="password">
                 <div class="form-wrapper margin-top-40">
-                    <div class="form-group" custom-input
+                    <div class="form-group"
                          data-ng-class="{'has-error': password.password.$invalid && password.password.focused, 'has-success': password.password.$valid && password.password.focused}">
-                        <input type="password" class="form-control" placeholder=""
+                        <input type="password" class="form-control" placeholder="KeyStore Password"
                                data-ng-model="$ctrl.project.android.keyStore.password"
                                name="password"
                                ng-minlength="6"
                                required
                                data-ng-focus="password.password.focused = true">
-                        <label class="control-label float-label">KeyStore Password</label>
                     </div>
                     <!--<p class="text-small description">KeyStore Password.</p>-->
 
-                    <div class="form-group margin-top-40" custom-input
+                    <div class="form-group margin-top-40"
                          data-ng-class="{'has-error': password.aliasPassword.$invalid && password.aliasPassword.focused, 'has-success': password.aliasPassword.$valid && password.aliasPassword.focused}">
-                        <input type="password" class="form-control" placeholder=""
+                        <input type="password" class="form-control" placeholder="Alias Password"
                                data-ng-model="$ctrl.project.android.keyStore.aliasPassword"
                                name="aliasPassword"
                                required
                                ng-minlength="6"
                                data-ng-focus="password.aliasPassword.focused = true">
-                        <label class="control-label float-label">Alias Password</label>
                     </div>
                     <!--<p class="text-small description">Alias Password.</p>-->
                 </div>

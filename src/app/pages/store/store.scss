@@ -73,6 +73,11 @@
         position: absolute;
         bottom: 5px;
         width: calc(100% - 20px);
+        p {
+          a.circle:focus {
+            outline: none;
+          }
+        }
       }
       .module-title {
         font-size: 21px;

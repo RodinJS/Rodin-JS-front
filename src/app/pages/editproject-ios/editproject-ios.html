@@ -131,7 +131,7 @@
                                                    accept=".mobileprovision"
                                                    onchange="angular.element(this).scope().$ctrl.changeProfile(event)">
                                         </p>
-                                        <div class="drag-item-again" ng-show="$ctrl.files.profile.name !== ''">
+                                        <div class="drag-item-again" onclick="document.querySelector('#profile-file').click()" ng-show="$ctrl.files.profile.name !== ''">
                                             <div class="drag-board"></div>
                                             <span>Tap To Replace</span>
                                         </div>
@@ -175,7 +175,7 @@
                                                    accept=".p12"
                                                    onchange="angular.element(this).scope().$ctrl.changeCert(event)">
                                         </p>
-                                        <div class="drag-item-again" ng-show="$ctrl.files.cert.name !== ''">
+                                        <div class="drag-item-again" onclick="document.querySelector('#cert-file').click()" ng-show="$ctrl.files.cert.name !== ''">
                                             <div class="drag-board"></div>
                                             <span>Tap To Replace</span>
                                         </div>
@@ -219,7 +219,7 @@
                                                    accept="image/*"
                                                    onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                         </p>
-                                        <div class="drag-item-again" ng-show="$ctrl.files.icon.name !== ''">
+                                        <div class="drag-item-again" onclick="document.querySelector('#icon-file').click()" ng-show="$ctrl.files.icon.name !== ''">
                                             <div class="drag-board"></div>
                                             <span>Tap To Replace</span>
                                         </div>
@@ -237,7 +237,7 @@
                         <div class="btn-wrapper" style="text-align: center">
                             <button type="button"  class="btn btn-default btn-submit"
                                     ng-click="$ctrl.open($event)"
-                                    ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name"
+                                    <!--ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name"-->
                             >Build</button>
                         </div>
 
@@ -282,14 +282,13 @@
             <p class="description text-small">Certificate password when u generate the app</p>
             <form name="password">
                 <div class="form-wrapper margin-top-20">
-                    <div class="form-group" custom-input
+                    <div class="form-group"
                          data-ng-class="{'has-error': password.certPassword.$invalid && password.certPassword.focused, 'has-success': password.certPassword.$valid && password.certPassword.focused}">
-                        <input type="password" class="form-control" placeholder=""
+                        <input type="password" class="form-control" placeholder="Certificate Password"
                                data-ng-model="$ctrl.project.ios.certPassword"
                                name="certPassword"
                                required
                                data-ng-focus="password.certPassword.focused = true">
-                        <label class="control-label float-label">Certificate Password</label>
                     </div>
                 </div>
             </form>
