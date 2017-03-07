@@ -1,0 +1,46 @@
+.contacts-page {
+  .title-section {
+    position: relative;
+    h1.title {
+      margin-top: 32px;
+      display: block;
+    }
+    .line {
+      border-bottom: 1px solid #008af1;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 114px;
+    }
+  }
+  .content-section {
+    margin-top: 80px;
+    > div {
+      > div {
+        font-family: $Roboto;
+        margin-bottom: 20px;
+        color: white;
+      }
+    }
+    .social-list-contact {
+      li {
+        display: inline-block !important;
+        a {
+          color: white !important;
+          &:not(:first-child) {
+            margin-left: 20px !important;
+          }
+          &:hover {
+            color: $color-primary !important;
+          }
+        }
+      }
+  }
+  .cs-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: white;
+  }
+}
+
+}

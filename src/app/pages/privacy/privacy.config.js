@@ -4,7 +4,7 @@ function PrivacyConfig($stateProvider) {
 		.state('landing.privacy', {
 			url: '/terms',
 			controller: 'PrivacyCtrl as $ctrl',
-			templateUrl: 'pages/privacy/privacy.html',
+			templateUrl: 'pages/privacy/contacts.html',
 			title: 'Privacy',
             pageClass:'new',
         })
