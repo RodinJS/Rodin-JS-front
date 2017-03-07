@@ -103,6 +103,10 @@
                                                 accept="image/*"
                                                 onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                          </p>
+                                            <div class="drag-item-again" ng-show="$ctrl.files.icon.name !== ''">
+                                                <div class="drag-board"></div>
+                                                <span>Tap To Replace</span>
+                                            </div>
                                      </div>
                                      <h5 class="section-small-title text-center">upload .png 1024x1024</h5>
                                  </div>

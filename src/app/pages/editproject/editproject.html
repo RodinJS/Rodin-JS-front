@@ -93,7 +93,7 @@
                                     <input class="hidden" type="file" id="thumbnail-img" data-ng-model="avatarUrl" accept="image/jpeg,image/jpg,image/png,"
                                            onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)" name="avatar"/>
                                     </p>
-                                    <div class="drag-item-again" ng-if="$ctrl.project.thumbnail">
+                                    <div class="drag-item-again" ng-show="$ctrl.project.thumbnail">
                                         <div class="drag-board"></div>
                                         <span>Tap To Replace</span>
                                     </div>
