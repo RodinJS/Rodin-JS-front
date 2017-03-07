@@ -125,6 +125,7 @@ window.LANDING = {
         $(document).on('click touch', '.back-home-btn', function () {
             let modal = $('.project-modal');
             modal.removeClass('show animationEnd');
+            $('body').removeAttr('style');
             $(window).scrollTop($(window).scrollTop() - 10);
         });
     },
