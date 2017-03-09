@@ -28,18 +28,19 @@ function AppRun(AppConstants, $rootScope, Restangular, JWT, $state, User, $timeo
 
     // change page title based on state
     $rootScope.$on('$stateChangeSuccess', (event, toState) => {
-        $rootScope.setPageTitle(toState.title);
+	    $rootScope.stateIsLoading = false;
+	    $rootScope.setPageTitle(toState.title);
         $rootScope.setPageClass(toState.pageClass);
     });
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+	    $rootScope.stateIsLoading = true;
         if (toState.redirectToWhenAuthenticated && JWT.get()) {
             // User isn’t authenticated
             $state.go(toState.redirectToWhenAuthenticated);
             event.preventDefault();
         }
     });
-
     // Helper method for setting the page's title
     $rootScope.setPageTitle = (title) => {
         $rootScope.pageTitle = '';
