@@ -57,6 +57,8 @@ import './betaAgreement/index';
 
 import './privacy/index';
 
+import './contacts/index';
+
 import './contentPages/index';
 
 // Create the module where our functionality can attach to
@@ -73,7 +75,8 @@ let pagesModule = angular.module('app.pages', [
     'landing.store',
     'landing.faq',
     'landing.privacy',
-    'landing.pages',
+	'landing.contacts',
+	'landing.pages',
     'landing.betaAgreement',
 
     'app.dashboard',
