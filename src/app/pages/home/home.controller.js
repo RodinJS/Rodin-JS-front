@@ -257,7 +257,7 @@ class HomeCtrl {
         this.requestInProgress = true;
         subscribe.position = subscribe.position.join(', ');
         this._User.subscribe(subscribe).then((result) => {
-            this._Notification.success('You have successfully subscribed to notification list');
+            this._Notification.success('Great success!');
             $('#emailControl').removeClass('focus').closest('.input-group').removeClass('focus');
             this.emailFocused = false;
             this.requestInProgress = false;
