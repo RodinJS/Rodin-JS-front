@@ -1,5 +1,5 @@
-<div class="header-background"></div>
-<div class="header-auth">
+<div class="header-background" ng-show="!stateIsLoading"></div>
+<div class="header-auth" ng-show="!stateIsLoading">
     <div class="container">
        <div class="navbar-header">
            <a href="" class="btn-mobile-menu visible-xs" ng-class="$ctrl.menuOpen ? 'active' : ''" ng-click="$ctrl.clickMenu()" ng-if="!$ctrl.isHome">
