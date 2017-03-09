@@ -297,3 +297,23 @@
     color: #2b9af3
   }
 }
+.static-pages {
+  .title-section {
+    position: relative;
+    h1.title {
+      color: $color-primary;
+      margin-top: 32px;
+      display: block;
+    }
+    .line {
+      border-bottom: 1px solid #008af1;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 114px;
+    }
+  }
+  .content-section {
+    margin-top: 80px;
+  }
+}
