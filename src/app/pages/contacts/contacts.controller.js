@@ -34,7 +34,7 @@ class ContactsCtrl {
 		let marker = new google.maps.Marker({
 			position: loc,
 			map: this.map,
-			title: 'Rodn'
+			title: 'Rodin'
 		});
 	}
 }

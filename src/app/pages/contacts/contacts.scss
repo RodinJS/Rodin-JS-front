@@ -1,24 +1,33 @@
 .contacts-page {
-  .title-section {
-    position: relative;
-    h1.title {
-      margin-top: 32px;
-      display: block;
-    }
-    .line {
-      border-bottom: 1px solid #008af1;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      top: 114px;
-    }
-  }
+  //.title-section {
+  //  position: relative;
+  //  h1.title {
+  //    margin-top: 32px;
+  //    display: block;
+  //  }
+  //  .line {
+  //    border-bottom: 1px solid #008af1;
+  //    width: 100%;
+  //    position: absolute;
+  //    left: 0;
+  //    top: 114px;
+  //  }
+  //}
   .content-section {
+    .col-md-12 {
+      min-height: 123px;
+      //margin-bottom: 0px;
+    }
     margin-top: 80px;
     > div {
       > div {
+        article {
+          margin-bottom: 20px;
+        }
         font-family: $Roboto;
-        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 18px;
+        //margin-bottom: 20px;
         color: white;
       }
     }
@@ -27,6 +36,7 @@
         display: inline-block !important;
         a {
           color: white !important;
+          cursor: pointer;
           &:not(:first-child) {
             margin-left: 20px !important;
           }
@@ -35,12 +45,18 @@
           }
         }
       }
+    }
+    .cs-title {
+      font-family: $RobotoCond;
+      font-size: 24px;
+      margin-bottom: 22px;
+      color: white;
+    }
+    .corp {
+      font-family: $Roboto;
+      font-weight: 600;
+      margin-bottom: 0px !important;
+    }
   }
-  .cs-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: white;
-  }
-}
 
 }

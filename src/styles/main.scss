@@ -27,7 +27,9 @@ button:hover,
 button:active{
   outline: none !important;
 }
-
+body.space-back {
+  background-image: url(../images/landing/content/banner.jpg);
+}
 body{
   &.new{
     .loader {
