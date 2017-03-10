@@ -10,7 +10,11 @@
     </div>
     <div class="container content-section faq-section">
         <div class="text-white col-md-8 col-md-offset-2">
-            <h3 class="text-faq">How do I pay for my subscription?</h3>
+            <div ng-repeat="faq in $ctrl.faqs">
+              <h3 class="text-faq">{{faq.name}}</h3>
+              <p class="desc-faq" ng-bind-html="faq.text | htmlize"></p>
+            </div>
+          <!--  <h3 class="text-faq">How do I pay for my subscription?</h3>
             <p class="desc-faq">
                 Once, we have completed the order we'll send you an invoice to be paid by Credit Card or Paypal.
                 Once the order has been paid in full, we will ship the order.
@@ -23,7 +27,7 @@
             <p class="desc-faq">Usually it lasts around 3-5 minutes</p>
 
             <h3 class="text-faq">How do I contact Rodin Customer Service?</h3>
-            <p class="desc-faq">Say hello to <a href="mailto:support@rodin.io">support@rodin.io</a></p>
+            <p class="desc-faq">Say hello to <a href="mailto:support@rodin.io">support@rodin.io</a></p>-->
 
         </div>
     </div>
