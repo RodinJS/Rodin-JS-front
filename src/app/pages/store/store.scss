@@ -17,6 +17,7 @@
     }
   }
 }
+
 .store-page {
   //padding-top: 34px;
   /* h2 {
@@ -299,6 +300,7 @@
 }
 
 .static-pages {
+  min-height: 990px;
   .title-section {
     position: relative;
     h1.title {
@@ -318,5 +320,29 @@
   }
   .content-section {
     margin-top: 80px;
+  }
+  .isLoading {
+    position: fixed;
+    height: 108px;
+    bottom: 0;
+    width: 1170px;
+  }
+  .footer-content {
+    @include footer()
+  }
+}
+
+.content-pages {
+  .isLoading {
+    position: fixed;
+    height: 108px;
+    bottom: 0;
+    width: 1170px;
+  }
+  //.footer-content {
+  //  @include footerContent();
+  //}
+  .footer-content {
+    @include footer()
   }
 }
