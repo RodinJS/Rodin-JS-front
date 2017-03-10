@@ -1,5 +1,3 @@
-import footer from '../home/scripts/components/footer';
-
 class PageCtrl {
     constructor(AppConstants, $scope, $state, $stateParams,  EventBus, PagesService, PagesStore, $window) {
         'ngInject';
@@ -17,12 +15,6 @@ class PageCtrl {
 
         if (!this.pageURL) return this.onFailedPage();
         this.getPageContent();
-	    $scope.$on('$viewContentLoaded', () => {
-		    $(document).ready(()=> {
-			    footer.init();
-		    });
-	    });
-
         /* this._PagesStore.subscribeAndInit($scope, () => {
              this.pagesList = this._PagesStore.getPagesList();
              if (this.pagesList.length > 0) {
