@@ -13,13 +13,11 @@ class ProjectCtrl {
         this.$state = $state;
         this.User = User;
         this.currentUser = this.User.current;
-
         if (this.currentUser.projects.total >= this.currentUser.allowProjectsCount) {
             this.Notification.error(`Maximum projects count exceeded, allowend project count ${this.currentUser.allowProjectsCount}`);
             return this.$state.go('app.dashboard');
         }
 
-        $scope.projectDescription = '';
 
         this.project = {
             name: '',
@@ -40,12 +38,17 @@ class ProjectCtrl {
             projects: [],
         };
 
+	    $scope.projectDescription = '';
+	    $scope.projectDescription = '';
+
         this.getTemplates();
         this.createFinalize = this.createFinalize.bind(this);
         //this.createFinalizeError = this.createFinalizeError.bind(this);
 
         $timeout(()=> {
             this.inputPadding = (angular.element('.project-path-label').width() + 10);
+	        let placeholderPad = angular.element('.main-placeholder').innerWidth()+22;
+	        angular.element('#project-url').css({'padding-left':placeholderPad});
         }, 500);
 
     }

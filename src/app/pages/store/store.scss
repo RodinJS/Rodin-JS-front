@@ -300,6 +300,7 @@
 }
 
 .static-pages {
+  min-height: 990px;
   .title-section {
     position: relative;
     h1.title {
@@ -338,6 +339,9 @@
     bottom: 0;
     width: 1170px;
   }
+  //.footer-content {
+  //  @include footerContent();
+  //}
   .footer-content {
     @include footer()
   }
