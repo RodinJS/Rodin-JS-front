@@ -43,6 +43,7 @@
                         <label for="url">Project url</label>
                         <div class="url-group">
                             <input type="text"
+                                   id="project-url"
                                    class="form-control"
                                    placeholder="projectURL"
                                    value=""
@@ -51,7 +52,7 @@
                                    limit-to="16"
                                    ng-click="$ctrl.projectFocused = true"
                                    data-ng-model="$ctrl.project.name">
-                            <span class="main-placeholder">https://rodin.io/projects/nasoku/</span>
+                            <span class="main-placeholder" ng-bind="'https://rodin.io/projects/' + $ctrl.currentUser.username + '/'"></span>
                         </div>
                     </div>
                     <!--<div class="form-group">-->
