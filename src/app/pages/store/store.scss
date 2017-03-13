@@ -339,9 +339,9 @@
     bottom: 0;
     width: 1170px;
   }
-  //.footer-content {
-  //  @include footerContent();
-  //}
+  .footer-content {
+    @include footerContent();
+  }
   .footer-content {
     @include footer()
   }
