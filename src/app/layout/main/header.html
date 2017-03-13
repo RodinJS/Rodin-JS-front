@@ -51,10 +51,10 @@
            <div class="account-action" ng-if="$ctrl.user">
                <ul>
                    <li class="dropdown notifi-dropdown" uib-dropdown auto-close="outsideClick">
-                       <a href="" class="btn-notifi new" ng-if="$ctrl.notifications.length > 0" class="dropdown-toggle btn-notifi" uib-dropdown-toggle role="button">
+                       <a href="" ng-if="$ctrl.notifications.length > 0" class="btn-notifi new dropdown-toggle btn-notifi" uib-dropdown-toggle role="button">
                            <i class="rd rd-notifi"></i>
                        </a>
-                       <a href="" class="btn-notifi" ng-if="!$ctrl.notifications.length > 0" class="dropdown-toggle btn-notifi" uib-dropdown-toggle role="button">
+                       <a href="" ng-if="$ctrl.notifications.length < 1" class="btn-notifi dropdown-toggle btn-notifi" uib-dropdown-toggle role="button">
                            <i class="rd rd-notifi"></i>
                        </a>
                        <div class="dropdown-menu notifi-dropdown-menu" uib-dropdown-menu>
