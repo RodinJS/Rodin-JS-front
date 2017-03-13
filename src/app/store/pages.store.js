@@ -26,8 +26,16 @@ function PagesStore(EventBus, BaseStore, $stateParams, $state, Project) {
 
     });
 
-    factory.getPagesList = function () {
+    factory.getPagesList =  () => {
         return _.map(factory.data.pagesList, (page) => _.pick(page, ['title', 'slug']));
+    };
+
+    factory.getHeadarPagesList = () => {
+        return _.filter(factory.data.pagesList, (filterPage) => filterPage.state === 'published');
+    };
+
+    factory.getFooterPagesList = () => {
+        return _.filter(factory.data.pagesList, (filterPage) =>  filterPage.putOnFooter == true);
     };
 
     factory.getPage = function (url) {

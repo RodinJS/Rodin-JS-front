@@ -6,6 +6,7 @@ function PageConfig($stateProvider) {
         controller: 'PagesCtrl as $ctrl',
         templateUrl: 'pages/contentPages/pages.html',
         pageClass: 'new',
+        showFooter: true,
     });
 }
 

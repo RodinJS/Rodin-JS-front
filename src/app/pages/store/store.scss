@@ -327,9 +327,9 @@
     bottom: 0;
     width: 1170px;
   }
-  .footer-content {
+ /* .footer-content {
     @include footer()
-  }
+  }*/
 }
 
 .content-pages {
@@ -339,10 +339,10 @@
     bottom: 0;
     width: 1170px;
   }
-  .footer-content {
+  /*.footer-content {
     @include footerContent();
   }
   .footer-content {
     @include footer()
-  }
+  }*/
 }

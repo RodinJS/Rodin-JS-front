@@ -20,12 +20,11 @@ class AppHeaderCtrl {
         };
 
         this._PagesStore.subscribeAndInit($scope, () => {
-            this.pagesList = this._PagesStore.getPagesList();
+            this.pagesList = this._PagesStore.getHeadarPagesList();
             if (this.pagesList.length <= 0 && !this.try) {
                 this.try = true;
                 return this.getPagesList();
             }
-
             if (this.pagesList.length > 0) {
                 this.pagesSection1 = _.slice(this.pagesList, 0, 3);
                 this.pagesSection2 = _.slice(this.pagesList, 3, this.pagesList.length);
@@ -61,7 +60,6 @@ class AppHeaderCtrl {
     getPagesList() {
         this._PagesService.getList().then(
             pagesList => {
-                console.log(pagesList);
                 this.eventBus.emit(this.eventBus.pages.SET, pagesList);
             },
 

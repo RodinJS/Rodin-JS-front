@@ -12,7 +12,7 @@ class AppHeaderCtrl {
         this.appName = AppConstants.appName;
 
         this._PagesStore.subscribeAndInit($scope, () => {
-            this.pagesList = this._PagesStore.getPagesList();
+            this.pagesList = this._PagesStore.getHeadarPagesList();
             if (this.pagesList.length <= 0 && !this.try) {
                 this.try = true;
                 return this.getPagesList();
