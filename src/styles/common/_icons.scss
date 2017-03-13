@@ -193,21 +193,21 @@
 }
 // Material Icon Font End
 
-@import '../main-icons/ionicons-icons';
+@import 'main-icons/ionicons-icons';
 
 // medium
-@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-
-}
-// tablet
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-
-}
-// phone + tablet
-@media (max-width: $screen-sm-max) {
-
-}
-// phone
-@media (max-width: $screen-xs-max) {
-
-}
+//@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+//
+//}
+//// tablet
+//@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+//
+//}
+//// phone + tablet
+//@media (max-width: $screen-sm-max) {
+//
+//}
+//// phone
+//@media (max-width: $screen-xs-max) {
+//
+//}

@@ -9,7 +9,7 @@ function AuthConfig($stateProvider) {
             templateUrl: 'pages/auth/auth.html',
             title: 'Sign in',
             redirectToWhenAuthenticated: 'app.dashboard',
-            pageClass: 'login-register new',
+            pageClass: 'login-register',
             showFooter: true,
             resolve: {
                 auth: function (User, $state, $timeout) {
@@ -24,7 +24,7 @@ function AuthConfig($stateProvider) {
             templateUrl: 'pages/auth/auth.html',
             title: 'Sign up',
             redirectToWhenAuthenticated: 'app.dashboard',
-            pageClass: 'login-register new',
+            pageClass: 'login-register',
             showFooter: true,
             resolve: {
                 auth: function (User) {

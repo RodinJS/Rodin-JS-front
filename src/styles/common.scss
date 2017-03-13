@@ -8,7 +8,26 @@
 * html .page__wrapper {
 	height: 100%;
 }
-
+body.space-back {
+	background-image: url(../images/landing/content/banner.jpg);
+}
+body {
+	&.page {
+		font-family: $Roboto;
+		font-weight: 400;
+		background-color: $bg-primary;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		height: 100%;
+		//background-image: url(/images/landing/content/auth-main-bg.jpg);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+		&.overflow {
+			overflow: hidden;
+		}
+	}
+}
 //== Typography
 h1,
 h2,
@@ -208,6 +227,54 @@ section.section {
     enable-background: new;
 }
 
+.loader {
+	background-color: rgba(0, 0, 0, .5);
+	background-image: url(../images/general/loader.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 50px 50px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+}
+.page-404{
+	.main-container{
+		.page-404-content{
+			text-align: center;
+			position: absolute;
+			top: 150px;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			a.btn-app:hover {
+				background: $color-primary;
+				color: white;
+			}
+		;
+		}
+		h1{
+			font-size: 150px;
+			line-height: .78;
+			font-weight: 700;
+			color: rgba($white, .2);
+			margin: 0;
+			margin-bottom: 40px;
+		}
+		h5{
+			color: $white;
+			font-weight: 400;
+			margin-top: 0;
+			margin-bottom: 40px;
+		}
+		.btn-primary{
+			height: 42px;
+			padding: 12px;
+			font-size: 12px;
+		}
+	}
+}
 @media screen and (min-width: 768px) and (max-width: 991px) {
 	h1,
 	.main-title {

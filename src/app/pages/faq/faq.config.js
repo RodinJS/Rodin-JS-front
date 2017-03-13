@@ -6,7 +6,7 @@ function FaqConfig($stateProvider) {
 			controller: 'FaqCtrl as $ctrl',
 			templateUrl: 'pages/faq/faq.html',
 			title: 'Faq',
-            pageClass:'new space-back',
+            pageClass:'space-back new',
         })
 }
 
