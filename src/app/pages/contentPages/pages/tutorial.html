@@ -1,0 +1,311 @@
+<div class="static-pages" codify>
+    <div class="container-fluid page static">
+        <div class="row title-section">
+            <h1 class="title text-center">
+                {{$ctrl.page.title.toUpperCase()}}</h1>
+            <span class="line"></span>
+        </div>
+        <div class="row">
+            <ul class="color-box">
+                <li ng-click="$ctrl.setCodeElementsColor('#F79803')"></li>
+                <li ng-click="$ctrl.setCodeElementsColor('#008BF2')"></li>
+                <li ng-click="$ctrl.setCodeElementsColor('#04A900')"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-pages tutorial" ng-if="$ctrl.pageURL.includes('tutorial')">
+        <div class="container page static">
+            <div class="col-md-3 rd-tree">
+                <ul class="nav nav-list">
+                    <li class="labeled"><label class="tree-toggler nav-header">RODIN LIB BASIC DOC</label>
+                    </li>
+                    <li class="labeled"><label class="tree-toggler nav-header">SCENE</label>
+                    </li>
+                    <li class="labeled"><label class="tree-toggler nav-header">SCULPT</label>
+                        <ul class="nav nav-list tree">
+                            <li><a>Main Information</a></li>
+                            <li><a>Sources</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-8 tutorial-section">
+                <section class="tutorial-content">
+                    <h1>RODIN LIB BASIC DOC</h1>
+                    <article>
+                        <p>A basic VR experience in Rodin starts with the following two lines:</p>
+                        <p class="indent">First, you import the components of the library. <span class="block"> <code class="common">import * as RODIN from 'rodin/core';</code> </span></p>
+                        <p class="indent">Then, you start the rendering loop (<code class="common">animationFrame</code> loop). <span class="block"> <code class="common">RODIN.start();</code> </span></p>
+                        <p class="code-desc"><code class="common">animationFrame</code> loops up to the frequency limited by the VRDisplay (60 fps for Mobiles and PCs, 90 fps for advanced VR Headsets, etc.)</p>
+                        <div class="section-footer">
+                            <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="_blank">window.requestAnimationFrame()</a> for details.</p>
+                        </div>
+                    </article>
+                </section>
+                <section class="tutorial-content">
+                    <h1>SCENE</h1>
+                    <article>
+                        <p>In Rodin, you build your experience in scenes. You may have multiple scenes in your project and switch from one to another whenever it&rsquo;s needed.</p>
+                        <p>After the <code class="common">RODIN.start()</code> call, Rodin creates a default scene and sets it as the <code class="common">active</code> one.</p>
+                        <p>The <code class="common">animationFrame</code> loop will render the active scene only.</p>
+                        <h6>Whenever you add an object to <code class="common">RODIN.Scene</code>, it is automatically added to the <code class="common">active</code> scene:</h6>
+                        <p class="indent"><code class="common">RODIN.Scene.add(object);</code></p>
+                        <h6>To create other scenes, just create a new object:</h6>
+                        <p class="indent"><code class="common">let scene2 = new RODIN.Scene(&ldquo;mySecondScene&rdquo;).</code></p>
+                        <h6>To add objects to non-active scene:</h6>
+                        <p class="indent"><code class="common">scene2.add(object);</code></p>
+                        <h6>To change the <code class="common">active</code> scene, use one of the following:</h6>
+                        <p class="indent line-through">by the scene name</p>
+                        <p class="indent"><code class="common"><span class="line-through">RODIN.Scene.go(&ldquo;mySecondScene&rdquo;);</span> not ready yet</code></p>
+                        <p class="indent">by the scene object</p>
+                        <p class="indent"><code class="common">RODIN.Scene.go(scene2);</code></p>
+                        <p class="indent">by the scene index (first scene has the index 0)</p>
+                        <p class="indent"><code class="common">RODIN.Scene.go(1);</code></p>
+                        <p>The <code class="common">Rodin.Scene</code> controls the rendering loop in its <code class="common">render()</code> function, which is called on every animation frame.</p>
+                        <h6>If you want a custom function to be called on each cycle, you can add it to</h6>
+                        <p class="indent"><code class="common">RODIN.Scene.preRender(myFunc)</code> &ndash; to be called before rendering the scene</p>
+                        <p class="indent">or</p>
+                        <p class="indent"><code class="common">RODIN.Scene.postRender(myFunc)</code> &ndash; to be called after rendering the scene.</p>
+                        <p>In the case above, the <code class="common">myFunc</code> will be called on every frame render, disregarding which scene is active.</p>
+                        <h6>If you want the myFunc to be called only when the current scene is active, use the following:</h6>
+                        <p class="indent"><code class="common">RODIN.Scene.preRender(myFunc)</code> &ndash; to be called before rendering the scene</p>
+                        <p class="indent">or</p>
+                        <p class="indent"><code class="common">RODIN.Scene.postRender(myFunc)</code> &ndash; to be called after rendering the scene.</p>
+                        <p>This way when you switch to another scene, myFunc will not be called.</p>
+                        <h6>Let&rsquo;s look at a basic example of how you can create two different scenes and switch between them by mouse click:</h6>
+                        <div class="code-box"><pre id="rodinCode" class="code-block"><code class="code">
+                                import * as RODIN from 'rodin/core';
+                                RODIN.start();
+                                let scene2 = new RODIN.Scene("mySecondScene");
+                                let currentSceneIndex = 0;
+
+                                let counter = 0;
+
+                                RODIN.Scene.preRender(() =&gt; {
+                                    if (++counter % 60 === 0) {
+                                        console.log(RODIN.Scene.active.name)
+                                    }
+                                });
+
+                                document.addEventListener('click', function () {
+                                    currentSceneIndex = (currentSceneIndex + 1) % 2;
+                                    RODIN.Scene.go(currentSceneIndex);
+                                });
+                            </code>
+                        </pre>
+                            <h6 class="code-box-title">Example 1</h6>
+                        </div>
+                        <p>In Example 1, you can see that the first scene is created by running the <code>RODIN.start()</code> function.</p>
+                        <p>The second scene is created manually. Since we know that there are two scenes, indexed accordingly as 0 and 1, we can switch between them using those indexes (<code class="common">currentSceneIndex</code>).</p>
+                        <p>We also have created a pre-render function that prints the current scene name once per 60 frames.</p>
+                        <h6>In a browser rendering loops at 60fps max, we will see the current scene name printed every second, and as we click, the scene switches and the printed scene name changes. Below is the Example 1 output from two clicks in 5 seconds:</h6>
+                        <p class="indent"><code class="common green" ng-style="$ctrl.codeStyle"> Main<br /> Main<br /> mySecondScene<br /> mySecondScene<br /> Main </code></p>
+                        <div class="section-footer">
+                            <p>See <a>Scene</a> for details.</p>
+                        </div>
+                    </article>
+                </section>
+                <section class="tutorial-content">
+                    <h1>Sculpt</h1>
+                    <article>
+                        <h6>Sculpt is essentially the 3D object container class.</h6>
+                        <p>As you might have noticed, the Rodin library is based on the Three.js library (thanks Ricardo Cabello and co.), and in Three.js all objects are extensions of <code class="common">THREE.Object3D</code>.</p>
+                        <p>The <code class="common">Sculpt</code> class enhances the features of <code class="common">THREE.Object3D</code> objects, by binding them to <code class="common">RodinEvents </code>(See <a>EVENTS</a> for details).</p>
+                        <h6>As a constructor argument, Sculpt must receive an object:</h6>
+                        <p><code class="common"> <span class="block green">{</span> <span class="block indent">name: &ldquo;myObject&rdquo;,</span> <span class="block green">and</span> <span class="block indent">threeObject: a THREE.Object3D instance,</span> <span class="block green indent">or</span> <span class="block indent">sculpt: another Sculpt instance</span> <span class="block green">}</span> </code></p>
+                        <p>You can also provide a <code class="common">THREE.Object3D</code> instance or a <code class="common">Sculpt</code> instance directly, without putting them in an object as a <code class="common">key:value</code> pair (See Example 2).</p>
+                        <p>With events enabled, all <code class="common">Sculpt</code> objects will be listening to fired <code class="commn">RodinEvents</code> and executing their corresponding event handlers if any.</p>
+                        <h6>Let&rsquo;s see a basic example to make it clear:</h6>
+                        <div id="ex2" class="code-box">
+<pre id="rodinCode" class="code-block">                            <code class="code">
+                                import * as RODIN from 'rodin/core';
+                                RODIN.start();
+
+                                let sphere = new RODIN.Sculpt(
+                                    new THREE.Mesh(
+                                        new THREE.SphereGeometry(1, 12, 12),
+                                            new THREE.MeshBasicMaterial({ wireframe: true })
+                                    )
+                                );
+
+                                RODIN.Scene.add(sphere);
+
+                                sphere.on(RODIN.CONST.READY, function (event) {
+                                    event.target.position = new THREE.Vector3(0, 1.6, -2);
+                                });
+
+                                sphere.on(RODIN.CONST.UPDATE, function (event) {
+                                    event.target.rotation.y += RODIN.Time.delta / 1000;
+                                });
+
+                                sphere.on(RODIN.CONST.UPDATE, (event) =&gt; {
+                                    event.target.rotation.z += RODIN.Time.delta / 10000;
+                                });
+
+                            </code>
+                        </pre>
+                            <h6 class="code-box-title">Example 2</h6>
+                        </div>
+                        <p>In Example 2, we create a Three.js sphere mesh object and pass it to a <code>RODIN.Sculpt()</code> constructor.</p>
+                        <p>Next, we add the <code class="common">sphere</code> and then three event listeners to the current(active) scene.</p>
+                        <p>Though not recommended, you can also gain access to the <code class="common">THREE.Object3D</code> object that is wrapped by the <code class="common">Sculpt</code> class using a reference, for example: <code class="common">sphere. _threeObject</code>.</p>
+                        <p><strong>The first</strong> handler function goes to <code class="common">RODIN.CONST.READY</code> event (See all event types listed in EVENTS chapter). Whenever the Sculpt object is created, it fires a <code class="common">READY</code> event. This handler then sets the needed position to the event target (which is the <code class="common">sphere</code> itself).</p>
+                        <p><strong>The second</strong> handler function goes to <code class="common">RODIN.CONST.UPDATE</code> event. This event is fired for all Sculpt objects of active scenes on each iteration of rendering during <code class="common">animationFrame</code> loop, after <code class="common">preRender</code> functions and before <code class="common">postRender</code> functions.</p>
+                        <p>This handler rotates the sphere by a 1000th fraction of <code class="common">RODIN.Time.delta</code> (the time elapsed after previous render call, e.g. 16.6ms for 60fps, 33.3ms for 30fps etc).</p>
+                        <p>In simpler words - this function is called on each rendering event, which generally occurs 60 times per second, and each time rotates the sphere by an angle that depends on how intense the calls are (60fps, 30fps, 90fps). The higher the fps rate, the smaller the angle of each rotation.</p>
+                        <p>This way we can make sure that the rotation speed won&rsquo;t vary on different devices with different fps rates.</p>
+                        <p><strong>The third</strong> handler function again goes to <code class="common">RODIN.CONST.UPDATE</code> event. This handler also rotates the sphere, but on a different axis and 10 times slower (try to understand why). This shows that Sculpt objects can have multiple handlers for each event and they all will be executed correspondingly.</p>
+                        <p>Sculpt class does not provide public functions for adding or removing child objects; instead, Sculpt has the <code class="common">parent</code> attribute you can set. By setting the<code class="common">parent</code> attribute, you remove the object from the current parent and add it to the target parent, <strong>while maintaining the objects&rsquo; global position, rotation, and scale</strong> (unlike Three.js).</p>
+                        <div class="section-footer">
+                            <p>See <a>Sculpt</a> for details.</p>
+                        </div>
+                    </article>
+                </section>
+                <section class="tutorial-content">
+                    <h1>Events</h1>
+                    <h6>There is a number of custom event types used in Rodin:</h6>
+                    <p class="indent"><code class="common"> READY = 'ready';<br /> UPDATE = 'update';<br /> START = 'start';<br /> STOP = 'stop';<br /> COMPLETE = 'complete';<br /> GAMEPAD_HOVER = 'gamepadhover';<br /> GAMEPAD_HOVER_OUT = 'gamepadhoverout';<br /> GAMEPAD_BUTTON = 'gamepadbutton';<br /> GAMEPAD_BUTTON_DOWN = 'gamepadbuttondown';<br /> GAMEPAD_BUTTON_UP = 'gamepadbuttonup';<br /> GAMEPAD_BUTTON_CHANGE = 'gamepadbuttonchange'; </code></p>
+                    <p>These constants are available through <code class="common">RODIN.CONST.{EVENT}</code>. All those events can be used, wrapped in the <code class="common">RodinEvent</code> class. Rodin has included this custom class because the controllers do not have the event concept natively; all they do is change state and value. So with Rodin, we&rsquo;ve created a more JS developer-friendly interface to work with. You have seen the events usage in Example 2. There are more samples available in our platform.</p>
+                    <h6>The RodinEvent constructor requires a target object and parameters object:</h6>
+                    <p><code class="block common"> { <span class="block indent"> type: 'event',<br /> domEvent: null,<br /> button: null,<br /> hand: '',<br /> controller: null </span> } </code></p>
+                </section>
+                <section class="tutorial-content">
+                    <h1>Animation</h1>
+                    <p>The <code class="common">AnimationClip</code> class is for creating animation clips on Sculpt objects. To create animation clips on Sculpt objets, we create a new instance of the class, provide the parameters that need to be animated (position, rotation, scale, etc.), the duration in milliseconds, and the target value of the parameters. Optionally, we can provide the starting value as well, but by default the starting value is considered the parameter&rsquo;s current value at the time the animation clip was started.</p>
+                    <h6>Let&rsquo;s look at an example:</h6>
+                    <div class="code-box">
+        <pre id="rodinCode" class="code-block">                            <code class="code">
+                            	import * as RODIN from 'rodin/core';
+                            	RODIN.start();
+
+                            	let sphere = new RODIN.Sphere();
+                            	let box = new RODIN.Box(.2, .2, .2, new THREE.MeshBasicMaterial({ wireframe: true, color: 0x996633 }));
+
+                            	sphere.on(RODIN.CONST.READY, function () {
+                            	    sphere.position.z = -2;
+                            	    sphere.position.y = 2;
+                            	    sphere.parent = box;
+                            	});
+
+                            	RODIN.Scene.add(new RODIN.Sculpt(new THREE.AmbientLight()));
+
+                            	let hoverAnimation = new RODIN.AnimationClip("hoverAnim", {
+                            	    scale: {
+                            	        x: {from: 1.0, to: 1.5},
+                            	        y: {from: 1.0, to: 1.5},
+                            	        z: {from: 1.0, to: 1.5}
+                            	    }
+                            	});
+                            	hoverAnimation.duration(200);
+
+                            	let hoverOutAnimation = new RODIN.AnimationClip("hoverOutAnim", {
+                            	    scale: {
+                            	        x: 1,
+                            	        y: 1,
+                            	        z: 1
+                            	    }
+                            	});
+                            	hoverOutAnimation.duration(200);
+
+                            	box.animation.add(hoverAnimation, hoverOutAnimation);
+
+                            	box.on(RODIN.CONST.GAMEPAD_HOVER, function () {
+                            	    if (box.animation.isPlaying('hoverOutAnim')) {
+                            	        box.animation.stop('hoverOutAnim', false);
+                            	    }
+                            	    box.animation.start('hoverAnim');
+                            	});
+
+                            	box.on(RODIN.CONST.GAMEPAD_HOVER_OUT, function () {
+                            	    if (box.animation.isPlaying('hoverAnim')) {
+                            	        box.animation.stop('hoverAnim', false);
+                            	    }
+                            	    box.animation.start('hoverOutAnim');
+                            	});
+
+                            	box.on(RODIN.CONST.READY, function () {
+                            	    box.position.set(1, 1.6, -2);
+                            	    RODIN.Scene.add(box);
+                            	});
+                            </code>
+
+                        </pre>
+                        <h6 class="code-box-title">Example 3</h6>
+                    </div>
+                    <p>Starting from the first lines, we can see two new concepts - <code class="common">new RODIN.Sphere();</code> and <code class="common">new RODIN.Box();</code>. These concepts are time saving utilities in the Rodin library, for creating simple <code class="common">Sculpt</code>objects very quickly.</p>
+                    <p>After adding a new ambient light to the scene, we start creating the animations.</p>
+                    <p>The first animation clip is the <code class="common">hoverAnimation</code>. The constructor receives a name &ldquo;hoverAnim&rdquo; and the parameters of the clip, that say &ldquo;change the <code class="common">scale</code> of the object <code class="common">from 1.0 to 1.5</code> for all three axes.&rdquo; Please note that the clip has an assigned value to start from. This means that no matter what the state of the object is, the scale will be set to <code class="common">1.0</code> at the beginning of the animation and end up being <code class="common">1.5</code> when the animation is finished.</p>
+                    <p>The duration of the animation clip is then set to <code class="common">200ms</code>.</p>
+                    <p>The next animation clip is the <code class="common">hoverOutAnimation</code>. Just like the <code class="common">hoverAnimation</code>, it changes the scale of the object. Please note that this <code class="common">hoverOutAnimation</code> does not assign any specific value to the property to start animating from. This means that whenever this animation starts, it will consider the current value of the property as the starting point.</p>
+                    <p>So now that we have the animation clips, let&rsquo;s assign them to an object and start/stop them on some user interaction cases.</p>
+                    <p>Every Sculpt object has an <code class="common">animation</code> member that is responsible for controlling assigned animation clips. We add the created clips to the <code class="common">box.animation</code>, and set <code class="common">hover</code>/ <code class="common">hoverOut</code> event handlers to start and stop the clips accordingly.</p>
+                    <div class="section-footer">
+                        <p>See <a>AnimationClip</a> and <a>Animation</a> for details.</p>
+                    </div>
+                </section>
+                <section class="tutorial-content">
+                    <h1>Time</h1>
+                    <p>The <code class="common">RODIN.Time</code> class is an extended integration of the native JS Date instance to our library. This class allows you to set different time speeds for each scene you have and dynamically change it for advanced animation effects or calculations. In simple words, in Rodin we can change the time speed wherever and whenever we want.</p>
+                    <p>This class also provides utilities like <code class="common">delta</code>, that returns the elapsed time in milliseconds after latest <code class="common">tick</code> (<code class="common">tick</code> is called on every render).</p>
+                    <p>The <code class="common">delta</code>&rsquo;s value is calculated according to the current time <code class="common">speed</code>.</p>
+                    <p>If you go back to <a href="#ex2">Example 2</a>, you&rsquo;ll notice that the sphere rotation depends on the <code class="common">RODIN.Time.delta</code>. So if we change the speed of the scene by adding the following line: <code class="common block indent"> RODIN.Time.speed = 0.25; </code> we will basically slow down the sphere rotation speed on both axes for four times.</p>
+                    <p class="note">NOTE: the rendering frequency does not depend on RODIN.Time.speed, so slowing down the speed won&rsquo;t affect your FPS.</p>
+                </section>
+                <section class="tutorial-content">
+                    <h1>GAMEPAD</h1>
+                    <p>Rodin provides access to the majority of current VR Headset gamepads (a.k.a. Controllers), including HTC Vive controllers, Oculus Touch controllers, cardboard button, Mouse, Keyboard, etc.</p>
+                    <p>All of the devices that help you interact with the VR experience in Rodin are considered a gamepad device. This approach helps to unify the gamepad's logic.</p>
+                    <p>By default, right after <code class="common">RODIN.start()</code> Rodin initializes several types of gamepads that are available in the <code class="common">RODIN.GamePad</code> object. All controllers are enabled and available when a corresponding device is detected.</p>
+                    <p>If you look at Example 3 for instance, you can see that no gamepad initialization is present in the code; however, when running within HTC Vive, you&rsquo;ll be able to see the default Vive gamepads being tracked and interacting with the box when hovering in and out. The same scenario works for mouse, Oculus Rift, and cardboard.</p>
+                    <p>Of course, you can make custom gamepads for each device, and as long as you keep the Class structure, the custom gamepad will be fully functional. (We will leave this now, and go into details in final documentation, sorry :)</p>
+                    <h6>Let&rsquo;s make another example with gamepad interaction:</h6>
+                    <div class="code-box">
+<pre id="rodinCode" class="code-block">                            <code class="code">
+                            	import * as RODIN from 'rodin/core';
+                            	RODIN.start();
+
+                            	RODIN.Scene.add(new RODIN.Sculpt(new THREE.AmbientLight()));
+
+                            	let hoverAnimation = new RODIN.AnimationClip("hoverAnim", {scale: {x: 1.2, y: 1.2, z: 1.2}});
+                            	hoverAnimation.duration(100);
+
+                            	let hoverOutAnimation = new RODIN.AnimationClip("hoverOutAnim", {scale: {x: 1, y: 1, z: 1}});
+                            	hoverOutAnimation.duration(100);
+
+                            	for (let i = 0; i &lt; 40; i++) {
+                            	    let box = new RODIN.Box(.2, .2, .2, new THREE.MeshNormalMaterial({wireframe: true, color: 0x996633}));
+                            	    box.animation.add(hoverAnimation, hoverOutAnimation);
+                            	    box.on(RODIN.CONST.READY, onReady);
+                            	    box.on(RODIN.CONST.GAMEPAD_HOVER, hover);
+                            	    box.on(RODIN.CONST.GAMEPAD_HOVER_OUT, hoverOut);
+                            	}
+
+                            	function onReady(evt) {
+                            	    evt.target.position.set(Math.random() * 4 - 2, Math.random() * 4 - 0.4, Math.random() * 4 - 2);
+                            	    RODIN.Scene.add(evt.target);
+                            	}
+                            	function hover(evt) {
+                            	    if (evt.target.animation.isPlaying('hoverOutAnim')) {
+                            	        evt.target.animation.stop('hoverOutAnim', false);
+                            	    }
+                            	    evt.target.animation.start('hoverAnim');
+                            	}
+                            	function hoverOut(evt) {
+                            	    if (evt.target.animation.isPlaying('hoverAnim')) {
+                            	        evt.target.animation.stop('hoverAnim', false);
+                            	    }
+                            	    evt.target.animation.start('hoverOutAnim');
+                            	}
+                            </code>
+                        </pre>
+                        <h6 class="code-box-title">Example 4</h6>
+                    </div>
+                    <p>That&rsquo;s it! We&rsquo;ve just created 40 randomly positioned boxes with hover and hover out actions.</p>
+                    <div class="section-footer">
+                        <p>See <a>GamePad</a> for details.</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

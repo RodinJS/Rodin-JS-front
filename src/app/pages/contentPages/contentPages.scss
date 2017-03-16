@@ -1,0 +1,96 @@
+.content-pages.tutorial {
+  .page {
+    font-family: $Roboto;
+    margin-top: 40px;
+    .rd-tree {
+      .nav-list {
+        margin-top: 5px;
+        li {
+          &.labeled {
+            ul {
+              margin-top: 9px;
+            }
+            margin-bottom: 9px;
+          }
+          label {
+            font-weight: 400;
+            color: $color-primary;
+            font-size:18px;
+            font-family: $RobotoCond;
+          }
+          a {
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0px 0px 6px 15px;
+            line-height: 18px;
+            color: $color-text-secondary;
+            font-family: $Roboto;
+          }
+        }
+      }
+    }
+    .tutorial-section {
+      .tutorial-content {
+        margin-bottom: 20px;
+        h1 {
+          margin-top: 0px;
+          font-family: $Roboto;
+          font-size: 34px;
+          color: $color-primary;
+        }
+        article {
+          p {
+            font-size: 16px;
+          }
+          .indent {
+            padding-left: 40px;
+          }
+          span.block {
+            display: block;
+          }
+          margin-top: 15px;
+          font-size: 16px;
+          line-height: 28px;
+          color: #ffffff;
+          .section-footer p {
+            font-size: 14px;
+            font-style: italic;
+            color: #808080;
+            text-align: right;
+          }
+        }
+      }
+      &:before {
+        content: "";
+        border-right: 1px #008BF2 solid;
+        opacity: 0.5;
+        position: absolute;
+        height: 100%;
+        left: -30px;
+      }
+    }
+  }
+}
+.color-box {
+  position: absolute;
+  right: 30px;
+  display: inline-block;
+  bottom: 168px;
+  li {
+    margin-right: 5px;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    &:nth-child(1) {
+      margin-right: 5px;
+      background: #F79803;
+    }
+    &:nth-child(2) {
+      margin-right: 5px;
+      background: #008BF2;
+    }
+    &:nth-child(3) {
+      background: #04A900;
+    }
+  }
+}
