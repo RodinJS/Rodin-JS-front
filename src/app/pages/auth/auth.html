@@ -142,11 +142,13 @@
                     <div class="form-group" custom-input
                          data-ng-focus="register.passwordConfirm.focused"
                          data-ng-class="{
-                         'has-error': register.passwordConfirm.$invalid && register.passwordConfirm.focused,
-                         'has-success': register.passwordConfirm.$valid && register.passwordConfirm.focused,
+                         'has-error': register.passwordConfirm.$invalid && register.passwordConfirm.focused && register.passwordConfirm.$error.confirmed,
+                         'has-success': register.passwordConfirm.$valid && register.passwordConfirm.focused && !register.passwordConfirm.$error.hasOwnProperty('confirmed'),
 
                          }">
                         <input type="password"
+                               confirm-Password
+                               compare-to="register.password.$viewValue"
                                data-ng-class="{'active':register.passwordConfirm.$viewValue}"
                                class="form-control"
                                name="passwordConfirm"
