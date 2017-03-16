@@ -2,9 +2,9 @@
     <div class="container">
         <form action="">
             <div class="form-group">
-                <input type="search" class="header-search" placeholder="Search by project name, url or description"
-                       data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
-                <button type="submit" class="btn-search" ng-click="$ctrl.search()">
+                <input type="search" class="header-search" placeholder="Filter by project name, url or description"
+                       data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search($event)">
+                <button type="submit" class="btn-search" ng-click="$ctrl.search($event)">
                     <i class="rd rd-search"></i>
                 </button>
             </div>
@@ -150,13 +150,13 @@
             <div class="required-field-actions clearfix">
                 <div class="text-center">
                     <button data-ng-hide="$ctrl.currentModalProject.public" type="button"
-                            class="btn btn-positive ng-hide" data-ng-click="$ctrl.goToSettings()">go to
+                            class="btn btn-positive ng-hide" data-ng-click="$ctrl.goToSettings()">Go to
                         settings
                     </button>
                     <button data-ng-show="$ctrl.currentModalProject.public" type="button"
-                            class="btn btn-positive ng-hide" data-ng-click="$ctrl.copyUrl()">copy this url
+                            class="btn btn-positive ng-hide" data-ng-click="$ctrl.copyUrl()">Copy this url
                     </button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">cancel</a>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">Cancel</a>
                 </div>
             </div>
         </div>
@@ -176,7 +176,8 @@
                      Your project will no longer be available on
                      <span class="text-highlight">{{$ctrl.currentModalProject.publishedUrl}}</span>, your apps for
                 </span>
-                <span class="text-highlight">"{{$ctrl.currentModalProject.name}}"</span> will stop working !<br>
+                <span> The <span class="text-highlight">"{{$ctrl.currentModalProject.name}}"</span> will stop working !
+                </span><br>
                 <p class="confirm">Are you sure you want to continue?</p>
             </p>
         </div>

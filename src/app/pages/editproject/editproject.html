@@ -195,7 +195,7 @@
                      Your project will no longer be available on
                      <span class="text-highlight">{{$ctrl.project.publishedUrl}}</span>, your apps for
                 </span>
-            <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !<br>
+            <span>The <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !</span><br>
             <p class="confirm">Are you sure you want to continue?</p>
             </p>
         </div>
@@ -203,8 +203,8 @@
             <div class="required-field-actions clearfix">
                 <div class="text-center">
                     <button type="button" class="btn btn-negative"
-                            ng-click="$ctrl.deleteProject()">delete</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.remove = false">cancel</a>
+                            ng-click="$ctrl.deleteProject()">Delete</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.remove = false">Cancel</a>
                 </div>
             </div>
         </div>
@@ -231,9 +231,9 @@
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <div class="text-center">
-                    <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">go to settings</button>
-                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl()">copy this url</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">cancel</a>
+                    <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">Go to settings</button>
+                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl()">Copy this url</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">Cancel</a>
                 </div>
             </div>
         </div>

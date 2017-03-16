@@ -270,7 +270,7 @@
                                     <!--type="button" class="btn btn-primary"-->
                                     <!--ng-click="$ctrl.download()">download-->
                                     <!--</button>-->
-                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.android.built" class="btn btn-save">cancel</a>
+                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.android.built" class="btn btn-save">Cancel</a>
                                 </div>
                             </div>
                         </div>
@@ -321,8 +321,8 @@
                 <div class="text-center">
                     <button type="button" class="btn btn-positive"
                             ng-click="$ctrl.build()"
-                            data-ng-disabled="!password.$valid">build</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.password = false">cancel</a>
+                            data-ng-disabled="!password.$valid">Build</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.password = false">Cancel</a>
                 </div>
             </div>
         </div>
