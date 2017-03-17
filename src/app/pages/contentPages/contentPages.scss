@@ -39,8 +39,14 @@
           color: $color-primary;
         }
         article {
+          p.code-box-title {
+            font-size:13px;
+            color: $color-text-gray;
+          }
           p {
+            margin: 0px;
             font-size: 16px;
+            line-height: 36px;
           }
           .indent {
             padding-left: 40px;
@@ -54,7 +60,6 @@
           color: #ffffff;
           .section-footer p {
             font-size: 14px;
-            font-style: italic;
             color: #808080;
             text-align: right;
           }
