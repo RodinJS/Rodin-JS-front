@@ -29,7 +29,7 @@
     <div class="required-field-actions clearfix">
         <div class="text-center">
             <button type="button" ng-if="!$ctrl.module.script" class="btn btn-positive blue" data-ng-click="$ctrl.assign($ctrl.module)">Generate script</button>
-            <a href="" class="btn btn-cancel" data-ng-click="$ctrl.copyToClipBoard(); $ctrl.modalInstance.close()"><!--{{$ctrl.module.script ? 'Close' : 'Cancel'}}--> Copy this url</a>
+            <a href="" class="btn btn-cancel" ng-if="$ctrl.module.script" data-ng-click="$ctrl.copyToClipBoard(); $ctrl.modalInstance.close()"><!--{{$ctrl.module.script ? 'Close' : 'Cancel'}}--> Copy this url</a>
         </div>
     </div>
 </div>
