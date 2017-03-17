@@ -56,7 +56,10 @@ class DashboardCtrl {
 
     search($event) {
         if (this.queryString === '') {
-            return this.getProjects($event);
+	        if($event) {
+		        $event.preventDefault();
+            }
+            return this.getProjects();
         }
 
         if (this.queryString.length < 3) {
@@ -67,7 +70,6 @@ class DashboardCtrl {
         this.timerToSearch = setTimeout(() => {
             this.getProjects();
         }, 500);
-        $event.preventDefault();
     }
 
     open(project, remove) {

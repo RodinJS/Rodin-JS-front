@@ -18,7 +18,7 @@
                     <!--<i class="fa fa-clipboard" aria-hidden="true"></i>-->
                 <!--</a>-->
             </div>
-            <p class="text-small description">copy and paste this script tag into index.html.</p>
+            <p class="text-small description">Copy and Paste this script tag into index.html.</p>
         </div>
     </div>
     <div ng-if="!$ctrl.module.script">
@@ -30,7 +30,7 @@
         <div class="text-center">
             <button type="button" ng-if="!$ctrl.module.script" class="btn btn-positive blue" data-ng-click="$ctrl.assign($ctrl.module)">Generate script</button>
             <a href="" class="btn btn-cancel" ng-if="!$ctrl.module.script" data-ng-click="$ctrl.modalInstance.close()"><!--{{$ctrl.module.script ? 'Close' : 'Cancel'}}--> Cancel</a>
-            <a href="" class="btn btn-cancel" ng-if="$ctrl.module.script" data-ng-click="$ctrl.copyToClipBoard(); $ctrl.modalInstance.close()"><!--{{$ctrl.module.script ? 'Close' : 'Cancel'}}--> Copy this script</a>
+            <a href="" class="btn btn-cancel" ng-if="$ctrl.module.script" data-ng-click="$ctrl.copyToClipBoard(); $ctrl.modalInstance.close()"><!--{{$ctrl.module.script ? 'Close' : 'Cancel'}}--> Copy This Script</a>
         </div>
     </div>
 </div>
