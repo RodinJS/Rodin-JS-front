@@ -54,7 +54,7 @@
                     <!--   <div class="section section-project-content login">
                            <div class="row">
                                <div class="center-block">
-                                   <div class="btn-wrapper">
+                                   <div class="btn-wrapper">$ctrl.formData.password
                                        <button type="submit" style="margin-right:10px" class="btn btn-primary border-orange">Sign in</button>
                                        <button type="button" ui-sref="landing.register" class="btn btn-primary border-orange">Register</button>
                                    </div>
@@ -120,13 +120,13 @@
                          data-ng-focus="register.password.focused"
                          data-ng-class="{
                          'has-error': register.password.$invalid && register.password.focused,
-                         'has-success': register.password.$valid && register.password.focused,
-
+                         'has-success': register.password.$valid && register.password.focused
                          }">
                         <input type="password"
                                data-ng-class="{'active':register.password.$viewValue}"
                                class="form-control"
                                name="password"
+                               ng-pattern="$ctrl.patterns.password"
                                placeholder="" value=""
                                data-ng-model="$ctrl.formData.password"
                                ng-minlength="8"
