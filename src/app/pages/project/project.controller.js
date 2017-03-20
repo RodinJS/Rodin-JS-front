@@ -14,7 +14,7 @@ class ProjectCtrl {
         this.User = User;
         this.currentUser = this.User.current;
         if (this.currentUser.projects.total >= this.currentUser.allowProjectsCount) {
-            this.Notification.error(`Maximum projects count exceeded, allowend project count ${this.currentUser.allowProjectsCount}`);
+            this.Notification.error(`Maximum projects count exceeded, allowed project count ${this.currentUser.allowProjectsCount}`);
             return this.$state.go('app.dashboard');
         }
 
