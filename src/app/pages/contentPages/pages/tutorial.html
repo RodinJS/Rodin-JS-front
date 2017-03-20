@@ -1,19 +1,4 @@
-<div class="static-pages" codify>
-    <div class="container-fluid page static">
-        <div class="row title-section">
-            <h1 class="title text-center">
-                {{$ctrl.page.title.toUpperCase()}}</h1>
-            <span class="line"></span>
-        </div>
-        <div class="row">
-            <ul class="color-box">
-                <li ng-click="$ctrl.setCodeElementsColor('#F79803')"></li>
-                <li ng-click="$ctrl.setCodeElementsColor('#008BF2')"></li>
-                <li ng-click="$ctrl.setCodeElementsColor('#04A900')"></li>
-            </ul>
-        </div>
-    </div>
-    <div class="content-pages tutorial" ng-if="$ctrl.pageURL.includes('tutorial')">
+ <div class="content-pages tutorial" ng-if="$ctrl.pageURL.includes('tutorial')" codify>
         <div class="container page static">
             <div class="col-md-3 rd-tree">
                 <ul class="nav nav-list">
@@ -308,4 +293,3 @@
             </div>
         </div>
     </div>
-</div>

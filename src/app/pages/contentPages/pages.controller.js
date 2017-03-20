@@ -32,9 +32,7 @@ class PageCtrl {
     getPageContent() {
         this._PagesService.get(this.pageURL).then(
             page => {
-                console.log(page)
                 this.page = page;
-                this.setCodeElementsColor();
                 //this._EventBus.emit(this._EventBus.pages.SET_CONTENT, page);
             },
 
@@ -47,14 +45,5 @@ class PageCtrl {
     onFailedPage() {
         return this._$state.go('landing.error');
     }
-
-    getSectionTitles() {
-        angular.element('.tutorial-content')
-    }
-
-    setCodeElementsColor(color = '#008BF2') {
-        angular.element('.common').css({color})
-    }
-
 }
 export default PageCtrl;

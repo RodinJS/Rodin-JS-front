@@ -29,14 +29,29 @@
     </symbol>
 </svg>
 
-<div class="content-pages" ng-if="!$ctrl.pageURL.includes('tutorial')">
-    <div class="container page static">
-        <div class="row text-white" >
-            <h1 class="text-center text-white" style="text-align: center;color:#fff; margin-bottom:30px">
-                {{$ctrl.page.title}}</h1>
-            <div ng-bind-html="$ctrl.page.content.extended | htmlize" codify></div>
+<div class="content-pages">
+    <!--<div class="container page static">-->
+        <!--<div class="row text-white" >-->
+            <!--<h1 class="text-center text-white" style="text-align: center;color:#fff; margin-bottom:30px">-->
+                <!--{{$ctrl.page.title}}</h1>-->
+            <!--<div ng-bind-html="$ctrl.page.content.extended | htmlize" codify></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="container-fluid page static-pages">
+        <div class="row title-section">
+            <h1 class="title text-center">
+                {{$ctrl.page.title.toUpperCase()}}</h1>
+            <span class="line"></span>
         </div>
+        <div class="row" ng-show="$ctrl.pageURL.includes('tutorial')">
+            <ul class="color-box">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="container static margin-top-40" ng-if="!$ctrl.pageURL.includes('tutorial')" ng-bind-html="$ctrl.page.content.extended | htmlize" codify></div>
+        <div ng-if="$ctrl.pageURL.includes('tutorial')" ng-include="'pages/contentPages/pages/tutorial.html'"></div>
     </div>
 </div>
-<div class="content-pages" ng-if="$ctrl.pageURL.includes('tutorial')" ng-include="'pages/contentPages/pages/tutorial.html'"></div>
 
