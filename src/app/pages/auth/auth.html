@@ -41,7 +41,7 @@
                     </p>
 
                     <div class="btn-wrapper">
-                        <button type="submit" style="margin-right:10px" class="btn btn-submit">Sign in</button>
+                        <button type="submit" style="margin-right:10px" class="btn btn-submit">Sign In</button>
                         <!--
                                                 <button type="button" ui-sref="landing.register" class="btn btn-default btn-submit">Register</button>
                         -->
@@ -54,7 +54,7 @@
                     <!--   <div class="section section-project-content login">
                            <div class="row">
                                <div class="center-block">
-                                   <div class="btn-wrapper">
+                                   <div class="btn-wrapper">$ctrl.formData.password
                                        <button type="submit" style="margin-right:10px" class="btn btn-primary border-orange">Sign in</button>
                                        <button type="button" ui-sref="landing.register" class="btn btn-primary border-orange">Register</button>
                                    </div>
@@ -120,13 +120,13 @@
                          data-ng-focus="register.password.focused"
                          data-ng-class="{
                          'has-error': register.password.$invalid && register.password.focused,
-                         'has-success': register.password.$valid && register.password.focused,
-
+                         'has-success': register.password.$valid && register.password.focused
                          }">
                         <input type="password"
                                data-ng-class="{'active':register.password.$viewValue}"
                                class="form-control"
                                name="password"
+                               ng-pattern="$ctrl.patterns.password"
                                placeholder="" value=""
                                data-ng-model="$ctrl.formData.password"
                                ng-minlength="8"
@@ -142,11 +142,12 @@
                     <div class="form-group" custom-input
                          data-ng-focus="register.passwordConfirm.focused"
                          data-ng-class="{
-                         'has-error': register.passwordConfirm.$invalid && register.passwordConfirm.focused,
-                         'has-success': register.passwordConfirm.$valid && register.passwordConfirm.focused,
-
+                         'has-error register-password': register.passwordConfirm.$invalid && register.passwordConfirm.focused && register.passwordConfirm.$error.confirmed,
+                         'has-success': register.passwordConfirm.$valid && register.passwordConfirm.focused && !register.passwordConfirm.$error.hasOwnProperty('confirmed'),
                          }">
                         <input type="password"
+                               confirm-Password
+                               compare-to="register.password.$viewValue"
                                data-ng-class="{'active':register.passwordConfirm.$viewValue}"
                                class="form-control"
                                name="passwordConfirm"
@@ -156,6 +157,11 @@
                                data-ng-focus="register.passwordConfirm.focused = true"
                                required>
                         <label class="control-label float-label">Confirm Password</label>
+                    </div>
+                    <div class="form-group" ng-show="register.passwordConfirm.$invalid && register.passwordConfirm.focused && register.passwordConfirm.$error.confirmed">
+                        <p class="password-description">
+                            Password does not match
+                        </p>
                     </div>
 
                     <div class="form-group"

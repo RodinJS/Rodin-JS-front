@@ -297,7 +297,7 @@
                                     <!--type="button" class="btn btn-primary"-->
                                     <!--ng-click="$ctrl.download()">download-->
                                     <!--</button>-->
-                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">cancel</a>
+                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">Cancel</a>
                                 </div>
                             </div>
                         </div>
@@ -315,9 +315,9 @@
             <p>Certificate Password</p>
         </div>
         <div class="modal-body padding-0-important">
-            <p class="description text-small">Certificate password when u generate the app</p>
+            <p class="description text-small">Certificate password when you generate the app</p>
             <form name="password">
-                <div class="form-wrapper margin-top-20">
+                <div class="form-wrapper">
                     <div class="form-group"
                          data-ng-class="{'has-error': password.certPassword.$invalid && password.certPassword.focused, 'has-success': password.certPassword.$valid && password.certPassword.focused}">
                         <input type="password" class="form-control" placeholder="Certificate Password"
@@ -334,9 +334,9 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-positive"
                             data-ng-disabled="!password.$valid"
-                            data-ng-click="$ctrl.build()">build</button>
+                            data-ng-click="$ctrl.build()">Build</button>
                     <a href="" class="btn btn-cancel"
-                       data-ng-click="$ctrl.modals.password = false">cancel</a>
+                       data-ng-click="$ctrl.modals.password = false">Cancel</a>
                 </div>
             </div>
         </div>
