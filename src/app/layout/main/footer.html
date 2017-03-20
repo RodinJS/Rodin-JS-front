@@ -16,12 +16,22 @@
 			</ul>
 		</div>
 		<div class="footer-menu-wrapper">
-			<p class="copyright">
+			<p class="copyright text-center">
 				Copyright &copy; {{::$ctrl.date | date:'yyyy'}} Rodin Corporation. All rights reserved.
 			</p>
 			<ul class="footer-menu-list">
-				<li ng-repeat="page in $ctrl.pagesList">
-					<a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+				<!--<li ng-repeat="page in $ctrl.pagesList">-->
+					<!--<a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>-->
+				<!--</li>-->
+				<li>
+					<a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">Documentation</a>
+				</li>
+				<li><a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">Terms and Conditions</a></li>
+				<li>
+					<a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">Contact</a>
+				</li>
+				<li>
+					<a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">Tutorial</a>
 				</li>
 			<!--<li>
 			<a ui-sref="landing.pages({pageURL:'tutorial'})">Documentation</a>

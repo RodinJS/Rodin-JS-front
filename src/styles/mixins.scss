@@ -1,93 +1,131 @@
 // Mixins.
 
 @mixin nl {
-    margin: 0;
-    padding: 0;
-    text-indent: 0;
-    list-style: none;
-    list-style-position: outside;
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style: none;
+  list-style-position: outside;
 }
 
 @mixin cf {
-    &:before,
-    &:after {
-        display: table;
-        content: "";
-    }
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
 
-    &:after {
-        clear: both;
-    }
+  &:after {
+    clear: both;
+  }
 
-    .lt-ie8 & {
-        zoom: 1;
-    }
+  .lt-ie8 & {
+    zoom: 1;
+  }
 }
 
 @mixin blocks-justify {
-    text-align: justify;
-    text-justify: newspaper;
+  text-align: justify;
+  text-justify: newspaper;
 }
 
 // You can add your own mixins here:
 @mixin footerContent {
-    position: relative !important;
+  position: relative !important;
 }
+
 @mixin footer {
-    //position: absolute;
-    margin-bottom: 20px;
-    width: 1170px;
-    border: 2px solid #054071;
-    border-radius: 8px;
-    padding: 25px;
-    margin-top: 40px;
+  position: relative;
+  margin-bottom: 20px;
+  //width: 1170px;
+  border: 2px solid #054071;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 40px;
+  .logo-wrapper {
+    margin-bottom: 15px;
+    .logo-footer {
+      width: 72px;
+    }
+    .social-list {
+      a {
+        font-size: 22px;
+        margin-left: 7px;
+        color: #DEDEDE;
+        &:hover {
+          color: $color-primary !important;
+        }
+      }
+    }
+  }
+  .footer-menu-wrapper {
+    @include cf();
+    .copyright {
+      float: left;
+      font-family: 'SF UI Display';
+      font-size: 15px;
+      font-weight: 500;
+      color: $color-primary;
+      opacity: 0.5;
+      margin: 0;
+    }
+    .footer-menu-list {
+      text-align: center;
+      margin-top: 30px;
+      li {
+        display: inline-block;
+        vertical-align: middle;
+        + li {
+          margin-left: 25px;
+        }
+        a {
+          font-family: 'SF UI Display';
+          font-size: 15px;
+          //line-height: 2.27;
+          color: $color-primary;
+          text-decoration: none;
+          transition: all .3s;
+          &:hover {
+            color: lighten($color-primary, 15%);
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 480px) and (max-width: 992px) {
+    border: none;
     .logo-wrapper {
-        margin-bottom: 15px;
-        .logo-footer {
-            width: 72px;
+      margin-bottom: 15px;
+      text-align: center;
+      .logo-footer {
+        width: 72px;
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0px;
+          width: 180px;
+          height: 1px;
+          background: #054071;
+          left: calc(50% - 90px);
         }
-        .social-list {
-            a {
-              font-size: 22px;
-                margin-left: 7px;
-                color: #DEDEDE;
-                &:hover {
-                color: $color-primary !important;
-              }
-            }
+      }
+      .social-list {
+        position: absolute;
+        bottom: 0;
+        margin-left: calc(50% - 87px);
+        a {
+          font-size: 22px;
+          margin-left: 7px;
+          color: #DEDEDE;
+          &:hover {
+            color: $color-primary !important;
+          }
         }
+      }
     }
     .footer-menu-wrapper {
-        @include cf();
-        .copyright {
-            float: left;
-            font-family: 'SF UI Display';
-            font-size: 15px;
-            font-weight: 500;
-            color: $color-primary;
-          opacity: 0.5;
-            margin: 0;
-        }
-        .footer-menu-list {
-            float: right;
-            li {
-                display: inline-block;
-                vertical-align: middle;
-                + li {
-                    margin-left: 25px;
-                }
-                a {
-                    font-family: 'SF UI Display';
-                    font-size: 15px;
-                    //line-height: 2.27;
-                    color: $color-primary;
-                    text-decoration: none;
-                    transition: all .3s;
-                    &:hover {
-                        color: lighten($color-primary, 15%);
-                    }
-                }
-            }
-        }
+      margin-bottom: 15px;
+      margin-left: calc(50% - 181.5px);
     }
+  }
 }
