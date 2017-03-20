@@ -1,13 +1,13 @@
 class EditProjectWebCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Notification) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Notification, $uibModal) {
         'ngInject';
 
         if (!$stateParams.projectId) return $state.go('landing.error');
 
-
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
+        this._$uibModal = $uibModal;
         this._JWT = JWT;
         this.Project = Project;
         this.$state = $state;
@@ -80,31 +80,72 @@ class EditProjectWebCtrl {
     }
 
     addDomain() {
+
+        if (this.project.domain && this.project.domain !== this.domain) {
+            this.modalText = `${this.project.domain} existing domain parameters will be overwriteen to ${this.domain}`;
+            this.delete = false;
+            return this.modalInstance = this._$uibModal.open({
+                animation: this.animationsEnabled,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'layout/modals/domainExists.html',
+                controller: EditProjectWebCtrl,
+                controllerAs: 'vm',
+                bindToController: true,
+                scope: this._$scope,
+                resolve: {},
+            });
+        }
+
+        this.submitDomain();
+    }
+
+    submitDomain() {
         this.domain = this.domain.replace(/.*?:\/\//g, '');
         this.Project.setDomain({ id: this.projectId, domain: this.domain }).then(
             response => {
                 this.Notification.success(response.message);
                 this.project.domain = this.domain;
+                if (this.modalInstance) this.modalInstance.close();
             },
 
             err=> {
                 _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
+                if (this.modalInstance) this.modalInstance.close();
             }
         );
     }
 
     deleteDomain() {
+        this.modalText = `Are you sure you want delete? ${this.domain}`;
+        this.delete = true;
+        return this.modalInstance = this._$uibModal.open({
+            animation: this.animationsEnabled,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'layout/modals/domainExists.html',
+            controller: EditProjectWebCtrl,
+            controllerAs: 'vm',
+            bindToController: true,
+            scope: this._$scope,
+            resolve: {},
+        });
+    }
+
+    comfirmDelete() {
         this.Project.deleteDomain(this.projectId, this.project).then(
             response => {
                 this.Notification.success(response.message);
+                if (this.modalInstance) this.modalInstance.close();
             },
 
             err=> {
                 _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
+                if (this.modalInstance) this.modalInstance.close();
             }
         );
     }
