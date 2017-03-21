@@ -82,7 +82,7 @@ class EditProjectWebCtrl {
     addDomain() {
 
         if (this.project.domain && this.project.domain !== this.domain) {
-            this.modalText = `${this.project.domain} existing domain parameters will be overwriteen to ${this.domain}`;
+            this.modalText = `${this.project.domain} existing domain parameters will be overwritten to ${this.domain}`;
             this.delete = false;
             return this.modalInstance = this._$uibModal.open({
                 animation: this.animationsEnabled,
@@ -119,7 +119,7 @@ class EditProjectWebCtrl {
     }
 
     deleteDomain() {
-        this.modalText = `Are you sure you want delete? ${this.domain}`;
+        this.modalText = `Are you sure you want delete ${this.domain} ?`;
         this.delete = true;
         return this.modalInstance = this._$uibModal.open({
             animation: this.animationsEnabled,
