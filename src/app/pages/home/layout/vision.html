@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
             <div class="title-wrapper">
-                <h3 class="title">OUR VISION</h3>
+                <h3 class="title">{{$ctrl.content.section5Title}}</h3>
                 <hr class="section-title-divider">
             </div>
             <div class="video-wrapper">
@@ -12,23 +12,18 @@
                             ng-src="{{$ctrl.activeVideo}}"
                             frameborder="0" allowfullscreen>
                     </iframe>
-                   <!-- <video id='rodinVision'
-                           preload='none'
-                           controls
-                           mediagroup='createProject'
-                           poster="images/landing/content/video-img.jpg">
-                        <source id='mp4' src="video/createproject.mp4" type='video/mp4'>
-                        <source id='webm' src="video/createproject.webm" type='video/webm'>
-                        <p>Your user agent does not support the HTML5 Video element.</p>
-                    </video>
-                    <button class="video-play-btn"><i class="rd-play"></i>
-                    active playing
-                    </button>-->
                 </div>
             </div>
             <div class="video-nav-wrapper">
                 <div class="video-nav">
-                    <a href="" class="video-play-btn left"
+                    <a href=""
+                       ng-repeat="video in $ctrl.videos"
+                       class="{{video.className}}"
+                       ng-class="$ctrl.videoTrigger == $index ? 'active playing' : ''"
+                       ng-click="$ctrl.changeVideo($index)">
+                        <span>{{video.title}}</span>
+                    </a>
+                   <!-- <a href="" class="video-play-btn left"
                        ng-class="$ctrl.videoTrigger == 'createProject' ? 'active playing' : ''"
                        ng-click="$ctrl.changeVideo('createProject')">
                         <span>See what’s possible with Rodin</span>
@@ -42,7 +37,7 @@
                        ng-class="$ctrl.videoTrigger == 'deploy' ? 'active playing' : ''"
                        ng-click="$ctrl.changeVideo('deploy')">
                         <span>Everything you need to deploy great VR apps</span>
-                    </a>
+                    </a>-->
                 </div>
             </div>
         </div>
