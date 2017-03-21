@@ -188,7 +188,7 @@
         font-family: 'SF UI Display';
         font-size: 15px;
         font-weight: 500;
-        line-height: 2.27;
+        //line-height: 2.27;
         color: $color-primary;
         opacity: 0.5;
         margin: 0;
@@ -228,6 +228,9 @@
           margin-bottom: 10px;
         }
         .footer-menu-wrapper {
+          .copyright {
+            line-height: 1.6;
+          }
           .footer-menu-list {
             li {
               + li {
