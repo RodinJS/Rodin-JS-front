@@ -10,7 +10,7 @@ function AuthConfig($stateProvider) {
             title: 'Sign in',
             redirectToWhenAuthenticated: 'app.dashboard',
             pageClass: 'login-register new',
-            showFooter: false,
+            showFooter: true,
             resolve: {
                 auth: function (User, $state, $timeout) {
                     return User.ensureAuthIs(false);
