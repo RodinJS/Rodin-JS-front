@@ -43,8 +43,7 @@
                 {{$ctrl.page.title.toUpperCase()}}</h1>
             <span class="line"></span>
         </div>
-        <div class="container static margin-top-40" ng-if="!$ctrl.pageURL.includes('tutorial')" ng-bind-html="$ctrl.page.content.extended | htmlize" codify></div>
-        <div ng-if="$ctrl.pageURL.includes('tutorial')" ng-include="'pages/contentPages/pages/tutorial.html'"></div>
+        <div class="container static margin-top-40" ng-bind-html="$ctrl.page.content.extended | htmlize" codify></div>
     </div>
 </div>
 
