@@ -54,11 +54,9 @@ class DashboardCtrl {
         );
     }
 
-    search($event) {
+    search() {
+
         if (this.queryString === '') {
-	        if($event) {
-		        $event.preventDefault();
-            }
             return this.getProjects();
         }
 
@@ -66,7 +64,7 @@ class DashboardCtrl {
             return;
         }
 
-        clearTimeout(this.timerToSearch);
+	    clearTimeout(this.timerToSearch);
         this.timerToSearch = setTimeout(() => {
             this.getProjects();
         }, 500);
