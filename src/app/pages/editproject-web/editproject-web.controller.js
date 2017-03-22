@@ -100,7 +100,6 @@ class EditProjectWebCtrl {
     }
 
     submitDomain() {
-        console.log('gago?');
         if(this.domainAddInProgress) return;
         this.domainAddInProgress = true;
         const domain = angular.copy(this.domain).replace(/.*?:\/\//g, '');
