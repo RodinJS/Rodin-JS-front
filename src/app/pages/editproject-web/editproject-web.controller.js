@@ -96,8 +96,6 @@ class EditProjectWebCtrl {
                 resolve: {},
             });
         }
-
-        this.submitDomain();
     }
 
     submitDomain() {
