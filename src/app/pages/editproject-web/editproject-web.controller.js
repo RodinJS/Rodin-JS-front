@@ -82,7 +82,7 @@ class EditProjectWebCtrl {
     addDomain() {
 
         if (this.project.domain && this.project.domain !== this.domain) {
-            this.modalText = `${this.project.domain} existing domain parameters will be overwritten to ${this.domain}`;
+            this.modalText = `<span class="text-highlight">${this.project.domain}</span> existing domain parameters will be overwritten to <span class="text-highlight">${this.domain}</span>`;
             this.delete = false;
             return this.modalInstance = this._$uibModal.open({
                 animation: this.animationsEnabled,
@@ -96,16 +96,17 @@ class EditProjectWebCtrl {
                 resolve: {},
             });
         }
-
-        this.submitDomain();
     }
 
     submitDomain() {
+        if(this.domainAddInProgress) return;
+        this.domainAddInProgress = true;
         this.domain = this.domain.replace(/.*?:\/\//g, '');
         this.Project.setDomain({ id: this.projectId, domain: this.domain }).then(
             response => {
                 this.Notification.success(response.message);
                 this.project.domain = this.domain;
+                this.domainAddInProgress = false;
                 if (this.modalInstance) this.modalInstance.close();
             },
 
@@ -113,13 +114,14 @@ class EditProjectWebCtrl {
                 _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
+                this.domainAddInProgress = false;
                 if (this.modalInstance) this.modalInstance.close();
             }
         );
     }
 
     deleteDomain() {
-        this.modalText = `Are you sure you want delete ${this.domain} ?`;
+        this.modalText = `Are you sure you want delete <span class="text-highlight">${this.domain}</span> ?`;
         this.delete = true;
         return this.modalInstance = this._$uibModal.open({
             animation: this.animationsEnabled,
@@ -135,9 +137,12 @@ class EditProjectWebCtrl {
     }
 
     comfirmDelete() {
+        if(this.deleteInProgress) return;
+        this.deleteInProgress = true;
         this.Project.deleteDomain(this.projectId, this.project).then(
             response => {
                 this.Notification.success(response.message);
+                this.deleteInProgress = false;
                 if (this.modalInstance) this.modalInstance.close();
             },
 
@@ -145,6 +150,7 @@ class EditProjectWebCtrl {
                 _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
+                this.deleteInProgress = false;
                 if (this.modalInstance) this.modalInstance.close();
             }
         );
