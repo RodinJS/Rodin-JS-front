@@ -89,23 +89,26 @@ class EditProjectWebCtrl {
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: 'layout/modals/domainExists.html',
-                controller: EditProjectWebCtrl,
+                //controller: EditProjectWebCtrl,
                 controllerAs: 'vm',
                 bindToController: true,
                 scope: this._$scope,
                 resolve: {},
             });
         }
+        this.submitDomain();
     }
 
     submitDomain() {
+        console.log('gago?');
         if(this.domainAddInProgress) return;
         this.domainAddInProgress = true;
-        this.domain = this.domain.replace(/.*?:\/\//g, '');
-        this.Project.setDomain({ id: this.projectId, domain: this.domain }).then(
+        const domain = angular.copy(this.domain).replace(/.*?:\/\//g, '');
+        this.Project.setDomain({ id: this.projectId, domain: domain }).then(
             response => {
                 this.Notification.success(response.message);
-                this.project.domain = this.domain;
+                this.project.domain = domain;
+                this.domain = domain;
                 this.domainAddInProgress = false;
                 if (this.modalInstance) this.modalInstance.close();
             },
@@ -128,7 +131,7 @@ class EditProjectWebCtrl {
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'layout/modals/domainExists.html',
-            controller: EditProjectWebCtrl,
+            //controller: EditProjectWebCtrl,
             controllerAs: 'vm',
             bindToController: true,
             scope: this._$scope,
