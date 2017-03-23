@@ -1,0 +1,59 @@
+.samples-page {
+  .line {
+    &:before {
+      content: "";
+      width: 100%;
+      border-top: 1px solid $color-primary;
+    }
+  }
+  .title {
+    font-size: 22px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+  }
+  .rd-tree {
+    .nav-list {
+      //margin-top: 5px;
+     > li {
+        margin-bottom: 0;
+        &.labeled {
+          .tree-toggler {
+            margin-bottom: 0;
+            font-weight: 400;
+            color: $color-primary;
+            font-size: 16px;
+            font-family: $RobotoCond;
+            padding: 10px 10px 10px 15px;
+            cursor: pointer;
+            width: 100%;
+            &:hover {
+              background: #082542;
+            }
+          }
+          ul.tree {
+            li {
+              padding-left: 30px;
+              &:hover {
+                background: #082542;
+                a {
+                  color: white;
+                }
+              }
+            }
+          }
+          //margin-bottom: 9px;
+        }
+        a {
+          cursor: pointer;
+          font-size: 14px;
+          width: 100%;
+          padding: 10px 0px 10px 0px;
+          //line-height: 18px;
+          color: $color-text-secondary;
+          font-family: $Roboto;
+        }
+      }
+    }
+  }
+}

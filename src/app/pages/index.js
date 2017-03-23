@@ -61,6 +61,8 @@ import './contacts/index';
 
 import './contentPages/index';
 
+import './samples/index';
+
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
     'landing.auth',
@@ -78,6 +80,7 @@ let pagesModule = angular.module('app.pages', [
 	'landing.contacts',
 	'landing.pages',
     'landing.betaAgreement',
+	'landing.samples',
 
     'app.dashboard',
     'app.profile',
@@ -91,6 +94,7 @@ let pagesModule = angular.module('app.pages', [
     'app.editporjectVive',
     'app.editporjectWeb',
     'app.editporjectPublish',
+
 
     'app.plans',
     'app.billing',
