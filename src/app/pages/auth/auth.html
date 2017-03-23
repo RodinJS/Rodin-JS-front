@@ -87,7 +87,7 @@
                          'has-success': register.username.$valid && register.username.focused,
                          }">
                         <input type="text"
-                               data-ng-class="{'active':$ctrl.formData.username}"
+                               data-ng-class="{'active':register.username.$viewValue}"
                                class="form-control"
                                placeholder=""
                                value=""

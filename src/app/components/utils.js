@@ -329,6 +329,18 @@ function ConfirmPassword() {
     };
 }
 
+function RdScroll() {
+    return {
+		restrict: 'A',
+		scope: {
+			rdScroll: '=',
+		},
+		link: function link(scope, elem, attrs, ctrl) {
+            elem.addClass('rd-scroll');
+		},
+	};
+}
+
 export default {
     limitTo,
     Compile,
@@ -339,4 +351,5 @@ export default {
     NgAutocomplete,
     Codify,
     ConfirmPassword,
+	RdScroll,
 };
