@@ -56,6 +56,8 @@ class EditProjectWebCtrl {
             else
                 this.finalizeRequest();
         });
+
+
     }
 
     getProject() {
@@ -123,7 +125,7 @@ class EditProjectWebCtrl {
     }
 
     deleteDomain() {
-        this.modalText = `Are you sure you want delete <span class="text-highlight">${this.domain}</span> ?`;
+        this.modalText = `Are you sure you want delete <span class="text-highlight">${this.project.domain}</span> ?`;
         this.delete = true;
         return this.modalInstance = this._$uibModal.open({
             animation: this.animationsEnabled,
@@ -156,6 +158,11 @@ class EditProjectWebCtrl {
                 if (this.modalInstance) this.modalInstance.close();
             }
         );
+    }
+
+    closeModal(){
+        this.domain = this.project.domain;
+        this.modalInstance.close();
     }
 
     switchDomainTrigger() {
