@@ -16,6 +16,7 @@ componentsModule.directive('closeModal', Utils.CloseModal);
 componentsModule.directive('ngAutocomplete', Utils.NgAutocomplete);
 componentsModule.directive('codify', ['$timeout', Utils.Codify]);
 componentsModule.directive('confirmPassword', Utils.ConfirmPassword);
+componentsModule.directive('rdScroll', Utils.RdScroll);
 
 
 import EditorNavigation from './editorNavigation/index';

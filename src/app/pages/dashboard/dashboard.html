@@ -3,8 +3,8 @@
         <form action="">
             <div class="form-group">
                 <input type="search" class="header-search" placeholder="Filter by project name, url or description"
-                       data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search($event)">
-                <button type="submit" class="btn-search" ng-click="$ctrl.search($event)">
+                       data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
+                <button type="submit" class="btn-search" ng-click="$event.preventDefault(); $ctrl.search()">
                     <i class="rd rd-search"></i>
                 </button>
             </div>
