@@ -53,6 +53,12 @@ class EditProjectViveCtrl {
             this.project = ProjectStore.getProject();
         });
         this.getProject();
+
+        $scope.$on('$destroy', ()=>{
+            if(this.timer){
+                this._$interval.cancel(this.timer);
+            }
+        })
     }
 
     getProject() {
