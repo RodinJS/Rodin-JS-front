@@ -18,7 +18,7 @@
       min-height: 123px;
       //margin-bottom: 0px;
     }
-    margin-top: 80px;
+    margin-top: 75px;
     > div {
       > div {
         article {
@@ -49,8 +49,9 @@
     .cs-title {
       font-family: $RobotoCond;
       font-size: 24px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       color: white;
+      line-height: normal;
     }
     .corp {
       font-family: $Roboto;

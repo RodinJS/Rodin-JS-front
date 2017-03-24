@@ -12,7 +12,7 @@ class ContactsCtrl {
 	}
 
 	addMap() {
-		let loc = {lat: 33.771750, lng: -118.191130};
+		let loc = {lat: 40.017901, lng: -105.276806};
 		let options = {
 			center: loc,
 			zoom: 16,
