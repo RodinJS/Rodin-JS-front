@@ -1,6 +1,8 @@
 /**
  * Created by kh.levon98 on 15-Sep-16.
  */
+// import '../pages/home/scripts/plugins/jquery.slimscroll';
+
 function Compile($compile) {
     'ngInject';
 
@@ -336,7 +338,11 @@ function RdScroll() {
 			rdScroll: '=',
 		},
 		link: function link(scope, elem, attrs, ctrl) {
-            elem.addClass('rd-scroll');
+			$(elem).slimScroll({
+				height: '485px',
+				color: '#AAAAAA',
+				alwaysVisible: true
+			})
 		},
 	};
 }
