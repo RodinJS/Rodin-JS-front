@@ -1,28 +1,24 @@
 <div class="container-fluid samples-page">
     <div class="row line">
-        <div class="col-md-3 rd-tree row">
-            <h3 class="title">Examples</h3>
-            <ul class="nav nav-list">
-                <!--<li class="labeled"><label class="tree-toggler nav-header">RODIN LIB BASIC DOC</label>-->
-                <!--</li>-->
-                <!--<li class="labeled"><label class="tree-toggler nav-header">SCENE</label>-->
-                <!--</li>-->
-                <!--<li class="labeled"><label class="tree-toggler nav-header">SCULPT</label>-->
-                    <!--<ul class="nav tree">-->
-                        <!--<li><a>Main Information</a></li>-->
-                        <!--<li><a>Sources</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <li class="labeled"><label class="tree-toggler nav-header">SCULPT</label>
-                    <ul class="nav tree">
-                        <li><a>Main Information</a></li>
-                        <li><a>Sources</a></li>
-                        <li><a>Sources</a></li>
-                        <li><a>Sources</a></li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="col-md-2 rd-tree ">
+            <div class="row">
+                <h3 class="title">Examples</h3>
+                <ul class="nav nav-list">
+                    <li class="labeled"><label class="tree-toggler nav-header">SCULPT</label>
+                        <ul class="nav tree">
+                            <li ng-repeat="(key, value) in $ctrl.samples"><a ng-click="$ctrl.setActiveLink(key)">{{key.charAt(0).toUpperCase()+ key.slice(1)}}</a></li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="col-md-9" style="background: black;"></div>
+        <div class="col-md-10">
+            <div class="row samples-iframe">
+                <h3 class="info">Text</h3>
+                <a href="{{$ctrl.sourceLink}}" target="_blank" class="view-source">View Source</a>
+                <iframe ng-src="{{$ctrl.activeLink}}" frameborder="0" height="99%" width="100%"></iframe>
+            </div>
+        </div>
     </div>
 </div>

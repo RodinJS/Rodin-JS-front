@@ -57,3 +57,23 @@
     }
   }
 }
+.samples-iframe {
+  .info {
+    position: absolute;
+    top: 6px;
+    left: 15px;
+    color: $color-primary;
+  }
+  .view-source {
+    position: absolute;
+    bottom: 12px;
+    right: 40px;
+    padding: 8px 12px 8px 12px;
+    border: 1px solid $color_primary;
+    border-radius: 3px;
+    background: $bg-primary;
+    &:hover {
+      //background: $color-bd-sec;
+    }
+  }
+}
