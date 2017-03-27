@@ -38,12 +38,13 @@
         <!--</div>-->
     <!--</div>-->
     <div class="container-fluid page static-pages">
-        <div class="row title-section">
-            <h1 class="title text-center">
+        <div class="row title-section" ng-if="!$ctrl.page.slug.includes('tutorial')">
+            <h1 class="title text-center" >
                 {{$ctrl.page.title.toUpperCase()}}</h1>
             <span class="line"></span>
         </div>
-        <div class="container static margin-top-40" ng-bind-html="$ctrl.page.content.extended | htmlize" codify></div>
+        <div ng-class="$ctrl.page.slug.includes('tutorial') ? 'tutorial col-md-10 col-md-offset-1': ''"
+             class="container static margin-top-40" ng-bind-html="$ctrl.page.content.extended | htmlize" codify></div>
     </div>
 </div>
 
