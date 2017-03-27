@@ -308,7 +308,33 @@
         </div>
     </div>
 </div>
+<div class="modal model-confirm" close-modal="notPublished"
+     ng-class="{'display-block': $ctrl.modals.notPublished, 'display-none': !$ctrl.modals.notPublished}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <!--<span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>-->
+            <p>Warning</p>
+        </div>
+        <div class="modal-body padding-0-important">
+            <p class="description word-wrap">
+                Your project is not published yet.
+                Please publish your project then connect URL
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <div class="text-center">
 
+                    <button type="button" class="btn btn-positive"
+                            ng-click="$ctrl.gotToPublish()">Publish Project
+                    </button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.notPublished = false">Cancel</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal" close-modal="password"  ng-class="{'display-block': $ctrl.modals.password, 'display-none': !$ctrl.modals.password}">
     <div class="modal-content">
         <div class="modal-header">
