@@ -19,15 +19,16 @@ class SamplesCtrl {
 			.then(res => {
 				this.samples = res.data;
 				let first = Object.keys(this.samples)[0];
-				this.setDefaultStates(this.samples[first].url, this.samples[first].git);
+				this.setDefaultStates(first, this.samples[first].url, this.samples[first].git);
 			})
 	}
 
 	setActiveLink(key) {
-		return this.setDefaultStates(this.samples[key].url, this.samples[key].git)
+		return this.setDefaultStates(key, this.samples[key].url, this.samples[key].git)
 	}
 
-	setDefaultStates(src, git) {
+	setDefaultStates(name, src, git) {
+		this.sampleName = name
 		this.activeLink = this._$sce.trustAsResourceUrl(src);
 		this.sourceLink = this._$sce.trustAsResourceUrl(git);
 	}
