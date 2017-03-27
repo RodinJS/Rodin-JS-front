@@ -190,6 +190,9 @@ class EditProjectViveCtrl {
     }
 
     build(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         const ctrl = this;
         e.preventDefault();
         this.project.build.vive.built = false;
@@ -277,6 +280,9 @@ class EditProjectViveCtrl {
     };
 
     open(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -295,6 +301,9 @@ class EditProjectViveCtrl {
             }
         );
     }
+	gotToPublish() {
+		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
+	}
 }
 
 export default EditProjectViveCtrl;
