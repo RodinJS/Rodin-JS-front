@@ -14,24 +14,24 @@
         }
         &.has-error {
             position: relative;
-            &:before {
-                content: $icon-error;
-                font-family: 'rodin-icon' !important;
-                speak: none;
-                font-style: normal;
-                font-weight: normal;
-                font-variant: normal;
-                text-transform: none;
-                line-height: 1;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                font-size: 18px;
-                color: $colorRed;
-                position: absolute;
-                top: 50%;
-                right: 12px;
-                transform: translateY(-50%);
-            }
+            //&:before {
+            //    content: $icon-error;
+            //    font-family: 'rodin-icon' !important;
+            //    speak: none;
+            //    font-style: normal;
+            //    font-weight: normal;
+            //    font-variant: normal;
+            //    text-transform: none;
+            //    line-height: 1;
+            //    -webkit-font-smoothing: antialiased;
+            //    -moz-osx-font-smoothing: grayscale;
+            //    font-size: 18px;
+            //    color: $colorRed;
+            //    position: absolute;
+            //    top: 50%;
+            //    right: 12px;
+            //    transform: translateY(-50%);
+            //}
             .form-control {
                 border-color: rgba($colorRed, .5);
                 padding-right: 40px;
@@ -48,24 +48,24 @@
         }
         &.has-success {
             position: relative;
-            &:before {
-                content: $icon-send;
-                font-family: 'rodin-icon' !important;
-                speak: none;
-                font-style: normal;
-                font-weight: normal;
-                font-variant: normal;
-                text-transform: none;
-                line-height: 1;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                font-size: 18px;
-                color: $colorGreen;
-                position: absolute;
-                top: 50%;
-                right: 12px;
-                transform: translateY(-50%);
-            }
+            //&:before {
+            //    content: $icon-send;
+            //    font-family: 'rodin-icon' !important;
+            //    speak: none;
+            //    font-style: normal;
+            //    font-weight: normal;
+            //    font-variant: normal;
+            //    text-transform: none;
+            //    line-height: 1;
+            //    -webkit-font-smoothing: antialiased;
+            //    -moz-osx-font-smoothing: grayscale;
+            //    font-size: 18px;
+            //    color: $colorGreen;
+            //    position: absolute;
+            //    top: 50%;
+            //    right: 12px;
+            //    transform: translateY(-50%);
+            //}
             .help-block {
                 color: $colorGreen;
                 &.success-help-block {

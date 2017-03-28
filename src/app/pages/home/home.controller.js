@@ -1,7 +1,7 @@
 import  './scripts/main';
 
 class HomeCtrl {
-    constructor(AppConstants, $sce, $window, $scope, User, Notification) {
+    constructor(AppConstants, $sce, $window, $scope, User, Notification, PagesService) {
         'ngInject';
 
         if (LANDING && Object.keys(LANDING).length >= 10) {
@@ -43,11 +43,11 @@ class HomeCtrl {
             email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         };
 
-        this.videos = {
+        /*this.videos = {
             createProject: 'https://www.youtube.com/embed/vW1cniBqE_k',
             develope: 'https://www.youtube.com/embed/7qhusC1KSg4',
             deploy: 'https://www.youtube.com/embed/7qhusC1KSg4',
-        };
+        };*/
 
         this.subscribe = {
             email: '',
@@ -55,23 +55,47 @@ class HomeCtrl {
             position: [],
         };
 
-        this.changeVideo('createProject');
-        $scope.$on('$viewContentLoaded', () => {
-
-            $(document).ready(() => {
-                LANDING.landing();
-                $('.code').each(function (i, block) {
-                    hljs.highlightBlock(block);
-                });
-
-                $('.back-home-btn').on('click', () => this.outToSlider());
-            });
-
-        });
-
         $scope.$on('scrollDown', (event, data) => this.scrollHandler({ deltaY: 1 }));
 
         $scope.$on('notificationBoxTrigger', (event, data)=> this.notificationBoxTrigger());
+
+
+        PagesService.get('landing').then(
+            content => {
+                this.content = content;
+                this.videos = [
+                    {
+                        title:this.content.section5Video1Title,
+                        className:'video-play-btn left',
+                        url:`https://www.youtube.com/embed/${this.content.section5Video1Embed}`
+                    },
+                    {
+                        title:this.content.section5Video2Title,
+                        className:'video-play-btn middle',
+                        url:`https://www.youtube.com/embed/${this.content.section5Video2Embed}`
+                    },
+                    {
+                        title:this.content.section5Video3Title,
+                        className:'video-play-btn right',
+                        url:`https://www.youtube.com/embed/${this.content.section5Video3Embed}`
+                    }
+                ];
+                $(document).ready(() => {
+                    LANDING.landing();
+                    $('.code').each(function (i, block) {
+                        hljs.highlightBlock(block);
+                    });
+
+                    $('.back-home-btn').on('click', () => this.outToSlider());
+                });
+                this.changeVideo(0);
+                console.log(this.content);
+            },
+
+            err => {
+                console.log(err);
+            }
+        );
     }
 
     notificationBoxTrigger($event, backdropClick) {
@@ -101,9 +125,9 @@ class HomeCtrl {
         });
     }
 
-    changeVideo(videoName) {
-        this.activeVideo = this._$sce.trustAsResourceUrl(this.videos[videoName]);
-        this.videoTrigger = videoName;
+    changeVideo(index) {
+        this.activeVideo = this._$sce.trustAsResourceUrl(this.videos[index].url);
+        this.videoTrigger = index;
     }
 
     outToSlider(disableScroll) {
@@ -257,7 +281,7 @@ class HomeCtrl {
         this.requestInProgress = true;
         subscribe.position = subscribe.position.join(', ');
         this._User.subscribe(subscribe).then((result) => {
-            this._Notification.success('You have successfully subscribed to notification list');
+            this._Notification.success('Great success!');
             $('#emailControl').removeClass('focus').closest('.input-group').removeClass('focus');
             this.emailFocused = false;
             this.requestInProgress = false;

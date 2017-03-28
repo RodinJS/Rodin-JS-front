@@ -131,7 +131,7 @@
                                                    accept=".mobileprovision"
                                                    onchange="angular.element(this).scope().$ctrl.changeProfile(event)">
                                         </p>
-                                        <div class="drag-item-again" ng-show="$ctrl.files.profile.name !== ''">
+                                        <div class="drag-item-again" onclick="document.querySelector('#profile-file').click()" ng-show="$ctrl.files.profile.name !== ''">
                                             <div class="drag-board"></div>
                                             <span>Tap To Replace</span>
                                         </div>
@@ -175,7 +175,7 @@
                                                    accept=".p12"
                                                    onchange="angular.element(this).scope().$ctrl.changeCert(event)">
                                         </p>
-                                        <div class="drag-item-again" ng-show="$ctrl.files.cert.name !== ''">
+                                        <div class="drag-item-again" onclick="document.querySelector('#cert-file').click()" ng-show="$ctrl.files.cert.name !== ''">
                                             <div class="drag-board"></div>
                                             <span>Tap To Replace</span>
                                         </div>
@@ -219,7 +219,7 @@
                                                    accept="image/*"
                                                    onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                         </p>
-                                        <div class="drag-item-again" ng-show="$ctrl.files.icon.name !== ''">
+                                        <div class="drag-item-again" onclick="document.querySelector('#icon-file').click()" ng-show="$ctrl.files.icon.name !== ''">
                                             <div class="drag-board"></div>
                                             <span>Tap To Replace</span>
                                         </div>
@@ -237,36 +237,72 @@
                         <div class="btn-wrapper" style="text-align: center">
                             <button type="button"  class="btn btn-default btn-submit"
                                     ng-click="$ctrl.open($event)"
-                                    ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name"
-                            >Build</button>
+                                    ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name">
+                            Build</button>
                         </div>
 
                     </form>
+                    <!--<form class="main-form" action="" ng-if="$ctrl.project.build.ios.requested">-->
+                        <!--<div class="section">-->
+                            <!--<div class="required-field-item">-->
+                                <!--<div class="small-loader" data-ng-if="$ctrl.project.build.ios.requested && !$ctrl.project.build.ios.built">-->
+                                    <!--<div class="image"></div>-->
+                                <!--</div>-->
+                                <!--<div class="main-upload-area"-->
+                                     <!--data-ng-if="$ctrl.project.build.ios.built">-->
+                                    <!--<img src="images/general/file_icon_placeholder.png" alt="" width="60"-->
+                                         <!--class="uploaded-file-icon">-->
+                                    <!--<p class="area-label"></p>-->
+                                <!--</div>-->
+                                <!--<p data-ng-if="!$ctrl.project.build.ios.built"-->
+                                   <!--class="description margin-top-20 text-white">We are now building your installation package, the download link will appear here once done.</p>-->
+                                <!--<p data-ng-if="$ctrl.project.build.ios.built"-->
+                                   <!--class="description margin-top-20 text-white">Package ready</p>-->
+                                <!--<div class="required-field-actions text-center">-->
+                                    <!--<button data-ng-if="$ctrl.project.build.ios.built"-->
+                                            <!--type="button" class="btn btn-primary"-->
+                                            <!--ng-click="$ctrl.download()">download</button>-->
+                                    <!--<a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">cancel</a>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</form>-->
                     <form class="main-form" action="" ng-if="$ctrl.project.build.ios.requested">
                         <div class="section">
                             <div class="required-field-item">
-                                <div class="small-loader" data-ng-if="$ctrl.project.build.ios.requested && !$ctrl.project.build.ios.built">
+                                <p data-ng-if="$ctrl.project.build.ios.built"
+                                   class="description margin-top-40 text-white text-center">Package ready</p>
+                                <div class="small-loader"
+                                     data-ng-if="$ctrl.project.build.ios.requested && !$ctrl.project.build.ios.built">
                                     <div class="image"></div>
                                 </div>
-                                <div class="main-upload-area"
+                                <div class="main-upload-area "
                                      data-ng-if="$ctrl.project.build.ios.built">
-                                    <img src="images/general/file_icon_placeholder.png" alt="" width="60"
-                                         class="uploaded-file-icon">
-                                    <p class="area-label"></p>
+                                    <div class="download-build">
+                                        <div class="dashed-bord">
+                                            <img src="images/general/file_icon_placeholder.png" alt="" width="60"
+                                                 class="uploaded-file-icon">
+                                        </div>
+                                        <div class="download" ng-click="$ctrl.download()">
+                                            <span>Download</span>
+                                        </div>
+                                        <p class="description">Click to download</p>
+                                    </div>
                                 </div>
                                 <p data-ng-if="!$ctrl.project.build.ios.built"
-                                   class="description margin-top-20 text-white">We are now building your installation package, the download link will appear here once done.</p>
-                                <p data-ng-if="$ctrl.project.build.ios.built"
-                                   class="description margin-top-20 text-white">Package ready</p>
-                                <div class="required-field-actions">
-                                    <button data-ng-if="$ctrl.project.build.ios.built"
-                                            type="button" class="btn btn-primary"
-                                            ng-click="$ctrl.download()">download</button>
-                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">cancel</a>
+                                   class="description margin-top-20 text-white text-center">We are now building your installation
+                                    package, the download link will appear here once done.</p>
+                                <div class="required-field-actions text-center">
+                                    <!--<button data-ng-if="$ctrl.project.build.oculus.built"-->
+                                    <!--type="button" class="btn btn-primary"-->
+                                    <!--ng-click="$ctrl.download()">download-->
+                                    <!--</button>-->
+                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">Cancel</a>
                                 </div>
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -279,17 +315,16 @@
             <p>Certificate Password</p>
         </div>
         <div class="modal-body padding-0-important">
-            <p class="description text-small">Certificate password when u generate the app</p>
+            <p class="description text-small">Certificate password when you generate the app</p>
             <form name="password">
-                <div class="form-wrapper margin-top-20">
-                    <div class="form-group" custom-input
+                <div class="form-wrapper">
+                    <div class="form-group"
                          data-ng-class="{'has-error': password.certPassword.$invalid && password.certPassword.focused, 'has-success': password.certPassword.$valid && password.certPassword.focused}">
-                        <input type="password" class="form-control" placeholder=""
+                        <input type="password" class="form-control" placeholder="Certificate Password"
                                data-ng-model="$ctrl.project.ios.certPassword"
                                name="certPassword"
                                required
                                data-ng-focus="password.certPassword.focused = true">
-                        <label class="control-label float-label">Certificate Password</label>
                     </div>
                 </div>
             </form>
@@ -299,9 +334,9 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-positive"
                             data-ng-disabled="!password.$valid"
-                            data-ng-click="$ctrl.build()">build</button>
+                            data-ng-click="$ctrl.build()">Build</button>
                     <a href="" class="btn btn-cancel"
-                       data-ng-click="$ctrl.modals.password = false">cancel</a>
+                       data-ng-click="$ctrl.modals.password = false">Cancel</a>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@
                             <li ng-class="!$ctrl.privacy ? 'active' : ''">
                                 <a href="" ng-click="$ctrl.privacy = false">Profile</a>
                             <li ng-class="$ctrl.privacy ? 'active' : ''">
-                                <a href="" ng-click="$ctrl.privacy = true">Privacy</a>
+                                <a href="" ng-click="$ctrl.privacy = true">Password</a>
                             </li>
                         </ul>
                     </div>
@@ -241,6 +241,7 @@
 
                             <div class="btn-wrapper text-center">
                                 <button type="submit" class="btn btn-submit btn-default"
+                                        ng-disabled="profile.$invalid"
                                         ng-click="$ctrl.updateProfile()">
                                     Update Profile
                                 </button>
@@ -312,26 +313,75 @@
 
 
 
+<!--<div class="modal model-confirm" close-modal="sync"-->
+     <!--ng-class="{'display-block': $ctrl.modals.sync, 'display-none': !$ctrl.modals.sync}" tabindex="-1" id="modalSync"-->
+     <!--role="dialog" aria-labelledby="modalSyncLabel">-->
+    <!--<div class="modal-dialog modal-sm" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-body">-->
+                <!--<h2 class="modal-title">Please enter your {{$ctrl.syncType}} id</h2>-->
+                <!--<form name="oculusSteamSync" class="modal-form">-->
+                    <!--<div class="form-group">-->
+                        <!--<input type="text" class="form-control" placeholder="" required-->
+                               <!--data-ng-model="$ctrl.oculusSteamId">-->
+                    <!--</div>-->
+                    <!--<div class="form-actions">-->
+                        <!--<button type="button" ng-disabled="oculusSteamSync.$invalid" class="btn btn-primary"-->
+                                <!--ng-click="$ctrl.syncOculusSteam()">Sync-->
+                        <!--</button>-->
+                        <!--<a href="" class="btn btn-save" data-ng-click="$ctrl.modals.sync = false">cancel</a>-->
+
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<div class="modal model-confirm" close-modal="unsync"-->
+     <!--ng-class="{'display-block': $ctrl.modals.unsync, 'display-none': !$ctrl.modals.unsync}" tabindex="-1"-->
+     <!--id="modalUnSync" role="dialog" aria-labelledby="modalSyncLabel">-->
+    <!--<div class="modal-dialog modal-md" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-body">-->
+                <!--<h2 class="modal-title">Unsync from {{$ctrl.unSyncType}}</h2>-->
+                <!--<h3>Are you sure want to unsync?</h3>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<div class="form-actions">-->
+                    <!--<button type="button" class="btn btn-negative"-->
+                            <!--ng-click="$ctrl.confirmUnsync()">Unsync-->
+                    <!--</button>-->
+                    <!--<a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.unsync = false">cancel</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
 <div class="modal model-confirm" close-modal="sync"
      ng-class="{'display-block': $ctrl.modals.sync, 'display-none': !$ctrl.modals.sync}" tabindex="-1" id="modalSync"
      role="dialog" aria-labelledby="modalSyncLabel">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h2 class="modal-title">Please enter your {{$ctrl.syncType}} id</h2>
-                <form name="oculusSteamSync" class="modal-form">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="" required
-                               data-ng-model="$ctrl.oculusSteamId">
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" ng-disabled="oculusSteamSync.$invalid" class="btn btn-primary"
-                                ng-click="$ctrl.syncOculusSteam()">Sync
-                        </button>
-                        <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.sync = false">cancel</a>
-
-                    </div>
-                </form>
+    <div class="modal-content">
+        <div class="modal-header">
+            <!--<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>-->
+            <p>Please enter your {{$ctrl.syncType}} id</p>
+        </div>
+        <div class="modal-body">
+            <form name="oculusSteamSync" class="modal-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="" required
+                           data-ng-model="$ctrl.oculusSteamId">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <div class="text-center">
+                    <button type="button" ng-disabled="oculusSteamSync.$invalid" class="btn btn-positive"
+                            ng-click="$ctrl.syncOculusSteam()">Sync
+                    </button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.sync = false">Cancel</a>
+                </div>
             </div>
         </div>
     </div>
@@ -339,17 +389,23 @@
 <div class="modal model-confirm" close-modal="unsync"
      ng-class="{'display-block': $ctrl.modals.unsync, 'display-none': !$ctrl.modals.unsync}" tabindex="-1"
      id="modalUnSync" role="dialog" aria-labelledby="modalSyncLabel">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h2 class="modal-title">Unsync from {{$ctrl.unSyncType}}</h2>
-                <h3>Are you sure want to unsync?</h3>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-primary"
+    <div class="modal-content">
+        <div class="modal-header">
+            <!--<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>-->
+            <p>Unsync from {{$ctrl.unSyncType}}</p>
+        </div>
+        <div class="modal-body">
+            <p class="text-small description">
+                Are you sure want to unsync?
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <div class="text-center">
+                    <button type="button" class="btn btn-negative"
                             ng-click="$ctrl.confirmUnsync()">Unsync
                     </button>
-                    <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.unsync = false">cancel</a>
-
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.unsync = false">Cancel</a>
                 </div>
             </div>
         </div>

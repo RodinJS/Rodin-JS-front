@@ -1,3 +1,24 @@
+//::-webkit-scrollbar {
+//  width: 12px;
+//}
+//
+///* Track */
+//::-webkit-scrollbar-track {
+//  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+//  -webkit-border-radius: 10px;
+//  border-radius: 10px;
+//}
+//
+///* Handle */
+//::-webkit-scrollbar-thumb {
+//  -webkit-border-radius: 10px;
+//  border-radius: 10px;
+//  background: rgba(255,0,0,0.8);
+//  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+//}
+//::-webkit-scrollbar-thumb:window-inactive {
+//  background: rgba(255,0,0,0.4);
+//}
 .header {
   min-height: 70px;
   padding-top: 0;
@@ -6,7 +27,7 @@
     width: 100%;
   }
   &.navbar-fixed-top {
-    padding-top: 25px;
+    padding-top: 17px;
     .header-background {
       display: none;
     }
@@ -230,8 +251,8 @@
         }
       }
       .notification-wrapper {
-        border-top-left-radius: 6px ;
-        border-top-right-radius: 6px ;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
         font-weight: 400;
         color: white;
         margin: 0;
@@ -248,7 +269,10 @@
           }
         }
       }
+
       .notifi-list {
+        max-height: 485px;
+        overflow: auto;
         li {
           margin-left: 0;
           position: relative;
@@ -383,6 +407,7 @@
             opacity: .8;
           }
           &.new {
+
             &:after {
               content: "";
               width: 6px;
@@ -615,7 +640,7 @@
           margin-top: 10px;
           padding: 15px 13px;
           margin-right: 3px;
-          &.login{
+          &.login {
             padding: 0;
             margin: 0;
             position: relative;
@@ -743,6 +768,8 @@
         border: 1px solid rgba(151, 151, 151, 0.18);
         padding-bottom: 0;
         .notifi-list {
+          max-height: 485px;
+          overflow: auto;
           > li {
             margin-bottom: 0;
           }

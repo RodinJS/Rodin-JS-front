@@ -103,7 +103,7 @@
                                                 accept="image/*"
                                                 onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                          </p>
-                                            <div class="drag-item-again" ng-show="$ctrl.files.icon.name !== ''">
+                                            <div class="drag-item-again" onclick="document.querySelector('#icon-file').click()" ng-show="$ctrl.files.icon.name !== ''">
                                                 <div class="drag-board"></div>
                                                 <span>Tap To Replace</span>
                                             </div>
@@ -235,31 +235,42 @@
                             <div class="btn-wrapper" style="text-align: center">
                                 <button type="button" class="btn btn-default btn-submit"
                                         ng-click="$ctrl.open($event)"
-                                        ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.icon.name">Build</button>
+                                        ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.icon.name">
+                                Build</button>
                             </div>
                         </div>
                     </form>
                     <form class="main-form" action="" style="margin-top:10px" ng-if="$ctrl.project.build.android.requested">
                         <div class="section">
                             <div class="required-field-item">
-                                <div class="small-loader" data-ng-if="$ctrl.project.build.android.requested && !$ctrl.project.build.android.built">
+                                <p data-ng-if="$ctrl.project.build.android.built"
+                                   class="description margin-top-40 text-white text-center">Package ready</p>
+                                <div class="small-loader"
+                                     data-ng-if="$ctrl.project.build.android.requested && !$ctrl.project.build.android.built">
                                     <div class="image"></div>
                                 </div>
-                                <div class="main-upload-area"
+                                <div class="main-upload-area "
                                      data-ng-if="$ctrl.project.build.android.built">
-                                    <img src="images/general/file_icon_placeholder.png" alt="" width="60"
-                                         class="uploaded-file-icon">
-                                    <p class="area-label"></p>
+                                    <div class="download-build">
+                                        <div class="dashed-bord">
+                                            <img src="images/general/file_icon_placeholder.png" alt="" width="60"
+                                                 class="uploaded-file-icon">
+                                        </div>
+                                        <div class="download" ng-click="$ctrl.download()">
+                                            <span>Download</span>
+                                        </div>
+                                        <p class="description">Click to download</p>
+                                    </div>
                                 </div>
                                 <p data-ng-if="!$ctrl.project.build.android.built"
-                                   class="description margin-top-20 text-white">We are now building your installation package, the download link will appear here once done.</p>
-                                <p data-ng-if="$ctrl.project.build.android.built"
-                                   class="description margin-top-20 text-white">Package ready</p>
-                                <div class="required-field-actions">
-                                    <button data-ng-if="$ctrl.project.build.android.built"
-                                            type="button" class="btn btn-primary"
-                                            ng-click="$ctrl.download()">download</button>
-                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.android.built" class="btn btn-save">cancel</a>
+                                   class="description margin-top-20 text-white text-center">We are now building your installation
+                                    package, the download link will appear here once done.</p>
+                                <div class="required-field-actions text-center">
+                                    <!--<button data-ng-if="$ctrl.project.build.oculus.built"-->
+                                    <!--type="button" class="btn btn-primary"-->
+                                    <!--ng-click="$ctrl.download()">download-->
+                                    <!--</button>-->
+                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.android.built" class="btn btn-save">Cancel</a>
                                 </div>
                             </div>
                         </div>
@@ -281,27 +292,25 @@
         <div class="modal-body padding-0-important">
             <form name="password">
                 <div class="form-wrapper margin-top-40">
-                    <div class="form-group" custom-input
+                    <div class="form-group"
                          data-ng-class="{'has-error': password.password.$invalid && password.password.focused, 'has-success': password.password.$valid && password.password.focused}">
-                        <input type="password" class="form-control" placeholder=""
+                        <input type="password" class="form-control" placeholder="KeyStore Password"
                                data-ng-model="$ctrl.project.android.keyStore.password"
                                name="password"
                                ng-minlength="6"
                                required
                                data-ng-focus="password.password.focused = true">
-                        <label class="control-label float-label">KeyStore Password</label>
                     </div>
                     <!--<p class="text-small description">KeyStore Password.</p>-->
 
-                    <div class="form-group margin-top-40" custom-input
+                    <div class="form-group margin-top-40"
                          data-ng-class="{'has-error': password.aliasPassword.$invalid && password.aliasPassword.focused, 'has-success': password.aliasPassword.$valid && password.aliasPassword.focused}">
-                        <input type="password" class="form-control" placeholder=""
+                        <input type="password" class="form-control" placeholder="Alias Password"
                                data-ng-model="$ctrl.project.android.keyStore.aliasPassword"
                                name="aliasPassword"
                                required
                                ng-minlength="6"
                                data-ng-focus="password.aliasPassword.focused = true">
-                        <label class="control-label float-label">Alias Password</label>
                     </div>
                     <!--<p class="text-small description">Alias Password.</p>-->
                 </div>
@@ -312,8 +321,8 @@
                 <div class="text-center">
                     <button type="button" class="btn btn-positive"
                             ng-click="$ctrl.build()"
-                            data-ng-disabled="!password.$valid">build</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.password = false">cancel</a>
+                            data-ng-disabled="!password.$valid">Build</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.password = false">Cancel</a>
                 </div>
             </div>
         </div>

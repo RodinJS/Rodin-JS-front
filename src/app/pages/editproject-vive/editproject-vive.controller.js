@@ -46,21 +46,28 @@ class EditProjectViveCtrl {
 
         this.submiting = false;
         this.openEvent = null;
+        this.vivePortTrigger = false;
 
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
         });
         this.getProject();
+
+        $scope.$on('$destroy', ()=>{
+            if(this.timer){
+                this._$interval.cancel(this.timer);
+            }
+        })
     }
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, { device: 'oculus' }).then(
+        this.Project.get(this.projectId, { device: 'vive' }).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                if(this.project.build.oculus.built && this.timer){
+                if(this.project.build.vive.built && this.timer){
                     this._$interval.cancel(this.timer);
                 }
             },
@@ -185,24 +192,26 @@ class EditProjectViveCtrl {
     build(e) {
         const ctrl = this;
         e.preventDefault();
-        this.project.build.oculus.built = false;
+        this.project.build.vive.built = false;
         let project = {
             userId: this.user.username,
             appId: this.project._id,
             appName: this.project.vive.name,
             version: this.project.vive.version,
-            oculus: {
-                exportMethod: 'ad-hoc',
-                bundleIdentifier: this.project.vive.bundle,
-                developerId: this.project.vive.developerId,
-                certPassword: this.project.vive.certPassword,
+            vive: {
+
             },
         };
+
+        if(this.vivePortTrigger){
+            project.vive.viveportId = this.project.vive.viveportId;
+            project.vive.viveportKey = this.project.vive.viveportKey;
+        }
 
         ctrl.showLoader = true;
         $('#configs').ajaxForm({
             dataType: 'json',
-            url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/vive',
             headers: {
                 'x-access-token': this._JWT.get(),
             },
@@ -238,8 +247,8 @@ class EditProjectViveCtrl {
             userId: this.user.username,
             appId: this.project._id,
             //appName: this.project.vive.name,
-            //version:this.project.oculus.version,
-            oculus: {
+            //version:this.project.vive.version,
+            vive: {
             },
         };
 
@@ -247,7 +256,7 @@ class EditProjectViveCtrl {
         $('#configs').ajaxForm({
             dataType: 'json',
             type: 'DELETE',
-            url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/vive',
             headers: {
                 'x-access-token': this._JWT.get(),
             },
@@ -274,7 +283,7 @@ class EditProjectViveCtrl {
 
     download() {
         this.showLoader = true;
-        this.Project.download(this.project._id, 'oculus').then(
+        this.Project.download(this.project._id, 'vive').then(
             data => {
                 this.showLoader = false;
                 window.location = data.downloadUrl;

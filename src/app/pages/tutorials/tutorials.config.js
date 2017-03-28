@@ -7,6 +7,7 @@ function TutorialsConfig($stateProvider) {
 			templateUrl: 'pages/tutorials/tutorials.html',
 			title: 'Tutorials',
             pageClass:'new',
+            showFooter: true,
         })
 }
 

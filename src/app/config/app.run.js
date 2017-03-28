@@ -23,23 +23,24 @@ function AppRun(AppConstants, $rootScope, Restangular, JWT, $state, User, $timeo
         return true; // error not handled
     });
 
-
     $rootScope.URL = AppConstants.SITE;
 
     // change page title based on state
     $rootScope.$on('$stateChangeSuccess', (event, toState) => {
+        $rootScope.stateIsLoading = false;
         $rootScope.setPageTitle(toState.title);
         $rootScope.setPageClass(toState.pageClass);
+        $rootScope.setShowFooter(toState.showFooter);
     });
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        $rootScope.stateIsLoading = true;
         if (toState.redirectToWhenAuthenticated && JWT.get()) {
             // User isn’t authenticated
             $state.go(toState.redirectToWhenAuthenticated);
             event.preventDefault();
         }
     });
-
     // Helper method for setting the page's title
     $rootScope.setPageTitle = (title) => {
         $rootScope.pageTitle = '';
@@ -54,6 +55,10 @@ function AppRun(AppConstants, $rootScope, Restangular, JWT, $state, User, $timeo
     $rootScope.pageClass = '';
     $rootScope.setPageClass = (pageClass = '') => {
         $rootScope.pageClass = pageClass;
+    };
+
+    $rootScope.setShowFooter = (showFooter = false) => {
+        $rootScope.showFooter = showFooter;
     };
 
 
