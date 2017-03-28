@@ -41,6 +41,7 @@
               padding-top:80px;
               .title{
                 margin-bottom: 32px !important;
+				  font-size: 27px !important;
               }
             }
 		}
@@ -75,8 +76,8 @@
 					font-size: 12px;
 					color: rgba(255, 255, 255, 0.45);
 					margin: 0;
-					max-width: 265px;
-					white-space: nowrap;
+					//max-width: 265px;
+					//white-space: nowrap;
 				}
 			.text-wrong {
 				color: $color-primary;
@@ -272,7 +273,7 @@
 			background-color: transparent;
 		}
 		&.area-control{
-			height: 178px;
+			height: 78px;
 			resize: none;
 		}
 		&.email-control{
@@ -328,6 +329,9 @@
 	.auth-container {
 		&.signup-container,
 		&.selet-template-container{
+			.title {
+				font-size:27px;
+			}
 			padding-top: 24px;
 			padding-bottom: 60px;
 		}

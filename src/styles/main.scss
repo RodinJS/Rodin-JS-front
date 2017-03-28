@@ -27,7 +27,9 @@ button:hover,
 button:active{
   outline: none !important;
 }
-
+body.space-back {
+  background-image: url(../images/landing/content/banner.jpg);
+}
 body{
   &.new{
     .loader {
@@ -79,8 +81,12 @@ body{
     @import "common";
     @import "utils";
     @import "docs";
+    @import "scroller";
     @import "../../src/app/pages/auth/auth";
+    @import "../../src/app/pages/faq/faq";
     @import "../../src/app/layout/header";
+    @import "../../src/app/layout/footer";
+    @import "../../src/app/pages/contacts/contacts";
     @import "../../src/app/pages/home/layout/banner";
     @import "../../src/app/pages/home/layout/benefits";
     @import "../../src/app/pages/home/layout/code";
@@ -97,6 +103,8 @@ body{
     @import "../../src/app/pages/discover/discover";
     @import "../../src/app/pages/store/store";
     @import "../../src/app/pages/contentPages/contentPages";
+    @import "../../src/app/pages/samples/samples";
+
   }
   /*&:not(.new){
 

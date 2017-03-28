@@ -43,6 +43,7 @@
                         <label for="url">Project url</label>
                         <div class="url-group">
                             <input type="text"
+                                   id="project-url"
                                    class="form-control"
                                    placeholder="projectURL"
                                    value=""
@@ -51,7 +52,7 @@
                                    limit-to="16"
                                    ng-click="$ctrl.projectFocused = true"
                                    data-ng-model="$ctrl.project.name">
-                            <span class="main-placeholder">https://rodin.io/projects/nasoku/</span>
+                            <span class="main-placeholder" ng-bind="'https://rodin.io/projects/' + $ctrl.currentUser.username + '/'"></span>
                         </div>
                     </div>
                     <!--<div class="form-group">-->
@@ -60,15 +61,14 @@
                         <!--<p class="form-description">Meta tags are a great way for webmasters to provide search engines with information about their sites</p>-->
                     <!--</div>-->
                     <div class="form-group"
-                         data-ng-class="{'has-error': $ctrl.projectDescription.length === 0 && $ctrl.projectDescriptionFocused, 'has-success': $ctrl.projectDescription.length > 0 && $ctrl.projectDescriptionFocused}"
+                         data-ng-class="{'has-error': projectDescription.length === 0 && $ctrl.projectDescriptionFocused, 'has-success': projectDescription.length > 0 && $ctrl.projectDescriptionFocused}"
                     >
-                        {{projectDescription}}
                         <label for="area">Description</label>
                         <textarea
                                 id="area"
                                 ng-minlength="1"
                                 limit-to="128" style="width:100%"
-                                data-ng-model="$ctrl.projectDescription"
+                                data-ng-model="projectDescription"
                                 class="form-control area-control"
                                 ng-click="$ctrl.projectDescriptionFocused = true"
                         ></textarea>

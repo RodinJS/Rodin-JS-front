@@ -81,9 +81,10 @@
                     </div>
 
                     <div class="section section-vr-space">
-                        <h3 class="section-title">Project Thumbnail</h3>
+                        <!--<h3 class="section-title">Project Thumbnail</h3>-->
                         <div class="drag-cont upload-label">
-                            <div class="drag-item first">
+                            <div class="drag-item first text-center">
+                                <label>Project Thumbnail</label>
                                 <div class="drag-area first">
                                     <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#thumbnail-img').click()">
                                         <i ng-if="!$ctrl.project.thumbnail" class="icon icon-invalid"></i>
@@ -93,12 +94,12 @@
                                     <input class="hidden" type="file" id="thumbnail-img" data-ng-model="avatarUrl" accept="image/jpeg,image/jpg,image/png,"
                                            onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)" name="avatar"/>
                                     </p>
-                                    <div class="drag-item-again" ng-show="$ctrl.project.thumbnail">
+                                    <div class="drag-item-again" onclick="document.querySelector('#thumbnail-img').click()" ng-show="$ctrl.project.thumbnail">
                                         <div class="drag-board"></div>
                                         <span>Tap To Replace</span>
                                     </div>
                                 </div>
-                                <h5 class="section-small-title text-left">We recomend to upload a maximum of 2Mb size image.</h5>
+                                <h5 class="section-small-title text-center">We recomend to upload a maximum of 2Mb size image.</h5>
                             </div>
                             <div class="drag-item hidden">
                                 <h5 class="section-small-title">Favicon</h5>
@@ -182,7 +183,7 @@
 
 
 <div class="modal" close-modal="remove"  ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
-    <div class="modal-content modal-negative">
+    <div class="modal-content">
         <div class="modal-header">
             <!--<span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>-->
             <p ng-hide="!!$ctrl.project.publishDate">Delete this project ?</p>
@@ -190,17 +191,21 @@
         </div>
         <div class="modal-body padding-0-important" ng-if="!!$ctrl.project.publishDate">
             <p class="description word-wrap">
-                Your project will no longer be available on
-                <span class="text-highlight">{{$ctrl.project.publishedUrl}}</span>, your apps for
-                <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !<br>
-                <p class="confirm">Are you sure you want to continue?</p>
+                <span ng-if="$ctrl.project.publishedUrl">
+                     Your project will no longer be available on
+                     <span class="text-highlight">{{$ctrl.project.publishedUrl}}</span>, your apps for
+                </span>
+            <span>The <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !</span><br>
+            <p class="confirm">Are you sure you want to continue?</p>
             </p>
         </div>
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
-                <button type="button" class="btn btn-primary"
-                        ng-click="$ctrl.deleteProject()">delete</button>
-                <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.remove = false">cancel</a>
+                <div class="text-center">
+                    <button type="button" class="btn btn-negative"
+                            ng-click="$ctrl.deleteProject()">Delete</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.remove = false">Cancel</a>
+                </div>
             </div>
         </div>
     </div>
@@ -217,18 +222,18 @@
                 This project is not public, you can change this from project settings.
             </p>
             <div class="form-wrapper margin-top-20" data-ng-if="$ctrl.project.public === 'true'">
-                <div class="form-group" custom-input>
+                <div class="form-group">
                     <input id="projectUrl" type="text" class="form-control" value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" disabled>
-                    <label class="control-label float-label">Url of project</label>
+                    <!--<label class="control-label float-label">Url of project</label>-->
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <div class="text-center">
-                    <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">go to settings</button>
-                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl()">copy this url</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">cancel</a>
+                    <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">Go To Settings</button>
+                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl()">Copy URL</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">Cancel</a>
                 </div>
             </div>
         </div>

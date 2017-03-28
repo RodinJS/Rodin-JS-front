@@ -181,6 +181,21 @@ $distance: 34;
         color: white;
       }
     }
+    .btn-cancel {
+      min-width: 100px;
+      color: #AAAAAA;
+      font-family: 'SF UI Display';
+      border: 2px solid #AAAAAA;
+      font-size: 16px;
+      line-height: 26px !important;
+      padding: 10px 30px !important;
+      font-weight: 600;
+      &:hover {
+        color: $color-text-primary;
+        border-color: $color-text-gray;
+        background-color: #bbbbbb !important;
+      }
+    }
     padding-top: 5px;
   }
 
@@ -409,7 +424,9 @@ $distance: 34;
   .section {
     .drag-cont {
       position: relative;
-
+      label {
+        font-weight: 400;
+      }
       &:hover {
         .drag-item-again {
           visibility: visible;
@@ -417,10 +434,10 @@ $distance: 34;
       }
       .drag-item {
         display: inline-block;
-        max-width: 185px;
+        max-width: 166px;
         padding-bottom: 40px;
         label {
-          color: white;
+          color: #f0f0f0;
         }
         h5.section-small-title {
           font-size: 13px;

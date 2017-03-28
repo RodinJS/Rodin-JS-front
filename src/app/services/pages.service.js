@@ -10,9 +10,11 @@ class Pages {
         this._Analyser = Analyser;
 
         this._Pages = Restangular.all('pages');
+        this._Support = Restangular.all('pages/support/');
         this._$state = $state;
         this._$q = $q;
         this._Validator = new Validator();
+
     }
 
     getList() {
@@ -24,6 +26,12 @@ class Pages {
     get(pageURL = null) {
         let Analyser = new this._Analyser();
         this._Pages.one('', pageURL).get().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    getFAQ() {
+        let Analyser = new this._Analyser();
+        this._Support.one('', 'faq').get().then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 

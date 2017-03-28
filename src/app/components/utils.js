@@ -1,16 +1,18 @@
 /**
  * Created by kh.levon98 on 15-Sep-16.
  */
+// import '../pages/home/scripts/plugins/jquery.slimscroll';
+
 function Compile($compile) {
     'ngInject';
 
     return function (scope, element, attrs) {
         scope.$watch((scope) => {
-                return scope.$eval(attrs.compile);
-            }, (value) => {
-                element.html(value);
-                $compile(element.contents())(scope);
-            }
+            return scope.$eval(attrs.compile);
+        }, (value) => {
+            element.html(value);
+            $compile(element.contents())(scope);
+        }
         );
     };
 }
@@ -23,7 +25,7 @@ function limitTo() {
         link: (scope, elem, attrs) => {
             let limit = parseInt(attrs.limitTo);
 
-            elem.bind('paste',  (e) => {
+            elem.bind('paste', (e) => {
 
                 let pastedData = e.originalEvent.clipboardData.getData('text');
                 let totalSymbolsLength = elem[0].value.length + pastedData.length;
@@ -137,7 +139,7 @@ function CloseModal() {
         restrict: 'A',
         link: function (scope, element, attrs, ngModel) {
             let $elem = element;
-            $elem.on('click', (e)=> {
+            $elem.on('click', (e) => {
                 const hasClassModal = angular.element(e.target).hasClass('modal');
                 if (!hasClassModal) return;
                 scope.$ctrl.modals[attrs.closeModal] = false;
@@ -155,7 +157,7 @@ function Codify($timeout) {
         restrict: 'A',
         link: function (scope, element) {
             let $elem = element;
-            $timeout(()=> {
+            $timeout(() => {
                 $elem.find('.code').each(function (i, block) {
                     hljs.highlightBlock(block);
                 });
@@ -245,43 +247,43 @@ function NgAutocomplete() {
                 var autocompleteService = new google.maps.places.AutocompleteService();
                 if (result.name.length > 0) {
                     autocompleteService.getPlacePredictions(
-                        {
-                            input: result.name,
-                            offset: result.name.length,
-                        },
-                        function listentoresult(list, status) {
-                            if (list == null || list.length == 0) {
+                     {
+                        input: result.name,
+                        offset: result.name.length,
+                    },
+                     function listentoresult(list, status) {
+                        if (list == null || list.length == 0) {
 
-                                scope.$apply(function () {
-                                    scope.details = null;
-                                });
+                            scope.$apply(function () {
+                                scope.details = null;
+                            });
 
-                            } else {
-                                var placesService = new google.maps.places.PlacesService(element[0]);
-                                placesService.getDetails(
-                                    { reference: list[0].reference },
-                                    function detailsresult(detailsResult, placesServiceStatus) {
+                        } else {
+                            var placesService = new google.maps.places.PlacesService(element[0]);
+                            placesService.getDetails(
+                             { reference: list[0].reference },
+                             function detailsresult(detailsResult, placesServiceStatus) {
 
-                                        if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
-                                            scope.$apply(function () {
+                                if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
+                                    scope.$apply(function () {
 
-                                                controller.$setViewValue(detailsResult.formatted_address);
-                                                element.val(detailsResult.formatted_address);
+                                        controller.$setViewValue(detailsResult.formatted_address);
+                                        element.val(detailsResult.formatted_address);
 
-                                                scope.details = detailsResult;
+                                        scope.details = detailsResult;
 
-                                                //on focusout the value reverts, need to set it again.
-                                                var watchFocusOut = element.on('focusout', function (event) {
-                                                    element.val(detailsResult.formatted_address);
-                                                    element.unbind('focusout');
-                                                });
+                                        //on focusout the value reverts, need to set it again.
+                                        var watchFocusOut = element.on('focusout', function (event) {
+                                         element.val(detailsResult.formatted_address);
+                                         element.unbind('focusout');
+                                        });
 
-                                            });
-                                        }
-                                    }
-                                );
+                                    });
+                                }
                             }
-                        });
+                            );
+                        }
+                    });
                 }
             };
 
@@ -303,4 +305,57 @@ function NgAutocomplete() {
     };
 }
 
-export default { limitTo, Compile, CheckForUnique, ShowAuthed, CustomInput, CloseModal, NgAutocomplete, Codify };
+function ConfirmPassword() {
+    'ngInject';
+
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        scope: {
+            compareTo: '=',
+        },
+        link: function link(scope, elem, attrs, ctrl) {
+            let validator = function (value) {
+                ctrl.$setValidity('confirmed', value === scope.compareTo);
+                return value;
+            };
+
+            ctrl.$parsers.unshift(validator);
+            ctrl.$formatters.push(validator);
+
+            scope.$watch('compareTo', function (newval, oldval) {
+                validator(ctrl.$viewValue);
+            });
+
+        },
+    };
+}
+
+function RdScroll() {
+    return {
+		restrict: 'A',
+		scope: {
+			rdScroll: '=',
+		},
+		link: function link(scope, elem, attrs, ctrl) {
+			$(elem).slimScroll({
+				height: '485px',
+				color: '#AAAAAA',
+				alwaysVisible: true
+			})
+		},
+	};
+}
+
+export default {
+    limitTo,
+    Compile,
+    CheckForUnique,
+    ShowAuthed,
+    CustomInput,
+    CloseModal,
+    NgAutocomplete,
+    Codify,
+    ConfirmPassword,
+	RdScroll,
+};
