@@ -27,6 +27,9 @@
                     <li>
                         <a ui-sref="landing.store">Store</a>
                     </li>
+                    <li>
+                        <a ui-sref="landing.samples">Samples</a>
+                    </li>
                     <li ng-repeat="page in $ctrl.pagesSection1">
                         <a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                     </li>
