@@ -28,8 +28,12 @@
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="500" />
     <meta property="og:image:height" content="300" />
-
     <base href="/">
+
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyA6Y8RlBTByatge6Ufdk4279cFABWBnm9Q"></script>
+    <script src="//apis.google.com/js/platform.js"></script>
+    <script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js"></script>
+
 </head>
 <body class="page" data-ng-class="pageClass">
 <div class="main-wrapper" data-ng-class="pageClass">
@@ -65,74 +69,8 @@
     </svg>
     <div data-ui-view class="page__wrapper"></div>
 </div>
-
-<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyA6Y8RlBTByatge6Ufdk4279cFABWBnm9Q"></script>
-<script src="//apis.google.com/js/platform.js"></script>
-<script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js"></script>
-<script type="text/javascript" src="/scripts/vendor/systemjs/dist/system.js"></script>
-<script>
-
-    (function (System) {
-        var systemnormalize = System.normalize;
-        var blacklist = ['systemjs-json'];
-
-        function shouldReverse(parts) {
-            return parts.every(function (part) {
-                return blacklist.indexOf(part) === -1;
-            });
-        }
-
-        System.normalize = function (name, parentName) {
-            var parts = name.split('!');
-
-            if (parts.length > 1 && shouldReverse(parts)) {
-                name = parts.reverse().join('!');
-            }
-
-            return systemnormalize.call(this, name, parentName);
-        };
-    })(System);
-
-    var systemLocate = System.locate;
-    System.locate = function (load) {
-        var System = this;
-        return Promise.resolve(systemLocate.call(this, load)).then(function (address) {
-            return address + System.cacheBust;
-        });
-    };
-    System.cacheBust = '?v=0.2.10';
-
-    System.config({
-        packages: {
-            "/app": {  // path to your project root
-                "defaultJSExtensions": true
-            },
-            "/scripts": {  // path to your project root
-                "defaultJSExtensions": true
-            }
-        },
-        paths: {
-            '*': 'scripts/vendor/*',
-            'app/*': 'app/*',
-            'scripts/*': 'scripts/*'
-        }
-    });
-    System.import('app/pages/home/highlight.pack.js');
-    System.import('app/app.js');
-
-    /*System.import('app/pages/home/mainz3a5m8eh2etu1md1b57b9.min.js')*/
-
-
-    /* System.import('app/pages/home/landing.js').then( (e) => {
-     Promise.all([
-     System.import('app/pages/home/highlight.pack.js'),
-     System.import('app/app.js'),
-     ])
-     })*/
-
-
-</script>
-
+<script type="text/javascript" src="app/vendors.js?v=0.2.10"></script>
+<script type="text/javascript" src="app/bundle.js?v=0.2.10"></script>
 <!-- Google Analytics -->
 <script>
     var host = window.location.host;

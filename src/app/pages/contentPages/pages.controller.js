@@ -31,7 +31,7 @@ class PageCtrl {
         return this._$state.go('landing.error');
     }
 
-    gotoAnchor = function(x) {
+    gotoAnchor(x) {
       var newHash = 'anchor' + x;
       if ($location.hash() !== newHash) {
         // set the $location.hash to `newHash` and
