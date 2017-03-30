@@ -5,8 +5,8 @@ import './helpers';
 
 import angular from 'angular/index';
 import 'jquery/dist/jquery.min';
-import 'jquery-form/src/jquery.form';
-import moment from 'moment/src/moment';
+import './assists/jquery.form';
+import moment from 'moment/min/moment.min.js';
 
 
 // Import our app config files

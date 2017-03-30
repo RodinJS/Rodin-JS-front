@@ -53,9 +53,6 @@ const ERROR_MESSAGE = {
 };
 
 
-const webpack = require('webpack');
-
-
 gulp.task('vendor', () => {
     let vendor_tasks = generate_vendor(VENDOR);
 
@@ -274,6 +271,8 @@ const bundleVendorsJS = ['node_modules/jquery/dist/jquery.min.js', 'src/app/page
 const strip = require('gulp-strip-comments');
 const stripDebug = require('gulp-strip-debug');
 const replace = require('gulp-replace');
+const webpack = require('webpack');
+
 
 gulp.task('vendorForBundle', () => {
     let vendor_tasks = generate_vendor({ "angular-ui-notification": "^0.2.0", "font-awesome": "4.7.0"});
@@ -339,12 +338,20 @@ gulp.task('webpack', (done) => {
 });
 
 gulp.task('cleanBundleFile', ()=>{
+    const s = size({ title: 'cleanBundleFile -> ', pretty: false });
     return gulp.src('./build/app/bundle.js')
         .pipe(strip())
         .pipe(uglify(UGLIFY_AGRESIVE))
         .pipe(stripDebug())
         .pipe(replace('env:"local"', `env:"${process.env.NODE_ENV || 'local'}"`))
-        .pipe(gulp.dest('./build/app'));
+        .pipe(plumber(ERROR_MESSAGE))
+        .pipe(s)
+        .pipe(plumber.stop())
+        .pipe(gulp.dest('./build/app'))
+        .pipe(notify({
+            onLast: true,
+            message: () => `generate-index - Total size ${s.prettySize}`,
+        }));
 });
 
 gulp.task('bundleTemplate', () => {
