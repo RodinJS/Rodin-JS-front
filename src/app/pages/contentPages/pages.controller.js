@@ -1,5 +1,5 @@
 class PageCtrl {
-    constructor(AppConstants, $scope, $state, $stateParams,  EventBus, PagesService, PagesStore, $window, $anchorScroll, $location) {
+    constructor(AppConstants, $scope, $state, $stateParams,  EventBus, PagesService, PagesStore, $window) {
         'ngInject';
 
         $window.scrollTo(0, 0);
@@ -30,19 +30,5 @@ class PageCtrl {
     onFailedPage() {
         return this._$state.go('landing.error');
     }
-
-    gotoAnchor(x) {
-      var newHash = 'anchor' + x;
-      if ($location.hash() !== newHash) {
-        // set the $location.hash to `newHash` and
-        // $anchorScroll will automatically scroll to it
-        $location.hash('anchor' + x);
-      } else {
-        // call $anchorScroll() explicitly,
-        // since $location.hash hasn't changed
-        $anchorScroll();
-      }
-    };
-
 }
 export default PageCtrl;
