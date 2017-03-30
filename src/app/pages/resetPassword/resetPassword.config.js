@@ -8,7 +8,7 @@ function UserConfirmConfig($stateProvider) {
 			controllerAs: '$ctrl',
 			templateUrl: 'pages/resetPassword/resetPassword.html',
 			title: 'Reset password',
-			pageClass: 'reset-password'
+			pageClass: 'reset-password new'
 		});
 
 }
