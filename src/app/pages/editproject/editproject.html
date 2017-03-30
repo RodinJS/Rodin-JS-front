@@ -232,7 +232,7 @@
             <div class="required-field-actions clearfix">
                 <div class="text-center">
                     <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">Go To Settings</button>
-                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl()">Copy URL</button>
+                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl(); $ctrl.modals.share = false;">Copy URL</button>
                     <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">Cancel</a>
                 </div>
             </div>
