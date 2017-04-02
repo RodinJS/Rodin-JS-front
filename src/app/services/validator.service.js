@@ -7,6 +7,19 @@ function Validator(AppConstants, $log) {
 
     const ERRORCODES = AppConstants.ERRORCODES;
 
+    Factory.checkVersion = (_old = '0.0.0', _new = '0.0.0') => {
+        _old = _old.split('.').map(i => parseInt(i));
+        _new = _new.split('.').map(i => parseInt(i));
+
+        for (let i = 0; i < _old.length; i++) {
+            if (_new[i] === _old[i])
+                continue;
+            return _new[i] > _old[i];
+        }
+
+        return false;
+    };
+
     return Factory;
 
     function Factory() {
@@ -63,13 +76,13 @@ function Validator(AppConstants, $log) {
                         let tmp = validData;
                         for (let i = 0; i < fields.length - 1; i++) {
                             const field = fields[i];
-                            if(!tmp.hasOwnProperty(field)) {
+                            if (!tmp.hasOwnProperty(field)) {
                                 tmp[field] = {};
                             }
                             tmp = tmp[field];
                         }
-
-                        tmp[fields.last()] = field.value;
+                        let ln = fields.length;
+                        tmp[fields[ln - 1]] = field.value;
                     } else {
                         for (let j in field.conditions) {
                             if (isValidField(j, field.conditions[j], field.value, data) && field.value !== undefined) {
@@ -78,13 +91,13 @@ function Validator(AppConstants, $log) {
                                 let tmp = validData;
                                 for (let i = 0; i < fields.length - 1; i++) {
                                     const field = fields[i];
-                                    if(!tmp.hasOwnProperty(field)) {
+                                    if (!tmp.hasOwnProperty(field)) {
                                         tmp[field] = {};
                                     }
                                     tmp = tmp[field];
                                 }
-
-                                tmp[fields.last()] = field.value;
+                                let ln = fields.length;
+                                tmp[fields[ln - 1]] = field.value;
                             } else {
                                 errors.push({
                                     fieldName: field.name,
@@ -152,7 +165,7 @@ function Validator(AppConstants, $log) {
                 if (backErrors) {
                     error = ERRORCODES[backErrors.status];
                     errors.push({
-                        fieldName: error.field,
+                        fieldName: error.field || backErrors.message,
                         code: backErrors.status,
                         error: error.message
                     })
@@ -182,8 +195,7 @@ function Validator(AppConstants, $log) {
          * @return {Array}
          * */
         function getErrorsHTTP() {
-            console.error("\n---------------\n")
-            console.log(errors)
+            console.log(errors);
             return errors;
         }
 
@@ -247,5 +259,6 @@ function Validator(AppConstants, $log) {
         }
     }
 }
+
 
 export default Validator;

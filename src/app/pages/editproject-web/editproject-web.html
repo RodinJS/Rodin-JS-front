@@ -1,90 +1,96 @@
 <div class="page__wrapper">
-    <div class="main-container development-container">
-        <div class="main-title-wrapper">
-            <h1 class="main-title">Build/<i class="icon icon-lock"></i><span class="user-name text-white">{{$ctrl.project.name}}</span>
-            </h1>
-        </div>
-        <div class="page-content">
-            <div class="content-navbar">
-                <ul class="navbar-list">
-                    <li class=""><a ui-sref="app.editproject({projectId: $ctrl.project._id})">Settings</a>
-                    </li>
-
-                    <li class=""><a ui-sref="app.editprojectIos({projectId: $ctrl.project._id})">IOS</a>
-                    </li>
-                    <li class=""><a ui-sref="app.editprojectAndroid({projectId: $ctrl.project._id})">Android</a>
-                    </li>
-                    <li class=""><a ui-sref="app.editprojectOculus({projectId: $ctrl.project._id})">Web</a>
-                    </li>
-                    <li class=""><a ui-sref="app.editprojectVive({projectId: $ctrl.project._id})">VIVE</a>
-                    </li>
-                    <li class="active"><a ui-sref="app.editprojectWeb({projectId: $ctrl.project._id})">Web</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="section-wrapper">
-                <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs">
+    <div class="container">
+        <div class="selet-template-container">
+            <div class="main-container">
+                <h1 class="title text-center">
+                    <i class="icon icon-private"></i>
+                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
+                <div class="main-form">
+                <div class="content-navbar">
+                    <ul class="navbar-list">
+                        <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
+                        <!--<li class="other-links dropdown" uib-dropdown>-->
+                            <!--<a id="dLabel" role="button" data-uib-dropdown-toggle>-->
+                                <!--<i class="icon icon-more"></i>-->
+                            <!--</a>-->
+                            <!--<ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>-->
+                                <!--<li>-->
+                                    <!--<a href="{{$ctrl.project.editorUrl}}">Editor</a>-->
+                                <!--</li>-->
+                                <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#">Designer</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#">Duplicate</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                        <!--<li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>-->
+                        <!--</li>-->
+                        <!--<li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+                <div class="section section-switch">
+                    <switch id="enabled" data-ng-change="$ctrl.switchDomainTrigger()" data-name="enabled" data-ng-model="$ctrl.customDomainTrigger"  class="green"></switch>
+                    <h5 class="switch-box-title">Add custom domain</h5>
+                    <p ng-if="$ctrl.project.publishedUrl && !$ctrl.customDomainTrigger" class="description text-small text-down">
+                        Your project current url:
+                        <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
+                    </p>
+                </div>
+                <form name="addDomain" id="configs" ng-if="$ctrl.customDomainTrigger" class="main-form">
                     <div class="section">
-                        <h2 class="section-title">Coming in next few days . . .</h2>
-                        <div class="required-field-item hidden">
-                            <ul class="field-intruction">
-                                <!--<li>App Name - Display name of your app</li>-->
-                                <li>
-                                    <div class="form-wrapper">
-                                        <div class="form-group" custom-input
-                                             data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
-                                            <input type="text" class="form-control" placeholder=""
-                                                   data-ng-model="$ctrl.project.web.name"
-                                                   name="displayName"
-                                                   required
-                                                   data-ng-focus="configs.displayName.focused = true">
-                                            <label class="control-label float-label">Display name</label>
-                                        </div>
-                                        <p class="text-small description">App Name - Display name of your app</p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="required-field-actions">
-                                <button type="button" class="btn btn-primary"
-                                        ng-click="$ctrl.build($event)"
-                                        ng-disabled="!configs.$valid || ($ctrl.project.build.web.requested && !$ctrl.project.build.web.built)">
-                                    build
-                                </button>
-                                <a href="" class="btn btn-save" disabled>remove</a>
-                            </div>
+                        <h3 class="section-title">Project URL</h3>
+                        <div class="form-group" custom-input
+                             style="margin-bottom:20px"
+                             data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': (configs.url.$valid || addDomain.url.$valid) && addDomain.url.focused}">
+                            <label >
+                                {{addDomain.url.focused || $ctrl.domain ? 'Project url' : 'example.com'}} {{addDomain.url.$invalid && addDomain.url.focused  ? 'invalid' : ''}}
+                            </label>
+                            <input type="text" class="form-control" placeholder=""
+                                   data-ng-model="$ctrl.domain"
+                                   ng-pattern="$ctrl.domainPattern"
+                                   name="url"
+                                   required
+                                   data-ng-focus="addDomain.url.focused = true">
+                            <p class="form-description">Please make "A record" redirect of your domain/subdomain to "178.62.211.113" IP address</p>
                         </div>
-                    </div>
-                </form>
-                <form action="" ng-if="$ctrl.project.build.web.requested">
-                    <div class="section">
-                        <div class="required-field-item">
-                            <div class="small-loader"
-                                 data-ng-if="$ctrl.project.build.web.requested && !$ctrl.project.build.web.built">
-                                <div class="image"></div>
-                            </div>
-                            <div class="main-upload-area"
-                                 data-ng-if="$ctrl.project.build.web.built">
-                                <img src="images/general/file_icon_placeholder.png" alt="" width="60"
-                                     class="uploaded-file-icon">
-                                <p class="area-label"></p>
-                            </div>
-                            <p data-ng-if="!$ctrl.project.build.web.built"
-                               class="description margin-top-20 text-white">We are now building your installation
-                                package, the download link will appear here once done.</p>
-                            <p data-ng-if="$ctrl.project.build.web.built"
-                               class="description margin-top-20 text-white">Package ready</p>
-                            <div class="required-field-actions">
-                                <button data-ng-if="$ctrl.project.build.web.built"
-                                        type="button" class="btn btn-primary"
-                                        ng-click="$ctrl.download()">download
-                                </button>
-                                <a data-ng-if="!$ctrl.project.build.web.built" class="btn btn-save">cancel</a>
-                            </div>
+                        <div class="btn-wrapper" style="text-align: center">
+                            <button type="submit" class="btn btn-default btn-submit" style="margin-right:10px"
+                                    ng-click="$ctrl.addDomain($event)"
+                                    ng-disabled="!addDomain.$valid || !$ctrl.project.publishedPublic">
+                                Submit
+                            </button>
+                            <a href="" class="btn link" style="padding:12px 30px" ng-if="$ctrl.project.domain" ng-click="$ctrl.deleteDomain($event)">
+                                Delete domain
+                            </a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+</div>
+</div>
+<div class="modal model-confirm" close-modal="notPublished"  ng-class="{'display-block': $ctrl.modals.notPublished, 'display-none': !$ctrl.modals.notPublished}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>
+            <h1>Warning</h1>
+        </div>
+        <div class="modal-body padding-0-important">
+            <p class="description word-wrap">
+                Your project not published.
+                Please publish your project then connect URL
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <button type="button" class="btn btn-primary"
+                        ng-click="$ctrl.gotToPublish()">Publish project</button>
+                <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.notPublished = false">cancel</a>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,116 @@
+.content-navbar{
+	margin-bottom: 30px;
+	.navbar-list{
+		padding: 0;
+		margin: 0;
+		border-bottom: 2px solid rgba($white, .1);
+		>li{
+			display: inline-block;
+			padding: 0 16px;
+			margin-bottom: -2px;
+			&:first-child{
+				padding-left: 0;
+				>a{
+					padding-left: 0;
+				}
+			}
+			&.active{
+				>a{
+					background-color: transparent;
+					color: $white;
+					font-weight: 700;
+					border: none;
+					border-bottom: 2px solid $white;
+					&:hover{
+						color: $white;
+					}
+				}
+			}
+			>a{
+				text-transform: capitalize;
+				display: block;
+				font-size: 14px;
+				line-height: 1.36;
+				color: $colorSemiWhite;
+				padding: 0 3px 20px 3px;
+				margin: 0;
+				border-bottom: 2px solid transparent;
+				text-decoration: none;
+				transition: all .3s;
+				&:hover{
+					color: $colorBlue;
+					background-color: transparent;
+				}
+			}
+		}
+	}
+}
+
+
+.content-navbar{
+	.navbar-list{
+		.other-links{
+			position: relative;
+			float: right;
+			cursor: pointer;
+			i{
+				color: $colorOrange;
+				font-size: 18px;
+				font-weight: bold;
+			}
+			span{
+				display: none;
+				position: absolute;
+				background: $black;
+				box-shadow: 0 4px 12px 0 rgba(0,0,0,0.50);
+				font-size: 10px;
+				color: $white;
+				letter-spacing: 0;
+				top: -40px;
+				padding: 5px 10px;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+			&:hover{
+				span{
+					display: block;
+				}
+				i{
+					color: $white;
+				}
+			}
+		}
+		.other-links.dropdown{
+			a{
+				padding: 0 10px 23px 10px;
+				background: none;
+				border: none;
+			}
+			.dropdown-menu.dropdown-menu-more{
+				top: 55px;
+				left: -108px;
+				width: 165px;
+				background-color: $black;
+				box-shadow: 0 4px 12px 0 rgba(0,0,0,0.50);
+				padding: 10px 0;
+				li{
+					width: 100%;
+					a{
+						color: $white;
+						padding: 5px 20px;
+						font-size: 15px;
+						&:hover{
+							background: none;
+						}
+					}
+					&:hover{
+						background-color: rgba(36,36,39,0.70);
+					}
+					&:focus{
+						background: none;
+					}
+				}
+			}
+		}
+	}
+}

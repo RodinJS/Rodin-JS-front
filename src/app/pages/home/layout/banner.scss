@@ -1,0 +1,394 @@
+.banner-section {
+    padding-top: 95px;
+    min-height: 100vh;
+    padding-bottom: 90px;
+    display: flex;
+    align-items: center;
+    .title {
+        margin-top: 28px;
+    }
+    .form {
+        max-width: 440px;
+        margin: 45px auto 0;
+        position: relative;
+        z-index: 1000;
+        .input-group-btn{
+            .btn{
+                font-size: 18px;
+                padding: 15px 30px;
+                border-radius: 0 50px 50px 0;
+                width: 100%;
+                &.subscribe-btn{
+                    min-width: 182px;
+                    max-width: 182px;
+                    &.disabled{
+                        cursor: not-allowed;
+                        background: #006ebf;
+                    }
+
+                }
+            }
+        }
+        .input-group{
+            &.focus{
+                .form-action-wrapper{
+                    display: block;
+                    visibility: visible;
+                    opacity: 1;
+                }
+                .input-group-btn{
+                    .btn{
+                        border-radius: 0 30px 0 0;
+                    }
+                }
+            }
+        }
+        .form-control{
+            &.focus{
+                border-radius: 30px 0 0 0;
+                box-shadow: none;
+                outline: none;
+                color: #616161;
+                background-color: #fff;
+            }
+        }
+    }
+    .form-action-wrapper{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border-radius: 0 0 30px 30px;
+        padding: 30px;
+        visibility: hidden;
+        opacity: 0;
+        .form-backdrop{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-color: transparent;
+        }
+        .radio-wrapper,
+        .checkbox-wrapper{
+            @include cf();
+        }
+        .radio-wrapper{
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #AEAEAE;
+        }
+        .checkbox-wrapper{
+            margin-bottom: 20px;
+        }
+        label{
+            width: 50%;
+            float: left;
+            margin: 0;
+            font-weight: 400;
+            font-size: 18px;
+            color: #AEAEAE;
+            padding: 0;
+            cursor: pointer;
+            user-select: none;
+            input{
+                display: none;
+            }
+        }
+        input[type="radio"]:checked + .custom-radio{
+            background-color: #3A71CD;
+            &:before{
+                left: 22px;
+            }
+        }
+        input[type="checkbox"]:checked + .custom-checkbox{
+            border-color: #3A71CD;
+            &:before{
+                font-size: 14px;
+                color: #3A71CD;
+            }
+        }
+        .custom-radio{
+            display: inline-block;
+            vertical-align: middle;
+            width: 50px;
+            height: 30px;
+            background-color: #0B162A;
+            border-radius: 50px;
+            margin-right: 5px;
+            position: relative;
+            top: -1px;
+            transition: all .3s;
+            &:before{
+                content: "";
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+                background-color: white;
+                position: absolute;
+                top: 2px;
+                bottom: 2px;
+                left: 2px;
+                transition: all .3s;
+            }
+        }
+        .custom-checkbox{
+            display: inline-block;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border: 2px solid #AEAEAE;
+            border-radius: 5px;
+            margin-right: 5px;
+            position: relative;
+            top: -1px;
+            transition: all .3s;
+            &:before{
+                content: "\e918";
+                font-family: 'RODIN' !important;
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                font-size: 0;
+                color: transparent;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin-left: 1px;
+                transition: all .3s;
+            }
+        }
+    }
+    .swiper-container {
+        padding-bottom: 58px;
+        margin-top: 73px;
+        .swiper-slide {
+            .slider-desc {
+                margin: auto;
+                display: block;
+                max-width: 600px;
+                svg {
+                    width: 100%;
+                    display: block;
+                }
+            }
+            &[data-devicename="vive"] {
+                .slider-desc {
+                    max-width: 480px;
+                }
+            }
+        }
+    }
+    .swiper-pagination {
+        bottom: 0;
+        text-align: center;
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            opacity: 0.26;
+            background-color: transparent;
+            margin: 0 15px;
+            cursor: pointer;
+            background-position: center;
+            background-size: cover;
+            &.swiper-pagination-bullet-active {
+                opacity: 1;
+            }
+            &.icon-samsungGear{
+                background-image: url(/images/landing/content/svg/sam-gear-ban.svg);
+            }
+            &.icon-oculus{
+                background-image: url(/images/landing/content/svg/oculus-ban.svg);
+                &:before{
+                    content:""
+                }
+            }
+            &.icon-vive{
+                background-image: url(/images/landing/content/svg/vive-ban.svg);
+            }
+            &.icon-daydream{
+                background-image: url(/images/landing/content/svg/bitmap-ban.svg);
+            }
+            &.icon-apple{
+                background-image: url(/images/landing/content/svg/apple-ban.svg);
+            }
+            &.icon-android{
+                background-image: url(/images/landing/content/svg/android-ban.svg);
+            }
+        }
+    }
+    .code-block-wrapper {
+        position: absolute;
+        top: 0;
+        z-index: 1000;
+        color: #fff;
+        margin: 0;
+        overflow: hidden;
+        pre {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: -20px;
+            margin: -20px 0 0;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+            text-align: left;
+            border-radius: 30px;
+            &::-webkit-scrollbar {
+                width: 0 !important;
+            }
+        }
+
+        &.round {
+            border-radius: 80px;
+        }
+
+        .code {
+            background-color: transparent;
+            font-size: 14px;
+            padding: 0;
+            overflow: hidden !important;
+            margin-left: -20px;
+        }
+    }
+    .sendgrid-subscription-widget{
+      &.form{
+        .response{
+          margin:10px 0;
+        }
+      }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .banner-section {
+        .swiper-container {
+            .swiper-slide {
+                .slider-desc {
+                    //height: 270px;
+                    max-width: 495px;
+                }
+            }
+        }
+        .form {
+            bottom: 25%;
+        }
+    }
+}
+
+// phone
+@media (max-width: $screen-xs-max) {
+    .banner-section {
+        padding-top: 10px;
+        .title {
+            margin-top: 15px;
+        }
+        .form {
+            max-width: 79.2%;
+            margin: 35px auto 0;
+            .input-group {
+                &.focus{
+                    .form-control{
+                        border-radius: 15px 0 0 0;
+                    }
+                    .input-group-btn{
+                        .btn{
+                            border-radius: 0 15px 0 0;
+                        }
+                    }
+                }
+                .form-control {
+                    height: 37px;
+                    font-size: 12px !important;
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                    padding-left: 20px;
+                }
+                .btn {
+                    height: 37px;
+                    padding: 8px 18px;
+                    font-size: 13px;
+                    &.subscribe-btn{
+                        min-width: 108px;
+                        max-width: 108px;
+                        padding: 0 10px;
+                    }
+
+                }
+            }
+        }
+        .form-action-wrapper{
+            border-radius: 0 0 15px 15px;
+            padding: 15px;
+            label{
+                font-size: 13px;
+            }
+            .radio-wrapper{
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+            }
+            .checkbox-wrapper{
+                margin-bottom: 15px;
+            }
+            .custom-radio{
+                height: 20px;
+                width: 33px;
+                &:before{
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+            input[type="radio"]:checked + .custom-radio{
+                &:before{
+                    left: 15px;
+                }
+            }
+            input[type="checkbox"]:checked + .custom-checkbox{
+                &:before{
+                    font-size: 10px;
+                    margin-left: 0;
+                }
+            }
+            .custom-checkbox{
+                width: 22px;
+                height: 22px;
+                &:before{
+                }
+            }
+        }
+        .swiper-container {
+            padding-bottom: 40px;
+            margin-top: 30px;
+            .swiper-slide {
+                .slider-desc {}
+            }
+        }
+        .swiper-pagination {
+            span {
+                margin: 0 6px;
+            }
+        }
+        .code-block {
+            //width: 300px;
+            min-height: 90px;
+            .code {
+                margin-left: 0px;
+                font-size: 12px;
+            }
+        }
+    }
+}

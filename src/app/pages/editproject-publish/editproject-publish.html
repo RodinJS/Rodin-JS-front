@@ -1,0 +1,147 @@
+<div class="page__wrapper">
+    <div class="container">
+        <div class="selet-template-container">
+            <div class="main-container">
+                <h1 class="title text-center">
+                    <i class="icon icon-private"></i>
+                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
+                <div class="main-form">
+                    <div class="content-navbar">
+                        <ul class="navbar-list">
+                            <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
+                            <!--<li class="other-links dropdown" uib-dropdown>-->
+                                <!--<a id="dLabel" role="button" data-uib-dropdown-toggle>-->
+                                    <!--<i class="icon icon-more"></i>-->
+                                <!--</a>-->
+                                <!--<ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>-->
+                                    <!--<li>-->
+                                        <!--<a href="{{$ctrl.project.editorUrl}}">Editor</a>-->
+                                    <!--</li>-->
+                                    <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="#">Designer</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="#">Duplicate</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>-->
+                            <!--</li>-->
+                            <!--<li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i-->
+                                    <!--class="icon icon-link"></i></a><span>Share</span>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <h3 class="section-title">Publish project</h3>
+                    <div ng-show="$ctrl.project.publishDate" class="publish-date">
+                        <p class="description">Your project is published on
+                            <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
+                        </p>
+                        <p class="description">Last publish at {{$ctrl.project.publishDate | date: 'MMMM dd yyyy.h:mm:ss a'}}</p>
+                        <div class="margin-top-40 publish-buttons">
+                            <button class="btn btn-primary" ng-click="$ctrl.modals.updateVersion = true;">Update
+                                Version
+                            </button>
+                            <button class="btn btn-primary" ng-click="$ctrl.getRollBackData()">Rollback Version</button>
+                            <button class="btn btn-primary" ng-click="$ctrl.modals.unpublish = true;">Unpublish</button>
+                        </div>
+                    </div>
+                    <div ng-hide="$ctrl.project.publishDate" class="publish-date">
+                        <p class="description">This project is not published yet.</p>
+                        <div class="margin-top-40 publish-buttons">
+                            <button class="btn btn-primary" ng-click="$ctrl.publish()">Publish</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" close-modal="updateVersion"
+     ng-class="{'display-block': $ctrl.modals.updateVersion, 'display-none': !$ctrl.modals.updateVersion}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Warning</h3>
+        </div>
+        <div class="modal-body padding-0-important">
+            <p class="description">
+                You are about to update published project to the current project version. Previous version will be lost.
+                <br>
+                Are you sure you want to continue?
+            </p>
+        </div>
+        <div class="modal-footer padding-bottom-40-important">
+            <div class="required-field-actions clearfix">
+                <div class="pull-right">
+                    <button class="btn btn-primary"
+                            data-ng-click="$ctrl.update()">Update
+                    </button>
+                    <a href="" class="btn btn-save"
+                       data-ng-click="$ctrl.modals.updateVersion = false">cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" close-modal="rollBack"
+     ng-class="{'display-block': $ctrl.modals.rollBack, 'display-none': !$ctrl.modals.rollBack}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Roll back </h3>
+        </div>
+        <div class="modal-body padding-0-important">
+            <p class="description">
+                Select which saved date version you want to rollback
+            </p>
+            <div class="form-group select-group">
+                <select ng-if="$ctrl.rollbackDates.length > 0" class="form-control" ng-model="$ctrl.rollBackDate">
+                    <option ng-repeat="rollBackDate in $ctrl.rollbackDates" value="{{rollBackDate.origin}}">
+                        {{rollBackDate.formated}}
+                    </option>
+                </select>
+                <span ng-if="$ctrl.rollbackDates.length <= 0 ">Currently you don't have saved versions</span>
+            </div>
+        </div>
+        <div class="modal-footer padding-bottom-40-important">
+            <div class="required-field-actions clearfix">
+                <div class="pull-right">
+                    <button class="btn btn-primary btn-action"
+                            data-ng-click="$ctrl.rollback($ctrl.rollBackDate)">Roll back
+                    </button>
+                    <a href="" class="btn btn-cancel"
+                       data-ng-click="$ctrl.modals.rollBack = false">cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" close-modal="unpublish"
+     ng-class="{'display-block': $ctrl.modals.unpublish, 'display-none': !$ctrl.modals.unpublish}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Warning</h3>
+        </div>
+        <div class="modal-body padding-0-important">
+            <p class="description">
+                Your project will no longer be available on
+                <span class="text-yellow">{{$ctrl.project.publishedUrl}}</span>, your apps for
+                <span class="text-yellow">"{{$ctrl.project.name}}"</span> will stop working !<br>
+                and your roll back history will be removed as well.
+                Are you sure you want to continue?
+            </p>
+        </div>
+        <div class="modal-footer padding-bottom-40-important">
+            <div class="required-field-actions clearfix">
+                <div class="pull-right">
+                    <button class="btn btn-primary"
+                            data-ng-click="$ctrl.unpublish()">Unpublish
+                    </button>
+                    <a href="" class="btn btn-save"
+                       data-ng-click="$ctrl.modals.unpublish = false">cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

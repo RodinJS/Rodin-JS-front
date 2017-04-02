@@ -1,100 +1,168 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title data-ng-bind="pageTitle"></title>
+    <meta charset="utf-8">
+    <title data-ng-bind="pageTitle"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="telephone=no" name="format-detection">
+    <!-- This make sence for mobile browsers. It means, that content has been optimized for mobile browsers -->
+    <meta name="HandheldFriendly" content="true">
 
-	<link rel="shortcut icon" href="/images/favicon/favicon.ico" type="image/x-icon"/>
-	<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="/images/favicon/manifest.json">
-	<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#000000">
-	<meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/images/favicon/manifest.json">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#000000">
+    <meta name="theme-color" content="#ffffff">
 
-	<link rel="stylesheet" href="/scripts/vendor/font-awesome/css/font-awesome.css">
-	<link rel="stylesheet" href="/styles/style.css?v=0.0.23">
-	<base href="/">
+    <link rel="stylesheet" href="/scripts/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/scripts/vendor/angular-ui-notification/dist/angular-ui-notification.css">
+    <link rel="stylesheet"  href="/styles/style.css?v=0.2.10">
+
+
+    <meta property="og:title" content="Rodin Inc." />
+    <meta property="og:url" content="https://rodin.io" />
+    <meta property="og:description" content="Build Powerful Virtual Reality Experiences" />
+    <meta property="og:image" content="https://rodin.io/images/content/social.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="300" />
+
+    <base href="/">
 </head>
 <body class="page" data-ng-class="pageClass">
+    <div class="main-wrapper" data-ng-class="pageClass">
+        <svg ng-if="pageClass === 'login-register'" xmlns="http://www.w3.org/2000/svg" style="border: 0 !important; clip: rect(0 0 0 0) !important; height: 1px !important; margin: -1px !important; overflow: hidden !important; padding: 0 !important; position: absolute !important; width: 1px !important;"
+             class="root-svg-symbols-element">
+            <symbol id="extensibly" viewBox="0 0 32 32">
+                <path fill="#14273c" d="M2.17.542h9.763v11.39H2.17V.542zm14.644 0h9.763v11.39h-9.763V.542zM2.17 15.729h9.763v11.39H2.17v-11.39z" />
+                <path fill="#008bf2" d="M1.247.271C.705.325.271.759.271 1.301v10.468c0 .597.488 1.03 1.03 1.03h10.468c.597 0 1.03-.488 1.03-1.03V1.301c0-.597-.488-1.03-1.03-1.03H1.247zM16 .271c-.597 0-1.03.488-1.03 1.03v10.468c0 .597.488 1.03 1.03 1.03h10.468c.597 0 1.03-.488 1.03-1.03V1.301c0-.542-.434-.976-.976-1.03H16zM2.386 2.386h8.407v8.407H2.386V2.386zm14.644 0h8.407v8.407H17.03V2.386zM1.247 14.97c-.542.054-.976.488-.976 1.03v10.468c0 .597.488 1.03 1.03 1.03h10.468c.597 0 1.03-.488 1.03-1.03V16c0-.597-.488-1.03-1.03-1.03H1.247zm14.753 0c-.597 0-1.03.488-1.03 1.03v10.468c0 .597.488 1.03 1.03 1.03h2.603c.38 0 .705-.217.922-.542s.217-.705 0-1.03c-.217-.325-.542-.542-.922-.542H17.03v-8.407h8.407v1.573c0 .38.217.705.542.922s.705.217 1.03 0c.325-.217.542-.542.542-.922v-2.603c0-.542-.434-.976-.976-1.03H15.999zM2.386 17.03h8.407v8.407H2.386V17.03zm23.973 4.177c-.542.054-.922.542-.922 1.085v3.146h-3.254c-.38 0-.705.217-.868.542s-.163.759.054 1.03.542.488.922.488h3.146v3.146c0 .38.217.705.542.922s.705.217 1.03 0c.325-.217.542-.542.542-.922v-3.146h3.146c.38 0 .705-.217.922-.542s.217-.705 0-1.03c-.217-.325-.542-.542-.922-.542h-3.146v-3.146c0-.325-.108-.597-.325-.814-.271-.108-.542-.217-.868-.217z"
+                />
+            </symbol>
+            <symbol id="javascript" viewBox="0 0 41 32">
+                <path fill="#14273c" d="M1.745 1.745H38.4c.643 0 1.164.521 1.164 1.164v27.345c0 .643-.521 1.164-1.164 1.164H1.745a1.164 1.164 0 0 1-1.164-1.164V2.909c0-.643.521-1.164 1.164-1.164z" />
+                <path fill="#008bf2" d="M2.764.167A2.779 2.779 0 0 0 0 2.931v27.643c0 .509.413.921.921.921h38.7a.921.921 0 0 0 .921-.921V2.931A2.779 2.779 0 0 0 37.778.167H2.764zm0 1.843h35.014a.9.9 0 0 1 .921.921v3.686H1.842V2.931a.9.9 0 0 1 .921-.921zm1.843 1.382a.921.921 0 0 0 0 1.842H12.9a.921.921 0 0 0 0-1.842H4.607zM1.843 8.46H38.7v21.193H1.843V8.46zm20.156 3.239c-.362.045-.683.296-.777.648l-3.686 12.9c-.132.467.164 1.029.633 1.152.471.123 1.02-.181 1.152-.648l3.686-12.9c.179-.589-.398-1.236-1.008-1.152zm-6.882 1.814a.927.927 0 0 0-.403.144l-7.371 4.607a.927.927 0 0 0 0 1.569l7.371 4.607c.411.256 1.025.108 1.281-.302s.109-1.011-.302-1.267l-6.119-3.815 6.119-3.83c.366-.21.552-.694.418-1.094s-.575-.673-.993-.619zm10.179 0c-.396.011-.764.308-.864.691s.077.82.418 1.022l6.119 3.83-6.119 3.815c-.411.256-.544.856-.288 1.267s.856.559 1.267.302l7.371-4.607c.618-.387.533-1.241 0-1.569l-7.371-4.607a.935.935 0 0 0-.533-.144z"
+                />
+            </symbol>
+            <symbol id="multiplatform" viewBox="0 0 53 32">
+                <path fill="#14273c" d="M49.938 11.081l.165 11.997-.094 6.605-1.905 1.686-18.3.06-2.769-2.515-1.747.183-2.763 2.059-14.871-.152-3.981-.292-.887-1.696.071-19.089 2.309-1.231 28.055-.039 14.83.291z" />
+                <path fill="#008bf2" d="M47.291 16.838c-.454 0-.757-.305-.757-.762v-3.2c0-.686-.605-1.295-1.286-1.295H8.399c-.454 0-.757-.305-.757-.762s.303-.762.757-.762h36.849c1.513 0 2.8 1.219 2.8 2.819v3.2c0 .381-.378.762-.757.762z" />
+                <path fill="#008bf2" d="M52.058 15.314h-1.135v-4.267c0-2.057-1.665-3.733-3.708-3.733h-18.16V1.219c0-.457-.303-.762-.757-.762h-3.783c-.454 0-.757.305-.757.762v6.095H5.598c-2.043 0-3.708 1.676-3.708 3.733v4.267H.755c-.454 0-.757.305-.757.762v6.857c0 .457.303.762.757.762H1.89v4.267c0 2.057 1.665 3.733 3.708 3.733h15.663c1.286 0 2.573-.686 3.178-1.905.378-.686 1.135-1.143 1.892-1.143s1.513.381 1.892 1.143c.681 1.143 1.892 1.905 3.178 1.905h15.663c2.043 0 3.708-1.676 3.708-3.733v-4.267h1.135c.454 0 .757-.305.757-.762v-6.857c.151-.457-.227-.762-.605-.762zM1.892 22.171h-.378v-5.333h.378v5.333zm23.38-20.266h2.27v5.333h-2.27V1.905zm24.213 14.171v11.886h-.076c0 1.219-.984 2.21-2.194 2.21H31.552c-.757 0-1.513-.457-1.892-1.143-.681-1.143-1.892-1.905-3.178-1.905-1.362 0-2.573.686-3.178 1.905-.378.686-1.135 1.143-1.892 1.143H5.674a2.203 2.203 0 0 1-2.194-2.21V11.048c0-1.219.984-2.21 2.194-2.21H47.29c1.211 0 2.194.99 2.194 2.21v5.029zm1.816 6.095h-.378v-5.333h.378v5.333z"
+                />
+                <path fill="#008bf2" d="M18.689 24.381a.685.685 0 0 1-.53-.229c-.303-.305-.227-.762.076-1.067l9.08-8.229c.303-.305.757-.229 1.059.076s.227.762-.076 1.067l-9.08 8.229c-.227.076-.378.152-.53.152zm5.297 0a.685.685 0 0 1-.53-.229c-.303-.305-.227-.762.076-1.067l9.08-8.229c.303-.305.757-.229 1.059.076s.227.762-.076 1.067l-9.08 8.229c-.227.076-.378.152-.53.152z"
+                />
+            </symbol>
+            <symbol id="spinner" viewBox="0 0 32 32">
+                <path fill="#14273c" d="M31.725 16.149c0 8.677-7.04 15.712-15.725 15.712S.275 24.827.275 16.149C.275 7.472 7.315.437 16 .437s15.725 7.034 15.725 15.712z" />
+                <path fill="#008bf2" d="M6.146 22.329c-.175-.314-.384-.628-.524-.943-.524-.978-1.747-1.397-2.726-.873s-1.398 1.711-.874 2.723c.21.419.454.873.734 1.257.384.594 1.048.943 1.677.943.384 0 .769-.105 1.083-.314a2.029 2.029 0 0 0 .629-2.793zm4.368 3.98c-.315-.175-.629-.349-.943-.559-.943-.594-2.201-.314-2.796.594-.594.943-.314 2.2.594 2.793.419.279.839.524 1.258.733.28.14.629.209.943.209.734 0 1.433-.384 1.782-1.082.524-.943.14-2.2-.839-2.688zm5.102-21.577h.105c1.118 0 2.027-.908 2.027-2.025S16.839.682 15.721.682h-.175c-1.118.035-1.992 1.013-1.922 2.13.07 1.082.943 1.92 1.992 1.92zm1.013 22.799c-.28.035-.559.035-.874.035h-.559a2.054 2.054 0 0 0-2.132 1.92c-.035 1.117.804 2.06 1.922 2.095h.769c.384 0 .769 0 1.153-.035a1.982 1.982 0 0 0 1.852-2.165c-.07-1.082-1.048-1.92-2.132-1.85zM2.407 18.837c1.118-.035 1.992-1.013 1.922-2.095v-.663a2.028 2.028 0 0 0-4.054 0v.873c.035 1.082.943 1.92 2.027 1.92h.105v-.035zm26.872-1.152c-1.083-.279-2.201.349-2.481 1.431a9.196 9.196 0 0 1-.594 1.641c-.454 1.013 0 2.2 1.013 2.654a2.4 2.4 0 0 0 .839.175 2.07 2.07 0 0 0 1.852-1.187c.314-.733.594-1.501.769-2.235a2.004 2.004 0 0 0-1.398-2.479zM8.941 6.582c.349 0 .699-.07 1.048-.279l.105-.07c.978-.559 1.328-1.781.769-2.758s-1.782-1.327-2.761-.768l-.21.105a1.99 1.99 0 0 0-.664 2.758c.384.663 1.013 1.013 1.712 1.013zm22.784-2.095c0-1.117-.909-2.025-1.992-2.025h-7.268a2.028 2.028 0 0 0-2.027 2.025v7.227a2.028 2.028 0 0 0 4.054 0V8.781a11.68 11.68 0 0 1 2.271 4.26c.105.419.14.559.175.838.175.943 1.048 1.606 1.957 1.606.14 0 .28 0 .419-.035 1.083-.21 1.782-1.292 1.572-2.374-.035-.279-.14-.628-.28-1.152-.559-1.955-1.538-3.806-2.796-5.412h1.887a2.028 2.028 0 0 0 2.027-2.025zm-8.701 20.46c-.454.384-.909.733-1.433 1.013-.943.559-1.258 1.816-.699 2.758a2.021 2.021 0 0 0 1.712.978c.349 0 .699-.07 1.048-.279a15.303 15.303 0 0 0 1.957-1.397c.839-.698.978-1.99.245-2.863-.664-.803-1.957-.908-2.83-.209zM3.036 11.261c.943.489 2.097.314 2.761-.768l.07-.14c.559-.943.245-2.2-.699-2.758s-2.201-.244-2.761.733l-.105.175c-.559.978-.245 2.235.734 2.758z"
+                />
+            </symbol>
+            <symbol id="upload" viewBox="0 0 31 32">
+                <path fill="#008bf2" d="M25.611 31.484H5.322c-2.401 0-4.348-1.972-4.348-4.404V15.336c0-2.433 1.946-4.404 4.348-4.404h5.797v2.936H5.322c-.8 0-1.449.658-1.449 1.468V27.08c0 .81.649 1.468 1.449 1.468h20.289c.8 0 1.449-.658 1.449-1.468V15.336a1.46 1.46 0 0 0-1.449-1.468h-5.797v-2.936h5.797c2.401 0 4.348 1.972 4.348 4.404V27.08c0 2.433-1.946 4.404-4.348 4.404zm-8.695-8.808h-2.898V8.006H8.221l7.246-7.35 7.246 7.35h-5.797v14.67z"
+                />
+            </symbol>
+        </svg>
+        <div data-ui-view class="page__wrapper"></div>
+    </div>
 
-<div data-ui-view class="page__wrapper"></div>
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyA6Y8RlBTByatge6Ufdk4279cFABWBnm9Q"></script>
+    <script src="//apis.google.com/js/platform.js"></script>
+    <script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js"></script>
+    <script type="text/javascript" src="/scripts/vendor/systemjs/dist/system.js"></script>
+    <script>
 
-<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-<script type="text/javascript" src="/scripts/systemjs/system.js"></script>
-<script>
+        (function (System) {
+            var systemnormalize = System.normalize;
+            var blacklist = ['systemjs-json'];
 
-	(function (System) {
-		var systemnormalize = System.normalize;
-		var blacklist = ['systemjs-json'];
+            function shouldReverse(parts) {
+                return parts.every(function (part) {
+                    return blacklist.indexOf(part) === -1;
+                });
+            }
 
-		function shouldReverse(parts) {
-			return parts.every(function (part) {
-				return blacklist.indexOf(part) === -1;
-			});
-		}
+            System.normalize = function (name, parentName) {
+                var parts = name.split('!');
 
-		System.normalize = function (name, parentName) {
-			var parts = name.split('!');
+                if (parts.length > 1 && shouldReverse(parts)) {
+                    name = parts.reverse().join('!');
+                }
 
-			if (parts.length > 1 && shouldReverse(parts)) {
-				name = parts.reverse().join('!');
-			}
+                return systemnormalize.call(this, name, parentName);
+            };
+        })(System);
 
-			return systemnormalize.call(this, name, parentName);
-		};
-	})(System);
+        var systemLocate = System.locate;
+        System.locate = function (load) {
+            var System = this;
+            return Promise.resolve(systemLocate.call(this, load)).then(function (address) {
+                return address + System.cacheBust;
+            });
+        };
+        System.cacheBust = '?v=0.2.10';
 
-	var systemLocate = System.locate;
-	System.locate = function (load) {
-		var System = this;
-		return Promise.resolve(systemLocate.call(this, load)).then(function (address) {
-			return address + System.cacheBust;
-		});
-	};
-	System.cacheBust = '?v=0.0.23';
+        System.config({
+            packages: {
+                "/app": {  // path to your project root
+                    "defaultJSExtensions": true
+                },
+                "/scripts": {  // path to your project root
+                    "defaultJSExtensions": true
+                }
+            },
+            paths: {
+                '*': 'scripts/vendor/*',
+                'app/*': 'app/*',
+                'scripts/*': 'scripts/*'
+            }
+        });
+        System.import('app/pages/home/highlight.pack.js');
+        System.import('app/app.js');
 
-	System.config({
-		packages: {
-			"/app": {  // path to your project root
-				"defaultJSExtensions": true
-			},
-			"/scripts": {  // path to your project root
-				"defaultJSExtensions": true
-			}
-		},
-		paths: {
-			'*': 'scripts/vendor/*',
-			'app/*': 'app/*',
-			'scripts/*': 'scripts/*'
-		}
-	});
+        /*System.import('app/pages/home/mainz3a5m8eh2etu1md1b57b9.min.js')*/
 
-	System.import('app/app.js');
 
-</script>
+       /* System.import('app/pages/home/landing.js').then( (e) => {
+            Promise.all([
+                System.import('app/pages/home/highlight.pack.js'),
+                System.import('app/app.js'),
+            ])
+        })*/
 
-<!-- Google Analytics -->
-<script>
-var host = window.location.host;
-if(host.indexOf("rodin.space") == -1 && host.indexOf("localhost") == -1){
-	(function (i, s, o, g, r, a, m) {
-		i['GoogleAnalyticsObject'] = r;
-		i[r] = i[r] || function () {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-		a = s.createElement(o),
-			m = s.getElementsByTagName(o)[0];
-		a.async = 1;
-		a.src = g;
-		m.parentNode.insertBefore(a, m)
-	})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-	ga('create', 'UA-52972530-2', 'auto');
-	ga('send', 'pageview');
-}
+    </script>
 
-</script>
-<!-- End Google Analytics -->
+    <!-- Google Analytics -->
+    <script>
+        var host = window.location.host;
+        if (host === 'rodin.io') {
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-92405504-1', 'auto');
+            ga('send', 'pageview');
+        }
+        <!-- End Google Analytics -->
+
+        // Load the SDK asynchronously
+        /*(function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) return;
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));*/
+
+    </script>
 </body>
 </html>

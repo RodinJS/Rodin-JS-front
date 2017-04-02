@@ -1,0 +1,190 @@
+[class^="rd-"], [class*=" rd-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'RODIN' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.rd-angle-right:before {
+  content: "\e903";
+}
+.rd-angle-left:before {
+  content: "\e90d";
+}
+.rd-angle-down:before {
+  content: "\e90e";
+}
+.rd-angle-up:before {
+  content: "\e90f";
+}
+.rd-times:before {
+  content: "\e900";
+}
+.rd-plus:before {
+  content: "\e901";
+}
+.rd-search:before {
+  content: "\e902";
+}
+.rd-notifi:before {
+  content: "\e904";
+}
+.rd-arrow-right:before {
+  content: "\e905";
+}
+.rd-arrow-down:before {
+  content: "\e906";
+}
+.rd-dictionary:before {
+  content: "\e907";
+}
+.rd-arrow-left:before {
+  content: "\e908";
+}
+.rd-faq:before {
+  content: "\e909";
+}
+.rd-forum:before {
+  content: "\e90a";
+}
+.rd-guides:before {
+  content: "\e90b";
+}
+.rd-mailing-list:before {
+  content: "\e90c";
+}
+.rd-play:before {
+  content: "\e914";
+}
+.rd-support:before {
+  content: "\e915";
+}
+.rd-whats-new:before {
+  content: "\e917";
+}
+.rd-check:before {
+  content: "\e918";
+}
+
+
+.icon-samsungGear {
+  background-image: url(/images/landing/sprite.png);
+  background-position: 0px 0px;
+  width: 47px;
+  height: 28px;
+  background-size: 151px, 100px;
+  background-repeat: no-repeat;
+}
+
+.icon-oculus {
+  background-image: url(/images/landing/sprite.png);
+  background-position: 0px -32px;
+  width: 38px;
+  height: 32px;
+  background-size: 151px, 100px;
+  background-repeat: no-repeat;
+}
+
+.icon-daydream {
+  background-image: url(/images/landing/sprite.png);
+  background-position: -51px 0px;
+  width: 30px;
+  height: 37px;
+  background-size: 151px, 100px;
+  background-repeat: no-repeat;
+}
+
+.icon-vive {
+  background-image: url(/images/landing/sprite.png);
+  background-position: 0px -68px;
+  width: 33px;
+  height: 32px;
+  background-size: 151px, 100px;
+  background-repeat: no-repeat;
+}
+
+.icon-apple {
+  background-image: url(/images/landing/sprite.png);
+  background-position: -122px -38px;
+  width: 26px;
+  height: 33px;
+  background-size: 151px, 100px;
+  background-repeat: no-repeat;
+}
+
+.icon-android {
+  background-image: url(/images/landing/sprite.png);
+  background-position: -122px 0px;
+  width: 29px;
+  height: 34px;
+  background-size: 151px, 100px;
+  background-repeat: no-repeat;
+}
+
+.icon-glob {
+  background-image: url(/images/landing/png-sprite/96dpi/spriteehxn6p9jbs47e63gtlnmi.png);
+  background-position: -85px 0px;
+  width: 33px;
+  height: 33px;
+  background-size: 151px, 100px;
+  background-repeat: no-repeat;
+}
+
+// devices controls
+/*.icon-samsungGear {
+  @include bg($samsung);
+}
+
+.icon-oculus {
+  @include bg($oculus);
+}
+
+.icon-daydream {
+  @include bg($dayDream);
+}
+
+.icon-vive {
+  @include bg($vive);
+}
+
+.icon-apple {
+  @include bg($apple);
+}
+
+.icon-android {
+  @include bg($android);
+}
+
+.icon-glob {
+  @include bg($glob);
+}*/
+
+// developers logo
+// .marcJacobs{
+//   @include bg($marcJacobs);
+// }
+// .united-airlanes{
+//   @include bg($united-airlanes);
+// }
+// .absolutLabslogo{
+//   @include bg($absolutLabslogo);
+// }
+// .grovueJones{
+//   @include bg($grovueJones);
+// }
+// .coors-light{
+//   @include bg($coors-light);
+// }
+// .subversive{
+//   @include bg($subversive);
+// }
+
+

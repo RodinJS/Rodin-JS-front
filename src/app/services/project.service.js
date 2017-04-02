@@ -1,156 +1,129 @@
+// jscs:disable
 /**
  * Created by kh.levon98 on 20-Sep-16.
  */
 class Project {
-	constructor(JWT, AppConstants, Restangular, Validator, $state, $q) {
-		'ngInject';
-		this._JWT = JWT;
-		this._AppConstants = AppConstants;
 
-		this._Projects = Restangular.all('project');
-		this._$state = $state;
-		this._$q = $q;
-		this._Validator = new Validator();
-	}
+    constructor(JWT, AppConstants, Restangular, Validator, $state, $q, Analyser) {
+        'ngInject';
+        this._JWT = JWT;
+        this._AppConstants = AppConstants;
+        this._Analyser = Analyser;
 
-	get(projectId = null, fields) {
-		let deferred = this._$q.defer();
-		this._Projects.one(projectId).get(fields).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
+        this._Projects = Restangular.all('project');
+        this._ProjectDomains = Restangular.all('domains');
+        this._$state = $state;
+        this._$q = $q;
+        this._Validator = new Validator();
 
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
 
-		return deferred.promise;
-	}
+    }
 
-	getList(fields = {}) {
-		let deferred = this._$q.defer();
-		this._Projects.one('').get(fields).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
+    setDomain(fields = {}){
+        let Analyser = new this._Analyser();
+        this._ProjectDomains.post(fields).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
+    deleteDomain(projectId, fields = {}){
+        let Analyser = new this._Analyser();
+        let deletingDomain = fields.domain;
+        fields.domain = '';
+        this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName', 'domain']))
+            .then(
+                data=>{
+                    return this._ProjectDomains.remove({domain:deletingDomain}).then(Analyser.resolve, Analyser.reject);
+                },
+                Analyser.reject
+            );
+        return Analyser.promise;
+    }
 
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
+    get(projectId = null, fields) {
+        let Analyser = new this._Analyser();
+        this._Projects.one(projectId).get(fields).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-		return deferred.promise;
-	}
+    getList(fields = {}) {
+        let Analyser = new this._Analyser();
+        this._Projects.one('').get(fields).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-	update(projectId = null, fields = {}) {
-		let deferred = this._$q.defer();
+    getPublishedHistory(projectId = null){
+        let Analyser = new this._Analyser();
+        this._Projects.one('publish/' + projectId).get().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-		this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags'])).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
+    publish(projectId = null) {
+        let Analyser = new this._Analyser();
+        this._Projects.one('publish/' + projectId).post().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
+    rollBack(projectId = null, fields = null) {
+        let Analyser = new this._Analyser();
+        this._Projects.one('publish/rollback/' + projectId).customPOST(fields).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-		return deferred.promise;
-	}
+    updatePublish(projectId = null) {
+        let Analyser = new this._Analyser();
+        this._Projects.one('publish/' + projectId).put().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-	create(fields = {}) {
-		let deferred = this._$q.defer();
+    unPublish(projectId = null) {
+        let Analyser = new this._Analyser();
+        this._Projects.one('publish/' + projectId).remove().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-		this._Projects.post(fields).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
+    transpile(projectId = null) {
+        let Analyser = new this._Analyser();
+        this._Projects.one(projectId + '/build/transpile').get().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
+    update(projectId = null, fields = {}) {
+        let Analyser = new this._Analyser();
+        this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName']))
+            .then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-		return deferred.promise;
-	}
+    create(fields = {}) {
+        let Analyser = new this._Analyser();
+        this._Projects.post(fields).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-	remove(projectId = null, fields = {}) {
-		let deferred = this._$q.defer();
+    remove(project = {}, fields = {}) {
+        let Analyser = new this._Analyser();
+        console.log(project);
+        this._Projects.one(project._id).remove(fields).then(
+            data=>{
+                if(project.domain){
+                    return this._ProjectDomains.remove({domain:project.domain}).then(Analyser.resolve, Analyser.reject);
+                }
+                return Analyser.resolve(data);
+            }, Analyser.reject);
+        return Analyser.promise;
+    }
 
-		this._Projects.one(projectId).remove(fields).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
+    toggleStatus(projectId = null, status = 'false') {
+        let Analyser = new this._Analyser();
+        this._Projects.one('pp').one(projectId).customPOST({status: status}).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
-	}
-
-	toggleStatus(projectId = null, status = 'false') {
-		let deferred = this._$q.defer();
-
-		this._Projects.one('pp').one(projectId).customPOST({status: status}).then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
-	}
-
-	download(projectId = "", target = "") {
-		let deferred = this._$q.defer();
-
-		this._Projects.one(projectId).one('download').one(target).customGET().then((result) => {
-			this._Validator.validateHTTP(result);
-			if (this._Validator.isValidHTTP()) {
-				let response = this._Validator.getDataHTTP();
-				deferred.resolve(response);
-			} else {
-				deferred.reject(this._Validator.getErrorsHTTP());
-			}
-		}, (result) => {
-			this._Validator.validateHTTP(result.data);
-
-			deferred.reject(this._Validator.getErrorsHTTP());
-		});
-
-		return deferred.promise;
-	}
+    download(projectId = "", target = "") {
+        let Analyser = new this._Analyser();
+        this._Projects.one(projectId).one('download').one(target).customGET().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
 }
 
 export default Project;

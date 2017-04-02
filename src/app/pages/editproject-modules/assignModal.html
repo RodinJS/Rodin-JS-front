@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h1>Assign</h1>
+</div>
+<div class="modal-body padding-0-important">
+    <div ng-if="$ctrl.module.script">
+        <div class="form-wrapper">
+            <div class="form-group" custom-input>
+                <input class="form-control"
+                       id="scriptInput"
+                       readonly
+                       style="width:90%; display: inline-block"
+                       value="{{$ctrl.module.script}}"/>
+                <a href=""
+                   tooltip-placement="top-left"
+                   style="display: inline-block; padding: 5px; color:#33deff"
+                   ng-click="$ctrl.copyToClipBoard()"
+                   uib-tooltip="Copy to clipboard">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                </a>
+            </div>
+            <p class="text-small description">copy and paste this script tag into index.html.</p>
+        </div>
+    </div>
+    <div ng-if="!$ctrl.module.script">
+        <h2 style="font-weight:400">Are you sure you want assign a module to current project?</h2>
+    </div>
+</div>
+<div class="modal-footer padding-bottom-20-important">
+    <div class="required-field-actions clearfix">
+        <button type="button" ng-if="!$ctrl.module.script" class="btn btn-primary blue" data-ng-click="$ctrl.assign($ctrl.module)">Generate script</button>
+        <a href="" class="btn btn-save" data-ng-click="$ctrl.modalInstance.close()">{{$ctrl.module.script ? 'Close' : 'Cancel'}}</a>
+    </div>
+</div>

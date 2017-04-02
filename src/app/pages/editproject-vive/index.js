@@ -10,7 +10,7 @@ editprojectViveModule.config(EditProjectViveConfig);
 
 // Controllers
 // import EditProjectViveCtrl from './editproject-vive.controller';
-import EditProjectViveCtrl from '../editproject-oculus/editproject-oculus.controller';
+import EditProjectViveCtrl from '../editproject-vive/editproject-vive.controller';
 editprojectViveModule.controller('EditProjectViveCtrl', EditProjectViveCtrl);
 
 

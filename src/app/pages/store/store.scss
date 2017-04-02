@@ -1,0 +1,294 @@
+.main-container {
+  margin-top: 34px;
+  .publish-date {
+    line-height: 32px;
+  }
+  .publish-buttons {
+    margin-top: 17px;
+    button {
+      color: $color-text-gray !important;
+      height: 36px;
+      margin-right: 14px;
+      font-size: 16px;
+      &:hover {
+        background-color: #008BF2;
+        color: white !important;
+      }
+    }
+  }
+}
+.store-page {
+  //padding-top: 34px;
+  /* h2 {
+     font-weight: 500;
+     font-family: "Open Sans", sans-serif;
+     font-size: 24px;
+     color: #fff;
+   }*/
+  h1 {
+    margin: 0px !important;
+  }
+  .line {
+    border-bottom: 1px solid #008af1;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    //top: 104px;
+  }
+  .module-content {
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    transition: all 0.3s ease;
+    //cursor: pointer;
+    p {
+      margin-bottom: 5px;
+    }
+    &.short {
+      background: rgba(0, 0, 0, 0.7);
+      opacity: 1;
+      padding-top: 10px;
+      position: absolute;
+      height: 40px;
+      visibility: visible;
+      bottom: 0;
+      .module-header {
+        color: #fff;
+        font-size: 15px;
+      }
+    }
+    &.long {
+      color: #fff;
+      bottom: 0;
+      opacity: 1;
+      height: 100%;
+      .content {
+        font-size: 16px;
+        overflow: hidden;
+        max-height: 100px;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .content-bottom {
+        position: absolute;
+        bottom: 5px;
+        width: calc(100% - 20px);
+      }
+      .module-title {
+        font-size: 21px;
+        font-weight: 700;
+        margin: 0;
+      }
+    }
+  }
+
+  .radio-list {
+    padding-top: 34px;
+    padding-bottom: 30px;
+    margin: 0;
+    @include cf();
+    li {
+      display: inline-block;
+      float: left;
+      padding: 0 13px;
+      width: 25%;
+    }
+    .radio-wrapper {
+      height: 0;
+      padding-bottom: 70.87%;
+      position: relative;
+      .label-radio {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        input[type="radio"] {
+          display: none;
+        }
+        input[type="radio"]:checked + .custom-radio {
+          border: 4px solid $color-bd;
+          span {
+            display: none;
+          }
+        }
+        input[type="radio"]:checked ~ .template-name {
+          color: #008af1;
+          font-weight: 500;
+        }
+        .custom-radio {
+          display: block;
+          width: 100%;
+          height: 100%;
+          border: 2px solid rgba($color-bd, .2);
+          border-radius: 4px;
+          background-color: #09192e;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          transition: border-color .3s;
+          cursor: pointer;
+          position: relative;
+          &:hover {
+            border-color: $color-bd;
+            .module-content {
+              &.short {
+                opacity: 0;
+                visibility: hidden;
+                background: transparent;
+                transition: all 0.3s ease;
+              }
+              &.long {
+                opacity: 1;
+                background: rgba(0, 0, 0, 0.9);
+                transition: all 0.3s ease;
+              }
+            }
+          }
+        }
+        .template-name {
+          font-size: 16px;
+          color: #f0f0f0;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          text-align: center;
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 992px) {
+    .module-wrapper {
+      .module-content {
+        &.long {
+          .content {
+            font-size: 13px;
+            max-height: 55px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 1200px) and (max-width: 1449px) {
+    .module-wrapper {
+      .module-content {
+        &.long {
+          .content {
+            font-size: 13px;
+            max-height: 55px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 1450px) {
+    .module-wrapper {
+      .module-content {
+        &.long {
+          .content {
+            font-size: 16px;
+            max-height: 100px;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+.store-popover {
+  border: none;
+  box-shadow: none;
+  background: #2b9af3;
+  color: #1e1e20;
+  font-size: 16px;
+  margin-top: -15px !important;
+  position: absolute;
+  border-radius: 5px;
+  .popover-content {
+    padding: 6px 12px;
+  }
+  .arrow {
+    &:after {
+      border-top-color: #2b9af3 !important;
+    }
+  }
+}
+
+&.page-store,
+&.page-account {
+  .module-wrapper {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    //padding: 0;
+    margin-bottom: 15px;
+    //overflow:hidden;
+    //height: 235px;
+    &:hover {
+      .module-content {
+        &.short {
+          opacity: 0;
+          visibility: hidden;
+          background: transparent;
+          transition: all 0.3s ease;
+        }
+        &.long {
+          opacity: 1;
+          background: rgba(0, 0, 0, 0.9);
+          transition: all 0.3s ease;
+        }
+      }
+    }
+
+  }
+  .col-ro {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+    &.md-2-5 {
+      width: 20%;
+      float: left;
+    }
+  }
+  .circle {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 5px 7px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid;
+    &.active,
+    &:hover {
+      border: 1px solid;
+      border-color: #2b9af3;
+      background: #2b9af3;
+      color: rgba(0, 0, 0, 0.9);
+    }
+    &:last-of-type {
+      margin-left: 5px;
+    }
+  }
+  .oval {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    border: 1px solid;
+    border-radius: 15px;
+    border-color: #2b9af3;
+    color: #2b9af3;
+    padding: 2px 10px;
+  }
+  .turn-blue {
+    color: #2b9af3
+  }
+}

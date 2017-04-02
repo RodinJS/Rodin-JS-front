@@ -1,41 +1,71 @@
-<nav class="navbar">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-ng-click="isNavbarCollapsed = !isNavbarCollapsed">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" data-ui-sref="landing.home">
-				<img src="images/rodin-logo.png" width="90" alt="logo">
-			</a>
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" data-uib-collapse="isNavbarCollapsed">
-			<!--<ul class="nav navbar-nav">
-					<li>
-						<a data-ui-sref-active="active" data-ui-sref="landing.home">
-			Home
-		</a>
-					</li>
-			</ul>-->
-			<ul class="nav navbar-nav navbar-right navbar-account">
-				<li>
-					<a class="nav-link" data-ui-sref-active="active" data-ui-sref="landing.login">
-						Sign in
-					</a>
-				</li>
+<header class="header navbar-fixed-top">
+        <nav class="navbar navbar-primary">
+            <div class="container">
+                <div class="navbar-header">
 
-				<!--<li>
-						<a class="nav-link" data-ui-sref-active="active" data-ui-sref="landing.register">
-		Sign up
-	</a>
-				</li>-->
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container-fluid -->
-</nav>
+                    <button type="button"
+                            class="navbar-toggle "
+                            data-toggle="collapse"
+                            data-target="#HeaderNavber"
+                            ng-class="$ctrl.collapse ? '' : 'collapsed'"
+                            ng-click="$ctrl.collapse = !$ctrl.collapse"
+                            aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar top"></span>
+                        <span class="icon-bar middle"></span>
+                        <span class="icon-bar bottom"></span>
+                    </button>
+
+                   <!-- <a href=""
+                       ng-mouseover="$ctrl.signUpHovered2 = true"
+                       ng-mouseleave="$ctrl.signUpHovered2 = false"
+                       style=" max-width: 120px;min-width: 120px;"
+                       class="visible-xs-inline-block btn-mobile-login subscribe" ng-click="$ctrl.scrollToSignUp()">
+                        {{$ctrl.signUpHovered2 ? 'Sign up' : 'Big blue button'}}
+                    </a>-->
+
+                    <a ui-sref="landing.login" class="visible-xs-inline-block btn-mobile-login">Login</a>
+                    <a class="navbar-brand">
+                        <img alt="Rodin" src="images/landing/general/logo.svg">
+                    </a>
+
+                </div>
+
+                <div class="collapse navbar-collapse navbar-center" ng-class="$ctrl.collapse ? 'in' : ''" id="HeaderNavber">
+                    <ul class="nav navbar-nav navbar-center">
+                        <li>
+                            <a ui-sref="landing.store">Store</a>
+                        </li>
+                        <li ng-repeat="page in $ctrl.pagesSection1">
+                            <a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+                        </li>
+                        <li class="dropdown" uib-dropdown auto-close="outsideClick"  ng-if="$ctrl.pagesSection2.length > 0">
+                            <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">
+                                More <i class="rd rd-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel" ng-if="$ctrl.pagesSection2.length > 0">
+                                <li class="rodin-hide" ng-repeat="pages in $ctrl.pagesSection2">
+                                    <a ui-sref="landing.pages({pageURL:'{{pages.slug}}'})">{{pages.title}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden-xs">
+                            <a ui-sref="landing.login">Login</a>
+                        </li>
+                        <li>
+                            <a href=""
+                               style=" max-width: 164px;min-width: 164px;"
+                               ng-mouseover="$ctrl.signUpHovered = true"
+                               ng-mouseleave="$ctrl.signUpHovered = false"
+                               ng-click="$ctrl.scrollToSignUp()"
+                               class="btn sign-up-btn">{{$ctrl.signUpHovered ? 'Sign up' : 'Big blue button'}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="header-backdrop"></div>
+    </header>

@@ -1,7 +1,11 @@
 class EditProjectWebCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Notification) {
         'ngInject';
 
+        if (!$stateParams.projectId) return $state.go('landing.error');
+
+
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
         this._JWT = JWT;
@@ -19,28 +23,38 @@ class EditProjectWebCtrl {
 
         this.fileChoosen = {
             profile: false,
-            p12: false
+            p12: false,
         };
 
         this.files = {
             profile: {
-                name: ""
+                name: '',
             },
             cert: {
-                name: ""
+                name: '',
             },
             icon: {
-                name: "",
-                src: ""
-            }
+                name: '',
+                src: '',
+            },
         };
 
         this.modals = {
-            password: false
+            notPublished: false,
         };
 
         this.submiting = false;
         this.openEvent = null;
+        this.domainPattern = /^(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
+        this.domain = '';
+        this.eventBus = EventBus;
+        ProjectStore.subscribeAndInit($scope, ()=> {
+            this.project = ProjectStore.getProject();
+            if (!this.project)
+                this.getProject();
+            else
+                this.finalizeRequest();
+        });
     }
 
     getProject() {
@@ -48,171 +62,71 @@ class EditProjectWebCtrl {
         this.Project.get(this.projectId).then(
             project => {
                 this.showLoader = false;
-                this.project = project;
+                this.eventBus.emit(this.eventBus.project.SET, project);
             },
+
             err => {
+                _.each(err, (val, key)=> {
+                    this.Notification.error(val.fieldName);
+                });
                 this.$state.go('landing.error');
             }
-        )
+        );
     }
 
-    update() {
-        this.showLoader = true;
-        this.Project.update(this.project._id, this.project).then(
-            data => {
-                this.showLoader = false;
-                console.log(data);
+    gotToPublish() {
+        this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
+    }
+
+    addDomain() {
+        this.domain = this.domain.replace(/.*?:\/\//g, '');
+        this.Project.setDomain({ id: this.projectId, domain: this.domain }).then(
+            response => {
+                this.Notification.success(response.message);
+                this.project.domain = this.domain;
             },
-            err => {
-                this.showLoader = false;
-                console.log(err);
-            }
-        )
-    }
 
-    changeIcon(e) {
-        if (window.FileReader && window.Blob) {
-
-            var file = e.target.files[0];
-
-            if (file) {
-                this.isValidImage(file).then((result) => {
-                    var reader = new FileReader();
-                    reader.onloadend = (e) => {
-                        this.files.icon.name = file.name;
-                        this.files.icon.src = reader.result;
-                        this._$scope.$apply();
-                    };
-                    reader.readAsDataURL(file);
-                }, (result) => {
-                    alert('Unsupported image type');
+            err=> {
+                _.each(err, (val, key)=> {
+                    this.Notification.error(val.fieldName);
                 });
-            }
-
-        } else {
-            alert("It seems your browser doesn't support FileReader.");
-        }
-    }
-
-    isValidImage(file) {
-        var defer = this.$q.defer();
-        var result = {
-            valid: true,
-            message: ""
-        };
-
-        if (file.size > 1024 * 1024) {
-            result.valid = false;
-            result.message = "FIle size must be less than 1mb";
-            var tim = $timeout(function () {
-                defer.reject(result);
-                $timeout.cancel(tim);
-            });
-        } else {
-            var fileReader = new FileReader();
-            fileReader.onloadend = function (e) {
-                var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
-                var header = "";
-                for (var i = 0; i < arr.length; i++) {
-                    header += arr[i].toString(16);
-                }
-
-                switch (header) {
-                    case "89504e47":
-                        break;
-                    default:
-                        result.valid = false;
-                        result.message = "Allowed only .jpg .jpeg and .png file types.";
-                        break;
-                }
-
-                if (result.valid) {
-                    defer.resolve(result);
-                } else {
-                    defer.reject(result);
-                }
-            };
-            fileReader.readAsArrayBuffer(file);
-        }
-
-        return defer.promise;
-    }
-
-    changeCert(e) {
-        if (window.FileReader && window.Blob) {
-            var file = e.target.files[0];
-            this.files.cert.name = file.name;
-            this._$scope.$apply();
-
-        } else {
-            alert("It seems your browser doesn't support FileReader.");
-        }
-    }
-
-    changeProfile(e) {
-        if (window.FileReader && window.Blob) {
-            var file = e.target.files[0];
-            this.files.profile.name = file.name;
-            this._$scope.$apply();
-
-        } else {
-            alert("It seems your browser doesn't support FileReader.");
-        }
-    }
-
-    build(e) {
-        const ctrl = this;
-        e.preventDefault();
-        let project = {
-            userId: this.user.username,
-            appId: this.project._id,
-            url: "http://google.com",
-            appName: this.project.web.name,
-            web: {
-                exportMethod: "ad-hoc",
-                bundleIdentifier: this.project.web.bundle,
-                developerId: this.project.web.developerId,
-                certPassword: this.project.web.certPassword
-            }
-        };
-
-        ctrl.showLoader = true;
-        $("#configs").ajaxForm({
-            dataType: "json",
-            url: this._AppConstants.API + '/project/' + this.project._id + '/build/web',
-            headers: {
-                "x-access-token": this._JWT.get()
-            },
-            data: {
-                project: angular.toJson(project)
-            },
-            success: function (data) {
-                ctrl.modals.password = false;
-                ctrl.getProject();
-            },
-            error: function (data) {
-                ctrl.showLoader = false;
-            }
-        }).submit();
-    };
-
-    open(e) {
-        this.modals.password = true;
-        this.openEvent = e;
-    }
-
-    download() {
-        this.showLoader = true;
-        this.Project.download(this.project._id, 'web').then(
-            data => {
-                this.showLoader = false;
-                window.location = data.downloadUrl;
-            },
-            err => {
-                this.showLoader = false;
                 console.log(err);
             }
-        )
+        );
+    }
+
+    deleteDomain() {
+        this.Project.deleteDomain(this.projectId, this.project).then(
+            response => {
+                this.Notification.success(response.message);
+            },
+
+            err=> {
+                _.each(err, (val, key)=> {
+                    this.Notification.error(val.fieldName);
+                });
+                console.log(err);
+            }
+        );
+    }
+
+    switchDomainTrigger() {
+        if (!this.project.publishedPublic) {
+            this.modals.notPublished = true;
+            this.customDomainTrigger = false;
+        }
+    }
+
+    finalizeRequest() {
+        this.project.editorUrl = `${this.EDITOR}${this.user.username}/${this.project.root}`;
+        if (this.project.publishedPublic)
+            this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
+        if (this.project.description)
+            this.project.description = $('<div/>').html(this.project.description).text();
+        this.projectPublic = this.project.public === 'true';
+        this.showLoader = false;
+        this.customDomainTrigger = this.project.domain ? true : false;
+        this.domain = this.project.domain;
     }
 }
 

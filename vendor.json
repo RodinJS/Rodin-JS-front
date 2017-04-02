@@ -1,0 +1,10 @@
+{
+  "systemjs-module": {
+    "src": "./src/systemjs-module/**/*.*",
+    "dest": "/systemjs-module/"
+  },
+  "assists": {
+    "src": "./src/assists/**/*.*",
+    "dest": "/assists/"
+  }
+}

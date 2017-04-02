@@ -1,254 +1,359 @@
 <div class="page__wrapper">
-    <div class="main-container account-settings-container">
-        <h1 class="main-title">
-            Account Settings
-            <!--<a ui-sref="app.plans" class="btn-upgrade text-action">-->
-                <!--<i class="icon icon-glasses-bold"></i>UPGRADE YOUR PLAN-->
-            <!--</a>-->
-        </h1>
-        <div class="page-content">
-            <div class="content-navbar">
-                <ul class="navbar-list">
-                    <li class="active"><a ui-sref="app.profile">Profile</a>
-                    </li>
-                    <!--
-                    <li class=""><a ui-sref="app.plans">Plans</a>
-                    </li>
-                    <li class=""><a ui-sref="app.billing">Billing</a>
-                    </li>
-                    <li class=""><a href="#">Integrations</a>
-                    </li>
-                    <li class=""><a href="#">Billing Tools</a>
-                    </li>
-                    <li class=""><a ui-sref="app.purchases">Purchases</a>
-                    </li>
-                    -->
-                </ul>
-            </div>
-
-            <div class="section-wrapper">
-
-                <form name="profile" data-ng-submit="$ctrl.updateProfile(profile.$valid)" novalidate>
-                    <div class="section section-account-info">
-                        <h2 class="section-title">Account Info</h2>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-wrapper">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group" custom-input>
-                                                <input type="text" class="form-control" placeholder=""
-                                                       data-ng-model="$ctrl.currentUser.profile.firstName">
-                                                <label class="control-label float-label">First Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group" custom-input>
-                                                <input type="text" class="form-control" placeholder=""
-                                                       data-ng-model="$ctrl.currentUser.profile.lastName">
-                                                <label class="control-label float-label">Last Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group" custom-input>
-                                                <input type="text" class="form-control" placeholder=""
-                                                       data-ng-model="$ctrl.currentUser.username" ng-disabled="true">
-                                                <label class="control-label float-label">username</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="text-small description">Deployed on your public profile, notifications and other places.
-                                    </p>
-                                    <div class="form-group" custom-input
-                                         data-ng-class="{'has-error': profile.email.$invalid && profile.email.focused, 'has-success': profile.email.$valid && profile.email.focused}">
-                                        <input type="email" class="form-control" placeholder=""
-                                               name="email"
-                                               data-ng-model="$ctrl.currentUser.email"
-                                               data-ng-pattern="$ctrl.patterns.email"
-                                               required
-                                               data-ng-focus="profile.email.focused = true">
-                                        <label class="control-label float-label">Email</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label class="text-small">
-                                            <input type="checkbox" checked>I want to receive notifications on this
-                                            email
-                                            <span class="custom-check"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="container">
+        <div class="selet-template-container">
+            <div class="main-container">
+                <h1 class="title"> Account Settings</h1>
+                <div class="main-form">
+                    <div class="content-navbar">
+                        <ul class="navbar-list">
+                            <li ng-class="!$ctrl.privacy ? 'active' : ''">
+                                <a href="" ng-click="$ctrl.privacy = false">Profile</a>
+                            <li ng-class="$ctrl.privacy ? 'active' : ''">
+                                <a href="" ng-click="$ctrl.privacy = true">Privacy</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="section section-profile-info">
-                        <h2 class="section-title">Profile Info</h2>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-wrapper">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group" custom-input>
-                                                <input type="text" class="form-control" placeholder="">
-                                                <label class="control-label float-label">City</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group select-group">
-                                                <select class="form-control selectpicker">
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                    <option value="">Country</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="text-small description">Displayed on your public profile and website pages.
-                                        Prospective clients can find you by searching you location.
-                                    </p>
-                                    <div class="form-group" custom-input>
-                                        <input type="text" class="form-control" placeholder="">
-                                        <label class="control-label float-label">Personal Website</label>
-                                    </div>
-                                    <div class="form-group area-group" custom-input>
-                                        <textarea class="form-control" maxlength="520"></textarea>
-                                        <label class="control-label float-label">Write briefly about yourself</label>
-                                    </div>
-                                    <p class="text-small description">
-                                        Your short bio will show up on your profile page. Let the world know
-                                        a little about you!
-                                        <span class="textarea-description"><strong>520</strong> symbols left</span>
-                                    </p>
-                                    <div class="form-group" custom-input>
-                                        <input type="text" class="form-control" placeholder="">
-                                        <label class="control-label float-label">Your skills</label>
-                                    </div>
-                                    <p class="text-small description">Your skills will show up on you profile page. Let
-                                        people know your top strengths</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="btn-wrapper">
-                                    <button type="submit" class="btn btn-primary">
-                                        Update Profile
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
 
-                <div class="section section-password">
-                    <h2 class="section-title">Change Password</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <form class="form-wrapper" data-ng-submit="$ctrl.updatePassword()"
-                                  name="changePasswordForm">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group pass-group" custom-input
-                                             data-ng-class="{'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused, 'has-success': changePasswordForm.password.$valid && changePasswordForm.password.focused}">
-                                            <input type="password" class="form-control" placeholder=""
-                                                   name="password"
-                                                   data-ng-model="$ctrl.newPassword.password"
-                                                   required
-                                                   ng-minlength="5"
-                                                   ng-change="$ctrl.confirmPassword()"
-                                                   data-ng-focus="changePasswordForm.password.focused = true">
-                                            <label class="control-label float-label">New Password</label>
-                                            <button type="button" class="btn-view-pass show-pass"></button>
-                                            <!-- <i class="icon icon-eye"></i> -->
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group pass-group" custom-input
-                                             data-ng-class="{'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused, 'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
-                                            <input type="password" class="form-control" placeholder=""
-                                                   name="confirmPassword"
-                                                   data-ng-model="$ctrl.newPassword.confirm"
-                                                   required
-                                                   ng-minlength="5"
-                                                   ng-change="$ctrl.confirmPassword()"
-                                                   data-ng-focus="changePasswordForm.confirmPassword.focused = true">
-                                            <label class="control-label float-label">Confirm Password</label>
-                                            <button type="button" class="btn-view-pass hide-pass"></button>
-                                            <!-- <i class="icon icon-eye-close"></i> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-small description pass-description">New password must be at least 8 characters long,
-                                    contain a number and an uppercase letter
-                                </p>
-                                <div class="form-group btn-wrapper"
-                                     data-ng-class="{'has-error': $ctrl.passwordChangeResponse === 'error', 'has-success': $ctrl.passwordChangeResponse === 'success'}">
-                                    <button type="submit"
-                                            data-ng-disabled="!changePasswordForm.$valid"
-                                            class="btn btn-primary">Update Password
-                                    </button>
-                                    <p class="help-block text-small error-help-block">Something went wrong. Please try
-                                        again later</p>
-                                    <p class="help-block text-small success-help-block">Excellent. Password
-                                        changed.</p>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section section-account-details last-section">
-                    <h2 class="section-title">Account Details</h2>
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div ng-show="!$ctrl.privacy">
+                            <h3 class="section-title">Account Details</h3>
                             <table class="table main-table">
                                 <tbody>
                                 <tr>
                                     <td class="text-primary"><span>Account Created</span>
                                     </td>
-                                    <td class="text-primary">9:28 am, June 24, 2014<span></span>
+                                    <td class="text-primary">
+                                        {{$ctrl.currentUser.creationDate | formatDate : 'DD MMMM YYYY'}}<span></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-primary"><span>Total number of exports</span>
+                                    <td class="text-primary"><span>Published projects</span>
                                     </td>
-                                    <td class="text-primary">42<span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-primary"><span>Non-showcased sites</span>
-                                    </td>
-                                    <td class="text-primary">8<span></span>
+                                    <td class="text-primary">{{$ctrl.currentUser.projects.published || 0}}<span></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-primary"><span>Showcased sites</span>
+                                    <td class="text-primary"><span>Unpublished sites</span>
                                     </td>
-                                    <td class="text-primary">0<span></span>
+                                    <td class="text-primary">{{$ctrl.currentUser.projects.unpublished ||
+                                        0}}<span></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="text-primary"><span>Storage Used (Sites)</span>
                                     </td>
-                                    <td class="text-primary">1821 Mb<span></span>
+                                    <td class="text-primary">
+                                        <span ng-if="$ctrl.currentUser.usedStorage"> {{$ctrl.currentUser.usedStorage | bytes:'MB'}}</span>
+                                        <span ng-if="!$ctrl.currentUser.usedStorage">0.00 MB</span>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
+                        <form name="profile" novalidate>
+                            <div class="section section-connected-accounts">
+                                <h3 class="section-title">Connected Accounts</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group title">Facebook</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <button type="button" ng-if="!$ctrl.currentUser.facebook"
+                                                        ng-click="$ctrl.fbSync()"
+                                                        class="btn btn-primary border-orange">Sync with Facebook
+                                                </button>
+                                                <div class="synced row" ng-if="$ctrl.currentUser.facebook">
+                                                    <div class="col-md-4" style="font-size: 14px">
+                                                        <span ng-click="$ctrl.openUnSync('facebook')">
+                                                            <i class=" icon icon-send"></i> Synced as
+                                                        ({{$ctrl.currentUser.facebook}})
+                                                        </span>
+                                                    </div>
+                                                    <!--<div class="col-md-6">-->
+                                                        <!--<button type="button"-->
+                                                                <!--ng-click="$ctrl.openUnSync('facebook')"-->
+                                                                <!--class="btn btn-primary border-orange">Unsync from Facebook-->
+                                                        <!--</button>-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group title">Google</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <button type="button" ng-if="!$ctrl.currentUser.google"
+                                                        ng-click="$ctrl.googleSync()"
+                                                        class="btn btn-primary border-orange">Sync with Google
+                                                </button>
+                                                <div class="synced row" ng-if="$ctrl.currentUser.google">
+                                                    <div class="col-md-4">
+                                                        <span ng-click="$ctrl.openUnSync('google')">
+                                                            <i class=" icon icon-send"></i> Synced as
+                                                        ({{$ctrl.currentUser.google}})
+                                                        </span>
+                                                    </div>
+                                                    <!--<div class="col-md-6">-->
+                                                        <!--<button type="button"-->
+                                                                <!--ng-click="$ctrl.openUnSync('google')"-->
+                                                                <!--class="btn btn-primary border-orange">Unsync from Google-->
+                                                        <!--</button>-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group title">Github</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <button type="button" ng-if="!$ctrl.currentUser.github"
+                                                        ng-click="$ctrl.gitSync()"
+                                                        class="btn btn-primary border-orange">Sync with Github
+                                                </button>
+                                                <div class="synced row" ng-if="$ctrl.currentUser.github">
+                                                    <div class="col-md-4">
+                                                        <span ng-click="$ctrl.openUnSync('github')">
+                                                            <i class=" icon icon-send"></i>
+                                                            Synced as
+                                                        ({{$ctrl.currentUser.github}})
+                                                        </span>
+                                                    </div>
+                                                    <!--<div class="col-md-6">-->
+                                                        <!--<button type="button"-->
+                                                                <!--ng-click="$ctrl.openUnSync('github')"-->
+                                                                <!--class="btn btn-primary border-orange">Unsync from Github-->
+                                                        <!--</button>-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group title">Oculus</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <button type="button" ng-if="!$ctrl.currentUser.oculus"
+                                                        ng-click="$ctrl.openSyncModal('oculus')"
+                                                        class="btn btn-primary border-orange">Sync with Oculus
+                                                </button>
+                                                <div class="synced row" ng-if="$ctrl.currentUser.oculus">
+                                                    <div class="col-md-4">
+                                                        <span ng-click="$ctrl.openUnSync('oculus')">
+                                                           <i class=" icon icon-send"></i> Synced
+                                                        </span>
+                                                    </div>
+                                                    <!--<div class="col-md-6">-->
+                                                        <!--<button type="button"-->
+                                                                <!--ng-click="$ctrl.openUnSync('oculus')"-->
+                                                                <!--class="btn btn-primary border-orange">Unsync from Oculus-->
+                                                        <!--</button>-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group title">Steam</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <button type="button" ng-if="!$ctrl.currentUser.steam"
+                                                        ng-click="$ctrl.openSyncModal('steam')"
+                                                        class="btn btn-primary border-orange">Sync with Steam
+                                                </button>
+                                                <div class="synced row" ng-if="$ctrl.currentUser.steam">
+                                                    <div class="col-md-4">
+                                                        <span ng-click="$ctrl.openUnSync('steam')">
+                                                            <i class=" icon icon-send"></i> Synced
+                                                        </span>
+                                                    </div>
+                                                    <!--<div class="col-md-6">-->
+                                                        <!--<button type="button"-->
+                                                                <!--ng-click="$ctrl.openUnSync('steam')"-->
+                                                                <!--class="btn btn-primary border-orange">Unsync from Steam-->
+                                                        <!--</button>-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="section">-->
+                            <h3 class="section-title">Account Info</h3>
+                            <div class="form-group" custom-input>
+                                <label>First Name</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.currentUser.profile.firstName">
+                            </div>
+
+                            <div class="form-group" custom-input>
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.currentUser.profile.lastName">
+                            </div>
+
+                            <div class="form-group form-username" custom-input>
+                                <label>Username</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.currentUser.username"
+                                       ng-disabled="true">
+                                <p class="form-description">
+                                    Deployed on your public profile, notifications and other places.
+                                </p>
+                            </div>
+
+                            <div class="form-group" custom-input
+                                 data-ng-class="{'has-error': profile.email.$invalid && profile.email.focused, 'has-success': profile.email.$valid && profile.email.focused}">
+                                <label>
+                                    Email <span
+                                        ng-if="profile.email.$invalid && profile.email.focused">is required</span>
+                                </label>
+                                <input type="email" class="form-control" placeholder=""
+                                       name="email"
+                                       data-ng-model="$ctrl.currentUser.email"
+                                       data-ng-pattern="$ctrl.patterns.email"
+                                       required
+                                       data-ng-focus="profile.email.focused = true">
+                                <div style="clear:both"></div>
+                            </div>
+
+                            <div class="form-group" custom-input>
+                                <label>Country (City)</label>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder=""
+                                       ng-autocomplete
+                                       options="$ctrl.autocompleteOptions"
+                                       ng-model="$ctrl.currentUser.profile.city">
+                            </div>
+
+                            <div class="checkbox">
+                                <label class="text-small" style="color: #fff;line-height: 25px;">
+                                    <input type="checkbox"
+                                           ng-model="$ctrl.profile.emailNotification" style="margin-top: 6px">
+                                    I want to receive notifications on this email
+                                    <span class="custom-check"></span>
+                                </label>
+                            </div>
+
+                            <div class="btn-wrapper text-center">
+                                <button type="submit" class="btn btn-submit btn-default"
+                                        ng-click="$ctrl.updateProfile()">
+                                    Update Profile
+                                </button>
+                            </div>
+
+
+                        <!--</div>-->
+                        </form>
+                    </div>
+
+                    <div ng-show="$ctrl.privacy">
+                        <div class="section">
+
+                        <h3 class="section-title">Change Password</h3>
+
+                        <form class="form-wrapper" data-ng-submit="$ctrl.updatePassword()"
+                              name="changePasswordForm">
+                            <div class="form-group pass-group" custom-input
+                                 data-ng-class="{'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused, 'has-success': changePasswordForm.password.$valid && changePasswordForm.password.focused}">
+                                <label>New Password</label>
+
+                                <input type="password" class="form-control" placeholder=""
+                                       name="password"
+                                       data-ng-model="$ctrl.newPassword.password"
+                                       required
+                                       ng-minlength="5"
+                                       ng-change="$ctrl.confirmPassword()"
+                                       data-ng-focus="changePasswordForm.password.focused = true">
+                                <button type="button" class="btn-view-pass show-pass"></button>
+                            </div>
+                            <div class="form-group pass-group" custom-input
+                                 data-ng-class="{'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused, 'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
+                                <label>Confirm Password</label>
+                                <input type="password" class="form-control" placeholder=""
+                                       name="confirmPassword"
+                                       data-ng-model="$ctrl.newPassword.confirm"
+                                       required
+                                       ng-minlength="5"
+                                       ng-change="$ctrl.confirmPassword()"
+                                       data-ng-focus="changePasswordForm.confirmPassword.focused = true">
+                                <button type="button" class="btn-view-pass hide-pass"></button>
+                            </div>
+
+                            <p class="form-description">New password must be at least 8
+                                characters long,
+                                contain a number and letter
+                            </p>
+
+
+                            <div class="btn-wrapper text-center"
+                                 data-ng-class="{'has-error': $ctrl.passwordChangeResponse === 'error', 'has-success': $ctrl.passwordChangeResponse === 'success'}">
+                                <button type="submit"
+                                        data-ng-disabled="!changePasswordForm.$valid"
+                                        class="btn btn-submit btn-default">Update Password
+                                </button>
+                              <!--  <p class="help-block text-small error-help-block">Something went wrong.</p>
+                                <p class="help-block text-small success-help-block">Excellent. Password
+                                    changed.</p>-->
+                            </div>
+                        </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
-
 </div>
+
+
+
+<div class="modal model-confirm" close-modal="sync"
+     ng-class="{'display-block': $ctrl.modals.sync, 'display-none': !$ctrl.modals.sync}" tabindex="-1" id="modalSync"
+     role="dialog" aria-labelledby="modalSyncLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2 class="modal-title">Please enter your {{$ctrl.syncType}} id</h2>
+                <form name="oculusSteamSync" class="modal-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="" required
+                               data-ng-model="$ctrl.oculusSteamId">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" ng-disabled="oculusSteamSync.$invalid" class="btn btn-primary"
+                                ng-click="$ctrl.syncOculusSteam()">Sync
+                        </button>
+                        <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.sync = false">cancel</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal model-confirm" close-modal="unsync"
+     ng-class="{'display-block': $ctrl.modals.unsync, 'display-none': !$ctrl.modals.unsync}" tabindex="-1"
+     id="modalUnSync" role="dialog" aria-labelledby="modalSyncLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2 class="modal-title">Unsync from {{$ctrl.unSyncType}}</h2>
+                <h3>Are you sure want to unsync?</h3>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary"
+                            ng-click="$ctrl.confirmUnsync()">Unsync
+                    </button>
+                    <a href="" class="btn btn-save" data-ng-click="$ctrl.modals.unsync = false">cancel</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader" data-ng-if="$ctrl.showLoader"></div>
+

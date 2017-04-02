@@ -1,0 +1,46 @@
+<div class="auth-page">
+	<div class="container page">
+		<div class="row" style="text-align: center">
+
+			<div class="offset-md-6 col-xs-12">
+				<h1 class="text-xs-center" data-ng-bind="::$ctrl.title"></h1>
+				<p class="text-xs-center" style="color:#fff">
+					Please provide a username. The username will be used for your Profile url
+				</p>
+
+				<form data-ng-submit="$ctrl.submitForm()">
+
+					<fieldset data-ng-disabled="$ctrl.isSubmitting">
+
+						<fieldset class="form-group">
+							<div class="row">
+								<div class="center-block landing-input-block margin-top-20">
+									<div class="form-wrapper">
+										<div class="form-group" custom-input>
+											<input type="text" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.username">
+											<label class="control-label float-label">Username</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+
+
+						<div class="section section-project-content">
+							<div class="row">
+								<div class="center-block">
+									<div class="">
+										<button type="submit" class="btn btn-primary border-orange">Submit</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</fieldset>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>

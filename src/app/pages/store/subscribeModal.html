@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h1>{{$ctrl.modalTitle}}</h1>
+</div>
+<div class="modal-body padding-0-important">
+    <p class="text-small description">
+        {{$ctrl.modalContent}}
+    </p>
+    <p class="alert alert-rodin" ng-if="$ctrl.subscribtionWarning">
+        {{$ctrl.subscribtionWarning}}
+    </p>
+</div>
+<div class="modal-footer padding-bottom-20-important">
+    <div class="required-field-actions clearfix">
+        <button ng-if="$ctrl.activateSubscribeButton" type="button" class="btn btn-primary" data-ng-click="$ctrl.purchaseModule($ctrl.module)">Subscribe</button>
+        <button ng-if="!$ctrl.activateSubscribeButton" type="button" class="btn btn-primary" data-ng-click="$ctrl.unsubscribeModule($ctrl.module)">Unsubscribe</button>
+        <a href="" class="btn btn-save" data-ng-click="$ctrl.modalInstance.close()">cancel</a>
+    </div>
+</div>

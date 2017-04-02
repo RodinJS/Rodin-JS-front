@@ -1,20 +1,20 @@
 function EditProjectAndroidConfig($stateProvider) {
-	'ngInject';
+    'ngInject';
 
-	$stateProvider
-		.state('app.editprojectAndroid', {
-			url: '/project/:projectId/android',
-			controller: 'EditProjectAndroidCtrl',
-			controllerAs: '$ctrl',
-			templateUrl: 'pages/editproject-android/editproject-android.html',
-			title: 'EditProjectAndroid',
-			pageClass: 'page-account',
-			resolve: {
-				auth: function (User) {
-					return User.ensureAuthIs(true);
-				}
-			}
-		});
+    $stateProvider
+     .state('app.editprojectAndroid', {
+        url: '/project/:projectId/android',
+        controller: 'EditProjectAndroidCtrl',
+        controllerAs: '$ctrl',
+        templateUrl: 'pages/editproject-android/editproject-android.html',
+        title: 'Edit Project - Android',
+        pageClass: 'page-account new',
+        resolve: {
+            auth: function (User) {
+                return User.ensureAuthIs(true);
+            },
+        },
+    });
 }
 
 export default EditProjectAndroidConfig;

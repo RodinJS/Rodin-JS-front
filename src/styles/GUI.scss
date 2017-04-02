@@ -1,0 +1,40 @@
+// GUI stylies of the project
+// For example, styles of the links, buttons and so on.
+
+//== ICONS
+//
+
+
+//== BUTTONS
+//
+
+.btn {
+	border-radius: 50px;
+	border-color: $color-primary;
+	color: $color-primary;
+	border-width: 2px;
+	padding: 12px 30px;
+	&:hover {
+		color: #0576C9;
+	}
+	&:focus,
+	&:active {
+		color: darken(#0576C9, 15%);
+		&:hover {
+			color: darken(#0576C9, 10%);
+		}
+	}
+}
+
+//== LINKS
+//
+
+a {
+	text-decoration: none;
+	color: $color-primary;
+	&:hover,
+	&:focus {
+		color: darken($color-primary, 10%);
+		text-decoration: none;
+	}
+}

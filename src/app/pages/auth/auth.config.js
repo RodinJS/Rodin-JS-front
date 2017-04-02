@@ -1,43 +1,35 @@
 function AuthConfig($stateProvider) {
-	'ngInject';
+    'ngInject';
 
-	$stateProvider
+    $stateProvider
 
-		.state('landing.login', {
-			url: '/login',
-			controller: 'AuthCtrl as $ctrl',
-			templateUrl: 'pages/auth/auth.html',
-			title: 'Sign in',
-			resolve: {
-				auth: function (User) {
-					return User.ensureAuthIs(false);
-				}
-			}
-		})
+        .state('landing.login', {
+            url: '/login',
+            controller: 'AuthCtrl as $ctrl',
+            templateUrl: 'pages/auth/auth.html',
+            title: 'Sign in',
+            redirectToWhenAuthenticated: 'app.dashboard',
+            pageClass: 'login-register new',
+            resolve: {
+                auth: function (User, $state, $timeout) {
+                    return User.ensureAuthIs(false);
+                },
+            },
+        })
 
-		.state('landing.register', {
-			url: '/register',
-			controller: 'AuthCtrl as $ctrl',
-			templateUrl: 'pages/auth/auth.html',
-			title: 'Sign up',
-			resolve: {
-				auth: function (User) {
-					return User.ensureAuthIs(false);
-				}
-			}
-		})
-
-		.state('landing.forgot', {
-			url: '/forgot',
-			controller: 'AuthCtrl as $ctrl',
-			templateUrl: 'pages/auth/auth.html',
-			title: 'Forgot Password',
-			resolve: {
-				auth: function (User) {
-					return User.ensureAuthIs(false);
-				}
-			}
-		});
+        .state('landing.register', {
+            url: '/register',
+            controller: 'AuthCtrl as $ctrl',
+            templateUrl: 'pages/auth/auth.html',
+            title: 'Sign up',
+            redirectToWhenAuthenticated: 'app.dashboard',
+            pageClass: 'login-register new',
+            resolve: {
+                auth: function (User) {
+                    return User.ensureAuthIs(false);
+                },
+            },
+        });
 
 };
 
