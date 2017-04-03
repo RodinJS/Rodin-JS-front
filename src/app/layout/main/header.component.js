@@ -1,10 +1,11 @@
 class AppHeaderCtrl {
-    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus, PagesService, PagesStore) {
+    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus, PagesService, PagesStore, Notification) {
         'ngInject';
         this.appName = AppConstants.appName;
         this.currentUser = User.current;
         this._User = User;
         this.notificationsStore = NotificationsStore;
+        this._Notification = Notification;
         this.eventBus = EventBus;
         this._$state = $state;
         this.try = false;
@@ -37,19 +38,35 @@ class AppHeaderCtrl {
         });
 
         this.user = User.current;
-
+        let tryAttempt = 0;
         if (this.user) {
             this.notificationsStore.subscribeAndInit($scope, ()=> {
                 this.notifications = this.notificationsStore.getNotifications();
-                this.notificationsCount = this.notificationsStore.getUndreadNotificationsCount();
-                if (!this.notifications) return this.getNotifications();
-            });
-
-            SocketService.on('projectBuild', (data)=> {
-                EventBus.emit(this.eventBus.notifications.SET_ONE, data);
+                //this.notificationsCount = this.notificationsStore.getUndreadNotificationsCount();
+                if (!this.notifications && tryAttempt == 0){
+                    tryAttempt = 1;
+                    return this.getNotifications();
+                }
             });
         }
 
+        SocketService.on('projectBuild', (data)=> this.showSocketResponse(data));
+
+        SocketService.on('gitSync', (data)=> this.showSocketResponse(data));
+
+    }
+
+    showSocketResponse(data){
+        console.log(data);
+        const message = _.isObject(data.data) ? data.data.message : data.data;
+        if(data.data.error || data.error)
+            this._Notification.error(message);
+        else
+            this._Notification.success(message);
+
+        if(!data.label)
+            data.label = message;
+        this.eventBus.emit(this.eventBus.notifications.SET_ONE, data);
     }
 
     clickMenu() {
