@@ -93,6 +93,7 @@ class ProfileCtrl {
             scope: this._$scope,
             resolve: {},
         });
+        
     }
 
     closeModal(){
