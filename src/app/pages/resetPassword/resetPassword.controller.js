@@ -32,7 +32,8 @@ class ResetPasswordCtrl {
             },
             err=> {
                 this.isSubmitting = false;
-                this.resetError = err[0].message || 'User not exist';
+                this.successfulySend = false;
+                this.resetError = err[0].message || "User doesn't exist";
             })
     }
 
