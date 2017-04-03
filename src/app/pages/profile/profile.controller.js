@@ -1,10 +1,11 @@
 class ProfileCtrl {
-    constructor(AppConstants, User, $scope, Validator, Error, $stateParams, $state, $window, Notification) {
+    constructor(AppConstants, User, $scope, Validator, Error, $stateParams, $state, $window, Notification, $uibModal) {
         'ngInject';
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._Constants = AppConstants;
         this._$window = $window;
+        this._$state = $state;
         this.currentUser = User.current;
         this._Validator = Validator;
         this._User = User;
@@ -13,6 +14,7 @@ class ProfileCtrl {
         this.privacy = false;
         this.showLoader = false;
         this.syncModal = false;
+        this._$uibModal = $uibModal;
         this.patterns = {
             email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         };
@@ -67,8 +69,7 @@ class ProfileCtrl {
 
             this._User.gitAuth(data).then((res) => {
                 this.currentUser.github = $stateParams.socialEmail;
-                $state.go('app.profile', {token: undefined, id: undefined, socialEmail:undefined});
-
+                return this.showGitSyncModal();
             }, (err) => {
                 this.isSubmitting = false;
                 this.errors = err;
@@ -76,6 +77,48 @@ class ProfileCtrl {
 
         }
 
+    }
+
+    showGitSyncModal(){
+        this.modalText = `Do you want to sync your existing projects with GitHub?`;
+        this.delete = false;
+        return this.modalInstance = this._$uibModal.open({
+            animation: this.animationsEnabled,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'layout/modals/githubSync.html',
+            //controller: EditProjectWebCtrl,
+            controllerAs: 'vm',
+            bindToController: true,
+            scope: this._$scope,
+            resolve: {},
+        });
+        
+    }
+
+    closeModal(){
+        this.modalInstance.close();
+        this._$state.go('app.profile', {token: undefined, id: undefined, socialEmail:undefined});
+    }
+
+    syncGithub(fromModal){
+        this._User.gitSync()
+            .then(data=>{
+                console.log(data);
+                this.Notification.success(data);
+                this.showLoader = false;
+                if(fromModal){
+                    this.modalInstance.close();
+                    this._$state.go('app.profile', {token: undefined, id: undefined, socialEmail:undefined});
+                }
+            })
+            .catch(err=>{
+                this.showLoader = false;
+                this.modalInstance.close();
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+            })
     }
 
     updateProfile() {

@@ -10,6 +10,7 @@ class User {
         this._NotificationsStore = NotificationsStore;
         this._User = Restangular.all('user');
         this._Auth = Restangular.all('auth');
+        this._Git  = Restangular.all('git');
         this._Notifications = Restangular.all('notifications');
         this._$state = $state;
         this._$q = $q;
@@ -115,6 +116,13 @@ class User {
         this.deferred = this._$q.defer();
         this._Auth.one('social/github').customPOST(data).then(this.onSyncSuccess, this.onError);
         return this.deferred.promise;
+    }
+
+    gitSync(data) {
+        let Analyser = new this._Analyser();
+
+        this._Git.one('syncProjects').customPOST({}).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
     }
 
     oculusSteamSync(data, type) {
