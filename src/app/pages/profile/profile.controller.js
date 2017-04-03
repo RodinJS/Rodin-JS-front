@@ -69,7 +69,7 @@ class ProfileCtrl {
 
             this._User.gitAuth(data).then((res) => {
                 this.currentUser.github = $stateParams.socialEmail;
-                return this.showGitSyncModal();
+                this.showGitSyncModal();
             }, (err) => {
                 this.isSubmitting = false;
                 this.errors = err;
@@ -93,7 +93,7 @@ class ProfileCtrl {
             scope: this._$scope,
             resolve: {},
         });
-        
+
     }
 
     closeModal(){
