@@ -266,6 +266,7 @@
                                 <input type="password" class="form-control" placeholder=""
                                        name="password"
                                        data-ng-model="$ctrl.newPassword.password"
+                                       ng-pattern="$ctrl.patterns.password"
                                        required
                                        ng-minlength="5"
                                        ng-change="$ctrl.confirmPassword()"
@@ -279,6 +280,8 @@
                                        name="confirmPassword"
                                        data-ng-model="$ctrl.newPassword.confirm"
                                        required
+                                       confirm-Password
+                                       compare-to="changePasswordForm.confirmPassword.$viewValue"
                                        ng-minlength="5"
                                        ng-change="$ctrl.confirmPassword()"
                                        data-ng-focus="changePasswordForm.confirmPassword.focused = true">
