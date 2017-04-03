@@ -83,11 +83,11 @@ class ProfileCtrl {
     showGitSyncModal(){
         this.modalText = `Do you want to sync your existing projects with GitHub?`;
         this.delete = false;
-        return this.modalInstance = this._$uibModal.open({
+        this.modalInstance = this._$uibModal.open({
             animation: this.animationsEnabled,
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
-            templateUrl: 'layout/modals/githubSync.html',
+            templateUrl: 'layout/modals/github_sync.html',
             //controller: EditProjectWebCtrl,
             controllerAs: 'vm',
             bindToController: true,
