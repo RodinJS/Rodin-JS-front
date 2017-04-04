@@ -87,7 +87,7 @@ class ProfileCtrl {
             animation: this.animationsEnabled,
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
-            templateUrl: 'layout/modals/github_sync.html',
+            templateUrl: 'layout/modals/githubSync.html',
             //controller: EditProjectWebCtrl,
             controllerAs: 'vm',
             bindToController: true,
