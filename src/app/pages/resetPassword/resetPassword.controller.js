@@ -46,7 +46,7 @@ class ResetPasswordCtrl {
             },
             err=> {
                 if(err[0].code === 316){
-                    this.errorMessage = 'Wrong token';
+                    this.errorMessage = 'Recovery token is expired';
                 }
                 else{
                     this.errorMessage = 'New password must be at least 8 characters long, contain a number and letter';
