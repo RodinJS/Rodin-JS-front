@@ -49,6 +49,12 @@
           margin-bottom:10px
         }
 		.main-form{
+			.forgot-password {
+				margin-bottom: 20px;
+				&:hover {
+					color: #006ebf;
+				}
+			}
 			.form-control{
 				padding-left: 15px;
 				@include placeholder($color: rgba(white, .45));

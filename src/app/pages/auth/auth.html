@@ -38,7 +38,9 @@
                        ng-if="$ctrl.errors[0]">
                         Wrong username or password
                     </p>
-
+                    <div class="text-center" style="margin-bottom: 10px;">
+                        <a ui-sref="landing.resetpassword" class="text-wrong forgot-password">Forgot password ?</a>
+                    </div>
                     <div class="btn-wrapper">
                         <button type="submit" style="margin-right:10px" class="btn btn-submit">Sign In</button>
                         <!--
@@ -157,7 +159,8 @@
                                required>
                         <label class="control-label float-label">Confirm Password</label>
                     </div>
-                    <div class="form-group" ng-show="register.passwordConfirm.$invalid && register.passwordConfirm.focused && register.passwordConfirm.$error.confirmed">
+                    <div class="form-group"
+                         ng-show="register.passwordConfirm.$invalid && register.passwordConfirm.focused && register.passwordConfirm.$error.confirmed">
                         <p class="password-description">
                             Password does not match
                         </p>
@@ -179,11 +182,11 @@
                     </div>
 
                     <!--<div class="form-group">-->
-                        <!--<input style="margin-left:5px" type="checkbox"-->
-                               <!--ng-change="!$ctrl.agree"-->
-                               <!--name="agreement" ng-model="$ctrl.agree"/>-->
-                        <!--<span style="margin-left:10px; color:rgba(255, 255, 255, 0.45)"> By clicking this button, I agree to Rodin's-->
-                            <!--<a target="_blank" ui-sref="landing.betaAgreement">Terms of Services</a></span>-->
+                    <!--<input style="margin-left:5px" type="checkbox"-->
+                    <!--ng-change="!$ctrl.agree"-->
+                    <!--name="agreement" ng-model="$ctrl.agree"/>-->
+                    <!--<span style="margin-left:10px; color:rgba(255, 255, 255, 0.45)"> By clicking this button, I agree to Rodin's-->
+                    <!--<a target="_blank" ui-sref="landing.betaAgreement">Terms of Services</a></span>-->
                     <!--</div>-->
                     <div class="form-group">
                         <input style="margin-left:5px" type="checkbox"
