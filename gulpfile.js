@@ -382,5 +382,5 @@ gulp.task('default', (done) => {
 });
 
 gulp.task('bundle', (done)=>{
-    sequence('clean',  'vendorForBundle', 'generate-index', 'bundleTemplate', 'webpack', ['sass', 'font', 'img', 'generateBundleIndex', 'bundleVendors', 'cleanBundleFile'], done)
+    sequence('clean', 'template',  'vendorForBundle', 'generateBundleIndex', 'webpack',  ['sass', 'font', 'img', 'bundleTemplate',  'bundleVendors', 'cleanBundleFile'], done)
 });
