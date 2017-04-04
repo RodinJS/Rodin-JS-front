@@ -15,10 +15,10 @@ class ProfileCtrl {
         this.showLoader = false;
         this.syncModal = false;
         this._$uibModal = $uibModal;
-	    this.patterns = {
-		    password: /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*]{8,}$/,
-		    email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-	    };
+        this.patterns = {
+            password: /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*]{8,}$/,
+            email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        };
 
         this.newPassword = {
             password: "",
@@ -26,8 +26,8 @@ class ProfileCtrl {
         };
 
         this.modals = {
-            sync:false,
-            unsync:false
+            sync: false,
+            unsync: false
         };
 
         this.autocompleteOptions = {
@@ -35,35 +35,44 @@ class ProfileCtrl {
         };
 
 
-        FB.init({
-            appId: AppConstants.FB,
-            cookie: true,  // enable cookies to allow the server to access
-                           // the session
-            xfbml: true,  // parse social plugins on this page
-            version: 'v2.8' // use graph api version 2.8
-        });
-
-        gapi.load('auth2', () => {
-            gapi.auth2.init({
-                client_id: AppConstants.GOOGLE,
-                scope: 'profile'
+        try {
+            FB.init({
+                appId: AppConstants.FB,
+                cookie: true,  // enable cookies to allow the server to access
+                               // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.8' // use graph api version 2.8
             });
-        });
+            FB.getLoginStatus((response) => {
+                if (response.status == 'connected')
+                    this.fbConnected = true;
+                else
+                    this.fbConnected = false;
 
-        FB.getLoginStatus((response)=> {
-            if (response.status == 'connected')
-               this.fbConnected = true;
-            else
-                this.fbConnected = false;
+            });
+        }
+        catch (e) {
+            this.Notification.error(`It looks like you are using private mode, and your tracking protection is turend on. Please turn off or use browser normal mode`);
+        }
 
-        });
+        try {
+            gapi.load('auth2', () => {
+                gapi.auth2.init({
+                    client_id: AppConstants.GOOGLE,
+                    scope: 'profile'
+                });
+            });
+        }
+        catch (e) {
+            this.Notification.error(`It looks like you are using private mode, and your tracking protection is turend on. Please turn off or use browser normal mode`);
+        }
 
         if ($stateParams.token && $stateParams.id && this.currentUser) {
 
             let data = {
                 id: $stateParams.id,
                 token: $stateParams.token,
-                socialEmail:$stateParams.socialEmail,
+                socialEmail: $stateParams.socialEmail,
                 email: this.currentUser.email,
                 sync: true
             };
@@ -80,7 +89,7 @@ class ProfileCtrl {
 
     }
 
-    showGitSyncModal(){
+    showGitSyncModal() {
         this.modalText = `Do you want to sync your existing projects with GitHub?`;
         this.delete = false;
         this.modalInstance = this._$uibModal.open({
@@ -97,23 +106,23 @@ class ProfileCtrl {
 
     }
 
-    closeModal(){
+    closeModal() {
         this.modalInstance.close();
-        this._$state.go('app.profile', {token: undefined, id: undefined, socialEmail:undefined});
+        this._$state.go('app.profile', {token: undefined, id: undefined, socialEmail: undefined});
     }
 
-    syncGithub(fromModal){
+    syncGithub(fromModal) {
         this._User.gitSync()
-            .then(data=>{
+            .then(data => {
                 console.log(data);
                 this.Notification.success(data);
                 this.showLoader = false;
-                if(fromModal){
+                if (fromModal) {
                     this.modalInstance.close();
-                    this._$state.go('app.profile', {token: undefined, id: undefined, socialEmail:undefined});
+                    this._$state.go('app.profile', {token: undefined, id: undefined, socialEmail: undefined});
                 }
             })
-            .catch(err=>{
+            .catch(err => {
                 this.showLoader = false;
                 this.modalInstance.close();
                 _.each(err, (val, key) => {
@@ -167,7 +176,7 @@ class ProfileCtrl {
                 first_name: BasicProfile.getGivenName(),
                 last_name: BasicProfile.getFamilyName(),
                 id: BasicProfile.getId(),
-                socialEmail:BasicProfile.getEmail(),
+                socialEmail: BasicProfile.getEmail(),
                 email: this.currentUser.email,
                 sync: true
 
@@ -192,7 +201,7 @@ class ProfileCtrl {
 
     }
 
-    openUnSync(type){
+    openUnSync(type) {
         this.modals.unsync = true;
         this.unSyncType = type;
     }
@@ -215,10 +224,10 @@ class ProfileCtrl {
             })
     }
 
-    confirmUnsync(){
+    confirmUnsync() {
         let fields = {
             username: this.currentUser.username,
-            socialName : this.unSyncType
+            socialName: this.unSyncType
         };
         this._User.unSync(null, fields).then(
             data => {
