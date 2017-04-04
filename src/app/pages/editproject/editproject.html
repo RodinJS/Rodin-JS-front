@@ -43,7 +43,7 @@
                         <h5 class="switch-box-title">Public</h5>
                         <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
                             Current version:
-                            <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
+                            <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}?t={{$ctrl.getDate()}}" target="_blank">
                                 {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
                             </a>
                         </p>
