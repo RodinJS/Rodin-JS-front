@@ -1,0 +1,45 @@
+.spriteLoader {
+  background-image: url("/images/spriteLoader.png");
+  background-color: rgba(0, 0, 0, .5);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50px 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  -webkit-animation: play .8s steps(10) infinite;
+  -moz-animation: play .8s steps(10) infinite;
+  -ms-animation: play .8s steps(10) infinite;
+  -o-animation: play .8s steps(10) infinite;
+  animation: play .8s steps(10) infinite;
+}
+
+@-webkit-keyframes play {
+  from { background-position:    0px;
+    filter: alpha(Opacity=70);
+  }
+  to { background-position: -1280px; }
+}
+
+@-moz-keyframes play {
+  from { background-position:    0px; }
+  to { background-position: -1280px; }
+}
+
+@-ms-keyframes play {
+  from { background-position:    0px; }
+  to { background-position: -1280px; }
+}
+
+@-o-keyframes play {
+  from { background-position:    0px; }
+  to { background-position: -1280px; }
+}
+
+@keyframes play {
+  from { background-position:    0px; }
+  to { background-position: -1280px; }
+}
