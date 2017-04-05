@@ -1,0 +1,49 @@
+.loaderContent {
+  background-color: rgba(0, 0, 0, .5);
+  background-repeat: no-repeat;
+  background-size: 200px 200px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  .spriteLoader {
+    background-image: url(/images/spriteLoader.png);
+    width: 200px;
+    height: 200px;
+    z-index: 100;
+    position: absolute;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+    -webkit-animation: play 2s steps(41) infinite;
+    -moz-animation: play 2s steps(41) infinite;
+    -ms-animation: play 2s steps(41) infinite;
+    -o-animation: play 2s steps(41) infinite;
+    animation: play 2s steps(41) infinite;
+  }
+
+  @-webkit-keyframes play {
+    from { background-position:   0px; }
+    to { background-position: -8200px; }
+  }
+
+  @-moz-keyframes play {
+    from { background-position:    0px; }
+    to { background-position: -8200px; }
+  }
+
+  @-ms-keyframes play {
+    from { background-position:    0px; }
+    to { background-position: -8200px; }
+  }
+
+  @-o-keyframes play {
+    from { background-position:    0px; }
+    to { background-position: -8200px; }
+  }
+
+  @keyframes play {
+    from { background-position:    0px; }
+    to { background-position: -8200px; }
+  }
+}
