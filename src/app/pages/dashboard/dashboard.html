@@ -120,11 +120,11 @@
             </div>
         </div>
     </div>
-
-    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+    <div class="loaderContent" data-ng-if="$ctrl.showLoader">
+        <div class="spriteLoader"></div>
+    </div>
 
 </div>
-
 
 <div class="modal" close-modal="share"
      data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
