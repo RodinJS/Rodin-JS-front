@@ -52,7 +52,7 @@ class ProfileCtrl {
             });
         }
         catch (e) {
-            this.Notification.error(`It looks like you are using private mode, and your tracking protection is turend on. Please turn off or use browser normal mode`);
+            this.Notification.error({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
         }
 
         try {
@@ -64,7 +64,7 @@ class ProfileCtrl {
             });
         }
         catch (e) {
-            this.Notification.error(`It looks like you are using private mode, and your tracking protection is turend on. Please turn off or use browser normal mode`);
+            this.Notification.error({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
         }
 
         if ($stateParams.token && $stateParams.id && this.currentUser) {
