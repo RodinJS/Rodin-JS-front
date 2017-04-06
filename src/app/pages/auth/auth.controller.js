@@ -31,7 +31,7 @@ class AuthCtrl {
             });
         }
         catch(e){
-            this.Notification.error({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
+            this.Notification.warning({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
         }
         try{
             gapi.load('auth2', () => {
@@ -42,7 +42,7 @@ class AuthCtrl {
             });
         }
         catch(e){
-            this.Notification.error({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
+            this.Notification.warning({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
         }
         $scope.$on('$viewContentLoaded', () => {
             $(document).ready(() => {
