@@ -87,6 +87,6 @@
     "ng-tags-input": "3.1.1",
     "restangular": "1.5.2",
     "socket.io-client": "1.7.2",
-    "systemjs": "^0.19.41"
+    "systemjs": "^0.20.12"
   }
 }
