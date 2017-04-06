@@ -1,11 +1,7 @@
+.line-sample {
+  border-top: 1px solid $color-primary;
+}
 .samples-page {
-  .line {
-    //&:before {
-      content: "";
-      width: 100%;
-      border-top: 1px solid $color-primary;
-    //}
-  }
   .title {
     font-size: 22px;
     margin-top: 15px;
@@ -89,9 +85,34 @@
   }
   .rd-tree {
     margin-top: 20px;
+    li {
+      a{
+          border-bottom:none !important;
+      }
+    }
   }
-  .line {
-    position: absolute;
-    top: 90px;
+  //.line {
+  //  position: absolute;
+  //  top: 90px;
+  //}
+}
+@media screen and (orientation:landscape) and (min-width: 320px) and (max-width: 1024px) {
+  .samples-iframe {
+    display: none;
   }
+  .rd-tree .nav-list > li a {
+
+  }
+  .rd-tree {
+    margin-top: 20px;
+    li {
+      a{
+          border-bottom:none !important;
+      }
+    }
+  }
+  //.line {
+  //  position: absolute;
+  //  top: 70px;
+  //}
 }
