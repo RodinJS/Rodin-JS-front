@@ -1,5 +1,5 @@
 .loaderContent {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .7);
   background-repeat: no-repeat;
   background-size: 200px 200px;
   position: fixed;
@@ -8,42 +8,44 @@
   top: 0;
   left: 0;
   .spriteLoader {
-    background-image: url(/images/spriteLoader.png);
-    width: 200px;
-    height: 200px;
+    background-image: url(/images/50px.png);
+    width: 50px;
+    height: 50px;
     z-index: 100;
     position: absolute;
-    left: calc(50% - 100px);
-    top: calc(50% - 100px);
-    -webkit-animation: play 2s steps(41) infinite;
-    -moz-animation: play 2s steps(41) infinite;
-    -ms-animation: play 2s steps(41) infinite;
-    -o-animation: play 2s steps(41) infinite;
-    animation: play 2s steps(41) infinite;
+    left: calc(50% - 37.5px);
+    top: calc(50% - 37.5px);
+    -webkit-animation: play 1s steps(41) infinite;
+    -moz-animation: play 2s steps(41) 1;
+    -ms-animation: play 2s steps(41) 1;
+    -o-animation: play 2s steps(41) 1;
+    animation: play 1s steps(41) infinite;
+    animation-direction: alternate;
+    //animation-play-state: running;
   }
 
   @-webkit-keyframes play {
     from { background-position:   0px; }
-    to { background-position: -8200px; }
+    to { background-position: -2050px; }
   }
 
   @-moz-keyframes play {
     from { background-position:    0px; }
-    to { background-position: -8200px; }
+    to { background-position: -2050px; }
   }
 
   @-ms-keyframes play {
     from { background-position:    0px; }
-    to { background-position: -8200px; }
+    to { background-position: -2050px; }
   }
 
   @-o-keyframes play {
     from { background-position:    0px; }
-    to { background-position: -8200px; }
+    to { background-position: -2050px; }
   }
 
   @keyframes play {
     from { background-position:    0px; }
-    to { background-position: -8200px; }
+    to { background-position: -2050px; }
   }
 }
