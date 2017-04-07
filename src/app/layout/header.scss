@@ -36,7 +36,7 @@
       padding: 0;
       min-height: 50px;
       margin-bottom: 0;
-      //background: transparent;
+      background: transparent;
     }
   }
   &.sticky {
@@ -164,19 +164,18 @@
   }
 }
 
-//.header-background {
-//  height: 90px;
-//  top: 0;
-//  background-color: black;
-//  opacity: 0.25;
-//  position: absolute;
-//  width: 100%;
-//  z-index: -9999;
-//}
+.header-background {
+  height: 90px;
+  top: 0;
+  background-color: black;
+  opacity: 0.25;
+  position: absolute;
+  width: 100%;
+  z-index: -9999;
+}
 
 .header-auth {
   @include cf();
-  background: #071323;
   min-height: 84px;
   padding: 20px 0;
   //margin-bottom: 34px;
@@ -633,8 +632,6 @@
     .header-auth {
       border: none;
       min-height: 66px;
-      //height: 66px;
-      //background: #071323;
       .navbar-header {
         .btn-mobile-login {
           float: right;
@@ -711,9 +708,9 @@
     }
   }
   .header-auth {
-    height: 60px;
+    min-height: 60px;
     padding: 19px 0;
-    //background-color: rgba(#09192e, .9);
+    background-color: rgba(#09192e, .9);
     .logo {
       padding-top: 0;
       float: none;
@@ -816,6 +813,36 @@
       .btn-search {
         font-size: 14px;
       }
+    }
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .header {
+    .header-auth {
+      height: 60px !important;
+    }
+    .header-background {
+      height: 60px !important;
+    }
+  }
+}
+@media screen and (orientation:landscape) and (min-width: 320px) and (max-width: 767px) {
+  .header {
+    .header-auth {
+      height: 60px !important;
+    }
+    .header-background {
+      height: 60px !important;
+    }
+  }
+}
+@media screen and (orientation:portrait) and (min-width: 768px) and (max-width: 1024px) {
+  .header {
+    //.header-auth {
+    //  height: 60px !important;
+    //}
+    .header-background {
+      height: 74px !important;
     }
   }
 }
