@@ -92,6 +92,17 @@ $distance: 34;
       height: 0;
       padding-bottom: 70.87%;
       position: relative;
+      .radio-overlay{
+        background: #09192E;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        z-index: 10;
+        cursor: not-allowed;
+        opacity: 0.7;
+        top: 0;
+      }
       .label-radio {
         position: absolute;
         top: 0;
@@ -125,21 +136,6 @@ $distance: 34;
           transition: border-color .3s;
           cursor: pointer;
           position: relative;
-          &:hover {
-            border-color: $color-bd;
-            span {
-              visibility: visible;
-              opacity: 1;
-              z-index: 1;
-            }
-            .custom-radio-hover-background {
-              width: 100%;
-              height: 100%;
-              z-index: 0;
-              background: black;
-              opacity: .5;
-            }
-          }
           span {
             font-size: 14px;
             position: absolute;
@@ -154,6 +150,25 @@ $distance: 34;
             transition: all .3s;
             color: #008af1;
           }
+          &.active{
+            &:hover {
+              border-color: $color-bd;
+              span {
+                visibility: visible;
+                opacity: 1;
+                z-index: 1;
+              }
+              .custom-radio-hover-background {
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                background: black;
+                opacity: .5;
+              }
+            }
+          }
+          &.disabled{
+          }
         }
         .template-name {
           font-size: 16px;
@@ -165,6 +180,9 @@ $distance: 34;
           font-weight: 400;
           text-align: center;
           margin-top: 15px;
+          &.disabled{
+            color:#aaa
+          }
         }
       }
     }

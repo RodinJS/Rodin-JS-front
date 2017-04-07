@@ -1,27 +1,44 @@
 <div class="page__wrapper">
-	<div class="container">
+    <div class="container">
         <div class="selet-template-container">
             <div class="main-container">
-                <h3 class="title">SELECT TEMPLATE</h3>
+                <h3 class="title" style="font-size:24px">Select template to create a project OR import project from GitHub</h3>
                 <p class="title-description">
-                    Select a template when creating a new space.
                 </p>
                 <div class="main-form create-project">
                     <ul class="radio-list" ng-repeat="list in $ctrl.projectTemplates.projects">
-                        <li  ng-repeat="project in list">
+                        <li ng-repeat="project in list">
                             <div class="radio-wrapper" ng-click="$ctrl.projectTemplates.selected = project">
+                                <div class="radio-overlay" ng-if="$ctrl.githubUrlValid"></div>
                                 <label class="label-radio">
-                                    <input type="radio" name="template">
-                                    <span class="custom-radio" style="background-image: url({{project.thumbnail}});">
+                                    <input type="radio" name="template" ng-disabled="$ctrl.githubUrlValid">
+                                    <span class="custom-radio"
+                                          ng-class="$ctrl.githubUrlValid ? 'disabled' : 'active'"
+                                          style="background-image: url({{project.thumbnail}});">
                                         <span>CHOOSE</span>
                                         <span class="custom-radio-hover-background"></span>
                                     </span>
-                                    <span class="template-name">{{project.name}}</span>
+                                    <span class="template-name"  ng-class="$ctrl.githubUrlValid ? 'disabled' : 'active'">{{project.name}}</span>
                                     <br>
                                 </label>
                             </div>
                         </li>
                     </ul>
+                    <div class="form-group"
+                         data-ng-class="{'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused, 'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused}">
+                        <label for="name">GitHub project url</label>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="GitHub project url"
+                               value=""
+                               ng-minlength="3"
+                               ng-maxlength="64"
+                               limit-to="64"
+                               data-ng-pattern="$ctrl.githubPattern"
+                               ng-keyup="$ctrl.validateGithubUrl()"
+                               ng-click="$ctrl.githubUrlFocused = true"
+                               data-ng-model="$ctrl.project.githubUrl">
+                    </div>
                     <div class="form-group"
                          data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
                         <label for="name">
@@ -52,13 +69,14 @@
                                    limit-to="16"
                                    ng-click="$ctrl.projectFocused = true"
                                    data-ng-model="$ctrl.project.name">
-                            <span class="main-placeholder" ng-bind="'https://rodin.io/projects/' + $ctrl.currentUser.username + '/'"></span>
+                            <span class="main-placeholder"
+                                  ng-bind="'https://rodin.io/projects/' + $ctrl.currentUser.username + '/'"></span>
                         </div>
                     </div>
                     <!--<div class="form-group">-->
-                        <!--<label for="url">Meta Tags</label>-->
-                        <!--<tags-input style="height:100%; min-height:55px" max-length="32" min-length="3" class="form-control" ng-model="$ctrl.project.tags"></tags-input>-->
-                        <!--<p class="form-description">Meta tags are a great way for webmasters to provide search engines with information about their sites</p>-->
+                    <!--<label for="url">Meta Tags</label>-->
+                    <!--<tags-input style="height:100%; min-height:55px" max-length="32" min-length="3" class="form-control" ng-model="$ctrl.project.tags"></tags-input>-->
+                    <!--<p class="form-description">Meta tags are a great way for webmasters to provide search engines with information about their sites</p>-->
                     <!--</div>-->
                     <div class="form-group"
                          data-ng-class="{'has-error': projectDescription.length === 0 && $ctrl.projectDescriptionFocused, 'has-success': projectDescription.length > 0 && $ctrl.projectDescriptionFocused}"
@@ -77,7 +95,9 @@
                         </span>
                     </div>
                     <div class="btn-wrapper" style="text-align: center">
-                        <button type="submit" data-ng-click="$ctrl.save()" class="btn btn-default btn-submit">Save and Get Started</button>
+                        <button type="submit" data-ng-click="$ctrl.save()" class="btn btn-default btn-submit">Save and
+                            Get Started
+                        </button>
                     </div>
                 </div>
             </div>
