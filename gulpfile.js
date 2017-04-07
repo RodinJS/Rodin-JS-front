@@ -263,11 +263,10 @@ gulp.task('build-template', (done) => {
 });
 
 //BUNDLE//
-
 /**
  * ENVS: local, dev, stage, prod
  */
-const bundleVendorsJS = ['node_modules/jquery/dist/jquery.min.js', 'src/app/pages/home/highlight.pack.js'];
+const bundleVendorsJS = ['node_modules/jquery/dist/jquery.min.js', 'node_modules/jquery-form/dist/jquery.form.min.js',  'src/app/pages/home/highlight.pack.js'];
 const strip = require('gulp-strip-comments');
 const stripDebug = require('gulp-strip-debug');
 const replace = require('gulp-replace');
@@ -275,7 +274,9 @@ const webpack = require('webpack');
 
 
 gulp.task('vendorForBundle', () => {
-    let vendor_tasks = generate_vendor({ "angular-ui-notification": "^0.2.0", "font-awesome": "4.7.0"});
+    let vendor_tasks = generate_vendor({ "angular-ui-notification": "^0.2.0",
+        "font-awesome": "4.7.0",
+    });
 
     let custom_vendor_tasks = _.map(VENDORMAP, (item, key) => {
         let src, dest;
