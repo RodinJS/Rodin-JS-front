@@ -37,7 +37,7 @@
     "babel-plugin-angular-inject": "^0.1.5",
     "babel-plugin-angularjs-annotate": "^0.5.1",
     "babel-plugin-transform-class-properties": "^6.11.5",
-    "babel-plugin-transform-es2015-modules-systemjs": "^6.14.0",
+    "babel-plugin-transform-es2015-modules-systemjs": "^6.24.1",
     "babel-plugin-transform-remove-strict-mode": "0.0.2",
     "babel-plugin-transform-strict-mode": "^6.22.0",
     "babel-plugin-undeclared-variables-check": "^6.8.0",
