@@ -3,7 +3,7 @@ class ResetPasswordCtrl {
         'ngInject';
 
 	    this.patterns = {
-            password: /^(?=.*[A-Za-z])(?=.*\d){8,}$/,
+            password: /^(?=.*[A-Za-z])(?=.*\d)[^]{8,}$/,
 	    };
 
         this.appName = AppConstants.appName;
