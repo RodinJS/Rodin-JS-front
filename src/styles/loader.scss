@@ -8,18 +8,8 @@
   top: 0;
   left: 0;
   .spriteLoader {
-    //background-image: url(/images/loader.png);
     width: 75px;
     height: 75px;
-    //z-index: 100;
-    //position: absolute;
-    //left: calc(50% - 37.5px);
-    //top: calc(50% - 37.5px);
-    //-webkit-animation: play 4s steps(96) infinite;
-    //-moz-animation: play 2s steps(96) 1;
-    //-ms-animation: play 2s steps(96) 1;
-    //-o-animation: play 2s steps(96) 1;
-    //animation: play 4s steps(96) infinite;
     position: absolute;
     top: 0;
     left: 0;
@@ -27,67 +17,56 @@
     bottom: 0;
     margin: auto;
     display: block;
-    //width: 120px;
-    //height: 120px;
-    background-image: url(/images/loader.png);
+    background-image: url(/images/Rodin-loader.png);
     background-size: auto;
-    animation: logoGif 2s steps(96) infinite;
-    -webkit-animation: logoGif 2s steps(96) infinite;
-    -moz-animation: logoGif 2s steps(96) infinite;
-    -ms-animation: logoGif 2s steps(96) infinite;
+    animation: play 2s steps(60) infinite;
+    -webkit-animation: play 2s steps(60) infinite;
+    -moz-animation: play 2s steps(60) infinite;
+    -ms-animation: play 2s steps(60) infinite;
   }
-  @keyframes logoGif {
+  @-webkit-keyframes play {
     0% {
       background-position: 0px;
     }
     100% {
-      background-position: -7200px;
+      background-position: -4500px;
+    }
+  }
+
+  @-moz-keyframes play {
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: -4500px;
+    }
+  }
+
+  @-ms-keyframes play {
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: -4500px;
+    }
+  }
+
+  @-o-keyframes play {
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: -4500px;
+    }
+  }
+
+  @keyframes play {
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: -4500px;
     }
   }
 }
-
-//@-webkit-keyframes play {
-//  from {
-//    background-position: 0px;
-//  }
-//  to {
-//    background-position: -7200px;
-//  }
-//}
-//
-//@-moz-keyframes play {
-//  from {
-//    background-position: 0px;
-//  }
-//  to {
-//    background-position: -7200px;
-//  }
-//}
-//
-//@-ms-keyframes play {
-//  from {
-//    background-position: 0px;
-//  }
-//  to {
-//    background-position: -7200px;
-//  }
-//}
-//
-//@-o-keyframes play {
-//  from {
-//    background-position: 0px;
-//  }
-//  to {
-//    background-position: -7200px;
-//  }
-//}
-//
-//@keyframes play {
-//  from {
-//    background-position: 0px;
-//  }
-//  to {
-//    background-position: -7200px;
-//  }
-//}
 
