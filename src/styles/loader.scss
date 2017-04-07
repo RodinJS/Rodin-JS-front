@@ -1,5 +1,5 @@
 .loaderContent {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .7);
   background-repeat: no-repeat;
   background-size: 200px 200px;
   position: fixed;
@@ -8,42 +8,65 @@
   top: 0;
   left: 0;
   .spriteLoader {
-    background-image: url(/images/spriteLoader.png);
-    width: 200px;
-    height: 200px;
-    z-index: 100;
+    width: 75px;
+    height: 75px;
     position: absolute;
-    left: calc(50% - 100px);
-    top: calc(50% - 100px);
-    -webkit-animation: play 2s steps(41) infinite;
-    -moz-animation: play 2s steps(41) infinite;
-    -ms-animation: play 2s steps(41) infinite;
-    -o-animation: play 2s steps(41) infinite;
-    animation: play 2s steps(41) infinite;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: block;
+    background-image: url(/images/Rodin-loader.png);
+    background-size: auto;
+    animation: play 2s steps(60) infinite;
+    -webkit-animation: play 2s steps(60) infinite;
+    -moz-animation: play 2s steps(60) infinite;
+    -ms-animation: play 2s steps(60) infinite;
   }
-
   @-webkit-keyframes play {
-    from { background-position:   0px; }
-    to { background-position: -8200px; }
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: -4500px;
+    }
   }
 
   @-moz-keyframes play {
-    from { background-position:    0px; }
-    to { background-position: -8200px; }
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: -4500px;
+    }
   }
 
   @-ms-keyframes play {
-    from { background-position:    0px; }
-    to { background-position: -8200px; }
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: -4500px;
+    }
   }
 
   @-o-keyframes play {
-    from { background-position:    0px; }
-    to { background-position: -8200px; }
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: -4500px;
+    }
   }
 
   @keyframes play {
-    from { background-position:    0px; }
-    to { background-position: -8200px; }
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: -4500px;
+    }
   }
 }
+
