@@ -17,7 +17,7 @@ class ProjectCtrl {
             this.Notification.error(`Maximum projects count exceeded, allowed project count ${this.currentUser.allowProjectsCount}`);
             return this.$state.go('app.dashboard');
         }
-
+        this.githubPattern  = /(?:git|ssh|https?|git@[\w\.]+):(?:\/\/)?[\w\.@:\/~_-]+\.git(?:\/?|\#[\d\w\.\-_]+?)$/;
 
         this.project = {
             name: '',
@@ -58,7 +58,8 @@ class ProjectCtrl {
         this.projectExist = false;
         let projectInfo = {};
         angular.extend(projectInfo, this.project);
-        projectInfo.templateId = this.projectTemplates.selected._id;
+        if(this.projectTemplates.selected)
+            projectInfo.templateId = this.projectTemplates.selected._id;
         projectInfo.tags = projectInfo.tags.map(i => i.text);
         projectInfo.description = this._$scope.projectDescription;
         this.Project.create(projectInfo).then(
@@ -96,6 +97,16 @@ class ProjectCtrl {
                 });
             }
         );
+    }
+
+    validateGithubUrl(){
+
+        this.githubUrlValid =  this.githubPattern.test(this.project.githubUrl);
+        if(this.githubUrlValid){
+            angular.element('input[type=radio]').prop('checked', false);
+            this.projectTemplates.selected = null;
+        }
+        console.log('VALID GITHUB', this.githubUrlValid);
     }
 
     createFinalize(err) {

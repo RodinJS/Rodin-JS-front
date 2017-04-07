@@ -69,9 +69,21 @@
                                    limit-to="64"
                                    ng-model="$ctrl.project.displayName">
                         </div>
+                        <div class="form-group" custom-input ng-if="$ctrl.project.githubUrl">
+                            <label>GitHub project url</label>
+                            <input type="text"
+                                   class="form-control input-blue"
+                                   placeholder=""
+                                   value="{{$ctrl.project.githubUrl}}"
+                                   disabled>
+                        </div>
                         <div class="form-group" custom-input>
                             <label>Project url</label>
-                            <input type="text" class="form-control input-blue" placeholder="" value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}" disabled>
+                            <input type="text"
+                                   class="form-control input-blue"
+                                   placeholder=""
+                                   value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}"
+                                   disabled>
                         </div>
                         <!--<div class="form-group" custom-input>
                             <label>Meta Tags</label>
@@ -121,7 +133,7 @@
                             <tr>
                                 <td class="text-primary"><span>Total Asset Size</span>
                                 </td>
-                                <td class="text-primary"><span>{{$ctrl.project.projectSize}} ( Files. Fonts, and Backups)</span>
+                                <td class="text-primary"><span>{{$ctrl.project.projectSize}}MB ( Files. Fonts, and Backups)</span>
                                 </td>
                             </tr>
                             <tr>

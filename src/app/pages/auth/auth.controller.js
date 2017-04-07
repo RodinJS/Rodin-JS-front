@@ -16,7 +16,7 @@ class AuthCtrl {
         //this.gotToHome = this.gotToHome.bind(this);
 
         this.patterns = {
-            password: /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*(),_-]{8,}$/,
+            password: /^(?=.*[A-Za-z])(?=.*\d){8,}$/,
             email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         };
 
@@ -31,7 +31,7 @@ class AuthCtrl {
             });
         }
         catch(e){
-            this.Notification.error({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
+            this.Notification.warning({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
         }
         try{
             gapi.load('auth2', () => {
@@ -42,7 +42,7 @@ class AuthCtrl {
             });
         }
         catch(e){
-            this.Notification.error({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
+            this.Notification.warning({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
         }
         $scope.$on('$viewContentLoaded', () => {
             $(document).ready(() => {
