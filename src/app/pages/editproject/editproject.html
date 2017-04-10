@@ -43,7 +43,7 @@
                         <h5 class="switch-box-title">Public</h5>
                         <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
                             Current version:
-                            <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
+                            <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}?t={{$ctrl.getDate()}}" target="_blank">
                                 {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
                             </a>
                         </p>
@@ -69,9 +69,21 @@
                                    limit-to="64"
                                    ng-model="$ctrl.project.displayName">
                         </div>
+                        <div class="form-group" custom-input ng-if="$ctrl.project.githubUrl">
+                            <label>GitHub project url</label>
+                            <input type="text"
+                                   class="form-control input-blue"
+                                   placeholder=""
+                                   value="{{$ctrl.project.githubUrl}}"
+                                   disabled>
+                        </div>
                         <div class="form-group" custom-input>
                             <label>Project url</label>
-                            <input type="text" class="form-control input-blue" placeholder="" value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}" disabled>
+                            <input type="text"
+                                   class="form-control input-blue"
+                                   placeholder=""
+                                   value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}"
+                                   disabled>
                         </div>
                         <!--<div class="form-group" custom-input>
                             <label>Meta Tags</label>
@@ -121,7 +133,7 @@
                             <tr>
                                 <td class="text-primary"><span>Total Asset Size</span>
                                 </td>
-                                <td class="text-primary"><span>{{$ctrl.project.projectSize}} ( Files. Fonts, and Backups)</span>
+                                <td class="text-primary"><span>{{$ctrl.project.projectSize}}MB ( Files. Fonts, and Backups)</span>
                                 </td>
                             </tr>
                             <tr>
@@ -134,7 +146,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr ng-if="!$ctrl.project.githubUrl">
                                 <td class="text-primary"><span>Template Of</span>
                                 </td>
                                 <td class="text-primary id"><span>{{$ctrl.project.templateOf || 'N/A'}}</span>
@@ -232,7 +244,7 @@
             <div class="required-field-actions clearfix">
                 <div class="text-center">
                     <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">Go To Settings</button>
-                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl()">Copy URL</button>
+                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl(); $ctrl.modals.share = false;">Copy URL</button>
                     <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">Cancel</a>
                 </div>
             </div>

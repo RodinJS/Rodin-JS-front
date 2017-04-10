@@ -2,6 +2,9 @@ class ResetPasswordCtrl {
     constructor(AppConstants, User, $stateParams, $state) {
         'ngInject';
 
+	    this.patterns = {
+            password: /^(?=.*[A-Za-z])(?=.*\d)[^]{8,}$/,
+	    };
 
         this.appName = AppConstants.appName;
         this.User = User;
@@ -29,7 +32,8 @@ class ResetPasswordCtrl {
             },
             err=> {
                 this.isSubmitting = false;
-                this.resetError = err[0].message || 'User not exist';
+                this.successfulySend = false;
+                this.resetError = err[0].message || "User doesn't exist";
             })
     }
 
@@ -42,7 +46,7 @@ class ResetPasswordCtrl {
             },
             err=> {
                 if(err[0].code === 316){
-                    this.errorMessage = 'Wrong token';
+                    this.errorMessage = 'Recovery token is expired';
                 }
                 else{
                     this.errorMessage = 'New password must be at least 8 characters long, contain a number and letter';

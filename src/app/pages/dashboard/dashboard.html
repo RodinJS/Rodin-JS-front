@@ -120,11 +120,11 @@
             </div>
         </div>
     </div>
-
-    <div class="loader" data-ng-if="$ctrl.showLoader"></div>
+    <div class="loaderContent" data-ng-if="$ctrl.showLoader">
+        <div class="spriteLoader"></div>
+    </div>
 
 </div>
-
 
 <div class="modal" close-modal="share"
      data-ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
@@ -141,7 +141,8 @@
                     <input id="projectUrl" type="text" class="form-control"
                            placeholder="Url of project"
                            value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.currentModalProject.name}}"
-                           disabled>
+                            disabled
+                    >
                     <!--<label class="control-label float-label">Url of project</label>-->
                 </div>
             </div>

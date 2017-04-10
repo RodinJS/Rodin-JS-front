@@ -105,7 +105,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <div class="form-group title">Github</div>
+                                                <div class="form-group title">GitHub</div>
                                             </div>
                                             <div class="col-md-10">
                                                 <button type="button" ng-if="!$ctrl.currentUser.github"
@@ -266,6 +266,7 @@
                                 <input type="password" class="form-control" placeholder=""
                                        name="password"
                                        data-ng-model="$ctrl.newPassword.password"
+                                       ng-pattern="$ctrl.patterns.password"
                                        required
                                        ng-minlength="5"
                                        ng-change="$ctrl.confirmPassword()"
@@ -279,6 +280,8 @@
                                        name="confirmPassword"
                                        data-ng-model="$ctrl.newPassword.confirm"
                                        required
+                                       confirm-Password
+                                       compare-to="changePasswordForm.confirmPassword.$viewValue"
                                        ng-minlength="5"
                                        ng-change="$ctrl.confirmPassword()"
                                        data-ng-focus="changePasswordForm.confirmPassword.focused = true">
@@ -310,53 +313,6 @@
         </div>
     </div>
 </div>
-
-
-
-<!--<div class="modal model-confirm" close-modal="sync"-->
-     <!--ng-class="{'display-block': $ctrl.modals.sync, 'display-none': !$ctrl.modals.sync}" tabindex="-1" id="modalSync"-->
-     <!--role="dialog" aria-labelledby="modalSyncLabel">-->
-    <!--<div class="modal-dialog modal-sm" role="document">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-body">-->
-                <!--<h2 class="modal-title">Please enter your {{$ctrl.syncType}} id</h2>-->
-                <!--<form name="oculusSteamSync" class="modal-form">-->
-                    <!--<div class="form-group">-->
-                        <!--<input type="text" class="form-control" placeholder="" required-->
-                               <!--data-ng-model="$ctrl.oculusSteamId">-->
-                    <!--</div>-->
-                    <!--<div class="form-actions">-->
-                        <!--<button type="button" ng-disabled="oculusSteamSync.$invalid" class="btn btn-primary"-->
-                                <!--ng-click="$ctrl.syncOculusSteam()">Sync-->
-                        <!--</button>-->
-                        <!--<a href="" class="btn btn-save" data-ng-click="$ctrl.modals.sync = false">cancel</a>-->
-
-                    <!--</div>-->
-                <!--</form>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-<!--<div class="modal model-confirm" close-modal="unsync"-->
-     <!--ng-class="{'display-block': $ctrl.modals.unsync, 'display-none': !$ctrl.modals.unsync}" tabindex="-1"-->
-     <!--id="modalUnSync" role="dialog" aria-labelledby="modalSyncLabel">-->
-    <!--<div class="modal-dialog modal-md" role="document">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-body">-->
-                <!--<h2 class="modal-title">Unsync from {{$ctrl.unSyncType}}</h2>-->
-                <!--<h3>Are you sure want to unsync?</h3>-->
-            <!--</div>-->
-            <!--<div class="modal-footer">-->
-                <!--<div class="form-actions">-->
-                    <!--<button type="button" class="btn btn-negative"-->
-                            <!--ng-click="$ctrl.confirmUnsync()">Unsync-->
-                    <!--</button>-->
-                    <!--<a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.unsync = false">cancel</a>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 
 <div class="modal model-confirm" close-modal="sync"
      ng-class="{'display-block': $ctrl.modals.sync, 'display-none': !$ctrl.modals.sync}" tabindex="-1" id="modalSync"
@@ -392,11 +348,14 @@
     <div class="modal-content">
         <div class="modal-header">
             <!--<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>-->
-            <p>Unsync from {{$ctrl.unSyncType}}</p>
+            <p>Unsync from {{$ctrl.unSyncType == 'github' ? 'GitHub' : $ctrl.unSyncType}}</p>
         </div>
         <div class="modal-body">
             <p class="text-small description">
-                Are you sure want to unsync?
+                <span  ng-if="$ctrl.unSyncType == 'github'">
+                    All your projects will be unlinked from GitHub.<br/>
+                </span>
+                Are you sure you want to unsync?
             </p>
         </div>
         <div class="modal-footer">
@@ -411,5 +370,7 @@
         </div>
     </div>
 </div>
-<div class="loader" data-ng-if="$ctrl.showLoader"></div>
+<div class="loaderContent" data-ng-if="$ctrl.showLoader">
+    <div class="spriteLoader"></div>
+</div>
 

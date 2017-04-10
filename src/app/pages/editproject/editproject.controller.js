@@ -44,6 +44,10 @@ class EditProjectCtrl {
         });
     }
 
+    getDate(){
+        return Date.now();
+    }
+
     getProject() {
         this.showLoader = true;
         this.Project.get(this.projectId, { projectSize: true }).then(

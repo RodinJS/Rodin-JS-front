@@ -178,6 +178,9 @@ class EditProjectAndroidCtrl {
     }
 
     build () {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         const e = this.openEvent;
         const ctrl = this;
         e.preventDefault();
@@ -266,6 +269,9 @@ class EditProjectAndroidCtrl {
     };
 
     open (e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -286,6 +292,9 @@ class EditProjectAndroidCtrl {
             }
         );
     }
+	gotToPublish() {
+		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
+	}
 }
 
 export default EditProjectAndroidCtrl;

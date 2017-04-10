@@ -1,5 +1,4 @@
 import  './scripts/main';
-
 class HomeCtrl {
     constructor(AppConstants, $sce, $window, $scope, User, Notification, PagesService) {
         'ngInject';

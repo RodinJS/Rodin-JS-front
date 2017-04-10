@@ -189,6 +189,9 @@ class EditProjectOculusCtrl {
     }
 
     build(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         const ctrl = this;
         e.preventDefault();
         this.project.build.oculus.built = false;
@@ -272,6 +275,9 @@ class EditProjectOculusCtrl {
     };
 
     open(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -292,6 +298,9 @@ class EditProjectOculusCtrl {
             }
         );
     }
+	gotToPublish() {
+		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
+	}
 }
 
 export default EditProjectOculusCtrl;
