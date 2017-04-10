@@ -4,14 +4,14 @@
         <div class="col-md-2 rd-tree ">
             <div class="row">
                 <h3 class="title">Examples</h3>
-                <ul class="nav nav-list" ng-if="!$ctrl.checkMobile()">
+                <ul class="nav nav-list">
                     <li class="labeled"><label class="tree-toggler nav-header">Basic</label>
                         <ul class="nav tree">
                             <li ng-repeat="(key, value) in $ctrl.samples"><a ng-click="$ctrl.setActiveLink(key)">{{key.charAt(0).toUpperCase()+ key.slice(1)}}</a></li>
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav-list ios-list" ng-if="$ctrl.checkMobile()">
+                <ul class="nav-list mobile-list">
                     <li class="labeled"><label class="tree-toggler nav-header">Basic</label>
                         <ul class="nav tree">
                             <li ng-repeat="(key, value) in $ctrl.samples"><a ng-href="{{value.url}}" target="_blank">{{key.charAt(0).toUpperCase()+ key.slice(1)}}</a></li>
