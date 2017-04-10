@@ -50,9 +50,12 @@ class AppHeaderCtrl {
             });
         }
 
-        SocketService.on('projectBuild', (data)=> this.showSocketResponse(data));
+        console.log(SocketService);
 
-        SocketService.on('gitSync', (data)=> this.showSocketResponse(data));
+        if(!SocketService.connected){
+            SocketService.on('projectBuild', (data)=> this.showSocketResponse(data));
+            SocketService.on('gitSync', (data)=> this.showSocketResponse(data));
+        }
 
     }
 

@@ -146,7 +146,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr ng-if="!$ctrl.project.githubUrl">
                                 <td class="text-primary"><span>Template Of</span>
                                 </td>
                                 <td class="text-primary id"><span>{{$ctrl.project.templateOf || 'N/A'}}</span>
