@@ -836,6 +836,16 @@
     }
   }
 }
+@media screen and (orientation:landscape) and (min-width: 768px) and (max-width: 1024px) {
+  .header {
+    .header-auth {
+      height: 84px !important;
+    }
+    .header-background {
+      height: 84px !important;
+    }
+  }
+}
 @media screen and (orientation:portrait) and (min-width: 768px) and (max-width: 1024px) {
   .header {
     //.header-auth {
