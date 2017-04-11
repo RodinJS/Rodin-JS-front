@@ -76,7 +76,7 @@
                                 </small>
                                 <div style="clear:both"></div>
                             </div>
-                            <ul rd-scroll class="notifi-list" id="notifi-list" ng-if="$ctrl.notifications.length > 1">
+                            <ul rd-scroll class="notifi-list" id="notifi-list" ng-if="$ctrl.notifications.length > 0">
                                 <li ng-repeat="(index, notification) in $ctrl.notifications"
                                     ng-click="$ctrl.updateNotification(notification, index, $event)"
                                     ng-class="notification.typeClass +' '+ notification.readClass">

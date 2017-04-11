@@ -50,8 +50,6 @@ class AppHeaderCtrl {
             });
         }
 
-        console.log(SocketService);
-
         if(!SocketService.connected){
             SocketService.on('projectBuild', (data)=> this.showSocketResponse(data));
             SocketService.on('gitSync', (data)=> this.showSocketResponse(data));
