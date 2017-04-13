@@ -210,6 +210,10 @@ const AppConstants = {
             field: '',
         },
         352: {
+            message: 'REPO_DOES_NOT_EXIST',
+            field: '',
+        },
+        353: {
             message: 'REPO_NAME_EXISTS',
             field: '',
         },
