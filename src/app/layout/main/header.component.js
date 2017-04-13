@@ -1,5 +1,5 @@
 class AppHeaderCtrl {
-    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus, PagesService, PagesStore, Notification) {
+    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus, PagesService, PagesStore, Notification, ModulesStore) {
         'ngInject';
         this.appName = AppConstants.appName;
         this.currentUser = User.current;
@@ -8,6 +8,7 @@ class AppHeaderCtrl {
         this._Notification = Notification;
         this.eventBus = EventBus;
         this._$state = $state;
+        this._ModulesStore = ModulesStore;
         this.try = false;
 
         this._PagesService = PagesService;
@@ -17,6 +18,8 @@ class AppHeaderCtrl {
 
         this.User = User;
         this.logout = () => {
+            this._ModulesStore.removeAllModules();
+
             User.logout(...arguments);
         };
 

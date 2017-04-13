@@ -19,12 +19,9 @@ class EditProjectModulesCtrl {
         this.projectId = $stateParams.projectId;
         this.onError = this.onError.bind(this);
         this.getProject = this.getProject.bind(this);
-
+        this._ModulesStore.removeAllModules();
         this._ModulesStore.subscribeAndInit($scope, () => {
             this.modulesList =  _.chunk(this._ModulesStore.getMyModules($stateParams.projectId), 4);
-
-            if (!this.modulesList || this.modulesList.length <= 0)
-                return this.getMyModules();
 
         });
 
@@ -33,6 +30,7 @@ class EditProjectModulesCtrl {
             if (!this.project)
                 this.getProject();
         });
+
         return this.getMyModules();
 
     }

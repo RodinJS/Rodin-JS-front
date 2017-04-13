@@ -91,6 +91,7 @@ class StoreCtrl {
                 this._Notification.success('Module Unsubscribed');
                 this.modalInstance.close();
                 module.unsubscribed = true;
+                console.log('MOOODULE', module);
                 this._EventBus.emit(this._EventBus.modules.UPDATE, module);
             })
             .catch(err => this.onError(err));
