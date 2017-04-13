@@ -31,7 +31,7 @@
                         <a ui-sref="landing.samples">Samples</a>
                     </li>
                     <li ng-repeat="page in $ctrl.pagesSection1">
-                        <a ng-if="page.externalURL" target="_blank" ng-href="{{page.externalURL}}">{{page.title}}</a>
+                        <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
                         <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                     </li>
 
