@@ -8,7 +8,7 @@ class AppHeaderCtrl {
         this._Notification = Notification;
         this.eventBus = EventBus;
         this._$state = $state;
-        this._ModulesStore = ModulesStore
+        this._ModulesStore = ModulesStore;
         this.try = false;
 
         this._PagesService = PagesService;
