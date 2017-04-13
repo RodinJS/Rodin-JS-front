@@ -8,6 +8,7 @@ const AppConstants = {
     jwtKey: 'token',
     appName: 'Rodin',
 
+
     local: {
         COOKIEDOMAIN: ['localhost', '.rodin.space'],
         SOCKET: 'http://localhost:4000/api',
@@ -210,11 +211,11 @@ const AppConstants = {
             field: '',
         },
         352: {
-            message: 'REPO_DOES_NOT_EXIST',
+            message: 'REPO_NAME_EXISTS',
             field: '',
         },
         353: {
-            message: 'REPO_NAME_EXISTS',
+            message: 'REPO_DOES_NOT_EXIST',
             field: '',
         },
         601: {
