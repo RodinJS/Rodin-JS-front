@@ -14,7 +14,7 @@
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // using AMD; register as anon module
-        define(['/scripts/vendor/jquery/dist/jquery.min'], factory);
+        define(['jquery/dist/jquery.min'], factory);
     } else {
         // no AMD; invoke directly
         factory( (typeof(jQuery) != 'undefined') ? jQuery : window.Zepto );

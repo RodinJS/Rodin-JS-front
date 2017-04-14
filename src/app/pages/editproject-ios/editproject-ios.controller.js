@@ -192,6 +192,9 @@ class EditProjectIosCtrl {
     }
 
     build() {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         const e = this.openEvent;
         const ctrl = this;
         e.preventDefault();
@@ -274,6 +277,9 @@ class EditProjectIosCtrl {
     };
 
     open(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -294,6 +300,9 @@ class EditProjectIosCtrl {
             }
         );
     }
+	gotToPublish() {
+		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
+	}
 }
 
 export default EditProjectIosCtrl;

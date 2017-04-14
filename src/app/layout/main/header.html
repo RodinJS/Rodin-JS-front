@@ -27,6 +27,9 @@
                     <li>
                         <a ui-sref="landing.store">Store</a>
                     </li>
+                    <li>
+                        <a ui-sref="landing.samples">Samples</a>
+                    </li>
                     <li ng-repeat="page in $ctrl.pagesSection1">
                         <a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                     </li>
@@ -73,7 +76,7 @@
                                 </small>
                                 <div style="clear:both"></div>
                             </div>
-                            <ul rd-scroll class="notifi-list" id="notifi-list" ng-if="$ctrl.notifications.length > 1">
+                            <ul rd-scroll class="notifi-list" id="notifi-list" ng-if="$ctrl.notifications.length > 0">
                                 <li ng-repeat="(index, notification) in $ctrl.notifications"
                                     ng-click="$ctrl.updateNotification(notification, index, $event)"
                                     ng-class="notification.typeClass +' '+ notification.readClass">
