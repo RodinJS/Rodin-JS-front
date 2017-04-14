@@ -24,7 +24,8 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="form-group"
+                    <div ng-show="$ctrl.projectTemplates.projects.length > 0">
+                        <div class="form-group"
                          data-ng-class="{'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused, 'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused}">
                         <label for="name">GitHub project url</label>
                         <input type="text"
@@ -79,8 +80,7 @@
                     <!--<p class="form-description">Meta tags are a great way for webmasters to provide search engines with information about their sites</p>-->
                     <!--</div>-->
                     <div class="form-group"
-                         data-ng-class="{'has-error': projectDescription.length === 0 && $ctrl.projectDescriptionFocused, 'has-success': projectDescription.length > 0 && $ctrl.projectDescriptionFocused}"
-                    >
+                         data-ng-class="{'has-error': projectDescription.length === 0 && $ctrl.projectDescriptionFocused, 'has-success': projectDescription.length > 0 && $ctrl.projectDescriptionFocused}">
                         <label for="area">Description</label>
                         <textarea
                                 id="area"
@@ -94,10 +94,12 @@
                             <span>{{128-projectDescription.length}}</span>/128
                         </span>
                     </div>
+                    
                     <div class="btn-wrapper" style="text-align: center">
                         <button type="submit" data-ng-click="$ctrl.save()" class="btn btn-default btn-submit">Save and
                             Get Started
                         </button>
+                    </div>
                     </div>
                 </div>
             </div>
