@@ -19,6 +19,7 @@ class EditProjectViveCtrl {
         this.project = {};
         this.showLoader = true;
 
+        this.userService = User;
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
 
@@ -189,12 +190,29 @@ class EditProjectViveCtrl {
         }
     }
 
+    publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.build(e);
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
     build(e) {
 	    if (!this.project.publishedPublic) {
 		    return this.modals.notPublished = true;
 	    }
         const ctrl = this;
-        e.preventDefault();
+	    if(e) {
+            e.preventDefault();
+        }
         this.project.build.vive.built = false;
         let project = {
             userId: this.user.username,
@@ -212,6 +230,8 @@ class EditProjectViveCtrl {
         }
 
         ctrl.showLoader = true;
+
+        this.modals.notPublished = false;
         $('#configs').ajaxForm({
             dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/vive',
@@ -228,7 +248,6 @@ class EditProjectViveCtrl {
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Vive build start');
-
                 ctrl.timer = ctrl._$interval(() => {
                     ctrl.getProject();
                 }, 2000);
