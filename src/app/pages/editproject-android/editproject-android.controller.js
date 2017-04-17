@@ -177,6 +177,21 @@ class EditProjectAndroidCtrl {
         }
     }
 
+   publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.build(e);
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
     build () {
 	    if (!this.project.publishedPublic) {
 		    return this.modals.notPublished = true;
@@ -194,6 +209,7 @@ class EditProjectAndroidCtrl {
         };
 
         this.showLoader = true;
+        this.modals.notPublished = false;
         $('#configs').ajaxForm({
             dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/android',
