@@ -192,13 +192,12 @@ class EditProjectAndroidCtrl {
             }
         )
     }
-    build () {
+    build (event) {
 	    if (!this.project.publishedPublic) {
 		    return this.modals.notPublished = true;
 	    }
-        const e = this.openEvent;
         const ctrl = this;
-        e.preventDefault();
+        event.preventDefault();
         let project = {
             userId: this.user.username,
             appId: this.project._id,
@@ -230,6 +229,8 @@ class EditProjectAndroidCtrl {
                 ctrl._$scope.configs.KSState.focused = false;
                 ctrl._$scope.configs.KSCC.focused = false;
                 ctrl._$scope.configs.KSAlias.focused = false;
+                ctrl.files.icon.name = '';
+                ctrl.files.icon.src = '';
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Android build start');
