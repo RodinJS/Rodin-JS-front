@@ -206,13 +206,12 @@ class EditProjectIosCtrl {
         )
     }
 
-    build() {
+    build(event) {
 	    if (!this.project.publishedPublic) {
 		    return this.modals.notPublished = true;
 	    }
-        const e = this.openEvent;
         const ctrl = this;
-        e.preventDefault();
+        event.preventDefault();
         let project = {
             userId: this.user.username,
             appId: this.projectId,
