@@ -4,7 +4,7 @@ class EditProjectOculusCtrl {
 
         if (!$stateParams.projectId) return $state.go('landing.error');
 
-
+        this.initRequest = true;
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
@@ -49,30 +49,35 @@ class EditProjectOculusCtrl {
         this.openEvent = null;
 
         this.eventBus = EventBus;
-        ProjectStore.subscribeAndInit($scope, ()=> {
+        ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
         });
-        $scope.$on('$destroy', ()=>{
-            if(this.timer){
+        $scope.$on('$destroy', () => {
+            if (this.timer) {
                 this._$interval.cancel(this.timer);
             }
         })
+        this.isBuildInProcess = false;
     }
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, { device: 'oculus' }).then(
+        this.Project.get(this.projectId, {device: 'oculus'}).then(
             project => {
-                this.showLoader = false;
-                this.eventBus.emit(this.eventBus.project.SET, project);
+                if (this.initRequest || project.build.oculus.built) {
+                    this.eventBus.emit(this.eventBus.project.SET, project);
+                    this.isBuildInProcess = false;
+                    this.initRequest = false;
+                    this.showLoader = false;
+                }
 
-                if(this.project.build.oculus.built && this.timer){
+                if (this.project.build.oculus.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
                 this.showLoader = false;
@@ -188,7 +193,7 @@ class EditProjectOculusCtrl {
         }
     }
 
-   publishNbuild(e) {
+    publishNbuild(e) {
         this.showLoader = true;
         this.Project.publish(this.projectId).then(
             data => {
@@ -197,7 +202,7 @@ class EditProjectOculusCtrl {
             },
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
@@ -205,9 +210,9 @@ class EditProjectOculusCtrl {
     }
 
     build(e) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         const ctrl = this;
         e.preventDefault();
         this.project.build.oculus.built = false;
@@ -236,15 +241,16 @@ class EditProjectOculusCtrl {
                 project: angular.toJson(project),
             },
             success: function (data) {
+                ctrl.isBuildInProcess = true;
                 ctrl._$scope.configs.displayName.focused = false;
                 ctrl._$scope.configs.version.focused = false;
                 ctrl.modals.password = false;
-                // ctrl.getProject();
+                ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Oculus build start');
 
                 ctrl.timer = ctrl._$interval(() => {
-                    // ctrl.getProject();
+                    ctrl.getProject();
                 }, 2000);
             },
 
@@ -291,9 +297,9 @@ class EditProjectOculusCtrl {
     };
 
     open(e) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -308,15 +314,16 @@ class EditProjectOculusCtrl {
 
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         );
     }
-	gotToPublish() {
-		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
-	}
+
+    gotToPublish() {
+        this.$state.go('app.editprojectPublish', {projectId: this.project._id});
+    }
 }
 
 export default EditProjectOculusCtrl;
