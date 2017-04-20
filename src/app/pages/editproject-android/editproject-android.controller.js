@@ -231,11 +231,11 @@ class EditProjectAndroidCtrl {
                 ctrl._$scope.configs.KSAlias.focused = false;
                 ctrl.files.icon.name = '';
                 ctrl.files.icon.src = '';
-                ctrl.getProject();
+                // ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Android build start');
                 ctrl.timer = ctrl._$interval(() => {
-                    ctrl.getProject();
+                    // ctrl.getProject();
                 }, 2000);
             },
 

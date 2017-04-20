@@ -239,14 +239,13 @@ class EditProjectOculusCtrl {
                 ctrl._$scope.configs.displayName.focused = false;
                 ctrl._$scope.configs.version.focused = false;
                 ctrl.modals.password = false;
-                ctrl.getProject();
+                // ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Oculus build start');
 
                 ctrl.timer = ctrl._$interval(() => {
-                    ctrl.getProject();
+                    // ctrl.getProject();
                 }, 2000);
-
             },
 
             error: function (data) {
