@@ -182,7 +182,8 @@ class EditProjectAndroidCtrl {
         this.Project.publish(this.projectId).then(
             data => {
                 this.project.publishedPublic = true;
-                this.build(e);
+                this.open(e);
+                this.modals.notPublished = false;
             },
             err => {
                 this.showLoader = false;

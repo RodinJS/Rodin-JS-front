@@ -274,7 +274,7 @@
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <div class="text-center">
-                    <button type="button" class="btn btn-positive" ng-click="$ctrl.build()" data-ng-disabled="!password.$valid">Build</button>
+                    <button type="button" class="btn btn-positive" ng-click="$ctrl.build($event)" data-ng-disabled="!password.$valid">Build</button>
                     <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.password = false">Cancel</a>
                 </div>
             </div>
