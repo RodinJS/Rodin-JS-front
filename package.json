@@ -33,7 +33,7 @@
   "homepage": "https://github.com/RodinJS/Rodin-JS-front#readme",
   "devDependencies": {
     "babel-core": "^6.24.0",
-    "babel-loader": "^6.4.1",
+    "babel-loader": "^7.0.0",
     "babel-plugin-angular-inject": "^0.1.5",
     "babel-plugin-angularjs-annotate": "^0.5.1",
     "babel-plugin-transform-class-properties": "^6.11.5",
