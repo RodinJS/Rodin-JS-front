@@ -2,6 +2,7 @@ class ProjectCtrl {
     constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User, VCS, Notification, $timeout) {
         'ngInject';
 
+        this._$timeout = $timeout;
         this._$scope = $scope;
         this.Notification = Notification;
         this.appName = AppConstants.appName;
@@ -17,7 +18,7 @@ class ProjectCtrl {
             this.Notification.error(`Maximum projects count exceeded, allowed project count ${this.currentUser.allowProjectsCount}`);
             return this.$state.go('app.dashboard');
         }
-        this.githubPattern  = /(?:git|ssh|https?|git@[\w\.]+):(?:\/\/)?[\w\.@:\/~_-]+\.git(?:\/?|\#[\d\w\.\-_]+?)$/;
+        this.githubPattern = /(?:git|ssh|https?|git@[\w\.]+):(?:\/\/)?[\w\.@:\/~_-]+\.git(?:\/?|\#[\d\w\.\-_]+?)$/;
 
         this.project = {
             name: '',
@@ -27,7 +28,7 @@ class ProjectCtrl {
 
         this.showLoader = false;
 
-        this.wysiwygOptions =  [
+        this.wysiwygOptions = [
             [],
         ];
 
@@ -38,18 +39,11 @@ class ProjectCtrl {
             projects: [],
         };
 
-	    $scope.projectDescription = '';
-	    $scope.projectDescription = '';
+        $scope.projectDescription = '';
+        $scope.projectDescription = '';
 
         this.getTemplates();
         this.createFinalize = this.createFinalize.bind(this);
-        //this.createFinalizeError = this.createFinalizeError.bind(this);
-
-        $timeout(()=> {
-            this.inputPadding = (angular.element('.project-path-label').width() + 10);
-	        let placeholderPad = angular.element('.main-placeholder').innerWidth()+22;
-	        angular.element('#project-url').css({'padding-left':placeholderPad});
-        }, 500);
 
     }
 
@@ -58,7 +52,7 @@ class ProjectCtrl {
         this.projectExist = false;
         let projectInfo = {};
         angular.extend(projectInfo, this.project);
-        if(this.projectTemplates.selected)
+        if (this.projectTemplates.selected)
             projectInfo.templateId = this.projectTemplates.selected._id;
         projectInfo.tags = projectInfo.tags.map(i => i.text);
         projectInfo.description = this._$scope.projectDescription;
@@ -72,7 +66,7 @@ class ProjectCtrl {
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
                 if (err[0].code && err[0].code === 309)
@@ -89,20 +83,25 @@ class ProjectCtrl {
                     projects: _.chunk(data, 4),
                     selected: data[0],
                 };
+                this._$timeout(() => {
+                    this.inputPadding = (angular.element('.project-path-label').width() + 10);
+                    let placeholderPad = angular.element('.main-placeholder').innerWidth() + 22;
+                    angular.element('#project-url').css({'padding-left': placeholderPad});
+                }, 500);
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         );
     }
 
-    validateGithubUrl(){
+    validateGithubUrl() {
 
-        this.githubUrlValid =  this.githubPattern.test(this.project.githubUrl);
-        if(this.githubUrlValid){
+        this.githubUrlValid = this.githubPattern.test(this.project.githubUrl);
+        if (this.githubUrlValid) {
             angular.element('input[type=radio]').prop('checked', false);
             this.projectTemplates.selected = null;
         }
