@@ -182,12 +182,12 @@ class EditProjectAndroidCtrl {
         this.Project.publish(this.projectId).then(
             data => {
                 this.project.publishedPublic = true;
-                this.open(e);
                 this.modals.notPublished = false;
+                this.open(e);
             },
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
             }
