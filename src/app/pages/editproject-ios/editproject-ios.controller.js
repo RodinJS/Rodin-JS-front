@@ -57,15 +57,25 @@ class EditProjectIosCtrl {
                 this._$interval.cancel(this.timer);
             }
         })
+        this.isBuildInProcess = false;
+        this.initRequest = true;
     }
 
     getProject() {
         this.showLoader = true;
         this.Project.get(this.projectId, { device: 'ios' }).then(
             project => {
-                this.showLoader = false;
-                this.eventBus.emit(this.eventBus.project.SET, project);
-                this.project = project;
+                if (this.initRequest || project.build.android.built) {
+                    this.eventBus.emit(this.eventBus.project.SET, project);
+                    this.isBuildInProcess = false;
+                    this.project = project;
+                    this.initRequest = false;
+                    this.showLoader = false;
+                    this.files.profile.name = '';
+                    this.files.cert.name = '';
+                    this.files.icon.name = '';
+                    this.files.icon.src = '';
+                }
 
                 if (this.project.build.ios.built && this.timer) {
                     this._$interval.cancel(this.timer);
@@ -239,6 +249,7 @@ class EditProjectIosCtrl {
                 project: angular.toJson(project),
             },
             success: function (data) {
+                ctrl.isBuildInProcess = false;
                 ctrl.modals.password = false;
                 ctrl._$scope.configs.displayName.focused = false;
                 ctrl._$scope.configs.version.focused = false;

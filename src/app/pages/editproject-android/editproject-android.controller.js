@@ -56,15 +56,24 @@ class EditProjectAndroidCtrl {
                 this._$interval.cancel(this.timer);
             }
         })
+        this.isBuildInProcess = false;
+        this.initRequest = true;
     }
 
     getProject () {
         this.showLoader = true;
         this.Project.get(this.projectId, { device: 'android' }).then(
             project => {
-                this.showLoader = false;
-                this.eventBus.emit(this.eventBus.project.SET, project);
-                if (this.project.build.android.built && this.timer) {
+                if (this.initRequest || project.build.android.built) {
+                    this.eventBus.emit(this.eventBus.project.SET, project);
+                    this.isBuildInProcess = false;
+                    this.initRequest = false;
+                    this.showLoader = false;
+                    this.files.icon.name = '';
+                    this.files.icon.src = '';
+                }
+
+                if (project.build.android.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },
@@ -220,6 +229,7 @@ class EditProjectAndroidCtrl {
                 project: angular.toJson(project),
             },
             success: function (data) {
+                ctrl.isBuildInProcess = true;
                 ctrl.modals.password = false;
                 ctrl._$scope.configs.displayName.focused = false;
                 ctrl._$scope.configs.version.focused = false;
@@ -230,8 +240,6 @@ class EditProjectAndroidCtrl {
                 ctrl._$scope.configs.KSState.focused = false;
                 ctrl._$scope.configs.KSCC.focused = false;
                 ctrl._$scope.configs.KSAlias.focused = false;
-                ctrl.files.icon.name = '';
-                ctrl.files.icon.src = '';
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Android build start');

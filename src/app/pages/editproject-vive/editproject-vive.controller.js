@@ -60,14 +60,21 @@ class EditProjectViveCtrl {
                 this._$interval.cancel(this.timer);
             }
         })
+        this.initRequest = true;
+        this.isBuildInProcess = false;
     }
 
     getProject() {
         this.showLoader = true;
         this.Project.get(this.projectId, {device: 'vive'}).then(
             project => {
-                this.showLoader = false;
-                this.eventBus.emit(this.eventBus.project.SET, project);
+                if (this.initRequest || project.build.vive.built) {
+                    this.showLoader = false;
+                    this.eventBus.emit(this.eventBus.project.SET, project);
+                    this.isBuildInProcess = false;
+                    this.initRequest = false;
+                }
+
                 if (this.project.build.vive.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
@@ -239,6 +246,7 @@ class EditProjectViveCtrl {
                 project: angular.toJson(project),
             },
             success: function (data) {
+                ctrl.isBuildInProcess = true;
                 ctrl._$scope.configs.displayName.focused = false;
                 ctrl._$scope.configs.version.focused = false;
                 ctrl.modals.password = false;
