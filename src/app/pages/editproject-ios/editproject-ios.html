@@ -42,7 +42,6 @@
                                    data-ng-model="$ctrl.project.ios.name"
                                    name="displayName"
                                    required
-                                   data-ng-disabled="$ctrl.isBuildInProcess"
                                    data-ng-focus="configs.displayName.focused = true">
                             <p class="form-description">App Name - Display name of your app</p>
                         </div>
@@ -60,7 +59,6 @@
                                    data-ng-model="$ctrl.project.ios.version"
                                    name="version"
                                    required
-                                   data-ng-disabled="$ctrl.isBuildInProcess"
                                    ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/"
                                    data-ng-focus="configs.version.focused = true"
                                    data-ng-change="$ctrl.project.build.ios.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.ios.version, $ctrl.project.ios.version))">
@@ -79,7 +77,6 @@
                                    data-ng-model="$ctrl.project.ios.bundle"
                                    name="bundle"
                                    required
-                                   data-ng-disabled="$ctrl.isBuildInProcess"
                                    ng-pattern="$ctrl.patterns.bundle"
                                    data-ng-focus="configs.bundle.focused = true">
                             <p class="form-description">Bundle Identifier - A bundle ID precisely
@@ -99,7 +96,6 @@
                                    data-ng-model="$ctrl.project.ios.developerId"
                                    name="developerId"
                                    required
-                                   data-ng-disabled="$ctrl.isBuildInProcess"
                                    data-ng-focus="configs.developerId.focused = true">
                             <p class="form-description">Developer ID.</p>
                         </div>
@@ -274,37 +270,35 @@
                     <form class="main-form" action="" ng-if="$ctrl.project.build.ios.requested">
                         <div class="section">
                             <div class="required-field-item">
-                                <section data-ng-if="!$ctrl.isBuildInProcess && $ctrl.project.build.ios.built">
-                                    <p class="description margin-top-40 text-white text-center">Package ready</p>
-                                    <div class="small-loader"
-                                         data-ng-if="$ctrl.project.build.ios.requested && !$ctrl.project.build.ios.built">
-                                        <div class="image"></div>
-                                    </div>
-                                    <div class="main-upload-area "
-                                         data-ng-if="$ctrl.project.build.ios.built">
-                                        <div class="download-build">
-                                            <div class="dashed-bord">
-                                                <img src="images/general/file_icon_placeholder.png" alt="" width="60"
-                                                     class="uploaded-file-icon">
-                                            </div>
-                                            <div class="download" ng-click="$ctrl.download()">
-                                                <span>Download</span>
-                                            </div>
-                                            <p class="description">Click to download</p>
+                                <p data-ng-if="$ctrl.project.build.ios.built"
+                                   class="description margin-top-40 text-white text-center">Package ready</p>
+                                <div class="small-loader"
+                                     data-ng-if="$ctrl.project.build.ios.requested && !$ctrl.project.build.ios.built">
+                                    <div class="image"></div>
+                                </div>
+                                <div class="main-upload-area "
+                                     data-ng-if="$ctrl.project.build.ios.built">
+                                    <div class="download-build">
+                                        <div class="dashed-bord">
+                                            <img src="images/general/file_icon_placeholder.png" alt="" width="60"
+                                                 class="uploaded-file-icon">
                                         </div>
+                                        <div class="download" ng-click="$ctrl.download()">
+                                            <span>Download</span>
+                                        </div>
+                                        <p class="description">Click to download</p>
                                     </div>
-                                </section>
-                                <section data-ng-if="$ctrl.isBuildInProcess">
-                                    <p class="description margin-top-20 text-white text-center">We are now building your installation
-                                        package, the download link will appear here once done.</p>
-                                    <div class="required-field-actions text-center">
-                                        <!--<button data-ng-if="$ctrl.project.build.oculus.built"-->
-                                        <!--type="button" class="btn btn-primary"-->
-                                        <!--ng-click="$ctrl.download()">download-->
-                                        <!--</button>-->
-                                        <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">Cancel</a>
-                                    </div>
-                                </section>
+                                </div>
+                                <p data-ng-if="!$ctrl.project.build.ios.built"
+                                   class="description margin-top-20 text-white text-center">We are now building your installation
+                                    package, the download link will appear here once done.</p>
+                                <div class="required-field-actions text-center">
+                                    <!--<button data-ng-if="$ctrl.project.build.oculus.built"-->
+                                    <!--type="button" class="btn btn-primary"-->
+                                    <!--ng-click="$ctrl.download()">download-->
+                                    <!--</button>-->
+                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">Cancel</a>
+                                </div>
                             </div>
                         </div>
                     </form>

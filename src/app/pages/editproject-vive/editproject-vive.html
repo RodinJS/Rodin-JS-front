@@ -26,7 +26,6 @@
                                        data-ng-model="$ctrl.project.vive.name"
                                        name="displayName"
                                        required
-                                       data-ng-disabled="$ctrl.isBuildInProcess"
                                        data-ng-focus="configs.displayName.focused = true">
                                 <p class="form-description">App Name - Display name of your app</p>
                             </div>
@@ -44,7 +43,6 @@
                                        data-ng-model="$ctrl.project.vive.version"
                                        name="version"
                                        required
-                                       data-ng-disabled="$ctrl.isBuildInProcess"
                                        ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/"
                                        data-ng-focus="configs.version.focused = true"
                                        data-ng-change="$ctrl.project.build.vive.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.vive.version, $ctrl.project.vive.version))">
@@ -81,7 +79,6 @@
                                            data-ng-model="$ctrl.project.vive.viveportId"
                                            name="viveportId"
                                            required
-                                           data-ng-disabled="$ctrl.isBuildInProcess"
                                            data-ng-focus="configs.viveportId.focused = true">
                                     <p class="form-description">Viveport id</p>
                                 </div>
@@ -95,7 +92,6 @@
                                            data-ng-model="$ctrl.project.vive.viveportKey"
                                            name="viveportKey"
                                            required
-                                           data-ng-disabled="$ctrl.isBuildInProcess"
                                            data-ng-focus="configs.viveportKey.focused = true">
                                     <p class="form-description">Viveport key</p>
                                 </div>
