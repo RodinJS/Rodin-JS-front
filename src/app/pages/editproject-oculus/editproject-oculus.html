@@ -43,7 +43,7 @@
                                         ng-if="configs.displayName.$invalid && configs.displayName.focused">is required</span>
                                 </label>
                                 <input type="text" class="form-control" placeholder="" data-ng-model="$ctrl.project.oculus.name" name="displayName" required
-                                    data-ng-focus="configs.displayName.focused = true" data-ng-disabled="$ctrl.isBuildInProcess">
+                                    data-ng-focus="configs.displayName.focused = true">
                                 <p class="form-description">App Name - Display name of your app</p>
                             </div>
 
@@ -56,8 +56,7 @@
                                 </label>
                                 <input type="text" class="form-control" placeholder="" data-ng-model="$ctrl.project.oculus.version" name="version" required
                                     ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/" data-ng-focus="configs.version.focused = true"
-                                    data-ng-disabled="$ctrl.isBuildInProcess"
-                                       data-ng-change="$ctrl.project.build.oculus.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.oculus.version, $ctrl.project.oculus.version))">
+                                    data-ng-change="$ctrl.project.build.oculus.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.oculus.version, $ctrl.project.oculus.version))">
                                 <p class="form-description">Version of your app</p>
                                 <p class="form-description" ng-if="configs.version.error">
                                     The current version for this project is 3.1.2, please select a higher version for the new build.
