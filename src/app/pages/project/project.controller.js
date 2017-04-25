@@ -2,6 +2,7 @@ class ProjectCtrl {
     constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User, VCS, Notification, $timeout) {
         'ngInject';
 
+        this._$timeout= $timeout;
         this._$scope = $scope;
         this.Notification = Notification;
         this.appName = AppConstants.appName;
@@ -43,13 +44,6 @@ class ProjectCtrl {
 
         this.getTemplates();
         this.createFinalize = this.createFinalize.bind(this);
-        //this.createFinalizeError = this.createFinalizeError.bind(this);
-
-        $timeout(()=> {
-            this.inputPadding = (angular.element('.project-path-label').width() + 10);
-	        let placeholderPad = angular.element('.main-placeholder').innerWidth()+22;
-	        angular.element('#project-url').css({'padding-left':placeholderPad});
-        }, 500);
 
     }
 
@@ -89,6 +83,12 @@ class ProjectCtrl {
                     projects: _.chunk(data, 4),
                     selected: data[0],
                 };
+                this._$timeout(()=> {
+                    this.inputPadding = (angular.element('.project-path-label').width() + 10);
+                    console.log(this.inputPadding)
+                    let placeholderPad = angular.element('.main-placeholder').innerWidth()+22;
+                    angular.element('#project-url').css({'padding-left':placeholderPad});
+                }, 500);
             },
 
             err => {
