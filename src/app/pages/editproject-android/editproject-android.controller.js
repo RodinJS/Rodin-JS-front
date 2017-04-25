@@ -73,7 +73,7 @@ class EditProjectAndroidCtrl {
                     this.files.icon.src = '';
                 }
 
-                if (this.project.build.android.built && this.timer) {
+                if (project.build.android.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },

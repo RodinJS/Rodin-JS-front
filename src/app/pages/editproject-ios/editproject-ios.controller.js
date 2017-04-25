@@ -71,6 +71,10 @@ class EditProjectIosCtrl {
                     this.project = project;
                     this.initRequest = false;
                     this.showLoader = false;
+                    this.files.profile.name = '';
+                    this.files.cert.name = '';
+                    this.files.icon.name = '';
+                    this.files.icon.src = '';
                 }
 
                 if (this.project.build.ios.built && this.timer) {

@@ -11,11 +11,8 @@ const AppConstants = {
 
     local: {
         COOKIEDOMAIN: ['localhost', '.rodin.space'],
-        // SOCKET: 'http://localhost:4000/api',
-        // API: 'http://localhost:3000/api',
-
-        SOCKET: 'https://ss.rodin.space/api',
-        API: 'https://api.rodin.space/api',
+        SOCKET: 'http://localhost:4000/api',
+        API: 'http://localhost:3000/api',
         RECORDIP: '178.62.229.191',
         // API: 'http://192.168.0.33:3000/api', // Xcho
         SITE: 'http://localhost:8585/',
