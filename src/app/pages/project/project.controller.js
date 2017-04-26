@@ -77,6 +77,7 @@ class ProjectCtrl {
     }
 
     getTemplates() {
+        this.showLoader = true;
         this.ProjectTemplate.getList().then(
             data => {
                 this.projectTemplates = {
@@ -87,6 +88,7 @@ class ProjectCtrl {
                     this.inputPadding = (angular.element('.project-path-label').width() + 10);
                     let placeholderPad = angular.element('.main-placeholder').innerWidth() + 22;
                     angular.element('#project-url').css({'padding-left': placeholderPad});
+                    this.showLoader = false;
                 }, 500);
             },
 
