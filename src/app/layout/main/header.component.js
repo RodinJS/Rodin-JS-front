@@ -61,7 +61,6 @@ class AppHeaderCtrl {
     }
 
     showSocketResponse(data){
-        console.log(data);
         const message = _.isObject(data.data) ? data.data.message : data.data;
         if(data.data.error || data.error)
             this._Notification.error(message);
@@ -103,12 +102,13 @@ class AppHeaderCtrl {
     }
 
     deleteNotification(param, index) {
+        if(this.notifications.length <= 0) return;
         param = !param  ? 'all=true' : 'id=' + param + '';
+
         this.User.deleteNotification(param).then(
             notification=> {
                 this.eventBus.emit(this.eventBus.notifications.DELETE, index);
             },
-
             error=> {
                 console.log(error);
             }
