@@ -19,7 +19,6 @@ function ModulesStore(EventBus, BaseStore) {
 
     EventBus.on(EventBus.modules.UPDATE, (scope, data) => {
         let findModuleIndex = _.findIndex(factory.data.myModules, (module) => (module._id == data._id || module._id == data.moduleId));
-
         if (findModuleIndex > -1) {
             factory.data.myModules[findModuleIndex] = data;
         }
@@ -51,10 +50,12 @@ function ModulesStore(EventBus, BaseStore) {
         return _.map(factory.data.myModules, (module)=> {
             const assignedToProject = factory.getMyModulesByPrjectId(module, projectId);
             const validDate = (new Date() < new Date(module.expiredAt));
+            console.log(validDate, assignedToProject, module.expiredAt);
             if (assignedToProject && validDate) {
                 module.script = assignedToProject.script;
-            } else
+            } else{
                 delete module.script;
+            }
 
             return module;
         });
@@ -74,6 +75,11 @@ function ModulesStore(EventBus, BaseStore) {
         });
 
     };
+
+    factory.removeAllModules = function(){
+        factory.data.myModules = false;
+        factory.data.modules = false
+    }
 
     return factory;
 }

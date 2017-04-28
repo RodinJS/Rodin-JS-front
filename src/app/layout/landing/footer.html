@@ -46,7 +46,8 @@
 			</p>
 			<ul class="footer-menu-list">
 				<li ng-repeat="page in $ctrl.pagesList">
-					<a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+					<a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
+					<a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
 				</li>
 
 			</ul>

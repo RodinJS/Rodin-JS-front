@@ -40,7 +40,8 @@
                             <a ui-sref="landing.samples">Samples</a>
                         </li>
                         <li ng-repeat="page in $ctrl.pagesSection1">
-                            <a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+                            <a ng-if="page.externalURL" target="_blank" ng-href="{{page.externalURL}}">{{page.title}}</a>
+                            <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                         </li>
                         <li class="dropdown" uib-dropdown auto-close="outsideClick"  ng-if="$ctrl.pagesSection2.length > 0">
                             <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown" role="button"
@@ -49,7 +50,8 @@
                             </a>
                             <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel" ng-if="$ctrl.pagesSection2.length > 0">
                                 <li class="rodin-hide" ng-repeat="pages in $ctrl.pagesSection2">
-                                    <a ui-sref="landing.pages({pageURL:'{{pages.slug}}'})">{{pages.title}}</a>
+                                    <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
+                                    <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                                 </li>
                             </ul>
                         </li>

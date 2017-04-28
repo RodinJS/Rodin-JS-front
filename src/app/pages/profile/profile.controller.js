@@ -67,7 +67,6 @@ class ProfileCtrl {
         catch (e) {
             this.Notification.warning({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
         }
-
         if ($stateParams.token && $stateParams.id && this.currentUser) {
 
             let data = {
@@ -80,7 +79,8 @@ class ProfileCtrl {
 
             this._User.gitAuth(data).then((res) => {
                 this.currentUser.github = $stateParams.socialEmail;
-                this.showGitSyncModal();
+                if(this.currentUser.projects.total > 0)
+                    this.showGitSyncModal();
             }, (err) => {
                 this.isSubmitting = false;
                 this.errors = err;

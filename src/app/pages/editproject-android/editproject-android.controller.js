@@ -177,13 +177,28 @@ class EditProjectAndroidCtrl {
         }
     }
 
-    build () {
+   publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.modals.notPublished = false;
+                this.open(e);
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key)=> {
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
+    build (event) {
 	    if (!this.project.publishedPublic) {
 		    return this.modals.notPublished = true;
 	    }
-        const e = this.openEvent;
         const ctrl = this;
-        e.preventDefault();
+        event.preventDefault();
         let project = {
             userId: this.user.username,
             appId: this.project._id,
@@ -194,6 +209,7 @@ class EditProjectAndroidCtrl {
         };
 
         this.showLoader = true;
+        this.modals.notPublished = false;
         $('#configs').ajaxForm({
             dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/android',
@@ -214,6 +230,8 @@ class EditProjectAndroidCtrl {
                 ctrl._$scope.configs.KSState.focused = false;
                 ctrl._$scope.configs.KSCC.focused = false;
                 ctrl._$scope.configs.KSAlias.focused = false;
+                ctrl.files.icon.name = '';
+                ctrl.files.icon.src = '';
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Android build start');

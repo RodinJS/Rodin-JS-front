@@ -23,10 +23,10 @@ class EditProjectPublishCtrl {
 
         this.modals =  {
             updateVersion: false,
-            rollBack:false,
+            rollBack: false,
             unpublish: false
         };
-
+        this.getProject();
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();

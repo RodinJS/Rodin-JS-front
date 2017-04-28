@@ -31,7 +31,8 @@
                         <a ui-sref="landing.samples">Samples</a>
                     </li>
                     <li ng-repeat="page in $ctrl.pagesSection1">
-                        <a ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+                        <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
+                        <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                     </li>
 
                     <li class="dropdown" uib-dropdown auto-close="outsideClick" ng-if="$ctrl.pagesSection2.length > 0">
@@ -43,7 +44,8 @@
                         <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel"
                             ng-if="$ctrl.pagesSection2.length > 0">
                             <li class="rodin-hide" ng-repeat="pages in $ctrl.pagesSection2">
-                                <a ui-sref="landing.pages({pageURL:'{{pages.slug}}'})">{{pages.title}}</a>
+                                <a ng-if="page.externalURL" target="_blank" ng-href="{{page.externalURL}}">{{page.title}}</a>
+                                <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                             </li>
                         </ul>
                     </li>
@@ -71,8 +73,8 @@
                             <div class="notification-wrapper">
                                 <h5 class="pull-left">Notifications</h5>
                                 <small class="pull-right">
-                                    <a href="" ng-click="$ctrl.deleteNotification()" style="font-size: 11px;">Delete
-                                        all</a>
+                                    <a href="" ng-click="$ctrl.deleteNotification()" style="font-size: 11px;">
+                                        Delete all</a>
                                 </small>
                                 <div style="clear:both"></div>
                             </div>
