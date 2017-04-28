@@ -338,8 +338,11 @@ function RdScroll() {
 			rdScroll: '=',
 		},
 		link: function link(scope, elem, attrs, ctrl) {
-			$(elem).slimScroll({
-				height: '485px',
+            const totalNotifications = parseInt(attrs.totalNotifications || 0);
+            const NotificationHeight = (59 + 5);
+            const height = totalNotifications <= 4 ?  NotificationHeight*totalNotifications : 350;
+            $(elem).slimScroll({
+				height: `${height}px`,
 				color: '#AAAAAA',
 				alwaysVisible: true
 			})
