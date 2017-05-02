@@ -243,12 +243,14 @@
       right: 0;
       .notification-list {
         position: relative;
-        height: 120px;
-        padding: 6px 15px;
+        height: 50px;
+        display: table;
+        text-align: center;
+        width: 100%;
         .no-notifications {
-          position: absolute;
-          top: 51px;
-          left: 42px;
+          font-size: 14px;
+          display: table-cell;
+          vertical-align: middle;
         }
       }
       .notification-wrapper {
@@ -289,12 +291,9 @@
             left: 10px;
           }
           &:first-child {
-            &:before {
-              top: 10px;
-            }
-            a {
-              padding-top: 5px;
-            }
+            //&:before {
+            //  top: 10px;
+            //}
           }
         }
         a {
