@@ -45,18 +45,16 @@ function ModulesStore(EventBus, BaseStore) {
 
     factory.getMyModules = function (projectId) {
         if (!projectId) return factory.data.myModules;
-        //const modules = _.filter(factory.data.myModules, (module) => (new Date() < new Date(module.expiredAt)));
 
         return _.map(factory.data.myModules, (module)=> {
             const assignedToProject = factory.getMyModulesByPrjectId(module, projectId);
             const validDate = (new Date() < new Date(module.expiredAt));
-            console.log(validDate, assignedToProject, module.expiredAt);
             if (assignedToProject && validDate) {
                 module.script = assignedToProject.script;
-            } else{
+            }
+            else{
                 delete module.script;
             }
-
             return module;
         });
     };
@@ -70,7 +68,6 @@ function ModulesStore(EventBus, BaseStore) {
                 module.expiredAt = findMyModule.expiredAt;
                 module.unsubscribed = findMyModule.unsubscribed;
             }
-
             return module;
         });
 
