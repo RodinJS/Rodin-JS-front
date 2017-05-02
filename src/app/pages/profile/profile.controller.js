@@ -148,6 +148,9 @@ class ProfileCtrl {
             },
             err => {
                 this.showLoader = false;
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
             }
         );
     }
