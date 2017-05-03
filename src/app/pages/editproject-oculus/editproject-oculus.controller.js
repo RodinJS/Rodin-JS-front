@@ -18,6 +18,7 @@ class EditProjectOculusCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
+        this.project = false;
         this.getProject();
 
         this.user = User.current;
@@ -51,6 +52,21 @@ class EditProjectOculusCtrl {
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
+            console.log('OCULUS', this.project);
+            if(this.project && (!this.project.oculus || Object.keys(this.project.oculus).length <=0 ) && !this.project.build.oculus.built){
+                this.project.oculus = {
+                    name:this.project.fields.appName,
+                    version:this.project.fields.version,
+                };
+                this.projectError = this.project.fields.error;
+
+                if(this.projectError){
+                    this.project.build.oculus.requested = false;
+                    this.errorText = this._AppConstants.ERRORCODES[this.projectError.message].message ||
+                        `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
+
+                }
+            }
         });
         $scope.$on('$destroy', ()=>{
             if(this.timer){
@@ -66,7 +82,7 @@ class EditProjectOculusCtrl {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
 
-                if(this.project.build.oculus.built && this.timer){
+                if(this.project && this.project.build.oculus.built && this.timer){
                     this._$interval.cancel(this.timer);
                 }
             },

@@ -49,11 +49,29 @@ class EditProjectViveCtrl {
         this.openEvent = null;
         this.vivePortTrigger = false;
 
+        this.project = false;
+        this.getProject();
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
+            console.log('VIVIE', this.project);
+            if(this.project && (!this.project.vive || Object.keys(this.project.vive).length <=0 ) && !this.project.build.vive.built){
+                this.project.vive = {
+                    name:this.project.fields.appName,
+                    version:this.project.fields.version,
+                };
+                this.projectError = this.project.fields.error;
+
+                if(this.projectError){
+                    this.project.build.vive.requested = false;
+                    this.errorText = this._AppConstants.ERRORCODES[this.projectError.message].message ||
+                        `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
+
+                }
+            }
+
         });
-        this.getProject();
+
 
         $scope.$on('$destroy', () => {
             if (this.timer) {
@@ -68,7 +86,7 @@ class EditProjectViveCtrl {
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                if (this.project.build.vive.built && this.timer) {
+                if (this.project && this.project.build.vive.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },

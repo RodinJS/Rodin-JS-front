@@ -1,5 +1,5 @@
 class EditProjectAndroidCtrl {
-    constructor (AppConstants, Project, $state, $interval, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
+    constructor(AppConstants, Project, $state, $interval, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
 
         if (!$stateParams.projectId) return $state.go('landing.error');
@@ -46,31 +46,50 @@ class EditProjectAndroidCtrl {
         this.keyStoreFileUpload = false;
 
         this.eventBus = EventBus;
+        this.project = false;
         this.getProject();
-        ProjectStore.subscribeAndInit($scope, ()=> {
+        ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
+            //&& !this.project.build.android.built
+            if (this.project && this.project.fields && this.project.fields.android &&
+                (!this.project.android || Object.keys(this.project.android).length <= 0 ) && !this.project.build.android.built) {
+                this.project.android = {
+                    name: this.project.fields.appName,
+                    version: this.project.fields.version,
+                    package: this.project.fields.android.package,
+                    keyStore: this.project.fields.android.keyStore
+                };
+                this.projectError = this.project.fields.error;
+
+                if (this.projectError) {
+                    this.project.build.android.requested = false;
+                    this.errorText = this._AppConstants.ERRORCODES[this.projectError.message].message ||
+                        `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
+
+                }
+            }
         });
 
-        $scope.$on('$destroy', ()=>{
-            if(this.timer){
+        $scope.$on('$destroy', () => {
+            if (this.timer) {
                 this._$interval.cancel(this.timer);
             }
         })
     }
 
-    getProject () {
+    getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, { device: 'android' }).then(
+        this.Project.get(this.projectId, {device: 'android'}).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                if (this.project.build.android.built && this.timer) {
+                if (this.project && this.project.build.android.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
                 this.showLoader = false;
@@ -79,7 +98,7 @@ class EditProjectAndroidCtrl {
         );
     }
 
-    update () {
+    update() {
         this.showLoader = true;
         this.Project.update(this.project._id, this.project).then(
             data => {
@@ -89,14 +108,14 @@ class EditProjectAndroidCtrl {
 
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         );
     }
 
-    changeIcon (e) {
+    changeIcon(e) {
         if (window.FileReader && window.Blob) {
 
             var file = e.target.files[0];
@@ -121,7 +140,7 @@ class EditProjectAndroidCtrl {
         }
     }
 
-    isValidImage (file) {
+    isValidImage(file) {
         var defer = this.$q.defer();
         var result = {
             valid: true,
@@ -166,7 +185,7 @@ class EditProjectAndroidCtrl {
         return defer.promise;
     }
 
-    changeKeyStore (e) {
+    changeKeyStore(e) {
         if (window.FileReader && window.Blob) {
             var file = e.target.files[0];
             this.files.keystore.name = file.name;
@@ -177,7 +196,7 @@ class EditProjectAndroidCtrl {
         }
     }
 
-   publishNbuild(e) {
+    publishNbuild(e) {
         this.showLoader = true;
         this.Project.publish(this.projectId).then(
             data => {
@@ -187,22 +206,22 @@ class EditProjectAndroidCtrl {
             },
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         )
     }
-    build (event) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+
+    build(event) {
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         const ctrl = this;
         event.preventDefault();
         let project = {
             userId: this.user.username,
             appId: this.project._id,
-            url: 'http://google.com',
             appName: this.project.android.name,
             android: this.project.android,
             version: this.project.android.version,
@@ -251,7 +270,7 @@ class EditProjectAndroidCtrl {
         console.log(project);
     };
 
-    cancelBuild (e) {
+    cancelBuild(e) {
         const ctrl = this;
         e.preventDefault();
         let project = {
@@ -286,15 +305,15 @@ class EditProjectAndroidCtrl {
         console.log(project);
     };
 
-    open (e) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+    open(e) {
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         this.modals.password = true;
         this.openEvent = e;
     }
 
-    download () {
+    download() {
         this.showLoader = true;
         this.Project.download(this.project._id, 'android').then(
             data => {
@@ -304,15 +323,16 @@ class EditProjectAndroidCtrl {
 
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         );
     }
-	gotToPublish() {
-		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
-	}
+
+    gotToPublish() {
+        this.$state.go('app.editprojectPublish', {projectId: this.project._id});
+    }
 }
 
 export default EditProjectAndroidCtrl;
