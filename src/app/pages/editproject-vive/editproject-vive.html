@@ -151,7 +151,7 @@
         </div>
     </div>
 </div>
-<div class="modal model-confirm" close-modal="notPublished"
+<div class="modal model-confirm publish-modal" close-modal="notPublished"
      ng-class="{'display-block': $ctrl.modals.notPublished, 'display-none': !$ctrl.modals.notPublished}">
     <div class="modal-content">
         <div class="modal-header">
@@ -167,6 +167,9 @@
             <div class="required-field-actions clearfix">
                 <div class="text-center">
 
+                    <button type="button" class="btn btn-positive"
+                            ng-click="$ctrl.publishNbuild($event)">Publish & Build
+                    </button>
                     <button type="button" class="btn btn-positive"
                             ng-click="$ctrl.gotToPublish()">Publish Project
                     </button>

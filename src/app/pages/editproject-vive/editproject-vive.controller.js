@@ -19,6 +19,7 @@ class EditProjectViveCtrl {
         this.project = {};
         this.showLoader = true;
 
+        this.userService = User;
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
 
@@ -49,13 +50,13 @@ class EditProjectViveCtrl {
         this.vivePortTrigger = false;
 
         this.eventBus = EventBus;
-        ProjectStore.subscribeAndInit($scope, ()=> {
+        ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
         });
         this.getProject();
 
-        $scope.$on('$destroy', ()=>{
-            if(this.timer){
+        $scope.$on('$destroy', () => {
+            if (this.timer) {
                 this._$interval.cancel(this.timer);
             }
         })
@@ -63,17 +64,17 @@ class EditProjectViveCtrl {
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, { device: 'vive' }).then(
+        this.Project.get(this.projectId, {device: 'vive'}).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                if(this.project.build.vive.built && this.timer){
+                if (this.project.build.vive.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
                 this.showLoader = false;
@@ -189,10 +190,26 @@ class EditProjectViveCtrl {
         }
     }
 
+    publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.build(e);
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
+
     build(e) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         const ctrl = this;
         e.preventDefault();
         this.project.build.vive.built = false;
@@ -201,17 +218,17 @@ class EditProjectViveCtrl {
             appId: this.project._id,
             appName: this.project.vive.name,
             version: this.project.vive.version,
-            vive: {
-
-            },
+            vive: {},
         };
 
-        if(this.vivePortTrigger){
+        if (this.vivePortTrigger) {
             project.vive.viveportId = this.project.vive.viveportId;
             project.vive.viveportKey = this.project.vive.viveportKey;
         }
 
         ctrl.showLoader = true;
+
+        this.modals.notPublished = false;
         $('#configs').ajaxForm({
             dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/vive',
@@ -228,7 +245,6 @@ class EditProjectViveCtrl {
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Vive build start');
-
                 ctrl.timer = ctrl._$interval(() => {
                     ctrl.getProject();
                 }, 2000);
@@ -251,8 +267,7 @@ class EditProjectViveCtrl {
             appId: this.project._id,
             //appName: this.project.vive.name,
             //version:this.project.vive.version,
-            vive: {
-            },
+            vive: {},
         };
 
         ctrl.showLoader = true;
@@ -280,9 +295,9 @@ class EditProjectViveCtrl {
     };
 
     open(e) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -301,9 +316,10 @@ class EditProjectViveCtrl {
             }
         );
     }
-	gotToPublish() {
-		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
-	}
+
+    gotToPublish() {
+        this.$state.go('app.editprojectPublish', {projectId: this.project._id});
+    }
 }
 
 export default EditProjectViveCtrl;

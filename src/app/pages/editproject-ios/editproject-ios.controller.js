@@ -190,14 +190,30 @@ class EditProjectIosCtrl {
             this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
     }
+   publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.open(e);
+                this.modals.notPublished = false;
 
-    build() {
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
+
+    build(event) {
 	    if (!this.project.publishedPublic) {
 		    return this.modals.notPublished = true;
 	    }
-        const e = this.openEvent;
         const ctrl = this;
-        e.preventDefault();
+        event.preventDefault();
         let project = {
             userId: this.user.username,
             appId: this.projectId,
@@ -212,6 +228,7 @@ class EditProjectIosCtrl {
         };
 
         ctrl.showLoader = true;
+        this.modals.notPublished = false;
         $('#configs').ajaxForm({
             dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.projectId + '/build/ios',
