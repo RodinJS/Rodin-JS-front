@@ -63,7 +63,8 @@ class EditProjectAndroidCtrl {
 
                 if (this.projectError) {
                     this.project.build.android.requested = false;
-                    this.errorText = this._AppConstants.ERRORCODES[this.projectError.message].message ||
+                    const msg = this._AppConstants.ERRORCODES[this.projectError.message];
+                    this.errorText = msg ? msg.message :
                         `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
 
                 }
@@ -260,6 +261,7 @@ class EditProjectAndroidCtrl {
             },
 
             error: function (data) {
+                console.log(data);
                 if (data.responseJSON && data.responseJson.error.message)
                     ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;

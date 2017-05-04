@@ -60,9 +60,10 @@ class EditProjectOculusCtrl {
                 };
                 this.projectError = this.project.fields.error;
 
-                if(this.projectError){
+                if(this.projectError && this.project.fields.buildId){
                     this.project.build.oculus.requested = false;
-                    this.errorText = this._AppConstants.ERRORCODES[this.projectError.message].message ||
+                    const msg = this._AppConstants.ERRORCODES[this.projectError.message];
+                    this.errorText = msg ? msg.message :
                         `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
 
                 }
