@@ -1,5 +1,11 @@
 $error_color:#F44336; //#a94442; //;
 .form-group {
+  label{
+    sub{
+      bottom:5px !important;
+      //left:1px !important;
+    }
+  }
   &.has-error {
     margin-bottom: 50px !important;
     .form-control{
@@ -13,6 +19,17 @@ $error_color:#F44336; //#a94442; //;
     bottom: -25px;
     &.error {
       color: $error_color;
+    }
+  }
+}
+
+form{
+  .btn-wrapper{
+    button{
+      &[disabled]{
+        cursor: default;
+        opacity: 1;
+      }
     }
   }
 }

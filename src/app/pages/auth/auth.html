@@ -98,9 +98,10 @@
                                data-ng-model="$ctrl.formData.username" required
                                data-ng-focus="register.username.focused = true"
                                >
-                        <label class="control-label float-label">Username</label>
+                        <label class="control-label float-label">Username<sub>*</sub></label>
                         <div class="validation error" ng-if="register.username.$invalid && register.username.focused">Username required</div>
                     </div>
+
                     <div class="form-group" custom-input
                          data-ng-class="{
                          'has-error': register.email.$invalid && register.email.focused,
@@ -115,7 +116,7 @@
                                data-ng-pattern="$ctrl.patterns.email"
                                data-ng-focus="register.email.focused = true"
                                data-ng-model="$ctrl.formData.email" required>
-                        <label class="control-label float-label">Email</label>
+                        <label class="control-label float-label">Email<sub>*</sub></label>
                         <div class="validation error" ng-if="register.email.$invalid && register.email.focused">Email required</div>
                     </div>
 
@@ -135,7 +136,7 @@
                                ng-minlength="8"
                                data-ng-focus="register.password.focused = true"
                                required>
-                        <label class="control-label float-label">Password</label>
+                        <label class="control-label float-label">Password<sub>*</sub></label>
                         <div class="validation error" ng-if="register.password.$invalid && register.password.focused">
                             Passwords must be at least 8 characters long, containing a number and letter
                         </div>
@@ -163,7 +164,7 @@
                                ng-minlength="8"
                                data-ng-focus="register.passwordConfirm.focused = true"
                                required>
-                        <label class="control-label float-label">Confirm Password</label>
+                        <label class="control-label float-label">Confirm Password<sub>*</sub></label>
                         <div class="validation error"
                              ng-if="(register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && register.passwordConfirm.focused">
                             Password does not match
@@ -177,7 +178,11 @@
                     </div>-->
 
                     <div class="form-group"
-                         data-ng-focus="register.email.invitationCode = true"
+                         data-ng-focus="register.invitationCode.invitationCode = true"
+                         data-ng-class="{
+                         'has-error': register.invitationCode.$invalid && register.invitationCode.focused,
+                         'has-success': register.invitationCode.$valid && register.invitationCode.focused,
+                         }"
                          custom-input>
                         <input type="text"
                                data-ng-class="{'active':$ctrl.formData.invitationCode}"
@@ -186,9 +191,10 @@
                                placeholder=""
                                value=""
                                data-ng-model="$ctrl.formData.invitationCode"
-                               data-ng-focus="register.email.focused = true"
+                               data-ng-focus="register.invitationCode.focused = true"
                                required>
-                        <label class="control-label float-label">Invitation Code</label>
+                        <label class="control-label float-label">Invitation Code<sub>*</sub></label>
+                        <div class="validation error" ng-if="register.invitationCode.$invalid && register.invitationCode.focused">Invitation code required</div>
                     </div>
                     <div class="form-group">
                         <input style="margin-left:5px" type="checkbox"

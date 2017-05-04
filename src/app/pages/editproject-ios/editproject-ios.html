@@ -14,9 +14,11 @@
                     <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs" class="main-form section">
                         <h3 class="section-title">iOS required fields</h3>
                         <div class="form-group" custom-input
-                             data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
+                             data-ng-class="{
+                             'has-error': configs.displayName.$invalid && configs.displayName.focused,
+                             'has-success': configs.displayName.$valid && configs.displayName.focused}">
                             <label>
-                                Display name
+                                Display name<sub>*</sub>
                             </label>
                             <input type="text" class="form-control" placeholder=""
                                    data-ng-model="$ctrl.project.ios.name"
@@ -24,14 +26,16 @@
                                    required
                                    data-ng-focus="configs.displayName.focused = true">
                             <p class="form-description">App Name - Display name of your app</p>
-                            <div class="validation error" ng-if="configs.displayName.$invalid && configs.displayName.focused">Description is required</div>
+                            <div class="validation error" ng-if="configs.displayName.$invalid && configs.displayName.focused">Display name is required</div>
                         </div>
 
                         <div class="form-group" custom-input
                              data-ng-init="isVersionValid = true"
-                             data-ng-class="{'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused, 'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
+                             data-ng-class="{
+                             'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused,
+                             'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
                             <label>
-                                Version
+                                Version<sub>*</sub>
                             </label>
 
                             <input type="text" class="form-control" placeholder=""
@@ -48,11 +52,8 @@
                             <div class="validation error" ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern">
                                 Version must be in x.x.x format
                             </div>
-                            <div class="validation error" ng-if="!isVersionValid">
+                            <div class="validation error" ng-if="!isVersionValid && configs.version.$valid">
                                 Version must be higher than current. Current version is {{$ctrl.project.build.ios.version}}
-                            </div>
-                            <div class="validation error" ng-if="configs.version.error">
-                                The current version for this project is 3.1.2, please select a higher version for the new build.
                             </div>
 
                         </div>
@@ -60,7 +61,7 @@
                         <div class="form-group" custom-input
                              data-ng-class="{'has-error': configs.bundle.$invalid && configs.bundle.focused, 'has-success': configs.bundle.$valid && configs.bundle.focused}">
                             <label>
-                                Bundle Identifier  <span ng-if="configs.bundle.$invalid && configs.bundle.focused">is required</span>
+                                Bundle Identifier<sub>*</sub>
                             </label>
                             <input type="text" class="form-control" placeholder=""
                                    data-ng-model="$ctrl.project.ios.bundle"
@@ -73,13 +74,14 @@
                                 A bundle ID is used during the development process to provision devices
                                 and by the operating system when the app is distributed to customers.
                             </p>
+                            <div class="validation error" ng-if="configs.bundle.$invalid && configs.bundle.focused"> Bundle Identifier is required</div>
 
                         </div>
 
                         <div class="form-group" custom-input
                              data-ng-class="{'has-error': configs.developerId.$invalid && configs.developerId.focused, 'has-success': configs.developerId.$valid && configs.developerId.focused}">
                             <label >
-                                Developer ID. <span ng-if="configs.developerId.$invalid && configs.developerId.focused">is required</span>
+                                Developer ID<sub>*</sub>
                             </label>
                             <input type="text" class="form-control" placeholder=""
                                    data-ng-model="$ctrl.project.ios.developerId"
@@ -87,23 +89,11 @@
                                    required
                                    data-ng-focus="configs.developerId.focused = true">
                             <p class="form-description">Developer ID.</p>
+                            <div class="validation error"  ng-if="configs.developerId.$invalid && configs.developerId.focused">Developer ID is required</div>
                         </div>
 
                         <div class="form-group col-md-4 main-upload-area">
                             <label>Provisioning Profile</label>
-                            <!--<div class="main-upload-area">-->
-                                <!--<label class="upload-area" ng-show="$ctrl.files.profile.name === ''">-->
-                                    <!--<div class="area-content">.mobileprovision</div>-->
-                                    <!--<input type="file"-->
-                                           <!--id="profile-file"-->
-                                           <!--name="profile"-->
-                                           <!--accept=".mobileprovision"-->
-                                           <!--onchange="angular.element(this).scope().$ctrl.changeProfile(event)">-->
-                                <!--</label>-->
-                                <!--<img ng-show="$ctrl.files.profile.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"-->
-                                     <!--class="uploaded-file-icon">-->
-                                <!--&lt;!&ndash;<p class="area-label">{{!!$ctrl.files.profile.name ? $ctrl.files.profile.name : 'Drag or Click'}}</p>&ndash;&gt;-->
-                            <!--</div>-->
                             <div class="drag-cont upload-label">
                                 <div class="drag-item first">
                                     <div class="drag-area first">
@@ -175,21 +165,6 @@
 
                         <div class="form-group col-md-4 upload-label">
                             <label>App icon</label>
-                            <!--<div class="main-upload-area text-center">-->
-                                <!--<label class="upload-area" ng-show="$ctrl.files.icon.name === ''">-->
-                                    <!--<div class="area-content">.png</div>-->
-                                    <!--<input type="file"-->
-                                           <!--id="icon-file"-->
-                                           <!--name="icon-h"-->
-                                           <!--accept="image/*"-->
-                                           <!--onchange="angular.element(this).scope().$ctrl.changeIcon(event)">-->
-                                <!--</label>-->
-                                <!--<img ng-show="$ctrl.files.icon.name !== ''"-->
-                                     <!--ng-src="{{$ctrl.files.icon.src}}" alt="" width="60"-->
-                                     <!--class="uploaded-file-icon">-->
-                                <!--<p class="description">upload .png 1024x1024</p>-->
-                                <!--&lt;!&ndash;<p class="area-label">{{ !!$ctrl.files.icon.name ? $ctrl.files.icon.name : 'Drag or Click' }}</p>&ndash;&gt;-->
-                            <!--</div>-->
                             <div class="drag-cont upload-label">
                                 <div class="drag-item first">
                                     <div class="drag-area first">
@@ -217,10 +192,6 @@
                                 </div>
                             </div>
 
-                            <!--<div class="required-field-actions margin-0-important">-->
-                                <!--<button type="button" class="btn btn-primary"-->
-                                        <!--onclick="document.querySelector('#icon-file').click()">browse</button>-->
-                            <!--</div>-->
                         </div>
 
                         <div class="btn-wrapper" style="text-align: center">
@@ -231,31 +202,6 @@
                         </div>
 
                     </form>
-                    <!--<form class="main-form" action="" ng-if="$ctrl.project.build.ios.requested">-->
-                        <!--<div class="section">-->
-                            <!--<div class="required-field-item">-->
-                                <!--<div class="small-loader" data-ng-if="$ctrl.project.build.ios.requested && !$ctrl.project.build.ios.built">-->
-                                    <!--<div class="image"></div>-->
-                                <!--</div>-->
-                                <!--<div class="main-upload-area"-->
-                                     <!--data-ng-if="$ctrl.project.build.ios.built">-->
-                                    <!--<img src="images/general/file_icon_placeholder.png" alt="" width="60"-->
-                                         <!--class="uploaded-file-icon">-->
-                                    <!--<p class="area-label"></p>-->
-                                <!--</div>-->
-                                <!--<p data-ng-if="!$ctrl.project.build.ios.built"-->
-                                   <!--class="description margin-top-20 text-white">We are now building your installation package, the download link will appear here once done.</p>-->
-                                <!--<p data-ng-if="$ctrl.project.build.ios.built"-->
-                                   <!--class="description margin-top-20 text-white">Package ready</p>-->
-                                <!--<div class="required-field-actions text-center">-->
-                                    <!--<button data-ng-if="$ctrl.project.build.ios.built"-->
-                                            <!--type="button" class="btn btn-primary"-->
-                                            <!--ng-click="$ctrl.download()">download</button>-->
-                                    <!--<a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">cancel</a>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</form>-->
                     <form class="main-form" action="" ng-if="$ctrl.project.build.ios.requested">
                         <div class="section">
                             <div class="required-field-item">
@@ -334,12 +280,15 @@
             <form name="password">
                 <div class="form-wrapper">
                     <div class="form-group"
-                         data-ng-class="{'has-error': password.certPassword.$invalid && password.certPassword.focused, 'has-success': password.certPassword.$valid && password.certPassword.focused}">
+                         data-ng-class="{
+                         'has-error': password.certPassword.$invalid && password.certPassword.focused,
+                         'has-success': password.certPassword.$valid && password.certPassword.focused}">
                         <input type="password" class="form-control" placeholder="Certificate Password"
                                data-ng-model="$ctrl.project.ios.certPassword"
                                name="certPassword"
                                required
                                data-ng-focus="password.certPassword.focused = true">
+                        <div class="validation error"  ng-if="password.certPassword.$invalid && password.certPassword.focused">Certificate password is required</div>
                     </div>
                 </div>
             </form>

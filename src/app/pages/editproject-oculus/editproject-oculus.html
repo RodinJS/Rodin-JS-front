@@ -34,36 +34,46 @@
                         </ul>
                     </div>
 
-                    <form class="main-form" name="configs" method="post" action="" enctype="multipart/form-data" id="configs">
+                    <form class="main-form" name="configs" method="post" action="" enctype="multipart/form-data"
+                          id="configs">
                         <div class="section">
                             <h3 class="section-title">Oculus required fields</h3>
-                            <div class="form-group" custom-input data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
+                            <div class="form-group" custom-input
+                                 data-ng-class="{'has-error': configs.displayName.$invalid && configs.displayName.focused, 'has-success': configs.displayName.$valid && configs.displayName.focused}">
                                 <label>
-                                    Display name <span
-                                        ng-if="configs.displayName.$invalid && configs.displayName.focused">is required</span>
+                                    Display name<sub>*</sub>
                                 </label>
-                                <input type="text" class="form-control" placeholder="" data-ng-model="$ctrl.project.oculus.name" name="displayName" required
-                                    data-ng-focus="configs.displayName.focused = true">
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.project.oculus.name" name="displayName" required
+                                       data-ng-focus="configs.displayName.focused = true">
                                 <p class="form-description">App Name - Display name of your app</p>
+                                <div class="validation error" ng-if="configs.displayName.$invalid && configs.displayName.focused">Display name is required</div>
                             </div>
 
-                            <div class="form-group" custom-input data-ng-init="isVersionValid = true" data-ng-class="{'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused, 'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
+                            <div class="form-group" custom-input data-ng-init="isVersionValid = true"
+                                 data-ng-class="{'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused, 'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
                                 <label>
-                                    Version <span
-                                        ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.required">is required</span>
-                                    <span ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern">must be in x.x.x format</span>
-                                    <span ng-if="!isVersionValid">must be higher than current. Current version is {{$ctrl.project.build.oculus.version}}</span>
+                                    Version<sub>*</sub>
                                 </label>
-                                <input type="text" class="form-control" placeholder="" data-ng-model="$ctrl.project.oculus.version" name="version" required
-                                    ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/" data-ng-focus="configs.version.focused = true"
-                                    data-ng-change="$ctrl.project.build.oculus.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.oculus.version, $ctrl.project.oculus.version))">
+                                <input type="text" class="form-control" placeholder=""
+                                       data-ng-model="$ctrl.project.oculus.version" name="version" required
+                                       ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/"
+                                       data-ng-focus="configs.version.focused = true"
+                                       data-ng-change="$ctrl.project.build.oculus.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.oculus.version, $ctrl.project.oculus.version))">
                                 <p class="form-description">Version of your app</p>
-                                <p class="form-description" ng-if="configs.version.error">
-                                    The current version for this project is 3.1.2, please select a higher version for the new build.
-                                </p>
+                                <div class="validation error" ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.required">
+                                    Version is required
+                                </div>
+                                <div class="validation error" ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern">
+                                    Version must be in x.x.x format
+                                </div>
+                                <div class="validation error" ng-if="!isVersionValid && configs.version.$valid">
+                                    Version must be higher than current. Current version is {{$ctrl.project.build.oculus.version}}
+                                </div>
                             </div>
                             <div class="btn-wrapper" style="text-align: center">
-                                <button type="button" class="btn btn-default btn-submit" ng-click="$ctrl.build($event)" ng-disabled="!isVersionValid || !configs.$valid || ($ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built)">
+                                <button type="button" class="btn btn-default btn-submit" ng-click="$ctrl.build($event)"
+                                        ng-disabled="!isVersionValid || !configs.$valid || ($ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built)">
                                     Build
                                 </button>
                             </div>
@@ -73,14 +83,17 @@
                     <form class="main-form" action="" ng-if="$ctrl.project.build.oculus.requested">
                         <div class="section">
                             <div class="required-field-item">
-                                <p data-ng-if="$ctrl.project.build.oculus.built" class="description margin-top-40 text-white text-center">Package ready</p>
-                                <div class="small-loader" data-ng-if="$ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built">
+                                <p data-ng-if="$ctrl.project.build.oculus.built"
+                                   class="description margin-top-40 text-white text-center">Package ready</p>
+                                <div class="small-loader"
+                                     data-ng-if="$ctrl.project.build.oculus.requested && !$ctrl.project.build.oculus.built">
                                     <div class="image"></div>
                                 </div>
                                 <div class="main-upload-area " data-ng-if="$ctrl.project.build.oculus.built">
                                     <div class="download-build">
                                         <div class="dashed-bord">
-                                            <img src="images/general/file_icon_placeholder.png" alt="" width="60" class="uploaded-file-icon">
+                                            <img src="images/general/file_icon_placeholder.png" alt="" width="60"
+                                                 class="uploaded-file-icon">
                                         </div>
                                         <div class="download" ng-click="$ctrl.download()">
                                             <span>Download</span>
@@ -88,13 +101,16 @@
                                         <p class="description">Click to download</p>
                                     </div>
                                 </div>
-                                <p data-ng-if="!$ctrl.project.build.oculus.built" class="description margin-top-40 text-white text-center">We are now building your installation package, the download link will appear here once done.</p>
+                                <p data-ng-if="!$ctrl.project.build.oculus.built"
+                                   class="description margin-top-40 text-white text-center">We are now building your
+                                    installation package, the download link will appear here once done.</p>
                                 <div class="required-field-actions text-center">
                                     <!--<button data-ng-if="$ctrl.project.build.oculus.built"-->
                                     <!--type="button" class="btn btn-primary"-->
                                     <!--ng-click="$ctrl.download()">download-->
                                     <!--</button>-->
-                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">Cancel</a>
+                                    <a data-ng-click="$ctrl.cancelBuild($event)"
+                                       data-ng-if="!$ctrl.project.build.oculus.built" class="btn btn-save">Cancel</a>
                                 </div>
                             </div>
                         </div>
@@ -104,10 +120,11 @@
         </div>
     </div>
 </div>
-<div class="modal model-confirm publish-modal" close-modal="notPublished" ng-class="{'display-block': $ctrl.modals.notPublished, 'display-none': !$ctrl.modals.notPublished}">
+<div class="modal model-confirm publish-modal" close-modal="notPublished"
+     ng-class="{'display-block': $ctrl.modals.notPublished, 'display-none': !$ctrl.modals.notPublished}">
     <div class="modal-content">
         <div class="modal-header">
-            
+
             <!--<span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>-->
             <p>Warning</p>
         </div>
@@ -119,7 +136,8 @@
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <div class="text-center">
-                    <button type="button" class="btn btn-positive" ng-click="$ctrl.publishNbuild($event)">Publish & Build
+                    <button type="button" class="btn btn-positive" ng-click="$ctrl.publishNbuild($event)">Publish &
+                        Build
                     </button>
                     <button type="button" class="btn btn-positive" ng-click="$ctrl.gotToPublish()">Publish Project
                     </button>
