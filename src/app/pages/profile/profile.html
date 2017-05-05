@@ -185,19 +185,19 @@
                             <h3 class="section-title">Account Info</h3>
                             <div class="form-group" custom-input>
                                 <label>First Name</label>
-                                <input type="text" class="form-control" placeholder=""
+                                <input type="text" class="form-control" placeholder="" limit-to="64"
                                        data-ng-model="$ctrl.currentUser.profile.firstName">
                             </div>
 
                             <div class="form-group" custom-input>
                                 <label>Last Name</label>
-                                <input type="text" class="form-control" placeholder=""
+                                <input type="text" class="form-control" placeholder="" limit-to="64"
                                        data-ng-model="$ctrl.currentUser.profile.lastName">
                             </div>
 
                             <div class="form-group form-username" custom-input>
                                 <label>Username</label>
-                                <input type="text" class="form-control" placeholder=""
+                                <input type="text" class="form-control" placeholder="" limit-to="32"
                                        data-ng-model="$ctrl.currentUser.username"
                                        ng-disabled="true">
                                 <p class="form-description">
@@ -208,8 +208,7 @@
                             <div class="form-group" custom-input
                                  data-ng-class="{'has-error': profile.email.$invalid && profile.email.focused, 'has-success': profile.email.$valid && profile.email.focused}">
                                 <label>
-                                    Email <span
-                                        ng-if="profile.email.$invalid && profile.email.focused">is required</span>
+                                    Email <sub>*</sub>
                                 </label>
                                 <input type="email" class="form-control" placeholder=""
                                        name="email"
@@ -218,6 +217,7 @@
                                        required
                                        data-ng-focus="profile.email.focused = true">
                                 <div style="clear:both"></div>
+                                <div class="validation error" ng-if="profile.email.$invalid && profile.email.focused">Email is required</div>
                             </div>
 
                             <div class="form-group" custom-input>
@@ -225,6 +225,7 @@
                                 <input type="text"
                                        class="form-control"
                                        placeholder=""
+                                       limit-to="64"
                                        ng-autocomplete
                                        options="$ctrl.autocompleteOptions"
                                        ng-model="$ctrl.currentUser.profile.city">
@@ -260,7 +261,9 @@
                         <form class="form-wrapper" data-ng-submit="$ctrl.updatePassword()"
                               name="changePasswordForm">
                             <div class="form-group pass-group" custom-input
-                                 data-ng-class="{'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused, 'has-success': changePasswordForm.password.$valid && changePasswordForm.password.focused}">
+                                 data-ng-class="{
+                                 'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused,
+                                 'has-success': changePasswordForm.password.$valid && changePasswordForm.password.focused}">
                                 <label>New Password</label>
 
                                 <input type="password" class="form-control" placeholder=""
@@ -271,10 +274,14 @@
                                        ng-minlength="5"
                                        ng-change="$ctrl.confirmPassword()"
                                        data-ng-focus="changePasswordForm.password.focused = true">
-                                <!--<button type="button" class="btn-view-pass show-pass"></button>-->
+                                <div class="validation error" ng-if="changePasswordForm.password.$invalid && changePasswordForm.password.focused">
+                                    Passwords must be at least 8 characters long, containing a number and letter
+                                </div>
                             </div>
                             <div class="form-group pass-group" custom-input
-                                 data-ng-class="{'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused, 'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
+                                 data-ng-class="{
+                                 'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused,
+                                 'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
                                 <label>Confirm Password</label>
                                 <input type="password" class="form-control" placeholder=""
                                        name="confirmPassword"
@@ -285,13 +292,16 @@
                                        ng-minlength="5"
                                        ng-change="$ctrl.confirmPassword()"
                                        data-ng-focus="changePasswordForm.confirmPassword.focused = true">
-                                <!--<button type="button" class="btn-view-pass hide-pass"></button>-->
+                                <div class="validation error"
+                                     ng-if="changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused">
+                                    Password does not match
+                                </div>
                             </div>
 
-                            <p class="description">New password must be at least 8
+                           <!-- <p class="description">New password must be at least 8
                                 characters long,
                                 contain a number and letter
-                            </p>
+                            </p>-->
 
 
                             <div class="btn-wrapper text-center"
