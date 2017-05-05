@@ -8,11 +8,11 @@ function Compile($compile) {
 
     return function (scope, element, attrs) {
         scope.$watch((scope) => {
-            return scope.$eval(attrs.compile);
-        }, (value) => {
-            element.html(value);
-            $compile(element.contents())(scope);
-        }
+                return scope.$eval(attrs.compile);
+            }, (value) => {
+                element.html(value);
+                $compile(element.contents())(scope);
+            }
         );
     };
 }
@@ -69,17 +69,17 @@ function ShowAuthed(User) {
                 // If user detected
                 if (val) {
                     if (attrs.showAuthed === 'true') {
-                        element.css({ display: 'inherit' });
+                        element.css({display: 'inherit'});
                     } else {
-                        element.css({ display: 'none' });
+                        element.css({display: 'none'});
                     }
 
                     // no user detected
                 } else {
                     if (attrs.showAuthed === 'true') {
-                        element.css({ display: 'none' });
+                        element.css({display: 'none'});
                     } else {
-                        element.css({ display: 'inherit' });
+                        element.css({display: 'inherit'});
                     }
                 }
             });
@@ -247,43 +247,43 @@ function NgAutocomplete() {
                 var autocompleteService = new google.maps.places.AutocompleteService();
                 if (result.name.length > 0) {
                     autocompleteService.getPlacePredictions(
-                     {
-                        input: result.name,
-                        offset: result.name.length,
-                    },
-                     function listentoresult(list, status) {
-                        if (list == null || list.length == 0) {
+                        {
+                            input: result.name,
+                            offset: result.name.length,
+                        },
+                        function listentoresult(list, status) {
+                            if (list == null || list.length == 0) {
 
-                            scope.$apply(function () {
-                                scope.details = null;
-                            });
+                                scope.$apply(function () {
+                                    scope.details = null;
+                                });
 
-                        } else {
-                            var placesService = new google.maps.places.PlacesService(element[0]);
-                            placesService.getDetails(
-                             { reference: list[0].reference },
-                             function detailsresult(detailsResult, placesServiceStatus) {
+                            } else {
+                                var placesService = new google.maps.places.PlacesService(element[0]);
+                                placesService.getDetails(
+                                    {reference: list[0].reference},
+                                    function detailsresult(detailsResult, placesServiceStatus) {
 
-                                if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
-                                    scope.$apply(function () {
+                                        if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
+                                            scope.$apply(function () {
 
-                                        controller.$setViewValue(detailsResult.formatted_address);
-                                        element.val(detailsResult.formatted_address);
+                                                controller.$setViewValue(detailsResult.formatted_address);
+                                                element.val(detailsResult.formatted_address);
 
-                                        scope.details = detailsResult;
+                                                scope.details = detailsResult;
 
-                                        //on focusout the value reverts, need to set it again.
-                                        var watchFocusOut = element.on('focusout', function (event) {
-                                         element.val(detailsResult.formatted_address);
-                                         element.unbind('focusout');
-                                        });
+                                                //on focusout the value reverts, need to set it again.
+                                                var watchFocusOut = element.on('focusout', function (event) {
+                                                    element.val(detailsResult.formatted_address);
+                                                    element.unbind('focusout');
+                                                });
 
-                                    });
-                                }
+                                            });
+                                        }
+                                    }
+                                );
                             }
-                            );
-                        }
-                    });
+                        });
                 }
             };
 
@@ -331,23 +331,32 @@ function ConfirmPassword() {
     };
 }
 
-function RdScroll() {
+function RdScroll($timeout) {
+    'ngInject';
+
     return {
-		restrict: 'A',
-		scope: {
-			rdScroll: '=',
-		},
-		link: function link(scope, elem, attrs, ctrl) {
-            const totalNotifications = parseInt(attrs.totalNotifications || 0);
-            const NotificationHeight = (59 + 5);
-            const height = totalNotifications <= 4 ?  NotificationHeight*totalNotifications : 350;
-            $(elem).slimScroll({
-				height: `${height}px`,
-				color: '#AAAAAA',
-				alwaysVisible: true
-			})
-		},
-	};
+        restrict: 'A',
+        scope: {
+            rdScroll: '=',
+        },
+        link: function link(scope, elem, attrs, ctrl) {
+            $timeout(() => {
+                let notificationHeight = 0;
+                for (let i = 0; i < elem[0].children.length; i++) {
+                    console.log(elem[0].children[i])
+                    notificationHeight += elem[0].children[i].height;
+                }
+
+                console.log(notificationHeight)
+                const height = notificationHeight >= 350     ? 350 : notificationHeight;
+                $(elem).slimScroll({
+                    height: `${height}px`,
+                    color: '#AAAAAA',
+                    alwaysVisible: true
+                })
+            }, 0)
+        },
+    };
 }
 
 export default {
@@ -360,5 +369,5 @@ export default {
     NgAutocomplete,
     Codify,
     ConfirmPassword,
-	RdScroll,
+    RdScroll,
 };
