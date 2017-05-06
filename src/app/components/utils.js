@@ -340,21 +340,22 @@ function RdScroll($timeout) {
             rdScroll: '=',
         },
         link: function link(scope, elem, attrs, ctrl) {
-            $timeout(() => {
-                let notificationHeight = 0;
+            let elHeight = 0;
+            scope.$watch(() => {
                 for (let i = 0; i < elem[0].children.length; i++) {
-                    console.log(elem[0].children[i])
-                    notificationHeight += elem[0].children[i].height;
+                    elHeight += elem[0].children[i].clientHeight;
                 }
 
-                console.log(notificationHeight)
-                const height = notificationHeight >= 350     ? 350 : notificationHeight;
+                setElementHeight(elHeight);
+            });
+            let setElementHeight = height => {
                 $(elem).slimScroll({
-                    height: `${height}px`,
+                    height: `${height >= 350 ? 350 : height}px`,
                     color: '#AAAAAA',
                     alwaysVisible: true
-                })
-            }, 0)
+                });
+                elHeight = 0;
+            };
         },
     };
 }
