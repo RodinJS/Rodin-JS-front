@@ -1,6 +1,8 @@
 /**
  * Created by kh.levon98 on 15-Sep-16.
  */
+// import '../pages/home/scripts/plugins/jquery.slimscroll';
+
 function Compile($compile) {
     'ngInject';
 
@@ -23,7 +25,7 @@ function limitTo() {
         link: (scope, elem, attrs) => {
             let limit = parseInt(attrs.limitTo);
 
-            elem.bind('paste',  (e) => {
+            elem.bind('paste', (e) => {
 
                 let pastedData = e.originalEvent.clipboardData.getData('text');
                 let totalSymbolsLength = elem[0].value.length + pastedData.length;
@@ -67,17 +69,17 @@ function ShowAuthed(User) {
                 // If user detected
                 if (val) {
                     if (attrs.showAuthed === 'true') {
-                        element.css({ display: 'inherit' });
+                        element.css({display: 'inherit'});
                     } else {
-                        element.css({ display: 'none' });
+                        element.css({display: 'none'});
                     }
 
                     // no user detected
                 } else {
                     if (attrs.showAuthed === 'true') {
-                        element.css({ display: 'none' });
+                        element.css({display: 'none'});
                     } else {
-                        element.css({ display: 'inherit' });
+                        element.css({display: 'inherit'});
                     }
                 }
             });
@@ -137,7 +139,7 @@ function CloseModal() {
         restrict: 'A',
         link: function (scope, element, attrs, ngModel) {
             let $elem = element;
-            $elem.on('click', (e)=> {
+            $elem.on('click', (e) => {
                 const hasClassModal = angular.element(e.target).hasClass('modal');
                 if (!hasClassModal) return;
                 scope.$ctrl.modals[attrs.closeModal] = false;
@@ -155,7 +157,7 @@ function Codify($timeout) {
         restrict: 'A',
         link: function (scope, element) {
             let $elem = element;
-            $timeout(()=> {
+            $timeout(() => {
                 $elem.find('.code').each(function (i, block) {
                     hljs.highlightBlock(block);
                 });
@@ -259,7 +261,7 @@ function NgAutocomplete() {
                             } else {
                                 var placesService = new google.maps.places.PlacesService(element[0]);
                                 placesService.getDetails(
-                                    { reference: list[0].reference },
+                                    {reference: list[0].reference},
                                     function detailsresult(detailsResult, placesServiceStatus) {
 
                                         if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
@@ -303,4 +305,70 @@ function NgAutocomplete() {
     };
 }
 
-export default { limitTo, Compile, CheckForUnique, ShowAuthed, CustomInput, CloseModal, NgAutocomplete, Codify };
+function ConfirmPassword() {
+    'ngInject';
+
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        scope: {
+            compareTo: '=',
+        },
+        link: function link(scope, elem, attrs, ctrl) {
+            let validator = function (value) {
+                ctrl.$setValidity('confirmed', value === scope.compareTo);
+                return value;
+            };
+
+            ctrl.$parsers.unshift(validator);
+            ctrl.$formatters.push(validator);
+
+            scope.$watch('compareTo', function (newval, oldval) {
+                validator(ctrl.$viewValue);
+            });
+
+        },
+    };
+}
+
+function RdScroll($timeout) {
+    'ngInject';
+
+    return {
+        restrict: 'A',
+        scope: {
+            rdScroll: '=',
+        },
+        link: function link(scope, elem, attrs, ctrl) {
+            let elHeight = 0;
+            scope.$watch(() => {
+                for (let i = 0; i < elem[0].children.length; i++) {
+                    elHeight += elem[0].children[i].clientHeight;
+                }
+
+                setElementHeight(elHeight);
+            });
+            let setElementHeight = height => {
+                $(elem).slimScroll({
+                    height: `${height >= 350 ? 350 : height}px`,
+                    color: '#AAAAAA',
+                    alwaysVisible: true
+                });
+                elHeight = 0;
+            };
+        },
+    };
+}
+
+export default {
+    limitTo,
+    Compile,
+    CheckForUnique,
+    ShowAuthed,
+    CustomInput,
+    CloseModal,
+    NgAutocomplete,
+    Codify,
+    ConfirmPassword,
+    RdScroll,
+};

@@ -1,0 +1,13 @@
+<div class="modal-header">Warning</div>
+<div class="modal-body">
+    <p class="text-small description" ng-bind-html="$ctrl.modalText | htmlize"></p>
+</div>
+<div class="modal-footer">
+    <div class="required-field-actions clearfix">
+        <div class="text-center">
+            <button type="button" class="btn btn-positive" data-ng-disabled="$ctrl.domainAddInProgress" ng-if="!$ctrl.delete" data-ng-click="$ctrl.submitDomain()">Confirm</button>
+            <button type="button" class="btn btn-positive" data-ng-disabled="$ctrl.deleteInProgress" ng-if="$ctrl.delete" data-ng-click="$ctrl.comfirmDelete()">Confirm</button>
+            <a href="" class="btn btn-cancel" data-ng-click="$ctrl.closeModal()">Cancel</a>
+        </div>
+    </div>
+</div>

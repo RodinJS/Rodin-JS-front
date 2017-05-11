@@ -1,22 +1,28 @@
-<h2 class="title">CHECK OUT OUR DOCS & GUIDES</h2>
+<h2 class="title">{{$ctrl.content.section3Title}}</h2>
 <hr class="section-title-divider">
 <div class="container">
     <ul class="doc-items">
-        <li >
+        <li>
             <a ui-sref="landing.pages({pageURL:'tutorial'})">
                 <i class="icon-tutorial"></i>
                 <span>Tutorials</span>
             </a>
         </li>
+        <li>
+            <a ui-sref="landing.docs">
+                <i class="rd-dictionary"></i>
+                <span>Reference API</span>
+            </a>
+        </li>
         <li uib-tooltip="Coming Soon" tooltip-placement="top">
-            <a >
+            <a>
                 <i class="rd-guides"></i>
                 <span>Guide</span>
             </a>
         </li>
 
         <li uib-tooltip="Coming Soon" tooltip-placement="top">
-            <a >
+            <a>
                 <i class="rd-forum"></i>
                 <span>Q & A</span>
             </a>
@@ -35,7 +41,7 @@
         </li>
 
         <li uib-tooltip="Coming Soon" tooltip-placement="top">
-            <a >
+            <a>
                 <i class="rd-mailing-list"></i>
                 <span>Dev Mailing list</span>
             </a>
@@ -53,17 +59,11 @@
                 <span>Support</span>
             </a>
         </li>
-        <li uib-tooltip="Coming Soon" tooltip-placement="top">
-            <a>
-                <i class="rd-dictionary"></i>
-                <span>Reference API</span>
-            </a>
-        </li>
     </ul>
 </div>
 <!--rd-dictionary-->
 <p class="doc-action-row">
-    <a  uib-tooltip="Coming Soon" tooltip-placement="top" class="link doc-link">
+    <a uib-tooltip="Coming Soon" tooltip-placement="top" class="link doc-link">
         View Documentation
         <i class="rd-arrow-right"></i>
     </a>

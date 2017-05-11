@@ -22,6 +22,7 @@ const templateCache = require('gulp-angular-templatecache');
 const VERSION = require('./package.json').version;
 const VENDOR = require('./package.json').dependencies;
 const VENDORMAP = require('./vendor.json');
+var newer = require('gulp-newer');
 
 const JS = ['src/app/**/*.js', '!src/systemjs-module/**', '!src/assists/**'];
 const HTML = ['src/app/**/*.html', 'src/app/**/**/*.html'];
@@ -51,6 +52,7 @@ const UGLIFY_AGRESIVE = {
 const ERROR_MESSAGE = {
     errorHandler: notify.onError('Error: <%= error.message %>'),
 };
+
 
 gulp.task('vendor', () => {
     let vendor_tasks = generate_vendor(VENDOR);
@@ -105,8 +107,18 @@ gulp.task('js', () => {
     const s = size({ title: 'JS -> ', pretty: true });
     return gulp.src(JS)
       .pipe(plumber(ERROR_MESSAGE))
+      .pipe(newer('./build/app'))
       .pipe(sourcemaps.init())
-      .pipe(babel())
+      .pipe(babel({
+          "presets": [
+              "es2015"
+          ],
+          "plugins": [
+              "angularjs-annotate",
+              "transform-es2015-modules-systemjs",
+              "transform-class-properties"
+          ]
+      }))
       .pipe(s)
       .pipe(plumber.stop())
       .pipe(gulp.dest('./build/app'))
@@ -120,7 +132,16 @@ gulp.task('js-prod', () => {
     const s = size({ title: 'JS production -> ', pretty: false });
     return gulp.src(JS)
       .pipe(plumber(ERROR_MESSAGE))
-      .pipe(babel())
+      .pipe(babel({
+          "presets": [
+              "es2015"
+          ],
+          "plugins": [
+              "angularjs-annotate",
+              "transform-es2015-modules-systemjs",
+              "transform-class-properties"
+          ]
+      }))
       .pipe(uglify(UGLIFY_AGRESIVE))
       .pipe(s)
       .pipe(plumber.stop())
@@ -243,10 +264,126 @@ gulp.task('build-template', (done) => {
     sequence('template', 'js', done);
 });
 
+//BUNDLE//
+/**
+ * ENVS: local, dev, stage, prod
+ */
+const bundleVendorsJS = ['node_modules/jquery/dist/jquery.min.js', 'node_modules/jquery-form/dist/jquery.form.min.js',  'src/app/pages/home/highlight.pack.js'];
+const strip = require('gulp-strip-comments');
+const stripDebug = require('gulp-strip-debug');
+const replace = require('gulp-replace');
+const webpack = require('webpack');
+
+
+gulp.task('vendorForBundle', () => {
+    let vendor_tasks = generate_vendor({ "angular-ui-notification": "^0.2.0",
+        "font-awesome": "4.7.0",
+    });
+
+    let custom_vendor_tasks = _.map(VENDORMAP, (item, key) => {
+        let src, dest;
+
+        src = item.src;
+        if (!src) {
+            throw new Error(`Please provide ${key} external module src.`);
+        }
+
+        dest = `./build/scripts/vendor/${item.dest || ''}`;
+
+        return gulp.src(src).pipe(gulp.dest(dest));
+    });
+
+    es.merge(_.concat(vendor_tasks, custom_vendor_tasks));
+});
+
+gulp.task('bundleVendors',()=>{
+    return gulp.src(bundleVendorsJS)
+        .pipe(concat('vendors.js'))
+        .pipe(strip())
+        .pipe(uglify(UGLIFY_AGRESIVE))
+        .pipe(gulp.dest('./build/app'))
+
+});
+
+gulp.task('generateBundleIndex', () => {
+    const s = size({ title: 'generate-index -> ', pretty: false });
+    return gulp.src('./src/index.build.html')
+        .pipe(replace(/\?v=(.{4})/g, `?v=${Date.now()}`))
+        .pipe(plumber(ERROR_MESSAGE))
+        .pipe(s)
+        .pipe(plumber.stop())
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('./build/'))
+        .pipe(notify({
+            onLast: true,
+            message: () => `generate-index - Total size ${s.prettySize}`,
+        }));
+});
+
+gulp.task('webpack', (done) => {
+    // run webpack
+    webpack(require('./webpack.config'), (error) => {
+        let pluginError;
+        if (error) {
+            pluginError = new gulpUtil.PluginError('webpack', error);
+
+            if (done) {
+                done(pluginError);
+            } else {
+                console.log('[webpack]', pluginError);
+            }
+            return;
+        }
+        if (done) {
+            done();
+        }
+    });
+});
+
+gulp.task('cleanBundleFile', ()=>{
+    const s = size({ title: 'cleanBundleFile -> ', pretty: false });
+    return gulp.src('./build/app/bundle.js')
+        .pipe(strip())
+        .pipe(uglify(UGLIFY_AGRESIVE))
+        .pipe(stripDebug())
+        .pipe(replace('env:"local"', `env:"${process.env.NODE_ENV || 'local'}"`))
+        .pipe(plumber(ERROR_MESSAGE))
+        .pipe(s)
+        .pipe(plumber.stop())
+        .pipe(gulp.dest('./build/app'))
+        .pipe(notify({
+            onLast: true,
+            message: () => `generate-index - Total size ${s.prettySize}`,
+        }));
+});
+
+gulp.task('bundleTemplate', () => {
+    const s = size({ title: 'template -> ', pretty: false });
+    return gulp.src(HTML)
+        .pipe(plumber(ERROR_MESSAGE))
+        .pipe(templateCache({
+            standalone: true,
+        }))
+        .pipe(rename('app.templates.js'))
+        .pipe(s)
+        .pipe(plumber.stop())
+        .pipe(gulp.dest('./build/app/config/'))
+        .pipe(notify({
+            onLast: true,
+            message: () => `template - Total size ${s.prettySize}`,
+        }));
+});
+//BUNDLE//
+
+
 gulp.task('prod', (done) => {
     sequence('clean', 'vendor', ['generate-index', 'template', 'js-prod', 'sass-prod',  'font', 'img'], done);
 });
 
 gulp.task('default', (done) => {
     sequence('clean', 'vendor', ['generate-index', 'template', 'js', 'sass',  'font', 'img', 'connect', 'watch'], done);
+});
+
+gulp.task('bundle', (done)=>{
+    sequence('clean', 'template',  'vendorForBundle', 'generateBundleIndex', 'webpack',  ['sass', 'font', 'img', 'bundleTemplate',  'bundleVendors', 'cleanBundleFile'], done)
 });

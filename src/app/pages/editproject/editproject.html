@@ -43,7 +43,7 @@
                         <h5 class="switch-box-title">Public</h5>
                         <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
                             Current version:
-                            <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" target="_blank">
+                            <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}?t={{$ctrl.getDate()}}" target="_blank">
                                 {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
                             </a>
                         </p>
@@ -58,7 +58,7 @@
                         <div class="form-group" custom-input
                              data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
                             <label>
-                                Project name  <span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">is required</span>
+                                Project name
                             </label>
                             <input type="text"
                                    class="form-control"
@@ -68,10 +68,23 @@
                                    ng-maxlength="64"
                                    limit-to="64"
                                    ng-model="$ctrl.project.displayName">
+                            <div class="validation error" ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">Project name is required</div>
+                        </div>
+                        <div class="form-group" custom-input ng-if="$ctrl.project.githubUrl">
+                            <label>GitHub project url</label>
+                            <input type="text"
+                                   class="form-control input-blue"
+                                   placeholder=""
+                                   value="{{$ctrl.project.githubUrl}}"
+                                   disabled>
                         </div>
                         <div class="form-group" custom-input>
                             <label>Project url</label>
-                            <input type="text" class="form-control input-blue" placeholder="" value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}" disabled>
+                            <input type="text"
+                                   class="form-control input-blue"
+                                   placeholder=""
+                                   value="{{$ctrl.previewUrl+$ctrl.user.username}}/{{$ctrl.project.name}}"
+                                   disabled>
                         </div>
                         <!--<div class="form-group" custom-input>
                             <label>Meta Tags</label>
@@ -99,7 +112,7 @@
                                         <span>Tap To Replace</span>
                                     </div>
                                 </div>
-                                <h5 class="section-small-title text-center">We recomend to upload a maximum of 2Mb size image.</h5>
+                                <h5 class="section-small-title text-center">We recommend to upload a maximum of 5Mb size image.</h5>
                             </div>
                             <div class="drag-item hidden">
                                 <h5 class="section-small-title">Favicon</h5>
@@ -121,7 +134,7 @@
                             <tr>
                                 <td class="text-primary"><span>Total Asset Size</span>
                                 </td>
-                                <td class="text-primary"><span>{{$ctrl.project.projectSize}} ( Files. Fonts, and Backups)</span>
+                                <td class="text-primary"><span>{{$ctrl.project.projectSize}}MB ( Files. Fonts, and Backups)</span>
                                 </td>
                             </tr>
                             <tr>
@@ -134,7 +147,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr ng-if="!$ctrl.project.githubUrl">
                                 <td class="text-primary"><span>Template Of</span>
                                 </td>
                                 <td class="text-primary id"><span>{{$ctrl.project.templateOf || 'N/A'}}</span>
@@ -168,6 +181,7 @@
                             <span class="letter-quantity">
                                 <span>{{128-$ctrl.project.description.length}}</span>/128
                             </span>
+                            <div class="validation error" ng-if=" !$ctrl.project.description">Description is required</div>
                         </div>
                     </div>
 
@@ -195,7 +209,7 @@
                      Your project will no longer be available on
                      <span class="text-highlight">{{$ctrl.project.publishedUrl}}</span>, your apps for
                 </span>
-            <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !<br>
+            <span>The <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !</span><br>
             <p class="confirm">Are you sure you want to continue?</p>
             </p>
         </div>
@@ -203,8 +217,8 @@
             <div class="required-field-actions clearfix">
                 <div class="text-center">
                     <button type="button" class="btn btn-negative"
-                            ng-click="$ctrl.deleteProject()">delete</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.remove = false">cancel</a>
+                            ng-click="$ctrl.deleteProject()">Delete</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.remove = false">Cancel</a>
                 </div>
             </div>
         </div>
@@ -231,9 +245,9 @@
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <div class="text-center">
-                    <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">go to settings</button>
-                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl()">copy this url</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">cancel</a>
+                    <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">Go To Settings</button>
+                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl(); $ctrl.modals.share = false;">Copy URL</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">Cancel</a>
                 </div>
             </div>
         </div>

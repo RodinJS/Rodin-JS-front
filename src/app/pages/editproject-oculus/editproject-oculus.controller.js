@@ -52,6 +52,11 @@ class EditProjectOculusCtrl {
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
         });
+        $scope.$on('$destroy', ()=>{
+            if(this.timer){
+                this._$interval.cancel(this.timer);
+            }
+        })
     }
 
     getProject() {
@@ -183,7 +188,26 @@ class EditProjectOculusCtrl {
         }
     }
 
+   publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.build(e);
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
+
     build(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         const ctrl = this;
         e.preventDefault();
         this.project.build.oculus.built = false;
@@ -201,6 +225,7 @@ class EditProjectOculusCtrl {
         };
 
         ctrl.showLoader = true;
+        this.modals.notPublished = false;
         $('#configs').ajaxForm({
             dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
@@ -267,6 +292,9 @@ class EditProjectOculusCtrl {
     };
 
     open(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -287,6 +315,9 @@ class EditProjectOculusCtrl {
             }
         );
     }
+	gotToPublish() {
+		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
+	}
 }
 
 export default EditProjectOculusCtrl;

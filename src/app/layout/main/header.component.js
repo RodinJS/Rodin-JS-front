@@ -1,12 +1,14 @@
 class AppHeaderCtrl {
-    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus, PagesService, PagesStore) {
+    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus, PagesService, PagesStore, Notification, ModulesStore) {
         'ngInject';
         this.appName = AppConstants.appName;
         this.currentUser = User.current;
         this._User = User;
         this.notificationsStore = NotificationsStore;
+        this._Notification = Notification;
         this.eventBus = EventBus;
         this._$state = $state;
+        this._ModulesStore = ModulesStore;
         this.try = false;
 
         this._PagesService = PagesService;
@@ -16,6 +18,8 @@ class AppHeaderCtrl {
 
         this.User = User;
         this.logout = () => {
+            this._ModulesStore.removeAllModules();
+
             User.logout(...arguments);
         };
 
@@ -37,19 +41,35 @@ class AppHeaderCtrl {
         });
 
         this.user = User.current;
-
+        let tryAttempt = 0;
         if (this.user) {
             this.notificationsStore.subscribeAndInit($scope, ()=> {
                 this.notifications = this.notificationsStore.getNotifications();
-                this.notificationsCount = this.notificationsStore.getUndreadNotificationsCount();
-                if (!this.notifications) return this.getNotifications();
-            });
-
-            SocketService.on('projectBuild', (data)=> {
-                EventBus.emit(this.eventBus.notifications.SET_ONE, data);
+                //this.notificationsCount = this.notificationsStore.getUndreadNotificationsCount();
+                if (!this.notifications && tryAttempt == 0){
+                    tryAttempt = 1;
+                    return this.getNotifications();
+                }
             });
         }
 
+        if(!SocketService.connected){
+            SocketService.on('projectBuild', (data)=> this.showSocketResponse(data));
+            SocketService.on('gitSync', (data)=> this.showSocketResponse(data));
+        }
+
+    }
+
+    showSocketResponse(data){
+        const message = _.isObject(data.data) ? data.data.message : data.data;
+        if(data.data.error || data.error)
+            this._Notification.error(message);
+        else
+            this._Notification.success(message);
+
+        if(!data.label)
+            data.label = message;
+        this.eventBus.emit(this.eventBus.notifications.SET_ONE, data);
     }
 
     clickMenu() {
@@ -73,6 +93,9 @@ class AppHeaderCtrl {
         this.User.getNotifications().then(
             notifications => {
                 this.eventBus.emit(this.eventBus.notifications.SET, notifications);
+                setTimeout(() => {
+                    console.dir(angular.element('.notifi-list-element'))
+                })
             },
 
             error => {
@@ -82,12 +105,13 @@ class AppHeaderCtrl {
     }
 
     deleteNotification(param, index) {
+        if(this.notifications.length <= 0) return;
         param = !param  ? 'all=true' : 'id=' + param + '';
+
         this.User.deleteNotification(param).then(
             notification=> {
                 this.eventBus.emit(this.eventBus.notifications.DELETE, index);
             },
-
             error=> {
                 console.log(error);
             }

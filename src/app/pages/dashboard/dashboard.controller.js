@@ -34,7 +34,7 @@ class DashboardCtrl {
 
     createProject() {
         if (this.cantCreateProject) {
-            return this.Notification.error(`Maximum projects count exceeded, allowend project count ${this.user.allowProjectsCount}`);
+            return this.Notification.error(`Maximum projects count exceeded, allowed project count ${this.user.allowProjectsCount}`);
         }
 
         this.$state.go('app.project');
@@ -55,6 +55,7 @@ class DashboardCtrl {
     }
 
     search() {
+
         if (this.queryString === '') {
             return this.getProjects();
         }
@@ -63,7 +64,7 @@ class DashboardCtrl {
             return;
         }
 
-        clearTimeout(this.timerToSearch);
+	    clearTimeout(this.timerToSearch);
         this.timerToSearch = setTimeout(() => {
             this.getProjects();
         }, 500);

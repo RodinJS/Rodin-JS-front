@@ -1,5 +1,5 @@
 class EditProjectIosCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification, $interval) {
         'ngInject';
 
         if (!$stateParams.projectId) return $state.go('landing.error');
@@ -8,6 +8,7 @@ class EditProjectIosCtrl {
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
         this._JWT = JWT;
+        this._$interval = $interval;
         this.Project = Project;
         this.$state = $state;
         this.$q = $q;
@@ -51,6 +52,11 @@ class EditProjectIosCtrl {
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
         });
+        $scope.$on('$destroy', ()=>{
+            if(this.timer){
+                this._$interval.cancel(this.timer);
+            }
+        })
     }
 
     getProject() {
@@ -60,6 +66,10 @@ class EditProjectIosCtrl {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
                 this.project = project;
+
+                if (this.project.build.ios.built && this.timer) {
+                    this._$interval.cancel(this.timer);
+                }
             },
 
             err => {
@@ -180,11 +190,30 @@ class EditProjectIosCtrl {
             this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
     }
+   publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.open(e);
+                this.modals.notPublished = false;
 
-    build() {
-        const e = this.openEvent;
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
+
+    build(event) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         const ctrl = this;
-        e.preventDefault();
+        event.preventDefault();
         let project = {
             userId: this.user.username,
             appId: this.projectId,
@@ -199,6 +228,7 @@ class EditProjectIosCtrl {
         };
 
         ctrl.showLoader = true;
+        this.modals.notPublished = false;
         $('#configs').ajaxForm({
             dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.projectId + '/build/ios',
@@ -216,11 +246,14 @@ class EditProjectIosCtrl {
                 ctrl._$scope.configs.developerId.focused = false;
                 ctrl.getProject();
                 ctrl.Notification.success('iOS build start');
+                ctrl.timer = ctrl._$interval(() => {
+                    ctrl.getProject();
+                }, 2000);
                 ctrl._$scope.$apply();
             },
 
             error: function (data) {
-                if (data.responseJSON && data.responseJson.error.message)
+                if (data.responseJSON && data.responseJSON.error.message)
                     ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
@@ -261,6 +294,9 @@ class EditProjectIosCtrl {
     };
 
     open(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -281,6 +317,9 @@ class EditProjectIosCtrl {
             }
         );
     }
+	gotToPublish() {
+		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
+	}
 }
 
 export default EditProjectIosCtrl;

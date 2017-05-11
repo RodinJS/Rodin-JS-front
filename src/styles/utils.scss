@@ -22,6 +22,11 @@ p {
   display: none;
 }
 
+.publish-modal {
+  .modal-content {
+    max-width: 520px !important;
+  }
+}
 .modal {
   display: none;
   position: fixed;

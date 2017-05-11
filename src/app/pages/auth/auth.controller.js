@@ -16,25 +16,36 @@ class AuthCtrl {
         //this.gotToHome = this.gotToHome.bind(this);
 
         this.patterns = {
+            password: /^(?=.*[A-Za-z])(?=.*\d)[^]{8,}$/,
             email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         };
 
-        FB.init({
-            appId: AppConstants.FB,
-            cookie: true,  // enable cookies to allow the server to access
-            // the session
-            xfbml: true,  // parse social plugins on this page
-            version: 'v2.8', // use graph api version 2.8
-        });
 
-        gapi.load('auth2', () => {
-            gapi.auth2.init({
-                client_id: AppConstants.GOOGLE,
-                scope: 'profile',
+        try {
+            FB.init({
+                appId: AppConstants.FB,
+                cookie: true,  // enable cookies to allow the server to access
+                // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.8', // use graph api version 2.8
             });
-        });
+        }
+        catch(e){
+            this.Notification.warning({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
+        }
+        try{
+            gapi.load('auth2', () => {
+                gapi.auth2.init({
+                    client_id: AppConstants.GOOGLE,
+                    scope: 'profile',
+                });
+            });
+        }
+        catch(e){
+            this.Notification.warning({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
+        }
         $scope.$on('$viewContentLoaded', () => {
-            $(document).ready(()=> {
+            $(document).ready(() => {
                 footer.init();
                 header.init();
             });
@@ -58,7 +69,7 @@ class AuthCtrl {
                 });
         } else if (this.authType === 'register') {
             this._User.signUp(this.formData).then(
-                res=> {
+                res => {
 
                     this.isSubmitting = false;
                     if (res[0]) {
@@ -71,7 +82,7 @@ class AuthCtrl {
                     this._$state.go('app.dashboard');
                 },
 
-                err=> {
+                err => {
                     this.isSubmitting = false;
                     console.log(err);
                 }

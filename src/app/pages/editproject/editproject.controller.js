@@ -44,6 +44,10 @@ class EditProjectCtrl {
         });
     }
 
+    getDate(){
+        return Date.now();
+    }
+
     getProject() {
         this.showLoader = true;
         this.Project.get(this.projectId, { projectSize: true }).then(
@@ -139,12 +143,10 @@ class EditProjectCtrl {
 
     changeThumbnail(e) {
         if (window.FileReader && window.Blob) {
-
+            let reader = new FileReader();
             var file = e.target.files[0];
-
             if (file) {
                 this.isValidImage(file).then((result) => {
-                    var reader = new FileReader();
                     reader.onloadend = (e) => {
                         this.project.thumbnail = reader.result;
                         this._$scope.$apply();
@@ -152,10 +154,9 @@ class EditProjectCtrl {
 
                     reader.readAsDataURL(file);
                 }, (result) => {
-                    this.Notification.error('Unsupported image type');
+                    this.Notification.error(result.message);
                 });
             }
-
         } else {
             this.Notification.warning('It seems your browser doesn\'t support FileReader.');
 
@@ -164,17 +165,17 @@ class EditProjectCtrl {
 
     isValidImage(file) {
         var defer = this.$q.defer();
+        var timeout = this.$timeout;
         var result = {
             valid: true,
             message: '',
         };
-
-        if (file.size > 1024 * 1024) {
+        if (file.size > 5242880) {
             result.valid = false;
-            result.message = 'FIle size must be less than 1mb';
-            var tim = this.$timeout(function () {
+            result.message = 'FIle size must be less than 5mb';
+            var tim = timeout(function () {
                 defer.reject(result);
-                this.$timeout.cancel(tim);
+                timeout.cancel(tim);
             });
         } else {
             var fileReader = new FileReader();
@@ -197,12 +198,8 @@ class EditProjectCtrl {
                     result.message = 'Allowed only .jpg .jpeg and .png file types.';
                 break;
             }
-
-                if (result.valid) {
-                    defer.resolve(result);
-                } else {
-                    defer.reject(result);
-                }
+                console.log(result)
+                result.valid ? defer.resolve(result): defer.reject(result);
             };
 
             fileReader.readAsArrayBuffer(file);

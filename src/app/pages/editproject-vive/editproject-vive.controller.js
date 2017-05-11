@@ -19,6 +19,7 @@ class EditProjectViveCtrl {
         this.project = {};
         this.showLoader = true;
 
+        this.userService = User;
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
 
@@ -46,27 +47,34 @@ class EditProjectViveCtrl {
 
         this.submiting = false;
         this.openEvent = null;
+        this.vivePortTrigger = false;
 
         this.eventBus = EventBus;
-        ProjectStore.subscribeAndInit($scope, ()=> {
+        ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
         });
         this.getProject();
+
+        $scope.$on('$destroy', () => {
+            if (this.timer) {
+                this._$interval.cancel(this.timer);
+            }
+        })
     }
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, { device: 'oculus' }).then(
+        this.Project.get(this.projectId, {device: 'vive'}).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                if(this.project.build.oculus.built && this.timer){
+                if (this.project.build.vive.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
                 this.showLoader = false;
@@ -182,27 +190,48 @@ class EditProjectViveCtrl {
         }
     }
 
+    publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.build(e);
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
+
     build(e) {
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         const ctrl = this;
         e.preventDefault();
-        this.project.build.oculus.built = false;
+        this.project.build.vive.built = false;
         let project = {
             userId: this.user.username,
             appId: this.project._id,
             appName: this.project.vive.name,
             version: this.project.vive.version,
-            oculus: {
-                exportMethod: 'ad-hoc',
-                bundleIdentifier: this.project.vive.bundle,
-                developerId: this.project.vive.developerId,
-                certPassword: this.project.vive.certPassword,
-            },
+            vive: {},
         };
 
+        if (this.vivePortTrigger) {
+            project.vive.viveportId = this.project.vive.viveportId;
+            project.vive.viveportKey = this.project.vive.viveportKey;
+        }
+
         ctrl.showLoader = true;
+
+        this.modals.notPublished = false;
         $('#configs').ajaxForm({
             dataType: 'json',
-            url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/vive',
             headers: {
                 'x-access-token': this._JWT.get(),
             },
@@ -216,7 +245,6 @@ class EditProjectViveCtrl {
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Vive build start');
-
                 ctrl.timer = ctrl._$interval(() => {
                     ctrl.getProject();
                 }, 2000);
@@ -238,16 +266,15 @@ class EditProjectViveCtrl {
             userId: this.user.username,
             appId: this.project._id,
             //appName: this.project.vive.name,
-            //version:this.project.oculus.version,
-            oculus: {
-            },
+            //version:this.project.vive.version,
+            vive: {},
         };
 
         ctrl.showLoader = true;
         $('#configs').ajaxForm({
             dataType: 'json',
             type: 'DELETE',
-            url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
+            url: this._AppConstants.API + '/project/' + this.project._id + '/build/vive',
             headers: {
                 'x-access-token': this._JWT.get(),
             },
@@ -268,13 +295,16 @@ class EditProjectViveCtrl {
     };
 
     open(e) {
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         this.modals.password = true;
         this.openEvent = e;
     }
 
     download() {
         this.showLoader = true;
-        this.Project.download(this.project._id, 'oculus').then(
+        this.Project.download(this.project._id, 'vive').then(
             data => {
                 this.showLoader = false;
                 window.location = data.downloadUrl;
@@ -285,6 +315,10 @@ class EditProjectViveCtrl {
                 console.log(err);
             }
         );
+    }
+
+    gotToPublish() {
+        this.$state.go('app.editprojectPublish', {projectId: this.project._id});
     }
 }
 

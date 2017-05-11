@@ -1,19 +1,19 @@
 function EditProjectWebConfig($stateProvider) {
-  'ngInject';
+    'ngInject';
 
-  $stateProvider
-    .state('app.editprojectWeb', {
-      url: '/project/:projectId/web',
-      controller: 'EditProjectWebCtrl',
-      controllerAs: '$ctrl',
-      templateUrl: 'pages/editproject-web/editproject-web.html',
-      title: 'EditProjectWeb',
-      pageClass: 'page-account',
-      resolve: {
-        auth: function (User) {
-          return User.ensureAuthIs(true);
+    $stateProvider
+      .state('app.editprojectWeb', {
+        url: '/project/:projectId/web',
+        controller: 'EditProjectWebCtrl',
+        controllerAs: '$ctrl',
+        templateUrl: 'pages/editproject-web/editproject-web.html',
+        title: 'Edit Project Web',
+        pageClass: 'page-account new',
+        resolve: {
+            auth: function (User) {
+                return User.ensureAuthIs(true);
+            },
         },
-      },
     });
 }
 

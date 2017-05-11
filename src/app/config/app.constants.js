@@ -8,10 +8,12 @@ const AppConstants = {
     jwtKey: 'token',
     appName: 'Rodin',
 
+
     local: {
         COOKIEDOMAIN: ['localhost', '.rodin.space'],
         SOCKET: 'http://localhost:4000/api',
         API: 'http://localhost:3000/api',
+        RECORDIP: '178.62.229.191',
         // API: 'http://192.168.0.33:3000/api', // Xcho
         SITE: 'http://localhost:8585/',
         PREVIEW: 'https://rodin.space/projects/',
@@ -21,12 +23,12 @@ const AppConstants = {
         FB: '216861662081500', //'' '216982868736046'
         GITHUB: '2350afe57c144672285b',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
-        sendGrid:'mcwrQNFMdcJdWW6auoJpC0hp9RZ%2BvkKlpQCC5u92qB96TTnmt5F5fmWV1O9OQuO8kj8I5oJQo1b6tTOgp6vNAXd255GhtnQneihBxwRISVU%3D',
     },
     dev: {
         COOKIEDOMAIN: ['.rodin.space'],
         SOCKET: 'https://ss.rodin.space/api',
         API: 'https://api.rodin.space/api',
+        RECORDIP: '178.62.229.191',
         SITE: 'https://rodin.space/',
         PREVIEW: 'https://rodin.space/projects/',
         PUBLIC: 'https://rodin.space/public/',
@@ -35,7 +37,6 @@ const AppConstants = {
         FB: '216982868736046', //'216861662081500' '216982868736046'
         GITHUB: 'fa69c03ad5758fce1f10',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
-        sendGrid:'mcwrQNFMdcJdWW6auoJpC5GXkRXKDUtIkVEt41%2FBP85v2E7SdWfMA7BB5omX9JSAB4cbBoBseKWioH%2B%2FLhkR74AbWufVpCq62Y56M9Oxi7Y%3D',
     },
     prod: {
         COOKIEDOMAIN: ['.rodinapp.com', '.rodin.io', '.rodin.space'],
@@ -46,10 +47,10 @@ const AppConstants = {
         PUBLIC: `${window.location.protocol}//${window.extractDomain()}/public/`,
         PUBLISH: `${window.location.protocol}//${window.extractDomain()}`,
         EDITOR: `${window.location.protocol}//editor.${window.extractDomain()}/`,
+        RECORDIP: '138.197.41.119',
         FB: '214577345643265',
         GITHUB: 'd2030c37902fa3d4d0c7',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
-        sendGrid:'mcwrQNFMdcJdWW6auoJpC%2FNvHxpdsRzyYVDgZiVgVm3Aaoh8HuYk94GTkCyNbnqHuJ2gEkbs91ycGm%2BxvDrz3TNFjjiCP%2F6R2UcqL5ah7q0%3D',
     },
 
     stage: {
@@ -61,6 +62,7 @@ const AppConstants = {
         PUBLIC: `${window.location.protocol}//${window.extractDomain()}/public/`,
         PUBLISH: `${window.location.protocol}//${window.extractDomain()}`,
         EDITOR: `${window.location.protocol}//editor.${window.extractDomain()}/`,
+        RECORDIP: '178.62.211.113',
         FB: '263064010794598',
         GITHUB: '5377f212205e0aa4b4cf',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
@@ -68,6 +70,10 @@ const AppConstants = {
 
     get FB() {
         return this[this.env].FB;
+    },
+
+    get RECORDIP() {
+        return this[this.env].RECORDIP;
     },
 
     get GITHUB() {
@@ -206,6 +212,10 @@ const AppConstants = {
         },
         352: {
             message: 'REPO_NAME_EXISTS',
+            field: '',
+        },
+        353: {
+            message: 'REPO_DOES_NOT_EXIST',
             field: '',
         },
         601: {
