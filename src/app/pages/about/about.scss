@@ -1,0 +1,68 @@
+$border-color:#026ec0;
+body {
+  &.about-us {
+
+  }
+}
+
+.about-us {
+  .centerize {
+    margin: 0 auto;
+  }
+  .btn-wrapper{
+    button{
+      background: #081a30;
+      color:#aaaaaa
+    }
+  }
+  section {
+    &.main {
+      background: url('../../../images/about/bg.jpg') no-repeat;
+      h3 {
+        font-family: "Roboto Condensed";
+        font-size: 34px;
+        color: #008af2;
+        font-weight: bold;
+        margin: 0;
+        padding: 25px 0;
+        text-transform: uppercase;
+      }
+    }
+    &.info {
+      background: url('../../../images/about/space.jpg') no-repeat;
+      p {
+        &.intor-text {
+          line-height: 32px;
+          margin: 25px 0;
+          padding: 0 200px;
+        }
+      }
+      .info-row {
+        border-top: 1px solid $border-color;
+        .details{
+          padding: 40px 30px;
+        }
+        & > .details{
+          &:first-child{
+            border-right: 1px solid $border-color;
+          }
+        }
+
+        h5 {
+          font-size: 24px;
+          font-family: "Roboto Condensed";
+          font-weight: bold;
+          margin: 20px 0 10px;
+        }
+      }
+    }
+    .team{
+      h3{
+        color: #ffffff;
+        font-family: "Roboto Condensed";
+        font-size: 34px;
+        font-weight: bold;
+      }
+    }
+  }
+}
