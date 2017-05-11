@@ -65,6 +65,9 @@ class EditProjectOculusCtrl {
                     const msg = this._AppConstants.ERRORCODES[this.projectError.message];
                     this.errorText = msg ? msg.message :
                         `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
+                    if (this.timer) {
+                        this._$interval.cancel(this.timer);
+                    }
 
                 }
             }
