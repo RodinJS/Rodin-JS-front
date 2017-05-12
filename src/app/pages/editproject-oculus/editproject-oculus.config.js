@@ -8,7 +8,7 @@ function EditProjectOculusConfig($stateProvider) {
         controllerAs: '$ctrl',
         templateUrl: 'pages/editproject-oculus/editproject-oculus.html',
         title: 'Edit Project Oculus',
-        pageClass: 'page-account new',
+        pageClass: 'page-account',
         resolve: {
             auth: function (User) {
                 return User.ensureAuthIs(true);

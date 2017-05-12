@@ -1,0 +1,108 @@
+<div class="main">
+    <h3 class="text-center"> We are making the future of VR development </h3>
+    <img src="../../../images/about/group.png" class="img-responsive centerize" alt="Champions"/>
+</div>
+<div class="info">
+    <div class="container">
+        <div class="row">
+            <p class="text-center intor-text">
+                Data Nerds is an energetic and dynamic tech company in Los Angeles.
+                We love ping pong, office dogs, beach days, and helping our local community.
+                And we want people who are dedicated to continuous learning, and will thrive within our talented,
+                fun-loving team of experts.
+            </p>
+        </div>
+        <div class="row info-row">
+            <div class="col-md-6 col-lg-6 text-center details">
+                <img src="../../../images/about/future.png" alt="future"/>
+                <h5>Our vision</h5>
+                <p>
+                    We are making it redicioulsy easy to cbuild interactive
+                    VR expriences and sharing it crossplatform.
+                </p>
+                <div class="btn-wrapper">
+                    <button type="button" ng-click="$ctrl.update()" class="btn btn-default btn-submit">
+                        Learn more
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 text-center details">
+                <img src="../../../images/about/group-small.png" alt="group"/>
+                <h5>Our Team</h5>
+                <p>
+                    Our innovative team consists of experienced developers
+                    and VR specialists who value the potential of VR.
+                </p>
+                <div class="btn-wrapper">
+                    <button type="button" ng-click="$ctrl.meetTheTeam()" class="btn btn-default btn-submit">
+                        Meet the Team
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row info-row">
+            <div class="col-md-6 col-lg-6 text-center details">
+                <img src="../../../images/about/xvr.png" alt="x40"/>
+                <h5>Being a part of Rodin</h5>
+                <p>
+                    Get a glimpse for yourself below.
+                    We're constantly working hard yet having a ton of fun!
+                </p>
+                <div class="btn-wrapper">
+                    <button type="button" ng-click="$ctrl.meetTheHardworkers()" class="btn btn-default btn-submit">
+                        View Photos
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6  text-center details">
+                <img src="../../../images/about/contact.png" alt="Contact Us"/>
+                <h5>Contact Us</h5>
+                <p>
+                    Get in touch with us to <br/>learn more about our platform.
+                </p>
+                <div class="btn-wrapper">
+                    <button type="button" ui-sref="landing.contacts" class="btn btn-default btn-submit">
+                        Contact us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="team" class="team overlay">
+    <div class="container">
+        <div class="row text-center">
+            <h3> Meet the team</h3>
+            <p class="compress">
+                Our team is filled with amazing talent from developers, to support and administration.
+                We've truly built a great atmosphere and company culture!
+            </p>
+        </div>
+        <div>
+            <div class="row" ng-repeat="teamChunk in $ctrl.team">
+                <div ng-repeat="member in teamChunk" class="col-md-3 col-lg-3 col-sm-3 no-margin team-wrapper">
+                    <img class="img-responsive" ng-src="{{member.img}}" alt="{{member.name}}"/>
+                    <div class="info">
+                        <h5>{{member.name}}</h5>
+                        <h6>{{member.position}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="team container" id="hardworkers">
+    <div class="row text-center">
+        <h3>What's it like here?</h3>
+        <p class="compress">
+            Get a glimpse for yourself below. We're constantly working hard yet having a ton of fun!
+        </p>
+    </div>
+    <div>
+        <div class="row" ng-repeat="teamChunk in $ctrl.workprocess">
+            <div ng-repeat="member in teamChunk" class="col-md-4 col-lg-4 col-sm-4 no-margin team-wrapper">
+                <img class="img-responsive" ng-src="{{member.img}}" alt="{{member.name}}"/>
+            </div>
+        </div>
+    </div>
+</div>
