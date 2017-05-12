@@ -61,11 +61,11 @@ class AppHeaderCtrl {
     }
 
     showSocketResponse(data){
-        console.log(data);
         const respData = data.data || data;
         const message = respData.message || respData.label;
         console.log('message', message);
-        if(respData)
+        console.log(respData);
+        if(respData.error)
             this._Notification.error(message);
         else
             this._Notification.success(message);
