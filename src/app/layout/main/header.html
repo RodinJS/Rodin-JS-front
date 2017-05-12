@@ -44,7 +44,7 @@
                         <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel"
                             ng-if="$ctrl.pagesSection2.length > 0">
                             <li class="rodin-hide" ng-repeat="pages in $ctrl.pagesSection2">
-                                <a ng-if="page.externalURL" target="_blank" ng-href="{{page.externalURL}}">{{page.title}}</a>
+                                <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
                                 <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                             </li>
                         </ul>
@@ -79,11 +79,13 @@
                                 </small>
                                 <div style="clear:both"></div>
                             </div>
-                            <div ng-if="$ctrl.notifications.length > 0">
+                            <div data-ng-if="$ctrl.notifications.length > 0">
                                 <ul rd-scroll total-notifications="{{$ctrl.notifications.length}}"
+                                    style="top: 150px;"
                                     class="notifi-list"
                                     id="notifi-list">
                                     <li ng-repeat="(index, notification) in $ctrl.notifications"
+                                        class="notifi-list-element"
                                         ng-click="$ctrl.updateNotification(notification, index, $event)"
                                         ng-class="notification.typeClass +' '+ notification.readClass">
                                         <a href="">

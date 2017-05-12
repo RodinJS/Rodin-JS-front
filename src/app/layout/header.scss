@@ -243,12 +243,14 @@
       right: 0;
       .notification-list {
         position: relative;
-        height: 120px;
-        padding: 6px 15px;
+        height: 50px;
+        display: table;
+        text-align: center;
+        width: 100%;
         .no-notifications {
-          position: absolute;
-          top: 51px;
-          left: 42px;
+          font-size: 14px;
+          display: table-cell;
+          vertical-align: middle;
         }
       }
       .notification-wrapper {
@@ -278,6 +280,7 @@
           margin-left: 0;
           position: relative;
           width: 100%;
+          min-height: 50px;
           &:before {
             content: "";
             width: 6px;
@@ -288,12 +291,9 @@
             top: 15px;
             left: 10px;
           }
-          &:first-child {
-            &:before {
-              top: 10px;
-            }
+          &:last-child {
             a {
-              padding-top: 5px;
+              border-bottom: none;
             }
           }
         }

@@ -26,7 +26,9 @@
                     </ul>
                     <div ng-show="$ctrl.projectTemplates.projects.length > 0">
                         <div class="form-group"
-                         data-ng-class="{'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused, 'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused}">
+                         data-ng-class="{
+                         'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused,
+                         'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused}">
                         <label for="name">GitHub project url</label>
                         <input type="text"
                                class="form-control"
@@ -39,11 +41,14 @@
                                ng-keyup="$ctrl.validateGithubUrl()"
                                ng-click="$ctrl.githubUrlFocused = true"
                                data-ng-model="$ctrl.project.githubUrl">
+                        <div class="validation error" ng-if="!$ctrl.githubUrlValid && $ctrl.githubUrlFocused"> GitHub project url invalid</div>
                     </div>
                     <div class="form-group"
-                         data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
+                         data-ng-class="{
+                         'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused,
+                         'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
                         <label for="name">
-                            Project name
+                            Project name<sub>*</sub>
                             <!--<span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">required</span>-->
                         </label>
                         <input type="text"
@@ -55,10 +60,13 @@
                                limit-to="64"
                                ng-click="$ctrl.displayNameFocused = true"
                                data-ng-model="$ctrl.project.displayName">
+                        <div class="validation error" ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">Project name required</div>
                     </div>
                     <div class="form-group"
-                         data-ng-class="{'has-error': !$ctrl.project.name && $ctrl.projectFocused, 'has-success': $ctrl.project.name && $ctrl.projectFocused}">
-                        <label for="project-url">Project url</label>
+                         data-ng-class="{
+                         'has-error': !$ctrl.project.name && $ctrl.projectFocused,
+                         'has-success': $ctrl.project.name && $ctrl.projectFocused}">
+                        <label for="project-url">Project url<sub>*</sub></label>
                         <div class="url-group">
                             <input type="text"
                                    id="project-url"
@@ -73,6 +81,7 @@
                             <span class="main-placeholder"
                                   ng-bind="'https://rodin.io/projects/' + $ctrl.currentUser.username + '/'"></span>
                         </div>
+                        <div class="validation error" ng-if="!$ctrl.project.name && $ctrl.projectFocused">Project url required</div>
                     </div>
                     <!--<div class="form-group">-->
                     <!--<label for="url">Meta Tags</label>-->
@@ -80,8 +89,10 @@
                     <!--<p class="form-description">Meta tags are a great way for webmasters to provide search engines with information about their sites</p>-->
                     <!--</div>-->
                     <div class="form-group"
-                         data-ng-class="{'has-error': projectDescription.length === 0 && $ctrl.projectDescriptionFocused, 'has-success': projectDescription.length > 0 && $ctrl.projectDescriptionFocused}">
-                        <label for="area">Description</label>
+                         data-ng-class="{
+                         'has-error': projectDescription.length === 0 && $ctrl.projectDescriptionFocused,
+                         'has-success': projectDescription.length > 0 && $ctrl.projectDescriptionFocused}">
+                        <label for="area">Description<sub>*</sub></label>
                         <textarea
                                 id="area"
                                 ng-minlength="1"
@@ -93,6 +104,7 @@
                         <span class="letter-quantity">
                             <span>{{128-projectDescription.length}}</span>/128
                         </span>
+                        <div class="validation error" ng-if="projectDescription.length === 0 && $ctrl.projectDescriptionFocused">Project url required</div>
                     </div>
                     
                     <div class="btn-wrapper" style="text-align: center">

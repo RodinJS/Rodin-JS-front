@@ -22,6 +22,7 @@ const templateCache = require('gulp-angular-templatecache');
 const VERSION = require('./package.json').version;
 const VENDOR = require('./package.json').dependencies;
 const VENDORMAP = require('./vendor.json');
+var newer = require('gulp-newer');
 
 const JS = ['src/app/**/*.js', '!src/systemjs-module/**', '!src/assists/**'];
 const HTML = ['src/app/**/*.html', 'src/app/**/**/*.html'];
@@ -106,6 +107,7 @@ gulp.task('js', () => {
     const s = size({ title: 'JS -> ', pretty: true });
     return gulp.src(JS)
       .pipe(plumber(ERROR_MESSAGE))
+      .pipe(newer('./build/app'))
       .pipe(sourcemaps.init())
       .pipe(babel({
           "presets": [

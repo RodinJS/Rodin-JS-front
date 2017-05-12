@@ -96,6 +96,9 @@ class AppHeaderCtrl {
         this.User.getNotifications().then(
             notifications => {
                 this.eventBus.emit(this.eventBus.notifications.SET, notifications);
+                setTimeout(() => {
+                    console.dir(angular.element('.notifi-list-element'))
+                })
             },
 
             error => {
