@@ -6,7 +6,7 @@ function FaqConfig($stateProvider) {
             controller: 'AboutCtrl as $ctrl',
             templateUrl: 'pages/about/about.html',
             title: 'About us',
-            pageClass: 'about-us',
+            pageClass: 'space-back about-us',
             showFooter: true,
         });
 }

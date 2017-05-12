@@ -1,7 +1,7 @@
 $border-color:#026ec0;
 body {
   &.about-us {
-
+    background-attachment: fixed;
   }
 }
 
@@ -15,7 +15,7 @@ body {
       color:#aaaaaa
     }
   }
-  section {
+  div {
     &.main {
       background: url('../../../images/about/bg.jpg') no-repeat;
       h3 {
@@ -29,7 +29,6 @@ body {
       }
     }
     &.info {
-      background: url('../../../images/about/space.jpg') no-repeat;
       p {
         &.intor-text {
           line-height: 32px;
@@ -56,12 +55,55 @@ body {
         }
       }
     }
-    .team{
+    &.team{
+      &.overlay{
+        background: rgba(0, 0, 0, 0.2);
+      }
       h3{
         color: #ffffff;
         font-family: "Roboto Condensed";
         font-size: 34px;
         font-weight: bold;
+        padding: 25px 0 15px;
+      }
+      .compress{
+        padding: 10px 200px;
+      }
+      .no-margin{
+        padding: 0 !important;
+        margin-bottom: 3px;
+      }
+      .team-wrapper{
+        //cursor: pointer;
+        &:hover{
+          .info{
+            opacity: 1;
+          }
+        }
+        .info{
+          position: absolute;
+          z-index: 10;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+          /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.65+100 */
+          background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%); /* FF3.6-15 */
+          background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.9) 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.9) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+          transition: all 0.3s ease-in-out;
+          opacity: 0;
+          h5{
+            font-weight: bold;
+            font-size: 18px;
+          }
+          h6{
+            text-transform: uppercase;
+            color: #728aa8;
+            font-weight: normal;
+            font-size: 14px;
+          }
+        }
       }
     }
   }
