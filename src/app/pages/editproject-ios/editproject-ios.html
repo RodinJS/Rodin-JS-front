@@ -4,14 +4,16 @@
             <div class="main-container">
                 <h1 class="title text-center">
                     <i class="icon icon-private"></i>
-                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
+                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span>
+                </h1>
                 <div class="main-form">
                     <div class="content-navbar">
                         <ul class="navbar-list">
                             <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
                         </ul>
                     </div>
-                    <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs" class="main-form section">
+                    <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs"
+                          class="main-form section">
                         <h3 class="section-title">iOS required fields</h3>
                         <div class="form-group" custom-input
                              data-ng-class="{
@@ -35,6 +37,7 @@
                              'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused,
                              'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
                             <label>
+
                                 Version<sub>*</sub>
                             </label>
 
@@ -46,6 +49,7 @@
                                    data-ng-focus="configs.version.focused = true"
                                    data-ng-change="$ctrl.project.build.ios.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.ios.version, $ctrl.project.ios.version))">
                             <p class="form-description">Version of your app</p>
+
                             <div class="validation error" ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.required">
                                 Version is required
                             </div>
@@ -61,6 +65,7 @@
                         <div class="form-group" custom-input
                              data-ng-class="{'has-error': configs.bundle.$invalid && configs.bundle.focused, 'has-success': configs.bundle.$valid && configs.bundle.focused}">
                             <label>
+
                                 Bundle Identifier<sub>*</sub>
                             </label>
                             <input type="text" class="form-control" placeholder=""
@@ -80,6 +85,7 @@
 
                         <div class="form-group" custom-input
                              data-ng-class="{'has-error': configs.developerId.$invalid && configs.developerId.focused, 'has-success': configs.developerId.$valid && configs.developerId.focused}">
+
                             <label >
                                 Developer ID<sub>*</sub>
                             </label>
@@ -94,12 +100,17 @@
 
                         <div class="form-group col-md-4 main-upload-area">
                             <label>Provisioning Profile</label>
+
                             <div class="drag-cont upload-label">
                                 <div class="drag-item first">
                                     <div class="drag-area first">
-                                        <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#profile-file').click()">
-                                            <div class="area-content" ng-show="$ctrl.files.profile.name == ''">.mobileprovision</div>
-                                            <img ng-show="$ctrl.files.profile.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
+                                        <div style="cursor: pointer" class="center-row"
+                                             onclick="document.querySelector('#profile-file').click()">
+                                            <div class="area-content" ng-show="$ctrl.files.profile.name == ''">
+                                                .mobileprovision
+                                            </div>
+                                            <img ng-show="$ctrl.files.profile.name !== ''"
+                                                 src="images/general/file_icon_plist.png" alt="" width="60"
                                                  class="uploaded-file-icon">
                                         </div>
                                         <p class="drag-instruct">
@@ -110,7 +121,9 @@
                                                    accept=".mobileprovision"
                                                    onchange="angular.element(this).scope().$ctrl.changeProfile(event)">
                                         </p>
-                                        <div class="drag-item-again" onclick="document.querySelector('#profile-file').click()" ng-show="$ctrl.files.profile.name !== ''">
+                                        <div class="drag-item-again"
+                                             onclick="document.querySelector('#profile-file').click()"
+                                             ng-show="$ctrl.files.profile.name !== ''">
                                             <div class="drag-board"></div>
                                             <span>Tap To Replace</span>
                                         </div>
@@ -122,28 +135,30 @@
                         <div class="form-group col-md-4 upload-label">
                             <label>Distribution/Development certificate.</label>
                             <!--<div class="main-upload-area">-->
-                                <!--<label class="upload-area" ng-show="$ctrl.files.cert.name === ''">-->
-                                    <!--<div class="area-content">.p12</div>-->
-                                    <!--<input type="file"-->
-                                           <!--id="cert-file"-->
-                                           <!--name="cert"-->
-                                           <!--accept=".p12"-->
-                                           <!--onchange="angular.element(this).scope().$ctrl.changeCert(event)">-->
-                                <!--</label>-->
-                                <!--<img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"-->
-                                     <!--class="uploaded-file-icon">-->
-                                <!--&lt;!&ndash;<p class="area-label">{{ !!$ctrl.files.cert.name ? $ctrl.files.cert.name : 'Drag or Click' }}</p>&ndash;&gt;-->
+                            <!--<label class="upload-area" ng-show="$ctrl.files.cert.name === ''">-->
+                            <!--<div class="area-content">.p12</div>-->
+                            <!--<input type="file"-->
+                            <!--id="cert-file"-->
+                            <!--name="cert"-->
+                            <!--accept=".p12"-->
+                            <!--onchange="angular.element(this).scope().$ctrl.changeCert(event)">-->
+                            <!--</label>-->
+                            <!--<img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"-->
+                            <!--class="uploaded-file-icon">-->
+                            <!--&lt;!&ndash;<p class="area-label">{{ !!$ctrl.files.cert.name ? $ctrl.files.cert.name : 'Drag or Click' }}</p>&ndash;&gt;-->
                             <!--</div>-->
                             <!--<div class="required-field-actions margin-0-important">-->
-                                <!--<button type="button" class="btn btn-primary"-->
-                                        <!--onclick="document.querySelector('#cert-file').click()">browse</button>-->
+                            <!--<button type="button" class="btn btn-primary"-->
+                            <!--onclick="document.querySelector('#cert-file').click()">browse</button>-->
                             <!--</div>-->
                             <div class="drag-cont upload-label">
                                 <div class="drag-item first">
                                     <div class="drag-area first">
-                                        <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#cert-file').click()">
+                                        <div style="cursor: pointer" class="center-row"
+                                             onclick="document.querySelector('#cert-file').click()">
                                             <div class="area-content" ng-show="$ctrl.files.cert.name == ''">.p12</div>
-                                            <img ng-show="$ctrl.files.cert.name !== ''" src="images/general/file_icon_plist.png" alt="" width="60"
+                                            <img ng-show="$ctrl.files.cert.name !== ''"
+                                                 src="images/general/file_icon_plist.png" alt="" width="60"
                                                  class="uploaded-file-icon">
                                         </div>
                                         <p class="drag-instruct">
@@ -154,7 +169,9 @@
                                                    accept=".p12"
                                                    onchange="angular.element(this).scope().$ctrl.changeCert(event)">
                                         </p>
-                                        <div class="drag-item-again" onclick="document.querySelector('#cert-file').click()" ng-show="$ctrl.files.cert.name !== ''">
+                                        <div class="drag-item-again"
+                                             onclick="document.querySelector('#cert-file').click()"
+                                             ng-show="$ctrl.files.cert.name !== ''">
                                             <div class="drag-board"></div>
                                             <span>Tap To Replace</span>
                                         </div>
@@ -165,10 +182,12 @@
 
                         <div class="form-group col-md-4 upload-label">
                             <label>App icon</label>
+
                             <div class="drag-cont upload-label">
                                 <div class="drag-item first">
                                     <div class="drag-area first">
-                                        <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#icon-file').click()">
+                                        <div style="cursor: pointer" class="center-row"
+                                             onclick="document.querySelector('#icon-file').click()">
                                             <div class="area-content" ng-show="$ctrl.files.icon.name == ''">.png</div>
                                             <img ng-show="$ctrl.files.icon.name !== ''"
                                                  width="166" height="166"
@@ -183,7 +202,9 @@
                                                    accept="image/*"
                                                    onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
                                         </p>
-                                        <div class="drag-item-again" onclick="document.querySelector('#icon-file').click()" ng-show="$ctrl.files.icon.name !== ''">
+                                        <div class="drag-item-again"
+                                             onclick="document.querySelector('#icon-file').click()"
+                                             ng-show="$ctrl.files.icon.name !== ''">
                                             <div class="drag-board"></div>
                                             <span>Tap To Replace</span>
                                         </div>
@@ -192,16 +213,19 @@
                                 </div>
                             </div>
 
+
                         </div>
 
                         <div class="btn-wrapper" style="text-align: center">
-                            <button type="button"  class="btn btn-default btn-submit"
+                            <button type="button" class="btn btn-default btn-submit"
                                     ng-click="$ctrl.open($event)"
                                     ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name">
-                            Build</button>
+                                Build
+                            </button>
                         </div>
 
                     </form>
+
                     <form class="main-form" action="" ng-if="$ctrl.project.build.ios.requested">
                         <div class="section">
                             <div class="required-field-item">
@@ -225,14 +249,16 @@
                                     </div>
                                 </div>
                                 <p data-ng-if="!$ctrl.project.build.ios.built"
-                                   class="description margin-top-20 text-white text-center">We are now building your installation
+                                   class="description margin-top-20 text-white text-center">We are now building your
+                                    installation
                                     package, the download link will appear here once done.</p>
                                 <div class="required-field-actions text-center">
                                     <!--<button data-ng-if="$ctrl.project.build.oculus.built"-->
                                     <!--type="button" class="btn btn-primary"-->
                                     <!--ng-click="$ctrl.download()">download-->
                                     <!--</button>-->
-                                    <a data-ng-click="$ctrl.cancelBuild($event)" data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">Cancel</a>
+                                    <a data-ng-click="$ctrl.cancelBuild($event)"
+                                       data-ng-if="!$ctrl.project.build.ios.built" class="btn btn-save">Cancel</a>
                                 </div>
                             </div>
                         </div>
@@ -258,7 +284,8 @@
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <div class="text-center">
- <button type="button" class="btn btn-positive" ng-click="$ctrl.publishNbuild($event)">Publish & Build
+                    <button type="button" class="btn btn-positive" ng-click="$ctrl.publishNbuild($event)">Publish &
+                        Build
                     </button>
                     <button type="button" class="btn btn-positive"
                             ng-click="$ctrl.gotToPublish()">Publish Project
@@ -270,7 +297,8 @@
         </div>
     </div>
 </div>
-<div class="modal" close-modal="password"  ng-class="{'display-block': $ctrl.modals.password, 'display-none': !$ctrl.modals.password}">
+<div class="modal" close-modal="password"
+     ng-class="{'display-block': $ctrl.modals.password, 'display-none': !$ctrl.modals.password}">
     <div class="modal-content">
         <div class="modal-header">
             <p>Certificate Password</p>
@@ -298,7 +326,8 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-positive"
                             data-ng-disabled="!password.$valid"
-                            data-ng-click="$ctrl.build($event)">Build</button>
+                            data-ng-click="$ctrl.build($event)">Build
+                    </button>
                     <a href="" class="btn btn-cancel"
                        data-ng-click="$ctrl.modals.password = false">Cancel</a>
                 </div>
