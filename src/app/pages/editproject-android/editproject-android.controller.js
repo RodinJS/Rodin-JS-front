@@ -51,8 +51,10 @@ class EditProjectAndroidCtrl {
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
             //&& !this.project.build.android.built
+
             if (this.project && this.project.fields && this.project.fields.android &&
                 (!this.project.android || Object.keys(this.project.android).length <= 0 ) && !this.project.build.android.built) {
+
                 this.project.android = {
                     name: this.project.fields.appName,
                     version: this.project.fields.version,
@@ -66,10 +68,18 @@ class EditProjectAndroidCtrl {
                     const msg = this._AppConstants.ERRORCODES[this.projectError.message];
                     this.errorText = msg ? msg.message :
                         `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
+
                     if (this.timer) {
                         this._$interval.cancel(this.timer);
                     }
-
+                    angular.forEach(angular.element('input'), (val, key) =>{
+                        angular.element(val).attr('disabled', false)
+                    })
+                }
+                else{
+                    angular.forEach(angular.element('input'), (val, key) =>{
+                        angular.element(val).attr('disabled', true)
+                    })
                 }
             }
         });

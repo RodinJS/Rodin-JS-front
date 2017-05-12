@@ -73,10 +73,17 @@ class EditProjectIosCtrl {
                     if (this.timer) {
                         this._$interval.cancel(this.timer);
                     }
+                    angular.forEach(angular.element('input'), (val, key) =>{
+                        angular.element(val).attr('disabled', false)
+                    })
 
                 }
+                else{
+                    angular.forEach(angular.element('input'), (val, key) =>{
+                        angular.element(val).attr('disabled', true)
+                    })
+                }
 
-                console.log(this.projectError, this.project.ios, this.project);
             }
         });
         $scope.$on('$destroy', () => {

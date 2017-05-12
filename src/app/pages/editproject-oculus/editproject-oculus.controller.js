@@ -68,7 +68,14 @@ class EditProjectOculusCtrl {
                     if (this.timer) {
                         this._$interval.cancel(this.timer);
                     }
-
+                    angular.forEach(angular.element('input'), (val, key) =>{
+                        angular.element(val).attr('disabled', false)
+                    })
+                }
+                else{
+                    angular.forEach(angular.element('input'), (val, key) =>{
+                        angular.element(val).attr('disabled', false)
+                    })
                 }
             }
         });
