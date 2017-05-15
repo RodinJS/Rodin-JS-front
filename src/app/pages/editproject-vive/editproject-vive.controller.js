@@ -55,7 +55,7 @@ class EditProjectViveCtrl {
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
             console.log('VIVIE', this.project);
-            if(this.project && (!this.project.vive || Object.keys(this.project.vive).length <=0 ) && !this.project.build.vive.built){
+            if(this.project && this.project.fields && (!this.project.vive || Object.keys(this.project.vive).length <=0 ) && !this.project.build.vive.built){
                 this.project.vive = {
                     name:this.project.fields.appName,
                     version:this.project.fields.version,

@@ -14,21 +14,19 @@
                     </div>
                     <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs"
                           class="main-form section">
-                        <h3 class="section-title">iOS required fields</h3>
                         <div class="form-group" custom-input
                              data-ng-class="{
                              'has-error': configs.displayName.$invalid && configs.displayName.focused,
                              'has-success': configs.displayName.$valid && configs.displayName.focused}">
                             <label>
-                                Display name<sub>*</sub>
+                                App name<sub>*</sub>
                             </label>
                             <input type="text" class="form-control" placeholder=""
                                    data-ng-model="$ctrl.project.ios.name"
                                    name="displayName"
                                    required
                                    data-ng-focus="configs.displayName.focused = true">
-                            <p class="form-description">App Name - Display name of your app</p>
-                            <div class="validation error" ng-if="configs.displayName.$invalid && configs.displayName.focused">Display name is required</div>
+                            <div class="validation error" ng-if="configs.displayName.$invalid && configs.displayName.focused">App name is required</div>
                         </div>
 
                         <div class="form-group" custom-input
@@ -37,7 +35,6 @@
                              'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused,
                              'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
                             <label>
-
                                 Version<sub>*</sub>
                             </label>
 
@@ -48,13 +45,13 @@
                                    ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/"
                                    data-ng-focus="configs.version.focused = true"
                                    data-ng-change="$ctrl.project.build.ios.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.ios.version, $ctrl.project.ios.version))">
-                            <p class="form-description">Version of your app</p>
+                            <p class="form-description"
+                               ng-class="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern ? 'error' : ''">
+                                Version must be in #.#.# format
+                            </p>
 
                             <div class="validation error" ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.required">
                                 Version is required
-                            </div>
-                            <div class="validation error" ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern">
-                                Version must be in x.x.x format
                             </div>
                             <div class="validation error" ng-if="!isVersionValid && configs.version.$valid">
                                 Version must be higher than current. Current version is {{$ctrl.project.build.ios.version}}
@@ -72,14 +69,15 @@
                                    data-ng-model="$ctrl.project.ios.bundle"
                                    name="bundle"
                                    required
-                                   ng-pattern="$ctrl.patterns.bundle"
+                                   ng-pattern="/^(0|[a-zA-Z0-9]\w*)\.(0|[a-zA-Z0-9]\w*)\.(0|[a-zA-Z0-9]\w*)$/"
                                    data-ng-focus="configs.bundle.focused = true">
-                            <p class="form-description">Bundle Identifier - A bundle ID precisely
-                                identifies a single app.
-                                A bundle ID is used during the development process to provision devices
-                                and by the operating system when the app is distributed to customers.
+                            <p class="form-description">
+                                Must be in xxx.xxx.xxx format
+                                Used for uniquely identifying your application in the operation system
                             </p>
-                            <div class="validation error" ng-if="configs.bundle.$invalid && configs.bundle.focused"> Bundle Identifier is required</div>
+                            <div class="validation error" ng-if="configs.bundle.$invalid && configs.bundle.focused">
+                                Bundle Identifier is invalid
+                            </div>
 
                         </div>
 
@@ -95,11 +93,13 @@
                                    required
                                    data-ng-focus="configs.developerId.focused = true">
                             <p class="form-description">Developer ID.</p>
-                            <div class="validation error"  ng-if="configs.developerId.$invalid && configs.developerId.focused">Developer ID is required</div>
+                            <div class="validation error"  ng-if="configs.developerId.$invalid && configs.developerId.focused">
+                                Developer ID is required
+                            </div>
                         </div>
 
                         <div class="form-group col-md-4 main-upload-area">
-                            <label>Provisioning Profile</label>
+                            <label>Provisioning Profile<sub>*</sub></label>
 
                             <div class="drag-cont upload-label">
                                 <div class="drag-item first">
@@ -133,7 +133,7 @@
                         </div>
 
                         <div class="form-group col-md-4 upload-label">
-                            <label>Distribution/Development certificate.</label>
+                            <label>Distribution/Development certificate.<sub>*</sub></label>
                             <!--<div class="main-upload-area">-->
                             <!--<label class="upload-area" ng-show="$ctrl.files.cert.name === ''">-->
                             <!--<div class="area-content">.p12</div>-->
@@ -181,7 +181,7 @@
                         </div>
 
                         <div class="form-group col-md-4 upload-label">
-                            <label>App icon</label>
+                            <label>App icon<sub>*</sub></label>
 
                             <div class="drag-cont upload-label">
                                 <div class="drag-item first">
@@ -209,7 +209,7 @@
                                             <span>Tap To Replace</span>
                                         </div>
                                     </div>
-                                    <h5 class="section-small-title text-center">upload .png 1024x1024</h5>
+                                    <h5 class="section-small-title text-center">We recomended a 1024x1024 size image</h5>
                                 </div>
                             </div>
 

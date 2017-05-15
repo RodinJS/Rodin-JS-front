@@ -242,6 +242,26 @@ const AppConstants = {
             message:`Build failed. Please drop an email to support including your build ID`,
         }
     },
+    FORMERRORS:{
+        register:{
+            username:'Username must contain at leas 3 characters',
+            email:'Invalid email',
+            password:'Passwords must be at least 8 characters long, containing a number and letter',
+            confirmPassword:'Password does not match',
+            invitationCode:'Invalid invitation code'
+        },
+        reset:{
+            usernameEmail:'Please enter username or email',
+            password:'Passwords must be at least 8 characters long, containing a number and letter',
+            confirmPassword:'Password does not match',
+        },
+        project:{
+            github:'URL is invalid',
+            name:'Project name must contain at least 3 characters',
+            url:'Project URL must be alphanumeric with no spaces',
+            description:'Description is required'
+        }
+    }
 };
 
 export default AppConstants;

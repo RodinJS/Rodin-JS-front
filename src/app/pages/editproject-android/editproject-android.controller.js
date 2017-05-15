@@ -20,6 +20,9 @@ class EditProjectAndroidCtrl {
 
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
+        this.patterns = {
+            package:'/^([a-zA-Z0-9]\d*)\.([a-zA-Z0-9]\d*)\.([a-zA-Z0-9]\d*)$/'
+        };
 
         this.fileChoosen = {
             profile: false,
