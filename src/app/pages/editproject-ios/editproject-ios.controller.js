@@ -70,6 +70,7 @@ class EditProjectIosCtrl {
                     this.project.build.ios.requested = false;
                     this.errorText = this._AppConstants.ERRORCODES[this.projectError.message].message ||
                         `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
+
                     if (this.timer) {
                         this._$interval.cancel(this.timer);
                     }
@@ -109,6 +110,9 @@ class EditProjectIosCtrl {
                 _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
+                if(this.timer) {
+                    this._$interval.cancel(this.timer);
+                }
                 this.showLoader = false;
                 //this.$state.go('landing.error');
             }
