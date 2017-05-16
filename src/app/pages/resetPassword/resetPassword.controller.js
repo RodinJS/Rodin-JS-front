@@ -1,5 +1,5 @@
 class ResetPasswordCtrl {
-    constructor(AppConstants, User, $stateParams, $state) {
+    constructor(AppConstants, User, $stateParams, $state, Notification) {
         'ngInject';
 
         this.patterns = {
@@ -10,6 +10,8 @@ class ResetPasswordCtrl {
         this.User = User;
         this.$stateParams = $stateParams;
         this.loaded = false;
+        this.formErrors = AppConstants.FORMERRORS.reset;
+        this.Notification = Notification;
 
         if (this.User.current) {
             return $state.go('app.dashboard');
@@ -67,6 +69,7 @@ class ResetPasswordCtrl {
                 else {
                     this.errorMessage = 'New password must be at least 8 characters long, contain a number and letter';
                 }
+                this.Notification.error(this.errorMessage);
                 this.isSubmitting = false;
             })
     }
