@@ -1,6 +1,7 @@
 .line-sample {
   border-top: 1px solid $color-primary;
 }
+
 .samples-page {
   .mobile-list {
     display: none;
@@ -14,7 +15,7 @@
   .rd-tree {
     .nav-list {
       //margin-top: 5px;
-     > li {
+      > li {
         margin-bottom: 0;
         &.labeled {
           .tree-toggler {
@@ -26,11 +27,14 @@
             padding: 10px 10px 10px 15px;
             cursor: pointer;
             width: 100%;
-            &:hover {
-              background: #082542;
-            }
           }
           ul.tree {
+            li.active {
+              background: #082542;
+              a {
+                color: white;
+              }
+            }
             li {
               padding-left: 30px;
               &:hover {
@@ -56,6 +60,7 @@
     }
   }
 }
+
 .samples-iframe {
   background: black;
   .info {
@@ -65,18 +70,20 @@
     color: $color-primary;
   }
   .view-source {
+    color: #35a9ff;
     position: absolute;
-    bottom: 50px;
+    top: 15px;
     right: 10px;
     padding: 8px 12px 8px 12px;
     border: 1px solid $color_primary;
     border-radius: 3px;
-    background: $bg-primary;
+    background: #132c4d;
     &:hover {
       //background: $color-bd-sec;
     }
   }
 }
+
 @media screen and (min-width: 320px) and (max-width: 1024px) {
   .samples-iframe {
     display: none;
@@ -87,7 +94,8 @@
     }
   }
 }
-@media screen and (orientation:portrait) and (min-width: 320px) and (max-width: 1024px) {
+
+@media screen and (orientation: portrait) and (min-width: 320px) and (max-width: 1024px) {
   .samples-iframe {
     display: none;
   }
@@ -100,8 +108,8 @@
   .rd-tree {
     margin-top: 20px;
     li {
-      a{
-          border-bottom:none !important;
+      a {
+        border-bottom: none !important;
       }
     }
   }
@@ -110,7 +118,8 @@
   //  top: 90px;
   //}
 }
-@media screen and (orientation:landscape) and (min-width: 320px) and (max-width: 1024px) {
+
+@media screen and (orientation: landscape) and (min-width: 320px) and (max-width: 1024px) {
   .samples-iframe {
     display: none;
   }
@@ -123,8 +132,8 @@
   .rd-tree {
     margin-top: 20px;
     li {
-      a{
-          border-bottom:none !important;
+      a {
+        border-bottom: none !important;
       }
     }
   }
