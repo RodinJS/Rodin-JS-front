@@ -9,6 +9,7 @@ class ResetPasswordCtrl {
         this.appName = AppConstants.appName;
         this.User = User;
         this.$stateParams = $stateParams;
+        this.loaded = false;
         this.formErrors = AppConstants.FORMERRORS.reset;
         this.Notification = Notification;
 
@@ -20,12 +21,19 @@ class ResetPasswordCtrl {
             this.User.validateChangePasswordToken($stateParams.t)
                 .then(
                     response => {
-                        if(response.tokenUsed) return this.tokenUsed = true;
+                        this.loaded = true;
+                        if(response.tokenUsed) {
+                            return this.tokenUsed = true;
+                        }
                         this.newPasswordMode = true;
                     },
                     err => {
+                        this.loaded = true;
                         console.log(err);
                     })
+        }
+        else{
+            this.loaded = true;
         }
 
 
