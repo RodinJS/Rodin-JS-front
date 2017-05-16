@@ -70,4 +70,24 @@ function formValidator() {
     }
 }
 
-export default {objLimitTo, bytesFilter, formatDate, htmlize, formValidator};
+function projectFormsValidator() {
+    return function (input, param) {
+        if (input && param) {
+            const invalid = input[param].$invalid &&
+                            input[param].focused &&
+                            (input[param].$viewValue ? input[param].$viewValue.length > 0 : 0) ||
+                            (input[param].pressed && input[param].$viewValue.length <= 0);
+
+            const valid = input[param].$valid && input[param].focused;
+
+            if (invalid) {
+                return 'invalid';
+            }
+            if (valid) {
+                return 'valid';
+            }
+        }
+    }
+}
+
+export default {objLimitTo, bytesFilter, formatDate, htmlize, formValidator, projectFormsValidator};

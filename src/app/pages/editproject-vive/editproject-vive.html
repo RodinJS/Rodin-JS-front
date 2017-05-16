@@ -16,25 +16,30 @@
                         <div class="section">
                             <div class="form-group" custom-input
                                  data-ng-class="{
-                                 'has-error': configs.displayName.$invalid && configs.displayName.focused,
-                                 'has-success': configs.displayName.$valid && configs.displayName.focused}">
+                                 'has-error':  (configs | PFValidator:'displayName')  == 'invalid',
+                                 'has-success':  (configs | PFValidator:'displayName')  == 'valid'
+                                 }">
                                 <label>
                                     App name<sub>*</sub>
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
                                        data-ng-model="$ctrl.project.vive.name"
-                                       name="appName"
+                                       name="displayName"
                                        required
+                                       data-ng-keyup="configs.displayName.pressed = true"
                                        data-ng-focus="configs.displayName.focused = true">
                                 <div class="validation error"
-                                     ng-if="configs.displayName.$invalid && configs.displayName.focused">App name is
-                                    required
+                                     ng-if=" (configs | PFValidator:'displayName')  == 'invalid'">
+                                    App name is required
                                 </div>
                             </div>
 
                             <div class="form-group" custom-input
                                  data-ng-init="isVersionValid = true"
-                                 data-ng-class="{'has-error': (configs.version.$invalid || !isVersionValid) && configs.version.focused, 'has-success': configs.version.$valid && isVersionValid && configs.version.focused}">
+                                 data-ng-class="{
+                                 'has-error':  (configs | PFValidator:'version')  == 'invalid' ||  !isVersionValid,
+                                 'has-success':  (configs | PFValidator:'version')  == 'valid' && isVersionValid
+                                 }">
                                 <label>
                                     Version<sub>*</sub>
                                 </label>
@@ -44,13 +49,14 @@
                                        required
                                        ng-pattern="/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/"
                                        data-ng-focus="configs.version.focused = true"
+                                       data-ng-keyup="configs.version.pressed = true"
                                        data-ng-change="$ctrl.project.build.vive.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.vive.version, $ctrl.project.vive.version))">
                                 <p class="form-description"
-                                    ng-class="configs.version.$invalid && configs.version.focused && configs.version.$error.pattern ? 'error' : ''">
+                                    ng-class="(configs | PFValidator:'version')  == 'invalid' && configs.version.$error.pattern ? 'error' : ''">
                                     Version must be in #.#.# format
                                 </p>
                                 <div class="validation error"
-                                     ng-if="configs.version.$invalid && configs.version.focused && configs.version.$error.required">
+                                     ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) && configs.version.$viewValue.length <= 0">
                                     Version is required
                                 </div>
                                 <div class="validation error" ng-if="!isVersionValid && configs.version.$valid">
@@ -78,8 +84,9 @@
                                 </div>
                                 <div class="form-group" custom-input
                                      data-ng-class="{
-                                     'has-error': configs.viveportId.$invalid && configs.viveportId.focused,
-                                     'has-success': configs.viveportId.$valid && configs.viveportId.focused}">
+                                     'has-error': (configs | PFValidator:'viveportId') == 'invalid',
+                                     'has-success': (configs | PFValidator:'viveportId') == 'valid'
+                                     }">
                                     <label>
                                         Viveport id<sub>*</sub>
                                     </label>
@@ -87,15 +94,19 @@
                                            data-ng-model="$ctrl.project.vive.viveportId"
                                            name="viveportId"
                                            required
-                                           data-ng-focus="configs.viveportId.focused = true">
+                                           data-ng-focus="configs.viveportId.focused = true"
+                                           data-ng-keyup="configs.viveportId.pressed = true">
                                     <p class="form-description">Viveport id</p>
                                     <div class="validation error"
-                                         ng-if="configs.viveportId.$invalid && configs.viveportId.focused">
+                                         ng-if="(configs | PFValidator:'viveportId') == 'invalid'">
                                         Viveport id is required
                                     </div>
                                 </div>
                                 <div class="form-group" custom-input
-                                     data-ng-class="{'has-error': configs.viveportKey.$invalid && configs.viveportKey.focused, 'has-success': configs.viveportKey.$valid && configs.viveportKey.focused}">
+                                     data-ng-class="{
+                                     'has-error': (configs | PFValidator:'viveportKey') == 'invalid',
+                                     'has-success': (configs | PFValidator:'viveportKey') == 'valid'
+                                     }">
                                     <label>
                                         Viveport key<sub>*</sub>
                                     </label>
@@ -103,10 +114,11 @@
                                            data-ng-model="$ctrl.project.vive.viveportKey"
                                            name="viveportKey"
                                            required
-                                           data-ng-focus="configs.viveportKey.focused = true">
+                                           data-ng-focus="configs.viveportKey.focused = true"
+                                           data-ng-keyup="configs.viveportKey.pressed = true">
                                     <p class="form-description">Viveport key</p>
                                     <div class="validation error"
-                                         ng-if="configs.viveportKey.$invalid && configs.viveportKey.focused">
+                                         ng-if="(configs | PFValidator:'viveportKey') == 'invalid'">
                                         Viveport key is required
                                     </div>
                                 </div>

@@ -61,8 +61,9 @@
                         <h3 class="section-title">General Settings</h3>
                         <div class="form-group" custom-input
                              data-ng-class="{
-                             'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused,
-                             'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
+                             'has-error': (project | PFValidator:'name')  == 'invalid',
+                             'has-success': (project | PFValidator:'name')  == 'valid'
+                             }">
                             <label>
                                 Project name<sub>*</sub>
                             </label>
@@ -76,7 +77,7 @@
                                    limit-to="64"
                                    ng-model="$ctrl.project.displayName">
                             <div class="validation error"
-                                 ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">
+                                 ng-if="(project | PFValidator:'name')  == 'invalid'">
                                 {{$ctrl.formErrors.name}}
                             </div>
                         </div>

@@ -51,8 +51,8 @@
 
                             <div class="form-group"
                                  data-ng-class="{
-                                 'has-error':!$ctrl.project.displayName && $ctrl.displayNameFocused  && project.name.$viewValue.length > 0,
-                                 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused
+                                 'has-error':(project | PFValidator:'name')  == 'invalid',
+                                 'has-success': (project | PFValidator:'name')  == 'valid'
                                  }">
                                 <label for="name">
                                     Project name<sub>*</sub>
@@ -66,16 +66,19 @@
                                        ng-maxlength="64"
                                        limit-to="64"
                                        name="name"
-                                       ng-click="$ctrl.displayNameFocused = true"
+                                       ng-focus="project.name.focused = true"
+                                       ng-keyup="project.name.pressed = true"
                                        data-ng-model="$ctrl.project.displayName">
-                                <div class="validation error" ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused &&  project.name.$viewValue.length > 0">
+                                <div class="validation error" ng-if="(project | PFValidator:'name')  == 'invalid'">
                                     {{$ctrl.formErrors.name}}
                                 </div>
                             </div>
+
                             <div class="form-group"
                                  data-ng-class="{
-                             'has-error': !$ctrl.project.name && $ctrl.projectFocused && project.url.$viewValue.length > 0,
-                             'has-success': $ctrl.project.name && $ctrl.projectFocused}">
+                                     'has-error': (project | PFValidator:'url')  == 'invalid',
+                                     'has-success': (project | PFValidator:'url')  == 'valid'
+                                 }">
                                 <label for="project-url">Project URL<sub>*</sub></label>
                                 <div class="url-group">
                                     <input type="text"
@@ -87,12 +90,13 @@
                                            ng-maxlength="16"
                                            limit-to="16"
                                            name="url"
-                                           ng-click="$ctrl.projectFocused = true"
+                                           ng-focus="project.url.focused = true"
+                                           ng-keyup="project.url.pressed = true"
                                            data-ng-model="$ctrl.project.name">
                                     <span class="main-placeholder"
                                           ng-bind="'https://rodin.io/projects/' + $ctrl.currentUser.username + '/'"></span>
                                 </div>
-                                <div class="validation error" ng-if="!$ctrl.project.name && $ctrl.projectFocused &&  project.url.$viewValue.length > 0">
+                                <div class="validation error" ng-if="(project | PFValidator:'url')  == 'invalid'">
                                     {{$ctrl.formErrors.url}}
                                 </div>
                             </div>
@@ -103,8 +107,9 @@
                             <!--</div>-->
                             <div class="form-group"
                                  data-ng-class="{
-                             'has-error': projectDescription.length === 0 && $ctrl.projectDescriptionFocused && project.description.$viewValue.length > 0,
-                             'has-success': projectDescription.length > 0 && $ctrl.projectDescriptionFocused}">
+                                 'has-error': projectDescription.length === 0 && $ctrl.projectDescriptionFocused && project.description.$viewValue.length > 0,
+                                 'has-success': projectDescription.length > 0 && $ctrl.projectDescriptionFocused
+                                 }">
                                 <label for="area">Description<sub>*</sub></label>
                                 <textarea
                                         id="area"

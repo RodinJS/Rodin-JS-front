@@ -206,7 +206,10 @@
                             </div>
 
                             <div class="form-group" custom-input
-                                 data-ng-class="{'has-error': profile.email.$invalid && profile.email.focused, 'has-success': profile.email.$valid && profile.email.focused}">
+                                 data-ng-class="{
+                                 'has-error': (profile | PFValidator:'email')  == 'invalid',
+                                 'has-success': (profile | PFValidator:'email')  == 'valid'
+                                 }">
                                 <label>
                                     Email <sub>*</sub>
                                 </label>
@@ -215,9 +218,10 @@
                                        data-ng-model="$ctrl.currentUser.email"
                                        data-ng-pattern="$ctrl.patterns.email"
                                        required
-                                       data-ng-focus="profile.email.focused = true">
+                                       data-ng-focus="profile.email.focused = true"
+                                       data-ng-keyup="profile.email.pressed = true">
                                 <div style="clear:both"></div>
-                                <div class="validation error" ng-if="profile.email.$invalid && profile.email.focused">Email is invalid</div>
+                                <div class="validation error" ng-if="(profile | PFValidator:'email')  == 'invalid'">Email is invalid</div>
                             </div>
 
                             <div class="form-group" custom-input>
@@ -256,65 +260,65 @@
                     <div ng-show="$ctrl.privacy">
                         <div class="section">
 
-                        <h3 class="section-title">Change Password</h3>
+                            <h3 class="section-title">Change Password</h3>
 
-                        <form class="form-wrapper" data-ng-submit="$ctrl.updatePassword()"
-                              name="changePasswordForm">
-                            <div class="form-group pass-group" custom-input
-                                 data-ng-class="{
-                                 'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0,
-                                 'has-success': changePasswordForm.password.$valid && changePasswordForm.password.focused}">
-                                <label>New Password</label>
+                            <form class="form-wrapper" data-ng-submit="$ctrl.updatePassword()"
+                                  name="changePasswordForm">
+                                <div class="form-group pass-group" custom-input
+                                     data-ng-class="{
+                                     'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0,
+                                     'has-success': changePasswordForm.password.$valid && changePasswordForm.password.focused}">
+                                    <label>New Password</label>
 
-                                <input type="password" class="form-control" placeholder=""
-                                       name="password"
-                                       data-ng-model="$ctrl.newPassword.password"
-                                       ng-pattern="$ctrl.patterns.password"
-                                       required
-                                       ng-minlength="5"
-                                       ng-change="$ctrl.confirmPassword()"
-                                       data-ng-focus="changePasswordForm.password.focused = true">
-                                <div class="validation " ng-class="changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0 ? 'error' : ''">
-                                    Passwords must be at least 8 characters long, containing a number and letter
+                                    <input type="password" class="form-control" placeholder=""
+                                           name="password"
+                                           data-ng-model="$ctrl.newPassword.password"
+                                           ng-pattern="$ctrl.patterns.password"
+                                           required
+                                           ng-minlength="5"
+                                           ng-change="$ctrl.confirmPassword()"
+                                           data-ng-focus="changePasswordForm.password.focused = true">
+                                    <div class="validation " ng-class="changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0 ? 'error' : ''">
+                                        Passwords must be at least 8 characters long, containing a number and letter
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group pass-group" custom-input
-                                 data-ng-class="{
-                                 'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0,
-                                 'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
-                                <label>Confirm Password</label>
-                                <input type="password" class="form-control" placeholder=""
-                                       name="confirmPassword"
-                                       data-ng-model="$ctrl.newPassword.confirm"
-                                       required
-                                       confirm-Password
-                                       compare-to="changePasswordForm.confirmPassword.$viewValue"
-                                       ng-minlength="5"
-                                       ng-change="$ctrl.confirmPassword()"
-                                       data-ng-focus="changePasswordForm.confirmPassword.focused = true">
-                                <div class="validation error"
-                                     ng-if="changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0">
-                                    Password does not match
+                                <div class="form-group pass-group" custom-input
+                                     data-ng-class="{
+                                     'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0,
+                                     'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" placeholder=""
+                                           name="confirmPassword"
+                                           data-ng-model="$ctrl.newPassword.confirm"
+                                           required
+                                           confirm-Password
+                                           compare-to="changePasswordForm.confirmPassword.$viewValue"
+                                           ng-minlength="5"
+                                           ng-change="$ctrl.confirmPassword()"
+                                           data-ng-focus="changePasswordForm.confirmPassword.focused = true">
+                                    <div class="validation error"
+                                         ng-if="changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0">
+                                        Password does not match
+                                    </div>
                                 </div>
-                            </div>
 
-                           <!-- <p class="description">New password must be at least 8
-                                characters long,
-                                contain a number and letter
-                            </p>-->
+                               <!-- <p class="description">New password must be at least 8
+                                    characters long,
+                                    contain a number and letter
+                                </p>-->
 
 
-                            <div class="btn-wrapper text-center"
-                                 data-ng-class="{'has-error': $ctrl.passwordChangeResponse === 'error', 'has-success': $ctrl.passwordChangeResponse === 'success'}">
-                                <button type="submit"
-                                        data-ng-disabled="!changePasswordForm.$valid"
-                                        class="btn btn-submit btn-default">Update Password
-                                </button>
-                              <!--  <p class="help-block text-small error-help-block">Something went wrong.</p>
-                                <p class="help-block text-small success-help-block">Excellent. Password
-                                    changed.</p>-->
-                            </div>
-                        </form>
+                                <div class="btn-wrapper text-center"
+                                     data-ng-class="{'has-error': $ctrl.passwordChangeResponse === 'error', 'has-success': $ctrl.passwordChangeResponse === 'success'}">
+                                    <button type="submit"
+                                            data-ng-disabled="!changePasswordForm.$valid"
+                                            class="btn btn-submit btn-default">Update Password
+                                    </button>
+                                  <!--  <p class="help-block text-small error-help-block">Something went wrong.</p>
+                                    <p class="help-block text-small success-help-block">Excellent. Password
+                                        changed.</p>-->
+                                </div>
+                            </form>
                         </div>
                     </div>
 
