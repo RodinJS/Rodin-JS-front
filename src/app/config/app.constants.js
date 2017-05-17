@@ -235,6 +235,30 @@ const AppConstants = {
             field: '',
         },
 
+        // FILEREADERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // FILEWRITEERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // MKDIRERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // RMDIRERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // RMERROR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // CPERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // BUILDERROR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // CLEANERROR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
         CERTIMPORTERROR:{
             message:`Build failed. Invalid certificate`,
         },
