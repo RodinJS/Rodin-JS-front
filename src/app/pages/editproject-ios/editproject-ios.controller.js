@@ -68,7 +68,7 @@ class EditProjectIosCtrl {
 
                 if (this.projectError) {
                     this.project.build.ios.requested = false;
-                    this.errorText = this._AppConstants.ERRORCODES[this.projectError.message].message ||
+                    this.errorText = //this._AppConstants.ERRORCODES[this.projectError.message].message ||
                         `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
 
                     if (this.timer) {
@@ -267,6 +267,8 @@ class EditProjectIosCtrl {
 
         ctrl.showLoader = true;
         this.modals.notPublished = false;
+        
+        console.log("--------- main");
         $('#configs').ajaxForm({
             dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.projectId + '/build/ios',
@@ -277,6 +279,7 @@ class EditProjectIosCtrl {
                 project: angular.toJson(project),
             },
             success: function (data) {
+                console.log("------------- success");
                 ctrl.modals.password = false;
                 ctrl._$scope.configs.displayName.focused = false;
                 ctrl._$scope.configs.version.focused = false;
@@ -291,6 +294,7 @@ class EditProjectIosCtrl {
             },
 
             error: function (data) {
+                console.log("-----------------error");
                 if (data.responseJSON && data.responseJSON.error.message)
                     ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
