@@ -70,15 +70,17 @@
         color: $color-primary;
     }
     .view-source {
-        color: #35a9ff;
         position: absolute;
         top: 15px;
         right: 10px;
         padding: 8px 12px 8px 12px;
         border: 1px solid $color_primary;
         border-radius: 3px;
-        background: #132c4d;
+        background: $bg-primary;
+        // background: #132c4d;
         &:hover {
+            background: #132c4d;
+            color: #35a9ff;
             //background: $color-bd-sec;
         }
     }
