@@ -7,14 +7,8 @@
                 <ul class="nav nav-list">
                     <li class="labeled"><label class="tree-toggler nav-header">Basic</label>
                         <ul class="nav tree">
-                            <li ng-repeat="(key, value) in $ctrl.samples" ng-class="$ctrl.sampleName === key ? 'active':''"><a ng-click="$ctrl.setActiveLink(key)">{{key.charAt(0).toUpperCase()+ key.slice(1)}}</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav-list mobile-list">
-                    <li class="labeled"><label class="tree-toggler nav-header">Basic</label>
-                        <ul class="nav tree">
-                            <li ng-repeat="(key, value) in $ctrl.samples" ng-class="$ctrl.sampleName === key ? 'active':''"><a ng-href="{{value.url}}" target="_blank">{{key.charAt(0).toUpperCase()+ key.slice(1)}}</a></li>
+                            <li ng-repeat="(key, value) in $ctrl.samples" ng-class="$ctrl.sampleName === key ? 'active':''">
+                                <a ng-click="$ctrl.setActiveLink(key)" ng-href="{{$ctrl.checkMobile() ? value.url : ''}}" target="{{$ctrl.checkMobile() ? '_blank': '_self'}}">{{key.charAt(0).toUpperCase()+ key.slice(1)}}</a></li>
                         </ul>
                     </li>
                 </ul>
