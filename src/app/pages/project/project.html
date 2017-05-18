@@ -26,12 +26,10 @@
                             </li>
                         </ul>
                         <div ng-show="$ctrl.projectTemplates.projects.length > 0">
-
-                            <div class="form-group"
+                            <div class="form-group" custom-input
                                  data-ng-class="{
                              'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused,
                              'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused}">
-                                <label for="name">GitHub project url</label>
                                 <input type="text"
                                        class="form-control"
                                        placeholder="GitHub project URL"
@@ -44,11 +42,12 @@
                                        ng-blur="$ctrl.githubUrlFocused = false"
                                        ng-click="$ctrl.githubUrlFocused = true"
                                        data-ng-model="$ctrl.project.githubUrl">
+                                <label class="control-label float-label">GitHub project url<sub>*</sub></label>
+
                                 <div class="validation error" ng-if="!$ctrl.githubUrlValid && $ctrl.githubUrlFocused">
                                     {{$ctrl.formErrors.github}}
                                 </div>
                             </div>
-
                             <div class="form-group"
                                  data-ng-class="{
                                  'has-error':!$ctrl.project.displayName && $ctrl.displayNameFocused  && project.name.$viewValue.length > 0,

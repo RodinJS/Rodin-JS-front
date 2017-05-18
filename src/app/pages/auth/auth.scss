@@ -1,6 +1,10 @@
 $primary-color : #008BF2;
+.error {
+	color: rgba(255, 0, 0, 0.5) !important;
+}
 .page{
 	&.page-auth{
+
 		background-image: url(/images/landing/content/auth-main-bg.jpg);
 		background-repeat: no-repeat;
 		background-position: center;

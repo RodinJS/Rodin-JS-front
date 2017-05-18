@@ -7,8 +7,7 @@
                 <a style="color:#008BF2" ui-sref="landing.login">Have an account?</a>
             </p>
 
-
-            <form data-ng-submit="$ctrl.submitForm()" class="main-form" name="register">
+            <form data-ng-submit="$ctrl.submitForm(register.$valid)" class="main-form" name="register" novalidate>
 
                 <div data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'login'">
 
@@ -67,9 +66,10 @@
                                data-ng-model="$ctrl.formData.username"
                                required
                                data-ng-focus="register.username.focused = true"
+                               data-ng-blur="register.username.focused = false"
                                >
                         <label class="control-label float-label">Username<sub>*</sub></label>
-                        <div class="validation error" ng-if="(register | formValidator:'username')  == 'invalid'">
+                        <div class="validation error" ng-if="(register | formValidator:'username')  == 'invalid' && !register.username.focused">
                             {{$ctrl.formErrors.username}}
                         </div>
                     </div>
@@ -87,9 +87,10 @@
                                name="email"
                                data-ng-pattern="$ctrl.patterns.email"
                                data-ng-focus="register.email.focused = true"
+                               data-ng-blur="register.email.focused = false"
                                data-ng-model="$ctrl.formData.email" required>
                         <label class="control-label float-label">Email<sub>*</sub></label>
-                        <div class="validation error" ng-if="(register | formValidator:'email')  == 'invalid'">
+                        <div class="validation error" ng-if="(register | formValidator:'email')  == 'invalid' && !register.email.focused">
                             {{$ctrl.formErrors.email}}
                         </div>
                     </div>
@@ -109,21 +110,18 @@
                                data-ng-model="$ctrl.formData.password"
                                ng-minlength="8"
                                data-ng-focus="register.password.focused = true"
+                               data-ng-blur="register.password.focused = false"
                                required>
                         <label class="control-label float-label">Password<sub>*</sub></label>
-                        <div class="validation" ng-class="(register | formValidator:'password')  == 'invalid' ? 'error' : ''">
+                        <div class="validation" ng-class="!!((register | formValidator:'password')== 'invalid' && !register.password.focused) ? 'error' : ''">
                             {{$ctrl.formErrors.password}}
                         </div>
                     </div>
-                   <!-- <div class="form-group">
-                        <p class="password-description">
-                            Passwords must be at least 8 characters long, containing a number and letter
-                        </p>
-                    </div>-->
+
                     <div class="form-group" custom-input
                          data-ng-focus="register.passwordConfirm.focused"
                          data-ng-class="{
-                         'has-error': (register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && register.passwordConfirm.focused,
+                         'has-error': (register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && (register | formValidator:'passwordConfirm')  == 'invalid',
                          'has-success': register.passwordConfirm.$valid && register.passwordConfirm.focused && !register.passwordConfirm.$error.hasOwnProperty('confirmed'),
                          }">
 
@@ -137,10 +135,14 @@
                                data-ng-model="$ctrl.formData.confirmPassword"
                                ng-minlength="8"
                                data-ng-focus="register.passwordConfirm.focused = true"
+                               data-ng-blur="register.passwordConfirm.focused = false"
                                required>
                         <label class="control-label float-label">Confirm Password<sub>*</sub></label>
                         <div class="validation error"
-                             ng-if="(register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && register.passwordConfirm.focused && register.passwordConfirm.$viewValue.length > 0">
+                             ng-if="
+                             (register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed)
+                             &&
+                             (register | formValidator:'passwordConfirm')== 'invalid' && !register.passwordConfirm.focused">
                             {{$ctrl.formErrors.confirmPassword}}
                         </div>
                     </div>
@@ -175,14 +177,16 @@
                     <div class="form-group">
                         <input style="margin-left:5px" type="checkbox"
                                ng-change="!$ctrl.agree2"
+                               required
                                name="agreement" ng-model="$ctrl.agree2"/>
-                        <span style="margin-left:10px; color:rgba(255, 255, 255, 0.45)"> By clicking this button, I agree to
+                        <span ng-class="{'error':(register | formValidator:'agreement')  == 'invalid'}"
+                                style="margin-left:10px; color:rgba(255, 255, 255, 0.45)"> By clicking this button, I agree to
                             <a target="_blank"
-                               ui-sref="landing.pages({pageURL:'beta-evaluation-agreement'})"> Pre-Release Evaluation Agreement.</a></span>
+                               ng-class="{'error':(register | formValidator:'agreement')  == 'invalid'}"
+                               ui-sref="landing.pages({pageURL:'beta-evaluation-agreement'})"> Pre-Release Evaluation Agreement.*</a></span>
                     </div>
                     <div class="btn-wrapper">
                         <button type="submit"
-                                ng-disabled="($ctrl.authType === 'register' && register.$invalid) ||  !$ctrl.agree2 || ($ctrl.formData.confirmPassword != $ctrl.formData.password)"
                                 class="btn btn-default btn-submit">Sign up
                         </button>
 
