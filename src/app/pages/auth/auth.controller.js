@@ -25,25 +25,23 @@ class AuthCtrl {
         try {
             FB.init({
                 appId: AppConstants.FB,
-                cookie: true,  // enable cookies to allow the server to access
+                cookie: true, // enable cookies to allow the server to access
                 // the session
-                xfbml: true,  // parse social plugins on this page
+                xfbml: true, // parse social plugins on this page
                 version: 'v2.8', // use graph api version 2.8
             });
+        } catch (e) {
+            this.Notification.warning({ message: `Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000 })
         }
-        catch(e){
-            this.Notification.warning({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
-        }
-        try{
+        try {
             gapi.load('auth2', () => {
                 gapi.auth2.init({
                     client_id: AppConstants.GOOGLE,
                     scope: 'profile',
                 });
             });
-        }
-        catch(e){
-            this.Notification.warning({message:`Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000})
+        } catch (e) {
+            this.Notification.warning({ message: `Tracking protection is turned on in private mode. Please turn off or use browser normal mode.`, delay: 7000 })
         }
         $scope.$on('$viewContentLoaded', () => {
             $(document).ready(() => {
@@ -75,7 +73,7 @@ class AuthCtrl {
                     this.isSubmitting = false;
                     if (res[0]) {
                         _.each(res, (val, key) => {
-                            this.Notification.error(val.fieldName);
+                            this.Notification.error(val.fieldName, 100000);
                         });
                         return;
                     }

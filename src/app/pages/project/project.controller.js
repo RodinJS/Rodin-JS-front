@@ -86,9 +86,9 @@ class ProjectCtrl {
                     selected: data[0],
                 };
                 this._$timeout(() => {
-                    this.inputPadding = (angular.element('.project-path-label').width() + 10);
+                    this.inputPadding = (angular.element('.project-path-label').width());
                     let placeholderPad = angular.element('.main-placeholder').innerWidth() + 22;
-                    angular.element('#project-url').css({'padding-left': placeholderPad});
+                    angular.element('#project-url-label').css({ 'margin-left': placeholderPad - 12 });
                     this.showLoader = false;
                 }, 500);
             },
@@ -107,7 +107,7 @@ class ProjectCtrl {
             angular.element('input[type=radio]').prop('checked', false);
             this.projectTemplates.selected = null;
         }
-       // console.log('VALID GITHUB', this.githubUrlValid);
+        // console.log('VALID GITHUB', this.githubUrlValid);
     }
 
     createFinalize(err) {
