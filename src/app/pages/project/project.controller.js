@@ -49,7 +49,7 @@ class ProjectCtrl {
 
     }
 
-    save() {
+    save(isValid) {
         this.showLoader = true;
         this.projectExist = false;
         let projectInfo = {};
@@ -58,24 +58,28 @@ class ProjectCtrl {
             projectInfo.templateId = this.projectTemplates.selected._id;
         projectInfo.tags = projectInfo.tags.map(i => i.text);
         projectInfo.description = this._$scope.projectDescription;
-        this.Project.create(projectInfo).then(
-            data => {
-                this.Project.transpile(data._id);
-                this.VCS.create(data._id, {
-                    root: data.root,
-                    name: data.name,
-                }).then(this.createFinalize, this.createFinalize);
-            },
+        console.log(isValid)
+        if (projectInfo && isValid) {
+            this.Project.create(projectInfo).then(
+                data => {
+                    this.Project.transpile(data._id);
+                    this.VCS.create(data._id, {
+                        root: data.root,
+                        name: data.name,
+                    }).then(this.createFinalize, this.createFinalize);
+                },
 
-            err => {
-                _.each(err, (val, key) => {
-                    this.Notification.error(val.fieldName);
-                });
-                if (err[0].code && err[0].code === 309)
-                    this.projectExist = true;
-                this.showLoader = false;
-            }
-        );
+                err => {
+                    _.each(err, (val, key) => {
+                        this.Notification.error(val.fieldName);
+                    });
+                    if (err[0].code && err[0].code === 309)
+                        this.projectExist = true;
+                    this.showLoader = false;
+                }
+            );
+        }
+
     }
 
     getTemplates() {
