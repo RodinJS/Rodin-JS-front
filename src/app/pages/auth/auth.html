@@ -42,7 +42,13 @@
                          'has-error': (register | formValidator:'username')  == 'invalid',
                          'has-success': (register | formValidator:'username')  == 'valid',
                          }">
-                        <input type="text" data-ng-class="{'active':register.username.$viewValue}" class="form-control" placeholder="" value="" ng-minlength="3" ng-maxlength="32" name="username" data-ng-model="$ctrl.formData.username" required data-ng-focus="register.username.focused = true"
+                        <input type="text"
+                               data-ng-class="{'active':register.username.$viewValue}"
+                               class="form-control"
+                               ng-minlength="3" ng-maxlength="32"
+                               name="username" data-ng-model="$ctrl.formData.username"
+                               required
+                               data-ng-focus="register.username.focused = true"
                             data-ng-blur="register.username.focused = false">
                         <label class="control-label float-label">Username<sub>*</sub></label>
                         <div class="validation error" ng-if="(register | formValidator:'username')  == 'invalid' && !register.username.focused">

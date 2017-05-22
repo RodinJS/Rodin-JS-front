@@ -60,7 +60,7 @@ function formValidator() {
         if (input && param) {
             const invalid =
                 input[param].$invalid &&
-                input[param].$touched &&
+                (input[param].$touched || input[param].$dirty) &&
                 (input[param].$viewValue ? input[param].$viewValue.length > 0 : 0);
             const valid = input[param].$valid && input[param].focused;
             if (invalid) {

@@ -11,10 +11,8 @@ const AppConstants = {
 
     local: {
         COOKIEDOMAIN: ['localhost', '.rodin.space'],
-        // SOCKET: 'http://localhost:4000/api',
-        // API: 'http://localhost:3000/api',
-        SOCKET: 'https://ss.rodin.space/api',
-        API: 'https://api.rodin.space/api',
+        SOCKET: 'http://localhost:4000/api',
+        API: 'http://localhost:3000/api',
         RECORDIP: '178.62.229.191',
         // API: 'http://192.168.0.33:3000/api', // Xcho
         SITE: 'http://localhost:8585/',
@@ -138,7 +136,7 @@ const AppConstants = {
         //////
         310: {
             message: 'WRONG_USERNAME_OR_PASSWORD',
-            field: '',//["username", "email"]
+            field: '', //["username", "email"]
         },
         311: {
             message: 'EMAIL_EXISTS',
@@ -237,31 +235,31 @@ const AppConstants = {
             field: '',
         },
 
-        CERTIMPORTERROR:{
-            message:`Build failed. Invalid certificate`,
+        CERTIMPORTERROR: {
+            message: `Build failed. Invalid certificate`,
         },
-        OTHERBUILDERROR:{
-            message:`Build failed. Please drop an email to support including your build ID`,
+        OTHERBUILDERROR: {
+            message: `Build failed. Please drop an email to support including your build ID`,
         }
     },
-    FORMERRORS:{
-        register:{
-            username:'Username must contain at leas 3 characters',
-            email:'Invalid email',
-            password:'Passwords must be at least 8 characters long, containing a number and letter',
-            confirmPassword:'Password do not match',
-            invitationCode:'Invalid invitation code'
+    FORMERRORS: {
+        register: {
+            username: 'Username must contain at leas 3 characters',
+            email: 'Invalid email',
+            password: 'Passwords must be at least 8 characters long, containing a number and letter',
+            confirmPassword: 'Password do not match',
+            invitationCode: 'Invalid invitation code'
         },
-        reset:{
-            usernameEmail:'Please enter username or email',
-            password:'Passwords must be at least 8 characters long, containing a number and letter',
-            confirmPassword:'Password does not match',
+        reset: {
+            usernameEmail: 'Please enter username or email',
+            password: 'Passwords must be at least 8 characters long, containing a number and letter',
+            confirmPassword: 'Password does not match',
         },
-        project:{
-            github:'URL is invalid',
-            name:'Project name must contain at least 3 characters',
-            url:'Project URL must be alphanumeric with no spaces',
-            description:'Description is required'
+        project: {
+            github: 'URL is invalid',
+            name: 'Project name must contain at least 3 characters',
+            url: 'Project URL must be alphanumeric with no spaces',
+            description: 'Description is required'
         }
     }
 };

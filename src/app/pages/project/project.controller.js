@@ -40,6 +40,7 @@ class ProjectCtrl {
             projects: [],
         };
 
+        this.githubUrlValid = false;
         $scope.projectDescription = '';
         $scope.projectDescription = '';
 
@@ -86,9 +87,10 @@ class ProjectCtrl {
                     selected: data[0],
                 };
                 this._$timeout(() => {
-                    this.inputPadding = (angular.element('.project-path-label').width());
-                    let placeholderPad = angular.element('.main-placeholder').innerWidth() + 22;
-                    angular.element('#project-url-label').css({ 'margin-left': placeholderPad - 12 });
+                    // this.inputPadding = (angular.element('#project-url').width() - 20);
+                    // angular.element('#project-url').css({'padding-left': 232})
+                    // let placeholderPad = angular.element('.main-placeholder').innerWidth() + 22;
+                    // angular.element('#project-url-label').css({ 'padding-left': placeholderPad - 12 });
                     this.showLoader = false;
                 }, 500);
             },
