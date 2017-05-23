@@ -40,7 +40,6 @@ class ProjectCtrl {
             projects: [],
         };
 
-        this.githubUrlValid = false;
         $scope.projectDescription = '';
         $scope.projectDescription = '';
 
@@ -49,7 +48,7 @@ class ProjectCtrl {
 
     }
 
-    save(isValid) {
+    save() {
         this.showLoader = true;
         this.projectExist = false;
         let projectInfo = {};
@@ -58,28 +57,24 @@ class ProjectCtrl {
             projectInfo.templateId = this.projectTemplates.selected._id;
         projectInfo.tags = projectInfo.tags.map(i => i.text);
         projectInfo.description = this._$scope.projectDescription;
-        console.log(isValid)
-        if (projectInfo && isValid) {
-            this.Project.create(projectInfo).then(
-                data => {
-                    this.Project.transpile(data._id);
-                    this.VCS.create(data._id, {
-                        root: data.root,
-                        name: data.name,
-                    }).then(this.createFinalize, this.createFinalize);
-                },
+        this.Project.create(projectInfo).then(
+            data => {
+                this.Project.transpile(data._id);
+                this.VCS.create(data._id, {
+                    root: data.root,
+                    name: data.name,
+                }).then(this.createFinalize, this.createFinalize);
+            },
 
-                err => {
-                    _.each(err, (val, key) => {
-                        this.Notification.error(val.fieldName);
-                    });
-                    if (err[0].code && err[0].code === 309)
-                        this.projectExist = true;
-                    this.showLoader = false;
-                }
-            );
-        }
-
+            err => {
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+                if (err[0].code && err[0].code === 309)
+                    this.projectExist = true;
+                this.showLoader = false;
+            }
+        );
     }
 
     getTemplates() {
@@ -91,10 +86,9 @@ class ProjectCtrl {
                     selected: data[0],
                 };
                 this._$timeout(() => {
-                    // this.inputPadding = (angular.element('#project-url').width() - 20);
-                    // angular.element('#project-url').css({'padding-left': 232})
-                    // let placeholderPad = angular.element('.main-placeholder').innerWidth() + 22;
-                    // angular.element('#project-url-label').css({ 'padding-left': placeholderPad - 12 });
+                    this.inputPadding = (angular.element('.project-path-label').width() + 10);
+                    let placeholderPad = angular.element('.main-placeholder').innerWidth() + 22;
+                    angular.element('#project-url').css({'padding-left': placeholderPad});
                     this.showLoader = false;
                 }, 500);
             },
@@ -113,7 +107,7 @@ class ProjectCtrl {
             angular.element('input[type=radio]').prop('checked', false);
             this.projectTemplates.selected = null;
         }
-        // console.log('VALID GITHUB', this.githubUrlValid);
+       // console.log('VALID GITHUB', this.githubUrlValid);
     }
 
     createFinalize(err) {
