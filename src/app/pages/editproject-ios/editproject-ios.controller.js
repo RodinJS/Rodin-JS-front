@@ -289,6 +289,10 @@ class EditProjectIosCtrl {
                 ctrl._$scope.configs.developerId.focused = false;
                 ctrl.files.icon.name = '';
                 ctrl.files.icon.src = '';
+                ctrl.files.cert.name == '';
+                ctrl.files.cert.src == '';
+                ctrl.files.profile.name == '';
+                ctrl.files.profile.src == '';
                 ctrl.getProject();
                 ctrl.Notification.success('iOS build start');
                 ctrl.timer = ctrl._$interval(() => {
