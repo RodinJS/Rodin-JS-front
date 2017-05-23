@@ -54,6 +54,11 @@ class EditProjectIosCtrl {
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
 
+            //temprary fix for RO-859
+            angular.forEach(angular.element('input'), (val, key) => {
+                angular.element(val).attr('disabled', false)
+            })
+
             console.log('IOS', this.project);
             if (this.project &&
                 this.project.fields && this.project.fields.ios &&
@@ -73,13 +78,13 @@ class EditProjectIosCtrl {
                     if (this.timer) {
                         this._$interval.cancel(this.timer);
                     }
-                    angular.forEach(angular.element('input'), (val, key) =>{
+                    angular.forEach(angular.element('input'), (val, key) => {
                         angular.element(val).attr('disabled', false)
                     })
 
                 }
                 else{
-                    angular.forEach(angular.element('input'), (val, key) =>{
+                    angular.forEach(angular.element('input'), (val, key) => {
                         angular.element(val).attr('disabled', true)
                     })
                 }
