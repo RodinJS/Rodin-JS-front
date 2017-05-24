@@ -8,7 +8,7 @@ function DashboardConfig($stateProvider) {
         controllerAs: '$ctrl',
         templateUrl: 'pages/dashboard/dashboard.html',
         title: 'Dashboard',
-        pageClass: 'page-dashboard new',
+        pageClass: 'page-dashboard',
         resolve: {
             auth: function (User) {
                 return User.ensureAuthIs(true);

@@ -7,207 +7,120 @@
                 <a style="color:#008BF2" ui-sref="landing.login">Have an account?</a>
             </p>
 
-
-            <form data-ng-submit="$ctrl.submitForm()" class="main-form" name="register">
+            <form data-ng-submit="$ctrl.submitForm(register.$valid)" class="main-form" name="register" novalidate>
 
                 <div data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'login'">
 
                     <div class="form-group" custom-input>
-                        <input type="text"
-                               class="form-control"
-                               ng-class="$ctrl.formData.username ? 'active' : ''"
-                               placeholder=""
-                               value=""
-                               data-ng-model="$ctrl.formData.username">
+                        <input type="text" class="form-control" ng-class="$ctrl.formData.username ? 'active' : ''" placeholder="" value="" data-ng-model="$ctrl.formData.username">
 
                         <label class="control-label float-label">Username</label>
                     </div>
 
-                    <div class="form-group" custom-input>
-                        <input type="password"
-                               class="form-control"
-                               ng-class="$ctrl.formData.password ? 'active' : ''"
-                               placeholder=""
-                               value=""
-                               data-ng-model="$ctrl.formData.password">
+                    <div class="form-group" custom-input style="margin-bottom:25px !important">
+                        <input type="password" class="form-control" ng-class="$ctrl.formData.password ? 'active' : ''" placeholder="" value="" data-ng-model="$ctrl.formData.password">
 
                         <label class="control-label float-label">Password</label>
                     </div>
 
-                    <p class="text-center text-wrong"
-                       ng-if="$ctrl.errors[0]">
-                        Wrong username or password
-                    </p>
                     <div class="text-center" style="margin-bottom: 10px;">
                         <a ui-sref="landing.resetpassword" class="text-wrong forgot-password">Forgot password?</a>
                     </div>
+
                     <div class="btn-wrapper">
-                        <button type="submit" style="margin-right:10px" class="btn btn-submit">Sign In</button>
+                        <button type="submit" style="margin-right:10px" class="btn btn-default btn-submit">Sign In</button>
                         <!--
-                                                <button type="button" ui-sref="landing.register" class="btn btn-default btn-submit">Register</button>
+                           <button type="button" ui-sref="landing.register" class="btn btn-default btn-submit">Register</button>
                         -->
                     </div>
-                    <!-- <div class="btn-wrapper">
-                         <button type="button" ng-click="$ctrl.fbLogin()" class="btn btn-default btn-submit">Sign in via Facebook</button>
-                         <button type="button" ng-click="$ctrl.googleLogin()" class="btn btn-default btn-submit">Sign in via Google</button>
-                     </div>-->
 
-                    <!--   <div class="section section-project-content login">
-                           <div class="row">
-                               <div class="center-block">
-                                   <div class="btn-wrapper">$ctrl.formData.password
-                                       <button type="submit" style="margin-right:10px" class="btn btn-primary border-orange">Sign in</button>
-                                       <button type="button" ui-sref="landing.register" class="btn btn-primary border-orange">Register</button>
-                                   </div>
-                               </div>
-                               <div class="center-block">
-                                   <div class="btn-wrapper">
-                                       <a  ui-sref="landing.resetpassword" class="btn link">Forgot password</a>
-                                   </div>
-                               </div>
-
-                               &lt;!&ndash;<div class="center-block">
-                                   <div class="btn-wrapper">
-                                       <button type="button" ng-click="$ctrl.fbLogin()" class="btn btn-primary border-orange">Login via Facebook</button>
-                                       <button type="button" ng-click="$ctrl.googleLogin()" class="btn btn-primary border-orange">Login via Google</button>
-                                       <button type="button" ng-click="$ctrl.gitLogin()" class="btn btn-primary border-orange">Login via Github</button>
-                                   </div>
-                               </div>&ndash;&gt;
-                           </div>
-                       </div>-->
 
                 </div>
 
-                <div data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'register'"
-                     class="form-register">
-
-                    <div class="form-group" custom-input
-                         data-ng-focus="register.username.focused"
-                         data-ng-class="{
-                         'has-error': register.username.$invalid && register.username.focused,
-                         'has-success': register.username.$valid && register.username.focused,
+                <div data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'register'" class="form-register">
+                    <div class="form-group" custom-input data-ng-focus="register.username.focused" data-ng-class="{
+                         'has-error': (register | formValidator:'username')  == 'invalid',
+                         'has-success': (register | formValidator:'username')  == 'valid',
                          }">
                         <input type="text"
                                data-ng-class="{'active':register.username.$viewValue}"
                                class="form-control"
-                               placeholder=""
-                               value=""
-                               ng-minlength="3"
-                               ng-maxlength="32"
-                               name="username"
-                               data-ng-model="$ctrl.formData.username" required
+                               ng-minlength="3" ng-maxlength="32"
+                               name="username" data-ng-model="$ctrl.formData.username"
+                               required
                                data-ng-focus="register.username.focused = true"
-                               >
+                            data-ng-blur="register.username.focused = false">
                         <label class="control-label float-label">Username<sub>*</sub></label>
-                        <div class="validation error" ng-if="register.username.$invalid && register.username.focused">Username required</div>
-                    </div>
-
-                    <div class="form-group" custom-input
-                         data-ng-class="{
-                         'has-error': register.email.$invalid && register.email.focused,
-                         'has-success': register.email.$valid && register.email.focused,
-                         }">
-                        <input type="text"
-                               data-ng-class="{'active':register.email.$viewValue}"
-                               class="form-control"
-                               placeholder=""
-                               value=""
-                               name="email"
-                               data-ng-pattern="$ctrl.patterns.email"
-                               data-ng-focus="register.email.focused = true"
-                               data-ng-model="$ctrl.formData.email" required>
-                        <label class="control-label float-label">Email<sub>*</sub></label>
-                        <div class="validation error" ng-if="register.email.$invalid && register.email.focused">Email required</div>
-                    </div>
-
-                    <div class="form-group" custom-input
-                         data-ng-focus="register.password.focused"
-                         data-ng-class="{
-                         'has-error': register.password.$invalid && register.password.focused,
-                         'has-success': register.password.$valid && register.password.focused
-                         }">
-                        <input type="password"
-                               data-ng-class="{'active':register.password.$viewValue}"
-                               class="form-control"
-                               name="password"
-                               ng-pattern="$ctrl.patterns.password"
-                               placeholder="" value=""
-                               data-ng-model="$ctrl.formData.password"
-                               ng-minlength="8"
-                               data-ng-focus="register.password.focused = true"
-                               required>
-                        <label class="control-label float-label">Password<sub>*</sub></label>
-                        <div class="validation error" ng-if="register.password.$invalid && register.password.focused">
-                            Passwords must be at least 8 characters long, containing a number and letter
+                        <div class="validation error" ng-if="(register | formValidator:'username')  == 'invalid' && !register.username.focused">
+                            {{$ctrl.formErrors.username}}
                         </div>
                     </div>
-                   <!-- <div class="form-group">
-                        <p class="password-description">
-                            Passwords must be at least 8 characters long, containing a number and letter
-                        </p>
-                    </div>-->
-                    <div class="form-group" custom-input
-                         data-ng-focus="register.passwordConfirm.focused"
-                         data-ng-class="{
-                         'has-error': (register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && register.passwordConfirm.focused,
+
+                    <div class="form-group" custom-input data-ng-class="{
+                         'has-error': (register | formValidator:'email')  == 'invalid',
+                         'has-success': (register | formValidator:'email')  == 'valid',
+                         }">
+                        <input type="text" data-ng-class="{'active':register.email.$viewValue}" class="form-control" placeholder="" value="" name="email" data-ng-pattern="$ctrl.patterns.email" data-ng-focus="register.email.focused = true" data-ng-blur="register.email.focused = false"
+                            data-ng-model="$ctrl.formData.email" required>
+                        <label class="control-label float-label">Email<sub>*</sub></label>
+                        <div class="validation error" ng-if="(register | formValidator:'email')  == 'invalid' && !register.email.focused">
+                            {{$ctrl.formErrors.email}}
+                        </div>
+                    </div>
+
+                    <div class="form-group" custom-input data-ng-focus="register.password.focused" data-ng-class="{
+                         'has-error': (register | formValidator:'password')  == 'invalid',
+                         'has-success': (register | formValidator:'password')  == 'valid',
+                         }">
+                        <input type="password" data-ng-class="{'active':register.password.$viewValue}" class="form-control" name="password" ng-pattern="$ctrl.patterns.password" placeholder="" value="" data-ng-model="$ctrl.formData.password" ng-minlength="8" data-ng-focus="register.password.focused = true"
+                            data-ng-blur="register.password.focused = false" required>
+                        <label class="control-label float-label">Password<sub>*</sub></label>
+                        <div class="validation" ng-class="!!((register | formValidator:'password')== 'invalid' && !register.password.focused) ? 'error' : ''">
+                            {{$ctrl.formErrors.password}}
+                        </div>
+                    </div>
+
+                    <div class="form-group" custom-input data-ng-focus="register.passwordConfirm.focused" data-ng-class="{
+                         'has-error': (register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && (register | formValidator:'passwordConfirm')  == 'invalid',
                          'has-success': register.passwordConfirm.$valid && register.passwordConfirm.focused && !register.passwordConfirm.$error.hasOwnProperty('confirmed'),
                          }">
 
-                        <input type="password"
-                               confirm-Password
-                               compare-to="register.password.$viewValue"
-                               data-ng-class="{'active':register.passwordConfirm.$viewValue}"
-                               class="form-control"
-                               name="passwordConfirm"
-                               placeholder="" value=""
-                               data-ng-model="$ctrl.formData.confirmPassword"
-                               ng-minlength="8"
-                               data-ng-focus="register.passwordConfirm.focused = true"
-                               required>
+                        <input type="password" confirm-Password compare-to="register.password.$viewValue" data-ng-class="{'active':register.passwordConfirm.$viewValue}" class="form-control" name="passwordConfirm" placeholder="" value="" data-ng-model="$ctrl.formData.confirmPassword"
+                            ng-minlength="8" data-ng-focus="register.passwordConfirm.focused = true" data-ng-blur="register.passwordConfirm.focused = false" required>
                         <label class="control-label float-label">Confirm Password<sub>*</sub></label>
-                        <div class="validation error"
-                             ng-if="(register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && register.passwordConfirm.focused">
-                            Password does not match
+                        <div class="validation error-password" ng-if="
+                             (register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed)
+                             &&
+                             (register | formValidator:'passwordConfirm')== 'invalid' && !register.passwordConfirm.focused">
+                            {{$ctrl.formErrors.confirmPassword}}
                         </div>
                     </div>
-                   <!-- <div class="form-group"
+                    <!-- <div class="form-group"
                          ng-show="register.passwordConfirm.$invalid && register.passwordConfirm.focused && register.passwordConfirm.$error.confirmed">
                         <p class="password-description">
                             Password does not match
                         </p>
                     </div>-->
 
-                    <div class="form-group"
-                         data-ng-focus="register.invitationCode.invitationCode = true"
-                         data-ng-class="{
-                         'has-error': register.invitationCode.$invalid && register.invitationCode.focused,
-                         'has-success': register.invitationCode.$valid && register.invitationCode.focused,
-                         }"
-                         custom-input>
-                        <input type="text"
-                               data-ng-class="{'active':$ctrl.formData.invitationCode}"
-                               name="invitationCode"
-                               class="form-control"
-                               placeholder=""
-                               value=""
-                               data-ng-model="$ctrl.formData.invitationCode"
-                               data-ng-focus="register.invitationCode.focused = true"
-                               required>
+                    <div class="form-group" data-ng-focus="register.invitationCode.invitationCode = true" data-ng-class="{
+                         'has-error': (register | formValidator:'invitationCode')  == 'invalid',
+                         'has-success': (register | formValidator:'invitationCode')  == 'valid',
+                         }" custom-input>
+                        <input type="text" data-ng-class="{'active':$ctrl.formData.invitationCode}" name="invitationCode" class="form-control" placeholder="" value="" data-ng-model="$ctrl.formData.invitationCode" data-ng-focus="register.invitationCode.focused = true" required>
                         <label class="control-label float-label">Invitation Code<sub>*</sub></label>
-                        <div class="validation error" ng-if="register.invitationCode.$invalid && register.invitationCode.focused">Invitation code required</div>
+                        <div class="validation error" ng-if="(register | formValidator:'invitationCode')  == 'invalid'">
+                            {{$ctrl.formErrors.invitationCode}}
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input style="margin-left:5px" type="checkbox"
-                               ng-change="!$ctrl.agree2"
-                               name="agreement" ng-model="$ctrl.agree2"/>
-                        <span style="margin-left:10px; color:rgba(255, 255, 255, 0.45)"> By clicking this button, I agree to
+                        <input style="margin-left:5px" type="checkbox" ng-change="!$ctrl.agree2" required name="agreement" ng-model="$ctrl.agree2" />
+                        <span ng-class="{'error-password':(register | formValidator:'agreement')  == 'invalid'}" style="margin-left:10px; color:rgba(255, 255, 255, 0.45)"> By clicking this button, I agree to
                             <a target="_blank"
-                               ui-sref="landing.pages({pageURL:'beta-evaluation-agreement'})"> Pre-Release Evaluation Agreement.</a></span>
+                               ng-class="{'error-password':(register | formValidator:'agreement')  == 'invalid'}"
+                               ui-sref="landing.pages({pageURL:'beta-evaluation-agreement'})"> Pre-Release Evaluation Agreement.*</a></span>
                     </div>
                     <div class="btn-wrapper">
-                        <button type="submit"
-                                ng-disabled="($ctrl.authType === 'register' && register.$invalid) ||  !$ctrl.agree2 || ($ctrl.formData.confirmPassword != $ctrl.formData.password)"
-                                class="btn btn-default btn-submit">Sign up
+                        <button type="submit" class="btn btn-default btn-submit">Sign up
                         </button>
 
                     </div>

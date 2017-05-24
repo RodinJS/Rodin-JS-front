@@ -217,7 +217,7 @@
                                        required
                                        data-ng-focus="profile.email.focused = true">
                                 <div style="clear:both"></div>
-                                <div class="validation error" ng-if="profile.email.$invalid && profile.email.focused">Email is required</div>
+                                <div class="validation error" ng-if="profile.email.$invalid && profile.email.focused">Email is invalid</div>
                             </div>
 
                             <div class="form-group" custom-input>
@@ -262,7 +262,7 @@
                               name="changePasswordForm">
                             <div class="form-group pass-group" custom-input
                                  data-ng-class="{
-                                 'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused,
+                                 'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0,
                                  'has-success': changePasswordForm.password.$valid && changePasswordForm.password.focused}">
                                 <label>New Password</label>
 
@@ -274,13 +274,13 @@
                                        ng-minlength="5"
                                        ng-change="$ctrl.confirmPassword()"
                                        data-ng-focus="changePasswordForm.password.focused = true">
-                                <div class="validation error" ng-if="changePasswordForm.password.$invalid && changePasswordForm.password.focused">
+                                <div class="validation " ng-class="changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0 ? 'error' : ''">
                                     Passwords must be at least 8 characters long, containing a number and letter
                                 </div>
                             </div>
                             <div class="form-group pass-group" custom-input
                                  data-ng-class="{
-                                 'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused,
+                                 'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0,
                                  'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
                                 <label>Confirm Password</label>
                                 <input type="password" class="form-control" placeholder=""
@@ -293,7 +293,7 @@
                                        ng-change="$ctrl.confirmPassword()"
                                        data-ng-focus="changePasswordForm.confirmPassword.focused = true">
                                 <div class="validation error"
-                                     ng-if="changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused">
+                                     ng-if="changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0">
                                     Password does not match
                                 </div>
                             </div>

@@ -8,7 +8,7 @@ function HomeConfig($stateProvider) {
         controllerAs: '$ctrl',
         templateUrl: 'pages/home/home.html',
         title: 'Home',
-        pageClass: 'home new',
+        pageClass: 'home',
         redirectToWhenAuthenticated: 'app.dashboard',
     });
 

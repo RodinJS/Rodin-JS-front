@@ -61,15 +61,18 @@ class AppHeaderCtrl {
     }
 
     showSocketResponse(data){
-        const message = _.isObject(data.data) ? data.data.message : data.data;
-        if(data.data.error || data.error)
+        const respData = data.data || data;
+        const message = respData.message || respData.label;
+        console.log('message', message);
+        console.log(respData);
+        if(respData.error)
             this._Notification.error(message);
         else
             this._Notification.success(message);
 
-        if(!data.label)
-            data.label = message;
-        this.eventBus.emit(this.eventBus.notifications.SET_ONE, data);
+        if(!respData.label)
+            respData.label = message;
+        this.eventBus.emit(this.eventBus.notifications.SET_ONE, respData);
     }
 
     clickMenu() {
@@ -93,6 +96,9 @@ class AppHeaderCtrl {
         this.User.getNotifications().then(
             notifications => {
                 this.eventBus.emit(this.eventBus.notifications.SET, notifications);
+                setTimeout(() => {
+                    console.dir(angular.element('.notifi-list-element'))
+                })
             },
 
             error => {
