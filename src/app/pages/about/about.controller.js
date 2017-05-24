@@ -5,14 +5,9 @@ class AboutCtrl {
         this.team = [
             [
                 {
-                    name: 'Albert Poghosyan',
-                    img: '../../../images/about/abo.png',
-                    position: 'BO'
-                },
-                {
-                    name: 'Aram Avetisyan',
-                    img: '../../../images/about/aram.png',
-                    position: 'Vojd'
+                    name: 'Lusine Kuchukyan',
+                    img: '../../../images/about/lusine.png',
+                    position: 'Kamandir'
                 },
                 {
                     name: 'Grigor Khachatryan',
@@ -23,14 +18,14 @@ class AboutCtrl {
                     name: 'Mariam Adamyan',
                     img: '../../../images/about/mariam.png',
                     position: '#ZVKUKAVIK'
-                }
-            ],
-            [
+                },
                 {
                     name: 'Mher Simonyan',
                     img: '../../../images/about/mher.png',
                     position: 'Minion'
                 },
+            ],
+            [
                 {
                     name: 'Khachatur Gharibyan',
                     img: '../../../images/about/khcho.png',
@@ -46,13 +41,13 @@ class AboutCtrl {
                     img: '../../../images/about/cristina.png',
                     position: 'Pahestapet'
                 },
-            ],
-            [
                 {
                     name: 'Gor Matevosyan',
                     img: '../../../images/about/gor.png',
                     position: 'Steven Hawking'
                 },
+            ],
+            [
                 {
                     name: 'Raffi Hovhannisyan',
                     img: '../../../images/about/raffi.png',
