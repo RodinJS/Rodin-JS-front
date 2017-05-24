@@ -23,7 +23,6 @@ const AppConstants = {
         FB: '216861662081500', //'' '216982868736046'
         GITHUB: '2350afe57c144672285b',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
-        SAMPLES: 'https://examples.rodin.space/list.json',
     },
     dev: {
         COOKIEDOMAIN: ['.rodin.space'],
@@ -38,7 +37,6 @@ const AppConstants = {
         FB: '216982868736046', //'216861662081500' '216982868736046'
         GITHUB: 'fa69c03ad5758fce1f10',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
-        SAMPLES: 'https://examples.rodin.space/list.json',
     },
     prod: {
         COOKIEDOMAIN: ['.rodinapp.com', '.rodin.io', '.rodin.space'],
@@ -53,8 +51,6 @@ const AppConstants = {
         FB: '214577345643265',
         GITHUB: 'd2030c37902fa3d4d0c7',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
-        SAMPLES: 'https://examples.rodin.io/list.json',
-
     },
 
     stage: {
@@ -70,8 +66,6 @@ const AppConstants = {
         FB: '263064010794598',
         GITHUB: '5377f212205e0aa4b4cf',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
-        SAMPLES: 'https://examples.rodin.design/list.json',
-
     },
 
     get FB() {
@@ -122,10 +116,6 @@ const AppConstants = {
         return this[this.env].COOKIEDOMAIN;
     },
 
-    get SAMPLES() {
-        return this[this.env].SAMPLES;
-    },
-
     ERRORCODES: {
         500: {
             message: 'INTERNAL_SERVER_ERROR',
@@ -146,7 +136,7 @@ const AppConstants = {
         //////
         310: {
             message: 'WRONG_USERNAME_OR_PASSWORD',
-            field: '', //["username", "email"]
+            field: '',//["username", "email"]
         },
         311: {
             message: 'EMAIL_EXISTS',
@@ -269,31 +259,31 @@ const AppConstants = {
         // CLEANERROR: {
         //     message: `Build failed. Please drop an email to support including your build ID`,
         // },
-        CERTIMPORTERROR: {
-            message: `Build failed. Invalid certificate`,
+        CERTIMPORTERROR:{
+            message:`Build failed. Invalid certificate`,
         },
-        OTHERBUILDERROR: {
-            message: `Build failed. Please drop an email to support including your build ID`,
+        OTHERBUILDERROR:{
+            message:`Build failed. Please drop an email to support including your build ID`,
         }
     },
-    FORMERRORS: {
-        register: {
-            username: 'Username must contain at leas 3 characters',
-            email: 'Invalid email',
-            password: 'Passwords must be at least 8 characters long, containing a number and letter',
-            confirmPassword: 'Password does not match',
-            invitationCode: 'Invalid invitation code'
+    FORMERRORS:{
+        register:{
+            username:'Username must contain at leas 3 characters',
+            email:'Invalid email',
+            password:'Passwords must be at least 8 characters long, containing a number and letter',
+            confirmPassword:'Password does not match',
+            invitationCode:'Invalid invitation code'
         },
-        reset: {
-            usernameEmail: 'Please enter username or email',
-            password: 'Passwords must be at least 8 characters long, containing a number and letter',
-            confirmPassword: 'Password does not match',
+        reset:{
+            usernameEmail:'Please enter username or email',
+            password:'Passwords must be at least 8 characters long, containing a number and letter',
+            confirmPassword:'Password does not match',
         },
-        project: {
-            github: 'URL is invalid',
-            name: 'Project name must contain at least 3 characters',
-            url: 'Project URL must be alphanumeric with no spaces',
-            description: 'Description is required'
+        project:{
+            github:'URL is invalid',
+            name:'Project name must contain at least 3 characters',
+            url:'Project URL must be alphanumeric with no spaces',
+            description:'Description is required'
         }
     }
 };
