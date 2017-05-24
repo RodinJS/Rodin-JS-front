@@ -9,6 +9,7 @@ const AppConstants = {
     appName: 'Rodin',
 
 
+
     local: {
         COOKIEDOMAIN: ['localhost', '.rodin.space'],
         SOCKET: 'http://localhost:4000/api',
