@@ -1,6 +1,10 @@
 class EditProjectModulesCtrl {
     constructor($scope, $stateParams, AppConstants, ModulesService, ModulesStore, ProjectStore, EventBus, Notification, User, Project, $uibModal) {
         'ngInject';
+
+
+        if (!$stateParams.projectId) return $state.go('landing.error');
+
         this._AppConstants = AppConstants;
         this._ModulesService = ModulesService;
         this._ModulesStore = ModulesStore;
@@ -15,12 +19,9 @@ class EditProjectModulesCtrl {
         this.projectId = $stateParams.projectId;
         this.onError = this.onError.bind(this);
         this.getProject = this.getProject.bind(this);
-
+        this._ModulesStore.removeAllModules();
         this._ModulesStore.subscribeAndInit($scope, () => {
-            this.modulesList = this._ModulesStore.getMyModules($stateParams.projectId);
-
-            if (!this.modulesList || this.modulesList.length <= 0)
-                return this.getMyModules();
+            this.modulesList =  _.chunk(this._ModulesStore.getMyModules($stateParams.projectId), 4);
 
         });
 
@@ -29,6 +30,7 @@ class EditProjectModulesCtrl {
             if (!this.project)
                 this.getProject();
         });
+
         return this.getMyModules();
 
     }

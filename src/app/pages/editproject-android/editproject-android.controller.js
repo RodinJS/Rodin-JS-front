@@ -1,10 +1,13 @@
 class EditProjectAndroidCtrl {
-    constructor (AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
+    constructor (AppConstants, Project, $state, $interval, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
+
+        if (!$stateParams.projectId) return $state.go('landing.error');
 
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this._AppConstants = AppConstants;
+        this._$interval = $interval;
         this._JWT = JWT;
         this.Project = Project;
         this.$state = $state;
@@ -20,24 +23,24 @@ class EditProjectAndroidCtrl {
 
         this.fileChoosen = {
             profile: false,
-            p12: false
+            p12: false,
         };
 
         this.files = {
             keystore: {
-                name: ""
+                name: '',
             },
             icon: {
-                name: "",
-                src: ""
-            }
+                name: '',
+                src: '',
+            },
         };
 
         this.submiting = false;
 
         this.openEvent = null;
         this.modals = {
-            password: false
+            password: false,
         };
 
         this.keyStoreFileUpload = false;
@@ -47,23 +50,33 @@ class EditProjectAndroidCtrl {
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
         });
+
+        $scope.$on('$destroy', ()=>{
+            if(this.timer){
+                this._$interval.cancel(this.timer);
+            }
+        })
     }
 
     getProject () {
         this.showLoader = true;
-        this.Project.get(this.projectId, {device: 'android'}).then(
+        this.Project.get(this.projectId, { device: 'android' }).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
+                if (this.project.build.android.built && this.timer) {
+                    this._$interval.cancel(this.timer);
+                }
             },
+
             err => {
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
                 this.showLoader = false;
                 //this.$state.go('landing.error');
             }
-        )
+        );
     }
 
     update () {
@@ -73,13 +86,14 @@ class EditProjectAndroidCtrl {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, data);
             },
+
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
             }
-        )
+        );
     }
 
     changeIcon (e) {
@@ -95,6 +109,7 @@ class EditProjectAndroidCtrl {
                         this.files.icon.src = reader.result;
                         this._$scope.$apply();
                     };
+
                     reader.readAsDataURL(file);
                 }, (result) => {
                     this.Notification.error('Unsupported image type');
@@ -110,12 +125,12 @@ class EditProjectAndroidCtrl {
         var defer = this.$q.defer();
         var result = {
             valid: true,
-            message: ""
+            message: '',
         };
 
         if (file.size > 1024 * 1024) {
             result.valid = false;
-            result.message = "FIle size must be less than 1mb";
+            result.message = 'FIle size must be less than 1mb';
             var tim = $timeout(function () {
                 defer.reject(result);
                 $timeout.cancel(tim);
@@ -124,17 +139,17 @@ class EditProjectAndroidCtrl {
             var fileReader = new FileReader();
             fileReader.onloadend = function (e) {
                 var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
-                var header = "";
+                var header = '';
                 for (var i = 0; i < arr.length; i++) {
                     header += arr[i].toString(16);
                 }
 
                 switch (header) {
-                    case "89504e47":
+                    case '89504e47':
                         break;
                     default:
                         result.valid = false;
-                        result.message = "Allowed only .jpg .jpeg and .png file types.";
+                        result.message = 'Allowed only .jpg .jpeg and .png file types.';
                         break;
                 }
 
@@ -144,6 +159,7 @@ class EditProjectAndroidCtrl {
                     defer.reject(result);
                 }
             };
+
             fileReader.readAsArrayBuffer(file);
         }
 
@@ -161,28 +177,47 @@ class EditProjectAndroidCtrl {
         }
     }
 
-    build () {
-        const e = this.openEvent;
+   publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.modals.notPublished = false;
+                this.open(e);
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key)=> {
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
+    build (event) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         const ctrl = this;
-        e.preventDefault();
+        event.preventDefault();
         let project = {
             userId: this.user.username,
             appId: this.project._id,
-            url: "http://google.com",
+            url: 'http://google.com',
             appName: this.project.android.name,
             android: this.project.android,
-            version:this.project.android.version,
+            version: this.project.android.version,
         };
 
         this.showLoader = true;
-        $("#configs").ajaxForm({
-            dataType: "json",
+        this.modals.notPublished = false;
+        $('#configs').ajaxForm({
+            dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/android',
             headers: {
-                "x-access-token": this._JWT.get()
+                'x-access-token': this._JWT.get(),
             },
             data: {
-                project: angular.toJson(project)
+                project: angular.toJson(project),
             },
             success: function (data) {
                 ctrl.modals.password = false;
@@ -195,16 +230,22 @@ class EditProjectAndroidCtrl {
                 ctrl._$scope.configs.KSState.focused = false;
                 ctrl._$scope.configs.KSCC.focused = false;
                 ctrl._$scope.configs.KSAlias.focused = false;
+                ctrl.files.icon.name = '';
+                ctrl.files.icon.src = '';
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Android build start');
+                ctrl.timer = ctrl._$interval(() => {
+                    ctrl.getProject();
+                }, 2000);
             },
+
             error: function (data) {
-                if(data.responseJSON && data.responseJson.error.message)
+                if (data.responseJSON && data.responseJson.error.message)
                     ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
-            }
+            },
         }).submit();
 
         console.log(project);
@@ -220,31 +261,35 @@ class EditProjectAndroidCtrl {
         };
 
         this.showLoader = true;
-        $("#configs").ajaxForm({
-            dataType: "json",
+        $('#configs').ajaxForm({
+            dataType: 'json',
             type: 'DELETE',
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/android',
             headers: {
-                "x-access-token": this._JWT.get()
+                'x-access-token': this._JWT.get(),
             },
             data: {
-                project: angular.toJson(project)
+                project: angular.toJson(project),
             },
             success: function (data) {
                 ctrl.getProject();
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
             },
+
             error: function (data) {
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
-            }
+            },
         }).submit();
 
         console.log(project);
     };
 
     open (e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -256,14 +301,18 @@ class EditProjectAndroidCtrl {
                 this.showLoader = false;
                 window.location = data.downloadUrl;
             },
+
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
             }
-        )
+        );
     }
+	gotToPublish() {
+		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
+	}
 }
 
 export default EditProjectAndroidCtrl;

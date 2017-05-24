@@ -1,24 +1,34 @@
-<div class="faq-page">
-  <div class="container page static">
-    <div class="row text-white">
+<div class="page-background"></div>
 
-      <h1 class="text-center text-white">F.A.Q.</h1>
-
-      <h4 class="text-yellow">How do I pay for my subscription?</h4>
-      <p style="margin: 20px 0">
-        Once, we have completed the order we'll send you an invoice to be paid by Credit Card or Paypal.
-        Once the order has been paid in full,  we will ship the order.
-      </p>
-
-      <h4 class="text-yellow">What is the maximum projects I can create?</h4>
-      <p style="margin: 20px 0">For free users we limited number of projects to 5</p>
-
-      <h4 class="text-yellow">How long does it take to build app?</h4>
-      <p style="margin: 20px 0">Usually it lasts around 3-5 minutes</p>
-
-      <h4 class="text-yellow">How do I contact Rodin Customer Service?</h4>
-      <p style="margin: 20px 0">Say hello to <a href="mailto:support@rodin.io">support@rodin.io</a></p>
-
+<div class="static-pages faq-page">
+    <div class="container-fluid page static">
+        <div class="row title-section">
+            <h1 class="title text-center">
+                FREQUENTLY ASKED QUESTIONS</h1>
+            <span class="line"></span>
+        </div>
     </div>
-  </div>
+    <div class="container content-section faq-section">
+        <div class="text-white col-md-8 col-md-offset-2">
+            <div ng-repeat="faq in $ctrl.faqs">
+              <h3 class="text-faq">{{faq.name}}</h3>
+              <p class="desc-faq" ng-bind-html="faq.text | htmlize"></p>
+            </div>
+          <!--  <h3 class="text-faq">How do I pay for my subscription?</h3>
+            <p class="desc-faq">
+                Once, we have completed the order we'll send you an invoice to be paid by Credit Card or Paypal.
+                Once the order has been paid in full, we will ship the order.
+            </p>
+
+            <h3 class="text-faq">What is the maximum projects I can create?</h3>
+            <p class="desc-faq">For free users we limited number of projects to 5</p>
+
+            <h3 class="text-faq">How long does it take to build app?</h3>
+            <p class="desc-faq">Usually it lasts around 3-5 minutes</p>
+
+            <h3 class="text-faq">How do I contact Rodin Customer Service?</h3>
+            <p class="desc-faq">Say hello to <a href="mailto:support@rodin.io">support@rodin.io</a></p>-->
+
+        </div>
+    </div>
 </div>

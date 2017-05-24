@@ -24,5 +24,8 @@ storeModules.factory('NotificationsStore', NotificationsStore);
 import ModulesStore from './modules.store';
 storeModules.factory('ModulesStore', ModulesStore);
 
+import PagesStore from './pages.store';
+storeModules.factory('PagesStore', PagesStore);
+
 
 export default storeModules;

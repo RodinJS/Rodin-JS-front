@@ -6,9 +6,12 @@ function SocketService(AppConstants, User, $rootScope){
 	const socket = io(AppConstants.SOCKET+"/", {transports: ['websocket', 'polling'],  query: "token=" + User._JWT._$cookies.get('token') + ""});
 
     const Factory = {
+    	connected:false,
 		on: listener,
 		emit: emitter
 	};
+
+    socket.on('connect', ()=> Factory.connected = true);
 
 	return Factory;
 

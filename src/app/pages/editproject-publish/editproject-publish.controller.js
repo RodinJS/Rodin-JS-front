@@ -2,6 +2,8 @@ class EditProjectPublishCtrl {
     constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, moment, Notification) {
         'ngInject';
 
+        if (!$stateParams.projectId) return $state.go('landing.error');
+
         this.Notification = Notification;
         this._moment = moment;
         this.appName = AppConstants.appName;
@@ -21,10 +23,10 @@ class EditProjectPublishCtrl {
 
         this.modals =  {
             updateVersion: false,
-            rollBack:false,
+            rollBack: false,
             unpublish: false
         };
-
+        this.getProject();
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();

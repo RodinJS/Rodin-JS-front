@@ -13,6 +13,16 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-private {
+	&:before {
+		content: $icon-private;
+	}
+}
+.icon-public {
+	&:before {
+		content: $icon-public;
+	}
+}
 .icon-github:before {
 	content: "\e91b";
 }

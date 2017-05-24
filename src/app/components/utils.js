@@ -1,6 +1,8 @@
 /**
  * Created by kh.levon98 on 15-Sep-16.
  */
+// import '../pages/home/scripts/plugins/jquery.slimscroll';
+
 function Compile($compile) {
     'ngInject';
 
@@ -11,24 +13,24 @@ function Compile($compile) {
                 element.html(value);
                 $compile(element.contents())(scope);
             }
-        )
-    }
+        );
+    };
 }
 
 function limitTo() {
     return {
-        restrict: "A",
+        restrict: 'A',
         require: 'ngModel',
 
         link: (scope, elem, attrs) => {
             let limit = parseInt(attrs.limitTo);
 
-            elem.bind('paste',  (e) => {
+            elem.bind('paste', (e) => {
 
                 let pastedData = e.originalEvent.clipboardData.getData('text');
-                let totalSymbolsLength = elem[0].value.length+pastedData.length;
+                let totalSymbolsLength = elem[0].value.length + pastedData.length;
 
-                if(totalSymbolsLength >= limit){
+                if (totalSymbolsLength >= limit) {
                     e.preventDefault();
                     return false;
                 }
@@ -39,8 +41,8 @@ function limitTo() {
                     return false;
                 }
             });
-        }
-    }
+        },
+    };
 }
 
 function CheckForUnique() {
@@ -51,8 +53,7 @@ function CheckForUnique() {
         restrict: 'A',
         link: function (scope, element, attrs) {
 
-
-        }
+        },
     };
 }
 
@@ -68,22 +69,22 @@ function ShowAuthed(User) {
                 // If user detected
                 if (val) {
                     if (attrs.showAuthed === 'true') {
-                        element.css({display: 'inherit'})
+                        element.css({display: 'inherit'});
                     } else {
-                        element.css({display: 'none'})
+                        element.css({display: 'none'});
                     }
 
                     // no user detected
                 } else {
                     if (attrs.showAuthed === 'true') {
-                        element.css({display: 'none'})
+                        element.css({display: 'none'});
                     } else {
-                        element.css({display: 'inherit'})
+                        element.css({display: 'inherit'});
                     }
                 }
             });
 
-        }
+        },
     };
 }
 
@@ -123,132 +124,148 @@ function CustomInput($timeout) {
             });
 
             scope.$watch(() => $input.val(), (newValue, oldValue) => {
-                if(newValue !== '' && !dirty) {
+                if (newValue !== '' && !dirty) {
                     $elem.addClass('is-dirty');
                 }
             });
-        }
+        },
     };
 }
 
-function CloseModal(){
+function CloseModal() {
     'ngInject';
 
     return {
         restrict: 'A',
         link: function (scope, element, attrs, ngModel) {
             let $elem = element;
-            $elem.on('click', (e)=>{
+            $elem.on('click', (e) => {
                 const hasClassModal = angular.element(e.target).hasClass('modal');
-                if(!hasClassModal) return;
+                if (!hasClassModal) return;
                 scope.$ctrl.modals[attrs.closeModal] = false;
                 scope.$apply();
-            })
+            });
 
-        }
+        },
     };
 }
 
-function NgAutocomplete(){
+function Codify($timeout) {
+    'ngInject';
+
+    return {
+        restrict: 'A',
+        link: function (scope, element) {
+            let $elem = element;
+            $timeout(() => {
+                $elem.find('.code').each(function (i, block) {
+                    hljs.highlightBlock(block);
+                });
+            }, 500);
+        },
+    };
+}
+
+function NgAutocomplete() {
     'ngInject';
     return {
         require: 'ngModel',
         scope: {
             ngModel: '=',
             options: '=?',
-            details: '=?'
+            details: '=?',
         },
 
-        link: function(scope, element, attrs, controller) {
+        link: function (scope, element, attrs, controller) {
 
             //options for autocomplete
             var opts;
             var watchEnter = false;
             //convert options provided to opts
-            var initOpts = function() {
+            var initOpts = function () {
 
                 opts = {};
                 if (scope.options) {
 
                     if (scope.options.watchEnter !== true) {
-                        watchEnter = false
+                        watchEnter = false;
                     } else {
-                        watchEnter = true
+                        watchEnter = true;
                     }
 
                     if (scope.options.types) {
                         opts.types = [];
                         opts.types.push(scope.options.types);
-                        scope.gPlace.setTypes(opts.types)
+                        scope.gPlace.setTypes(opts.types);
                     } else {
-                        scope.gPlace.setTypes([])
+                        scope.gPlace.setTypes([]);
                     }
 
                     if (scope.options.bounds) {
                         opts.bounds = scope.options.bounds;
-                        scope.gPlace.setBounds(opts.bounds)
+                        scope.gPlace.setBounds(opts.bounds);
                     } else {
-                        scope.gPlace.setBounds(null)
+                        scope.gPlace.setBounds(null);
                     }
 
                     if (scope.options.country) {
                         opts.componentRestrictions = {
-                            country: scope.options.country
-                        }
-                        scope.gPlace.setComponentRestrictions(opts.componentRestrictions)
+                            country: scope.options.country,
+                        };
+                        scope.gPlace.setComponentRestrictions(opts.componentRestrictions);
                     } else {
-                        scope.gPlace.setComponentRestrictions(null)
+                        scope.gPlace.setComponentRestrictions(null);
                     }
                 }
-            }
+            };
 
             if (scope.gPlace == undefined) {
                 scope.gPlace = new google.maps.places.Autocomplete(element[0], {});
             }
-            google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
+
+            google.maps.event.addListener(scope.gPlace, 'place_changed', function () {
                 var result = scope.gPlace.getPlace();
                 if (result !== undefined) {
                     if (result.address_components !== undefined) {
 
-                        scope.$apply(function() {
+                        scope.$apply(function () {
 
                             scope.details = result;
 
                             controller.$setViewValue(element.val());
                         });
-                    }
-                    else {
+                    } else {
                         if (watchEnter) {
-                            getPlace(result)
+                            getPlace(result);
                         }
                     }
                 }
             });
 
             //function to get retrieve the autocompletes first result using the AutocompleteService
-            var getPlace = function(result) {
+            var getPlace = function (result) {
                 var autocompleteService = new google.maps.places.AutocompleteService();
-                if (result.name.length > 0){
+                if (result.name.length > 0) {
                     autocompleteService.getPlacePredictions(
                         {
                             input: result.name,
-                            offset: result.name.length
+                            offset: result.name.length,
                         },
                         function listentoresult(list, status) {
-                            if(list == null || list.length == 0) {
+                            if (list == null || list.length == 0) {
 
-                                scope.$apply(function() {
+                                scope.$apply(function () {
                                     scope.details = null;
                                 });
 
                             } else {
                                 var placesService = new google.maps.places.PlacesService(element[0]);
                                 placesService.getDetails(
-                                    {'reference': list[0].reference},
+                                    {reference: list[0].reference},
                                     function detailsresult(detailsResult, placesServiceStatus) {
 
                                         if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
-                                            scope.$apply(function() {
+                                            scope.$apply(function () {
 
                                                 controller.$setViewValue(detailsResult.formatted_address);
                                                 element.val(detailsResult.formatted_address);
@@ -256,10 +273,10 @@ function NgAutocomplete(){
                                                 scope.details = detailsResult;
 
                                                 //on focusout the value reverts, need to set it again.
-                                                var watchFocusOut = element.on('focusout', function(event) {
+                                                var watchFocusOut = element.on('focusout', function (event) {
                                                     element.val(detailsResult.formatted_address);
-                                                    element.unbind('focusout')
-                                                })
+                                                    element.unbind('focusout');
+                                                });
 
                                             });
                                         }
@@ -268,7 +285,7 @@ function NgAutocomplete(){
                             }
                         });
                 }
-            }
+            };
 
             controller.$render = function () {
                 var location = controller.$viewValue;
@@ -277,16 +294,81 @@ function NgAutocomplete(){
 
             //watch options provided to directive
             scope.watchOptions = function () {
-                return scope.options
+                return scope.options;
             };
+
             scope.$watch(scope.watchOptions, function () {
-                initOpts()
+                initOpts();
             }, true);
 
-        }
+        },
     };
-
 }
 
+function ConfirmPassword() {
+    'ngInject';
 
-export default {limitTo, Compile, CheckForUnique, ShowAuthed, CustomInput, CloseModal, NgAutocomplete};
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        scope: {
+            compareTo: '=',
+        },
+        link: function link(scope, elem, attrs, ctrl) {
+            let validator = function (value) {
+                ctrl.$setValidity('confirmed', value === scope.compareTo);
+                return value;
+            };
+
+            ctrl.$parsers.unshift(validator);
+            ctrl.$formatters.push(validator);
+
+            scope.$watch('compareTo', function (newval, oldval) {
+                validator(ctrl.$viewValue);
+            });
+
+        },
+    };
+}
+
+function RdScroll($timeout) {
+    'ngInject';
+
+    return {
+        restrict: 'A',
+        scope: {
+            rdScroll: '=',
+        },
+        link: function link(scope, elem, attrs, ctrl) {
+            let elHeight = 0;
+            scope.$watch(() => {
+                for (let i = 0; i < elem[0].children.length; i++) {
+                    elHeight += elem[0].children[i].clientHeight;
+                }
+
+                setElementHeight(elHeight);
+            });
+            let setElementHeight = height => {
+                $(elem).slimScroll({
+                    height: `${height >= 350 ? 350 : height}px`,
+                    color: '#AAAAAA',
+                    alwaysVisible: true
+                });
+                elHeight = 0;
+            };
+        },
+    };
+}
+
+export default {
+    limitTo,
+    Compile,
+    CheckForUnique,
+    ShowAuthed,
+    CustomInput,
+    CloseModal,
+    NgAutocomplete,
+    Codify,
+    ConfirmPassword,
+    RdScroll,
+};

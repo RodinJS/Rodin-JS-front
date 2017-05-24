@@ -28,13 +28,34 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
     })
      .state('landing', {
         abstract: true,
-        templateUrl: 'layout/landing/landing-view.html',
+        templateUrl: 'layout/main/app-view.html',
         resolve: {
             auth: function (User) {
                 return User.verifyAuth(false);
             },
         },
     })
+     .state('home', {
+        abstract: true,
+        templateUrl: 'layout/landing/landing-view.html',
+        resolve: {
+            auth: function (User) {
+                return User.verifyAuth(false);
+            },
+        },
+    });
+
+    $urlRouterProvider.rule(($injector, $location) => {
+
+        const path = $location.path();
+        const hasTrailingSlash = path[path.length - 1] === '/';
+
+        if (hasTrailingSlash) {
+            //if last charcter is a slash, return the same url without the slash
+            const newPath = path.substr(0, path.length - 1);
+            return newPath;
+        }
+    });
 
     $urlRouterProvider.otherwise('/error');
 

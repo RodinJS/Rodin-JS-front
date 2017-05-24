@@ -1,20 +1,20 @@
 function EditProjectViveConfig($stateProvider) {
-	'ngInject';
+    'ngInject';
 
-	$stateProvider
-		.state('app.editprojectVive', {
-			url: '/project/:projectId/vive',
-			controller: 'EditProjectViveCtrl',
-			controllerAs: '$ctrl',
-			templateUrl: 'pages/editproject-vive/editproject-vive.html',
-			title: 'EditProjectVive',
-			pageClass: 'page-account',
-			resolve: {
-				auth: function (User) {
-					return User.ensureAuthIs(true);
-				}
-			}
-		});
+    $stateProvider
+     .state('app.editprojectVive', {
+        url: '/project/:projectId/vive',
+        controller: 'EditProjectViveCtrl',
+        controllerAs: '$ctrl',
+        templateUrl: 'pages/editproject-vive/editproject-vive.html',
+        title: 'Edit Project Vive',
+        pageClass: 'page-account new',
+        resolve: {
+            auth: function (User) {
+                return User.ensureAuthIs(true);
+            },
+        },
+    });
 }
 
 export default EditProjectViveConfig;

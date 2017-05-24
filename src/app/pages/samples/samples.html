@@ -1,0 +1,31 @@
+<div class="line-sample"></div>
+<div class="container-fluid samples-page">
+    <div class="row">
+        <div class="col-md-2 rd-tree ">
+            <div class="row">
+                <h3 class="title">Examples</h3>
+                <ul class="nav nav-list">
+                    <li class="labeled"><label class="tree-toggler nav-header">Basic</label>
+                        <ul class="nav tree">
+                            <li ng-repeat="(key, value) in $ctrl.samples"><a ng-click="$ctrl.setActiveLink(key)">{{key.charAt(0).toUpperCase()+ key.slice(1)}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav-list mobile-list">
+                    <li class="labeled"><label class="tree-toggler nav-header">Basic</label>
+                        <ul class="nav tree">
+                            <li ng-repeat="(key, value) in $ctrl.samples"><a ng-href="{{value.url}}" target="_blank">{{key.charAt(0).toUpperCase()+ key.slice(1)}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="row samples-iframe">
+                <h3 class="info">{{$ctrl.sampleName.charAt(0).toUpperCase()+ $ctrl.sampleName.slice(1)}}</h3>
+                <a href="{{$ctrl.sourceLink}}" target="_blank" class="view-source">View Source</a>
+                <iframe ng-src="{{$ctrl.activeLink}}" frameborder="0" height="99%" width="100%"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

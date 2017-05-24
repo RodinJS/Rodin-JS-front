@@ -18,6 +18,15 @@
                 padding: 15px 30px;
                 border-radius: 0 50px 50px 0;
                 width: 100%;
+                &.subscribe-btn{
+                    min-width: 182px;
+                    max-width: 182px;
+                    &.disabled{
+                        cursor: not-allowed;
+                        background: #006ebf;
+                    }
+
+                }
             }
         }
         .input-group{
@@ -226,22 +235,22 @@
         margin: 0;
         overflow: hidden;
         pre {
-        	display: block;
-        	position: absolute;
-        	top: 0;
-        	left: 0;
-        	bottom: 0;
-        	right: -20px;
-        	margin: -20px 0 0;
-        	overflow-y: scroll;
-	        overflow-x: hidden;
-	        -ms-overflow-style: none;
-	        -webkit-overflow-scrolling: touch;
-	        text-align: left;
-	        border-radius: 30px;
-	        &::-webkit-scrollbar {
-	            width: 0 !important;
-	        }
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: -20px;
+            margin: -20px 0 0;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+            text-align: left;
+            border-radius: 30px;
+            &::-webkit-scrollbar {
+                width: 0 !important;
+            }
         }
 
         &.round {
@@ -270,8 +279,8 @@
         .swiper-container {
             .swiper-slide {
                 .slider-desc {
-                    height: 270px;
-                    width: 495px;
+                    //height: 270px;
+                    max-width: 495px;
                 }
             }
         }
@@ -304,16 +313,21 @@
                 }
                 .form-control {
                     height: 37px;
-                    font-size: 13px;
+                    font-size: 12px !important;
                     padding-top: 8px;
                     padding-bottom: 8px;
-                    padding-left: 25px;
+                    padding-left: 20px;
                 }
                 .btn {
                     height: 37px;
-                    padding-top: 8px;
-                    padding-bottom: 8px;
+                    padding: 8px 18px;
                     font-size: 13px;
+                    &.subscribe-btn{
+                        min-width: 108px;
+                        max-width: 108px;
+                        padding: 0 10px;
+                    }
+
                 }
             }
         }
@@ -369,7 +383,7 @@
             }
         }
         .code-block {
-            width: 300px;
+            //width: 300px;
             min-height: 90px;
             .code {
                 margin-left: 0px;

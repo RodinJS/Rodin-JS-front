@@ -2,7 +2,7 @@ function HomeConfig($stateProvider) {
     'ngInject';
 
     $stateProvider
-     .state('landing.home', {
+     .state('home.landing', {
         url: '/',
         controller: 'HomeCtrl',
         controllerAs: '$ctrl',

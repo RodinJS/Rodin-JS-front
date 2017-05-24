@@ -58,7 +58,7 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
 
     function mapNotifications(notifications) {
         const validDevices = ['oculus', 'vive', 'daydream', 'gearvr', 'ios', 'android'];
-        return _.map(notifications, (val, key) => {
+        return _.map(_.filter(notifications, (notification)=> notification.label), (val, key) => {
             let notification = {
                 typeClass: val.error ? 'red' : 'blue',
                 readClass: val.isRead ? 'readed' : 'not-readed',
@@ -87,10 +87,14 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
                         break;
                     case 'vive':
                         url = 'app.editprojectVive';
+                        break;
+                    default:
+                        url = 'app.editproject';
+                        break;
                 }
                 url+="({ projectId:'"+val.project._id+"'})";
 
-                notification.label = '<a ui-sref=" '+url+'">'+val.label+'</a>';
+                notification.label = '<span ui-sref=" '+url+'">'+val.label+'</span>';
             }
 
             return notification;

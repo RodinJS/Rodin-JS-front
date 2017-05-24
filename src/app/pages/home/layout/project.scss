@@ -29,7 +29,7 @@
             text-align: center;
             font-size: 50px;
             color: #fff;
-            height: 100%;
+            //height: 100%;
             &:nth-child(odd) {
                 background-color: rgba(#0C1E36, .7);
             }
@@ -124,6 +124,9 @@
         color: $color-primary;
         margin-top: 0;
         margin-bottom: 50px;
+    }
+    .slider-inner{
+        flex: 1;
     }
     .img-wrapper {
         position: relative;
@@ -264,6 +267,30 @@
         }
         p{
             font-size: 12px;
+        }
+        .img-wrapper{
+            .img{
+                padding-bottom: 50%;
+            }
+        }
+
+    }
+}
+
+@media (max-width: $screen-xs-max) and (orientation:landscape) {
+    .slide-content {
+        .col-xs-offset-1{
+            margin-left: 16.66667%;
+        }
+        .col-xs-10{
+            width: 66.66667%;
+        }
+        h3{
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        p{
+            margin-bottom: 30px;
         }
     }
 }

@@ -5,7 +5,7 @@ function StoreConfig($stateProvider) {
         url: '/store',
         controller: 'StoreCtrl as $ctrl',
         templateUrl: 'pages/store/store.html',
-        pageClass: 'page-store',
+        pageClass: 'page-store new',
         title: 'Store',
     });
 }

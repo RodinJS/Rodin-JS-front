@@ -10,6 +10,7 @@ class User {
         this._NotificationsStore = NotificationsStore;
         this._User = Restangular.all('user');
         this._Auth = Restangular.all('auth');
+        this._Git  = Restangular.all('git');
         this._Notifications = Restangular.all('notifications');
         this._$state = $state;
         this._$q = $q;
@@ -117,6 +118,13 @@ class User {
         return this.deferred.promise;
     }
 
+    gitSync(data) {
+        let Analyser = new this._Analyser();
+
+        this._Git.one('syncProjects').customPOST({}).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
     oculusSteamSync(data, type) {
         this.deferred = this._$q.defer();
         this._Auth.one(`social/${type}`).customPOST(data).then(this.onSyncSuccess, this.onError);
@@ -146,6 +154,14 @@ class User {
         let Analyser = new this._Analyser();
 
         this._User.one(`unsync/${fields.username}/${fields.socialName}`).get().then(Analyser.resolve, Analyser.reject);
+
+        return Analyser.promise;
+    }
+
+    validateChangePasswordToken(token) {
+        let Analyser = new this._Analyser();
+
+        this._User.one(`resetPassword?token=${token}`).get().then(Analyser.resolve, Analyser.reject);
 
         return Analyser.promise;
     }

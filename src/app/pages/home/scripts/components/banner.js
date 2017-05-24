@@ -50,7 +50,7 @@ const BANNER = {
                 setTimeout(() => {
                     BANNER.showCodeBlock(codeBlock, devicePath, true);
                     setTimeout(()=> {
-                        code.scrollLeft(60);
+                        code.scrollLeft(90);
                         codeBlock.scrollTop(35);
                     }, 10);
 
@@ -137,7 +137,7 @@ const BANNER = {
 
     showCodeBlock: function (block, devicePath, init) {
 
-        let additionalParams = { l: 0, t: 0, w: 0, h: 0 };
+       /* let additionalParams = { l: 0, t: 0, w: 0, h: 0 };
         //console.log(this.checkMobile());
         switch (devicePath[0].parentNode.id){
             case 'samsungGear':
@@ -158,7 +158,7 @@ const BANNER = {
                 break;
         }
 
-        const minusLeft = this.checkMobile() ? -20 : 0;
+
 
         //console.log(devicePath[0].getBoundingClientRect());
 
@@ -180,6 +180,29 @@ const BANNER = {
             code = $('#rodinCode code');
 
         codeBlock.css({ opacity: 1 });
+        */
+
+        const minusTop = this.checkMobile()  ? $('.header .navbar-collapse').hasClass('in') ? -$('.header').height() : -70 : 0;
+
+        let params = {
+            width: devicePath[0].getBoundingClientRect().width - 10,
+            height: devicePath[0].getBoundingClientRect().height - 20,
+            top: devicePath[0].getBoundingClientRect().top + window.pageYOffset + 10 + minusTop,
+            left: devicePath[0].getBoundingClientRect().left + 5,
+        };
+        if (init) {
+            block.css(params);
+        } else {
+            block.animate(params);
+        }
+
+        if (codeBlock.length <= 0)
+            codeBlock = $('.code-block-wrapper');
+        if (code.length <= 0)
+            code = $('#rodinCode code');
+
+        codeBlock.css({ opacity: 1 });
+
     },
 
     mobileMenuToggle: function () {
@@ -212,6 +235,13 @@ const BANNER = {
 
          });*/
 
+    },
+
+    orientationchange: function () {
+        var _this = this;
+        $(window).on('orientationchange', function (event) {
+            _this.showCodeBlock(codeBlock, BANNER.lastActivePath, true);
+        });
     },
 
     checkMobile() {

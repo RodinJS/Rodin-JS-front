@@ -3,7 +3,7 @@
 const header = {
     init: function () {
         this.stickyHeader();
-        this.toggleHeaderAuth();
+        //this.toggleHeaderAuth();
     },
 
     stickyHeader: function () {
@@ -35,6 +35,8 @@ const header = {
     },
 
     toggleHeaderAuth: function () {
+        if(this.inited) return;
+        this.inited = true;
         $('.btn-mobile-menu').on('click', function (event) {
             event.preventDefault();
             $('.header-menu').css({float:'inherit'});

@@ -24,10 +24,10 @@ class StoreCtrl {
             }
 
             if (this.modulesList && this.myModules) {
-                this.modulesList = this._ModulesStore.handleMyModules();
+                this.modulesList = _.chunk(this._ModulesStore.handleMyModules(), 4);
+            } else {
+                this.modulesList = _.chunk(this.modulesList, 4);
             }
-
-            console.log(this.modulesList);
 
         });
     }
@@ -48,6 +48,7 @@ class StoreCtrl {
         if (!this._User.current) {
             return this.onError([{ fieldName: 'You should logged in to purchase module' }]);
         }
+
         this.subscribtionWarning = false;
         this.modalTitle = module.subscribed && !module.unsubscribed ? 'Unsubscribe'  : 'Subscribe';
         this.modalContent = module.subscribed && !module.unsubscribed ?  `Are you sure you want to unsubscribe? Your subscription will still be valid until ${this._moment(module.expiredAt).format('YYYY-MM-DD')} ` : module.description;
@@ -90,6 +91,7 @@ class StoreCtrl {
                 this._Notification.success('Module Unsubscribed');
                 this.modalInstance.close();
                 module.unsubscribed = true;
+                console.log('MOOODULE', module);
                 this._EventBus.emit(this._EventBus.modules.UPDATE, module);
             })
             .catch(err => this.onError(err));

@@ -5,7 +5,7 @@ import './helpers';
 
 import angular from 'angular/index';
 import 'jquery/dist/jquery.min';
-import '/scripts/vendor/assists/jquery.form';
+import './assists/jquery.form';
 import moment from 'moment/min/moment.min.js';
 
 

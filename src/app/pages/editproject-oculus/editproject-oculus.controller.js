@@ -1,6 +1,9 @@
 class EditProjectOculusCtrl {
-    constructor(AppConstants, Project, $state, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
+    constructor(AppConstants, Project, $state, $stateParams, $q, $interval, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
+
+        if (!$stateParams.projectId) return $state.go('landing.error');
+
 
         this.Notification = Notification;
         this.appName = AppConstants.appName;
@@ -10,6 +13,7 @@ class EditProjectOculusCtrl {
         this.$state = $state;
         this.$q = $q;
         this._$scope = $scope;
+        this._$interval = $interval;
 
         this.projectId = $stateParams.projectId;
         this.project = {};
@@ -21,24 +25,24 @@ class EditProjectOculusCtrl {
 
         this.fileChoosen = {
             profile: false,
-            p12: false
+            p12: false,
         };
 
         this.files = {
             profile: {
-                name: ""
+                name: '',
             },
             cert: {
-                name: ""
+                name: '',
             },
             icon: {
-                name: "",
-                src: ""
-            }
+                name: '',
+                src: '',
+            },
         };
 
         this.modals = {
-            password: false
+            password: false,
         };
 
         this.submiting = false;
@@ -48,23 +52,33 @@ class EditProjectOculusCtrl {
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
         });
+        $scope.$on('$destroy', ()=>{
+            if(this.timer){
+                this._$interval.cancel(this.timer);
+            }
+        })
     }
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, {device: 'oculus'}).then(
+        this.Project.get(this.projectId, { device: 'oculus' }).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
+
+                if(this.project.build.oculus.built && this.timer){
+                    this._$interval.cancel(this.timer);
+                }
             },
+
             err => {
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
                 this.showLoader = false;
                 //this.$state.go('landing.error');
             }
-        )
+        );
     }
 
     update() {
@@ -74,11 +88,12 @@ class EditProjectOculusCtrl {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, data);
             },
+
             err => {
                 this.showLoader = false;
                 console.log(err);
             }
-        )
+        );
     }
 
     changeIcon(e) {
@@ -94,6 +109,7 @@ class EditProjectOculusCtrl {
                         this.files.icon.src = reader.result;
                         this._$scope.$apply();
                     };
+
                     reader.readAsDataURL(file);
                 }, (result) => {
                     this.Notification.error('Unsupported image type');
@@ -109,12 +125,12 @@ class EditProjectOculusCtrl {
         var defer = this.$q.defer();
         var result = {
             valid: true,
-            message: ""
+            message: '',
         };
 
         if (file.size > 1024 * 1024) {
             result.valid = false;
-            result.message = "FIle size must be less than 1mb";
+            result.message = 'FIle size must be less than 1mb';
             var tim = $timeout(function () {
                 defer.reject(result);
                 $timeout.cancel(tim);
@@ -123,17 +139,17 @@ class EditProjectOculusCtrl {
             var fileReader = new FileReader();
             fileReader.onloadend = function (e) {
                 var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
-                var header = "";
+                var header = '';
                 for (var i = 0; i < arr.length; i++) {
                     header += arr[i].toString(16);
                 }
 
                 switch (header) {
-                    case "89504e47":
+                    case '89504e47':
                         break;
                     default:
                         result.valid = false;
-                        result.message = "Allowed only .jpg .jpeg and .png file types.";
+                        result.message = 'Allowed only .jpg .jpeg and .png file types.';
                         break;
                 }
 
@@ -143,6 +159,7 @@ class EditProjectOculusCtrl {
                     defer.reject(result);
                 }
             };
+
             fileReader.readAsArrayBuffer(file);
         }
 
@@ -171,31 +188,52 @@ class EditProjectOculusCtrl {
         }
     }
 
+   publishNbuild(e) {
+        this.showLoader = true;
+        this.Project.publish(this.projectId).then(
+            data => {
+                this.project.publishedPublic = true;
+                this.build(e);
+            },
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key)=>{
+                    this.Notification.error(val.fieldName);
+                });
+            }
+        )
+    }
+
     build(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         const ctrl = this;
         e.preventDefault();
+        this.project.build.oculus.built = false;
         let project = {
             userId: this.user.username,
             appId: this.project._id,
             appName: this.project.oculus.name,
-            version:this.project.oculus.version,
+            version: this.project.oculus.version,
             oculus: {
-                exportMethod: "ad-hoc",
+                exportMethod: 'ad-hoc',
                 bundleIdentifier: this.project.oculus.bundle,
                 developerId: this.project.oculus.developerId,
-                certPassword: this.project.oculus.certPassword
-            }
+                certPassword: this.project.oculus.certPassword,
+            },
         };
 
         ctrl.showLoader = true;
-        $("#configs").ajaxForm({
-            dataType: "json",
+        this.modals.notPublished = false;
+        $('#configs').ajaxForm({
+            dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
             headers: {
-                "x-access-token": this._JWT.get()
+                'x-access-token': this._JWT.get(),
             },
             data: {
-                project: angular.toJson(project)
+                project: angular.toJson(project),
             },
             success: function (data) {
                 ctrl._$scope.configs.displayName.focused = false;
@@ -205,13 +243,18 @@ class EditProjectOculusCtrl {
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Oculus build start');
 
+                ctrl.timer = ctrl._$interval(() => {
+                    ctrl.getProject();
+                }, 2000);
+
             },
+
             error: function (data) {
-                if(data.responseJSON && data.responseJson.error.message)
+                if (data.responseJSON && data.responseJson.error.message)
                     ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
-            }
+            },
         }).submit();
     };
 
@@ -221,33 +264,37 @@ class EditProjectOculusCtrl {
         let project = {
             userId: this.user.username,
             appId: this.project._id,
-            oculus: {}
+            oculus: {},
         };
 
         ctrl.showLoader = true;
-        $("#configs").ajaxForm({
-            dataType: "json",
+        $('#configs').ajaxForm({
+            dataType: 'json',
             type: 'DELETE',
             url: this._AppConstants.API + '/project/' + this.project._id + '/build/oculus',
             headers: {
-                "x-access-token": this._JWT.get()
+                'x-access-token': this._JWT.get(),
             },
             data: {
-                project: angular.toJson(project)
+                project: angular.toJson(project),
             },
             success: function (data) {
                 ctrl.getProject();
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
             },
+
             error: function (data) {
                 ctrl.showLoader = false;
                 ctrl._$scope.$apply();
-            }
+            },
         }).submit();
     };
 
     open(e) {
+	    if (!this.project.publishedPublic) {
+		    return this.modals.notPublished = true;
+	    }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -259,14 +306,18 @@ class EditProjectOculusCtrl {
                 this.showLoader = false;
                 window.location = data.downloadUrl;
             },
+
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key)=> {
                     this.Notification.error(val.fieldName);
                 });
             }
-        )
+        );
     }
+	gotToPublish() {
+		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
+	}
 }
 
 export default EditProjectOculusCtrl;
