@@ -53,7 +53,7 @@ class EditProjectOculusCtrl {
         ProjectStore.subscribeAndInit($scope, ()=> {
             this.project = ProjectStore.getProject();
             console.log('OCULUS', this.project);
-            if(this.project && this.project.fields && (!this.project.oculus || Object.keys(this.project.oculus).length <=0 ) && !this.project.build.oculus.built){
+            if(this.project && (!this.project.oculus || Object.keys(this.project.oculus).length <=0 ) && !this.project.build.oculus.built){
                 this.project.oculus = {
                     name:this.project.fields.appName,
                     version:this.project.fields.version,
