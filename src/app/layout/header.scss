@@ -280,7 +280,6 @@
           margin-left: 0;
           position: relative;
           width: 100%;
-          min-height: 50px;
           &:before {
             content: "";
             width: 6px;
@@ -291,10 +290,10 @@
             top: 15px;
             left: 10px;
           }
-          &:last-child {
-            a {
-              border-bottom: none;
-            }
+          &:first-child {
+            //&:before {
+            //  top: 10px;
+            //}
           }
         }
         a {
