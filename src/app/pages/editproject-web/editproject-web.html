@@ -29,6 +29,7 @@
                                  data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': (configs.url.$valid || addDomain.url.$valid) && addDomain.url.focused}">
                                 <label>
                                     {{addDomain.url.focused || $ctrl.domain ? 'Project url' : 'example.com'}}
+                                    {{addDomain.url.$invalid && addDomain.url.focused ? 'invalid' : ''}}
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
                                        data-ng-model="$ctrl.domain"
@@ -40,8 +41,6 @@
                                     Please make "A record" redirect of your domain/subdomain to "{{$ctrl.recordIp}}" IP
                                     address
                                 </p>
-                                <div class="validation error" ng-if="addDomain.url.$invalid && addDomain.url.focused"> Project url invalid
-                                </div>
                             </div>
                             <div class="btn-wrapper" style="text-align: center">
                                 <button type="submit" class="btn btn-default btn-submit" style="margin-right:10px"

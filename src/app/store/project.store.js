@@ -24,9 +24,8 @@ function ProjectStore(EventBus, BaseStore, $stateParams, $state, Project) {
                     $state.go('landing.error');
                 });
         }
-        const project = angular.copy(factory.data.project);
-        delete factory.data.project;
-        return project;
+
+        return angular.copy(factory.data.project);
     };
 
     return factory;

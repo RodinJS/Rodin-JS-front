@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp",
-    "local": "export NODE_ENV=local; gulp bundle",
-    "dev": "export NODE_ENV=dev; gulp bundle",
-    "stage": "export NODE_ENV=stage; gulp bundle",
-    "prod": "export NODE_ENV=prod; gulp bundle"
+    "local":"export NODE_ENV=local; gulp bundle",
+    "dev":"export NODE_ENV=dev; gulp bundle",
+    "stage":"export NODE_ENV=stage; gulp bundle",
+    "prod":"export NODE_ENV=prod; gulp bundle"
   },
   "repository": {
     "type": "git",
@@ -51,7 +51,6 @@
     "gulp-clean-css": "^2.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^5.0.0",
-    "gulp-newer": "^1.3.0",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",

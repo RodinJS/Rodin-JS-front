@@ -13,7 +13,6 @@ class AuthCtrl {
         this.Notification = Notification;
         this.title = $state.current.title;
         this.authType = $state.current.name.replace('landing.', '');
-        this.formErrors = AppConstants.FORMERRORS.register;
         //this.gotToHome = this.gotToHome.bind(this);
 
         this.patterns = {
@@ -67,7 +66,6 @@ class AuthCtrl {
                 (err) => {
                     this.isSubmitting = false;
                     this.errors = err;
-                    this.Notification.error('Wrong username or password');
                 });
         } else if (this.authType === 'register') {
             this._User.signUp(this.formData).then(
