@@ -8,7 +8,7 @@ function EditProjectIosConfig($stateProvider) {
 			controllerAs: '$ctrl',
 			templateUrl: 'pages/editproject-ios/editproject-ios.html',
 			title: 'Edit Project Ios',
-			pageClass: 'page-account',
+			pageClass: 'page-account new',
 			resolve: {
 				auth: function (User) {
 					return User.ensureAuthIs(true);

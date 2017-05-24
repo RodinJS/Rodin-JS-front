@@ -19,12 +19,6 @@ $bg-secondary:                                        #0C1E33;
 $bg-blue:                                             #0178D3;
 $text-gray:                                           #A6A6A6;
 $text-light-gray:                                     #DADADA;
-$black:               #000;
-$white:               #fff;
-$colorSemiWhite:      rgba(255, 255, 255, .5);
-$colorOrange:         #FF9A2B;
-$sectionBorder:       #3B3B3D;
-$icon-delete:        "\e90c";
 
 
 
@@ -32,44 +26,3 @@ $icon-delete:        "\e90c";
 //
 
 $fontBase:                                             16px;
-
-// Icons
-// ==== Font
-$font-base:          16px;
-$fontHelvetic:       "Helvetica Neue", Helvetica, sans-serif;
-$fontOpenSans:       'Open Sans', sans-serif;
-
-// ===== Icons
-$icomoon-font-path:  "../../../../fonts/rodin-icon" !default;
-
-$icon-private:       "\e91d";
-$icon-public:        "\e91e";
-$icon-fullscreen:    "\e919";
-$icon-reload:        "\e91a";
-$icon-download:      "\e918";
-$icon-glasses-bold:  "\e917";
-$icon-eye:           "\e914";
-$icon-eye-close:     "\e915";
-$icon-check:         "\e916";
-$icon-oculus:        "\e913";
-$icon-glasses:       "\e901";
-$icon-invalid:       "\e902";
-$icon-delete:        "\e90c";
-$icon-publish:       "\e90d";
-$icon-delete-space:  "\e90e";
-$icon-more:          "\e90f";
-$icon-send:          "\e910";
-$icon-error:         "\e911";
-$icon-monocle:       "\e912";
-$icon-notifi:        "\e900";
-$icon-dot:           "\e903";
-$icon-lock:          "\e904";
-$icon-angle-down:    "\e905";
-$icon-search:        "\e906";
-$icon-add:           "\e907";
-$icon-info:          "\e908";
-$icon-link:          "\e909";
-$icon-edit:          "\e90a";
-$icon-settings:      "\e90b";
-
-@import "common/main-icons/ionicons-variables";

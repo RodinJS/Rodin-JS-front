@@ -1,0 +1,395 @@
+.account-settings-container{
+	h1.main-title{
+		color: $white;
+		.btn-upgrade{
+			display: block;
+			float: right;
+			color: $colorBlue;
+			text-decoration: none;
+			padding-top: 4px;
+			transition: all .3s;
+			&:hover{
+				color: darken($colorBlue, 15%);
+			}
+			i{
+				font-size: 21px;
+				margin-right: 10px;
+				vertical-align: middle;
+			}
+		}
+	}
+}
+//section
+.section{
+  	margin-bottom: 20px;
+  	padding-bottom: 25px;
+  	border-bottom: 1px solid rgba(255, 255, 255, .1);
+  	&.last-section{
+    	border: none;
+  	}
+  	&.section-profile-info{
+    	padding-bottom: 10px;
+  	}
+  	&.section-password{
+    	.btn-wrapper{
+      		@include cf();
+      		.btn{
+        		float: left;
+      		}
+      		.help-block{
+        		float: left;
+        		margin-top: 8px;
+        		margin-left: 10px;
+      		}
+		}
+  	}
+  	.subsection-item{
+		display: table;
+		width: 100%;
+		padding-bottom: 30px;
+		margin-bottom: 30px;
+		border-bottom: 1px solid rgba(255, 255, 255, .1);
+		&.empty-subsection-item{
+			.template-img-wrapper{
+				.template-img{
+					background-image: none !important;
+					background-color: rgba($white, .02);
+					border: 1px solid rgba($white, .2);
+					box-shadow: none;
+					position: relative;
+					img{
+						display: block;
+					}
+				}
+			}
+		}
+		&.last-subsection-item{
+			margin-bottom: 0;
+			border: none;
+		}
+		.template-img-wrapper{
+			display: table-cell;
+			vertical-align: top;
+			width: 41.66667%;
+			padding-right: 15px;
+		}
+		.template-img{
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			height: 0;
+			padding-bottom: 75.3%;
+			img{
+				display: none;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				filter: opacity(.5);
+			}
+		}
+		.template-description{
+			display: table-cell;
+			vertical-align: top;
+			width: 58.33333%;
+			padding: 18px 16.66667% 51px 15px;
+			padding-right: calc(16.66667% - 15px);
+			position: relative;
+			h2{
+				font-weight: 400;
+				color: $white;
+				margin-top: 0;
+				margin-bottom: 10px;
+			}
+			.info-btn-wrapper{
+				position: absolute;
+				left: 15px;
+				right: calc(30% - 15px);
+				bottom: 18px;
+				.price{
+					color: $white;
+					font-size: 24px;
+					line-height: 1.375;
+					sup,
+					sub{
+						color: $colorSemiWhite;
+					}
+					sup{
+						position: relative;
+						top: -10px;
+					}
+				}
+				.btn-primary{
+					text-transform: uppercase;
+					float: right;
+					margin-top: 3px;
+					&:hover{
+						border-color: $colorOrange;
+					}
+				}
+			}
+		}
+	}
+}
+//section end
+
+//switch checkbox btn
+.switch-cont{
+  	position: relative;
+  	display: inline-block;
+  	width: 50px;
+  	height: 24px;
+  	background: $black;
+  	border-radius: 100px;
+  	padding: 3px;
+  	cursor: pointer;
+  	.switch-btn{
+    	display: inline-block;
+    	background: #262629;
+    	border-radius: 50%;
+    	width: 18px;
+    	height: 18px;
+    	transition: all 0.5s ease-in-out;
+  	}
+  	span{
+	    position: absolute;
+	    color: $white;
+	    font-size: 10px;
+	    font-weight: bold;
+	    vertical-align: middle;
+	    transition: all 0.5s ease-in-out;
+  	}
+  	span.on{
+	    left: 7px;
+	    top: 5px;
+	    opacity: 0;
+  	}
+  	span.off{
+	    right: 7px;
+	    top: 5px;
+  	}
+}
+.switch-cont.active{
+  	.switch-btn{
+	    transform: translateX(145%);
+	    background: $colorOrange;
+  	}
+  	span.on{
+    	opacity: 1!important;
+  	}
+  	span.off{
+    	opacity: 0;
+  	}
+}
+//switch checkbox btn
+
+//Account plans
+.section-plan-wrapper{
+	.content-title-wrapper{
+		text-align: center;
+		padding-bottom: 25px;
+		h1.main-title{
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+	}
+	.plan-content-navbar{
+		padding: 0;
+		margin: 0 auto 60px;
+		text-align: center;
+		font-size: 0;
+		max-width: 360px;
+		li{
+			display: inline-block;
+			width: 50%;
+			&.active{
+				a{
+					border-color: $colorBlue;
+					font-weight: 700;
+				}
+			}
+			a{
+				display: block;
+				text-transform: uppercase;
+				color: $white;
+				text-decoration: none;
+				padding: 0 20px 20px;
+				border-bottom: 2px solid $white;
+				transition: all .3s;
+				&:hover{
+					font-weight: 700;
+				}
+			}
+		}
+	}
+	.plan-content-wrapper{
+		margin: 0 -15px 60px;
+		.plan-content{
+			display: table;
+			width: 100%;
+			.plan-content-item-box{
+				display: table-cell;
+				vertical-align: top;
+				width: 33.33333%;
+				padding: 0 15px;
+				text-align: center;
+				&.current-item-box{
+					.plan-content-item{
+						&:hover{
+							border-color: transparent;
+							i{
+								transform: none;
+							}
+						}
+						.btn-current{
+							pointer-events: none;
+						}
+					}
+				}
+				&.recomended-item-box{
+					.plan-content-item{
+						border: 1px solid rgba($colorBlue, .2);
+					}
+				}
+				.plan-content-item{
+					background-color: rgba($white, .02);
+					padding: 50px 85px 65px;
+					position: relative;
+					border: 1px solid transparent;
+					transition: all .3s;
+					&:hover{
+						border: 1px solid rgba($colorBlue, .4);
+						i{
+							transform: rotate(-5deg);
+						}
+					}
+					.recomended{
+						position: absolute;
+						top: 5px;
+						right: 10px;
+						color: $colorBlue;
+					}
+					i{
+						display: inline-block;
+						font-size: 60px;
+						color: $colorBlue;
+						margin-bottom: 30px;
+						transition: all .3s;
+					}
+					h2{
+						color: $white;
+						margin-top: 0;
+						margin-bottom: 10px;
+					}
+					p{
+						margin-bottom: 30px;
+						min-height: 28px;
+					}
+					.plan-item-info-list{
+						padding: 0;
+						list-style-type: none;
+						margin-bottom: 15px;
+						min-height: 260px;
+						li{
+							color: $white;
+							margin-bottom: 10px;
+							a{
+								color: $white;
+								text-decoration: none;
+								transition: all .3s;
+								&:hover{
+									color: $colorSemiWhite;
+								}
+							}
+						}
+					}
+					.plan-price-wrapper{
+						margin-bottom: 25px;
+						.price{
+							font-size: 64px;
+							line-height: 1.36;
+							color: $white;
+							sub,
+							sup{
+								font-size: 24px;
+								color: $colorSemiWhite;
+							}
+							sup{
+								position: relative;
+								top: -30px;
+							}
+						}
+					}
+					.btn-wrapper{
+						.btn-primary{
+							border-color: $colorBlue;
+							&:hover{
+								background-color: rgba($white, .05);
+							}
+						}
+						.btn-current{
+							&:hover{
+								color: $colorBlue;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+//Account plans end
+
+// Account billing
+.section-upcoming-invoice{
+	h2{
+		margin-bottom: 20px;
+	}
+}
+// Account billing end
+
+// Account purchases
+.account-purchases-container{
+	padding-bottom: 55px;
+}
+.section-templates{
+
+}
+.section-redemption{
+	.form-wrapper{
+		p.description{
+			margin-bottom: 20px;
+		}
+		.btn-primary{
+			text-transform: uppercase;
+			&:hover{
+				border-color: $colorOrange;
+			}
+		}
+	}
+}
+
+// medium
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+	.section{
+	  	.subsection-item{
+			.template-description{
+				padding-right: 8.33333%;
+				.info-btn-wrapper{
+					right: calc(20% - 15px);
+				}
+			}
+		}
+	}
+	.section-plan-wrapper{
+		.plan-content-wrapper {
+			.plan-content {
+				.plan-content-item-box {
+					.plan-content-item{
+						padding: 50px 58px 65px;
+					}
+				}
+			}
+		}
+	}
+}

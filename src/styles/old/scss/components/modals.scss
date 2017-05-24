@@ -1,0 +1,169 @@
+.modal {
+    .modal-dialog {
+        margin-top: 80px;
+        &.modal-sm {
+            width: 441px;
+        }
+        &.modal-center {
+            margin-top: 30vh;
+        }
+    }
+    .modal-content {
+        border-radius: 0;
+        border: 0;
+        color: white;
+        background: $colorGray;
+        box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.50);
+    }
+    .modal-body {
+        padding: 30px 40px 40px;
+    }
+    .modal-title {
+        font-weight: normal;
+        margin: 0 0 18px;
+    }
+    .modal-form {
+        margin-top: 20px;
+        .form-group {
+            margin-bottom: 20px;
+            &.row {
+                display: flex;
+                align-items: center;
+            }
+        }
+        .form-label {
+            font-size: 10px;
+            line-height: 14px;
+            margin-bottom: 8px;
+            &[class*="col-"] {
+                margin: 0;
+                padding-right: 0;
+                color: rgba(white, .6);
+                font-size: 12px;
+            }
+        }
+        .form-control {
+            border-radius: 0 !important;
+            height: 30px;
+            padding: 6px 12px;
+            line-height: 16px;
+            background-color: rgba(white, .05);
+            border-color: rgba(white, .1);
+            box-shadow: none;
+            color: white;
+            appearance: none;
+            font-size: 12px;
+        }
+        select.form-control {
+            font-size: 10px;
+            padding-right: 25px;
+            padding-left: 36px;
+        }
+        .btn-group {
+            &.bootstrap-select {
+                &.form-control{
+                    .btn {
+                        padding-left: 36px;
+                        border-radius: 0;
+                        background-color: rgba(white, .05);
+                        border: 1px solid rgba(white, .1);
+                    }
+                }
+            }
+        }
+        .dropdown-wrapper {
+            position: relative;
+            .file-icon {
+                position: absolute;
+                left: 10px;
+                top: 5px;
+                font-size: 20px;
+                z-index: 33;
+                &.orange {
+                    color: $colorOrange;
+                }
+                &.blue {
+                    color: $colorBlue;
+                }
+                &.red {
+                    color: $colorRed;
+                }
+                &.green {
+                    color: $colorGreen2;
+                }
+            }
+            .dr-arrow {
+                position: absolute;
+                font-size: 10px;
+                color: white;
+                opacity: .5;
+                top: 10px;
+                right: 13px;
+            }
+            .dropdown-menu {
+                > li {
+                    > a {
+                        padding: 5px 20px;
+                    }
+                }
+            }
+        }
+        .form-actions {
+            text-align: right;
+            padding-top: 10px;
+            .btn {
+                text-transform: uppercase;
+                font-weight: bold;
+                text-decoration: none;
+                outline: none !important;
+                + .btn {
+                    margin-left: 20px;
+                }
+                &.btn-link {
+                    border: none;
+                    color: $colorOrange;
+                }
+                &.btn-primary {
+                    border-color: $colorOrange;
+                    background-color: rgba($white, .02);
+                    &:hover {
+                        background-color: rgba($white, .05);
+                    }
+                }
+                &[disabled],
+                &:disabled {
+                    color: rgba(white, .5);
+                    border-color: rgba($white, .2);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    .modal-alert {
+        padding: 20px;
+        .modal-title {
+            line-height: 18px;
+            margin: 0;
+            i {
+                font-size: 18px;
+                color: $colorGreen2;
+                display: inline-block;
+                vertical-align: top;
+                margin-right: 10px;
+            }
+        }
+        .modal-close {
+            text-decoration: none;
+            position: absolute;
+            display: block;
+            right: 20px;
+            margin-top: -12px;
+            top: 50%;
+            color: white;
+            opacity: 0.3;
+            i {
+                display: block;
+            }
+        }
+    }
+}
