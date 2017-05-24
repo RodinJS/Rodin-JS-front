@@ -272,6 +272,7 @@ class EditProjectIosCtrl {
         ctrl.showLoader = true;
         this.modals.notPublished = false;
         
+        console.log("--------- main");
         $('#configs').ajaxForm({
             dataType: 'json',
             url: this._AppConstants.API + '/project/' + this.projectId + '/build/ios',
@@ -282,13 +283,12 @@ class EditProjectIosCtrl {
                 project: angular.toJson(project),
             },
             success: function (data) {
+                console.log("------------- success");
                 ctrl.modals.password = false;
                 ctrl._$scope.configs.displayName.focused = false;
                 ctrl._$scope.configs.version.focused = false;
                 ctrl._$scope.configs.bundle.focused = false;
                 ctrl._$scope.configs.developerId.focused = false;
-                ctrl.files.icon.name = '';
-                ctrl.files.icon.src = '';
                 ctrl.getProject();
                 ctrl.Notification.success('iOS build start');
                 ctrl.timer = ctrl._$interval(() => {
@@ -298,6 +298,7 @@ class EditProjectIosCtrl {
             },
 
             error: function (data) {
+                console.log("-----------------error");
                 if (data.responseJSON && data.responseJSON.error.message)
                     ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
