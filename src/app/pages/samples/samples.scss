@@ -3,6 +3,9 @@
 }
 
 .samples-page {
+    .mobile-list {
+        display: none;
+    }
     .title {
         font-size: 22px;
         margin-top: 15px;
@@ -87,11 +90,22 @@
     .samples-iframe {
         display: none;
     }
+    .samples-page {
+        .mobile-list {
+            display: block;
+        }
+    }
 }
 
 @media screen and (orientation: portrait) and (min-width: 320px) and (max-width: 1024px) {
     .samples-iframe {
         display: none;
+    }
+    .nav-list {
+        // display: none;
+    }
+    .mobile-list {
+        display: block;
     }
     .rd-tree {
         margin-top: 20px;
@@ -110,6 +124,12 @@
 @media screen and (orientation: landscape) and (min-width: 320px) and (max-width: 1024px) {
     .samples-iframe {
         display: none;
+    }
+    .nav-list {
+        display: none;
+    }
+    .mobile-list {
+        display: block;
     }
     .rd-tree {
         margin-top: 20px;
