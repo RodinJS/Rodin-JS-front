@@ -61,18 +61,15 @@ class AppHeaderCtrl {
     }
 
     showSocketResponse(data){
-        console.log(data);
-        const respData = data.data || data;
-        const message = respData.message || respData.label;
-        console.log('message', message);
-        if(respData)
+        const message = _.isObject(data.data) ? data.data.message : data.data;
+        if(data.data.error || data.error)
             this._Notification.error(message);
         else
             this._Notification.success(message);
 
-        if(!respData.label)
-            respData.label = message;
-        this.eventBus.emit(this.eventBus.notifications.SET_ONE, respData);
+        if(!data.label)
+            data.label = message;
+        this.eventBus.emit(this.eventBus.notifications.SET_ONE, data);
     }
 
     clickMenu() {
