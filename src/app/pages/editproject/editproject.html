@@ -58,7 +58,7 @@
                         <div class="form-group" custom-input
                              data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
                             <label>
-                                Project name
+                                Project name  <span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">is required</span>
                             </label>
                             <input type="text"
                                    class="form-control"
@@ -68,7 +68,6 @@
                                    ng-maxlength="64"
                                    limit-to="64"
                                    ng-model="$ctrl.project.displayName">
-                            <div class="validation error" ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">Project name is required</div>
                         </div>
                         <div class="form-group" custom-input ng-if="$ctrl.project.githubUrl">
                             <label>GitHub project url</label>
@@ -181,7 +180,6 @@
                             <span class="letter-quantity">
                                 <span>{{128-$ctrl.project.description.length}}</span>/128
                             </span>
-                            <div class="validation error" ng-if=" !$ctrl.project.description">Description is required</div>
                         </div>
                     </div>
 
