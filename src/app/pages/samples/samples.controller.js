@@ -13,13 +13,14 @@ class SamplesCtrl {
 	}
 
 	init() {
+		console.log(this.checkMobile())
 		let iframeContent = angular.element('.samples-iframe');
 		iframeContent.css({ height: window.innerHeight - 91 });
 		this._$http.get('https://examples.rodin.io/list.json')
 			.then(res => {
 				this.samples = res.data;
 				let first = Object.keys(this.samples)[0];
-                this.setDefaultStates(first, this.samples[first].url, this.samples[first].git);
+				this.setDefaultStates(first, this.samples[first].url, this.samples[first].git);
 			})
 	}
 
