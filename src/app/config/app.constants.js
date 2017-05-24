@@ -234,13 +234,6 @@ const AppConstants = {
             message: 'UNKNOWN_SOCKET_ACTION',
             field: '',
         },
-
-        CERTIMPORTERROR:{
-            message:`Build failed. Invalid certificate`,
-        },
-        OTHERBUILDERROR:{
-            message:`Build failed. Please drop an email to support including your build ID`,
-        }
     },
 };
 

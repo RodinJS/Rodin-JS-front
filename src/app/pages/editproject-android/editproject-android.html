@@ -11,6 +11,26 @@
                         <div class="content-navbar">
                             <ul class="navbar-list">
                                 <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
+                                <!--<li class="other-links dropdown" uib-dropdown>-->
+                                <!--<a id="dLabel" role="button" data-uib-dropdown-toggle>-->
+                                <!--<i class="icon icon-more"></i>-->
+                                <!--</a>-->
+                                <!--<ul class="dropdown-menu dropdown-menu-more" data-uib-dropdown-menu>-->
+                                <!--<li>-->
+                                <!--<a href="{{$ctrl.project.editorUrl}}">Editor</a>-->
+                                <!--</li>-->
+                                <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#">Designer</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li class="disabled">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#">Duplicate</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                <!--</ul>-->
+                                <!--</li>-->
+                                <!--<li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>-->
+                                <!--</li>-->
+                                <!--<li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>-->
+                                <!--</li>-->
                             </ul>
                         </div>
 
@@ -206,11 +226,6 @@
                                 <div class="validation error"
                                      ng-if="configs.KSAlias.$invalid && configs.KSAlias.focused">Alias is required
                                 </div>
-                            </div>
-
-                            <div style="clear:both"></div>
-                            <div class="form-group" ng-if="$ctrl.projectError">
-                                <h4 class="text-center">{{$ctrl.errorText}}</h4>
                             </div>
 
                             <div class="btn-wrapper" style="text-align: center">
