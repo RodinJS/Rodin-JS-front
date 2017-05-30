@@ -50,14 +50,14 @@
                                    data-ng-focus="configs.version.focused = true"
                                    data-ng-keyup="configs.version.pressed = true"
                                    data-ng-change="$ctrl.project.build.ios.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.ios.version, $ctrl.project.ios.version))">
-                            <p class="form-description"
-                               ng-class="(configs | PFValidator:'version')  == 'invalid' && configs.version.$error.pattern ? 'error' : ''">
+                            <div class="validation error"
+                               ng-if="(configs | PFValidator:'version')  == 'invalid' && configs.version.$error.pattern ? 'error' : ''">
                                 Version must be in #.#.# format
-                            </p>
+                            </div>
 
                             <div class="validation error"
                                  ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) && configs.version.$viewValue.length <= 0">
-                            Version is required
+                                Version is required
                             </div>
                             <div class="validation error" ng-if="!isVersionValid && configs.version.$valid">
                                 Version must be higher than current. Current version is {{$ctrl.project.build.ios.version}}
@@ -81,12 +81,13 @@
                                    ng-pattern="/^(0|[a-zA-Z0-9]\w*)\.(0|[a-zA-Z0-9]\w*)\.(0|[a-zA-Z0-9]\w*)$/"
                                    data-ng-focus="configs.bundle.focused = true"
                                    data-ng-keyup="configs.bundle.pressed = true">
-                            <p class="form-description">
+                            <!--<p class="form-description">
                                 Must be in xxx.xxx.xxx format
                                 Used for uniquely identifying your application in the operation system
-                            </p>
+                            </p>-->
                             <div class="validation error" ng-if="(configs | PFValidator:'bundle')  == 'invalid'">
-                                Bundle Identifier is invalid
+                                Must be in xxx.xxx.xxx format.
+                                Used for uniquely identifying your application in the operation system
                             </div>
 
                         </div>
@@ -106,7 +107,6 @@
                                    required
                                    data-ng-keyup="configs.developerId.pressed = true"
                                    data-ng-focus="configs.developerId.focused = true">
-                            <p class="form-description">Developer ID.</p>
                             <div class="validation error"  ng-if="(configs | PFValidator:'developerId')  == 'invalid'">
                                 Developer ID is required
                             </div>
@@ -147,7 +147,7 @@
                         </div>
 
                         <div class="form-group col-md-4 upload-label">
-                            <label>Distribution/Development certificate.<sub>*</sub></label>
+                            <label>Distribution/Development Certificate.<sub>*</sub></label>
                             <!--<div class="main-upload-area">-->
                             <!--<label class="upload-area" ng-show="$ctrl.files.cert.name === ''">-->
                             <!--<div class="area-content">.p12</div>-->
@@ -195,7 +195,7 @@
                         </div>
 
                         <div class="form-group col-md-4 upload-label">
-                            <label>App icon<sub>*</sub></label>
+                            <label>App Icon<sub>*</sub></label>
 
                             <div class="drag-cont upload-label">
                                 <div class="drag-item first">

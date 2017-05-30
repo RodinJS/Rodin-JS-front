@@ -5,7 +5,7 @@
                 <h1 class="title text-center">
                     <i class="icon icon-private"></i>
                     <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
-                <div class="main-form" name="project">
+                <form class="main-form" name="project">
 
                     <div class="content-navbar">
                         <ul class="navbar-list">
@@ -65,7 +65,7 @@
                              'has-success': (project | PFValidator:'name')  == 'valid'
                              }">
                             <label>
-                                Project name<sub>*</sub>
+                                Project Name<sub>*</sub>
                             </label>
                             <input type="text"
                                    name="name"
@@ -75,6 +75,8 @@
                                    ng-minlength="3"
                                    ng-maxlength="64"
                                    limit-to="64"
+                                   ng-focus="project.name.focused = true"
+                                   ng-keyup="project.name.pressed = true"
                                    ng-model="$ctrl.project.displayName">
                             <div class="validation error"
                                  ng-if="(project | PFValidator:'name')  == 'invalid'">
@@ -215,7 +217,7 @@
                         </button>
                     </div>
 
-                </div>
+                </form>
             </div>
         </div>
     </div>

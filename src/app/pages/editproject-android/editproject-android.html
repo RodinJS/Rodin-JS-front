@@ -23,7 +23,7 @@
                                         'has-success':(configs | PFValidator:'displayName')  == 'valid'}
                                 ">
                                     <label class="control-label float-label">
-                                        App name <sub>*</sub>
+                                        App Name<sub>*</sub>
                                     </label>
                                     <input type="text" class="form-control" placeholder=""
                                            data-ng-model="$ctrl.project.android.name"
@@ -54,10 +54,10 @@
                                            data-ng-keyup="configs.version.pressed = true"
                                            data-ng-focus="configs.version.focused = true"
                                            data-ng-change="$ctrl.project.build.android.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.android.version, $ctrl.project.android.version))">
-                                    <p class="form-description"
-                                         ng-class="(configs | PFValidator:'version')  == 'invalid' && configs.version.$error.pattern  ? 'error' : ''">
+                                    <div class="validation error"
+                                         ng-if="(configs | PFValidator:'version')  == 'invalid' && configs.version.$error.pattern  ? 'error' : ''">
                                         Version must be in #.#.# format
-                                    </p>
+                                    </div>
                                     <div class="validation error"
                                          ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) && configs.version.$viewValue.length <= 0">
                                         Version is required
@@ -74,7 +74,7 @@
                                      'has-success': (configs | PFValidator:'package')  == 'valid'
                                      }">
                                     <label class="control-label float-label">
-                                        Package <sub>*</sub>
+                                        Package<sub>*</sub>
                                     </label>
                                     <input type="text" class="form-control" placeholder=""
                                            data-ng-model="$ctrl.project.android.package"
@@ -83,19 +83,16 @@
                                            ng-pattern="/^(0|[a-zA-Z0-9]\w*)\.(0|[a-zA-Z0-9]\w*)\.(0|[a-zA-Z0-9]\w*)$/"
                                            data-ng-keyup="configs.package.pressed = true"
                                            data-ng-focus="configs.package.focused = true">
-                                    <p class="form-description">
-                                        Must be in xxx.xxx.xxx format
-                                        Used for uniquely identifying your application in the operation system
-                                    </p>
                                     <div class="validation error"
                                          ng-if="(configs | PFValidator:'package')  == 'invalid'">
-                                        Package is invalid
+                                        Must be in xxx.xxx.xxx format.
+                                        Used for uniquely identifying your application in the operation system
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="drag-cont text-center" style="margin-top:10px">
                                         <div class="drag-item first text-center">
-                                            <label class="control-label float-label">App icon<sub>*</sub></label>
+                                            <label class="control-label float-label">App Icon<sub>*</sub></label>
                                             <div class="drag-area first">
                                                 <div style="cursor: pointer" class="center-row"
                                                      onclick="document.querySelector('#icon-file').click()">
@@ -141,7 +138,7 @@
                                  'has-success': (configs | PFValidator:'KSName')  == 'valid'
                                  }">
                                 <label class="control-label float-label">
-                                    Name <sub>*</sub>
+                                    Name<sub>*</sub>
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
                                        data-ng-model="$ctrl.project.android.keyStore.name"
@@ -156,85 +153,11 @@
 
                             <div class="form-group" custom-input
                                  data-ng-class="{
-                                 'has-error': (configs | PFValidator:'KSFLName')  == 'invalid',
-                                 'has-success': (configs | PFValidator:'KSFLName')  == 'valid'
-                                 }">
-                                <label class="control-label float-label">
-                                    Full Name<sub>*</sub>
-                                </label>
-                                <input type="text"
-                                       class="form-control"
-                                       placeholder=""
-                                       data-ng-model="$ctrl.project.android.keyStore.firstLastName"
-                                       name="KSFLName"
-                                       required
-                                       data-ng-focus="configs.KSFLName.focused = true"
-                                       data-ng-keyup="configs.KSFLName.pressed = true">
-                                <div class="validation error"
-                                     ng-if="(configs | PFValidator:'KSFLName')  == 'invalid'">
-                                    Full Name is required
-                                </div>
-
-                            </div>
-
-                            <div class="form-group" custom-input
-                                 data-ng-class="{
-                                 'has-error': (configs | PFValidator:'KSOrganization')  == 'invalid',
-                                 'has-success': (configs | PFValidator:'KSOrganization')  == 'valid'
-                                 }">
-                                <label class="control-label float-label">Organization</label>
-                                <input type="text"
-                                       class="form-control"
-                                       placeholder=""
-                                       data-ng-model="$ctrl.project.android.keyStore.organization"
-                                       name="KSOrganization"
-                                       data-ng-focus="configs.KSOrganization.focused = true">
-                                <!--<p class="form-description">Organization</p>-->
-
-                            </div>
-
-                            <div class="form-group" custom-input
-                                 data-ng-class="{
-                                 'has-error': configs.KSCity.$invalid && configs.KSCity.focused,
-                                 'has-success': configs.KSCity.$valid && configs.KSCity.focused}">
-                                <label class="control-label float-label">City</label>
-                                <input type="text" class="form-control" placeholder=""
-                                       data-ng-model="$ctrl.project.android.keyStore.city" name="KSCity"
-
-                                       data-ng-focus="configs.KSCity.focused = true">
-                                <!--<p class="form-description">City</p>-->
-                            </div>
-
-                            <div class="form-group" custom-input
-                                 data-ng-class="{
-                                 'has-error': configs.KSState.$invalid && configs.KSState.focused,
-                                 'has-success': configs.KSState.$valid && configs.KSState.focused}">
-                                <label class="control-label float-label">State</label>
-                                <input type="text" class="form-control" placeholder=""
-                                       data-ng-model="$ctrl.project.android.keyStore.state" name="KSState"
-
-                                       data-ng-focus="configs.KSState.focused = true">
-                                <!--<p class="form-description">State</p>-->
-                            </div>
-
-                            <div class="form-group" custom-input
-                                 data-ng-class="{
-                                 'has-error': configs.KSCC.$invalid && configs.KSCC.focused,
-                                 'has-success': configs.KSCC.$valid && configs.KSCC.focused}">
-                                <label class="control-label float-label">Country Code</label>
-                                <input type="text" class="form-control" placeholder=""
-                                       data-ng-model="$ctrl.project.android.keyStore.countryCode" name="KSCC"
-                                      data-ng-focus="configs.KSCC.focused = true">
-                                <!--<p class="form-description">State</p>-->
-                            </div>
-
-                            <div class="form-group" custom-input
-                                 data-ng-class="{
                                  'has-error': (configs | PFValidator:'KSAlias')  == 'invalid',
                                  'has-success': (configs | PFValidator:'KSAlias')  == 'valid'
                                  }">
                                 <label class="control-label float-label">
-                                    Alias <sub>*</sub>
+                                    Alias<sub>*</sub>
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
                                        data-ng-model="$ctrl.project.android.keyStore.alias"

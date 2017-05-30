@@ -29,13 +29,14 @@
 
                             <div class="form-group"
                                  data-ng-class="{
-                                     'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused,
+                                     'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused && project.githuburl.$viewValue.length > 0,
                                      'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused
                                  }">
-                                <label for="name">GitHub project url</label>
+                                <label for="name">GitHub Project URL</label>
                                 <input type="text"
                                        class="form-control"
-                                       placeholder="GitHub project URL"
+                                       name="githuburl"
+                                       placeholder="GitHub Project URL"
                                        value=""
                                        ng-minlength="3"
                                        ng-maxlength="64"
@@ -45,7 +46,7 @@
                                        ng-blur="$ctrl.githubUrlFocused = false"
                                        ng-click="$ctrl.githubUrlFocused = true"
                                        data-ng-model="$ctrl.project.githubUrl">
-                                <div class="validation error" ng-if="!$ctrl.githubUrlValid && $ctrl.githubUrlFocused">
+                                <div class="validation error" ng-if="!$ctrl.githubUrlValid && $ctrl.githubUrlFocused && project.githuburl.$viewValue.length > 0">
                                     {{$ctrl.formErrors.github}}
                                 </div>
                             </div>
@@ -56,7 +57,7 @@
                                  'has-success': (project | PFValidator:'name')  == 'valid'
                                  }">
                                 <label for="name">
-                                    Project name<sub>*</sub>
+                                    Project Name<sub>*</sub>
                                     <!--<span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">required</span>-->
                                 </label>
                                 <input type="text"
@@ -69,6 +70,7 @@
                                        name="name"
                                        ng-focus="project.name.focused = true"
                                        ng-keyup="project.name.pressed = true"
+                                       required
                                        data-ng-model="$ctrl.project.displayName">
                                 <div class="validation error" ng-if="(project | PFValidator:'name')  == 'invalid'">
                                     {{$ctrl.formErrors.name}}
@@ -91,10 +93,11 @@
                                            ng-maxlength="16"
                                            limit-to="16"
                                            name="url"
+                                           required
                                            ng-focus="project.url.focused = true"
                                            ng-keyup="project.url.pressed = true"
                                            data-ng-model="$ctrl.project.name">
-                                    <span class="main-placeholder"
+                                    <span class="main-placeholder" style="top:14px"
                                           ng-bind="'https://rodin.io/projects/' + $ctrl.currentUser.username + '/'"></span>
                                 </div>
                                 <div class="validation error" ng-if="(project | PFValidator:'url')  == 'invalid'">

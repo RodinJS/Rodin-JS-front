@@ -23,7 +23,7 @@
                                  'has-success': (configs | PFValidator:'displayName')  == 'valid'
                                  }">
                                 <label>
-                                    App name<sub>*</sub>
+                                    App Name<sub>*</sub>
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
                                        data-ng-model="$ctrl.project.oculus.name"
@@ -50,10 +50,10 @@
                                        data-ng-focus="configs.version.focused = true"
                                        data-ng-keyup="configs.version.pressed = true"
                                        data-ng-change="$ctrl.project.build.oculus.version && (isVersionValid = $ctrl._checkVersion($ctrl.project.build.oculus.version, $ctrl.project.oculus.version))">
-                                <p class="form-description"
-                                   ng-class="(configs | PFValidator:'version')  == 'invalid'  && configs.version.$error.pattern ? 'error' : ''">
+                                <div class="validation error"
+                                   ng-if="(configs | PFValidator:'version')  == 'invalid'  && configs.version.$error.pattern ? 'error' : ''">
                                     Version must be in #.#.# format
-                                </p>
+                                </div>
                                 <div class="validation error"
                                      ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) && configs.version.$viewValue.length <= 0">
                                     Version is required
