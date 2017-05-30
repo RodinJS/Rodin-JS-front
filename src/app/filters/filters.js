@@ -73,12 +73,15 @@ function formValidator() {
 function projectFormsValidator() {
     return function (input, param) {
         if (input && param) {
+            const inputLength = input[param].$viewValue ? input[param].$viewValue.length : 0;
             const invalid = input[param].$invalid &&
                             input[param].focused &&
-                            (input[param].$viewValue ? input[param].$viewValue.length > 0 : 0) ||
-                            (input[param].pressed && input[param].$viewValue.length <= 0);
+                            (inputLength > 0) ||
+                            (input[param].pressed && inputLength <= 0);
 
             const valid = input[param].$valid && input[param].focused;
+
+            console.log('INVALID', param, input[param].$invalid, input[param].focused, input[param].pressed, inputLength);
 
             if (invalid) {
                 return 'invalid';

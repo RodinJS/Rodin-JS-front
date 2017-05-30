@@ -326,16 +326,22 @@
             <p class="description text-small">Certificate password when you generate the app</p>
             <form name="password">
                 <div class="form-wrapper">
-                    <div class="form-group"
+                    <div class="form-group" style="position: relative"
                          data-ng-class="{
-                         'has-error': password.certPassword.$invalid && password.certPassword.focused,
-                         'has-success': password.certPassword.$valid && password.certPassword.focused}">
-                        <input type="password" class="form-control" placeholder="Certificate Password"
+                         'has-error': (password | PFValidator:'certPassword')  == 'invalid',
+                         'has-success': (password | PFValidator:'certPassword')  == 'valid'
+                         }">
+                        <input type="password"
+                               class="form-control"
+                               placeholder="Certificate Password"
                                data-ng-model="$ctrl.project.ios.certPassword"
                                name="certPassword"
                                required
+                               data-ng-keyup="password.certPassword.pressed = true"
                                data-ng-focus="password.certPassword.focused = true">
-                        <div class="validation error"  ng-if="password.certPassword.$invalid && password.certPassword.focused">Certificate password is required</div>
+                        <div class="validation error"  ng-if="(password | PFValidator:'certPassword')  == 'invalid'">
+                            Certificate password is required
+                        </div>
                     </div>
                 </div>
             </form>

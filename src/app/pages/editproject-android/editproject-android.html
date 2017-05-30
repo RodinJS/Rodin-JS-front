@@ -149,7 +149,7 @@
                                        required
                                        data-ng-focus="configs.KSName.focused = true"
                                        data-ng-keyup="configs.KSName.pressed = true">
-                                <div class="validation error" ng-if="(configs | PFValidator:'KSName')  == 'valid'">
+                                <div class="validation error" ng-if="(configs | PFValidator:'KSName')  == 'invalid'">
                                     Name is required
                                 </div>
                             </div>
@@ -342,27 +342,41 @@
             <form name="password">
                 <div class="form-wrapper margin-top-40">
                     <div class="form-group" style="position: relative"
-                         data-ng-class="{'has-error': password.password.$invalid && password.password.focused,
-                         'has-success': password.password.$valid && password.password.focused}">
-                        <input type="password" class="form-control" placeholder="KeyStore Password"
+                         data-ng-class="{
+                         'has-error': (password | PFValidator:'password')  == 'invalid',
+                         'has-success': (password | PFValidator:'password')  == 'valid'
+                         }">
+                        <input type="password"
+                               class="form-control"
+                               placeholder="KeyStore Password"
                                data-ng-model="$ctrl.project.android.keyStore.password"
-                               name="password" ng-minlength="6" required
+                               name="password"
+                               ng-minlength="6"
+                               required
+                               data-ng-keyup="password.password.pressed = true"
                                data-ng-focus="password.password.focused = true">
                         <div class="validation error"
-                             ng-if="password.password.$invalid && password.password.focused">KeyStore Password is required
+                             ng-if="(password | PFValidator:'password')  == 'invalid'">KeyStore Password is required
                         </div>
                     </div>
                     <!--<p class="text-small description">KeyStore Password.</p>-->
 
                     <div class="form-group margin-top-40"  style="position: relative"
-                         data-ng-class="{'has-error': password.aliasPassword.$invalid && password.aliasPassword.focused,
-                         'has-success': password.aliasPassword.$valid && password.aliasPassword.focused}">
-                        <input type="password" class="form-control" placeholder="Alias Password"
+                         data-ng-class="{
+                         'has-error': (password | PFValidator:'aliasPassword')  == 'invalid',
+                         'has-success': (password | PFValidator:'aliasPassword')  == 'valid'
+                         }">
+                        <input type="password"
+                               class="form-control"
+                               placeholder="Alias Password"
                                data-ng-model="$ctrl.project.android.keyStore.aliasPassword"
-                               name="aliasPassword" required ng-minlength="6"
+                               name="aliasPassword"
+                               required
+                               ng-minlength="6"
+                               data-ng-keyup="password.aliasPassword.pressed = true"
                                data-ng-focus="password.aliasPassword.focused = true">
                         <div class="validation error"
-                             ng-if="password.aliasPassword.$invalid && password.aliasPassword.focused">Alias Password is required
+                             ng-if="(password | PFValidator:'aliasPassword')  == 'invalid'">Alias Password is required
                         </div>
                     </div>
                     <!--<p class="text-small description">Alias Password.</p>-->
