@@ -81,7 +81,8 @@ class EditProjectWebCtrl {
         this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
     }
 
-    addDomain() {
+    addDomain(isValid) {
+        if(!isValid) return;
 
         if (this.project.domain && this.project.domain !== this.domain) {
             this.modalText = `<span class="text-highlight">${this.project.domain}</span> existing domain parameters will be overwritten to <span class="text-highlight">${this.domain}</span>`;

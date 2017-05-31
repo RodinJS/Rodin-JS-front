@@ -12,8 +12,7 @@
                             <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
                         </ul>
                     </div>
-                    <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs"
-                          class="main-form section">
+                    <form name="configs"  novalidate enctype="multipart/form-data" id="configs" class="main-form section">
 
 
 
@@ -237,8 +236,7 @@
 
                         <div class="btn-wrapper" style="text-align: center">
                             <button type="button" class="btn btn-default btn-submit"
-                                    ng-click="$ctrl.open($event)"
-                                    ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.profile.name || !$ctrl.files.cert.name || !$ctrl.files.icon.name">
+                                    ng-click="configs.$submitted = true; $ctrl.open($event, configs.$valid)">
                                 Build
                             </button>
                         </div>

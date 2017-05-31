@@ -55,7 +55,7 @@ class AuthCtrl {
 
     }
 
-    submitForm() {
+    submitForm(isValid) {
         this.isSubmitting = true;
 
         if (this.authType === 'login') {
@@ -69,7 +69,7 @@ class AuthCtrl {
                     this.errors = err;
                     this.Notification.error('Wrong username or password');
                 });
-        } else if (this.authType === 'register') {
+        } else if (this.authType === 'register' && isValid) {
             this._User.signUp(this.formData).then(
                 res => {
 

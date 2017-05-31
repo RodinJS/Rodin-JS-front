@@ -279,9 +279,14 @@ class EditProjectIosCtrl {
             success: function (data) {
                 ctrl.modals.password = false;
                 ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
+                ctrl._$scope.configs.version.pressed = false;
                 ctrl._$scope.configs.bundle.focused = false;
+                ctrl._$scope.configs.bundle.pressed = false;
                 ctrl._$scope.configs.developerId.focused = false;
+                ctrl._$scope.configs.developerId.pressed = false;
+                ctrl._$scope.configs.$submitted = false;
                 ctrl.getProject();
                 ctrl.Notification.success('iOS build start');
                 ctrl.timer = ctrl._$interval(() => {
@@ -331,7 +336,8 @@ class EditProjectIosCtrl {
         }).submit();
     };
 
-    open(e) {
+    open(e, isValid) {
+        if(!isValid) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }

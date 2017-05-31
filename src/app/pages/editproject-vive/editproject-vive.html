@@ -11,7 +11,7 @@
                             <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
                         </ul>
                     </div>
-                    <form class="main-form" name="configs" method="post" action="" enctype="multipart/form-data"
+                    <form class="main-form" name="configs" method="post" novalidate enctype="multipart/form-data"
                           id="configs">
                         <div class="section">
 
@@ -57,7 +57,7 @@
                                     Version must be in #.#.# format
                                 </div>
                                 <div class="validation error"
-                                     ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) && configs.version.$viewValue.length <= 0">
+                                     ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) && (configs.version.$viewValue.length <= 0 || !configs.version.$viewValue)">
                                     Version is required
                                 </div>
                                 <div class="validation error" ng-if="!isVersionValid && configs.version.$valid">
@@ -129,11 +129,9 @@
                             </div>
 
                             <div class="btn-wrapper" style="text-align: center">
-                                <button type="button" class="btn btn-default btn-submit"
-                                        ng-click="$ctrl.build($event)"
-                                        ng-disabled="!isVersionValid ||
-                                        !configs.$valid ||
-                                        ($ctrl.project.build.vive.requested && !$ctrl.project.build.vive.built)">
+                                <button type="button"
+                                        class="btn btn-default btn-submit"
+                                        ng-click="configs.$submitted = true; $ctrl.build($event, configs.$valid, configs)">
                                     Build
                                 </button>
                             </div>

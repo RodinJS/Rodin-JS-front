@@ -8,11 +8,12 @@
             </p>
 
 
-            <form data-ng-submit="$ctrl.submitForm()" class="main-form" name="register">
+            <form data-ng-submit="$ctrl.submitForm(register.$valid)" class="main-form" name="register" novalidate>
 
                 <div data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'login'">
 
                     <div class="form-group" custom-input>
+                        <label class="control-label">Username</label>
                         <input type="text"
                                class="form-control"
                                ng-class="$ctrl.formData.username ? 'active' : ''"
@@ -20,18 +21,16 @@
                                value=""
                                data-ng-model="$ctrl.formData.username">
 
-                        <label class="control-label float-label">Username</label>
                     </div>
 
                     <div class="form-group" custom-input style="margin-bottom:25px !important">
+                        <label class="control-label">Password</label>
                         <input type="password"
                                class="form-control"
                                ng-class="$ctrl.formData.password ? 'active' : ''"
                                placeholder=""
                                value=""
                                data-ng-model="$ctrl.formData.password">
-
-                        <label class="control-label float-label">Password</label>
                     </div>
 
                     <div class="text-center" style="margin-bottom: 10px;">
@@ -39,7 +38,9 @@
                     </div>
 
                     <div class="btn-wrapper">
-                        <button type="submit" style="margin-right:10px" class="btn btn-default btn-submit">Sign In</button>
+                        <button type="submit" style="margin-right:10px" class="btn btn-default btn-submit">
+                            Sign In
+                        </button>
                         <!--
                            <button type="button" ui-sref="landing.register" class="btn btn-default btn-submit">Register</button>
                         -->
@@ -56,6 +57,7 @@
                          'has-error': (register | formValidator:'username')  == 'invalid',
                          'has-success': (register | formValidator:'username')  == 'valid',
                          }">
+                        <label class="control-label">Username<sub>*</sub></label>
                         <input type="text"
                                data-ng-class="{'active':register.username.$viewValue}"
                                class="form-control"
@@ -67,8 +69,7 @@
                                data-ng-model="$ctrl.formData.username"
                                required
                                data-ng-focus="register.username.focused = true"
-                               >
-                        <label class="control-label float-label">Username<sub>*</sub></label>
+                        >
                         <div class="validation error" ng-if="(register | formValidator:'username')  == 'invalid'">
                             {{$ctrl.formErrors.username}}
                         </div>
@@ -79,6 +80,7 @@
                          'has-error': (register | formValidator:'email')  == 'invalid',
                          'has-success': (register | formValidator:'email')  == 'valid',
                          }">
+                        <label class="control-label">Email<sub>*</sub></label>
                         <input type="text"
                                data-ng-class="{'active':register.email.$viewValue}"
                                class="form-control"
@@ -88,7 +90,6 @@
                                data-ng-pattern="$ctrl.patterns.email"
                                data-ng-focus="register.email.focused = true"
                                data-ng-model="$ctrl.formData.email" required>
-                        <label class="control-label float-label">Email<sub>*</sub></label>
                         <div class="validation error" ng-if="(register | formValidator:'email')  == 'invalid'">
                             {{$ctrl.formErrors.email}}
                         </div>
@@ -100,6 +101,7 @@
                          'has-error': (register | formValidator:'password')  == 'invalid',
                          'has-success': (register | formValidator:'password')  == 'valid',
                          }">
+                        <label class="control-label">Password<sub>*</sub></label>
                         <input type="password"
                                data-ng-class="{'active':register.password.$viewValue}"
                                class="form-control"
@@ -110,23 +112,23 @@
                                ng-minlength="8"
                                data-ng-focus="register.password.focused = true"
                                required>
-                        <label class="control-label float-label">Password<sub>*</sub></label>
-                        <div class="validation" ng-class="(register | formValidator:'password')  == 'invalid' ? 'error' : ''">
+                        <div class="validation"
+                             ng-class="(register | formValidator:'password')  == 'invalid' ? 'error' : ''">
                             {{$ctrl.formErrors.password}}
                         </div>
                     </div>
-                   <!-- <div class="form-group">
-                        <p class="password-description">
-                            Passwords must be at least 8 characters long, containing a number and letter
-                        </p>
-                    </div>-->
+                    <!-- <div class="form-group">
+                         <p class="password-description">
+                             Passwords must be at least 8 characters long, containing a number and letter
+                         </p>
+                     </div>-->
                     <div class="form-group" custom-input
                          data-ng-focus="register.passwordConfirm.focused"
                          data-ng-class="{
-                         'has-error': (register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && register.passwordConfirm.focused,
+                         'has-error': (register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && (register | formValidator:'passwordConfirm')  == 'invalid',
                          'has-success': register.passwordConfirm.$valid && register.passwordConfirm.focused && !register.passwordConfirm.$error.hasOwnProperty('confirmed'),
                          }">
-
+                        <label class="control-label">Confirm Password<sub>*</sub></label>
                         <input type="password"
                                confirm-Password
                                compare-to="register.password.$viewValue"
@@ -138,18 +140,17 @@
                                ng-minlength="8"
                                data-ng-focus="register.passwordConfirm.focused = true"
                                required>
-                        <label class="control-label float-label">Confirm Password<sub>*</sub></label>
                         <div class="validation error"
-                             ng-if="(register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && register.passwordConfirm.focused && register.passwordConfirm.$viewValue.length > 0">
+                             ng-if="(register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed)  && (register | formValidator:'passwordConfirm')== 'invalid' && !register.passwordConfirm.focused">
                             {{$ctrl.formErrors.confirmPassword}}
                         </div>
                     </div>
-                   <!-- <div class="form-group"
-                         ng-show="register.passwordConfirm.$invalid && register.passwordConfirm.focused && register.passwordConfirm.$error.confirmed">
-                        <p class="password-description">
-                            Password does not match
-                        </p>
-                    </div>-->
+                    <!-- <div class="form-group"
+                          ng-show="register.passwordConfirm.$invalid && register.passwordConfirm.focused && register.passwordConfirm.$error.confirmed">
+                         <p class="password-description">
+                             Password does not match
+                         </p>
+                     </div>-->
 
                     <div class="form-group"
                          data-ng-focus="register.invitationCode.invitationCode = true"
@@ -158,6 +159,7 @@
                          'has-success': (register | formValidator:'invitationCode')  == 'valid',
                          }"
                          custom-input>
+                        <label class="control-label">Invitation Code<sub>*</sub></label>
                         <input type="text"
                                data-ng-class="{'active':$ctrl.formData.invitationCode}"
                                name="invitationCode"
@@ -167,25 +169,31 @@
                                data-ng-model="$ctrl.formData.invitationCode"
                                data-ng-focus="register.invitationCode.focused = true"
                                required>
-                        <label class="control-label float-label">Invitation Code<sub>*</sub></label>
                         <div class="validation error" ng-if="(register | formValidator:'invitationCode')  == 'invalid'">
                             {{$ctrl.formErrors.invitationCode}}
                         </div>
                     </div>
                     <div class="form-group">
-                        <input style="margin-left:5px" type="checkbox"
+                        <input style="margin-left:5px"
+                               type="checkbox"
                                ng-change="!$ctrl.agree2"
-                               name="agreement" ng-model="$ctrl.agree2"/>
-                        <span style="margin-left:10px; color:rgba(255, 255, 255, 0.45)"> By clicking this button, I agree to
+                               name="agreement"
+                               ng-model="$ctrl.agree2"
+                               required/>
+                        <span ng-class="{'error':(register | formValidator:'agreement')  == 'invalid'}"
+                              style="margin-left:10px; color:rgba(255, 255, 255, 0.45)">
+                            By clicking this button, I agree to
                             <a target="_blank"
-                               ui-sref="landing.pages({pageURL:'beta-evaluation-agreement'})"> Pre-Release Evaluation Agreement.</a></span>
+                               ng-class="{'error':(register | formValidator:'agreement')  == 'invalid'}"
+                               ui-sref="landing.pages({pageURL:'beta-evaluation-agreement'})">
+                                Pre-Release Evaluation Agreement.
+                            </a>
+                        </span>
                     </div>
                     <div class="btn-wrapper">
-                        <button type="submit"
-                                ng-disabled="($ctrl.authType === 'register' && register.$invalid) ||  !$ctrl.agree2 || ($ctrl.formData.confirmPassword != $ctrl.formData.password)"
-                                class="btn btn-default btn-submit">Sign up
+                        <button type="submit" class="btn btn-default btn-submit">
+                            Sign up
                         </button>
-
                     </div>
 
                 </div>

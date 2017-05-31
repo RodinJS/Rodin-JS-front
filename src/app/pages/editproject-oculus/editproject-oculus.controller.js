@@ -231,7 +231,8 @@ class EditProjectOculusCtrl {
         )
     }
 
-    build(e) {
+    build(e, isValid, form) {
+        if(!isValid) return;
 	    if (!this.project.publishedPublic) {
 		    return this.modals.notPublished = true;
 	    }
@@ -263,8 +264,12 @@ class EditProjectOculusCtrl {
                 project: angular.toJson(project),
             },
             success: function (data) {
+                form.$submitted = false;
                 ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
+                ctrl._$scope.configs.version.pressed = false;
+                ctrl._$scope.configs.$submitted = false;
                 ctrl.modals.password = false;
                 ctrl.getProject();
                 ctrl._$scope.$apply();

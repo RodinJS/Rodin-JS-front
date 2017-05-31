@@ -6,7 +6,7 @@
                     <i class="icon icon-private"></i>
                     <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
                 <div class="main-form">
-                    <form name="configs" method="post" action="" enctype="multipart/form-data" id="configs"
+                    <form name="configs" novalidate enctype="multipart/form-data" id="configs"
                           class="main-form">
                         <div class="content-navbar">
                             <ul class="navbar-list">
@@ -177,14 +177,14 @@
                             </div>
 
                             <div class="btn-wrapper" style="text-align: center">
-                                <button type="button" class="btn btn-default btn-submit" ng-click="$ctrl.open($event)"
-                                        ng-disabled="!isVersionValid || !configs.$valid || !$ctrl.files.icon.name">
+                                <button type="button" class="btn btn-default btn-submit"
+                                        ng-click="configs.$submitted = true; $ctrl.open($event, configs.$valid)">
                                     Build
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <form class="main-form" action="" style="margin-top:10px"
+                    <form class="main-form"  style="margin-top:10px"
                           ng-if="$ctrl.project.build.android.requested">
                         <div class="section">
                             <div class="required-field-item">

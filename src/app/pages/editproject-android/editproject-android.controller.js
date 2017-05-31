@@ -258,14 +258,24 @@ class EditProjectAndroidCtrl {
             success: function (data) {
                 ctrl.modals.password = false;
                 ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
+                ctrl._$scope.configs.version.pressed = false;
                 ctrl._$scope.configs.package.focused = false;
+                ctrl._$scope.configs.package.pressed = false;
                 ctrl._$scope.configs.KSFLName.focused = false;
+                ctrl._$scope.configs.KSFLName.pressed = false;
                 ctrl._$scope.configs.KSOrganization.focused = false;
+                ctrl._$scope.configs.KSOrganization.pressed = false;
                 ctrl._$scope.configs.KSCity.focused = false;
+                ctrl._$scope.configs.KSCity.pressed = false;
                 ctrl._$scope.configs.KSState.focused = false;
+                ctrl._$scope.configs.KSState.pressed = false;
                 ctrl._$scope.configs.KSCC.focused = false;
+                ctrl._$scope.configs.KSCC.presed = false;
                 ctrl._$scope.configs.KSAlias.focused = false;
+                ctrl._$scope.configs.KSAlias.pressed = false;
+                ctrl._$scope.configs.$submitted = false;
                 ctrl.files.icon.name = '';
                 ctrl.files.icon.src = '';
                 ctrl.getProject();
@@ -323,7 +333,8 @@ class EditProjectAndroidCtrl {
         console.log(project);
     };
 
-    open(e) {
+    open(e, isValid) {
+        if(!isValid) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }
