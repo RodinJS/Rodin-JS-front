@@ -119,7 +119,8 @@ class EditProjectCtrl {
         );
     }
 
-    update() {
+    update(isValid) {
+        if(!isValid) return;
         let projectInfo = {};
         angular.extend(projectInfo, this.project);
         projectInfo.tags = projectInfo.tags.map(i => i.text);

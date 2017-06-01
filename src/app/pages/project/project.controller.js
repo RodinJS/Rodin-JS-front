@@ -14,6 +14,7 @@ class ProjectCtrl {
         this.$state = $state;
         this.User = User;
         this.currentUser = this.User.current;
+        this.formErrors = AppConstants.FORMERRORS.project;
         if (this.currentUser.projects.total >= this.currentUser.allowProjectsCount) {
             this.Notification.error(`Maximum projects count exceeded, allowed project count ${this.currentUser.allowProjectsCount}`);
             return this.$state.go('app.dashboard');
@@ -47,7 +48,8 @@ class ProjectCtrl {
 
     }
 
-    save() {
+    save(isValid) {
+        if(!isValid) return;
         this.showLoader = true;
         this.projectExist = false;
         let projectInfo = {};
@@ -101,13 +103,12 @@ class ProjectCtrl {
     }
 
     validateGithubUrl() {
-
         this.githubUrlValid = this.githubPattern.test(this.project.githubUrl);
         if (this.githubUrlValid) {
             angular.element('input[type=radio]').prop('checked', false);
             this.projectTemplates.selected = null;
         }
-        console.log('VALID GITHUB', this.githubUrlValid);
+       // console.log('VALID GITHUB', this.githubUrlValid);
     }
 
     createFinalize(err) {

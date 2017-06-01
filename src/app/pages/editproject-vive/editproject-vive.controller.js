@@ -206,7 +206,8 @@ class EditProjectViveCtrl {
         )
     }
 
-    build(e) {
+    build(e, isValid, form) {
+        if(!isValid) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }
@@ -240,8 +241,15 @@ class EditProjectViveCtrl {
             },
             success: function (data) {
                 ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
+                ctrl._$scope.configs.version.pressed = false;
+                ctrl._$scope.configs.viveportKey.focused = false;
+                ctrl._$scope.configs.viveportKey.pressed = false;
+                ctrl._$scope.configs.viveportId.focused = false;
+                ctrl._$scope.configs.viveportId.pressed = false;
                 ctrl.modals.password = false;
+                ctrl._$scope.configs.$submitted = false;
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Vive build start');

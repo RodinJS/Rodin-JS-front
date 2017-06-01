@@ -10,4 +10,7 @@ FiltersModule.filter('formatDate', ['moment', Filters.formatDate]);
 
 FiltersModule.filter('htmlize', ['$sce', Filters.htmlize]);
 
+FiltersModule.filter('formValidator', ['$sce', Filters.formValidator]);
+FiltersModule.filter('PFValidator', ['$sce', Filters.projectFormsValidator]);
+
 export default FiltersModule;
