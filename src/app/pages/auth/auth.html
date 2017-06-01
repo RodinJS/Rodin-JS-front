@@ -152,27 +152,27 @@
                          </p>
                      </div>-->
 
-                    <div class="form-group"
-                         data-ng-focus="register.invitationCode.invitationCode = true"
-                         data-ng-class="{
-                         'has-error': (register | formValidator:'invitationCode')  == 'invalid',
-                         'has-success': (register | formValidator:'invitationCode')  == 'valid',
-                         }"
-                         custom-input>
-                        <label class="control-label">Invitation Code<sub>*</sub></label>
-                        <input type="text"
-                               data-ng-class="{'active':$ctrl.formData.invitationCode}"
-                               name="invitationCode"
-                               class="form-control"
-                               placeholder=""
-                               value=""
-                               data-ng-model="$ctrl.formData.invitationCode"
-                               data-ng-focus="register.invitationCode.focused = true"
-                               required>
-                        <div class="validation error" ng-if="(register | formValidator:'invitationCode')  == 'invalid'">
-                            {{$ctrl.formErrors.invitationCode}}
-                        </div>
-                    </div>
+                    <!--<div class="form-group"-->
+                         <!--data-ng-focus="register.invitationCode.invitationCode = true"-->
+                         <!--data-ng-class="{-->
+                         <!--'has-error': (register | formValidator:'invitationCode')  == 'invalid',-->
+                         <!--'has-success': (register | formValidator:'invitationCode')  == 'valid',-->
+                         <!--}"-->
+                         <!--custom-input>-->
+                        <!--<label class="control-label">Invitation Code<sub>*</sub></label>-->
+                        <!--<input type="text"-->
+                               <!--data-ng-class="{'active':$ctrl.formData.invitationCode}"-->
+                               <!--name="invitationCode"-->
+                               <!--class="form-control"-->
+                               <!--placeholder=""-->
+                               <!--value=""-->
+                               <!--data-ng-model="$ctrl.formData.invitationCode"-->
+                               <!--data-ng-focus="register.invitationCode.focused = true"-->
+                               <!--required>-->
+                        <!--<div class="validation error" ng-if="(register | formValidator:'invitationCode')  == 'invalid'">-->
+                            <!--{{$ctrl.formErrors.invitationCode}}-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="form-group">
                         <input style="margin-left:5px"
                                type="checkbox"
