@@ -12,7 +12,12 @@ body {
   .btn-wrapper{
     button{
       background: #081a30;
-      color:#aaaaaa
+      color:#aaaaaa;
+      &:hover{
+        border-color: lighten(#008bf2, 5%);
+        background-color: lighten(#008bf2, 5%);
+        color: #fff;
+      }
     }
   }
   div {
@@ -39,7 +44,7 @@ body {
       .info-row {
         border-top: 1px solid $border-color;
         .details{
-          padding: 40px 30px;
+          padding: 40px 15px;
         }
         & > .details{
           &:first-child{

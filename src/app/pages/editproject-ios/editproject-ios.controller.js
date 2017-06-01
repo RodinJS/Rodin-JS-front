@@ -287,6 +287,9 @@ class EditProjectIosCtrl {
                 ctrl._$scope.configs.developerId.focused = false;
                 ctrl._$scope.configs.developerId.pressed = false;
                 ctrl._$scope.configs.$submitted = false;
+                ctrl.Project.cleanInputFiles('#profile-file');
+                ctrl.Project.cleanInputFiles('#cert-file');
+                ctrl.Project.cleanInputFiles('#icon-file');
                 ctrl.getProject();
                 ctrl.Notification.success('iOS build start');
                 ctrl.timer = ctrl._$interval(() => {
