@@ -23,6 +23,7 @@ const AppConstants = {
         FB: '216861662081500', //'' '216982868736046'
         GITHUB: '2350afe57c144672285b',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
+        SAMPLES: 'https://examples.rodin.space/list.json',
     },
     dev: {
         COOKIEDOMAIN: ['.rodin.space'],
@@ -37,6 +38,7 @@ const AppConstants = {
         FB: '216982868736046', //'216861662081500' '216982868736046'
         GITHUB: 'fa69c03ad5758fce1f10',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
+        SAMPLES: 'https://examples.rodin.space/list.json',
     },
     prod: {
         COOKIEDOMAIN: ['.rodinapp.com', '.rodin.io', '.rodin.space'],
@@ -51,6 +53,7 @@ const AppConstants = {
         FB: '214577345643265',
         GITHUB: 'd2030c37902fa3d4d0c7',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
+        SAMPLES: 'https://examples.rodin.io/list.json',
     },
 
     stage: {
@@ -66,6 +69,7 @@ const AppConstants = {
         FB: '263064010794598',
         GITHUB: '5377f212205e0aa4b4cf',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
+        SAMPLES: 'https://examples.rodin.design/list.json',
     },
 
     get FB() {
@@ -116,6 +120,9 @@ const AppConstants = {
         return this[this.env].COOKIEDOMAIN;
     },
 
+    get SAMPLES() {
+        return this[this.env].SAMPLES;
+    },
     ERRORCODES: {
         500: {
             message: 'INTERNAL_SERVER_ERROR',
