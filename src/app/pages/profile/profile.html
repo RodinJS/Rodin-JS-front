@@ -8,6 +8,7 @@
                         <ul class="navbar-list">
                             <li ng-class="!$ctrl.privacy ? 'active' : ''">
                                 <a href="" ng-click="$ctrl.privacy = false">Profile</a>
+                            </li>
                             <li ng-class="$ctrl.privacy ? 'active' : ''">
                                 <a href="" ng-click="$ctrl.privacy = true">Password</a>
                             </li>
@@ -15,39 +16,39 @@
                     </div>
 
                     <div ng-show="!$ctrl.privacy">
-                            <h3 class="section-title">Account Details</h3>
-                            <table class="table main-table">
-                                <tbody>
-                                <tr>
-                                    <td class="text-primary"><span>Account Created</span>
-                                    </td>
-                                    <td class="text-primary">
-                                        {{$ctrl.currentUser.creationDate | formatDate : 'DD MMMM YYYY'}}<span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-primary"><span>Published projects</span>
-                                    </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.projects.published || 0}}<span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-primary"><span>Unpublished sites</span>
-                                    </td>
-                                    <td class="text-primary">{{$ctrl.currentUser.projects.unpublished ||
-                                        0}}<span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-primary"><span>Storage Used (Sites)</span>
-                                    </td>
-                                    <td class="text-primary">
-                                        <span ng-if="$ctrl.currentUser.usedStorage"> {{$ctrl.currentUser.usedStorage | bytes:'MB'}}</span>
-                                        <span ng-if="!$ctrl.currentUser.usedStorage">0.00 MB</span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <h3 class="section-title">Account Details</h3>
+                        <table class="table main-table">
+                            <tbody>
+                            <tr>
+                                <td class="text-primary"><span>Account Created</span>
+                                </td>
+                                <td class="text-primary">
+                                    {{$ctrl.currentUser.creationDate | formatDate : 'DD MMMM YYYY'}}<span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Published projects</span>
+                                </td>
+                                <td class="text-primary">{{$ctrl.currentUser.projects.published || 0}}<span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Unpublished sites</span>
+                                </td>
+                                <td class="text-primary">{{$ctrl.currentUser.projects.unpublished ||
+                                    0}}<span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><span>Storage Used (Sites)</span>
+                                </td>
+                                <td class="text-primary">
+                                    <span ng-if="$ctrl.currentUser.usedStorage"> {{$ctrl.currentUser.usedStorage | bytes:'MB'}}</span>
+                                    <span ng-if="!$ctrl.currentUser.usedStorage">0.00 MB</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                         <form name="profile" novalidate>
                             <div class="section section-connected-accounts">
                                 <h3 class="section-title">Connected Accounts</h3>
@@ -70,10 +71,10 @@
                                                         </span>
                                                     </div>
                                                     <!--<div class="col-md-6">-->
-                                                        <!--<button type="button"-->
-                                                                <!--ng-click="$ctrl.openUnSync('facebook')"-->
-                                                                <!--class="btn btn-primary border-orange">Unsync from Facebook-->
-                                                        <!--</button>-->
+                                                    <!--<button type="button"-->
+                                                    <!--ng-click="$ctrl.openUnSync('facebook')"-->
+                                                    <!--class="btn btn-primary border-orange">Unsync from Facebook-->
+                                                    <!--</button>-->
                                                     <!--</div>-->
                                                 </div>
                                             </div>
@@ -95,10 +96,10 @@
                                                         </span>
                                                     </div>
                                                     <!--<div class="col-md-6">-->
-                                                        <!--<button type="button"-->
-                                                                <!--ng-click="$ctrl.openUnSync('google')"-->
-                                                                <!--class="btn btn-primary border-orange">Unsync from Google-->
-                                                        <!--</button>-->
+                                                    <!--<button type="button"-->
+                                                    <!--ng-click="$ctrl.openUnSync('google')"-->
+                                                    <!--class="btn btn-primary border-orange">Unsync from Google-->
+                                                    <!--</button>-->
                                                     <!--</div>-->
                                                 </div>
                                             </div>
@@ -121,10 +122,10 @@
                                                         </span>
                                                     </div>
                                                     <!--<div class="col-md-6">-->
-                                                        <!--<button type="button"-->
-                                                                <!--ng-click="$ctrl.openUnSync('github')"-->
-                                                                <!--class="btn btn-primary border-orange">Unsync from Github-->
-                                                        <!--</button>-->
+                                                    <!--<button type="button"-->
+                                                    <!--ng-click="$ctrl.openUnSync('github')"-->
+                                                    <!--class="btn btn-primary border-orange">Unsync from Github-->
+                                                    <!--</button>-->
                                                     <!--</div>-->
                                                 </div>
                                             </div>
@@ -145,10 +146,10 @@
                                                         </span>
                                                     </div>
                                                     <!--<div class="col-md-6">-->
-                                                        <!--<button type="button"-->
-                                                                <!--ng-click="$ctrl.openUnSync('oculus')"-->
-                                                                <!--class="btn btn-primary border-orange">Unsync from Oculus-->
-                                                        <!--</button>-->
+                                                    <!--<button type="button"-->
+                                                    <!--ng-click="$ctrl.openUnSync('oculus')"-->
+                                                    <!--class="btn btn-primary border-orange">Unsync from Oculus-->
+                                                    <!--</button>-->
                                                     <!--</div>-->
                                                 </div>
                                             </div>
@@ -169,10 +170,10 @@
                                                         </span>
                                                     </div>
                                                     <!--<div class="col-md-6">-->
-                                                        <!--<button type="button"-->
-                                                                <!--ng-click="$ctrl.openUnSync('steam')"-->
-                                                                <!--class="btn btn-primary border-orange">Unsync from Steam-->
-                                                        <!--</button>-->
+                                                    <!--<button type="button"-->
+                                                    <!--ng-click="$ctrl.openUnSync('steam')"-->
+                                                    <!--class="btn btn-primary border-orange">Unsync from Steam-->
+                                                    <!--</button>-->
                                                     <!--</div>-->
                                                 </div>
                                             </div>
@@ -206,7 +207,10 @@
                             </div>
 
                             <div class="form-group" custom-input
-                                 data-ng-class="{'has-error': profile.email.$invalid && profile.email.focused, 'has-success': profile.email.$valid && profile.email.focused}">
+                                 data-ng-class="{
+                                 'has-error': (profile | PFValidator:'email')  == 'invalid',
+                                 'has-success': (profile | PFValidator:'email')  == 'valid'
+                                 }">
                                 <label>
                                     Email <sub>*</sub>
                                 </label>
@@ -215,9 +219,12 @@
                                        data-ng-model="$ctrl.currentUser.email"
                                        data-ng-pattern="$ctrl.patterns.email"
                                        required
-                                       data-ng-focus="profile.email.focused = true">
+                                       data-ng-focus="profile.email.focused = true"
+                                       data-ng-keyup="profile.email.pressed = true">
                                 <div style="clear:both"></div>
-                                <div class="validation error" ng-if="profile.email.$invalid && profile.email.focused">Email is invalid</div>
+                                <div class="validation error" ng-if="(profile | PFValidator:'email')  == 'invalid'">
+                                    Email is invalid
+                                </div>
                             </div>
 
                             <div class="form-group" custom-input>
@@ -242,79 +249,82 @@
 
                             <div class="btn-wrapper text-center">
                                 <button type="submit" class="btn btn-submit btn-default"
-                                        ng-disabled="profile.$invalid"
-                                        ng-click="$ctrl.updateProfile()">
+                                        ng-click="$ctrl.updateProfile(profile.$valid)">
                                     Update Profile
                                 </button>
                             </div>
 
 
-                        <!--</div>-->
+                            <!--</div>-->
                         </form>
                     </div>
 
                     <div ng-show="$ctrl.privacy">
                         <div class="section">
 
-                        <h3 class="section-title">Change Password</h3>
+                            <h3 class="section-title">Change Password</h3>
 
-                        <form class="form-wrapper" data-ng-submit="$ctrl.updatePassword()"
-                              name="changePasswordForm">
-                            <div class="form-group pass-group" custom-input
-                                 data-ng-class="{
-                                 'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0,
-                                 'has-success': changePasswordForm.password.$valid && changePasswordForm.password.focused}">
-                                <label>New Password</label>
+                            <form class="form-wrapper" data-ng-submit="$ctrl.updatePassword()"
+                                  name="changePasswordForm">
+                                <div class="form-group pass-group" custom-input
+                                     data-ng-class="{
+                                     'has-error': changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0,
+                                     'has-success': changePasswordForm.password.$valid && changePasswordForm.password.focused}">
+                                    <label>New Password</label>
 
-                                <input type="password" class="form-control" placeholder=""
-                                       name="password"
-                                       data-ng-model="$ctrl.newPassword.password"
-                                       ng-pattern="$ctrl.patterns.password"
-                                       required
-                                       ng-minlength="5"
-                                       ng-change="$ctrl.confirmPassword()"
-                                       data-ng-focus="changePasswordForm.password.focused = true">
-                                <div class="validation " ng-class="changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0 ? 'error' : ''">
-                                    Passwords must be at least 8 characters long, containing a number and letter
+                                    <input type="password" class="form-control" placeholder=""
+                                           name="password"
+                                           data-ng-model="$ctrl.newPassword.password"
+                                           ng-pattern="$ctrl.patterns.password"
+                                           required
+                                           ng-minlength="5"
+                                           ng-change="$ctrl.confirmPassword()"
+                                           data-ng-focus="changePasswordForm.password.focused = true">
+                                    <div class="validation"
+                                         ng-class="changePasswordForm.password.$invalid && changePasswordForm.password.focused && changePasswordForm.password.$viewValue.length > 0 ? 'error' : ''">
+                                        Passwords must be at least 8 characters long, containing a number and letter
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group pass-group" custom-input
-                                 data-ng-class="{
-                                 'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0,
-                                 'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
-                                <label>Confirm Password</label>
-                                <input type="password" class="form-control" placeholder=""
-                                       name="confirmPassword"
-                                       data-ng-model="$ctrl.newPassword.confirm"
-                                       required
-                                       confirm-Password
-                                       compare-to="changePasswordForm.confirmPassword.$viewValue"
-                                       ng-minlength="5"
-                                       ng-change="$ctrl.confirmPassword()"
-                                       data-ng-focus="changePasswordForm.confirmPassword.focused = true">
-                                <div class="validation error"
-                                     ng-if="changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0">
-                                    Password does not match
+                                <div class="form-group pass-group" custom-input
+                                     data-ng-class="{
+                                     'has-error': changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0,
+                                     'has-success': changePasswordForm.confirmPassword.$valid && changePasswordForm.confirmPassword.focused}">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" placeholder=""
+                                           name="confirmPassword"
+                                           data-ng-model="$ctrl.newPassword.confirm"
+                                           required
+                                           confirm-Password
+                                           compare-to="changePasswordForm.confirmPassword.$viewValue"
+                                           ng-minlength="5"
+                                           ng-change="$ctrl.confirmPassword()"
+                                           data-ng-focus="changePasswordForm.confirmPassword.focused = true">
+                                    <div class="validation error"
+                                         ng-if="changePasswordForm.confirmPassword.$invalid && changePasswordForm.confirmPassword.focused && changePasswordForm.confirmPassword.$viewValue.length > 0">
+                                        Password does not match
+                                    </div>
                                 </div>
-                            </div>
 
-                           <!-- <p class="description">New password must be at least 8
-                                characters long,
-                                contain a number and letter
-                            </p>-->
+                                <!-- <p class="description">New password must be at least 8
+                                     characters long,
+                                     contain a number and letter
+                                 </p>-->
 
 
-                            <div class="btn-wrapper text-center"
-                                 data-ng-class="{'has-error': $ctrl.passwordChangeResponse === 'error', 'has-success': $ctrl.passwordChangeResponse === 'success'}">
-                                <button type="submit"
-                                        data-ng-disabled="!changePasswordForm.$valid"
-                                        class="btn btn-submit btn-default">Update Password
-                                </button>
-                              <!--  <p class="help-block text-small error-help-block">Something went wrong.</p>
-                                <p class="help-block text-small success-help-block">Excellent. Password
-                                    changed.</p>-->
-                            </div>
-                        </form>
+                                <div class="btn-wrapper text-center"
+                                     data-ng-class="{
+                                        'has-error': $ctrl.passwordChangeResponse === 'error',
+                                        'has-success': $ctrl.passwordChangeResponse === 'success'
+                                    }">
+                                    <button type="submit"
+                                            data-ng-disabled="!changePasswordForm.$valid"
+                                            class="btn btn-submit btn-default">Update Password
+                                    </button>
+                                    <!--  <p class="help-block text-small error-help-block">Something went wrong.</p>
+                                      <p class="help-block text-small success-help-block">Excellent. Password
+                                          changed.</p>-->
+                                </div>
+                            </form>
                         </div>
                     </div>
 
@@ -362,7 +372,7 @@
         </div>
         <div class="modal-body">
             <p class="text-small description">
-                <span  ng-if="$ctrl.unSyncType == 'github'">
+                <span ng-if="$ctrl.unSyncType == 'github'">
                     All your projects will be unlinked from GitHub.<br/>
                 </span>
                 Are you sure you want to unsync?

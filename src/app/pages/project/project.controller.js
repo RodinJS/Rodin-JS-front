@@ -48,7 +48,8 @@ class ProjectCtrl {
 
     }
 
-    save() {
+    save(isValid) {
+        if(!isValid) return;
         this.showLoader = true;
         this.projectExist = false;
         let projectInfo = {};

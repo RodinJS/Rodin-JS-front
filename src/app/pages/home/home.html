@@ -41,7 +41,7 @@
     </symbol>
 </svg>
 <style>
-    body .header .navbar-header {
+    body.new .header .navbar-header{
         width: auto;
     }
 </style>
@@ -187,89 +187,89 @@
 
             <!-- begin form -->
 
-            <div class="form">
-                <div class="input-group">
-                    <input type="email"
-                           style="font-size:17px"
-                           class="form-control"
-                           id="emailControl"
-                           ng-model="$ctrl.subscribe.email"
-                           placeholder="{{$ctrl.emailFocused ? 'Provide email' : 'Get notified when we launch'}}"
-                           ng-pattern="$ctrl.patterns.email"
+            <!--<div class="form">-->
+                <!--<div class="input-group">-->
+                    <!--<input type="email"-->
+                           <!--style="font-size:17px"-->
+                           <!--class="form-control"-->
+                           <!--id="emailControl"-->
+                           <!--ng-model="$ctrl.subscribe.email"-->
+                           <!--placeholder="{{$ctrl.emailFocused ? 'Provide email' : 'Get notified when we launch'}}"-->
+                           <!--ng-pattern="$ctrl.patterns.email"-->
 
-                           ng-click="$ctrl.notificationBoxTrigger($event)"
-                           value="">
-                    <span class="input-group-btn">
-					<button class="btn btn-default subscribe-btn"
-                            ng-class="!$ctrl.subscribe.email || !$ctrl.subscribe.userType ? 'disabled' : ''"
-                            ng-mouseover="$ctrl.signUpHovered3 = true"
-                            ng-mouseleave="$ctrl.signUpHovered3 = false"
-                            ng-click="$ctrl.submitSubscribe()"
-                            type="submit">
-						<span class="text">{{$ctrl.signUpHovered3 ? 'Sign Up' : 'Big blue button'}}</span>
-					</button>
-				</span>
-                    <div class="form-action-wrapper">
-                        <div class="radio-wrapper">
-                            <label class="raido-inline">
-                                <input type="radio"
-                                       name="Personal"
-                                       value="Personal" checked
-                                       ng-init="$ctrl.subscribe.userType = 'Personal'"
-                                       ng-model="$ctrl.subscribe.userType">
-                                <span class="custom-radio"></span>
-                                <span class="name">Personal</span>
-                            </label>
-                            <label class="raido-inline">
-                                <input type="radio" name="Agency" value="Agency"  ng-model="$ctrl.subscribe.userType">
-                                <span class="custom-radio"></span>
-                                <span class="name">Agency</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-wrapper">
-                            <label class="checkbox-inline">
-                                <input type="checkbox"
-                                       name="$ctrl.subscribe.position[]"
-                                       value="3D engineer"
-                                       ng-click="$ctrl.toggle('3D Engineer')"
-                                       ng-checked="$ctrl.subscribe.position.indexOf('3D Engineer') > -1">
-                                <span class="custom-checkbox"></span>
-                                <span class="name">3D engineer</span>
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox"
-                                       name="$ctrl.subscribe.position[]"
-                                       value="Designer"
-                                       ng-click="$ctrl.toggle('Designer')"
-                                       ng-checked="$ctrl.subscribe.position.indexOf('Designer') > -1">
-                                <span class="custom-checkbox"></span>
-                                <span class="name">Designer</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-wrapper">
-                            <label class="checkbox-inline">
-                                <input type="checkbox"
-                                       name="$ctrl.subscribe.position[]"
-                                       value="Web dev"
-                                       ng-click="$ctrl.toggle('Web dev')"
-                                       ng-checked="$ctrl.subscribe.position.indexOf('Web dev') > -1">
-                                <span class="custom-checkbox"></span>
-                                <span class="name">Web dev</span>
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox"
-                                       name="$ctrl.subscribe.position[]"
-                                       value="Game dev"
-                                       ng-click="$ctrl.toggle('Game dev')"
-                                       ng-checked="$ctrl.subscribe.position.indexOf('Game dev') > -1">
-                                <span class="custom-checkbox"></span>
-                                <span class="name">Game dev</span>
-                            </label>
-                        </div>
-                        <div class="form-backdrop" ng-click="$ctrl.notificationBoxTrigger(false, true)"></div>
-                    </div>
-                </div>
-            </div>
+                           <!--ng-click="$ctrl.notificationBoxTrigger($event)"-->
+                           <!--value="">-->
+                    <!--<span class="input-group-btn">-->
+					<!--<button class="btn btn-default subscribe-btn"-->
+                            <!--ng-class="!$ctrl.subscribe.email || !$ctrl.subscribe.userType ? 'disabled' : ''"-->
+                            <!--ng-mouseover="$ctrl.signUpHovered3 = true"-->
+                            <!--ng-mouseleave="$ctrl.signUpHovered3 = false"-->
+                            <!--ng-click="$ctrl.submitSubscribe()"-->
+                            <!--type="submit">-->
+						<!--<span class="text">{{$ctrl.signUpHovered3 ? 'Sign Up' : 'Big blue button'}}</span>-->
+					<!--</button>-->
+				<!--</span>-->
+                    <!--<div class="form-action-wrapper">-->
+                        <!--<div class="radio-wrapper">-->
+                            <!--<label class="raido-inline">-->
+                                <!--<input type="radio"-->
+                                       <!--name="Personal"-->
+                                       <!--value="Personal" checked-->
+                                       <!--ng-init="$ctrl.subscribe.userType = 'Personal'"-->
+                                       <!--ng-model="$ctrl.subscribe.userType">-->
+                                <!--<span class="custom-radio"></span>-->
+                                <!--<span class="name">Personal</span>-->
+                            <!--</label>-->
+                            <!--<label class="raido-inline">-->
+                                <!--<input type="radio" name="Agency" value="Agency"  ng-model="$ctrl.subscribe.userType">-->
+                                <!--<span class="custom-radio"></span>-->
+                                <!--<span class="name">Agency</span>-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="checkbox-wrapper">-->
+                            <!--<label class="checkbox-inline">-->
+                                <!--<input type="checkbox"-->
+                                       <!--name="$ctrl.subscribe.position[]"-->
+                                       <!--value="3D engineer"-->
+                                       <!--ng-click="$ctrl.toggle('3D Engineer')"-->
+                                       <!--ng-checked="$ctrl.subscribe.position.indexOf('3D Engineer') > -1">-->
+                                <!--<span class="custom-checkbox"></span>-->
+                                <!--<span class="name">3D engineer</span>-->
+                            <!--</label>-->
+                            <!--<label class="checkbox-inline">-->
+                                <!--<input type="checkbox"-->
+                                       <!--name="$ctrl.subscribe.position[]"-->
+                                       <!--value="Designer"-->
+                                       <!--ng-click="$ctrl.toggle('Designer')"-->
+                                       <!--ng-checked="$ctrl.subscribe.position.indexOf('Designer') > -1">-->
+                                <!--<span class="custom-checkbox"></span>-->
+                                <!--<span class="name">Designer</span>-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="checkbox-wrapper">-->
+                            <!--<label class="checkbox-inline">-->
+                                <!--<input type="checkbox"-->
+                                       <!--name="$ctrl.subscribe.position[]"-->
+                                       <!--value="Web dev"-->
+                                       <!--ng-click="$ctrl.toggle('Web dev')"-->
+                                       <!--ng-checked="$ctrl.subscribe.position.indexOf('Web dev') > -1">-->
+                                <!--<span class="custom-checkbox"></span>-->
+                                <!--<span class="name">Web dev</span>-->
+                            <!--</label>-->
+                            <!--<label class="checkbox-inline">-->
+                                <!--<input type="checkbox"-->
+                                       <!--name="$ctrl.subscribe.position[]"-->
+                                       <!--value="Game dev"-->
+                                       <!--ng-click="$ctrl.toggle('Game dev')"-->
+                                       <!--ng-checked="$ctrl.subscribe.position.indexOf('Game dev') > -1">-->
+                                <!--<span class="custom-checkbox"></span>-->
+                                <!--<span class="name">Game dev</span>-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="form-backdrop" ng-click="$ctrl.notificationBoxTrigger(false, true)"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
 
 

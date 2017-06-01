@@ -22,7 +22,6 @@ class EditProjectCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.formErrors = AppConstants.FORMERRORS.project;
 
         this.wysiwygOptions = [
           [],
@@ -120,7 +119,8 @@ class EditProjectCtrl {
         );
     }
 
-    update() {
+    update(isValid) {
+        if(!isValid) return;
         let projectInfo = {};
         angular.extend(projectInfo, this.project);
         projectInfo.tags = projectInfo.tags.map(i => i.text);

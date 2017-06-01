@@ -8,7 +8,7 @@ function EditProjectViveConfig($stateProvider) {
         controllerAs: '$ctrl',
         templateUrl: 'pages/editproject-vive/editproject-vive.html',
         title: 'Edit Project Vive',
-        pageClass: 'page-account',
+        pageClass: 'page-account new',
         resolve: {
             auth: function (User) {
                 return User.ensureAuthIs(true);

@@ -1,39 +1,46 @@
-$error_color:rgba(255, 0, 0, 0.5); //#a94442; //;
+$error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
+
+.error:not(.ui-notification) {
+	color: $error_color !important;
+}
 .form-group {
-  label{
-    sub{
-      bottom:5px !important;
+  margin-bottom: 36px !important;
+  &.search{
+    margin-bottom: 0 !important;
+  }
+  label {
+    sub {
+      bottom: 5px !important;
       //left:1px !important;
     }
   }
   &.has-error {
     //margin-bottom: 50px !important;
-    .form-control{
+    .form-control {
       border-color: $error_color !important;
       //box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
     }
   }
-  margin-bottom: 48px !important;
   .validation {
     position: absolute;
     bottom: -25px;
-    color:rgba(255, 255, 255, 0.45);
-    font-size:14px;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
     &.error {
       color: $error_color;
     }
   }
-  .form-description{
+  .form-description {
     &.error {
       color: $error_color !important;
     }
   }
 }
 
-form{
-  .btn-wrapper{
-    button{
-      &[disabled]{
+form {
+  .btn-wrapper {
+    button {
+      &[disabled] {
         cursor: default;
         opacity: 1;
       }

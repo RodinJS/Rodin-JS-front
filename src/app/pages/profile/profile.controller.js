@@ -132,7 +132,8 @@ class ProfileCtrl {
             })
     }
 
-    updateProfile() {
+    updateProfile(isValid) {
+        if(!isValid) return;
         this.showLoader = true;
         let currentUser = {
             email: this.currentUser.email,

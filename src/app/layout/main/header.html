@@ -15,7 +15,7 @@
             </a>
             <a ui-sref="landing.login" ng-if="!$ctrl.user"
                class="visible-xs-inline-block btn-mobile-login login">Login</a>
-            <a ng-click="$ctrl.gotToHome()" class="logo navbar-brand">
+            <a ui-sref="home.landing({new:true})" ui-sref-opts="{reload: false, notify: true}" class="logo navbar-brand">
                 <img alt="Rodin" src="/images/landing/general/logo.svg">
             </a>
 
@@ -79,13 +79,11 @@
                                 </small>
                                 <div style="clear:both"></div>
                             </div>
-                            <div data-ng-if="$ctrl.notifications.length > 0">
+                            <div ng-if="$ctrl.notifications.length > 0">
                                 <ul rd-scroll total-notifications="{{$ctrl.notifications.length}}"
-                                    style="top: 150px;"
                                     class="notifi-list"
                                     id="notifi-list">
                                     <li ng-repeat="(index, notification) in $ctrl.notifications"
-                                        class="notifi-list-element"
                                         ng-click="$ctrl.updateNotification(notification, index, $event)"
                                         ng-class="notification.typeClass +' '+ notification.readClass">
                                         <a href="">

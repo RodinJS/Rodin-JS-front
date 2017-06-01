@@ -66,8 +66,38 @@ function formValidator() {
             if (valid) {
                 return 'valid';
             }
+            //console.log('Submitted', input.$submitted);
+            if(input.$submitted && input[param].$invalid) {
+               return 'invalid';
+            }
         }
     }
 }
 
-export default {objLimitTo, bytesFilter, formatDate, htmlize, formValidator};
+function projectFormsValidator() {
+    return function (input, param) {
+        if (input && param) {
+            const inputLength = (input[param] && input[param].$viewValue) ? input[param].$viewValue.length : 0;
+            const invalid = input[param] && input[param].$invalid &&
+                            input[param] && input[param].focused &&
+                            (inputLength > 0) ||
+                            (input[param] && input[param].pressed && inputLength <= 0);
+
+            const valid = input[param] && input[param].$valid && input[param].focused;
+
+            //console.log('INVALID', param, input[param].$invalid, input[param].focused, input[param].pressed, inputLength);
+
+            if (invalid) {
+                return 'invalid';
+            }
+            if (valid) {
+                return 'valid';
+            }
+            if( input.$submitted && (input[param] && input[param].$invalid)){
+                return 'invalid';
+            }
+        }
+    }
+}
+
+export default {objLimitTo, bytesFilter, formatDate, htmlize, formValidator, projectFormsValidator};

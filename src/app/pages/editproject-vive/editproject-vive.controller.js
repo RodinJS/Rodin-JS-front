@@ -49,41 +49,11 @@ class EditProjectViveCtrl {
         this.openEvent = null;
         this.vivePortTrigger = false;
 
-        this.project = false;
-        this.getProject();
         this.eventBus = EventBus;
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
-            console.log('VIVIE', this.project);
-            if(this.project && this.project.fields && (!this.project.vive || Object.keys(this.project.vive).length <=0 ) && !this.project.build.vive.built){
-                this.project.vive = {
-                    name:this.project.fields.appName,
-                    version:this.project.fields.version,
-                };
-                this.projectError = this.project.fields.error;
-
-                if(this.projectError){
-                    this.project.build.vive.requested = false;
-                    const msg = this._AppConstants.ERRORCODES[this.projectError.message];
-                    this.errorText = msg ? msg.message :
-                        `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
-                    if (this.timer) {
-                        this._$interval.cancel(this.timer);
-                    }
-                    angular.forEach(angular.element('input'), (val, key) =>{
-                        angular.element(val).attr('disabled', false)
-                    })
-
-                }
-                else{
-                    angular.forEach(angular.element('input'), (val, key) =>{
-                        angular.element(val).attr('disabled', false)
-                    })
-                }
-            }
-
         });
-
+        this.getProject();
 
         $scope.$on('$destroy', () => {
             if (this.timer) {
@@ -98,7 +68,7 @@ class EditProjectViveCtrl {
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                if (this.project && this.project.build.vive.built && this.timer) {
+                if (this.project.build.vive.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },
@@ -236,7 +206,8 @@ class EditProjectViveCtrl {
         )
     }
 
-    build(e) {
+    build(e, isValid, form) {
+        if(!isValid) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }
@@ -270,8 +241,15 @@ class EditProjectViveCtrl {
             },
             success: function (data) {
                 ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
+                ctrl._$scope.configs.version.pressed = false;
+                ctrl._$scope.configs.viveportKey.focused = false;
+                ctrl._$scope.configs.viveportKey.pressed = false;
+                ctrl._$scope.configs.viveportId.focused = false;
+                ctrl._$scope.configs.viveportId.pressed = false;
                 ctrl.modals.password = false;
+                ctrl._$scope.configs.$submitted = false;
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Vive build start');

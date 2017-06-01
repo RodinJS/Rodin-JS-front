@@ -15,38 +15,42 @@
                         <switch id="enabled" data-ng-change="$ctrl.switchDomainTrigger()" data-name="enabled"
                                 data-ng-model="$ctrl.customDomainTrigger" class="green"></switch>
                         <h5 class="switch-box-title">Add custom domain</h5>
-                        <p ng-if="$ctrl.project.publishedUrl && !$ctrl.customDomainTrigger"
+                        <p ng-if="$ctrl.project.publishedUrl"
                            class="description text-small text-down">
                             Your project current url:
                             <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
                         </p>
                     </div>
-                    <form name="addDomain" id="configs" ng-if="$ctrl.customDomainTrigger" class="main-form">
+                    <form name="addDomain" id="configs" ng-if="$ctrl.customDomainTrigger" class="main-form" novalidate>
                         <div class="section">
-                            <h3 class="section-title">Project URL</h3>
+                            <p class="form-description" style="font-size:14px !important;">
+                                Please make "A record" redirect of your domain/subdomain to "{{$ctrl.recordIp}}" IP
+                                address
+                            </p>
                             <div class="form-group" custom-input
                                  style="margin-bottom:20px"
-                                 data-ng-class="{'has-error': addDomain.url.$invalid && addDomain.url.focused, 'has-success': (configs.url.$valid || addDomain.url.$valid) && addDomain.url.focused}">
+                                 data-ng-class="{
+                                 'has-error':(addDomain | PFValidator:'url') == 'invalid',
+                                 'has-success': (addDomain | PFValidator:'url') == 'valid'
+                                 }">
                                 <label>
-                                    {{addDomain.url.focused || $ctrl.domain ? 'Project url' : 'example.com'}}
+                                    Custom URL
+                                    {{addDomain.url.focused || $ctrl.domain ? '' : ''}}
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
                                        data-ng-model="$ctrl.domain"
                                        ng-pattern="$ctrl.domainPattern"
                                        name="url"
                                        required
-                                       data-ng-focus="addDomain.url.focused = true">
-                                <p class="form-description" style="font-size:14px !important;">
-                                    Please make "A record" redirect of your domain/subdomain to "{{$ctrl.recordIp}}" IP
-                                    address
-                                </p>
-                                <div class="validation error" ng-if="addDomain.url.$invalid && addDomain.url.focused"> Project url invalid
+                                       data-ng-focus="addDomain.url.focused = true"
+                                       data-ng-keyup="addDomain.url.pressed = true">
+                                <div class="validation error" ng-if="(addDomain | PFValidator:'url') == 'invalid'">
+                                    Project url invalid
                                 </div>
                             </div>
                             <div class="btn-wrapper" style="text-align: center">
                                 <button type="submit" class="btn btn-default btn-submit" style="margin-right:10px"
-                                        ng-click="$ctrl.addDomain($event)"
-                                        ng-disabled="!addDomain.$valid || !$ctrl.project.publishedPublic || ($ctrl.project.domain === $ctrl.domain)">
+                                        ng-click="addDomain.$submitted = true; $ctrl.addDomain(addDomain.$valid)">
                                     Submit
                                 </button>
                                 <a href="" class="btn btn-cancel" style="padding:12px 30px" ng-if="$ctrl.project.domain"
