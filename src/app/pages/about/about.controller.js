@@ -3,99 +3,108 @@ class AboutCtrl {
         'ngInject';
 
         this.team = [
-            [
-                {
+            [{
+                    name: 'Taron Lizagub',
+                    img: '../../../images/about/taron.png',
+                    position: 'CEO'
+                },{
                     name: 'Albert Poghosyan',
                     img: '../../../images/about/abo.png',
-                    position: 'BO'
+                    position: 'COO'
                 },
                 {
                     name: 'Aram Avetisyan',
                     img: '../../../images/about/aram.png',
-                    position: 'Vojd'
+                    position: 'CTO'
                 },
                 {
                     name: 'Grigor Khachatryan',
                     img: '../../../images/about/grig.png',
-                    position: 'Shaman'
+                    position: 'Development Team Lead'
                 },
+                ],
+            [
                 {
                     name: 'Mariam Adamyan',
                     img: '../../../images/about/mariam.png',
-                    position: '#ZVKUKAVIK'
-                }
-            ],
-            [
+                    position: 'QA Engineer'
+                },
                 {
-                    name: 'Mher Simonyan',
-                    img: '../../../images/about/mher.png',
-                    position: 'Minion'
+                    name: 'Lusine Kuchukyan',
+                    img: '../../../images/about/lusine.png',
+                    position: 'Product Owner'
                 },
                 {
                     name: 'Khachatur Gharibyan',
                     img: '../../../images/about/khcho.png',
-                    position: 'Ninja'
+                    position: 'Software Engineer'
                 },
                 {
                     name: 'Khatchadour Israelyan',
                     img: '../../../images/about/khatchadour.png',
-                    position: 'ISO'
-                },
-                {
-                    name: 'Christina Karapetyan',
-                    img: '../../../images/about/cristina.png',
-                    position: 'Pahestapet'
-                },
+                    position: 'Designer'
+                }
             ],
             [
                 {
+                    name: 'Christina Karapetyan',
+                    img: '../../../images/about/cristina.png',
+                    position: 'Software Engineer'
+                },
+                {
+                    name: 'Mher Simonyan',
+                    img: '../../../images/about/mher.png',
+                    position: 'QA Engineer'
+                },
+                {
                     name: 'Gor Matevosyan',
                     img: '../../../images/about/gor.png',
-                    position: 'Steven Hawking'
+                    position: 'Software Engineer'
                 },
                 {
                     name: 'Raffi Hovhannisyan',
                     img: '../../../images/about/raffi.png',
-                    position: '1px Armenia: Badasxan'
+                    position: 'Software Engineer'
                 },
+            ],
+            [
                 {
                     name: 'Sergey Hovakimyan',
                     img: '../../../images/about/serg.png',
-                    position: 'UXT'
+                    position: 'Software Engineer'
                 },
             ]
         ];
 
         this.workprocess = [
-            [
-                {
-                    name:'Mortal Kombat',
+            [{
+                    name: 'Mortal Kombat',
                     img: '../../../images/about/1.png',
                     position: ''
                 },
                 {
-                    name:'VR Cooking',
+                    name: 'VR Cooking',
                     img: '../../../images/about/2.png',
                     position: ''
                 },
                 {
-                    name:'#Qyart',
+                    name: '#Qyart',
                     img: '../../../images/about/3.png',
                     position: ''
                 },
-            ], [
-                {
-                    name:'Zvukavik is dead',
+            ],
+            [{
+                    name: 'Zvukavik is dead',
                     img: '../../../images/about/4.png',
                     position: ''
                 },
                 {
-                    name:'Steve on duty',
+                    name: 'Steve on duty',
                     img: '../../../images/about/5.png',
                     position: ''
                 },
                 {
-                    name:'#Uxtaglaz',
+                    name: '#Uxtaglaz',
                     img: '../../../images/about/6.png',
                     position: ''
                 },
@@ -103,22 +112,22 @@ class AboutCtrl {
         ]
 
     }
-    meetTheTeam(){
+    meetTheTeam() {
         angular.element('html,body').animate({
             scrollTop: angular.element('#team')[0].offsetTop,
         }, {
             duration: 500,
-            complete: function () {
+            complete: function() {
 
             },
         });
     }
-    meetTheHardworkers(){
+    meetTheHardworkers() {
         angular.element('html,body').animate({
             scrollTop: angular.element('#hardworkers')[0].offsetTop,
         }, {
             duration: 500,
-            complete: function () {
+            complete: function() {
 
             },
         });
