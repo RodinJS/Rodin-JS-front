@@ -22,7 +22,6 @@ class EditProjectCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.formErrors = AppConstants.FORMERRORS.project;
 
         this.wysiwygOptions = [
           [],

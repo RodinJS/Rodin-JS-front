@@ -6,7 +6,7 @@ function ContactsConfig($stateProvider) {
         controller: 'ContactsCtrl as $ctrl',
         templateUrl: 'pages/contacts/contacts.html',
         title: 'Contacts',
-        pageClass: 'space-back',
+        pageClass: 'new space-back',
         showFooter: true,
     });
 }

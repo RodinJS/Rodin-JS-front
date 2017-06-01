@@ -6,7 +6,7 @@ function DocsConfig($stateProvider) {
         controller: 'DocsCtrl as $ctrl',
         templateUrl: 'pages/docs/docs.html',
         title: 'Docs',
-        pageClass: '',
+        pageClass: 'new',
     });
 }
 
