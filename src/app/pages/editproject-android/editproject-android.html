@@ -6,8 +6,7 @@
                     <i class="icon icon-private"></i>
                     <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
                 <div class="main-form">
-                    <form name="configs" novalidate enctype="multipart/form-data" id="configs"
-                          class="main-form">
+                    <form name="configs" novalidate enctype="multipart/form-data" id="configs"  method="post" class="main-form">
                         <div class="content-navbar">
                             <ul class="navbar-list">
                                 <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
