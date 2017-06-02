@@ -1,4 +1,5 @@
 $distance: 34;
+$error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
 .section-title {
   margin: 30px 0px 30px 0px !important;
   sub{
@@ -16,9 +17,6 @@ $distance: 34;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  .project-fields {
-    margin-top: 30px;
-  }
 
   h1 {
     &.title {
@@ -625,6 +623,18 @@ $distance: 34;
         .drag-area.first {
           width: 166px;
           height: 166px;
+        }
+      }
+      &.has-error{
+        color:$error_color;
+        .center-row{
+          color: $error_color !important;
+        }
+        .drag-area{
+          border-color: $error_color !important;
+        }
+        .section-small-title{
+          color: $error_color !important;
         }
       }
     }
