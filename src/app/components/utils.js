@@ -333,21 +333,29 @@ function ConfirmPassword() {
 
 function RdScroll() {
     return {
-		restrict: 'A',
-		scope: {
-			rdScroll: '=',
-		},
-		link: function link(scope, elem, attrs, ctrl) {
-            const totalNotifications = parseInt(attrs.totalNotifications || 0);
-            const NotificationHeight = (59 + 5);
-            const height = totalNotifications <= 4 ?  NotificationHeight*totalNotifications : 350;
-            $(elem).slimScroll({
-				height: `${height}px`,
-				color: '#AAAAAA',
-				alwaysVisible: true
-			})
-		},
-	};
+        restrict: 'A',
+        scope: {
+            rdScroll: '=',
+        },
+        link: function link(scope, elem, attrs, ctrl) {
+            let elHeight = 0;
+            scope.$watch(() => {
+                for (let i = 0; i < elem[0].children.length; i++) {
+                    elHeight += elem[0].children[i].clientHeight;
+                }
+
+                setElementHeight(elHeight);
+            });
+            let setElementHeight = height => {
+                $(elem).slimScroll({
+                    height: `${height >= 350 ? 350 : height}px`,
+                    color: '#AAAAAA',
+                    alwaysVisible: true
+                });
+                elHeight = 0;
+            };
+        },
+    };
 }
 
 export default {
