@@ -195,7 +195,7 @@ class EditProjectViveCtrl {
         this.Project.publish(this.projectId).then(
             data => {
                 this.project.publishedPublic = true;
-                this.build(e);
+                this.build(e, true);
             },
             err => {
                 this.showLoader = false;
@@ -206,7 +206,7 @@ class EditProjectViveCtrl {
         )
     }
 
-    build(e, isValid, form) {
+    build(e, isValid) {
         if(!isValid) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
@@ -244,10 +244,14 @@ class EditProjectViveCtrl {
                 ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
                 ctrl._$scope.configs.version.pressed = false;
-                ctrl._$scope.configs.viveportKey.focused = false;
-                ctrl._$scope.configs.viveportKey.pressed = false;
-                ctrl._$scope.configs.viveportId.focused = false;
-                ctrl._$scope.configs.viveportId.pressed = false;
+                if(ctrl._$scope.configs.viveportKey){
+                    ctrl._$scope.configs.viveportKey.focused = false;
+                    ctrl._$scope.configs.viveportKey.pressed = false;
+                }
+                if(ctrl._$scope.configs.viveportId){
+                    ctrl._$scope.configs.viveportId.focused = false;
+                    ctrl._$scope.configs.viveportId.pressed = false;
+                }
                 ctrl.modals.password = false;
                 ctrl._$scope.configs.$submitted = false;
                 ctrl.getProject();

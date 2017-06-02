@@ -49,11 +49,11 @@ class EditProjectOculusCtrl {
         this.openEvent = null;
 
         this.eventBus = EventBus;
-        ProjectStore.subscribeAndInit($scope, ()=> {
+        ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
         });
-        $scope.$on('$destroy', ()=>{
-            if(this.timer){
+        $scope.$on('$destroy', () => {
+            if (this.timer) {
                 this._$interval.cancel(this.timer);
             }
         })
@@ -61,18 +61,18 @@ class EditProjectOculusCtrl {
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, { device: 'oculus' }).then(
+        this.Project.get(this.projectId, {device: 'oculus'}).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
 
-                if(this.project.build.oculus.built && this.timer){
+                if (this.project.build.oculus.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
                 this.showLoader = false;
@@ -188,27 +188,27 @@ class EditProjectOculusCtrl {
         }
     }
 
-   publishNbuild(e) {
+    publishNbuild(e) {
         this.showLoader = true;
         this.Project.publish(this.projectId).then(
             data => {
                 this.project.publishedPublic = true;
-                this.build(e);
+                this.build(e, true);
             },
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         )
     }
 
-    build(e, isValid, form) {
-        if(!isValid) return;
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+    build(e, isValid) {
+        if (!isValid) return;
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         const ctrl = this;
         e.preventDefault();
         this.project.build.oculus.built = false;
@@ -237,7 +237,6 @@ class EditProjectOculusCtrl {
                 project: angular.toJson(project),
             },
             success: function (data) {
-                form.$submitted = false;
                 ctrl._$scope.configs.displayName.focused = false;
                 ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
@@ -297,9 +296,9 @@ class EditProjectOculusCtrl {
     };
 
     open(e) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -314,15 +313,16 @@ class EditProjectOculusCtrl {
 
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         );
     }
-	gotToPublish() {
-		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
-	}
+
+    gotToPublish() {
+        this.$state.go('app.editprojectPublish', {projectId: this.project._id});
+    }
 }
 
 export default EditProjectOculusCtrl;
