@@ -233,7 +233,7 @@ class EditProjectIosCtrl {
         this.Project.publish(this.projectId).then(
             data => {
                 this.project.publishedPublic = true;
-                this.open(e);
+                this.open(e, true);
                 this.modals.notPublished = false;
 
             },
