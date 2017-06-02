@@ -12,7 +12,7 @@
 
                 <div data-ng-disabled="$ctrl.isSubmitting" data-ng-if="$ctrl.authType === 'login'">
 
-                    <div class="form-group" custom-input>
+                    <div class="form-group" custom-input style="margin-bottom: 15px !important;">
                         <label class="control-label">Username</label>
                         <input type="text"
                                class="form-control"
@@ -141,7 +141,7 @@
                                data-ng-focus="register.passwordConfirm.focused = true"
                                required>
                         <div class="validation error"
-                             ng-if="(register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed)  && (register | formValidator:'passwordConfirm')== 'invalid' && !register.passwordConfirm.focused">
+                             ng-if="(register.passwordConfirm.$invalid || register.passwordConfirm.$error.confirmed) && (register | formValidator:'passwordConfirm')  == 'invalid'">
                             {{$ctrl.formErrors.confirmPassword}}
                         </div>
                     </div>

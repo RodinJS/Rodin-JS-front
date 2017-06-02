@@ -6,7 +6,8 @@
                     <i class="icon icon-private"></i>
                     <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
                 <div class="main-form">
-                    <form name="configs" novalidate enctype="multipart/form-data" id="configs"  method="post" class="main-form">
+                    <form name="configs" novalidate enctype="multipart/form-data" id="configs" method="post"
+                          class="main-form">
                         <div class="content-navbar">
                             <ul class="navbar-list">
                                 <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
@@ -58,7 +59,7 @@
                                         Version must be in #.#.# format
                                     </div>
                                     <div class="validation error"
-                                         ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) && configs.version.$viewValue.length <= 0">
+                                         ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) && (!configs.version.$viewValue || configs.version.$viewValue.length <= 0)">
                                         Version is required
                                     </div>
                                     <div class="validation error" ng-if="!isVersionValid && configs.version.$valid">
@@ -88,22 +89,30 @@
                                         Used for uniquely identifying your application in the operation system
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="drag-cont text-center" style="margin-top:10px">
+
+                                <div class="form-group" style="margin-bottom:0 !important;">
+                                    <div class="drag-cont text-center" style="margin-top:10px"
+                                         data-ng-class="{
+                                         'has-error': configs.$submitted && !$ctrl.files.icon.name,
+                                         'has-success': configs.$submitted && $ctrl.files.icon.name
+                                         }">
                                         <div class="drag-item first text-center">
-                                            <label class="control-label float-label">App Icon<sub>*</sub></label>
+                                            <label class="control-label float-label">App Icon <sub>*</sub></label>
                                             <div class="drag-area first">
                                                 <div style="cursor: pointer" class="center-row"
                                                      onclick="document.querySelector('#icon-file').click()">
                                                     <span ng-if="$ctrl.files.icon.name == ''"
-                                                       class="">.png</span>
+                                                          class="">.png</span>
                                                     <img width="166" height="166" ng-src="{{$ctrl.files.icon.src}}"
                                                          ng-if="$ctrl.files.icon.name !== ''" alt="">
                                                 </div>
                                                 <p class="drag-instruct">
-                                                    <input type="file" class="hidden" id="icon-file" name="icon-h"
+                                                    <input type="file"
+                                                           class="hidden"
+                                                           id="icon-file"
+                                                           name="icon-h"
                                                            accept="image/*"
-                                                           onchange="angular.element(this).scope().$ctrl.changeIcon(event)">
+                                                           onchange="angular.element(this).scope().$ctrl.changeIcon(event)" required>
                                                 </p>
                                                 <div class="drag-item-again"
                                                      onclick="document.querySelector('#icon-file').click()"
@@ -112,13 +121,15 @@
                                                     <span>Tap To Replace</span>
                                                 </div>
                                             </div>
-                                            <h5 class="section-small-title text-center">We recomended a 1024x1024 size image</h5>
+                                            <h5 class="section-small-title text-center">We recomended a 1024x1024 size
+                                                image</h5>
                                         </div>
                                         <div class="drag-item hidden">
                                             <h5 class="section-small-title">Favicon</h5>
                                             <p class="text-small description">upload .png 1024x1024</p>
                                             <div class="drag-area first">
-                                                <div class="center-row"><i class="icon icon-invalid"></i>
+                                                <div class="center-row">
+                                                    <i class="icon icon-invalid"></i>
                                                 </div>
                                                 <p class="drag-instruct">To try <span>Again</span>
                                                 </p>
@@ -183,7 +194,7 @@
                             </div>
                         </div>
                     </form>
-                    <form class="main-form"  style="margin-top:10px"
+                    <form class="main-form" style="margin-top:10px"
                           ng-if="$ctrl.project.build.android.requested">
                         <div class="section">
                             <div class="required-field-item">
@@ -283,7 +294,7 @@
                     </div>
                     <!--<p class="text-small description">KeyStore Password.</p>-->
 
-                    <div class="form-group margin-top-40"  style="position: relative"
+                    <div class="form-group margin-top-40" style="position: relative"
                          data-ng-class="{
                          'has-error': (password | PFValidator:'aliasPassword')  == 'invalid',
                          'has-success': (password | PFValidator:'aliasPassword')  == 'valid'

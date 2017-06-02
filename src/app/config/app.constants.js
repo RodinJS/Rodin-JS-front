@@ -273,7 +273,7 @@ const AppConstants = {
     },
     FORMERRORS: {
         register: {
-            username: 'Username must contain at leas 3 characters',
+            username: 'Username must contain at least 3 characters',
             email: 'Invalid email',
             password: 'Passwords must be at least 8 characters long, containing a number and letter',
             confirmPassword: 'Password does not match',

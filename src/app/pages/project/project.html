@@ -13,7 +13,10 @@
                                 <div class="radio-wrapper" ng-click="$ctrl.projectTemplates.selected = project">
                                     <div class="radio-overlay" ng-if="$ctrl.githubUrlValid"></div>
                                     <label class="label-radio">
-                                        <input type="radio" name="template" ng-disabled="$ctrl.githubUrlValid">
+                                        <input type="radio"
+                                               name="template"
+                                               ng-disabled="$ctrl.githubUrlValid"
+                                               ng-checked="project ==  $ctrl.projectTemplates.selected">
                                         <span class="custom-radio"
                                               ng-class="$ctrl.githubUrlValid ? 'disabled' : 'active'"
                                               style="background-image: url({{project.thumbnail}});">
@@ -31,7 +34,7 @@
 
                             <div class="form-group"
                                  data-ng-class="{
-                                     'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused && project.githuburl.$viewValue.length > 0,
+                                     'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused && (!project.githuburl.$viewValue || project.githuburl.$viewValue.length > 0),
                                      'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused
                                  }">
                                 <label for="name">GitHub Project URL</label>
@@ -41,8 +44,6 @@
                                        placeholder="GitHub Project URL"
                                        value=""
                                        ng-minlength="3"
-                                       ng-maxlength="64"
-                                       limit-to="64"
                                        data-ng-pattern="$ctrl.githubPattern"
                                        ng-keyup="$ctrl.validateGithubUrl()"
                                        ng-blur="$ctrl.githubUrlFocused = false"
@@ -96,6 +97,7 @@
                                            ng-maxlength="16"
                                            limit-to="16"
                                            name="url"
+                                           ng-pattern="/^\S*$/"
                                            required
                                            ng-focus="project.url.focused = true"
                                            ng-keyup="project.url.pressed = true"

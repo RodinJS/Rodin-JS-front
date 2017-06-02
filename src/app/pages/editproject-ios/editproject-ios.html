@@ -21,7 +21,7 @@
                              'has-error': (configs | PFValidator:'displayName')  == 'invalid',
                              'has-success': (configs | PFValidator:'displayName')  == 'valid'}">
                             <label>
-                                App name<sub>*</sub>
+                                App Name<sub>*</sub>
                             </label>
                             <input type="text" class="form-control" placeholder=""
                                    data-ng-model="$ctrl.project.ios.name"
@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="validation error"
-                                 ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) && configs.version.$viewValue.length <= 0">
+                                 ng-if="((configs | PFValidator:'version')  == 'invalid' || !isVersionValid) &&  (!configs.version.$viewValue || configs.version.$viewValue.length <= 0)">
                                 Version is required
                             </div>
                             <div class="validation error" ng-if="!isVersionValid && configs.version.$valid">
@@ -111,11 +111,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-4 main-upload-area">
+                        <div style="margin-bottom:0 !important;" class="form-group col-md-4 main-upload-area">
                             <label>Provisioning Profile<sub>*</sub></label>
 
-                            <div class="drag-cont upload-label">
-                                <div class="drag-item first">
+                            <div class="drag-cont upload-label"
+                                 data-ng-class="{
+                                     'has-error': configs.$submitted && !$ctrl.files.profile.name,
+                                     'has-success': configs.$submitted && $ctrl.files.profile.name
+                                 }">
+                                <div class="drag-item first" >
                                     <div class="drag-area first">
                                         <div style="cursor: pointer" class="center-row"
                                              onclick="document.querySelector('#profile-file').click()">
@@ -145,7 +149,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-4 upload-label">
+                        <div style="margin-bottom:0 !important;" class="form-group col-md-4 upload-label">
                             <label>Distribution/Development Certificate.<sub>*</sub></label>
                             <!--<div class="main-upload-area">-->
                             <!--<label class="upload-area" ng-show="$ctrl.files.cert.name === ''">-->
@@ -164,7 +168,11 @@
                             <!--<button type="button" class="btn btn-primary"-->
                             <!--onclick="document.querySelector('#cert-file').click()">browse</button>-->
                             <!--</div>-->
-                            <div class="drag-cont upload-label">
+                            <div class="drag-cont upload-label"
+                                 data-ng-class="{
+                                     'has-error': configs.$submitted && !$ctrl.files.cert.name,
+                                     'has-success': configs.$submitted && $ctrl.files.cert.name
+                                 }">
                                 <div class="drag-item first">
                                     <div class="drag-area first">
                                         <div style="cursor: pointer" class="center-row"
@@ -193,10 +201,14 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-4 upload-label">
+                        <div style="margin-bottom:0 !important;" class="form-group col-md-4 upload-label">
                             <label>App Icon<sub>*</sub></label>
 
-                            <div class="drag-cont upload-label">
+                            <div class="drag-cont upload-label"
+                                 data-ng-class="{
+                                     'has-error': configs.$submitted && !$ctrl.files.icon.name,
+                                     'has-success': configs.$submitted && $ctrl.files.icon.name
+                                 }">
                                 <div class="drag-item first">
                                     <div class="drag-area first">
                                         <div style="cursor: pointer" class="center-row"
@@ -236,7 +248,7 @@
 
                         <div class="btn-wrapper" style="text-align: center">
                             <button type="button" class="btn btn-default btn-submit"
-                                    ng-click="configs.$submitted = true; $ctrl.open($event, configs.$valid)">
+                                    ng-click="configs.$submitted = true; $ctrl.open($event, (configs.$valid && $ctrl.files.icon.name && $ctrl.files.cert.name && $ctrl.files.profile.name))">
                                 Build
                             </button>
                         </div>
