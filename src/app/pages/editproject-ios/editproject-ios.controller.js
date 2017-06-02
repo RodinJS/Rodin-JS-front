@@ -46,7 +46,7 @@ class EditProjectIosCtrl {
         this.submiting = false;
         this.openEvent = null;
 
-        const self = this;
+        // const self = this;
         this.eventBus = EventBus;
         this.project = false;
 
@@ -68,8 +68,9 @@ class EditProjectIosCtrl {
 
                 if (this.projectError) {
                     this.project.build.ios.requested = false;
-                    this.errorText = this._AppConstants.ERRORCODES[this.projectError.message].message ||
-                        `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
+                    this.errorText = ''; 
+                        // this._AppConstants.ERRORCODES[this.projectError.message].message ||
+                        // `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
 
                     if (this.timer) {
                         this._$interval.cancel(this.timer);
