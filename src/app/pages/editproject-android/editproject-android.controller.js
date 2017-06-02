@@ -58,7 +58,7 @@ class EditProjectAndroidCtrl {
             //temprary fix for RO-859
             angular.forEach(angular.element('input'), (val, key) => {
                 angular.element(val).attr('disabled', false)
-            })
+            });
 
             if (this.project && this.project.fields && this.project.fields.android &&
                 (!this.project.android || Object.keys(this.project.android).length <= 0 ) && !this.project.build.android.built) {
@@ -82,12 +82,12 @@ class EditProjectAndroidCtrl {
                     }
                     angular.forEach(angular.element('input'), (val, key) =>{
                         angular.element(val).attr('disabled', false)
-                    })
+                    });
                 }
                 else{
                     angular.forEach(angular.element('input'), (val, key) =>{
                         angular.element(val).attr('disabled', true)
-                    })
+                    });
                 }
             }
         });
