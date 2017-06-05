@@ -83,6 +83,12 @@ class EditProjectIosCtrl {
                     angular.forEach(angular.element('input'), (val, key) =>{
                         angular.element(val).attr('disabled', false)
                     });
+                    this.files.profile.name = '';
+                    this.files.cert.name = '';
+                    this.files.icon.name = '';
+                    this.Project.cleanInputFiles('#profile-file');
+                    this.Project.cleanInputFiles('#cert-file');
+                    this.Project.cleanInputFiles('#icon-file');
 
                 }
                 else{
@@ -293,6 +299,9 @@ class EditProjectIosCtrl {
                 ctrl._$scope.configs.developerId.focused = false;
                 ctrl._$scope.configs.developerId.pressed = false;
                 ctrl._$scope.configs.$submitted = false;
+                ctrl.files.profile.name = '';
+                ctrl.files.cert.name = '';
+                ctrl.files.icon.name = '';
                 ctrl.Project.cleanInputFiles('#profile-file');
                 ctrl.Project.cleanInputFiles('#cert-file');
                 ctrl.Project.cleanInputFiles('#icon-file');

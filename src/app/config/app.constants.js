@@ -275,19 +275,19 @@ const AppConstants = {
         register: {
             username: 'Username must contain at least 3 characters',
             email: 'Invalid email',
-            password: 'Passwords must be at least 8 characters long, containing a number and letter',
-            confirmPassword: 'Password does not match',
+            password: 'Password must contain at least 8 characters, including numbers and letters',
+            confirmPassword: 'Passwords do not match',
             invitationCode: 'Invalid invitation code'
         },
         reset: {
             usernameEmail: 'Please enter username or email',
-            password: 'Passwords must be at least 8 characters long, containing a number and letter',
-            confirmPassword: 'Password does not match',
+            password: 'Password must contain at least 8 characters, including numbers and letters',
+            confirmPassword: 'Passwords do not match',
         },
         project: {
             github: 'URL is invalid',
             name: 'Project name must contain at least 3 characters',
-            url: 'Project URL must be alphanumeric with no spaces',
+            url: 'Project URL must be alphanumeric with no spaces and at least 3 characters',
             description: 'Description is required'
         }
     }

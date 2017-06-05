@@ -1,5 +1,5 @@
 class ResetPasswordCtrl {
-    constructor(AppConstants, User, $stateParams, $state) {
+    constructor(AppConstants, User, $stateParams, $state, Notification) {
         'ngInject';
 
         this.patterns = {
@@ -53,6 +53,7 @@ class ResetPasswordCtrl {
                 this.isSubmitting = false;
                 this.successfulySend = false;
                 this.resetError = err[0].message || "User doesn't exist";
+                this.Notification.error(this.resetError);
             })
     }
 

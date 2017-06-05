@@ -97,7 +97,7 @@
                                          'has-success': configs.$submitted && $ctrl.files.icon.name
                                          }">
                                         <div class="drag-item first text-center">
-                                            <label class="control-label float-label">App Icon <sub>*</sub></label>
+                                            <label class="control-label float-label">App Icon<sub>*</sub></label>
                                             <div class="drag-area first">
                                                 <div style="cursor: pointer" class="center-row"
                                                      onclick="document.querySelector('#icon-file').click()">
@@ -289,7 +289,8 @@
                                data-ng-keyup="password.password.pressed = true"
                                data-ng-focus="password.password.focused = true">
                         <div class="validation error"
-                             ng-if="(password | PFValidator:'password')  == 'invalid'">KeyStore Password is required
+                             ng-if="(password | PFValidator:'password')  == 'invalid'">
+                            KeyStore password must be at least 6 characters
                         </div>
                     </div>
                     <!--<p class="text-small description">KeyStore Password.</p>-->
@@ -309,7 +310,8 @@
                                data-ng-keyup="password.aliasPassword.pressed = true"
                                data-ng-focus="password.aliasPassword.focused = true">
                         <div class="validation error"
-                             ng-if="(password | PFValidator:'aliasPassword')  == 'invalid'">Alias Password is required
+                             ng-if="(password | PFValidator:'aliasPassword')  == 'invalid'">
+                            Alias password must be at least 6 characters
                         </div>
                     </div>
                     <!--<p class="text-small description">Alias Password.</p>-->

@@ -129,7 +129,7 @@ class DashboardCtrl {
             clearTimeout(t);
         }, 1000);
 	    this.modals.share = false;
-	    this.Notification.success('Copied Url')
+	    this.Notification.success('Copied URL')
     }
 }
 

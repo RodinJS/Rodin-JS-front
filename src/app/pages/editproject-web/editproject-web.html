@@ -17,7 +17,7 @@
                         <h5 class="switch-box-title">Add custom domain</h5>
                         <p ng-if="$ctrl.project.publishedUrl"
                            class="description text-small text-down">
-                            Your project current url:
+                            Your project current URL:
                             <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
                         </p>
                     </div>
@@ -45,7 +45,7 @@
                                        data-ng-focus="addDomain.url.focused = true"
                                        data-ng-keyup="addDomain.url.pressed = true">
                                 <div class="validation error" ng-if="(addDomain | PFValidator:'url') == 'invalid'">
-                                    URL invalid
+                                    URL is invalid
                                 </div>
                             </div>
                             <div class="btn-wrapper" style="text-align: center">

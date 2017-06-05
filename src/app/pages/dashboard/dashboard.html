@@ -108,10 +108,13 @@
                         </div>
                         <a href="" class="dashboard-item-link">
                             <h3 class="box-title">
-                                <i style="margin-right:5px" ng-if="!project.public || project.public == 'false'"
-                                   class="icon icon-private icon-private" aria-hidden="true"></i>
+                                <i style="margin-right:5px"
+                                   ng-class="{
+                                        'icon-private' : (!project.public || project.public == 'false'),
+                                        'icon-globe' : (project.public && project.public == 'true'),
+                                    }"
+                                   class="icon" aria-hidden="true"></i>
                                 {{project.displayName || project.name}}
-                            </h3>
                             <p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
                             </p>
                         </a>
