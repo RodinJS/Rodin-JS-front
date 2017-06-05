@@ -211,9 +211,10 @@
           top: calc(50% - 25px);
           .btn-add {
             font-size: 48px;
-            color: $color-primary;
+            color: #337ab7;
             &:hover {
               text-decoration: none;
+              color: $color-primary;
             }
           }
 

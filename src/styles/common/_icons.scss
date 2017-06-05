@@ -23,6 +23,11 @@
 		content: $icon-public;
 	}
 }
+.icon-globe {
+	&:before {
+		content: $icon-globe;
+	}
+}
 .icon-github:before {
 	content: "\e91b";
 }

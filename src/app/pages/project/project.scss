@@ -190,6 +190,28 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
             color:#aaa
           }
         }
+        &:hover{
+          .template-name{
+            color: #008af1;
+          }
+          .custom-radio{
+            &.active{
+              border-color: $color-bd;
+            }
+            span {
+              visibility: visible;
+              opacity: 1;
+              z-index: 1;
+            }
+            .custom-radio-hover-background {
+              width: 100%;
+              height: 100%;
+              z-index: 0;
+              background: black;
+              opacity: .5;
+            }
+          }
+        }
       }
     }
   }
@@ -661,7 +683,7 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
       cursor: pointer;
       color: $color-primary;
       &:hover {
-        color: white;
+        color: #006ebf;
       }
       span {
         white-space: nowrap;
@@ -783,6 +805,9 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
     color: $white;
     border-width: 2px;
     padding: 4px 30px;
+    &:hover{
+      background: $color-primary;
+    }
   }
   .form-username {
     input {
@@ -790,7 +815,7 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
     }
   }
   .form-description {
-    font-size: 13px !important;
+    font-size: 12px !important;
   }
   .create-project {
     label {

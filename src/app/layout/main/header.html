@@ -53,10 +53,11 @@
             </div>
             <ul class="nav navbar-nav navbar-right" ng-if="!$ctrl.user">
                 <li class="hidden-xs">
-                    <a ui-sref="landing.login">Login</a>
+                    <a ui-sref="landing.login"  style="font-size:16px">Login</a>
                 </li>
-                <li class="hidden-xs" ng-if="$ctrl.isHome"><a href="" ng-click="$ctrl.scrollToSignUp()"
-                                                              class="btn sign-up-btn">Sign up</a></li>
+                <li class="hidden-xs" ng-if="$ctrl.isHome">
+                    <a href="" ng-click="$ctrl.scrollToSignUp()" class="btn sign-up-btn">Sign up</a>
+                </li>
             </ul>
             <div class="account-action" ng-if="$ctrl.user">
                 <ul>
@@ -110,7 +111,6 @@
                             <i class="rd rd-angle-down hidden-xs"></i>
                         </a>
                         <div class="dropdown-menu account-dropdown-menu" uib-dropdown-menu>
-                            <h4>{{$ctrl.user.username}}</h4>
                             <ul class="account-action-list">
                                 <li>
                                     <a data-ui-sref-active="active" data-ui-sref="app.profile">Edit Profile</a></li>
