@@ -3,7 +3,12 @@
         <div class="selet-template-container">
             <div class="main-container">
                 <h1 class="title text-center">
-                    <i class="icon icon-private"></i>
+                    <i style="margin-right:5px" ng-show=""
+                       ng-class="{
+                                        'icon-private' : (!$ctrl.project.public || $ctrl.project.public == 'false'),
+                                        'icon-globe' : ($ctrl.project.public && $ctrl.project.public == 'true'),
+                                    }"
+                       class="icon" aria-hidden="true"></i>
                     <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
                 <div class="main-form">
                     <div class="content-navbar">
