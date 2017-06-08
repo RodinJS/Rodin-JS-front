@@ -39,7 +39,7 @@ class ProjectCtrl {
             selected: null,
             projects: [],
         };
-
+        this.isGithubTemplate = false;
         $scope.projectDescription = '';
         $scope.projectDescription = '';
 
@@ -49,7 +49,7 @@ class ProjectCtrl {
     }
 
     save(isValid) {
-        if(!isValid) return;
+        if (!isValid) return;
         this.showLoader = true;
         this.projectExist = false;
         let projectInfo = {};
@@ -82,6 +82,10 @@ class ProjectCtrl {
         this.showLoader = true;
         this.ProjectTemplate.getList().then(
             data => {
+                data.push({
+                    thumbnail: '',
+                    name: 'GitHub'
+                });
                 this.projectTemplates = {
                     projects: _.chunk(data, 4),
                     selected: data[0],
@@ -102,13 +106,17 @@ class ProjectCtrl {
         );
     }
 
+    setActiveTemplate(project) {
+        this.projectTemplates.selected = project;
+        this.isGithubTemplate = project.name === 'GitHub';
+    }
+
     validateGithubUrl() {
         this.githubUrlValid = this.githubPattern.test(this.project.githubUrl);
         if (this.githubUrlValid) {
             angular.element('input[type=radio]').prop('checked', false);
             this.projectTemplates.selected = null;
         }
-       // console.log('VALID GITHUB', this.githubUrlValid);
     }
 
     createFinalize(err) {

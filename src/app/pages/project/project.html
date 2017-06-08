@@ -10,21 +10,17 @@
                     <div class="main-form create-project">
                         <ul class="radio-list" ng-repeat="list in $ctrl.projectTemplates.projects">
                             <li ng-repeat="project in list">
-                                <div class="radio-wrapper" ng-click="$ctrl.projectTemplates.selected = project">
-                                    <div class="radio-overlay" ng-if="$ctrl.githubUrlValid"></div>
+                                <div class="radio-wrapper" ng-click="$ctrl.setActiveTemplate(project)">
                                     <label class="label-radio">
                                         <input type="radio"
                                                name="template"
-                                               ng-disabled="$ctrl.githubUrlValid"
                                                ng-checked="project ==  $ctrl.projectTemplates.selected">
                                         <span class="custom-radio"
-                                              ng-class="$ctrl.githubUrlValid ? 'disabled' : 'active'"
                                               style="background-image: url({{project.thumbnail}});">
                                             <span>CHOOSE</span>
                                             <span class="custom-radio-hover-background"></span>
                                         </span>
-                                        <span class="template-name"
-                                              ng-class="$ctrl.githubUrlValid ? 'disabled' : 'active'">{{project.name}}</span>
+                                        <span class="template-name">{{project.name}}</span>
                                         <br>
                                     </label>
                                 </div>
@@ -33,6 +29,7 @@
                         <div ng-show="$ctrl.projectTemplates.projects.length > 0" style="margin-top:36px" class="project-fields">
 
                             <div class="form-group"
+                                 ng-show="$ctrl.isGithubTemplate"
                                  data-ng-class="{
                                      'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused && (!project.githuburl.$viewValue || project.githuburl.$viewValue.length > 0),
                                      'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused
