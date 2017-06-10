@@ -117,19 +117,19 @@
                                 <label>Project Thumbnail</label>
                                 <div class="drag-area first">
                                     <div style="cursor: pointer" class="center-row"
-                                         onclick="document.querySelector('#thumbnail-img').click()">
+                                         ng-click="$ctrl.onUploadAreaClick()">
                                         <span ng-if="!$ctrl.project.thumbnail">.png</span>
                                         <img width="166" height="166" ng-src="{{$ctrl.project.thumbnail}}"
                                              ng-if="!!$ctrl.project.thumbnail" alt="">
                                     </div>
                                     <p class="drag-instruct">
-                                        <input class="hidden" type="file" id="thumbnail-img" data-ng-model="avatarUrl"
+                                        <input class="hidden" type="file" id="thumbnail-img"
                                                accept="image/jpeg,image/jpg,image/png,"
                                                onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)"
                                                name="avatar"/>
                                     </p>
                                     <div class="drag-item-again"
-                                         onclick="document.querySelector('#thumbnail-img').click()"
+                                         ng-click="$ctrl.onUploadAreaClick()"
                                          ng-show="$ctrl.project.thumbnail">
                                         <div class="drag-board"></div>
                                         <span>Tap To Replace</span>
@@ -302,4 +302,3 @@
         </div>
     </div>
 </div>
-

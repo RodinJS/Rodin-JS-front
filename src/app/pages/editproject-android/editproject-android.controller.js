@@ -21,7 +21,7 @@ class EditProjectAndroidCtrl {
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
         this.patterns = {
-            package:'/^([a-zA-Z0-9]\d*)\.([a-zA-Z0-9]\d*)\.([a-zA-Z0-9]\d*)$/'
+            package: '/^([a-zA-Z0-9]\d*)\.([a-zA-Z0-9]\d*)\.([a-zA-Z0-9]\d*)$/'
         };
 
         this.fileChoosen = {
@@ -80,12 +80,12 @@ class EditProjectAndroidCtrl {
                     if (this.timer) {
                         this._$interval.cancel(this.timer);
                     }
-                    angular.forEach(angular.element('input'), (val, key) =>{
+                    angular.forEach(angular.element('input'), (val, key) => {
                         angular.element(val).attr('disabled', false)
                     });
                 }
-                else{
-                    angular.forEach(angular.element('input'), (val, key) =>{
+                else {
+                    angular.forEach(angular.element('input'), (val, key) => {
                         angular.element(val).attr('disabled', true)
                     });
                 }
@@ -153,6 +153,7 @@ class EditProjectAndroidCtrl {
 
                     reader.readAsDataURL(file);
                 }, (result) => {
+                    angular.element('#icon-file')[0].value = '';
                     this.Notification.error('Unsupported image type');
                 });
             }
@@ -163,48 +164,40 @@ class EditProjectAndroidCtrl {
     }
 
     isValidImage(file) {
-        var defer = this.$q.defer();
-        var result = {
-            valid: true,
-            message: '',
-        };
-
-        if (file.size > 1024 * 1024) {
-            result.valid = false;
-            result.message = 'FIle size must be less than 1mb';
-            var tim = $timeout(function () {
-                defer.reject(result);
-                $timeout.cancel(tim);
-            });
-        } else {
-            var fileReader = new FileReader();
-            fileReader.onloadend = function (e) {
-                var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
-                var header = '';
-                for (var i = 0; i < arr.length; i++) {
-                    header += arr[i].toString(16);
-                }
-
-                switch (header) {
-                    case '89504e47':
-                        break;
-                    default:
-                        result.valid = false;
-                        result.message = 'Allowed only .jpg .jpeg and .png file types.';
-                        break;
-                }
-
-                if (result.valid) {
-                    defer.resolve(result);
-                } else {
-                    defer.reject(result);
-                }
+        return new Promise((resolve, reject) => {
+            let result = {
+                valid: true,
+                message: '',
             };
 
-            fileReader.readAsArrayBuffer(file);
-        }
+            if (file.size > 1024 * 1024) {
+                result.valid = false;
+                result.message = 'FIle size must be less than 1mb';
+                reject(result);
+            } else {
+                let fileReader = new FileReader();
+                fileReader.onloadend = function (e) {
+                    let arr = (new Uint8Array(e.target.result)).subarray(0, 4);
+                    let header = '';
+                    for (let i = 0; i < arr.length; i++) {
+                        header += arr[i].toString(16);
+                    }
 
-        return defer.promise;
+                    switch (header) {
+                        case '89504e47':
+                            break;
+                        default:
+                            result.valid = false;
+                            result.message = 'Allowed only .jpg .jpeg and .png file types.';
+                            break;
+                    }
+
+                    result.valid ? resolve(result) : reject(result);
+                };
+
+                fileReader.readAsArrayBuffer(file);
+            }
+        });
     }
 
     changeKeyStore(e) {
@@ -332,7 +325,7 @@ class EditProjectAndroidCtrl {
     };
 
     open(e, isValid) {
-        if(!isValid) return;
+        if (!isValid) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }
