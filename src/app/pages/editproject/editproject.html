@@ -5,11 +5,11 @@
                 <h1 class="title text-center">
                     <i style="margin-right:5px" ng-show="$ctrl.project.public"
                        ng-class="{
-                                        'icon-private' : (!$ctrl.project.public || $ctrl.project.public == 'false'),
-                                        'icon-globe' : ($ctrl.project.public && $ctrl.project.public == 'true'),
-                                    }"
-                       class="icon" aria-hidden="true"></i>
-                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
+                            'icon-private' : (!$ctrl.project.public || $ctrl.project.public == 'false'),
+                            'icon-globe' : ($ctrl.project.public && $ctrl.project.public == 'true'),
+                        }" class="icon" aria-hidden="true"></i>
+                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span>
+                </h1>
                 <form class="main-form" name="project" novalidate>
 
                     <div class="content-navbar">
@@ -43,16 +43,17 @@
 
                         <switch id="enabled"
                                 data-name="enabled1"
-                                data-ng-change="$ctrl.toggleStatus()"
+                                ng-change="$ctrl.toggleStatus()"
                                 data-ng-model="$ctrl.projectPublic"
                                 class="blue"></switch>
+
                         <h5 class="switch-box-title">Public</h5>
                         <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
                             Current version:
                             <a class="text-yellow"
-                               ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}?t={{$ctrl.getDate()}}"
+                               href="{{$ctrl.publicURL | lowercase}}?t={{$ctrl.currentDate}}"
                                target="_blank">
-                                {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
+                                {{$ctrl.publicURL | lowercase}}
                             </a>
                         </p>
                         <p ng-if="$ctrl.project.publishedUrl" class="description text-small text-down">
@@ -60,6 +61,7 @@
                             <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
                         </p>
                     </div>
+
 
                     <div class="section section-general-setting">
                         <h3 class="section-title">General Settings</h3>
@@ -117,19 +119,19 @@
                                 <label>Project Thumbnail</label>
                                 <div class="drag-area first">
                                     <div style="cursor: pointer" class="center-row"
-                                         onclick="document.querySelector('#thumbnail-img').click()">
+                                         ng-click="$ctrl.onUploadAreaClick()">
                                         <span ng-if="!$ctrl.project.thumbnail">.png</span>
                                         <img width="166" height="166" ng-src="{{$ctrl.project.thumbnail}}"
                                              ng-if="!!$ctrl.project.thumbnail" alt="">
                                     </div>
                                     <p class="drag-instruct">
-                                        <input class="hidden" type="file" id="thumbnail-img" data-ng-model="avatarUrl"
+                                        <input class="hidden" type="file" id="thumbnail-img"
                                                accept="image/jpeg,image/jpg,image/png,"
                                                onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)"
                                                name="avatar"/>
                                     </p>
                                     <div class="drag-item-again"
-                                         onclick="document.querySelector('#thumbnail-img').click()"
+                                         ng-click="$ctrl.onUploadAreaClick()"
                                          ng-show="$ctrl.project.thumbnail">
                                         <div class="drag-board"></div>
                                         <span>Tap To Replace</span>
@@ -230,6 +232,8 @@
                     </div>
 
                 </form>
+
+
             </div>
         </div>
     </div>
@@ -302,4 +306,3 @@
         </div>
     </div>
 </div>
-
