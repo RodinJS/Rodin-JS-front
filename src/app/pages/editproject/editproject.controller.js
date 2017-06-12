@@ -18,6 +18,7 @@ class EditProjectCtrl {
         this._$scope = $scope;
         this.user = User.current;
         this._AppConstants = AppConstants;
+        this.currentDate = Date.now();
 
         this.projectId = $stateParams.projectId;
         this.project = {};
@@ -69,6 +70,7 @@ class EditProjectCtrl {
 
     finalizeRequest() {
         this.project.editorUrl = `${this.EDITOR}${this.user.username}/${this.project.root}`;
+        this.publicURL = `${this.PUBLIC}${this.user.username}/${this.project.name}`;
         if (this.project.publishedPublic)
             this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
         if (this.project.description)
