@@ -11,8 +11,10 @@ const AppConstants = {
 
     local: {
         COOKIEDOMAIN: ['localhost', '.rodin.space'],
-        SOCKET: 'http://localhost:4000/api',
+        // SOCKET: 'http://localhost:4000/api',
         API: 'http://localhost:3000/api',
+        SOCKET: 'https://ss.rodin.space/api',
+        // API: 'https://api.rodin.space/api',
         RECORDIP: '178.62.229.191',
         // API: 'http://192.168.0.33:3000/api', // Xcho
         SITE: 'http://localhost:8585/',
@@ -24,6 +26,7 @@ const AppConstants = {
         GITHUB: '2350afe57c144672285b',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.space/list.json',
+        MODULES: 'http://localhost:4000/modules/',
     },
     dev: {
         COOKIEDOMAIN: ['.rodin.space'],
@@ -39,6 +42,8 @@ const AppConstants = {
         GITHUB: 'fa69c03ad5758fce1f10',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.space/list.json',
+        MODULES: 'http://localhost:4000/modules/',
+
     },
     prod: {
         COOKIEDOMAIN: ['.rodinapp.com', '.rodin.io', '.rodin.space'],
@@ -54,6 +59,8 @@ const AppConstants = {
         GITHUB: 'd2030c37902fa3d4d0c7',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.io/list.json',
+        MODULES: 'http://localhost:4000/modules/',
+
     },
 
     stage: {
@@ -70,6 +77,7 @@ const AppConstants = {
         GITHUB: '5377f212205e0aa4b4cf',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.design/list.json',
+        MODULES: 'http://localhost:4000/modules/',
     },
 
     get FB() {
@@ -123,6 +131,11 @@ const AppConstants = {
     get SAMPLES() {
         return this[this.env].SAMPLES;
     },
+
+    get MODULES() {
+        return this[this.env].MODULES;
+    },
+
     ERRORCODES: {
         500: {
             message: 'INTERNAL_SERVER_ERROR',
