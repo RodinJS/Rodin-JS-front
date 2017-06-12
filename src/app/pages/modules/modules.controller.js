@@ -22,16 +22,14 @@
 class ModulesCtrl {
     constructor($scope, $state, $http, AppConstants, Notification) {
         'ngInject';
+        this._$scope = $scope;
+        this.$http = $http;
+        this.Notification = Notification;
         this.modulesURL = AppConstants.MODULES;
 
         this.moduleId = $state.params.id;
 
-        this.files = {
-            modules : {
-                name: '',
-                src: ''
-            }
-        };
+        this.fileName = '';
         this.formData = {};
 
         this.patterns = {
@@ -40,19 +38,57 @@ class ModulesCtrl {
         }
     }
 
-    changeFile(){
+    changeFile(e) {
+        if (window.FileReader && window.Blob) {
 
+            var file = e.target.files[0];
+
+            if (file) {
+                this.isValidFile(file).then((result) => {
+                    var reader = new FileReader();
+                    reader.onloadend = (e) => {
+                        this.formData.file = reader.result;
+                        this.fileName = file.name;
+                        this._$scope.$apply();
+                    };
+
+                    reader.readAsDataURL(file);
+                }, (result) => {
+                    angular.element('#js-file')[0].value = '';
+                    this.Notification.error(result.message);
+                });
+            }
+
+        } else {
+            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
+        }
     }
 
     submitForm(isValid) {
-        if(isValid) {
-            console.log(this.formData)
+        if (isValid) {
+            this.formData.moduleId = this.moduleId;
+            this.$http.post(this.modulesURL + 'submit', this.formData)
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
-        return
     }
 
     isValidFile(file) {
         return new Promise((resolve, reject) => {
+            let result = {
+                valid: true,
+                message: '',
+            };
+            if (file.type !== "application/javascript") {
+                result.valid = false;
+                result.message = 'Unsupported file type';
+                return reject(result);
+            }
+            return resolve(result)
         })
     }
 }
