@@ -4,6 +4,7 @@ class ProjectCtrl {
 
         this._$timeout = $timeout;
         this._$scope = $scope;
+        this.githubUrlFocused = false;
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this.editorUrl = AppConstants.EDITOR;
@@ -83,7 +84,7 @@ class ProjectCtrl {
         this.ProjectTemplate.getList().then(
             data => {
                 data.push({
-                    thumbnail: '',
+                    thumbnail: './images/projects/Github_Project.jpg',
                     name: 'GitHub'
                 });
                 this.projectTemplates = {
@@ -113,10 +114,6 @@ class ProjectCtrl {
 
     validateGithubUrl() {
         this.githubUrlValid = this.githubPattern.test(this.project.githubUrl);
-        if (this.githubUrlValid) {
-            angular.element('input[type=radio]').prop('checked', false);
-            this.projectTemplates.selected = null;
-        }
     }
 
     createFinalize(err) {
