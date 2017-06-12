@@ -27,7 +27,7 @@ class EditProjectCtrl {
         this.formErrors = AppConstants.FORMERRORS.project;
 
         this.wysiwygOptions = [
-          [],
+            [],
         ];
 
         this.modals = {
@@ -40,28 +40,31 @@ class EditProjectCtrl {
             this.project = ProjectStore.getProject();
 
             if (!this.project)
-              this.getProject();
+                this.getProject();
             else
-              this.finalizeRequest();
+                this.finalizeRequest();
 
         });
     }
 
+    getDate() {
+        return Date.now();
+    }
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, { projectSize: true }).then(
-          project => {
-            this.eventBus.emit(this.eventBus.project.SET, project);
-            this.finalizeRequest();
-        },
+        this.Project.get(this.projectId, {projectSize: true}).then(
+            project => {
+                this.eventBus.emit(this.eventBus.project.SET, project);
+                this.finalizeRequest();
+            },
 
-          err => {
-            _.each(err, (val, key) => {
-                this.Notification.error(val.fieldName);
-            });
-            this.$state.go('landing.error');
-        }
+            err => {
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+                this.$state.go('landing.error');
+            }
         );
     }
 
@@ -69,9 +72,9 @@ class EditProjectCtrl {
         this.project.editorUrl = `${this.EDITOR}${this.user.username}/${this.project.root}`;
         this.publicURL = `${this.PUBLIC}${this.user.username}/${this.project.name}`;
         if (this.project.publishedPublic)
-          this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
+            this.project.publishedUrl = `${this._AppConstants.PUBLISH}/${this.user.username}/${this.project.name}`;
         if (this.project.description)
-          this.project.description = $('<div/>').html(this.project.description).text();
+            this.project.description = $('<div/>').html(this.project.description).text();
         this.projectPublic = this.project.public === 'true';
         this.showLoader = false;
     }
@@ -81,19 +84,19 @@ class EditProjectCtrl {
 
         this.showLoader = true;
         this.Project.toggleStatus(this.project._id, this.project.public).then(
-          res => {
-            this.eventBus.emit(this.eventBus.project.SET, this.project);
-            this.showLoader = false;
-        },
+            res => {
+                this.eventBus.emit(this.eventBus.project.SET, this.project);
+                this.showLoader = false;
+            },
 
-          err => {
-            _.each(err, (val, key) => {
-                this.Notification.error(val.fieldName);
-            });
-            this.projectPublic = !this.projectPublic;
-            this.project.public = this.projectPublic.toString();
-            this.showLoader = false;
-        }
+            err => {
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+                this.projectPublic = !this.projectPublic;
+                this.project.public = this.projectPublic.toString();
+                this.showLoader = false;
+            }
         );
     }
 
@@ -101,54 +104,54 @@ class EditProjectCtrl {
         this.showLoader = true;
 
         this.Project.remove(this.project).then(
-          data => {
-            this.Notification.success('Project deleted');
-            this.showLoader = false;
-            if (this.user.projects.total > 0) {
-                this.user.projects.total--;
+            data => {
+                this.Notification.success('Project deleted');
+                this.showLoader = false;
+                if (this.user.projects.total > 0) {
+                    this.user.projects.total--;
+                }
+
+                this.$state.go('app.dashboard');
+            },
+
+            err => {
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+                this.showLoader = false;
             }
-
-            this.$state.go('app.dashboard');
-        },
-
-          err => {
-            _.each(err, (val, key) => {
-                this.Notification.error(val.fieldName);
-            });
-            this.showLoader = false;
-        }
         );
     }
 
     update(isValid) {
-        if(!isValid) return;
+        if (!isValid) return;
         let projectInfo = {};
         angular.extend(projectInfo, this.project);
         projectInfo.tags = projectInfo.tags.map(i => i.text);
         this.showLoader = true;
         console.log(projectInfo);
         this.Project.update(this.project._id, projectInfo).then(
-          data => {
-            this.Notification.success('Project updated');
-            this.eventBus.emit(this.eventBus.project.SET, data);
-            this.showLoader = false;
-        },
+            data => {
+                this.Notification.success('Project updated');
+                this.eventBus.emit(this.eventBus.project.SET, data);
+                this.showLoader = false;
+            },
 
-          err => {
-            this.showLoader = false;
-            _.each(err, (val, key) => {
-                this.Notification.error(val.fieldName);
-            });
-        }
+            err => {
+                this.showLoader = false;
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+            }
         );
     }
 
     changeThumbnail(e) {
         if (window.FileReader && window.Blob) {
-            let reader = new FileReader();
-            var file = e.target.files[0];
+            let file = e.target.files[0];
             if (file) {
                 this.isValidImage(file).then((result) => {
+                    let reader = new FileReader();
                     reader.onloadend = (e) => {
                         this.project.thumbnail = reader.result;
                         this._$scope.$apply();
@@ -156,62 +159,62 @@ class EditProjectCtrl {
 
                     reader.readAsDataURL(file);
                 }, (result) => {
+                    angular.element('#thumbnail-img')[0].value = '';
                     this.Notification.error(result.message);
                 });
             }
         } else {
             this.Notification.warning('It seems your browser doesn\'t support FileReader.');
-
         }
     }
 
     isValidImage(file) {
-        var defer = this.$q.defer();
-        var timeout = this.$timeout;
-        var result = {
-            valid: true,
-            message: '',
-        };
-        if (file.size > 5242880) {
-            result.valid = false;
-            result.message = 'FIle size must be less than 5mb';
-            var tim = timeout(function () {
-                defer.reject(result);
-                timeout.cancel(tim);
-            });
-        } else {
-            var fileReader = new FileReader();
-            fileReader.onloadend = function (e) {
-                var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
-                var header = '';
-                for (var i = 0; i < arr.length; i++) {
-                    header += arr[i].toString(16);
-                }
-
-                switch (header) {
-                case '89504e47'://"image/png"
-                //case "47494638"://"image/gif"
-                case 'ffd8ffe0'://"image/jpeg"
-                case 'ffd8ffe1':
-                case 'ffd8ffe2':
-                break;
-                default:
-                    result.valid = false;
-                    result.message = 'Allowed only .jpg .jpeg and .png file types.';
-                break;
-            }
-                console.log(result)
-                result.valid ? defer.resolve(result): defer.reject(result);
+        return new Promise((resolve, reject) => {
+            let result = {
+                valid: true,
+                message: '',
             };
+            if (file.size > 5242880) {
+                result.valid = false;
+                result.message = 'FIle size must be less than 5mb';
+                return reject(result);
+            } else {
+                let fileReader = new FileReader();
+                fileReader.onloadend = function (e) {
+                    let arr = (new Uint8Array(e.target.result)).subarray(0, 4);
+                    let header = '';
+                    for (let i = 0; i < arr.length; i++) {
+                        header += arr[i].toString(16);
+                    }
 
-            fileReader.readAsArrayBuffer(file);
-        }
+                    switch (header) {
+                        case '89504e47'://"image/png"
+                        //case "47494638"://"image/gif"
+                        case 'ffd8ffe0'://"image/jpeg"
+                        case 'ffd8ffe1':
+                        case 'ffd8ffe2':
+                            break;
+                        default:
+                            result.valid = false;
+                            result.message = 'Allowed only .jpg .jpeg and .png file types.';
+                            break;
+                    }
+                    result.valid ? resolve(result) : reject(result);
+                };
 
-        return defer.promise;
+                fileReader.readAsArrayBuffer(file);
+            }
+        })
     }
 
     open(modal) {
         this.modals[modal] = true;
+    }
+
+    onUploadAreaClick() {
+        this.$timeout(() => {
+            document.querySelector('#thumbnail-img').click();
+        });
     }
 
     copyUrl() {
