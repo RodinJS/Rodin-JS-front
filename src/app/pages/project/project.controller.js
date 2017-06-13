@@ -85,7 +85,7 @@ class ProjectCtrl {
             data => {
                 data.push({
                     thumbnail: './images/projects/Github_Project.jpg',
-                    name: 'Pull from GitHub'
+                    name: 'Pull From GitHub'
                 });
                 this.projectTemplates = {
                     projects: _.chunk(data, 4),
@@ -109,7 +109,7 @@ class ProjectCtrl {
 
     setActiveTemplate(project) {
         this.projectTemplates.selected = project;
-        this.isGithubTemplate = project.name === 'GitHub';
+        this.isGithubTemplate = project.name === 'Pull From GitHub';
     }
 
     validateGithubUrl() {
