@@ -3,7 +3,9 @@
         <div class="module-padding"></div>
         <h3 class="title text-center">Create Module</h3>
         <div class="form-content">
-            <form data-ng-submit="$ctrl.submitForm(modules.$valid)" class="main-form" name="modules" novalidate>
+            <form data-ng-submit="$ctrl.submitForm(modules,modules.$valid)" enctype="multipart/form-data"
+                  class="main-form"
+                  name="modules" novalidate>
 
                 <div class="form-group" custom-input
                      data-ng-class="{
@@ -58,7 +60,7 @@
                            placeholder=""
                            ng-required="true"
                            name="documentationLink"
-                           ng-model="$ctrl.formData.documentationLink"
+                           data-ng-model="$ctrl.formData.documentationLink"
                            data-ng-pattern="$ctrl.patterns.url"
                            data-ng-focus="modules.documentationLink.focused = true"
                            value="">
@@ -78,7 +80,7 @@
                            placeholder=""
                            ng-required="true"
                            name="exampleLink"
-                           ng-model="$ctrl.formData.exampleLink"
+                           data-ng-model="$ctrl.formData.exampleLink"
                            data-ng-pattern="$ctrl.patterns.url"
                            data-ng-focus="modules.exampleLink.focused = true"
                            value="">
@@ -101,7 +103,7 @@
                               ng-required="true"
                               data-ng-focus="modules.description.focused = true"
                               style="height: 120px;"
-                              ng-model="$ctrl.formData.description"> </textarea>
+                              data-ng-model="$ctrl.formData.description"> </textarea>
                     <div class="validation error" ng-if="(modules | formValidator:'description')  == 'invalid'">
                         Description is required
                     </div>
@@ -116,7 +118,8 @@
                                      onclick="document.querySelector('#js-file').click()">
                                     <span ng-if="$ctrl.fileName == ''"
                                           class="">.js</span>
-                                    <img width="166" height="166" ng-if="$ctrl.fileName.length > 0" ng-src="./images/general/js-outline.png"
+                                    <img width="166" height="166" ng-show="$ctrl.fileName.length > 0"
+                                         ng-src="./images/general/js-outline.png"
                                          alt="">
                                 </div>
                                 <p class="drag-instruct">

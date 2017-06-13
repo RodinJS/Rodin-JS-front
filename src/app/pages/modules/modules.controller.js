@@ -40,19 +40,11 @@ class ModulesCtrl {
 
     changeFile(e) {
         if (window.FileReader && window.Blob) {
-
             var file = e.target.files[0];
-
             if (file) {
-                this.isValidFile(file).then((result) => {
-                    var reader = new FileReader();
-                    reader.onloadend = (e) => {
-                        this.formData.file = reader.result;
-                        this.fileName = file.name;
-                        this._$scope.$apply();
-                    };
-
-                    reader.readAsDataURL(file);
+                this.isValidFile(file).then(() => {
+                    this.file = e.target.files[0];
+                    this.fileName = file.name;
                 }, (result) => {
                     angular.element('#js-file')[0].value = '';
                     this.Notification.error(result.message);
@@ -64,16 +56,21 @@ class ModulesCtrl {
         }
     }
 
-    submitForm(isValid) {
+    submitForm(form, isValid) {
         if (isValid) {
             this.formData.moduleId = this.moduleId;
-            this.$http.post(this.modulesURL + 'submit', this.formData)
-                .then(res => {
-                    console.log(res)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+            let formData = new FormData(form);
+            this.createSubmitData(formData);
+            formData.append('file', this.file);
+            let xhr = new XMLHttpRequest();
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                }
+            });
+            xhr.open("POST", this.modulesURL + "submit");
+            xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.send(formData);
         }
     }
 
@@ -87,9 +84,22 @@ class ModulesCtrl {
                 result.valid = false;
                 result.message = 'Unsupported file type';
                 return reject(result);
+            } else {
+                result = {
+                    valid: true,
+                    message: '',
+                };
+                return resolve(result)
             }
-            return resolve(result)
         })
+    }
+
+    createSubmitData(data) {
+        let keys = Object.keys(this.formData);
+        keys.map(i => {
+            data.append(i, this.formData[i]);
+        });
+        return data;
     }
 }
 export default ModulesCtrl;
