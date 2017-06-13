@@ -62,7 +62,7 @@ class ProjectCtrl {
         this.Project.create(projectInfo).then(
             data => {
                 this.Project.transpile(data._id)
-                    .then(data=> this.VCS.create(data._id, {
+                    .then(response => this.VCS.create(data._id, {
                         root: data.root,
                         name: data.name,
                     }), this.createFinalize)
