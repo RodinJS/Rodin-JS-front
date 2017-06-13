@@ -61,11 +61,12 @@ class ProjectCtrl {
         projectInfo.description = this._$scope.projectDescription;
         this.Project.create(projectInfo).then(
             data => {
-                this.Project.transpile(data._id);
-                this.VCS.create(data._id, {
-                    root: data.root,
-                    name: data.name,
-                }).then(this.createFinalize, this.createFinalize);
+                this.Project.transpile(data._id)
+                    .then(data=> this.VCS.create(data._id, {
+                        root: data.root,
+                        name: data.name,
+                    }), this.createFinalize)
+                    .then(this.createFinalize, this.createFinalize);
             },
 
             err => {
