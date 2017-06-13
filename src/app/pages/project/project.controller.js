@@ -85,7 +85,7 @@ class ProjectCtrl {
             data => {
                 data.push({
                     thumbnail: './images/projects/Github_Project.jpg',
-                    name: 'GitHub'
+                    name: 'Pull from GitHub'
                 });
                 this.projectTemplates = {
                     projects: _.chunk(data, 4),
