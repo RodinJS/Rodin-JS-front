@@ -121,13 +121,14 @@
                                     <div style="cursor: pointer" class="center-row"
                                          ng-click="$ctrl.onUploadAreaClick()">
                                         <span ng-if="!$ctrl.project.thumbnail">.png</span>
-                                        <img width="166" height="166" ng-src="{{$ctrl.project.thumbnail}}"
+                                        <img width="262" height="197" ng-src="{{$ctrl.project.thumbnail}}"
                                              ng-if="!!$ctrl.project.thumbnail" alt="">
                                     </div>
                                     <p class="drag-instruct">
                                         <input class="hidden" type="file" id="thumbnail-img"
+                                               img-cropper-fileread image="$ctrl.cropper.sourceImage"
                                                accept="image/jpeg,image/jpg,image/png,"
-                                               onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)"
+                                               onchange="angular.element(this).scope().$ctrl.changeThumbnail(event);"
                                                name="avatar"/>
                                     </p>
                                     <div class="drag-item-again"
@@ -301,6 +302,35 @@
                             data-ng-click="$ctrl.copyUrl(); $ctrl.modals.share = false;">Copy URL
                     </button>
                     <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal"
+     ng-class="{'display-block': $ctrl.modals.crop, 'display-none': !$ctrl.modals.crop}">
+    <div class="modal-content" style="max-width: 550px;">
+        <div>
+            <canvas width="500"
+                    height="300"
+                    id="canvas"
+                    image-cropper
+                    image="$ctrl.cropper.sourceImage"
+                    cropped-image="$ctrl.cropper.croppedImage"
+                    crop-width="262"
+                    crop-height="197"
+                    keep-aspect="true"
+                    touch-radius="30">
+            </canvas>
+        </div>
+        <div class="modal-footer" style="max-width: 550px;">
+            <div class="required-field-actions clearfix">
+                <div class="text-center">
+                    <button type="button" class="btn btn-positive"
+                            data-ng-click="$ctrl.saveImage()">Save
+                    </button>
+                    <!--<a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.crop = false">Save</a>-->
                 </div>
             </div>
         </div>

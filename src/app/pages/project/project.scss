@@ -480,7 +480,7 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
       }
       .drag-item {
         display: inline-block;
-        max-width: 166px;
+        max-width: 262px;
         padding-bottom: 40px;
         label {
           color: #f0f0f0;
@@ -504,8 +504,8 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
           cursor: pointer;
           .drag-item-again {
             visibility: hidden;
-            width: 166px;
-            height: 166px;
+            width: 262px;
+            height: 197px;
             position: absolute;
             left: 0;
             .drag-board {
@@ -514,8 +514,8 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
               left: 0;
               background: black;
               opacity: .5;
-              width: 166px;
-              height: 166px;
+              width: 262px;
+              height: 197px;
               z-index: 1;
             }
             span {
@@ -643,8 +643,8 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
       .drag-item.first {
         //margin-right: 105px;
         .drag-area.first {
-          width: 166px;
-          height: 166px;
+          width: 262px;
+          height: 197px;
         }
       }
       &.has-error{
