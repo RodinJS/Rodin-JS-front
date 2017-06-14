@@ -5,6 +5,10 @@ class EditProjectCtrl {
         if (!$stateParams.projectId) return $state.go('landing.error');
 
         $window.scrollTo(0, 0);
+        // image crop
+        this.cropper = {};
+        this.cropper.sourceImage = null;
+        this.cropper.croppedImage = null;
 
         this.$timeout = $timeout;
         this.Notification = Notification;
@@ -23,7 +27,6 @@ class EditProjectCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        //this.projectPublic == false;
         this.formErrors = AppConstants.FORMERRORS.project;
 
         this.wysiwygOptions = [
@@ -33,6 +36,7 @@ class EditProjectCtrl {
         this.modals = {
             remove: false,
             share: false,
+            core: false
         };
 
         this.eventBus = EventBus;
@@ -45,10 +49,6 @@ class EditProjectCtrl {
                 this.finalizeRequest();
 
         });
-    }
-
-    getDate() {
-        return Date.now();
     }
 
     getProject() {
@@ -151,13 +151,8 @@ class EditProjectCtrl {
             let file = e.target.files[0];
             if (file) {
                 this.isValidImage(file).then((result) => {
-                    let reader = new FileReader();
-                    reader.onloadend = (e) => {
-                        this.project.thumbnail = reader.result;
-                        this._$scope.$apply();
-                    };
-
-                    reader.readAsDataURL(file);
+                    this.modals.crop = true;
+                    angular.element('#thumbnail-img')[0].value = '';
                 }, (result) => {
                     angular.element('#thumbnail-img')[0].value = '';
                     this.Notification.error(result.message);
@@ -166,6 +161,12 @@ class EditProjectCtrl {
         } else {
             this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
+    }
+
+    saveImage() {
+        this.project.thumbnail = this.cropper.croppedImage;
+        this.modals.crop = false;
+        this._$scope.$apply();
     }
 
     isValidImage(file) {
