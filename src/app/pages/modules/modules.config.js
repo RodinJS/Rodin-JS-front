@@ -6,7 +6,6 @@ function ModulesConfig($stateProvider) {
             controller: 'ModulesCtrl as $ctrl',
             templateUrl: 'pages/modules/modules.html',
             title: 'Modules',
-            showFooter: false,
         });
 }
 

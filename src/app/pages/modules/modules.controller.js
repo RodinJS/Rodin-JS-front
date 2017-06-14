@@ -20,57 +20,60 @@
  xhr.send(data);
  */
 class ModulesCtrl {
-    constructor($scope, $state, $http, AppConstants, Notification) {
+    constructor($scope, $http, $state, AppConstants, Notification) {
         'ngInject';
-        this._$scope = $scope;
-        this.$http = $http;
         this.Notification = Notification;
         this.modulesURL = AppConstants.MODULES;
 
+        this.$http = $http;
         this.moduleId = $state.params.id;
-
-        this.fileName = '';
+        this.file = {
+            name: '',
+            value: ''
+        };
         this.formData = {};
-
         this.patterns = {
             url: /(http|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/,
             email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        }
+        };
+        // this.getModuleParams();
+    }
+
+    getModuleParams() {
+        this.$http('url').then(res => {
+            this.formData = res.data;
+            this.file.name = res.data.file.name;
+        });
     }
 
     changeFile(e) {
-        if (window.FileReader && window.Blob) {
-            var file = e.target.files[0];
-            if (file) {
-                this.isValidFile(file).then(() => {
-                    this.file = e.target.files[0];
-                    this.fileName = file.name;
-                }, (result) => {
-                    angular.element('#js-file')[0].value = '';
-                    this.Notification.error(result.message);
-                });
-            }
-
-        } else {
-            this.Notification.warning('It seems your browser doesn\'t support FileReader.');
+        let file = e.target.files[0];
+        if (file) {
+            this.isValidFile(file).then(() => {
+                this.file.value = e.target.files[0];
+                this.file.name = file.name;
+            }, (result) => {
+                angular.element('#js-file')[0].value = '';
+                this.Notification.error(result.message);
+            });
         }
     }
 
     submitForm(form, isValid) {
         if (isValid) {
-            this.formData.moduleId = this.moduleId;
             let formData = new FormData(form);
-            this.createSubmitData(formData);
-            formData.append('file', this.file);
-            let xhr = new XMLHttpRequest();
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    console.log(this.responseText);
-                }
-            });
-            xhr.open("POST", this.modulesURL + "submit");
-            xhr.setRequestHeader("cache-control", "no-cache");
-            xhr.send(formData);
+            formData.append('file', this.file.value);
+            formData.append('moduleId', this.moduleId);
+            this.request(formData)
+                .then(res => {
+                    let response = JSON.parse(res);
+                    this.Notification.success(response.data);
+                }, err => {
+                    let response = JSON.parse(err);
+                    if (!response.success) {
+                        this.Notification.error(response.error.message);
+                    }
+                });
         }
     }
 
@@ -89,17 +92,27 @@ class ModulesCtrl {
                     valid: true,
                     message: '',
                 };
-                return resolve(result)
+                return resolve(result);
             }
         })
     }
 
-    createSubmitData(data) {
-        let keys = Object.keys(this.formData);
-        keys.map(i => {
-            data.append(i, this.formData[i]);
-        });
-        return data;
+    request(data) {
+        return new Promise((resolve, reject) => {
+            let xhr = new XMLHttpRequest();
+            xhr.addEventListener("readystatechange", function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        return resolve(xhr.response);
+                    } else {
+                        return reject(xhr.response);
+                    }
+                }
+            });
+            xhr.open("POST", this.modulesURL + "submit");
+            xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.send(data);
+        })
     }
 }
 export default ModulesCtrl;

@@ -6,13 +6,12 @@
             <form data-ng-submit="$ctrl.submitForm(modules,modules.$valid)" enctype="multipart/form-data"
                   class="main-form"
                   name="modules" novalidate>
-
                 <div class="form-group" custom-input
                      data-ng-class="{
                          'has-error': (modules | formValidator:'title')  == 'invalid',
                          'has-success': (modules | formValidator:'title')  == 'valid',
                          }">
-                    <label class="control-label">Title</label>
+                    <label class="control-label">Title<sub>*</sub></label>
                     <input type="text"
                            class="form-control"
                            data-ng-class="{'active':modules.title.$viewValue}"
@@ -53,19 +52,18 @@
                          'has-success': (modules | formValidator:'documentationLink')  == 'valid',
                          }"
                 >
-                    <label class="control-label">Documentation Link</label>
+                    <label class="control-label">Documentation Link<sub>*</sub></label>
                     <input type="text"
                            class="form-control"
                            data-ng-class="{'active':modules.documentationLink.$viewValue}"
                            placeholder=""
-                           ng-required="true"
                            name="documentationLink"
                            data-ng-model="$ctrl.formData.documentationLink"
                            data-ng-pattern="$ctrl.patterns.url"
                            data-ng-focus="modules.documentationLink.focused = true"
                            value="">
                     <div class="validation error" ng-if="(modules | formValidator:'documentationLink')  == 'invalid'">
-                        Documentation Link is required
+                        Documentation Link is not valid
                     </div>
                 </div>
                 <div class="form-group" custom-input
@@ -73,19 +71,18 @@
                          'has-error': (modules | formValidator:'exampleLink')  == 'invalid',
                          'has-success': (modules | formValidator:'exampleLink')  == 'valid',
                          }">
-                    <label class="control-label">Example Link</label>
+                    <label class="control-label">Example Link<sub>*</sub></label>
                     <input type="text"
                            data-ng-class="{'active':modules.exampleLink.$viewValue}"
                            class="form-control"
                            placeholder=""
-                           ng-required="true"
                            name="exampleLink"
                            data-ng-model="$ctrl.formData.exampleLink"
                            data-ng-pattern="$ctrl.patterns.url"
                            data-ng-focus="modules.exampleLink.focused = true"
                            value="">
                     <div class="validation error" ng-if="(modules | formValidator:'exampleLink')  == 'invalid'">
-                        Example Link is required
+                        Example Link is not valid
                     </div>
                 </div>
 
@@ -94,7 +91,7 @@
                          'has-error': (modules | formValidator:'description')  == 'invalid',
                          'has-success': (modules | formValidator:'description')  == 'valid',
                          }">
-                    <label class="control-label">Description</label>
+                    <label class="control-label">Description<sub>*</sub></label>
                     <textarea class="form-control"
                               placeholder=""
                               data-ng-class="{'active':modules.description.$viewValue}"
@@ -116,9 +113,9 @@
                             <div class="drag-area first">
                                 <div style="cursor: pointer" class="center-row"
                                      onclick="document.querySelector('#js-file').click()">
-                                    <span ng-if="$ctrl.fileName == ''"
+                                    <span ng-if="$ctrl.file.name == ''"
                                           class="">.js</span>
-                                    <img width="166" height="166" ng-show="$ctrl.fileName.length > 0"
+                                    <img width="166" height="166" ng-if="$ctrl.file.name.length > 0"
                                          ng-src="./images/general/js-outline.png"
                                          alt="">
                                 </div>
@@ -126,24 +123,23 @@
                                     <input type="file"
                                            class="hidden"
                                            id="js-file"
-                                           name="icon-h"
+                                           name="file"
                                            onchange="angular.element(this).scope().$ctrl.changeFile(event)" required>
                                 </p>
                                 <div class="drag-item-again"
                                      onclick="document.querySelector('#js-file').click()"
-                                     ng-show="$ctrl.fileName !== ''">
+                                     ng-show="$ctrl.file.name !== ''">
                                     <div class="drag-board"></div>
                                     <span>Tap To Replace</span>
                                 </div>
                             </div>
                             <h5 class="section-small-title text-center"></h5>
                         </div>
-                        <div ng-if="$ctrl.fileName.length > 0" style="color: white;">
-                            <span>{{$ctrl.fileName}}</span>
+                        <div ng-if="$ctrl.file.name.length > 0" style="color: white;">
+                            <span>{{$ctrl.file.name}}</span>
                         </div>
                         <div class="drag-item hidden">
                             <h5 class="section-small-title">Favicon</h5>
-                            <!--<p class="text-small description">upload .png 1024x1024</p>-->
                             <div class="drag-area first">
                                 <div class="center-row">
                                     <i class="icon icon-invalid"></i>
