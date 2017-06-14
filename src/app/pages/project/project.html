@@ -31,15 +31,16 @@
                             <div class="form-group"
                                  ng-show="$ctrl.isGithubTemplate"
                                  data-ng-class="{
-                                     'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused && (!project.githuburl.$viewValue || project.githuburl.$viewValue.length > 0),
+                                     'has-error': !$ctrl.githubUrlValid && project.githuburl.$viewValue.length > 0 || (project | PFValidator:'githuburl')  == 'invalid',
                                      'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused
                                  }">
-                                <label for="name">GitHub Project URL</label>
+                                <label for="name">GitHub Project URL<sub>*</sub></label>
                                 <input type="text"
                                        class="form-control"
                                        name="githuburl"
                                        placeholder="GitHub Project URL"
                                        value=""
+                                       ng-required="$ctrl.isGithubTemplate"
                                        ng-minlength="3"
                                        data-ng-pattern="$ctrl.githubPattern"
                                        ng-keyup="$ctrl.validateGithubUrl()"
@@ -47,8 +48,12 @@
                                        ng-click="$ctrl.githubUrlFocused = true"
                                        data-ng-model="$ctrl.project.githubUrl">
                                 <div class="validation error"
-                                     ng-if="!$ctrl.githubUrlValid && $ctrl.githubUrlFocused && project.githuburl.$viewValue.length > 0">
+                                     ng-if="!$ctrl.githubUrlValid && project.githuburl.$viewValue.length > 0">
                                     {{$ctrl.formErrors.github}}
+                                </div>
+                                <div class="validation error"
+                                     ng-if="(project | PFValidator:'githuburl')  == 'invalid'">
+                                    GitHub URL is required
                                 </div>
                             </div>
 

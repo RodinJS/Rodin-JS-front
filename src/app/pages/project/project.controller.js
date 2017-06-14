@@ -4,6 +4,7 @@ class ProjectCtrl {
 
         this._$timeout = $timeout;
         this._$scope = $scope;
+        this.githubUrlFocused = false;
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this.editorUrl = AppConstants.EDITOR;
@@ -60,11 +61,12 @@ class ProjectCtrl {
         projectInfo.description = this._$scope.projectDescription;
         this.Project.create(projectInfo).then(
             data => {
-                this.Project.transpile(data._id);
-                this.VCS.create(data._id, {
-                    root: data.root,
-                    name: data.name,
-                }).then(this.createFinalize, this.createFinalize);
+                this.Project.transpile(data._id)
+                    .then(response => this.VCS.create(data._id, {
+                        root: data.root,
+                        name: data.name,
+                    }), this.createFinalize)
+                    .then(this.createFinalize, this.createFinalize);
             },
 
             err => {
@@ -83,8 +85,8 @@ class ProjectCtrl {
         this.ProjectTemplate.getList().then(
             data => {
                 data.push({
-                    thumbnail: '',
-                    name: 'GitHub'
+                    thumbnail: './images/projects/Github_Project.jpg',
+                    name: 'Pull From GitHub'
                 });
                 this.projectTemplates = {
                     projects: _.chunk(data, 4),
@@ -108,15 +110,11 @@ class ProjectCtrl {
 
     setActiveTemplate(project) {
         this.projectTemplates.selected = project;
-        this.isGithubTemplate = project.name === 'GitHub';
+        this.isGithubTemplate = project.name === 'Pull From GitHub';
     }
 
     validateGithubUrl() {
         this.githubUrlValid = this.githubPattern.test(this.project.githubUrl);
-        if (this.githubUrlValid) {
-            angular.element('input[type=radio]').prop('checked', false);
-            this.projectTemplates.selected = null;
-        }
     }
 
     createFinalize(err) {
