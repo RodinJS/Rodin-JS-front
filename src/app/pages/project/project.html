@@ -31,8 +31,8 @@
                             <div class="form-group"
                                  ng-show="$ctrl.isGithubTemplate"
                                  data-ng-class="{
-                                     'has-error': !$ctrl.githubUrlValid && project.githuburl.$viewValue.length > 0 || (project | PFValidator:'githuburl')  == 'invalid',
-                                     'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused
+                                     'has-error': !$ctrl.githubUrlValid && project.githuburl.$dirty || (project | PFValidator:'githuburl')  == 'invalid',
+                                     'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused || (project | PFValidator:'githuburl')  == 'valid'
                                  }">
                                 <label for="name">GitHub Project URL<sub>*</sub></label>
                                 <input type="text"
@@ -48,12 +48,8 @@
                                        ng-click="$ctrl.githubUrlFocused = true"
                                        data-ng-model="$ctrl.project.githubUrl">
                                 <div class="validation error"
-                                     ng-if="!$ctrl.githubUrlValid && project.githuburl.$viewValue.length > 0">
+                                     ng-if="!$ctrl.githubUrlValid && project.githuburl.$dirty || (project | PFValidator:'githuburl')  == 'invalid'">
                                     {{$ctrl.formErrors.github}}
-                                </div>
-                                <div class="validation error"
-                                     ng-if="(project | PFValidator:'githuburl')  == 'invalid'">
-                                    GitHub URL is required
                                 </div>
                             </div>
 
