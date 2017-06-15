@@ -1,3 +1,4 @@
+import {gitHub} from '../../components/localTemplates.js';
 class ProjectCtrl {
     constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User, VCS, Notification, $timeout) {
         'ngInject';
@@ -59,6 +60,7 @@ class ProjectCtrl {
             projectInfo.templateId = this.projectTemplates.selected._id;
         projectInfo.tags = projectInfo.tags.map(i => i.text);
         projectInfo.description = this._$scope.projectDescription;
+        projectInfo.defaultThumbnail = this.projectTemplates.selected.thumbnail;
         this.Project.create(projectInfo).then(
             data => {
                 this.Project.transpile(data._id)
@@ -84,10 +86,7 @@ class ProjectCtrl {
         this.showLoader = true;
         this.ProjectTemplate.getList().then(
             data => {
-                data.push({
-                    thumbnail: './images/projects/Github_Project.jpg',
-                    name: 'Pull From GitHub'
-                });
+                data.push(gitHub);
                 this.projectTemplates = {
                     projects: _.chunk(data, 4),
                     selected: data[0],
