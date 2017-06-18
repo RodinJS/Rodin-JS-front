@@ -218,6 +218,7 @@
                 // make it draggable and no longer dependent on the jqueryUI
                 if (o.railDraggable) {
                     bar.bind('mousedown', function (e) {
+                        var t, pageY, currTop;
                         var $doc = $(document);
                         isDragg = true;
                         t = parseFloat(bar.css('top'));

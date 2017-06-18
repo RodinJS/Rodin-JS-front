@@ -15,7 +15,7 @@
             </a>
             <a ui-sref="landing.login" ng-if="!$ctrl.user"
                class="visible-xs-inline-block btn-mobile-login login">Login</a>
-            <a ng-click="$ctrl.gotToHome()" class="logo navbar-brand">
+            <a ui-sref="home.landing({new:true})" ui-sref-opts="{reload: false, notify: true}" class="logo navbar-brand">
                 <img alt="Rodin" src="/images/landing/general/logo.svg">
             </a>
 
@@ -53,10 +53,11 @@
             </div>
             <ul class="nav navbar-nav navbar-right" ng-if="!$ctrl.user">
                 <li class="hidden-xs">
-                    <a ui-sref="landing.login">Login</a>
+                    <a ui-sref="landing.login"  style="font-size:16px">Login</a>
                 </li>
-                <li class="hidden-xs" ng-if="$ctrl.isHome"><a href="" ng-click="$ctrl.scrollToSignUp()"
-                                                              class="btn sign-up-btn">Sign up</a></li>
+                <li class="hidden-xs" ng-if="$ctrl.isHome">
+                    <a href="" ng-click="$ctrl.scrollToSignUp()" class="btn sign-up-btn">Sign up</a>
+                </li>
             </ul>
             <div class="account-action" ng-if="$ctrl.user">
                 <ul>
@@ -65,7 +66,7 @@
                            class="btn-notifi new dropdown-toggle btn-notifi" uib-dropdown-toggle role="button">
                             <i class="rd rd-notifi"></i>
                         </a>
-                        <a href="" ng-if="$ctrl.notifications.length < 1" class="btn-notifi dropdown-toggle btn-notifi"
+                        <a href="" ng-if="$ctrl.notifications.length <= 0" class="btn-notifi dropdown-toggle btn-notifi"
                            uib-dropdown-toggle role="button">
                             <i class="rd rd-notifi"></i>
                         </a>
@@ -74,23 +75,30 @@
                                 <h5 class="pull-left">Notifications</h5>
                                 <small class="pull-right">
                                     <a href="" ng-click="$ctrl.deleteNotification()" style="font-size: 11px;">
-                                        Delete all</a>
+                                        Delete all
+                                    </a>
                                 </small>
                                 <div style="clear:both"></div>
                             </div>
-                            <ul rd-scroll class="notifi-list" id="notifi-list" ng-if="$ctrl.notifications.length > 0">
-                                <li ng-repeat="(index, notification) in $ctrl.notifications"
-                                    ng-click="$ctrl.updateNotification(notification, index, $event)"
-                                    ng-class="notification.typeClass +' '+ notification.readClass">
-                                    <a href="">
-                                        <p compile="notification.label"></p>
-                                        <span class="notifi-date">{{notification.date}}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                                <div ng-if="$ctrl.notifications.length < 1" class="notification-list">
-                                    <span class="no-notifications">No new notifications</span>
-                                </div>
+                            <div data-ng-if="$ctrl.notifications.length > 0">
+                                <ul rd-scroll total-notifications="{{$ctrl.notifications.length}}"
+                                    style="top: 150px;"
+                                    class="notifi-list"
+                                    id="notifi-list">
+                                    <li ng-repeat="(index, notification) in $ctrl.notifications"
+                                        class="notifi-list-element"
+                                        ng-click="$ctrl.updateNotification(notification, index, $event)"
+                                        ng-class="notification.typeClass +' '+ notification.readClass">
+                                        <a href="">
+                                            <p compile="notification.label"></p>
+                                            <span class="notifi-date">{{notification.date}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div ng-if="$ctrl.notifications.length <= 0" class="notification-list">
+                                <span class="no-notifications">No new notifications</span>
+                            </div>
                         </div>
                     </li>
                     <li class="dropdown account-dropdown" data-uib-dropdown auto-close="outsideClick">
@@ -103,7 +111,6 @@
                             <i class="rd rd-angle-down hidden-xs"></i>
                         </a>
                         <div class="dropdown-menu account-dropdown-menu" uib-dropdown-menu>
-                            <h4>{{$ctrl.user.username}}</h4>
                             <ul class="account-action-list">
                                 <li>
                                     <a data-ui-sref-active="active" data-ui-sref="app.profile">Edit Profile</a></li>

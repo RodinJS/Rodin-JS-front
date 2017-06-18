@@ -158,6 +158,14 @@ class User {
         return Analyser.promise;
     }
 
+    validateChangePasswordToken(token) {
+        let Analyser = new this._Analyser();
+
+        this._User.one(`resetPassword?token=${token}`).get().then(Analyser.resolve, Analyser.reject);
+
+        return Analyser.promise;
+    }
+
     updatePassword(fields = {}) {
         let Analyser = new this._Analyser();
 

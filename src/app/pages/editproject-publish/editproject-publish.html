@@ -3,7 +3,12 @@
         <div class="selet-template-container">
             <div class="main-container">
                 <h1 class="title text-center">
-                    <i class="icon icon-private"></i>
+                    <i style="margin-right:5px" ng-show="$ctrl.project.public"
+                       ng-class="{
+                                        'icon-private' : (!$ctrl.project.public || $ctrl.project.public == 'false'),
+                                        'icon-globe' : ($ctrl.project.public && $ctrl.project.public == 'true'),
+                                    }"
+                       class="icon" aria-hidden="true"></i>
                     <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
                 <div class="main-form">
                     <div class="content-navbar">
@@ -37,7 +42,7 @@
                         <p class="description">Your project is published on
                             <a class="text-yellow" target="_blank" href="{{$ctrl.project.publishedUrl}}">{{$ctrl.project.publishedUrl}}</a>
                         </p>
-                        <p class="description">Last publish at {{$ctrl.project.publishDate | date: 'MMMM dd yyyy.h:mm:ss a'}}</p>
+                        <p class="description">Last publish at {{$ctrl.project.activePublishDate ? $ctrl.project.activePublishDate : $ctrl.project.publishDate | date: 'MMMM dd yyyy.h:mm:ss a'}}</p>
                         <div class="margin-top-40 publish-buttons">
                             <button class="btn btn-primary" ng-click="$ctrl.modals.updateVersion = true;">Update
                                 Version

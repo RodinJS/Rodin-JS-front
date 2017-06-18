@@ -333,18 +333,29 @@ function ConfirmPassword() {
 
 function RdScroll() {
     return {
-		restrict: 'A',
-		scope: {
-			rdScroll: '=',
-		},
-		link: function link(scope, elem, attrs, ctrl) {
-			$(elem).slimScroll({
-				height: '485px',
-				color: '#AAAAAA',
-				alwaysVisible: true
-			})
-		},
-	};
+        restrict: 'A',
+        scope: {
+            rdScroll: '=',
+        },
+        link: function link(scope, elem, attrs, ctrl) {
+            let elHeight = 0;
+            scope.$watch(() => {
+                for (let i = 0; i < elem[0].children.length; i++) {
+                    elHeight += elem[0].children[i].clientHeight;
+                }
+
+                setElementHeight(elHeight);
+            });
+            let setElementHeight = height => {
+                $(elem).slimScroll({
+                    height: `${height >= 350 ? 350 : height}px`,
+                    color: '#AAAAAA',
+                    alwaysVisible: true
+                });
+                elHeight = 0;
+            };
+        },
+    };
 }
 
 export default {

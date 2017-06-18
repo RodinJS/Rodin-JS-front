@@ -27,6 +27,7 @@ import 'angular-ui-bootstrap/dist/ui-bootstrap-tpls';
 import 'angular-ui-switch/angular-ui-switch.min';
 import 'angular-ui-notification/dist/angular-ui-notification';
 import 'ng-tags-input/build/ng-tags-input.min';
+import 'angular-img-cropper/dist/angular-img-cropper.min'
 
 //import 'app/components/wysiwyg/bootstrap-colorpicker-module'
 //import 'app/components/wysiwyg/angular-wysiwyg'
@@ -45,24 +46,25 @@ import './filters/index';
 
 // Create and bootstrap application
 const requires = [
-  'ngAnimate',
-  'ngTouch',
-  'ngCookies',
+    'ngAnimate',
+    'ngTouch',
+    'ngCookies',
 
-  'ui.router',
-  'angular-storage',
-  'restangular',
-  'templates',
-  'ui.bootstrap',
-  'app.services',
-  'app.store',
-  'app.components',
-  'app.layout',
-  'app.pages',
-  'app.filters',
-  'uiSwitch',
-  'ngTagsInput',
-  'ui-notification',
+    'ui.router',
+    'angular-storage',
+    'restangular',
+    'templates',
+    'ui.bootstrap',
+    'app.services',
+    'app.store',
+    'app.components',
+    'app.layout',
+    'app.pages',
+    'app.filters',
+    'uiSwitch',
+    'ngTagsInput',
+    'ui-notification',
+    'angular-img-cropper',
 ];
 
 // Mount on window for testing
@@ -77,5 +79,5 @@ angular.module('app').config(appConfig);
 angular.module('app').run(appRun);
 
 angular.bootstrap(document, ['app'], {
-  strictDi: true
+    strictDi: true
 });

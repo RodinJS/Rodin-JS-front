@@ -3,9 +3,15 @@
         <div class="selet-template-container">
             <div class="main-container">
                 <h1 class="title text-center">
-                    <i class="icon icon-private"></i>
-                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span></h1>
-                <div class="main-form">
+                    <i style="margin-right:5px" ng-show="$ctrl.project.public"
+                       ng-class="{
+                            'icon-private' : (!$ctrl.project.public || $ctrl.project.public == 'false'),
+                            'icon-globe' : ($ctrl.project.public && $ctrl.project.public == 'true'),
+                        }" class="icon" aria-hidden="true"></i>
+                    <span class="user-name">{{$ctrl.project.displayName || $ctrl.project.name}}</span>
+                </h1>
+                <form class="main-form" name="project" novalidate>
+
                     <div class="content-navbar">
                         <ul class="navbar-list">
                             <editor-navigation data-projectid="$ctrl.project._id"></editor-navigation>
@@ -27,24 +33,27 @@
                             </li>
                             <li class="other-links" ng-click="$ctrl.open('remove')"><a><i class="icon icon-delete"></i></a><span>Delete</span>
                             </li>
-                            <li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i class="icon icon-link"></i></a><span>Share</span>
+                            <li class="other-links" ng-if="$ctrl.projectPublic" ng-click="$ctrl.open('share')"><a><i
+                                    class="icon icon-link"></i></a><span>Share</span>
                             </li>
                         </ul>
                     </div>
 
                     <div class="section section-switch">
 
-                        <switch
-                                id="enabled"
-                                data-name="enabled"
-                                data-ng-change="$ctrl.toggleStatus()"
+                        <switch id="enabled"
+                                data-name="enabled1"
+                                ng-change="$ctrl.toggleStatus()"
                                 data-ng-model="$ctrl.projectPublic"
                                 class="blue"></switch>
+
                         <h5 class="switch-box-title">Public</h5>
                         <p class="description text-small text-down" ng-if="$ctrl.project.public === 'true'">
                             Current version:
-                            <a  class="text-yellow" ng-href="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}?t={{$ctrl.getDate()}}" target="_blank">
-                                {{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}
+                            <a class="text-yellow"
+                               href="{{$ctrl.publicURL | lowercase}}?t={{$ctrl.currentDate}}"
+                               target="_blank">
+                                {{$ctrl.publicURL | lowercase}}
                             </a>
                         </p>
                         <p ng-if="$ctrl.project.publishedUrl" class="description text-small text-down">
@@ -53,24 +62,35 @@
                         </p>
                     </div>
 
+
                     <div class="section section-general-setting">
                         <h3 class="section-title">General Settings</h3>
                         <div class="form-group" custom-input
-                             data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
+                             data-ng-class="{
+                             'has-error': (project | PFValidator:'name')  == 'invalid',
+                             'has-success': (project | PFValidator:'name')  == 'valid'
+                             }">
                             <label>
-                                Project name  <span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">is required</span>
+                                Project Name<sub>*</sub>
                             </label>
                             <input type="text"
+                                   name="name"
                                    class="form-control"
                                    placeholder="" required
                                    ng-click="$ctrl.displayNameFocused = true"
                                    ng-minlength="3"
                                    ng-maxlength="64"
                                    limit-to="64"
+                                   ng-focus="project.name.focused = true"
+                                   ng-keyup="project.name.pressed = true"
                                    ng-model="$ctrl.project.displayName">
+                            <div class="validation error"
+                                 ng-if="(project | PFValidator:'name')  == 'invalid'">
+                                {{$ctrl.formErrors.name}}
+                            </div>
                         </div>
                         <div class="form-group" custom-input ng-if="$ctrl.project.githubUrl">
-                            <label>GitHub project url</label>
+                            <label>GitHub project URL</label>
                             <input type="text"
                                    class="form-control input-blue"
                                    placeholder=""
@@ -78,7 +98,7 @@
                                    disabled>
                         </div>
                         <div class="form-group" custom-input>
-                            <label>Project url</label>
+                            <label>Project URL</label>
                             <input type="text"
                                    class="form-control input-blue"
                                    placeholder=""
@@ -95,27 +115,38 @@
                     <div class="section section-vr-space">
                         <!--<h3 class="section-title">Project Thumbnail</h3>-->
                         <div class="drag-cont upload-label">
-                            <div class="drag-item first text-center">
+                            <div class="drag-item first text-center" style="padding-bottom:0">
                                 <label>Project Thumbnail</label>
                                 <div class="drag-area first">
-                                    <div style="cursor: pointer" class="center-row" onclick="document.querySelector('#thumbnail-img').click()">
-                                        <i ng-if="!$ctrl.project.thumbnail" class="icon icon-invalid"></i>
-                                        <img width="166" height="166" ng-src="{{$ctrl.project.thumbnail}}" ng-if="!!$ctrl.project.thumbnail" alt="">
+                                    <div style="cursor: pointer" class="center-row"
+                                         ng-click="$ctrl.onUploadAreaClick()">
+                                        <span ng-if="!$ctrl.project.thumbnail">.png</span>
+                                        <img width="262" height="197" ng-src="{{$ctrl.project.thumbnail}}"
+                                             ng-if="!!$ctrl.project.thumbnail" alt="">
                                     </div>
                                     <p class="drag-instruct">
-                                    <input class="hidden" type="file" id="thumbnail-img" data-ng-model="avatarUrl" accept="image/jpeg,image/jpg,image/png,"
-                                           onchange="angular.element(this).scope().$ctrl.changeThumbnail(event)" name="avatar"/>
+                                        <input class="hidden" type="file" id="thumbnail-img"
+                                               img-cropper-fileread image="$ctrl.cropper.sourceImage"
+                                               accept="image/jpeg,image/jpg,image/png,"
+                                               onchange="angular.element(this).scope().$ctrl.changeThumbnail(event);"
+                                               name="avatar"/>
                                     </p>
-                                    <div class="drag-item-again" onclick="document.querySelector('#thumbnail-img').click()" ng-show="$ctrl.project.thumbnail">
+                                    <div class="drag-item-again"
+                                         ng-click="$ctrl.onUploadAreaClick()"
+                                         ng-show="$ctrl.project.thumbnail">
                                         <div class="drag-board"></div>
                                         <span>Tap To Replace</span>
                                     </div>
                                 </div>
-                                <h5 class="section-small-title text-center">We recommend to upload a maximum of 5Mb size image.</h5>
+                                <h5 class="section-small-title text-center">
+                                    Image max size is 5MB  and allowed
+                                    file types are jpeg, jpg, png
+                                </h5>
                             </div>
                             <div class="drag-item hidden">
                                 <h5 class="section-small-title">Favicon</h5>
-                                <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon image Supported image formats are .ico, .png, .gif and .jpg</p>
+                                <p class="text-small description">Upload a <span>32 x 32 pixel</span> favicon image
+                                    Supported image formats are .ico, .png, .gif and .jpg</p>
                                 <div class="drag-area first">
                                     <div class="center-row"><i class="icon icon-invalid"></i>
                                     </div>
@@ -127,7 +158,7 @@
                     </div>
 
                     <div class="section overview">
-                        <h3 class="section-title">Overview</h3>
+                        <h3 class="section-title" style="margin: 10px 0 15px !important">Overview</h3>
                         <table class="table main-table">
                             <tbody>
                             <tr>
@@ -168,33 +199,50 @@
                         </table>
                     </div>
 
-
                     <div class="section section-project-content last-section">
-                        <h3 class="section-title">Description</h3>
+                        <h3 class="section-title">Description<sub>*</sub></h3>
                         <div class="form-group"
-                             data-ng-class="{'has-error': !$ctrl.project.description, 'has-success': $ctrl.project.description.length > 0}">
+                             data-ng-class="{
+                             'has-error': (project | PFValidator:'description')  == 'invalid',
+                             'has-success': (project | PFValidator:'description')  == 'valid'
+                             }">
                             <!--<label for="area">Description</label>-->
-                            <textarea id="area" limit-to="128" style="width:100%"
+                            <textarea id="area"
+                                      limit-to="128"
+                                      style="width:100%"
+                                      name="description"
                                       ng-model="$ctrl.project.description"
-                                      class="form-control area-control"></textarea>
+                                      ng-focus="project.description.focused = true"
+                                      ng-keyup="project.description.pressed = true"
+                                      class="form-control area-control" required>
+
+                            </textarea>
                             <span class="letter-quantity">
                                 <span>{{128-$ctrl.project.description.length}}</span>/128
                             </span>
+                            <div class="validation error" ng-if="(project | PFValidator:'description')  == 'invalid'">
+                                Description is required
+                            </div>
                         </div>
                     </div>
 
                     <div class="btn-wrapper" style="text-align: center">
-                        <button type="button" ng-click="$ctrl.update()" class="btn btn-default btn-submit">Update</button>
+                        <button type="button" ng-click="$ctrl.update(project.$valid)" class="btn btn-default btn-submit">
+                            Update
+                        </button>
                     </div>
 
-                </div>
+                </form>
+
+
             </div>
         </div>
     </div>
 </div>
 
 
-<div class="modal" close-modal="remove"  ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+<div class="modal" close-modal="remove"
+     ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
     <div class="modal-content">
         <div class="modal-header">
             <!--<span class="close" data-ng-click="$ctrl.modals.remove = false">×</span>-->
@@ -207,7 +255,7 @@
                      Your project will no longer be available on
                      <span class="text-highlight">{{$ctrl.project.publishedUrl}}</span>, your apps for
                 </span>
-            <span>The <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !</span><br>
+                <span>The <span class="text-highlight">"{{$ctrl.project.name}}"</span> will stop working !</span><br>
             <p class="confirm">Are you sure you want to continue?</p>
             </p>
         </div>
@@ -215,7 +263,8 @@
             <div class="required-field-actions clearfix">
                 <div class="text-center">
                     <button type="button" class="btn btn-negative"
-                            ng-click="$ctrl.deleteProject()">Delete</button>
+                            ng-click="$ctrl.deleteProject()">Delete
+                    </button>
                     <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.remove = false">Cancel</a>
                 </div>
             </div>
@@ -223,7 +272,8 @@
     </div>
 </div>
 
-<div class="modal" close-modal="share" ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
+<div class="modal" close-modal="share"
+     ng-class="{'display-block': $ctrl.modals.share, 'display-none': !$ctrl.modals.share}">
     <div class="modal-content">
         <div class="modal-header">
             <!--<span class="close" data-ng-click="$ctrl.modals.share = false">×</span>-->
@@ -235,7 +285,9 @@
             </p>
             <div class="form-wrapper margin-top-20" data-ng-if="$ctrl.project.public === 'true'">
                 <div class="form-group">
-                    <input id="projectUrl" type="text" class="form-control" value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}" disabled>
+                    <input id="projectUrl" type="text" class="form-control"
+                           value="{{$ctrl.PUBLIC + $ctrl.user.username + '/' + $ctrl.project.name | lowercase}}"
+                           disabled>
                     <!--<label class="control-label float-label">Url of project</label>-->
                 </div>
             </div>
@@ -243,8 +295,12 @@
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <div class="text-center">
-                    <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive" data-ng-click="$ctrl.goToSettings()">Go To Settings</button>
-                    <button  data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive" data-ng-click="$ctrl.copyUrl(); $ctrl.modals.share = false;">Copy URL</button>
+                    <button data-ng-if="$ctrl.project.public === 'false'" type="button" class="btn btn-positive"
+                            data-ng-click="$ctrl.goToSettings()">Go To Settings
+                    </button>
+                    <button data-ng-if="$ctrl.project.public === 'true'" type="button" class="btn btn-positive"
+                            data-ng-click="$ctrl.copyUrl(); $ctrl.modals.share = false;">Copy URL
+                    </button>
                     <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.share = false">Cancel</a>
                 </div>
             </div>
@@ -252,3 +308,31 @@
     </div>
 </div>
 
+<div class="modal" style="z-index:1001"
+     ng-class="{'display-block': $ctrl.modals.crop, 'display-none': !$ctrl.modals.crop}">
+    <div class="modal-content" style="max-width: 550px;">
+        <div>
+            <canvas width="500"
+                    height="300"
+                    id="canvas"
+                    image-cropper
+                    image="$ctrl.cropper.sourceImage"
+                    cropped-image="$ctrl.cropper.croppedImage"
+                    crop-width="262"
+                    crop-height="197"
+                    keep-aspect="true"
+                    touch-radius="30">
+            </canvas>
+        </div>
+        <div class="modal-footer" style="max-width: 550px;">
+            <div class="required-field-actions clearfix">
+                <div class="text-center">
+                    <button type="button" class="btn btn-positive"
+                            data-ng-click="$ctrl.saveImage()">Save
+                    </button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.crop = false">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -60,17 +60,17 @@ class AppHeaderCtrl {
 
     }
 
-    showSocketResponse(data){
-        console.log(data);
-        const message = _.isObject(data.data) ? data.data.message : data.data;
-        if(data.data.error || data.error)
+    showSocketResponse(data) {
+        const respData = data.data || data;
+        const message = respData.message || respData.label;
+        if(respData.error)
             this._Notification.error(message);
         else
             this._Notification.success(message);
 
-        if(!data.label)
-            data.label = message;
-        this.eventBus.emit(this.eventBus.notifications.SET_ONE, data);
+        if(!respData.label)
+            respData.label = message;
+        this.eventBus.emit(this.eventBus.notifications.SET_ONE, respData);
     }
 
     clickMenu() {
@@ -103,12 +103,13 @@ class AppHeaderCtrl {
     }
 
     deleteNotification(param, index) {
+        if(this.notifications.length <= 0) return;
         param = !param  ? 'all=true' : 'id=' + param + '';
+
         this.User.deleteNotification(param).then(
             notification=> {
                 this.eventBus.emit(this.eventBus.notifications.DELETE, index);
             },
-
             error=> {
                 console.log(error);
             }

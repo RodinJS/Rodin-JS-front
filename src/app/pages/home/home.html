@@ -144,132 +144,115 @@
             <div class="code-block-wrapper" style="opacity: 0;">
                 <pre class="code-block" id="rodinCode">
                         <code class="code">
-                            import * as RODIN from 'https://cdn.rodin.io/v0.0.1/rodinjs/RODIN.js';
-                            import {THREE} from 'https://cdn.rodin.io/v0.0.1/vendor/three/THREE.GLOBAL.js';
-                            import {SceneManager} from 'https://cdn.rodin.io/v0.0.1/rodinjs/scene/SceneManager.js';
-                            import {CubeObject} from 'https://cdn.rodin.io/v0.0.1/rodinjs/sculpt/CubeObject.js';
-                            import {MouseController} from 'https://cdn.rodin.io/v0.0.1/rodinjs/controllers/MouseController.js';
+                            import * as RODIN from 'rodin/core';
+                            RODIN.start();
 
-                            let scene = SceneManager.get();
-                            let mouseController = new MouseController();
-                            SceneManager.addController(mouseController);
+                            const earthModel = new RODIN.Sculpt('./models/earth.obj');
+                            earthModel.on(RODIN.CONST.READY, (evt) => {
+                                evt.target.position.set(0, 1.6, -3);
+                                RODIN.Scene.add(evt.target);
+                            });
+                            earthModel.on(RODIN.CONST.UPDATE, (evt) => { evt.target.rotation.y += 0.002; });
 
-                            let geometry = new THREE.BoxGeometry(0.015, 0.015, 0.015);
-                            let material = new THREE.MeshNormalMaterial();
-
-                            let onReady = function(evt) {
-                                evt.target.object3D.position.set(Math.randomFloatIn(-0.75,0.75),
-                                    scene.controls.userHeight - Math.randomFloatIn(-1.5,1.5),
-                                    Math.randomFloatIn(-0.75,0.75));
-
-                                scene.add(evt.target.object3D);
-                                RODIN.Raycastables.push(evt.target.object3D);
-                            };
-                            let onUpdate = function(evt) {
-                                    evt.target.object3D.rotation.y += RODIN.Time.deltaTime() / 500;
-                            };
-                            let onHover = function(evt) {
-                                evt.target.object3D.scale.set(2, 2, 2);
-                            };
-                            let onHoverOut = function(evt) {
-                                evt.target.object3D.scale.set(1, 1, 1);
-                            };
-
-                            for (let i = 0; i < 1000; i++) {
-                                let cube = new RODIN.THREEObject(new THREE.Mesh(geometry, material));
-                                cube.on(RODIN.CONSTANTS.EVENT_NAMES.READY, onReady);
-                                cube.on(RODIN.CONSTANTS.EVENT_NAMES.UPDATE, onUpdate);
-                                cube.on(RODIN.CONSTANTS.EVENT_NAMES.CONTROLLER_HOVER, onHover);
-                                cube.on(RODIN.CONSTANTS.EVENT_NAMES.CONTROLLER_HOVER_OUT, onHoverOut);
-                            }
+                            const plane = new RODIN.Plane(50, 50, 100, 100,
+                                new THREE.MeshBasicMaterial({
+                                    color: 0x35a9ff,
+                                    wireframe: true,
+                                    alphaMap: RODIN.Loader.loadTexture('https://cdn.rodin.io/resources/img/gradient.jpg'),
+                                    transparent: true,
+                                    opacity: 0.2
+                                })
+                            );
+                            plane.rotation.x = -Math.PI / 2;
+                            RODIN.Scene.add(plane);
                         </code>	</pre>
             </div>
 
             <!-- begin form -->
 
-            <div class="form">
-                <div class="input-group">
-                    <input type="email"
-                           style="font-size:17px"
-                           class="form-control"
-                           id="emailControl"
-                           ng-model="$ctrl.subscribe.email"
-                           placeholder="{{$ctrl.emailFocused ? 'Provide email' : 'Get notified when we launch'}}"
-                           ng-pattern="$ctrl.patterns.email"
+            <!--<div class="form">-->
+                <!--<div class="input-group">-->
+                    <!--<input type="email"-->
+                           <!--style="font-size:17px"-->
+                           <!--class="form-control"-->
+                           <!--id="emailControl"-->
+                           <!--ng-model="$ctrl.subscribe.email"-->
+                           <!--placeholder="{{$ctrl.emailFocused ? 'Provide email' : 'Get notified when we launch'}}"-->
+                           <!--ng-pattern="$ctrl.patterns.email"-->
 
-                           ng-click="$ctrl.notificationBoxTrigger($event)"
-                           value="">
-                    <span class="input-group-btn">
-					<button class="btn btn-default subscribe-btn"
-                            ng-class="!$ctrl.subscribe.email || !$ctrl.subscribe.userType ? 'disabled' : ''"
-                            ng-mouseover="$ctrl.signUpHovered3 = true"
-                            ng-mouseleave="$ctrl.signUpHovered3 = false"
-                            ng-click="$ctrl.submitSubscribe()"
-                            type="submit">
-						<span class="text">{{$ctrl.signUpHovered3 ? 'Sign Up' : 'Big blue button'}}</span>
-					</button>
-				</span>
-                    <div class="form-action-wrapper">
-                        <div class="radio-wrapper">
-                            <label class="raido-inline">
-                                <input type="radio"
-                                       name="Personal"
-                                       value="Personal" checked
-                                       ng-init="$ctrl.subscribe.userType = 'Personal'"
-                                       ng-model="$ctrl.subscribe.userType">
-                                <span class="custom-radio"></span>
-                                <span class="name">Personal</span>
-                            </label>
-                            <label class="raido-inline">
-                                <input type="radio" name="Agency" value="Agency"  ng-model="$ctrl.subscribe.userType">
-                                <span class="custom-radio"></span>
-                                <span class="name">Agency</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-wrapper">
-                            <label class="checkbox-inline">
-                                <input type="checkbox"
-                                       name="$ctrl.subscribe.position[]"
-                                       value="3D engineer"
-                                       ng-click="$ctrl.toggle('3D Engineer')"
-                                       ng-checked="$ctrl.subscribe.position.indexOf('3D Engineer') > -1">
-                                <span class="custom-checkbox"></span>
-                                <span class="name">3D engineer</span>
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox"
-                                       name="$ctrl.subscribe.position[]"
-                                       value="Designer"
-                                       ng-click="$ctrl.toggle('Designer')"
-                                       ng-checked="$ctrl.subscribe.position.indexOf('Designer') > -1">
-                                <span class="custom-checkbox"></span>
-                                <span class="name">Designer</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-wrapper">
-                            <label class="checkbox-inline">
-                                <input type="checkbox"
-                                       name="$ctrl.subscribe.position[]"
-                                       value="Web dev"
-                                       ng-click="$ctrl.toggle('Web dev')"
-                                       ng-checked="$ctrl.subscribe.position.indexOf('Web dev') > -1">
-                                <span class="custom-checkbox"></span>
-                                <span class="name">Web dev</span>
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox"
-                                       name="$ctrl.subscribe.position[]"
-                                       value="Game dev"
-                                       ng-click="$ctrl.toggle('Game dev')"
-                                       ng-checked="$ctrl.subscribe.position.indexOf('Game dev') > -1">
-                                <span class="custom-checkbox"></span>
-                                <span class="name">Game dev</span>
-                            </label>
-                        </div>
-                        <div class="form-backdrop" ng-click="$ctrl.notificationBoxTrigger(false, true)"></div>
-                    </div>
-                </div>
-            </div>
+                           <!--ng-click="$ctrl.notificationBoxTrigger($event)"-->
+                           <!--value="">-->
+                    <!--<span class="input-group-btn">-->
+					<!--<button class="btn btn-default subscribe-btn"-->
+                            <!--ng-class="!$ctrl.subscribe.email || !$ctrl.subscribe.userType ? 'disabled' : ''"-->
+                            <!--ng-mouseover="$ctrl.signUpHovered3 = true"-->
+                            <!--ng-mouseleave="$ctrl.signUpHovered3 = false"-->
+                            <!--ng-click="$ctrl.submitSubscribe()"-->
+                            <!--type="submit">-->
+						<!--<span class="text">{{$ctrl.signUpHovered3 ? 'Sign Up' : 'Big blue button'}}</span>-->
+					<!--</button>-->
+				<!--</span>-->
+                    <!--<div class="form-action-wrapper">-->
+                        <!--<div class="radio-wrapper">-->
+                            <!--<label class="raido-inline">-->
+                                <!--<input type="radio"-->
+                                       <!--name="Personal"-->
+                                       <!--value="Personal" checked-->
+                                       <!--ng-init="$ctrl.subscribe.userType = 'Personal'"-->
+                                       <!--ng-model="$ctrl.subscribe.userType">-->
+                                <!--<span class="custom-radio"></span>-->
+                                <!--<span class="name">Personal</span>-->
+                            <!--</label>-->
+                            <!--<label class="raido-inline">-->
+                                <!--<input type="radio" name="Agency" value="Agency"  ng-model="$ctrl.subscribe.userType">-->
+                                <!--<span class="custom-radio"></span>-->
+                                <!--<span class="name">Agency</span>-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="checkbox-wrapper">-->
+                            <!--<label class="checkbox-inline">-->
+                                <!--<input type="checkbox"-->
+                                       <!--name="$ctrl.subscribe.position[]"-->
+                                       <!--value="3D engineer"-->
+                                       <!--ng-click="$ctrl.toggle('3D Engineer')"-->
+                                       <!--ng-checked="$ctrl.subscribe.position.indexOf('3D Engineer') > -1">-->
+                                <!--<span class="custom-checkbox"></span>-->
+                                <!--<span class="name">3D engineer</span>-->
+                            <!--</label>-->
+                            <!--<label class="checkbox-inline">-->
+                                <!--<input type="checkbox"-->
+                                       <!--name="$ctrl.subscribe.position[]"-->
+                                       <!--value="Designer"-->
+                                       <!--ng-click="$ctrl.toggle('Designer')"-->
+                                       <!--ng-checked="$ctrl.subscribe.position.indexOf('Designer') > -1">-->
+                                <!--<span class="custom-checkbox"></span>-->
+                                <!--<span class="name">Designer</span>-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="checkbox-wrapper">-->
+                            <!--<label class="checkbox-inline">-->
+                                <!--<input type="checkbox"-->
+                                       <!--name="$ctrl.subscribe.position[]"-->
+                                       <!--value="Web dev"-->
+                                       <!--ng-click="$ctrl.toggle('Web dev')"-->
+                                       <!--ng-checked="$ctrl.subscribe.position.indexOf('Web dev') > -1">-->
+                                <!--<span class="custom-checkbox"></span>-->
+                                <!--<span class="name">Web dev</span>-->
+                            <!--</label>-->
+                            <!--<label class="checkbox-inline">-->
+                                <!--<input type="checkbox"-->
+                                       <!--name="$ctrl.subscribe.position[]"-->
+                                       <!--value="Game dev"-->
+                                       <!--ng-click="$ctrl.toggle('Game dev')"-->
+                                       <!--ng-checked="$ctrl.subscribe.position.indexOf('Game dev') > -1">-->
+                                <!--<span class="custom-checkbox"></span>-->
+                                <!--<span class="name">Game dev</span>-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="form-backdrop" ng-click="$ctrl.notificationBoxTrigger(false, true)"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
 
 

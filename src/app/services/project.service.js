@@ -19,20 +19,20 @@ class Project {
 
     }
 
-    setDomain(fields = {}){
+    setDomain(fields = {}) {
         let Analyser = new this._Analyser();
         this._ProjectDomains.post(fields).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 
-    deleteDomain(projectId, fields = {}){
+    deleteDomain(projectId, fields = {}) {
         let Analyser = new this._Analyser();
         let deletingDomain = fields.domain;
         fields.domain = '';
         this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName', 'domain']))
             .then(
-                data=>{
-                    return this._ProjectDomains.remove({domain:deletingDomain}).then(Analyser.resolve, Analyser.reject);
+                data => {
+                    return this._ProjectDomains.remove({domain: deletingDomain}).then(Analyser.resolve, Analyser.reject);
                 },
                 Analyser.reject
             );
@@ -51,7 +51,7 @@ class Project {
         return Analyser.promise;
     }
 
-    getPublishedHistory(projectId = null){
+    getPublishedHistory(projectId = null) {
         let Analyser = new this._Analyser();
         this._Projects.one('publish/' + projectId).get().then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
@@ -104,9 +104,9 @@ class Project {
         let Analyser = new this._Analyser();
         console.log(project);
         this._Projects.one(project._id).remove(fields).then(
-            data=>{
-                if(project.domain){
-                    return this._ProjectDomains.remove({domain:project.domain}).then(Analyser.resolve, Analyser.reject);
+            data => {
+                if (project.domain) {
+                    return this._ProjectDomains.remove({domain: project.domain}).then(Analyser.resolve, Analyser.reject);
                 }
                 return Analyser.resolve(data);
             }, Analyser.reject);
@@ -123,6 +123,10 @@ class Project {
         let Analyser = new this._Analyser();
         this._Projects.one(projectId).one('download').one(target).customGET().then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
+    }
+
+    cleanInputFiles(inputName) {
+        angular.element(inputName).val(null);
     }
 }
 
