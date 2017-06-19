@@ -129,7 +129,6 @@ class EditProjectCtrl {
         angular.extend(projectInfo, this.project);
         projectInfo.tags = projectInfo.tags.map(i => i.text);
         this.showLoader = true;
-        console.log(projectInfo);
         this.Project.update(this.project._id, projectInfo).then(
             data => {
                 this.Notification.success('Project updated');
@@ -166,7 +165,7 @@ class EditProjectCtrl {
     saveImage() {
         this.project.thumbnail = this.cropper.croppedImage;
         this.modals.crop = false;
-        this._$scope.$apply();
+        // this._$scope.$apply();
     }
 
     isValidImage(file) {

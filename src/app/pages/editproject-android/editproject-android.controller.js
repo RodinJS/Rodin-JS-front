@@ -278,7 +278,7 @@ class EditProjectAndroidCtrl {
             },
 
             error: function (data) {
-                console.log(data);
+                // console.log(data);
                 if (data.responseJSON && data.responseJson.error.message)
                     ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
@@ -286,7 +286,7 @@ class EditProjectAndroidCtrl {
             },
         }).submit();
 
-        console.log(project);
+        // console.log(project);
     };
 
     cancelBuild(e) {
@@ -321,7 +321,7 @@ class EditProjectAndroidCtrl {
             },
         }).submit();
 
-        console.log(project);
+        // console.log(project);
     };
 
     open(e, isValid) {

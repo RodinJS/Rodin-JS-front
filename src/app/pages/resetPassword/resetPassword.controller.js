@@ -29,7 +29,6 @@ class ResetPasswordCtrl {
                     },
                     err => {
                         this.loaded = true;
-                        console.log(err);
                     })
         }
         else{
@@ -62,7 +61,7 @@ class ResetPasswordCtrl {
         this.isSubmitting = true;
         this.User.changePassword(this.formData).then(
             response => {
-                console.log(response);
+                // console.log(response);
             },
             err => {
                 if (err[0].code === 316) {

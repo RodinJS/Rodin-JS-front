@@ -102,7 +102,6 @@ class Project {
 
     remove(project = {}, fields = {}) {
         let Analyser = new this._Analyser();
-        console.log(project);
         this._Projects.one(project._id).remove(fields).then(
             data => {
                 if (project.domain) {

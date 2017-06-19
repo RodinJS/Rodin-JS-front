@@ -93,7 +93,6 @@ class EditProjectViveCtrl {
 
             err => {
                 this.showLoader = false;
-                console.log(err);
             }
         );
     }
@@ -324,7 +323,6 @@ class EditProjectViveCtrl {
 
             err => {
                 this.showLoader = false;
-                console.log(err);
             }
         );
     }
