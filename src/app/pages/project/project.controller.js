@@ -54,13 +54,23 @@ class ProjectCtrl {
         if (!isValid) return;
         this.showLoader = true;
         this.projectExist = false;
-        let projectInfo = {};
-        angular.extend(projectInfo, this.project);
+        let projectInfo = {
+            name: this.project.name,
+            displayName: this.project.displayName,
+            templateOf: this.project.templateOf
+        };
+        if(this.projectTemplates.selected.name === 'Pull From GitHub') {
+            projectInfo.githubUrl = this.project.githubUrl;
+        }
         if (this.projectTemplates.selected)
             projectInfo.templateId = this.projectTemplates.selected._id;
-        projectInfo.tags = projectInfo.tags.map(i => i.text);
+
+        projectInfo.tags = this.project.tags.map(i => i.text);
+
         projectInfo.description = this._$scope.projectDescription;
+
         projectInfo.defaultThumbnail = this.projectTemplates.selected.thumbnail;
+
         this.Project.create(projectInfo).then(
             data => {
                 this.Project.transpile(data._id)
