@@ -10,7 +10,6 @@ export default class JWT {
 		this._$q = $q;
 		this._Auth = Restangular.all("auth");
 		this._token = null;
-        console.log(window);
     }
 
 	save(token) {

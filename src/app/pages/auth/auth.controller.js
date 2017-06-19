@@ -87,11 +87,9 @@ class AuthCtrl {
 
                 err => {
                     this.isSubmitting = false;
-                    console.log(err);
                 }
             );
         } else if (this.authType === 'forgot') {
-            console.log('forgot');
         } else {
             this.isSubmitting = false;
         }

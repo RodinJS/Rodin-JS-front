@@ -1,7 +1,6 @@
 class SamplesCtrl {
     constructor($scope, $http, $sce, AppConstants) {
         'ngInject'
-        console.log(AppConstants)
         this.samplesUrl = AppConstants.SAMPLES;
         this._$scope = $scope;
         this._$sce = $sce;
