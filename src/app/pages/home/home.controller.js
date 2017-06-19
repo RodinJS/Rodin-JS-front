@@ -88,7 +88,6 @@ class HomeCtrl {
                     $('.back-home-btn').on('click', () => this.outToSlider());
                 });
                 this.changeVideo(0);
-                console.log(this.content);
             },
 
             err => {

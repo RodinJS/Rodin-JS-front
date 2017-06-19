@@ -13,7 +13,6 @@ class PlansCrtl {
 	}
 
 	updateProfile(isValidForm = true) {
-		console.log("currentUser", this.currentUser);
 		if (!isValidForm) {
 			return;
 		}

@@ -91,7 +91,7 @@ class EditProjectOculusCtrl {
 
             err => {
                 this.showLoader = false;
-                console.log(err);
+                // console.log(err);
             }
         );
     }

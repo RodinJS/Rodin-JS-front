@@ -115,7 +115,6 @@ class ProfileCtrl {
     syncGithub(fromModal) {
         this._User.gitSync()
             .then(data => {
-                console.log(data);
                 this.Notification.success(data);
                 this.showLoader = false;
                 if (fromModal) {

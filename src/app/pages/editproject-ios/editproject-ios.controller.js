@@ -59,7 +59,6 @@ class EditProjectIosCtrl {
                 angular.element(val).attr('disabled', false)
             });
 
-            console.log('IOS', this.project);
             if (this.project &&
                 this.project.fields && this.project.fields.ios &&
                 (!this.project.ios || Object.keys(this.project.ios).length <= 0 ) && !this.project.build.ios.built) {
