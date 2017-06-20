@@ -478,9 +478,12 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
           visibility: visible;
         }
       }
+      .settings-drag-item {
+        max-width: 262px !important;
+      }
       .drag-item {
         display: inline-block;
-        max-width: 262px;
+        max-width: 166px;
         padding-bottom: 40px;
         label {
           color: #f0f0f0;
@@ -502,20 +505,28 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
           border: 2px dashed $sectionBorder;
           display: table;
           cursor: pointer;
+          .settings-drag-item-again {
+            width: 262px !important;
+            height: 197px !important;
+          }
           .drag-item-again {
             visibility: hidden;
-            width: 262px;
-            height: 197px;
+            width: 166px;
+            height: 166px;
             position: absolute;
             left: 0;
+            .settings-drag-board {
+              width: 262px !important;
+              height: 197px !important;
+            }
             .drag-board {
               position: absolute;
               top: 0;
               left: 0;
               background: black;
               opacity: .5;
-              width: 262px;
-              height: 197px;
+              width: 166px;
+              height: 166px;
               z-index: 1;
             }
             span {
@@ -642,9 +653,13 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
       }
       .drag-item.first {
         //margin-right: 105px;
+        .settings-drag-area.first {
+          width: 262px !important;
+          height: 197px !important;
+        }
         .drag-area.first {
-          width: 262px;
-          height: 197px;
+          width: 166px;
+          height: 166px;
         }
       }
       &.has-error{
