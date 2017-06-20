@@ -1,7 +1,7 @@
 <div class="header-search-box">
     <div class="container">
         <form action="">
-            <div class="form-group">
+            <div class="form-group search">
                 <input type="search" class="header-search" placeholder="Filter by project name, url or description"
                        data-ng-model="$ctrl.queryString" data-ng-change="$ctrl.search()">
                 <button type="submit" class="btn-search" ng-click="$event.preventDefault(); $ctrl.search()">
@@ -33,7 +33,7 @@
             <h3 class="title text-center">
                 <a data-ui-sref="app.project">CREATE A NEW PROJECT</a>
             </h3>
-            <p class="title-description">You don't have any projects at this point</p>
+            <p class="title-description">You don't have any project at this point</p>
             <div class="btn-wrapper">
                 <a href="" ng-click="$ctrl.createProject()"  class="btn-create-project">
                     <i class="rd rd-plus"></i>
@@ -72,10 +72,12 @@
                     <div class="dashboard-content-item">
                         <div class="item-content-wrapper"
                              ng-click="$ctrl.goToProject($event, $ctrl.editorUrl + $ctrl.user.username + '/' + project.root)">
-                            <div data-ng-if="!project.thumbnail" class="dashboard-content-img"
+                            <div data-ng-if="!project.thumbnail && !project.defaultThumbnail" class="dashboard-content-img"
                                  style="background-image: url(images/content/dashboard-content-img.jpg);"></div>
                             <div data-ng-if="!!project.thumbnail" class="dashboard-content-img"
                                  style="background-image: url({{project.thumbnail}})"></div>
+                            <div data-ng-if="!project.thumbnail && project.defaultThumbnail" class="dashboard-content-img"
+                                 style="background-image: url({{project.defaultThumbnail}})"></div>
                             <div class="item-description">
                                 <ul class="item-action-list pull-left">
                                     <li>
@@ -108,10 +110,13 @@
                         </div>
                         <a href="" class="dashboard-item-link">
                             <h3 class="box-title">
-                                <i style="margin-right:5px" ng-if="!project.public || project.public == 'false'"
-                                   class="icon icon-private icon-private" aria-hidden="true"></i>
+                                <i style="margin-right:5px"
+                                   ng-class="{
+                                        'icon-private' : (!project.public || project.public == 'false'),
+                                        'icon-globe' : (project.public && project.public == 'true'),
+                                    }"
+                                   class="icon" aria-hidden="true"></i>
                                 {{project.displayName || project.name}}
-                            </h3>
                             <p class="text-primary">Last updated <span class="text-action">{{project.updatedAt | date : "dd MMM yyyy"}}</span>
                             </p>
                         </a>

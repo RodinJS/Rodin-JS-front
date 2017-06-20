@@ -46,14 +46,60 @@ class EditProjectIosCtrl {
         this.submiting = false;
         this.openEvent = null;
 
-        const self = this;
+        // const self = this;
         this.eventBus = EventBus;
+        this.project = false;
+
         this.getProject();
-        ProjectStore.subscribeAndInit($scope, ()=> {
+        ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
+
+            //temprary fix for RO-859
+            angular.forEach(angular.element('input'), (val, key) => {
+                angular.element(val).attr('disabled', false)
+            });
+
+            if (this.project &&
+                this.project.fields && this.project.fields.ios &&
+                (!this.project.ios || Object.keys(this.project.ios).length <= 0 ) && !this.project.build.ios.built) {
+                this.project.ios = {
+                    name: this.project.fields.appName,
+                    version: this.project.fields.version,
+                    bundle: this.project.fields.ios.bundleIdentifier,
+                    developerId: this.project.fields.ios.developerId
+                };
+                this.projectError = this.project.fields.error;
+
+                if (this.projectError) {
+                    this.project.build.ios.requested = false;
+                    this.errorText = ''; 
+                        // this._AppConstants.ERRORCODES[this.projectError.message].message ||
+                        // `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
+
+                    if (this.timer) {
+                        this._$interval.cancel(this.timer);
+                    }
+                    angular.forEach(angular.element('input'), (val, key) =>{
+                        angular.element(val).attr('disabled', false)
+                    });
+                    this.files.profile.name = '';
+                    this.files.cert.name = '';
+                    this.files.icon.name = '';
+                    this.Project.cleanInputFiles('#profile-file');
+                    this.Project.cleanInputFiles('#cert-file');
+                    this.Project.cleanInputFiles('#icon-file');
+
+                }
+                else{
+                    angular.forEach(angular.element('input'), (val, key) =>{
+                        angular.element(val).attr('disabled', true)
+                    });
+                }
+
+            }
         });
-        $scope.$on('$destroy', ()=>{
-            if(this.timer){
+        $scope.$on('$destroy', () => {
+            if (this.timer) {
                 this._$interval.cancel(this.timer);
             }
         })
@@ -61,21 +107,23 @@ class EditProjectIosCtrl {
 
     getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, { device: 'ios' }).then(
+        this.Project.get(this.projectId, {device: 'ios'}).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                this.project = project;
 
-                if (this.project.build.ios.built && this.timer) {
+                if (this.project && this.project.build.ios.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
+                if(this.timer) {
+                    this._$interval.cancel(this.timer);
+                }
                 this.showLoader = false;
                 //this.$state.go('landing.error');
             }
@@ -92,7 +140,7 @@ class EditProjectIosCtrl {
 
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
@@ -190,18 +238,19 @@ class EditProjectIosCtrl {
             this.Notification.warning('It seems your browser doesn\'t support FileReader.');
         }
     }
-   publishNbuild(e) {
+
+    publishNbuild(e) {
         this.showLoader = true;
         this.Project.publish(this.projectId).then(
             data => {
                 this.project.publishedPublic = true;
-                this.open(e);
+                this.open(e, true);
                 this.modals.notPublished = false;
 
             },
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=>{
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
@@ -209,9 +258,9 @@ class EditProjectIosCtrl {
     }
 
     build(event) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         const ctrl = this;
         event.preventDefault();
         let project = {
@@ -241,9 +290,20 @@ class EditProjectIosCtrl {
             success: function (data) {
                 ctrl.modals.password = false;
                 ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
+                ctrl._$scope.configs.version.pressed = false;
                 ctrl._$scope.configs.bundle.focused = false;
+                ctrl._$scope.configs.bundle.pressed = false;
                 ctrl._$scope.configs.developerId.focused = false;
+                ctrl._$scope.configs.developerId.pressed = false;
+                ctrl._$scope.configs.$submitted = false;
+                ctrl.files.profile.name = '';
+                ctrl.files.cert.name = '';
+                ctrl.files.icon.name = '';
+                ctrl.Project.cleanInputFiles('#profile-file');
+                ctrl.Project.cleanInputFiles('#cert-file');
+                ctrl.Project.cleanInputFiles('#icon-file');
                 ctrl.getProject();
                 ctrl.Notification.success('iOS build start');
                 ctrl.timer = ctrl._$interval(() => {
@@ -293,10 +353,11 @@ class EditProjectIosCtrl {
         }).submit();
     };
 
-    open(e) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+    open(e, isValid) {
+        if(!isValid) return;
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         this.modals.password = true;
         this.openEvent = e;
     }
@@ -311,15 +372,16 @@ class EditProjectIosCtrl {
 
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         );
     }
-	gotToPublish() {
-		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
-	}
+
+    gotToPublish() {
+        this.$state.go('app.editprojectPublish', {projectId: this.project._id});
+    }
 }
 
 export default EditProjectIosCtrl;

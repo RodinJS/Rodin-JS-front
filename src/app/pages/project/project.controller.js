@@ -1,9 +1,11 @@
+import {gitHub} from '../../components/localTemplates.js';
 class ProjectCtrl {
     constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User, VCS, Notification, $timeout) {
         'ngInject';
 
         this._$timeout = $timeout;
         this._$scope = $scope;
+        this.githubUrlFocused = false;
         this.Notification = Notification;
         this.appName = AppConstants.appName;
         this.editorUrl = AppConstants.EDITOR;
@@ -14,6 +16,7 @@ class ProjectCtrl {
         this.$state = $state;
         this.User = User;
         this.currentUser = this.User.current;
+        this.formErrors = AppConstants.FORMERRORS.project;
         if (this.currentUser.projects.total >= this.currentUser.allowProjectsCount) {
             this.Notification.error(`Maximum projects count exceeded, allowed project count ${this.currentUser.allowProjectsCount}`);
             return this.$state.go('app.dashboard');
@@ -38,7 +41,7 @@ class ProjectCtrl {
             selected: null,
             projects: [],
         };
-
+        this.isGithubTemplate = false;
         $scope.projectDescription = '';
         $scope.projectDescription = '';
 
@@ -47,22 +50,35 @@ class ProjectCtrl {
 
     }
 
-    save() {
+    save(isValid) {
+        if (!isValid) return;
         this.showLoader = true;
         this.projectExist = false;
-        let projectInfo = {};
-        angular.extend(projectInfo, this.project);
+        let projectInfo = {
+            name: this.project.name,
+            displayName: this.project.displayName,
+            templateOf: this.project.templateOf
+        };
+        if(this.projectTemplates.selected.name === 'Pull From GitHub') {
+            projectInfo.githubUrl = this.project.githubUrl;
+        }
         if (this.projectTemplates.selected)
             projectInfo.templateId = this.projectTemplates.selected._id;
-        projectInfo.tags = projectInfo.tags.map(i => i.text);
+
+        projectInfo.tags = this.project.tags.map(i => i.text);
+
         projectInfo.description = this._$scope.projectDescription;
+
+        projectInfo.defaultThumbnail = this.projectTemplates.selected.thumbnail;
+
         this.Project.create(projectInfo).then(
             data => {
-                this.Project.transpile(data._id);
-                this.VCS.create(data._id, {
-                    root: data.root,
-                    name: data.name,
-                }).then(this.createFinalize, this.createFinalize);
+                this.Project.transpile(data._id)
+                    .then(response => this.VCS.create(data._id, {
+                        root: data.root,
+                        name: data.name,
+                    }), this.createFinalize)
+                    .then(this.createFinalize, this.createFinalize);
             },
 
             err => {
@@ -80,6 +96,7 @@ class ProjectCtrl {
         this.showLoader = true;
         this.ProjectTemplate.getList().then(
             data => {
+                data.push(gitHub);
                 this.projectTemplates = {
                     projects: _.chunk(data, 4),
                     selected: data[0],
@@ -100,14 +117,13 @@ class ProjectCtrl {
         );
     }
 
-    validateGithubUrl() {
+    setActiveTemplate(project) {
+        this.projectTemplates.selected = project;
+        this.isGithubTemplate = project.name === 'Pull From GitHub';
+    }
 
+    validateGithubUrl() {
         this.githubUrlValid = this.githubPattern.test(this.project.githubUrl);
-        if (this.githubUrlValid) {
-            angular.element('input[type=radio]').prop('checked', false);
-            this.projectTemplates.selected = null;
-        }
-        console.log('VALID GITHUB', this.githubUrlValid);
     }
 
     createFinalize(err) {

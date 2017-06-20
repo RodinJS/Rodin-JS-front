@@ -1,5 +1,5 @@
 class EditProjectAndroidCtrl {
-    constructor (AppConstants, Project, $state, $interval, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
+    constructor(AppConstants, Project, $state, $interval, $stateParams, $q, $scope, User, JWT, EventBus, ProjectStore, Validator, Notification) {
         'ngInject';
 
         if (!$stateParams.projectId) return $state.go('landing.error');
@@ -20,6 +20,9 @@ class EditProjectAndroidCtrl {
 
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
+        this.patterns = {
+            package: '/^([a-zA-Z0-9]\d*)\.([a-zA-Z0-9]\d*)\.([a-zA-Z0-9]\d*)$/'
+        };
 
         this.fileChoosen = {
             profile: false,
@@ -46,31 +49,69 @@ class EditProjectAndroidCtrl {
         this.keyStoreFileUpload = false;
 
         this.eventBus = EventBus;
+        this.project = false;
         this.getProject();
-        ProjectStore.subscribeAndInit($scope, ()=> {
+        ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
+            //&& !this.project.build.android.built
+
+            //temprary fix for RO-859
+            angular.forEach(angular.element('input'), (val, key) => {
+                angular.element(val).attr('disabled', false)
+            });
+
+            if (this.project && this.project.fields && this.project.fields.android &&
+                (!this.project.android || Object.keys(this.project.android).length <= 0 ) && !this.project.build.android.built) {
+
+                this.project.android = {
+                    name: this.project.fields.appName,
+                    version: this.project.fields.version,
+                    package: this.project.fields.android.package,
+                    keyStore: this.project.fields.android.keyStore
+                };
+                this.projectError = this.project.fields.error;
+
+                if (this.projectError) {
+                    this.project.build.android.requested = false;
+                    const msg = this._AppConstants.ERRORCODES[this.projectError.message];
+                    this.errorText = msg ? msg.message :
+                        `${this._AppConstants.ERRORCODES['OTHERBUILDERROR'].message} ${this.project.fields.buildId}`;
+
+                    if (this.timer) {
+                        this._$interval.cancel(this.timer);
+                    }
+                    angular.forEach(angular.element('input'), (val, key) => {
+                        angular.element(val).attr('disabled', false)
+                    });
+                }
+                else {
+                    angular.forEach(angular.element('input'), (val, key) => {
+                        angular.element(val).attr('disabled', true)
+                    });
+                }
+            }
         });
 
-        $scope.$on('$destroy', ()=>{
-            if(this.timer){
+        $scope.$on('$destroy', () => {
+            if (this.timer) {
                 this._$interval.cancel(this.timer);
             }
         })
     }
 
-    getProject () {
+    getProject() {
         this.showLoader = true;
-        this.Project.get(this.projectId, { device: 'android' }).then(
+        this.Project.get(this.projectId, {device: 'android'}).then(
             project => {
                 this.showLoader = false;
                 this.eventBus.emit(this.eventBus.project.SET, project);
-                if (this.project.build.android.built && this.timer) {
+                if (this.project && this.project.build.android.built && this.timer) {
                     this._$interval.cancel(this.timer);
                 }
             },
 
             err => {
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
                 this.showLoader = false;
@@ -79,7 +120,7 @@ class EditProjectAndroidCtrl {
         );
     }
 
-    update () {
+    update() {
         this.showLoader = true;
         this.Project.update(this.project._id, this.project).then(
             data => {
@@ -89,14 +130,14 @@ class EditProjectAndroidCtrl {
 
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         );
     }
 
-    changeIcon (e) {
+    changeIcon(e) {
         if (window.FileReader && window.Blob) {
 
             var file = e.target.files[0];
@@ -112,6 +153,7 @@ class EditProjectAndroidCtrl {
 
                     reader.readAsDataURL(file);
                 }, (result) => {
+                    angular.element('#icon-file')[0].value = '';
                     this.Notification.error('Unsupported image type');
                 });
             }
@@ -121,52 +163,44 @@ class EditProjectAndroidCtrl {
         }
     }
 
-    isValidImage (file) {
-        var defer = this.$q.defer();
-        var result = {
-            valid: true,
-            message: '',
-        };
-
-        if (file.size > 1024 * 1024) {
-            result.valid = false;
-            result.message = 'FIle size must be less than 1mb';
-            var tim = $timeout(function () {
-                defer.reject(result);
-                $timeout.cancel(tim);
-            });
-        } else {
-            var fileReader = new FileReader();
-            fileReader.onloadend = function (e) {
-                var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
-                var header = '';
-                for (var i = 0; i < arr.length; i++) {
-                    header += arr[i].toString(16);
-                }
-
-                switch (header) {
-                    case '89504e47':
-                        break;
-                    default:
-                        result.valid = false;
-                        result.message = 'Allowed only .jpg .jpeg and .png file types.';
-                        break;
-                }
-
-                if (result.valid) {
-                    defer.resolve(result);
-                } else {
-                    defer.reject(result);
-                }
+    isValidImage(file) {
+        return new Promise((resolve, reject) => {
+            let result = {
+                valid: true,
+                message: '',
             };
 
-            fileReader.readAsArrayBuffer(file);
-        }
+            if (file.size > 1024 * 1024) {
+                result.valid = false;
+                result.message = 'FIle size must be less than 1mb';
+                reject(result);
+            } else {
+                let fileReader = new FileReader();
+                fileReader.onloadend = function (e) {
+                    let arr = (new Uint8Array(e.target.result)).subarray(0, 4);
+                    let header = '';
+                    for (let i = 0; i < arr.length; i++) {
+                        header += arr[i].toString(16);
+                    }
 
-        return defer.promise;
+                    switch (header) {
+                        case '89504e47':
+                            break;
+                        default:
+                            result.valid = false;
+                            result.message = 'Allowed only .jpg .jpeg and .png file types.';
+                            break;
+                    }
+
+                    result.valid ? resolve(result) : reject(result);
+                };
+
+                fileReader.readAsArrayBuffer(file);
+            }
+        });
     }
 
-    changeKeyStore (e) {
+    changeKeyStore(e) {
         if (window.FileReader && window.Blob) {
             var file = e.target.files[0];
             this.files.keystore.name = file.name;
@@ -177,32 +211,32 @@ class EditProjectAndroidCtrl {
         }
     }
 
-   publishNbuild(e) {
+    publishNbuild(e) {
         this.showLoader = true;
         this.Project.publish(this.projectId).then(
             data => {
                 this.project.publishedPublic = true;
                 this.modals.notPublished = false;
-                this.open(e);
+                this.open(e, true);
             },
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         )
     }
-    build (event) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+
+    build(event) {
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         const ctrl = this;
         event.preventDefault();
         let project = {
             userId: this.user.username,
             appId: this.project._id,
-            url: 'http://google.com',
             appName: this.project.android.name,
             android: this.project.android,
             version: this.project.android.version,
@@ -222,16 +256,19 @@ class EditProjectAndroidCtrl {
             success: function (data) {
                 ctrl.modals.password = false;
                 ctrl._$scope.configs.displayName.focused = false;
+                ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
+                ctrl._$scope.configs.version.pressed = false;
                 ctrl._$scope.configs.package.focused = false;
-                ctrl._$scope.configs.KSFLName.focused = false;
-                ctrl._$scope.configs.KSOrganization.focused = false;
-                ctrl._$scope.configs.KSCity.focused = false;
-                ctrl._$scope.configs.KSState.focused = false;
-                ctrl._$scope.configs.KSCC.focused = false;
+                ctrl._$scope.configs.package.pressed = false;
                 ctrl._$scope.configs.KSAlias.focused = false;
+                ctrl._$scope.configs.KSAlias.pressed = false;
+                ctrl._$scope.configs.KSName.focused = false;
+                ctrl._$scope.configs.KSName.pressed = false;
+                ctrl._$scope.configs.$submitted = false;
                 ctrl.files.icon.name = '';
                 ctrl.files.icon.src = '';
+                ctrl.Project.cleanInputFiles('#icon-file');
                 ctrl.getProject();
                 ctrl._$scope.$apply();
                 ctrl.Notification.success('Android build start');
@@ -241,6 +278,7 @@ class EditProjectAndroidCtrl {
             },
 
             error: function (data) {
+                // console.log(data);
                 if (data.responseJSON && data.responseJson.error.message)
                     ctrl.Notification.error(data.responseJSON.error.message);
                 ctrl.showLoader = false;
@@ -248,10 +286,10 @@ class EditProjectAndroidCtrl {
             },
         }).submit();
 
-        console.log(project);
+        // console.log(project);
     };
 
-    cancelBuild (e) {
+    cancelBuild(e) {
         const ctrl = this;
         e.preventDefault();
         let project = {
@@ -283,18 +321,19 @@ class EditProjectAndroidCtrl {
             },
         }).submit();
 
-        console.log(project);
+        // console.log(project);
     };
 
-    open (e) {
-	    if (!this.project.publishedPublic) {
-		    return this.modals.notPublished = true;
-	    }
+    open(e, isValid) {
+        if (!isValid) return;
+        if (!this.project.publishedPublic) {
+            return this.modals.notPublished = true;
+        }
         this.modals.password = true;
         this.openEvent = e;
     }
 
-    download () {
+    download() {
         this.showLoader = true;
         this.Project.download(this.project._id, 'android').then(
             data => {
@@ -304,15 +343,16 @@ class EditProjectAndroidCtrl {
 
             err => {
                 this.showLoader = false;
-                _.each(err, (val, key)=> {
+                _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
                 });
             }
         );
     }
-	gotToPublish() {
-		this.$state.go('app.editprojectPublish',  { projectId: this.project._id });
-	}
+
+    gotToPublish() {
+        this.$state.go('app.editprojectPublish', {projectId: this.project._id});
+    }
 }
 
 export default EditProjectAndroidCtrl;

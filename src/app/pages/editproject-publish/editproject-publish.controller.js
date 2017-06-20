@@ -76,6 +76,7 @@ class EditProjectPublishCtrl {
         if(!this.rollBackDate) return;
         this.Project.rollBack(this.projectId, {date:this.rollBackDate}).then(
             data => {
+                this.project.activePublishDate = this.rollBackDate;
                 this.Notification.success(`Project rolled back to ${this._moment.unix(parseInt(this.rollBackDate)/1000).format('YYYY-MM-DD HH:mm:ss')}`);
                 this.modals.rollBack = false;
             },
@@ -115,7 +116,7 @@ class EditProjectPublishCtrl {
         this.Project.updatePublish(this.projectId).then(
             data => {
                 this.Notification.success('Project updated');
-                this.getProject();
+                this.project.activePublishDate = new Date();
             },
             err => {
                 this.showLoader = false;

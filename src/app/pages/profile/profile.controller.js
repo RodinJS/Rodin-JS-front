@@ -115,7 +115,6 @@ class ProfileCtrl {
     syncGithub(fromModal) {
         this._User.gitSync()
             .then(data => {
-                console.log(data);
                 this.Notification.success(data);
                 this.showLoader = false;
                 if (fromModal) {
@@ -132,7 +131,8 @@ class ProfileCtrl {
             })
     }
 
-    updateProfile() {
+    updateProfile(isValid) {
+        if(!isValid) return;
         this.showLoader = true;
         let currentUser = {
             email: this.currentUser.email,
@@ -148,6 +148,9 @@ class ProfileCtrl {
             },
             err => {
                 this.showLoader = false;
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
             }
         );
     }
@@ -276,9 +279,11 @@ class ProfileCtrl {
             this._User.updatePassword(Object.filterByKeys(data, ['password'])).then((data) => {
                 this.showLoader = false;
                 this.passwordChangeResponse = 'success';
+                this.Notification.success('Password successfully updated');
             }, (data) => {
                 this.showLoader = false;
                 this.passwordChangeResponse = 'error';
+                this.Notification.error(`Can't update password`);
 
             });
         } else {

@@ -243,12 +243,14 @@
       right: 0;
       .notification-list {
         position: relative;
-        height: 120px;
-        padding: 6px 15px;
+        height: 50px;
+        display: table;
+        text-align: center;
+        width: 100%;
         .no-notifications {
-          position: absolute;
-          top: 51px;
-          left: 42px;
+          font-size: 14px;
+          display: table-cell;
+          vertical-align: middle;
         }
       }
       .notification-wrapper {
@@ -266,7 +268,10 @@
           padding: 10px 0 0 0;
           a {
             padding: 0;
-            color: $color-primary;
+            color: #008BF2;
+            &:hover{
+              color:#006ebf
+            }
           }
         }
       }
@@ -278,6 +283,7 @@
           margin-left: 0;
           position: relative;
           width: 100%;
+          min-height: 50px;
           &:before {
             content: "";
             width: 6px;
@@ -288,12 +294,9 @@
             top: 15px;
             left: 10px;
           }
-          &:first-child {
-            &:before {
-              top: 10px;
-            }
+          &:last-child {
             a {
-              padding-top: 5px;
+              border-bottom: none;
             }
           }
         }
@@ -352,11 +355,17 @@
             display: block;
             padding: 3px 0;
             font-weight: 400;
-            color: $color-text-secondary;
+            color:  $color-text-gray;
+            &:hover{
+              color: $color-text-secondary;
+            }
           }
           &:last-child {
             a {
               color: $color-text-gray !important;
+              &:hover{
+                color: $color-text-secondary !important;
+              }
             }
           }
         }
@@ -582,6 +591,15 @@
         left: 50%;
         border-radius: 0 2px 2px 0;
       }
+    }
+  }
+}
+
+
+#HeaderNavber{
+  li{
+    a{
+      font-size:16px;
     }
   }
 }

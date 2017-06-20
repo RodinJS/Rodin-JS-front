@@ -1,6 +1,12 @@
 $distance: 34;
+$error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
 .section-title {
   margin: 30px 0px 30px 0px !important;
+  sub{
+    font-size: 55%;
+    left: 2px;
+    bottom: 5px;
+  }
 }
 
 .selet-template-container {
@@ -182,6 +188,28 @@ $distance: 34;
           margin-top: 15px;
           &.disabled{
             color:#aaa
+          }
+        }
+        &:hover{
+          .template-name{
+            color: #008af1;
+          }
+          .custom-radio{
+            &.active{
+              border-color: $color-bd;
+            }
+            span {
+              visibility: visible;
+              opacity: 1;
+              z-index: 1;
+            }
+            .custom-radio-hover-background {
+              width: 100%;
+              height: 100%;
+              z-index: 0;
+              background: black;
+              opacity: .5;
+            }
           }
         }
       }
@@ -452,13 +480,13 @@ $distance: 34;
       }
       .drag-item {
         display: inline-block;
-        max-width: 166px;
+        max-width: 262px;
         padding-bottom: 40px;
         label {
           color: #f0f0f0;
         }
         h5.section-small-title {
-          font-size: 13px;
+          font-size: 12px;
           color: $color-text-gray;
         }
         .text-small.description {
@@ -476,8 +504,8 @@ $distance: 34;
           cursor: pointer;
           .drag-item-again {
             visibility: hidden;
-            width: 166px;
-            height: 166px;
+            width: 262px;
+            height: 197px;
             position: absolute;
             left: 0;
             .drag-board {
@@ -486,8 +514,8 @@ $distance: 34;
               left: 0;
               background: black;
               opacity: .5;
-              width: 166px;
-              height: 166px;
+              width: 262px;
+              height: 197px;
               z-index: 1;
             }
             span {
@@ -615,8 +643,20 @@ $distance: 34;
       .drag-item.first {
         //margin-right: 105px;
         .drag-area.first {
-          width: 166px;
-          height: 166px;
+          width: 262px;
+          height: 197px;
+        }
+      }
+      &.has-error{
+        color:$error_color;
+        .center-row{
+          color: $error_color !important;
+        }
+        .drag-area{
+          border-color: $error_color !important;
+        }
+        .section-small-title{
+          color: $error_color !important;
         }
       }
     }
@@ -643,7 +683,7 @@ $distance: 34;
       cursor: pointer;
       color: $color-primary;
       &:hover {
-        color: white;
+        color: #006ebf;
       }
       span {
         white-space: nowrap;
@@ -765,6 +805,9 @@ $distance: 34;
     color: $white;
     border-width: 2px;
     padding: 4px 30px;
+    &:hover{
+      background: $color-primary;
+    }
   }
   .form-username {
     input {
@@ -772,7 +815,7 @@ $distance: 34;
     }
   }
   .form-description {
-    font-size: 13px !important;
+    font-size: 12px !important;
   }
   .create-project {
     label {

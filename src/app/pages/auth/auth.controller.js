@@ -13,6 +13,7 @@ class AuthCtrl {
         this.Notification = Notification;
         this.title = $state.current.title;
         this.authType = $state.current.name.replace('landing.', '');
+        this.formErrors = AppConstants.FORMERRORS.register;
         //this.gotToHome = this.gotToHome.bind(this);
 
         this.patterns = {
@@ -54,7 +55,7 @@ class AuthCtrl {
 
     }
 
-    submitForm() {
+    submitForm(isValid) {
         this.isSubmitting = true;
 
         if (this.authType === 'login') {
@@ -66,8 +67,10 @@ class AuthCtrl {
                 (err) => {
                     this.isSubmitting = false;
                     this.errors = err;
+                    this.Notification.error('Wrong username or password');
+
                 });
-        } else if (this.authType === 'register') {
+        } else if (this.authType === 'register' && isValid) {
             this._User.signUp(this.formData).then(
                 res => {
 
@@ -84,11 +87,9 @@ class AuthCtrl {
 
                 err => {
                     this.isSubmitting = false;
-                    console.log(err);
                 }
             );
         } else if (this.authType === 'forgot') {
-            console.log('forgot');
         } else {
             this.isSubmitting = false;
         }

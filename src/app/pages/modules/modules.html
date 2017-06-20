@@ -1,0 +1,164 @@
+<div class="modules container">
+    <div class="row">
+        <div class="module-padding"></div>
+        <h3 class="title text-center">Create Module</h3>
+        <div class="form-content">
+            <form data-ng-submit="$ctrl.submitForm(modules,modules.$valid)" enctype="multipart/form-data"
+                  class="main-form"
+                  name="modules" novalidate>
+                <div class="form-group" custom-input
+                     data-ng-class="{
+                         'has-error': (modules | formValidator:'title')  == 'invalid',
+                         'has-success': (modules | formValidator:'title')  == 'valid',
+                         }">
+                    <label class="control-label">Title<sub>*</sub></label>
+                    <input type="text"
+                           class="form-control"
+                           data-ng-class="{'active':modules.title.$viewValue}"
+                           ng-required="true"
+                           ng-minlength="3"
+                           placeholder=""
+                           name="title"
+                           data-ng-model="$ctrl.formData.title"
+                           data-ng-focus="modules.title.focused = true"
+                           value="">
+                    <div class="validation error" ng-if="(modules | formValidator:'title')  == 'invalid'">
+                        Title is required
+                    </div>
+                </div>
+
+                <div class="form-group" custom-input
+                     data-ng-class="{
+                         'has-error': (modules | formValidator:'email')  == 'invalid',
+                         'has-success': (modules | formValidator:'email')  == 'valid',
+                         }">
+                    <label class="control-label">Email<sub>*</sub></label>
+                    <input type="text"
+                           data-ng-class="{'active':modules.email.$viewValue}"
+                           class="form-control"
+                           placeholder=""
+                           value=""
+                           name="email"
+                           data-ng-pattern="$ctrl.patterns.email"
+                           data-ng-focus="modules.email.focused = true"
+                           data-ng-model="$ctrl.formData.email" required>
+                    <div class="validation error" ng-if="(modules | formValidator:'email')  == 'invalid'">
+                        Email is required
+                    </div>
+                </div>
+                <div class="form-group" custom-input
+                     data-ng-class="{
+                         'has-error': (modules | formValidator:'documentationLink')  == 'invalid',
+                         'has-success': (modules | formValidator:'documentationLink')  == 'valid',
+                         }"
+                >
+                    <label class="control-label">Documentation Link<sub>*</sub></label>
+                    <input type="text"
+                           class="form-control"
+                           data-ng-class="{'active':modules.documentationLink.$viewValue}"
+                           placeholder=""
+                           name="documentationLink"
+                           data-ng-model="$ctrl.formData.documentationLink"
+                           data-ng-pattern="$ctrl.patterns.url"
+                           data-ng-focus="modules.documentationLink.focused = true"
+                           value="">
+                    <div class="validation error" ng-if="(modules | formValidator:'documentationLink')  == 'invalid'">
+                        Documentation Link is not valid
+                    </div>
+                </div>
+                <div class="form-group" custom-input
+                     data-ng-class="{
+                         'has-error': (modules | formValidator:'exampleLink')  == 'invalid',
+                         'has-success': (modules | formValidator:'exampleLink')  == 'valid',
+                         }">
+                    <label class="control-label">Example Link<sub>*</sub></label>
+                    <input type="text"
+                           data-ng-class="{'active':modules.exampleLink.$viewValue}"
+                           class="form-control"
+                           placeholder=""
+                           name="exampleLink"
+                           data-ng-model="$ctrl.formData.exampleLink"
+                           data-ng-pattern="$ctrl.patterns.url"
+                           data-ng-focus="modules.exampleLink.focused = true"
+                           value="">
+                    <div class="validation error" ng-if="(modules | formValidator:'exampleLink')  == 'invalid'">
+                        Example Link is not valid
+                    </div>
+                </div>
+
+                <div class="form-group" custom-input
+                     data-ng-class="{
+                         'has-error': (modules | formValidator:'description')  == 'invalid',
+                         'has-success': (modules | formValidator:'description')  == 'valid',
+                         }">
+                    <label class="control-label">Description<sub>*</sub></label>
+                    <textarea class="form-control"
+                              placeholder=""
+                              data-ng-class="{'active':modules.description.$viewValue}"
+                              name="description"
+                              ng-minlength="1"
+                              ng-required="true"
+                              data-ng-focus="modules.description.focused = true"
+                              style="height: 120px;"
+                              data-ng-model="$ctrl.formData.description"> </textarea>
+                    <div class="validation error" ng-if="(modules | formValidator:'description')  == 'invalid'">
+                        Description is required
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom:0 !important;">
+                    <div class="drag-cont text-center" style="margin-top:10px">
+                        <div class="drag-item first text-center">
+                            <label class="control-label float-label">Module File.js<sub>*</sub></label>
+                            <div class="drag-area first">
+                                <div style="cursor: pointer" class="center-row"
+                                     onclick="document.querySelector('#js-file').click()">
+                                    <span ng-if="$ctrl.file.name == ''"
+                                          class="">.js</span>
+                                    <img width="166" height="166" ng-if="$ctrl.file.name.length > 0"
+                                         ng-src="./images/general/js-outline.png"
+                                         alt="">
+                                </div>
+                                <p class="drag-instruct">
+                                    <input type="file"
+                                           class="hidden"
+                                           id="js-file"
+                                           name="file"
+                                           onchange="angular.element(this).scope().$ctrl.changeFile(event)" required>
+                                </p>
+                                <div class="drag-item-again"
+                                     onclick="document.querySelector('#js-file').click()"
+                                     ng-show="$ctrl.file.name !== ''">
+                                    <div class="drag-board"></div>
+                                    <span>Tap To Replace</span>
+                                </div>
+                            </div>
+                            <h5 class="section-small-title text-center"></h5>
+                        </div>
+                        <div ng-if="$ctrl.file.name.length > 0" style="color: white;">
+                            <span>{{$ctrl.file.name}}</span>
+                        </div>
+                        <div class="drag-item hidden">
+                            <h5 class="section-small-title">Favicon</h5>
+                            <div class="drag-area first">
+                                <div class="center-row">
+                                    <i class="icon icon-invalid"></i>
+                                </div>
+                                <p class="drag-instruct">To try <span>Again</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-wrapper text-center">
+                    <button type="submit" style="margin-right:10px" class="btn btn-default btn-submit">
+                        Submit Module
+                    </button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

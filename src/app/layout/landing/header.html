@@ -25,7 +25,7 @@
                     </a>-->
 
                     <a ui-sref="landing.login" class="visible-xs-inline-block btn-mobile-login">Login</a>
-                    <a class="navbar-brand">
+                    <a class="navbar-brand" ui-sref="home.landing({new:true})" ui-sref-opts="{reload: false, notify: true}">
                         <img alt="Rodin" src="images/landing/general/logo.svg">
                     </a>
 
@@ -61,12 +61,9 @@
                             <a ui-sref="landing.login">Login</a>
                         </li>
                         <li>
-                            <a href=""
+                            <a ui-sref="landing.register"
                                style=" max-width: 164px;min-width: 164px;"
-                               ng-mouseover="$ctrl.signUpHovered = true"
-                               ng-mouseleave="$ctrl.signUpHovered = false"
-                               ng-click="$ctrl.scrollToSignUp()"
-                               class="btn sign-up-btn">{{$ctrl.signUpHovered ? 'Sign Up' : 'Big blue button'}}</a>
+                               class="btn sign-up-btn">Sign Up</a>
                         </li>
                     </ul>
                 </div>

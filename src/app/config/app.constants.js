@@ -13,6 +13,7 @@ const AppConstants = {
         COOKIEDOMAIN: ['localhost', '.rodin.space'],
         SOCKET: 'http://localhost:4000/api',
         API: 'http://localhost:3000/api',
+        // API: 'https://api.rodin.space/api',
         RECORDIP: '178.62.229.191',
         // API: 'http://192.168.0.33:3000/api', // Xcho
         SITE: 'http://localhost:8585/',
@@ -23,6 +24,8 @@ const AppConstants = {
         FB: '216861662081500', //'' '216982868736046'
         GITHUB: '2350afe57c144672285b',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
+        SAMPLES: 'https://examples.rodin.space/list.json',
+        MODULES: 'http://localhost:4000/modules/',
     },
     dev: {
         COOKIEDOMAIN: ['.rodin.space'],
@@ -37,6 +40,9 @@ const AppConstants = {
         FB: '216982868736046', //'216861662081500' '216982868736046'
         GITHUB: 'fa69c03ad5758fce1f10',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
+        SAMPLES: 'https://examples.rodin.space/list.json',
+        MODULES: 'http://localhost:4000/modules/',
+
     },
     prod: {
         COOKIEDOMAIN: ['.rodinapp.com', '.rodin.io', '.rodin.space'],
@@ -51,6 +57,9 @@ const AppConstants = {
         FB: '214577345643265',
         GITHUB: 'd2030c37902fa3d4d0c7',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
+        SAMPLES: 'https://examples.rodin.io/list.json',
+        MODULES: 'http://localhost:4000/modules/',
+
     },
 
     stage: {
@@ -66,6 +75,8 @@ const AppConstants = {
         FB: '263064010794598',
         GITHUB: '5377f212205e0aa4b4cf',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
+        SAMPLES: 'https://examples.rodin.design/list.json',
+        MODULES: 'http://localhost:4000/modules/',
     },
 
     get FB() {
@@ -114,6 +125,14 @@ const AppConstants = {
 
     get COOKIEDOMAIN() {
         return this[this.env].COOKIEDOMAIN;
+    },
+
+    get SAMPLES() {
+        return this[this.env].SAMPLES;
+    },
+
+    get MODULES() {
+        return this[this.env].MODULES;
     },
 
     ERRORCODES: {
@@ -233,8 +252,57 @@ const AppConstants = {
         604: {
             message: 'UNKNOWN_SOCKET_ACTION',
             field: '',
+        },   // FILEREADERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // FILEWRITEERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // MKDIRERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // RMDIRERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // RMERROR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // CPERR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // BUILDERROR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        // CLEANERROR: {
+        //     message: `Build failed. Please drop an email to support including your build ID`,
+        // },
+        CERTIMPORTERROR: {
+            message: `Build failed. Invalid certificate`,
         },
+        OTHERBUILDERROR: {
+            message: `Build failed. Please drop an email to support including your build ID`,
+        }
     },
+    FORMERRORS: {
+        register: {
+            username: 'Username must contain at least 3 characters',
+            email: 'Invalid email',
+            password: 'Password must contain at least 8 characters, including numbers and letters',
+            confirmPassword: 'Passwords do not match',
+            invitationCode: 'Invalid invitation code'
+        },
+        reset: {
+            usernameEmail: 'Please enter username or email',
+            password: 'Password must contain at least 8 characters, including numbers and letters',
+            confirmPassword: 'Passwords do not match',
+        },
+        project: {
+            github: 'URL is invalid',
+            name: 'Project name must contain at least 3 characters',
+            url: 'Project URL must be alphanumeric with no spaces and at least 3 characters',
+            description: 'Description is required'
+        }
+    }
 };
 
 export default AppConstants;

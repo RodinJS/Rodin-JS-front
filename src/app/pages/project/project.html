@@ -2,106 +2,152 @@
     <div class="container">
         <div class="selet-template-container">
             <div class="main-container" ng-show="$ctrl.projectTemplates.projects.length > 0">
-                <h3 class="title" style="font-size:24px">Select template to create a project OR import project from GitHub</h3>
+                <h3 class="title" style="font-size:24px">Select template to create a project OR import project from
+                    GitHub</h3>
                 <p class="title-description">
                 </p>
-                <div class="main-form create-project">
-                    <ul class="radio-list" ng-repeat="list in $ctrl.projectTemplates.projects">
-                        <li ng-repeat="project in list">
-                            <div class="radio-wrapper" ng-click="$ctrl.projectTemplates.selected = project">
-                                <div class="radio-overlay" ng-if="$ctrl.githubUrlValid"></div>
-                                <label class="label-radio">
-                                    <input type="radio" name="template" ng-disabled="$ctrl.githubUrlValid">
-                                    <span class="custom-radio"
-                                          ng-class="$ctrl.githubUrlValid ? 'disabled' : 'active'"
-                                          style="background-image: url({{project.thumbnail}});">
-                                        <span>CHOOSE</span>
-                                        <span class="custom-radio-hover-background"></span>
-                                    </span>
-                                    <span class="template-name"  ng-class="$ctrl.githubUrlValid ? 'disabled' : 'active'">{{project.name}}</span>
-                                    <br>
-                                </label>
+                <form name="project" novalidate>
+                    <div class="main-form create-project">
+                        <ul class="radio-list" ng-repeat="list in $ctrl.projectTemplates.projects">
+                            <li ng-repeat="project in list">
+                                <div class="radio-wrapper" ng-click="$ctrl.setActiveTemplate(project)">
+                                    <label class="label-radio">
+                                        <input type="radio"
+                                               name="template"
+                                               ng-checked="project ==  $ctrl.projectTemplates.selected">
+                                        <span class="custom-radio"
+                                              style="background-image: url({{project.thumbnail}});">
+                                            <span>CHOOSE</span>
+                                            <span class="custom-radio-hover-background"></span>
+                                        </span>
+                                        <span class="template-name">{{project.name}}</span>
+                                        <br>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div ng-show="$ctrl.projectTemplates.projects.length > 0" style="margin-top:36px" class="project-fields">
+
+                            <div class="form-group"
+                                 ng-show="$ctrl.isGithubTemplate"
+                                 data-ng-class="{
+                                     'has-error': !$ctrl.githubUrlValid && project.githuburl.$dirty || (project | PFValidator:'githuburl')  == 'invalid',
+                                     'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused || (project | PFValidator:'githuburl')  == 'valid'
+                                 }">
+                                <label for="name">GitHub Project URL<sub>*</sub></label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="githuburl"
+                                       placeholder="GitHub Project URL"
+                                       value=""
+                                       ng-required="$ctrl.isGithubTemplate"
+                                       ng-minlength="3"
+                                       data-ng-pattern="$ctrl.githubPattern"
+                                       ng-keyup="$ctrl.validateGithubUrl()"
+                                       ng-blur="$ctrl.githubUrlFocused = false"
+                                       ng-click="$ctrl.githubUrlFocused = true"
+                                       data-ng-model="$ctrl.project.githubUrl">
+                                <div class="validation error"
+                                     ng-if="!$ctrl.githubUrlValid && project.githuburl.$dirty || (project | PFValidator:'githuburl')  == 'invalid'">
+                                    {{$ctrl.formErrors.github}}
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-                    <div ng-show="$ctrl.projectTemplates.projects.length > 0">
-                        <div class="form-group"
-                         data-ng-class="{'has-error': !$ctrl.githubUrlValid && $ctrl.githubUrlFocused, 'has-success': $ctrl.githubUrlValid && $ctrl.githubUrlFocused}">
-                        <label for="name">GitHub project url</label>
-                        <input type="text"
-                               class="form-control"
-                               placeholder="GitHub project url"
-                               value=""
-                               ng-minlength="3"
-                               ng-maxlength="64"
-                               limit-to="64"
-                               data-ng-pattern="$ctrl.githubPattern"
-                               ng-keyup="$ctrl.validateGithubUrl()"
-                               ng-click="$ctrl.githubUrlFocused = true"
-                               data-ng-model="$ctrl.project.githubUrl">
-                    </div>
-                    <div class="form-group"
-                         data-ng-class="{'has-error': !$ctrl.project.displayName && $ctrl.displayNameFocused, 'has-success': $ctrl.project.displayName && $ctrl.displayNameFocused}">
-                        <label for="name">
-                            Project name
-                            <!--<span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">required</span>-->
-                        </label>
-                        <input type="text"
-                               class="form-control"
-                               placeholder="Rodin VR awesome project"
-                               value=""
-                               ng-minlength="3"
-                               ng-maxlength="64"
-                               limit-to="64"
-                               ng-click="$ctrl.displayNameFocused = true"
-                               data-ng-model="$ctrl.project.displayName">
-                    </div>
-                    <div class="form-group"
-                         data-ng-class="{'has-error': !$ctrl.project.name && $ctrl.projectFocused, 'has-success': $ctrl.project.name && $ctrl.projectFocused}">
-                        <label for="project-url">Project url</label>
-                        <div class="url-group">
-                            <input type="text"
-                                   id="project-url"
-                                   class="form-control"
-                                   placeholder="projectURL"
-                                   value=""
-                                   ng-minlength="3"
-                                   ng-maxlength="16"
-                                   limit-to="16"
-                                   ng-click="$ctrl.projectFocused = true"
-                                   data-ng-model="$ctrl.project.name">
-                            <span class="main-placeholder"
-                                  ng-bind="'https://rodin.io/projects/' + $ctrl.currentUser.username + '/'"></span>
+
+                            <div class="form-group"
+                                 data-ng-class="{
+                                 'has-error':(project | PFValidator:'name')  == 'invalid',
+                                 'has-success': (project | PFValidator:'name')  == 'valid'
+                                 }">
+                                <label for="name">
+                                    Project Name<sub>*</sub>
+                                    <!--<span ng-if="!$ctrl.project.displayName && $ctrl.displayNameFocused">required</span>-->
+                                </label>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Project name"
+                                       value=""
+                                       ng-minlength="3"
+                                       ng-maxlength="64"
+                                       limit-to="64"
+                                       name="name"
+                                       ng-focus="project.name.focused = true"
+                                       ng-keyup="project.name.pressed = true"
+                                       required
+                                       data-ng-model="$ctrl.project.displayName">
+                                <div class="validation error" ng-if="(project | PFValidator:'name')  == 'invalid'">
+                                    {{$ctrl.formErrors.name}}
+                                </div>
+                            </div>
+
+                            <div class="form-group"
+                                 data-ng-class="{
+                                     'has-error': (project | PFValidator:'url')  == 'invalid',
+                                     'has-success': (project | PFValidator:'url')  == 'valid'
+                                 }">
+                                <label for="project-url">Project URL<sub>*</sub></label>
+                                <div class="url-group">
+                                    <input type="text"
+                                           id="project-url"
+                                           class="form-control"
+                                           placeholder="projectURL"
+                                           value=""
+                                           ng-minlength="3"
+                                           ng-maxlength="16"
+                                           limit-to="16"
+                                           name="url"
+                                           ng-pattern="/^\S*$/"
+                                           required
+                                           ng-focus="project.url.focused = true"
+                                           ng-keyup="project.url.pressed = true"
+                                           data-ng-model="$ctrl.project.name">
+                                    <span class="main-placeholder" style="top:14px"
+                                          ng-bind="'https://rodin.io/projects/' + $ctrl.currentUser.username + '/'"></span>
+                                </div>
+                                <div class="validation error" ng-if="(project | PFValidator:'url')  == 'invalid'">
+                                    {{$ctrl.formErrors.url}}
+                                </div>
+                            </div>
+                            <!--<div class="form-group">-->
+                            <!--<label for="url">Meta Tags</label>-->
+                            <!--<tags-input style="height:100%; min-height:55px" max-length="32" min-length="3" class="form-control" ng-model="$ctrl.project.tags"></tags-input>-->
+                            <!--<p class="form-description">Meta tags are a great way for webmasters to provide search engines with information about their sites</p>-->
+                            <!--</div>-->
+                            <div class="form-group"
+                                 data-ng-class="{
+                                 'has-error':(project | PFValidator:'description')  == 'invalid',
+                                 'has-success': (project | PFValidator:'description')  == 'valid'
+                                 }">
+                                <label for="area">Description<sub>*</sub></label>
+                                <textarea
+                                        id="area"
+                                        ng-minlength="1"
+                                        name="description"
+                                        limit-to="128"
+                                        style="width:100%"
+                                        data-ng-model="projectDescription"
+                                        class="form-control area-control"
+                                        ng-focus="project.description.focused = true"
+                                        ng-keyup="project.description.pressed = true"
+                                        required
+                                ></textarea>
+                                <span class="letter-quantity">
+                                <span>{{128-projectDescription.length}}</span>/128
+                            </span>
+                                <div class="validation error"
+                                     ng-if="(project | PFValidator:'description')  == 'invalid'">
+                                    {{$ctrl.formErrors.description}}
+                                </div>
+                            </div>
+
+                            <div class="btn-wrapper" style="text-align: center">
+                                <button type="submit" data-ng-click="$ctrl.save(project.$valid)" class="btn btn-default btn-submit">
+                                    Save and
+                                    Get Started
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <!--<div class="form-group">-->
-                    <!--<label for="url">Meta Tags</label>-->
-                    <!--<tags-input style="height:100%; min-height:55px" max-length="32" min-length="3" class="form-control" ng-model="$ctrl.project.tags"></tags-input>-->
-                    <!--<p class="form-description">Meta tags are a great way for webmasters to provide search engines with information about their sites</p>-->
-                    <!--</div>-->
-                    <div class="form-group"
-                         data-ng-class="{'has-error': projectDescription.length === 0 && $ctrl.projectDescriptionFocused, 'has-success': projectDescription.length > 0 && $ctrl.projectDescriptionFocused}">
-                        <label for="area">Description</label>
-                        <textarea
-                                id="area"
-                                ng-minlength="1"
-                                limit-to="128" style="width:100%"
-                                data-ng-model="projectDescription"
-                                class="form-control area-control"
-                                ng-click="$ctrl.projectDescriptionFocused = true"
-                        ></textarea>
-                        <span class="letter-quantity">
-                            <span>{{128-projectDescription.length}}</span>/128
-                        </span>
-                    </div>
-                    
-                    <div class="btn-wrapper" style="text-align: center">
-                        <button type="submit" data-ng-click="$ctrl.save()" class="btn btn-default btn-submit">Save and
-                            Get Started
-                        </button>
-                    </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

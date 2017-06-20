@@ -10,7 +10,6 @@ class FaqCtrl {
 	    this.faqs = [];
         this._PagesService.getFAQ()
             .then(list=> {
-                console.log(list);
                 this.faqs = list;
             })
             .catch(err=> {
@@ -18,7 +17,6 @@ class FaqCtrl {
                     this._Notification.error(val.fieldName);
                 });
                 //this._$state.go('landing.error');
-                console.log(err);
             });
     }
 }
