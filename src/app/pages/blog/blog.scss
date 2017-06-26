@@ -1,0 +1,91 @@
+.blog-section {
+  .blog-form {
+    max-width: 440px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1000;
+    ::-webkit-input-placeholder {
+      color: $color-primary;
+      opacity: 0.3;
+    }
+    input {
+      border:2px solid rgba(0,139,242,.5);
+    }
+    .input-group-btn{
+      .btn{
+        font-size: 18px;
+        padding: 15px 30px;
+        border-radius: 0 50px 50px 0;
+        width: 100%;
+        &.subscribe-btn{
+          min-width: 150px;
+          max-width: 170px;
+          &.disabled{
+            cursor: not-allowed;
+            background: #006ebf;
+          }
+
+        }
+      }
+    }
+    .input-group{
+      &.focus{
+        .form-action-wrapper{
+          display: block;
+          visibility: visible;
+          opacity: 1;
+        }
+        .input-group-btn{
+          .btn{
+            border-radius: 0 30px 0 0;
+          }
+        }
+      }
+    }
+    .form-control{
+      &.focus{
+        border-radius: 30px 0 0 0;
+        box-shadow: none;
+        outline: none;
+        color: #616161;
+        background-color: #fff;
+      }
+    }
+  }
+  margin-top: 80px;
+  .blog-info-transparent {
+    background: black;
+    opacity: 0.2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+  }
+  .blog-info {
+    padding: 25px;
+    font-family: $RobotoCond;
+    .blog-date {
+      color: $color-primary;
+    }
+    .blog-title {
+      font-weight: 600;
+    }
+    .blog-desc {
+      color: #ffffff;
+      margin-top: 15px;
+      line-height: 1.7;
+    }
+  }
+  .blog-actions {
+    padding-top: 20px;
+    padding-bottom: 8px;
+  }
+  .blog-item {
+    .blog-title {
+      padding-bottom: 15px;
+    }
+    .blog-desc {
+      line-height: 1.9;
+    }
+  }
+}
