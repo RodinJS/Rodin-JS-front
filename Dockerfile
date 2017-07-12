@@ -3,6 +3,7 @@ FROM yvnio/nginx
 
 MAINTAINER Grigor Khachatryan <g@yvn.io>
 
+#--build-arg {---}
 ARG env=dev
 
 # Install Global node packages
