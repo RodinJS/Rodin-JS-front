@@ -375,6 +375,20 @@ gulp.task('bundleTemplate', () => {
 });
 //BUNDLE//
 
+gulp.task('env', ()=>{
+    const s = size({ title: 'cleanBundleFile -> ', pretty: false });
+    return gulp.src('./build/app/bundle.js')
+        .pipe(replace('env:"local"', `env:"${process.env.NODE_ENV || 'dev'}"`))
+        .pipe(plumber(ERROR_MESSAGE))
+        .pipe(s)
+        .pipe(plumber.stop())
+        .pipe(gulp.dest('./build/app'))
+        .pipe(notify({
+            onLast: true,
+            message: () => `env-setup - Total size ${s.prettySize}`,
+        }));
+});
+
 
 gulp.task('prod', (done) => {
     sequence('clean', 'vendor', ['generate-index', 'template', 'js-prod', 'sass-prod',  'font', 'img'], done);

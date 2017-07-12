@@ -10,7 +10,8 @@ const AppConstants = {
 
 
     local: {
-        COOKIEDOMAIN: ['localhost', '.rodin.space'],
+        COOKIEDOMAIN: ['localhost', '192.168.99.100', '.rodin.space'],
+        // SOCKET: 'https://ss.rodin.space/api',
         SOCKET: 'http://localhost:4000/api',
         API: 'http://localhost:3000/api',
         // API: 'https://api.rodin.space/api',
@@ -45,7 +46,7 @@ const AppConstants = {
 
     },
     prod: {
-        COOKIEDOMAIN: ['.rodinapp.com', '.rodin.io', '.rodin.space'],
+        COOKIEDOMAIN: ['.rodin.io', '.rodin.space'],
         API: `${window.location.protocol}//api.${window.extractDomain()}/api`,
         SOCKET: `${window.location.protocol}//ss.rodin.space/api`,
         SITE: `${window.location.protocol}//${window.extractDomain()}/`,
@@ -63,7 +64,7 @@ const AppConstants = {
     },
 
     stage: {
-        COOKIEDOMAIN: ['rodin.design'],
+        COOKIEDOMAIN: ['.rodin.design'],
         API: `${window.location.protocol}//api.${window.extractDomain()}/api`,
         SOCKET: `${window.location.protocol}//ss.rodin.space/api`,
         SITE: `${window.location.protocol}//${window.extractDomain()}/`,
@@ -76,6 +77,23 @@ const AppConstants = {
         GITHUB: '5377f212205e0aa4b4cf',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.design/list.json',
+        MODULES: 'http://localhost:4000/modules/',
+    },
+
+    test: {
+        COOKIEDOMAIN: ['localhost', '192.168.99.100', '.rodinapp.com'],
+        API: `${window.location.protocol}//api.${window.extractDomain()}/api`,
+        SOCKET: `${window.location.protocol}//ss.rodin.space/api`,
+        SITE: `${window.location.protocol}//${window.extractDomain()}/`,
+        PREVIEW: `${window.location.protocol}//${window.extractDomain()}/projects/`,
+        PUBLIC: `${window.location.protocol}//${window.extractDomain()}/public/`,
+        PUBLISH: `${window.location.protocol}//${window.extractDomain()}`,
+        EDITOR: `${window.location.protocol}//editor.${window.extractDomain()}/`,
+        RECORDIP: 'x.x.x.x',
+        FB: 'XXXX64010X945XX',
+        GITHUB: '5377f212205e0aa4b4cf',
+        GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
+        SAMPLES: 'https://examples.rodinapp.com/list.json',
         MODULES: 'http://localhost:4000/modules/',
     },
 
