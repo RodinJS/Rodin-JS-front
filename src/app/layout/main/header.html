@@ -55,8 +55,11 @@
                 <li class="hidden-xs">
                     <a ui-sref="landing.login"  style="font-size:16px">Login</a>
                 </li>
-                <li class="hidden-xs" ng-if="$ctrl.isHome">
+                <li class="hidden-xs">
+                    <a ui-sref="landing.register"  style="font-size:16px">Sign up</a>
+<!--
                     <a href="" ng-click="$ctrl.scrollToSignUp()" class="btn sign-up-btn">Sign up</a>
+-->
                 </li>
             </ul>
             <div class="account-action" ng-if="$ctrl.user">
