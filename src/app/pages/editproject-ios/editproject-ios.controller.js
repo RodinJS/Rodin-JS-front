@@ -49,6 +49,7 @@ class EditProjectIosCtrl {
         // const self = this;
         this.eventBus = EventBus;
         this.project = false;
+        this.projectError = false;
 
         this.getProject();
         ProjectStore.subscribeAndInit($scope, () => {
@@ -107,6 +108,7 @@ class EditProjectIosCtrl {
 
     getProject() {
         this.showLoader = true;
+        this.eventBus.emit(this.eventBus.project.DELETE, {});
         this.Project.get(this.projectId, {device: 'ios'}).then(
             project => {
                 this.showLoader = false;

@@ -64,6 +64,7 @@ class EditProjectViveCtrl {
 
     getProject() {
         this.showLoader = true;
+        this.eventBus.emit(this.eventBus.project.DELETE, {});
         this.Project.get(this.projectId, {device: 'vive'}).then(
             project => {
                 this.showLoader = false;
