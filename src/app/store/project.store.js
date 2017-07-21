@@ -14,6 +14,10 @@ function ProjectStore(EventBus, BaseStore, $stateParams, $state, Project) {
         factory.emitChanges();
     });
 
+    EventBus.on(EventBus.project.DELETE, function (scope, data) {
+        factory.data.project = false;
+    });
+
     factory.getProject = function () {
         if(factory.data.project && factory.data.project._id != $stateParams.projectId){
             Project.get($stateParams.projectId, {projectSize:true}).then(
@@ -26,6 +30,11 @@ function ProjectStore(EventBus, BaseStore, $stateParams, $state, Project) {
         }
 
         return angular.copy(factory.data.project);
+    };
+
+    factory.clearProject = function(){
+        factory.data.project = false;
+        return true;
     };
 
     return factory;
