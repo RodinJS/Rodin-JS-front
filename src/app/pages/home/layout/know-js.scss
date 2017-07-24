@@ -1,0 +1,54 @@
+.know-js-section {
+  padding-top: 120px;
+  padding-bottom: 60px;
+}
+.know-js-section-subtitle {
+  font-size: 18px;
+  font-family: Roboto;
+  font-weight: 300;
+  color: #DEDEDE;
+  text-align: center;
+}
+.know-js-line {
+  margin-bottom: 40px;
+}
+.know-js-item {
+  text-align: center;
+  padding: 0 20px;
+  .know-js-icon {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    > i {
+      font-size: 30px;
+    }
+  }
+  .know-js-title {
+    font-family: $Roboto;
+    line-height: 1.2;
+    color: #95989A;
+    font-size: 16px;
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 32px;
+  }
+  a {
+    &:hover {
+      color: #31a7ff;
+    }
+  }
+  p {
+    text-align: left;
+    font-size: 16px;
+    color: $text-gray;
+  }
+}
