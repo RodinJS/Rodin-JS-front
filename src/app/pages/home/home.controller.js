@@ -7,13 +7,14 @@ class HomeCtrl {
             return location.reload();
         }
 
+        console.log(AppConstants)
         this._$window = $window;
         this._$scope = $scope;
         this._$sce = $sce;
         this._User = User;
         this._Notification = Notification;
         this.appName = AppConstants.appName;
-
+        this.rodinHome = AppConstants.RODIN_HOME;
         this.windowHeight = this._$window.innerHeight;
         this.windowWidth = this._$window.innerWidth;
 

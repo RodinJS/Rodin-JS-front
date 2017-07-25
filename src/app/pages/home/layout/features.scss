@@ -98,6 +98,10 @@
 	}
 }
 
+@media (max-width: 1200px) {
+	.features-slide-wrapper{
+		padding-top: 90px !important;}
+}
 @media (max-width: $screen-xs-max) {
 	.section-features{
 		padding-top: 35px;
