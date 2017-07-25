@@ -1,5 +1,6 @@
 .doc-section {
-	padding-bottom: 120px;
+	padding-top: 60px;
+	padding-bottom: 60px;
 	.doc-action-row {
 		text-align: center;
 		margin-top: 75px;
@@ -19,7 +20,7 @@
 	align-items: center;
 	justify-content: space-between;
 	max-width: 945px;
-	margin: 50px auto 0;
+	margin: 0 auto;
 	padding-left: 0;
 	padding-right: 0;
 	>li {
@@ -56,6 +57,9 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
+	.title {
+		font-size: 28px;
+	}
 	.doc-section {
 		padding-bottom: 40px;
 		.doc-action-row {
@@ -83,6 +87,9 @@
 }
 
 @media (max-width: $screen-xs-max) {
+	.title {
+		font-size: 28px;
+	}
 	.doc-section {
 		padding-bottom: 40px;
 		.doc-action-row {

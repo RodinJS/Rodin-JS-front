@@ -61,6 +61,7 @@ class EditProjectOculusCtrl {
 
     getProject() {
         this.showLoader = true;
+        this.eventBus.emit(this.eventBus.project.DELETE, {});
         this.Project.get(this.projectId, {device: 'oculus'}).then(
             project => {
                 this.showLoader = false;

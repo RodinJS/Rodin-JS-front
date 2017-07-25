@@ -115,9 +115,9 @@
                     <div class="section section-vr-space">
                         <!--<h3 class="section-title">Project Thumbnail</h3>-->
                         <div class="drag-cont upload-label">
-                            <div class="drag-item first text-center" style="padding-bottom:0">
+                            <div class="drag-item settings-drag-item  first text-center" style="padding-bottom:0">
                                 <label>Project Thumbnail</label>
-                                <div class="drag-area first">
+                                <div class="settings-drag-area drag-area first">
                                     <div style="cursor: pointer" class="center-row"
                                          ng-click="$ctrl.onUploadAreaClick()">
                                         <span ng-if="!$ctrl.project.thumbnail">.png</span>
@@ -131,7 +131,7 @@
                                                onchange="angular.element(this).scope().$ctrl.changeThumbnail(event);"
                                                name="avatar"/>
                                     </p>
-                                    <div class="drag-item-again"
+                                    <div class="drag-item-again settings-drag-item-again"
                                          ng-click="$ctrl.onUploadAreaClick()"
                                          ng-show="$ctrl.project.thumbnail">
                                         <div class="drag-board"></div>
