@@ -131,7 +131,7 @@
     > a {
       color: $color-text-gray;
       transition: color .2s ease;
-      background-color: transparent;
+      background-color: transparent !important;
       &:hover {
         color: $color-text-primary;
       }
@@ -146,23 +146,26 @@
       }
     }
   }
+ .sign-up-btn-non-sticky {
+    background-color: $primary-color !important;
+   &:hover {
+     color: white;
+     border-color: #31a7ff !important;
+     background: #31a7ff !important;
+   }
+   &:focus {
+     background: #31a7ff !important;
+   }
+  }
   .sign-up-btn {
-    background: $primary-color;
     color: white;
+    background: $primary-color !important;
     transition: background .2s ease, border-color .2s ease;
     //transition: border-color .2s ease;
     padding: 12px 20px;
-    &:hover {
-      color: white;
-      border-color: #31a7ff;
-      background: #31a7ff;
-    }
-    &:focus {
-      background: #31a7ff;
-    }
   }
   .sticky-signup {
-    background: transparent;
+    background: transparent !important;
     color: $color-text-gray;
     transition: background .2s ease, border-color .2s ease;
     margin-top: 0;
