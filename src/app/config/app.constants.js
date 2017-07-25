@@ -27,6 +27,7 @@ const AppConstants = {
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.space/list.json',
         MODULES: 'http://localhost:4000/modules/',
+        RODIN_HOME:'https://app.rodin.space/'
     },
     dev: {
         COOKIEDOMAIN: ['.rodin.space'],
@@ -43,6 +44,7 @@ const AppConstants = {
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.space/list.json',
         MODULES: 'http://localhost:4000/modules/',
+        RODIN_HOME:'https://app.rodin.space/'
 
     },
     prod: {
@@ -60,6 +62,7 @@ const AppConstants = {
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.io/list.json',
         MODULES: 'http://localhost:4000/modules/',
+        RODIN_HOME:'https://app.rodin.io/'
 
     },
 
@@ -78,6 +81,7 @@ const AppConstants = {
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.design/list.json',
         MODULES: 'http://localhost:4000/modules/',
+        RODIN_HOME:'https://app.rodin.stage/'
     },
 
     test: {
@@ -151,6 +155,10 @@ const AppConstants = {
 
     get MODULES() {
         return this[this.env].MODULES;
+    },
+
+    get RODIN_HOME() {
+        return this[this.env].RODIN_HOME;
     },
 
     ERRORCODES: {
