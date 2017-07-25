@@ -57,6 +57,9 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
+	.title {
+		font-size: 28px;
+	}
 	.doc-section {
 		padding-bottom: 40px;
 		.doc-action-row {
@@ -84,6 +87,9 @@
 }
 
 @media (max-width: $screen-xs-max) {
+	.title {
+		font-size: 28px;
+	}
 	.doc-section {
 		padding-bottom: 40px;
 		.doc-action-row {
