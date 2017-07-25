@@ -7,7 +7,6 @@ class HomeCtrl {
             return location.reload();
         }
 
-        console.log(AppConstants)
         this._$window = $window;
         this._$scope = $scope;
         this._$sce = $sce;
