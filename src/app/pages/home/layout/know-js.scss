@@ -85,6 +85,10 @@
 
 
 @media (max-width: 767px) {
+  .know-js-section {
+    padding-top: 60px;
+    padding-bottom: 0 !important;
+  }
   .benefit-section-title {
     font-size: 28px !important;
   }
@@ -95,6 +99,7 @@
     display: none;
   }
   .know-js-title {
+    margin-top: 0px;
     max-width: 270px;
     text-align: center;
     display: inline-block;
