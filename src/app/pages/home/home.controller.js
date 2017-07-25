@@ -64,19 +64,19 @@ class HomeCtrl {
                 this.content = content;
                 this.videos = [
                     {
-                        title:this.content.section5Video1Title,
+                        title:this.content.section7Video1Title,
                         className:'video-play-btn left',
-                        url:`https://www.youtube.com/embed/${this.content.section5Video1Embed}`
+                        url:`https://www.youtube.com/embed/${this.content.section7Video1Embed}`
                     },
                     {
-                        title:this.content.section5Video2Title,
+                        title:this.content.section7Video2Title,
                         className:'video-play-btn middle',
-                        url:`https://www.youtube.com/embed/${this.content.section5Video2Embed}`
+                        url:`https://www.youtube.com/embed/${this.content.section7Video2Embed}`
                     },
                     {
-                        title:this.content.section5Video3Title,
+                        title:this.content.section7Video3Title,
                         className:'video-play-btn right',
-                        url:`https://www.youtube.com/embed/${this.content.section5Video3Embed}`
+                        url:`https://www.youtube.com/embed/${this.content.section7Video3Embed}`
                     }
                 ];
                 $(document).ready(() => {

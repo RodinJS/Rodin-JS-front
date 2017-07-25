@@ -131,7 +131,7 @@
     > a {
       color: $color-text-gray;
       transition: color .2s ease;
-      background-color: transparent !important;
+      background-color: transparent;
       &:hover {
         color: $color-text-primary;
       }
@@ -147,10 +147,36 @@
     }
   }
   .sign-up-btn {
+    background: $primary-color;
+    color: white;
+    transition: background .2s ease, border-color .2s ease;
+    //transition: border-color .2s ease;
+    padding: 12px 20px;
+    &:hover {
+      color: white;
+      border-color: #31a7ff;
+      background: #31a7ff;
+    }
+    &:focus {
+      background: #31a7ff;
+    }
+  }
+  .sticky-signup {
+    background: transparent;
+    color: $color-text-gray;
+    transition: background .2s ease, border-color .2s ease;
     margin-top: 0;
     margin-bottom: 11px;
-    padding: 12px 30px;
+    padding: 12px 20px;
     font-size: 15px;
+    &:hover {
+      border-color: $primary-color;
+      background: $primary-color;
+    }
+    &:focus {
+      background: $primary-color;
+    }
+
   }
 }
 

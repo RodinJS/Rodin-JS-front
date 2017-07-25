@@ -173,8 +173,8 @@ section.section {
         margin-bottom: 8px;
     }
     .subtitle {
-        opacity: 0.7;
-        font-weight: 500;
+        color: #DEDEDE;
+        font-weight: 300;
         font-size: 18px;
     }
     .title+.section-title-divider {
@@ -183,7 +183,7 @@ section.section {
 }
 
 .section-title-divider {
-    width: 54px;
+    width: 122px;
     height: 2px;
     margin: auto;
     border-top: 2px solid $color-primary;
