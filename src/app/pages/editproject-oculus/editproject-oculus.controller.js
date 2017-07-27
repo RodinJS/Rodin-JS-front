@@ -18,7 +18,6 @@ class EditProjectOculusCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.getProject();
 
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
@@ -57,6 +56,7 @@ class EditProjectOculusCtrl {
                 this._$interval.cancel(this.timer);
             }
         })
+        this.getProject();
     }
 
     getProject() {
