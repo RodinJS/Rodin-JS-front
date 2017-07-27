@@ -44,7 +44,7 @@ class SingleDescController {
 
     }
     askQuestion() {
-        this.helpService.createQuestion(this.type, {subject:'Abajub jibujab', tags:['yahoo','mahoo'], preview:'preview'})
+        this.helpService.createQuestion(this.type, {subject:'Galustna Sahakyan', tags:['galus','t', 'sahakyan', 'abort', 'urod'], description:'Երեխեքքք ուզում եմ աբոռտ անեմ,ինչ խորհուրդ կտաաաք'})
             .then(response =>console.log(response))
     }
 }
