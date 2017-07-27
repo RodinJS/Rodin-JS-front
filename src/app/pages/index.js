@@ -67,6 +67,18 @@ import './about/index';
 
 import './modules/index';
 
+import './help-descs/question/index';
+
+import './help-descs/question/single/index';
+
+import './help-descs/feature/index';
+
+import './help-descs/feature/single/index';
+
+import './help-descs/issues/index';
+
+import './help-descs/issues/single/index';
+
 // Create the module where our functionality can attach to
 let pagesModule = angular.module('app.pages', [
     'landing.auth',
@@ -87,6 +99,13 @@ let pagesModule = angular.module('app.pages', [
 	'landing.samples',
     'landing.about',
     'landing.about',
+    'landing.question',
+    'landing.single-question',
+    'landing.feature',
+    'landing.single-feature',
+    'landing.issues',
+    'landing.single-issues',
+
 
     'app.dashboard',
     'app.profile',
@@ -105,7 +124,6 @@ let pagesModule = angular.module('app.pages', [
     'app.plans',
     'app.billing',
     'app.purchases',
-
     'modules'
 ]);
 

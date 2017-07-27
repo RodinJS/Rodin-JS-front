@@ -1,8 +1,11 @@
 /**
- * Created by Reinchard on 7/25/2017.
+ * Created by Reinchard on 7/26/2017.
  */
-class ProjectCtrl {
+
+class IssuesCtrl {
     constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User, VCS, Notification, $timeout) {
         'ngInject';
     }
 }
+
+export default IssuesCtrl;

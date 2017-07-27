@@ -4,16 +4,16 @@
 import angular from 'angular/index';
 
 // Create the module where our functionality can attach to
-let questionModule = angular.module('app.qa', []);
+let questionModule = angular.module('landing.question', []);
 
 // Include our UI-Router config settings
-import QuestionConfig from './question.config';
+import QuestionConfig from './question';
 questionModule.config(QuestionConfig);
 
 
 // Controllers
 import QuestionCtrl from './question.controller';
-questionModule.controller('ProjectCtrl', QuestionCtrl);
+questionModule.controller('QuestionCtrl', QuestionCtrl);
 
 
 export default questionModule;

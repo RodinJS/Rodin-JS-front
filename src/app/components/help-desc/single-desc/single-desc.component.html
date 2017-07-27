@@ -1,0 +1,161 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="search-line">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="header-search-box">
+                                <form action="">
+                                    <div class="form-group search">
+                                        <input type="search" class="header-search" ng-model="$ctrl.searchField"
+                                               placeholder="Search">
+                                        <button type="submit" class="btn-search" ng-click="$ctrl.search($event)">
+                                            <i class="rd rd-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <button class="button-ask" ng-click="$ctrl._$state.go('landing.questions')">{{$ctrl.config.buttonText}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" ng-if="!$ctrl.creationPage">
+            <div class="col-md-12">
+                <div class="tag-section">
+                    <ul>
+                        <li ng-repeat="tag in $ctrl.tags"><a ng-click="$ctrl.filterByTag(tag.name)"> {{tag.name}}</a></li>
+                    </ul>
+                </div>
+                <div class="content">
+                    <h2>{{$ctrl.config.title}}</h2>
+                </div>
+            </div>
+            <div class="col-md-12 message-section">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img class="img-circle img-responsive profile-image" src="/images/question/incognito.png"
+                             alt="">
+                    </div>
+                    <div class="col-md-11 text-section">
+                        <p>{{$ctrl.question.user.firstName}} {{$ctrl.question.user.lastName}}</p>
+                        <small>{{$ctrl.question.createdAt | date:'medium'}}</small>
+                        <div class="col-md-12 message">
+                            <div class="message-background"></div>
+                            <div class="row message-content">
+                                <section class="col-md-11">
+                                    <div class="row">
+                                        <p>{{$ctrl.question.preview}}</p>
+                                    </div>
+                                </section>
+                                <section class="col-md-1">
+                                    <div class="row">
+                                        <ul class="vote-panel">
+                                            <li ng-click="$ctrl.vote($ctrl.question.id, 1, index)" disabled="{{inProgress}}">
+                                                <span class="icon-vote-up"></span></li>
+                                            <li class="count">{{$ctrl.question.rating}}</li>
+                                            <li ng-click="$ctrl.vote($ctrl.question.id, -1, index)" disabled="{{inProgress}}">
+                                                <span class="icon-vote-down"></span></li>
+                                        </ul>
+
+
+                                    </div>
+
+                                </section>
+
+                                <div class="tag-section col-md-12">
+                                    <div class="row">
+                                        <ul>
+                                            <li ng-repeat="tag in $ctrl.question.tags"><a ng-click="$ctrl.filterByTag(tag)"> {{tag}}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-repeat="message in $ctrl.question.threads" class="col-md-12 message-section">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img class="img-circle img-responsive profile-image" src="/images/question/incognito.png"
+                             alt="">
+                    </div>
+                    <div class="col-md-11 text-section">
+                        <p>{{message.createdBy.firstName}} {{message.createdBy.lastName}}</p>
+                        <small>{{message.createdAt | date:'medium'}}</small>
+                        <div class="col-md-12 message">
+                            <div class="message-background"></div>
+                            <div class="row message-content">
+                                <section class="col-md-11">
+                                    <div class="row">
+                                        <p>{{message.body}}</p>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 answer-question">
+                <h3>Your Answer</h3>
+                <div class="col-md-1">
+                    <img class="img-circle img-responsive profile-image" src="/images/question/incognito.png"
+                         alt="">
+                </div>
+                <div class="col-md-11">
+                    <p ng-if="$ctrl.currentUser">{{$ctrl.currentUser.username}}</p>
+                    <textarea class="answer-question-section" ng-model="$ctrl.answer"></textarea>
+                </div>
+                <div class="col-md-12 action-section text-center">
+                    <button class="btn-back">Back</button>
+                    <button class="btn-answer" ng-click="$ctrl.submitAnswer()">{{$ctrl.currentUser ? 'Post':'Sing in and post'}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="container" ng-if="$ctrl.creationPage">
+            <div class="col-md-12 answer-question">
+                <div class="content" style="margin-bottom: 30px;">
+                    <h2>{{$ctrl.config.title}}</h2>
+                </div>
+                <div class="col-md-1">
+                    <img class="img-circle img-responsive profile-image" src="/images/question/incognito.png"
+                         alt="">
+                </div>
+                <div class="col-md-11">
+                    <p class="question-type">{{$ctrl.config.type}}</p>
+                    <form ng-submit="askQuestion()">
+                        <div class="form-group">
+                            <input type="text" class="question-section" style="height: 50px;" placeholder="{{$ctrl.config.placeholder}}">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="answer-question-section" placeholder="Fill in the details..." ng-model="$ctrl.answer"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <!--<div class="col-md-offset-1 col-md-11 tag-selection">-->
+                    <!--<ui-select multiple ng-model="$ctrl.colors" theme="bootstrap" close-on-select="false" style="width: 300px;" title="Choose a color">-->
+                        <!--<ui-select-match placeholder="Select colors...">{{$item}}</ui-select-match>-->
+                        <!--<ui-select-choices repeat="color in $ctrl.availableColors">-->
+                            <!--{{color}}-->
+                        <!--</ui-select-choices>-->
+                    <!--</ui-select>-->
+                <!--</div>-->
+                <div class="col-md-12 action-section text-center">
+                    <button class="btn-back">Back</button>
+                    <button class="btn-answer" ng-click="$ctrl.submitAnswer()">{{$ctrl.currentUser ? 'Post':'Sing in and post'}}</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="loaderContent" data-ng-if="$ctrl.showLoader">
+        <div class="spriteLoader"></div>
+    </div>
+</div>

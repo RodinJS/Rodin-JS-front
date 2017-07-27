@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "export NODE_ENV=test; gulp bundle",
     "start": "gulp",
     "local": "export NODE_ENV=local; gulp bundle",
     "dev": "export NODE_ENV=dev; gulp bundle",
     "stage": "export NODE_ENV=stage; gulp bundle",
-    "prod": "export NODE_ENV=prod; gulp bundle",
-    "test": "export NODE_ENV=test; gulp bundle"
+    "prod": "export NODE_ENV=prod; gulp bundle"
   },
   "repository": {
     "type": "git",
@@ -90,6 +89,7 @@
     "ng-tags-input": "3.1.1",
     "restangular": "1.5.2",
     "socket.io-client": "1.7.2",
-    "systemjs": "^0.19.41"
+    "systemjs": "^0.19.41",
+    "ui-select": "^0.19.8"
   }
 }

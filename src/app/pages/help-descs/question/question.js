@@ -5,18 +5,14 @@ function QuestionConfig($stateProvider) {
     'ngInject';
 
     $stateProvider
-        .state('app.question', {
-            url: '/question',
+        .state('landing.question', {
+            url: '/questions',
             controller: 'QuestionCtrl',
             controllerAs: '$ctrl',
-            templateUrl: 'pages/q&a/question.html',
+            templateUrl: 'pages/help-descs/question/question.html',
             title: 'Question and Answer',
-            resolve: {
-                auth: function (User) {
-                    return User.ensureAuthIs(true);
-                },
-            },
-        });
+            showFooter: true
+        })
 
 }
 
