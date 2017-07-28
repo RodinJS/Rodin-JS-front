@@ -2,6 +2,10 @@
   display: inline-table;
   margin-top: 30px;
   margin-bottom: 30px;
+  .active-page {
+    color: white;
+    background: #072F55;
+  }
   li {
     margin-left: 5px;
     margin-right: 5px;

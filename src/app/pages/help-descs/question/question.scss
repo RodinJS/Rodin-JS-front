@@ -1,6 +1,7 @@
 a {
   cursor: pointer;
 }
+
 .search-line {
   border: 1px solid rgba(170, 170, 170, .2);
   border-left-color: transparent;
@@ -15,7 +16,7 @@ a {
     color: #DEDEDE;
     border: none;
     border-radius: 6px;
-    &:hover{
+    &:hover {
       background: #31a7ff;
       color: white;
     }
@@ -80,6 +81,9 @@ a {
         color: #5F6977;
       }
       &:active {
+        .count {
+          color: #C1C5CA;
+        }
         color: #C1C5CA;
       }
     }
@@ -100,7 +104,7 @@ a {
     .question-description {
       margin-top: 30px;
       color: #DEDEDE;
-      font-size:16px;
+      font-size: 16px;
     }
     .message-content {
       padding: 15px;
@@ -108,14 +112,14 @@ a {
     small {
       margin-left: 18px;
       font-size: 12px;
-      color: #aaaaaa;
+      color: #575F6A;
     }
     p {
-      color: #aaaaaa;
+      color: #DEDEDE;
       display: inline-block;
       font-size: 18px;
       a {
-        color: #aaaaaa;
+        color: #DEDEDE;
         &:hover {
           color: white;
         }
@@ -144,9 +148,12 @@ a {
 .answer-question {
   margin-top: 30px;
   margin-bottom: 30px;
+  h3 {
+    color: #AAAAAA;
+  }
   .question-type {
-    color:#aaaaaa;
-    font-size:18px;
+    color: #aaaaaa;
+    font-size: 18px;
   }
   .question-section {
     width: 100%;
@@ -155,11 +162,12 @@ a {
     min-height: 52px;
     background: #0F1F35;
     padding: 15px;
-    color: #5C646F;
-    font-size:24px;
+    color: white;
+    font-size: 18px;
     resize: none;
     &::-webkit-input-placeholder {
-      font-size: 24px;
+      font-size: 18px;
+      color: #5C646F;
     }
     &:focus {
       outline: none;
@@ -172,11 +180,13 @@ a {
     min-height: 165px;
     background: #0F1F35;
     padding: 15px;
-    color: #5C646F;
-    font-size:24px;
+    color: white;
+    font-size: 18px;
     resize: none;
+
     &::-webkit-input-placeholder {
-      font-size: 24px;
+      font-size: 18px;
+      color: #4A5461;
     }
     &:focus {
       outline: none;
@@ -190,7 +200,7 @@ a {
     margin-bottom: 30px;
   }
   .tag-selection {
-    .tags  {
+    .tags {
       width: 100% !important;
       box-shadow: none;
       border: 1px solid #045190;
@@ -199,21 +209,28 @@ a {
       background: #0F1F35;
       padding: 8px;
       color: #5C646F;
-      font-size:24px;
+      font-size: 24px;
       resize: none;
       .input {
         height: 34px;
         background: transparent;
         border: none;
         margin: 0;
+        color: white;
         font-size: 18px;
         font-family: $Roboto;
         &:focus {
           outline: none !important;
         }
+        &::-webkit-input-placeholder {
+          font-size: 18px;
+          color: #4A5461;
+
+        }
+
       }
       &::-webkit-input-placeholder {
-        font-size: 24px;
+        font-size: 18px;
       }
 
       .ui-select-match {

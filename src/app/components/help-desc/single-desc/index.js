@@ -12,7 +12,7 @@ class SingleDescController {
         this.Notification = Notification;
         this.configs = {
             questions: {
-                title: 'All Questions',
+                title: 'Ask a Question',
                 buttonText: 'Ask a Question',
                 type: 'Your question',
                 placeholder: 'Type your question here...'

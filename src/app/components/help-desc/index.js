@@ -21,6 +21,7 @@ class HelpDescComponentController {
         this.searchField = '';
         this.getContent();
         this.getFeaturedTags();
+        this.pages = [];
 
     }
 
@@ -29,13 +30,13 @@ class HelpDescComponentController {
         if (this.searchField.length > 0) {
             this.config.searchTitle = '';
         }
-
         this.showLoader = true;
         this.helpService.searchConversations(this.type + `?subject=${this.searchField}`)
             .then((response) => {
                 this.config.searchTitle = 'Results For: ' + this.searchField;
                 this.showLoader = false;
                 this.response = response;
+                this.updatePagination(response.pages);
             })
             .catch((err) => {
                 this.showLoader = false;
@@ -49,11 +50,12 @@ class HelpDescComponentController {
             })
     }
 
-    getContent() {
-        this.helpService.getList(this.type)
+    getContent(page =1) {
+        this.helpService.getList(this.type, page)
             .then((response) => {
                 this.showLoader = false;
                 this.response = response;
+                this.updatePagination(response.pages);
             })
     }
 
@@ -80,6 +82,7 @@ class HelpDescComponentController {
                 this.config.searchTitle = name;
                 this.showLoader = false;
                 this.response = response;
+                this.updatePagination(response.pages);
             })
             .catch((err) => {
                 this.showLoader = false;
@@ -87,6 +90,18 @@ class HelpDescComponentController {
     }
     goToPage(id = 'create') {
         this._$state.go('landing.single-' + this.type.slice(0,-1), {id});
+    }
+
+    changePage(page) {
+        this.showLoader = true;
+        this.getContent(page);
+    }
+
+    updatePagination(pages) {
+        this.pages = [];
+        for(let i =0; i< pages; i++) {
+            this.pages.push(i+ 1);
+        }
     }
 }
 

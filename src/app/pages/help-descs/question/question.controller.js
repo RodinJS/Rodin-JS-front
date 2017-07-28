@@ -4,7 +4,6 @@
 class QuestionCtrl {
     constructor(AppConstants, Project, ProjectTemplate, $state, $scope, User, VCS, Notification, $timeout) {
         'ngInject';
-        console.log($state)
     }
 }
 
