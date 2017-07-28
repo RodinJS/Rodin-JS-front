@@ -231,6 +231,7 @@ class EditProjectAndroidCtrl {
     }
 
     build(event) {
+        if (!this._checkVersion(this.project.build.android.version, this.project.android.version)) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }
