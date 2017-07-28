@@ -1,8 +1,12 @@
+a {
+  cursor: pointer;
+}
 .search-line {
   border: 1px solid rgba(170, 170, 170, .2);
   border-left-color: transparent;
   border-right-color: transparent;
   .button-ask {
+    cursor: pointer;
     font-size: 16px;
     padding: 10px 15.5px;
     float: right;
@@ -93,6 +97,11 @@
     max-width: 64px;
   }
   .text-section {
+    .question-description {
+      margin-top: 30px;
+      color: #DEDEDE;
+      font-size:16px;
+    }
     .message-content {
       padding: 15px;
     }
@@ -181,69 +190,62 @@
     margin-bottom: 30px;
   }
   .tag-selection {
-    .ui-select-container {
+    .tags  {
       width: 100% !important;
+      box-shadow: none;
       border: 1px solid #045190;
       border-radius: 6px;
       min-height: 52px;
       background: #0F1F35;
-      padding: 15px;
+      padding: 8px;
       color: #5C646F;
       font-size:24px;
       resize: none;
+      .input {
+        height: 34px;
+        background: transparent;
+        border: none;
+        margin: 0;
+        font-size: 18px;
+        font-family: $Roboto;
+        &:focus {
+          outline: none !important;
+        }
+      }
       &::-webkit-input-placeholder {
         font-size: 24px;
       }
-      &:focus {
-        outline: none;
-      }
+
       .ui-select-match {
         position: absolute;
         top: -6px;
       }
-      .ui-select-choices, ui-select-choices-content, ui-select-dropdown {
-        width: 100%;
-        background: #0F1F35;
-        border: 1px solid black;
-        .ui-select-choices {
-          cursor: pointer;
-        }
-      }
-      .ui-select-search {
-        position: absolute;
-        left: 130px;
-        top: 8px;
-        background: transparent;
-        border: none;
-        &:focus {
-          outline: none;
-        }
-      }
-      .ui-select-match-item {
-        .close {
-          display: none;
-        }
-        border: 1px solid #4f5864;
-        border-radius: 6px;
-        padding: 6px 12px;
-        color: #AAAAAA;
-        font-family: "Roboto", sans-serif;
-        display: inline-block;
-        margin-right: 6px;
-        margin-top: 15px;
-        cursor: pointer;
-        font-size: 14px;
-        background: transparent;
-        a {
+
+      .tag-list {
+        li {
+          border: 1px solid #4f5864;
+          border-radius: 6px;
+          padding: 4px 12px;
+          height: 34px;
           color: #AAAAAA;
-        }
-        &:hover {
-          color: white;
-          background: #045190;
-          border: 1px solid #045190;
+          font-family: "Roboto", sans-serif;
+          display: inline-block;
+          margin-right: 6px;
+          cursor: pointer;
+          font-size: 14px;
+          background: none;
+          margin-top: 0;
           a {
-            text-decoration: none;
+            color: #AAAAAA;
+          }
+          &:hover {
             color: white;
+            background: #045190;
+            border: 1px solid #045190;
+            a {
+              text-decoration: none;
+              color: white;
+            }
           }
         }
       }

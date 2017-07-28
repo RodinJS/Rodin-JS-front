@@ -6,7 +6,7 @@ function SingleQuestionConfig($stateProvider) {
     'ngInject';
 
     $stateProvider
-        .state('landing.single-issue', {
+        .state('landing.single-question', {
             url: '/questions/:id',
             controller: 'SingleQuestionCtrl',
             controllerAs: '$ctrl',

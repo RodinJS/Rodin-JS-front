@@ -104,7 +104,7 @@ let pagesModule = angular.module('app.pages', [
     'landing.feature',
     'landing.single-feature',
     'landing.issues',
-    'landing.single-issues',
+    'landing.single-issue',
 
 
     'app.dashboard',

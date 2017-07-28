@@ -6,8 +6,8 @@ function SingleIssueConfig($stateProvider) {
     'ngInject';
 
     $stateProvider
-        .state('landing.single-issues', {
-            url: '/issues/:id',
+        .state('landing.single-issue', {
+            url: '/issue/:id',
             controller: 'SingleIssueCtrl',
             controllerAs: '$ctrl',
             template:'<single-desc type="issues" id="$ctrl.id"></single-desc>',

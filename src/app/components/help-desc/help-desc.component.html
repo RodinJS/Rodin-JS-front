@@ -20,7 +20,8 @@
                     </div>
                     <div class="col-md-2">
                         <div class="row">
-                            <button class="button-ask">{{$ctrl.config.buttonText}}</button>
+                            <!--<a ui-sref="{{$ctrl._$state.goTo('landing.single-' + $ctrl.type.slice(0, -1), { id: 'create' })}}" class="button-ask">{{$ctrl.config.buttonText}}</a>-->
+                            <button ng-click="$ctrl.goToPage()"  class="button-ask">{{$ctrl.config.buttonText}}</button>
                         </div>
                     </div>
                 </div>
@@ -34,7 +35,7 @@
                     </ul>
                 </div>
                 <div class="content">
-                    <h2>{{$ctrl.config.title}}</h2>
+                    <h2>{{$ctrl.config.searchTitle.length > 0 ? $ctrl.config.searchTitle : $ctrl.config.title}}</h2>
                 </div>
             </div>
             <div ng-repeat="(index, message) in $ctrl.response.items" class="col-md-12 message-section">
@@ -51,7 +52,7 @@
                             <div class="row message-content">
                                 <section class="col-md-11">
                                     <div class="row">
-                                        <p><a href="{{'#/' + $ctrl.type +'/'+ message.id }}">{{message.subject}}</a></p>
+                                        <p><a ng-click="$ctrl.goToPage(message.id)">{{message.subject}}</a></p>
                                     </div>
                                 </section>
                                 <section class="col-md-1">
@@ -82,17 +83,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 text-center">
-                <ul class="pagination">
-                    <li class="disabled"><a href="#">&lt;</a></li>
-                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&gt;</a></li>
-                </ul>
-            </div>
+            <!--<div class="col-md-12 text-center">-->
+                <!--<ul class="pagination">-->
+                    <!--<li class="disabled"><a href="#">&lt;</a></li>-->
+                    <!--<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>-->
+                    <!--<li><a href="#">2</a></li>-->
+                    <!--<li><a href="#">3</a></li>-->
+                    <!--<li><a href="#">4</a></li>-->
+                    <!--<li><a href="#">5</a></li>-->
+                    <!--<li><a href="#">&gt;</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
         </div>
     </div>
     <div class="loaderContent" data-ng-if="$ctrl.showLoader">

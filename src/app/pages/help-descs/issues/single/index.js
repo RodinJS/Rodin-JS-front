@@ -4,7 +4,7 @@
 import angular from 'angular/index';
 
 // Create the module where our functionality can attach to
-let singleIssueModule = angular.module('landing.single-issues', []);
+let singleIssueModule = angular.module('landing.single-issue', []);
 
 // Include our UI-Router config settings
 import SingleIssueConfig from './single-issue';
