@@ -19,6 +19,12 @@
 //::-webkit-scrollbar-thumb:window-inactive {
 //  background: rgba(255,0,0,0.4);
 //}
+@media (max-width: 767px) {
+  .header-logo {
+    margin-top: 20px;
+  }
+}
+
 .header {
   min-height: 70px;
   padding-top: 0;
@@ -146,11 +152,40 @@
       }
     }
   }
+ .sign-up-btn-non-sticky {
+    background-color: $primary-color !important;
+   &:hover {
+     color: white;
+     border-color: #31a7ff !important;
+     background: #31a7ff !important;
+   }
+   &:focus {
+     background: #31a7ff !important;
+   }
+  }
   .sign-up-btn {
+    color: white;
+    background: $primary-color !important;
+    transition: background .2s ease, border-color .2s ease;
+    //transition: border-color .2s ease;
+    padding: 12px 20px;
+  }
+  .sticky-signup {
+    background: transparent !important;
+    color: $color-text-gray;
+    transition: background .2s ease, border-color .2s ease;
     margin-top: 0;
     margin-bottom: 11px;
-    padding: 12px 30px;
+    padding: 12px 20px;
     font-size: 15px;
+    &:hover {
+      border-color: $primary-color;
+      background: $primary-color;
+    }
+    &:focus {
+      background: $primary-color;
+    }
+
   }
 }
 

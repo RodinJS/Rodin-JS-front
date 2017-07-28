@@ -3,6 +3,7 @@ function EventBus($rootScope) {
     const factory = {
         project: {
             SET: 'projectObject',
+            DELETE:'deleteProjectObject'
         },
         pages: {
             SET: 'pagesArray',

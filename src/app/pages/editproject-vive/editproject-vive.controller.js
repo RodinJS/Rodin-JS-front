@@ -64,6 +64,7 @@ class EditProjectViveCtrl {
 
     getProject() {
         this.showLoader = true;
+        this.eventBus.emit(this.eventBus.project.DELETE, {});
         this.Project.get(this.projectId, {device: 'vive'}).then(
             project => {
                 this.showLoader = false;
@@ -206,7 +207,9 @@ class EditProjectViveCtrl {
     }
 
     build(e, isValid) {
-        if(!isValid) return;
+
+        if (!isValid || !this._checkVersion(this.project.build.vive.version, this.project.vive.version)) return;
+
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }
@@ -243,11 +246,11 @@ class EditProjectViveCtrl {
                 ctrl._$scope.configs.displayName.pressed = false;
                 ctrl._$scope.configs.version.focused = false;
                 ctrl._$scope.configs.version.pressed = false;
-                if(ctrl._$scope.configs.viveportKey){
+                if (ctrl._$scope.configs.viveportKey) {
                     ctrl._$scope.configs.viveportKey.focused = false;
                     ctrl._$scope.configs.viveportKey.pressed = false;
                 }
-                if(ctrl._$scope.configs.viveportId){
+                if (ctrl._$scope.configs.viveportId) {
                     ctrl._$scope.configs.viveportId.focused = false;
                     ctrl._$scope.configs.viveportId.pressed = false;
                 }

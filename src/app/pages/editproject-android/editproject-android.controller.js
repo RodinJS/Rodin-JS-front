@@ -50,6 +50,7 @@ class EditProjectAndroidCtrl {
 
         this.eventBus = EventBus;
         this.project = false;
+        this.projectError = false;
         this.getProject();
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
@@ -60,9 +61,9 @@ class EditProjectAndroidCtrl {
                 angular.element(val).attr('disabled', false)
             });
 
+
             if (this.project && this.project.fields && this.project.fields.android &&
                 (!this.project.android || Object.keys(this.project.android).length <= 0 ) && !this.project.build.android.built) {
-
                 this.project.android = {
                     name: this.project.fields.appName,
                     version: this.project.fields.version,
@@ -101,6 +102,7 @@ class EditProjectAndroidCtrl {
 
     getProject() {
         this.showLoader = true;
+        this.eventBus.emit(this.eventBus.project.DELETE, {});
         this.Project.get(this.projectId, {device: 'android'}).then(
             project => {
                 this.showLoader = false;
@@ -229,6 +231,7 @@ class EditProjectAndroidCtrl {
     }
 
     build(event) {
+        if (!this._checkVersion(this.project.build.android.version, this.project.android.version)) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }

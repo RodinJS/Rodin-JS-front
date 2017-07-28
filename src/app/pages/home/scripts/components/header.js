@@ -27,9 +27,11 @@ const header = {
             if ($(this).scrollTop() > 0) {
                 $('.header').addClass('sticky');
                 $('body').addClass('sticky-header');
+                $('.sign-up-btn').addClass('sticky-signup')
             } else {
                 $('.header').removeClass('sticky');
                 $('body').removeClass('sticky-header');
+                $('.sign-up-btn').removeClass('sticky-signup')
             }
         });
     },
