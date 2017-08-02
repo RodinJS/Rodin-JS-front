@@ -376,7 +376,7 @@ gulp.task('bundleTemplate', () => {
 //BUNDLE//
 
 gulp.task('env', ()=>{
-    const s = size({ title: 'cleanBundleFile -> ', pretty: false });
+    const s = size({ title: 'env -> ', pretty: false });
     return gulp.src('./build/app/bundle.js')
         .pipe(replace('env:"local"', `env:"${process.env.NODE_ENV || 'test'}"`))
         .pipe(plumber(ERROR_MESSAGE))

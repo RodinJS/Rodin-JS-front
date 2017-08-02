@@ -95,7 +95,7 @@
 			margin-top: 0;
 		}
 		.benefits-row{
-			margin-top: 60px;
+			margin-top: 30px;
 		}
 		.benefits-item{
 			position: relative;
@@ -134,5 +134,11 @@
 				}
 			}
 		}
+	}
+}
+@media (max-width: 767px) {
+	.benefits-section {
+		padding-bottom: 0 !important;
+		padding-top: 0 !important;;
 	}
 }

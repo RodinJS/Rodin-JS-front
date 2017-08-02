@@ -19,6 +19,12 @@
 //::-webkit-scrollbar-thumb:window-inactive {
 //  background: rgba(255,0,0,0.4);
 //}
+@media (max-width: 767px) {
+  .header-logo {
+    margin-top: 20px;
+  }
+}
+
 .header {
   min-height: 70px;
   padding-top: 0;
