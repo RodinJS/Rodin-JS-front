@@ -34,7 +34,24 @@
                         <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
                         <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                     </li>
-
+                    <li class="dropdown account-dropdown" data-uib-dropdown auto-close="outsideClick">
+                        <a href="" class="btn-account" id="support" data-uib-dropdown-toggle>
+                            <span class="hidden-xs">Support</span>
+                        </a>
+                        <div class="dropdown-menu account-dropdown-menu" uib-dropdown-menu>
+                            <ul class="account-action-list">
+                                <li>
+                                    <a data-ui-sref-active="active" data-ui-sref="landing.question">Questions and Answers</a></li>
+                                </li>
+                                <li>
+                                    <a data-ui-sref-active="active" data-ui-sref="landing.issues">Issue Tracker</a></li>
+                                </li>
+                                <li>
+                                    <a data-ui-sref-active="active" data-ui-sref="landing.feature">Feature Requests</a></li>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="dropdown" uib-dropdown auto-close="outsideClick" ng-if="$ctrl.pagesSection2.length > 0">
                         <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown"
                            role="button"

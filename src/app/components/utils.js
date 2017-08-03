@@ -358,6 +358,33 @@ function RdScroll() {
     };
 }
 
+
+function MultiSelect() {
+    return {
+        restrict: 'E',
+        scope: {
+            rdScroll: '=',
+        },
+        link: function link(scope, elem, attrs, ctrl) {
+            let elHeight = 0;
+            scope.$watch(() => {
+                for (let i = 0; i < elem[0].children.length; i++) {
+                    elHeight += elem[0].children[i].clientHeight;
+                }
+
+                setElementHeight(elHeight);
+            });
+            let setElementHeight = height => {
+                $(elem).slimScroll({
+                    height: `${height >= 350 ? 350 : height}px`,
+                    color: '#AAAAAA',
+                    alwaysVisible: true
+                });
+                elHeight = 0;
+            };
+        },
+    };
+}
 export default {
     limitTo,
     Compile,

@@ -1,0 +1,30 @@
+.pagination {
+  display: inline-table;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  .active-page {
+    color: white;
+    background: #072F55;
+  }
+  li {
+    margin-left: 5px;
+    margin-right: 5px;
+    background: #071324;
+    vertical-align: middle;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    text-align: center;
+    display: inherit;
+    a {
+      display: table-cell;
+      vertical-align: middle;
+      margin: 0 auto;
+      color: #95989A;
+      &:hover {
+        background: #072F55;
+        color: white;
+      }
+    }
+  }
+}

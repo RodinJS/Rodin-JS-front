@@ -321,3 +321,29 @@ p {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+.btn-back {
+  border-radius: 50px;
+  border: 2px solid #aaaaaa;
+  color:#AAAAAA;
+  padding: 12px 30px;
+  outline: none;
+  transition: all .3s;
+  &:hover{
+    background: #AAAAAA;
+    color: white;
+  }
+}
+
+.btn-answer {
+  border-radius: 50px;
+  border: 2px solid $color-primary;
+  color:#AAAAAA;
+  padding: 12px 30px;
+  outline: none;
+  transition: all .3s;
+  &:hover{
+    background: $color-primary;
+    color: white;
+  }
+}

@@ -1,0 +1,98 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="search-line">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="header-search-box">
+                                <form action="">
+                                    <div class="form-group search">
+                                        <input type="search" class="header-search" ng-model="$ctrl.searchField"
+                                               placeholder="Search">
+                                        <button type="submit" class="btn-search" ng-click="$ctrl.search($event)">
+                                            <i class="rd rd-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <!--<a ui-sref="{{$ctrl._$state.goTo('landing.single-' + $ctrl.type.slice(0, -1), { id: 'create' })}}" class="button-ask">{{$ctrl.config.buttonText}}</a>-->
+                            <button ng-click="$ctrl.goToPage()"  class="button-ask">{{$ctrl.config.buttonText}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="tag-section">
+                    <ul>
+                        <li ng-repeat="tag in $ctrl.tags"><a ng-click="$ctrl.filterByTag(tag.name)"> {{tag.name}}</a></li>
+                    </ul>
+                </div>
+                <div class="content">
+                    <h2>{{$ctrl.config.searchTitle.length > 0 ? $ctrl.config.searchTitle : $ctrl.config.title}}</h2>
+                </div>
+            </div>
+            <div ng-repeat="(index, message) in $ctrl.response.items" class="col-md-12 message-section">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img class="img-circle img-responsive profile-image" src="/images/question/incognito.png"
+                             alt="">
+                    </div>
+                    <div class="col-md-11 text-section">
+                        <p>{{message.user.firstName}} {{message.user.lastName}}</p>
+                        <small>{{message.createdAt | date:'medium'}}</small>
+                        <div class="col-md-12 message">
+                            <div class="message-background"></div>
+                            <div class="row message-content">
+                                <section class="col-md-11">
+                                    <div class="row">
+                                        <p><a ng-click="$ctrl.goToPage(message.id)">{{message.subject}}</a></p>
+                                    </div>
+                                </section>
+                                <!--<section class="col-md-1">-->
+                                    <!--<div class="row">-->
+                                        <!--<ul class="vote-panel">-->
+                                            <!--<li ng-click="$ctrl.vote(message.id, 1, index)" disabled="{{inProgress}}">-->
+                                                <!--<span class="icon-vote-up"></span></li>-->
+                                            <!--<li class="count">{{message.rating}}</li>-->
+                                            <!--<li ng-click="$ctrl.vote(message.id, -1, index)" disabled="{{inProgress}}">-->
+                                                <!--<span class="icon-vote-down"></span></li>-->
+                                        <!--</ul>-->
+
+
+                                    <!--</div>-->
+
+                                <!--</section>-->
+
+                                <div class="tag-section col-md-12">
+                                    <div class="row">
+                                        <ul>
+                                            <li ng-repeat="tag in message.tags"><a ng-click="$ctrl.filterByTag(tag)"> {{tag}}</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center" ng-show="$ctrl.pages.length > 0">
+                <ul class="pagination">
+                    <li class="disabled"><a ng-click="$ctrl.changePage($ctrl.response.page - 1)">&lt;</a></li>
+                    <li ng-repeat="page in $ctrl.pages track by $index" ng-class="{'active-page': page === $ctrl.response.page}"><a ng-click="$ctrl.changePage(page)">{{page}}</a></li>
+                    <li><a ng-click="$ctrl.changePage($ctrl.response.page + 1)">&gt;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="loaderContent" data-ng-if="$ctrl.showLoader">
+        <div class="spriteLoader"></div>
+    </div>
+</div>

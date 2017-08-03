@@ -46,8 +46,8 @@ class EditProjectOculusCtrl {
 
         this.submiting = false;
         this.openEvent = null;
-
         this.eventBus = EventBus;
+        this.getProject();
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
         });
@@ -61,6 +61,7 @@ class EditProjectOculusCtrl {
 
     getProject() {
         this.showLoader = true;
+        // console.log(this.eventBus)
         this.eventBus.emit(this.eventBus.project.DELETE, {});
         this.Project.get(this.projectId, {device: 'oculus'}).then(
             project => {
