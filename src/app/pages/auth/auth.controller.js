@@ -81,7 +81,7 @@ class AuthCtrl {
                         });
                         return;
                     }
-
+                    this._User.getMe();
                     this._$state.go('app.dashboard');
                 },
 
