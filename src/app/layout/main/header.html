@@ -1,7 +1,7 @@
 <div class="header-background" ng-show="!stateIsLoading"></div>
 <div class="header-auth" ng-show="!stateIsLoading">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header main-navbar-header">
             <a href="" class="btn-mobile-menu visible-xs" ng-class="$ctrl.menuOpen ? 'active' : ''"
                ng-click="$ctrl.clickMenu()" ng-if="!$ctrl.isHome">
                 <span class="btn-bars">
@@ -60,7 +60,7 @@
                         </a>
                         <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel"
                             ng-if="$ctrl.pagesSection2.length > 0">
-                            <li class="rodin-hide" ng-repeat="pages in $ctrl.pagesSection2">
+                            <li class="rodin-hide" ng-repeat="page in $ctrl.pagesSection2">
                                 <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
                                 <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                             </li>
@@ -68,7 +68,7 @@
                     </li>
                 </ul>
             </div>
-            <ul class="nav navbar-nav navbar-right" ng-if="!$ctrl.user">
+            <ul class="nav navbar-nav navbar-right" ng-if="!$ctrl.user" ng-style="$ctrl.user  ? {display: 'block'}: {display: 'none'}">
                 <li class="hidden-xs">
                     <a ui-sref="landing.login"  style="font-size:16px">Login</a>
                 </li>

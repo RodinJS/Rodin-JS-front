@@ -1,5 +1,5 @@
 class AppHeaderCtrl {
-    constructor(AppConstants, User, $scope, $state, SocketService, NotificationsStore, EventBus, PagesService, PagesStore, Notification, ModulesStore) {
+    constructor(AppConstants,$window, User, $scope, $state, SocketService, NotificationsStore, EventBus, PagesService, PagesStore, Notification, ModulesStore) {
         'ngInject';
         this.appName = AppConstants.appName;
         this.currentUser = User.current;
@@ -29,13 +29,13 @@ class AppHeaderCtrl {
                 this.try = true;
                 return this.getPagesList();
             }
-            if (this.pagesList.length > 0) {
-                this.pagesSection1 = _.slice(this.pagesList, 0, 3);
-                this.pagesSection2 = _.slice(this.pagesList, 3, this.pagesList.length);
-            }
+           this.setPagesDropdown();
 
         });
 
+        angular.element($window).bind('resize', () => {
+            this.setPagesDropdown();
+        });
         $scope.$watch('User.current', (newUser) => {
             this.currentUser = newUser;
         });
@@ -45,7 +45,6 @@ class AppHeaderCtrl {
         if (this.user) {
             this.notificationsStore.subscribeAndInit($scope, ()=> {
                 this.notifications = this.notificationsStore.getNotifications();
-                //this.notificationsCount = this.notificationsStore.getUndreadNotificationsCount();
                 if (!this.notifications && tryAttempt == 0){
                     tryAttempt = 1;
                     return this.getNotifications();
@@ -60,6 +59,15 @@ class AppHeaderCtrl {
 
     }
 
+    setPagesDropdown() {
+        if(window.innerWidth <= 992) {
+            this.pagesSection1 = _.slice(0);
+            this.pagesSection2 = _.slice(this.pagesList);
+        } else if (this.pagesList.length > 0) {
+            this.pagesSection1 = _.slice(this.pagesList, 0, 3);
+            this.pagesSection2 = _.slice(this.pagesList, 3, this.pagesList.length);
+        }
+    }
     showSocketResponse(data) {
         const respData = (data.data && typeof data.data === 'object') ? data.data  : data;
         const message = respData.message || respData.label || respData.data;
@@ -78,7 +86,7 @@ class AppHeaderCtrl {
 
     clickMenu() {
         this.menuOpen = !this.menuOpen;
-        this.mobileMenu = this.menuOpen ? { display: 'block', float: 'inherit' } : { display: 'none', float: 'none' };
+        this.mobileMenu = this.menuOpen ? { display: 'block' } : { display: 'none'};
     }
 
     getPagesList() {
