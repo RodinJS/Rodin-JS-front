@@ -214,6 +214,8 @@ class EditProjectAndroidCtrl {
     }
 
     publishNbuild(e) {
+        if (!this._checkVersion(this.project.build.android.version, this.project.android.version)) return;
+
         this.showLoader = true;
         this.Project.publish(this.projectId).then(
             data => {
@@ -328,7 +330,7 @@ class EditProjectAndroidCtrl {
     };
 
     open(e, isValid) {
-        if (!isValid) return;
+        if (!isValid || !this._checkVersion(this.project.build.android.version, this.project.android.version)) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }

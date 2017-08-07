@@ -357,7 +357,7 @@ class EditProjectIosCtrl {
     };
 
     open(e, isValid) {
-        if(!isValid) return;
+        if(!isValid || !this._checkVersion(this.project.build.ios.version, this.project.ios.version)) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }
