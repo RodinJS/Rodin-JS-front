@@ -48,8 +48,8 @@
                                aria-haspopup="true" aria-expanded="false">
                                 More <i class="rd rd-angle-down"></i>
                             </a>
-                            <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel" ng-if="$ctrl.pagesSection2.length > 0">
-                                <li class="rodin-hide" ng-repeat="pages in $ctrl.pagesSection2">
+                            <ul class="dropdown-menu more-dropdown-menu more-menu-redesign" aria-labelledby="moreLabel" ng-if="$ctrl.pagesSection2.length > 0">
+                                <li class="rodin-hide" ng-repeat="page in $ctrl.pagesSection2">
                                     <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
                                     <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                                 </li>
