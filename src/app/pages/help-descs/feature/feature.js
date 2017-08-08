@@ -12,7 +12,8 @@ function FeatureConfig($stateProvider) {
             controllerAs: '$ctrl',
             templateUrl: 'pages/help-descs/feature/feature.html',
             title: 'Question and Answer',
-            showFooter: true
+            showFooter: true,
+            slug: 'qna'
         });
 
 }

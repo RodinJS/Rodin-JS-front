@@ -12,7 +12,8 @@ function IssuesConfig($stateProvider) {
             controllerAs: '$ctrl',
             templateUrl: 'pages/help-descs/issues/issues.html',
             title: 'Issues',
-            showFooter: true
+            showFooter: true,
+            slug: 'qna'
         });
 
 }

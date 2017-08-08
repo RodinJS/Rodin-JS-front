@@ -38,7 +38,7 @@
                         <a href="" class="btn-account" id="support" data-uib-dropdown-toggle>
                             <span class="hidden-xs">Support <i class="rd rd-angle-down"></i></span>
                         </a>
-                        <div class="dropdown-menu account-dropdown-menu" uib-dropdown-menu>
+                        <div class="dropdown-menu dropdown-menu-new account-dropdown-menu" uib-dropdown-menu>
                             <ul class="account-action-list">
                                 <li>
                                     <a data-ui-sref-active="active" data-ui-sref="landing.question">Questions and Answers</a></li>
@@ -52,19 +52,22 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="dropdown" uib-dropdown auto-close="outsideClick" ng-if="$ctrl.pagesSection2.length > 0">
+                    <li class="dropdown account-dropdown" uib-dropdown auto-close="outsideClick" ng-if="$ctrl.pagesSection2.length > 0">
                         <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown"
                            role="button"
                            aria-haspopup="true" aria-expanded="false">
                             More <i class="rd rd-angle-down"></i>
                         </a>
-                        <ul class="dropdown-menu more-dropdown-menu" aria-labelledby="moreLabel"
-                            ng-if="$ctrl.pagesSection2.length > 0">
-                            <li class="rodin-hide" ng-repeat="page in $ctrl.pagesSection2">
-                                <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
-                                <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
-                            </li>
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-new account-dropdown-menu" aria-labelledby="moreLabel">
+                            <ul class="account-action-list"
+                                ng-if="$ctrl.pagesSection2.length > 0">
+                                <li class="rodin-hide" ng-repeat="page in $ctrl.pagesSection2">
+                                    <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
+                                    <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </li>
                 </ul>
             </div>
@@ -90,7 +93,7 @@
                            uib-dropdown-toggle role="button">
                             <i class="rd rd-notifi"></i>
                         </a>
-                        <div class="dropdown-menu notifi-dropdown-menu" uib-dropdown-menu>
+                        <div class="dropdown-menu dropdown-menu-new notifi-dropdown-menu" uib-dropdown-menu>
                             <div class="notification-wrapper">
                                 <h5 class="pull-left">Notifications</h5>
                                 <small class="pull-right">
@@ -130,7 +133,7 @@
 							</span>
                             <i class="rd rd-angle-down hidden-xs"></i>
                         </a>
-                        <div class="dropdown-menu account-dropdown-menu" uib-dropdown-menu>
+                        <div class="dropdown-menu dropdown-menu-new dropdown-menu-edit account-dropdown-menu" uib-dropdown-menu>
                             <ul class="account-action-list">
                                 <li>
                                     <a data-ui-sref-active="active" data-ui-sref="app.profile">Edit Profile</a></li>

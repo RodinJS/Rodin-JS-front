@@ -64,8 +64,8 @@ class AppHeaderCtrl {
             this.pagesSection1 = _.slice(0);
             this.pagesSection2 = _.slice(this.pagesList);
         } else if (this.pagesList.length > 0) {
-            this.pagesSection1 = _.slice(this.pagesList, 0, 3);
-            this.pagesSection2 = _.slice(this.pagesList, 3, this.pagesList.length);
+            this.pagesSection1 = _.slice(this.pagesList, 0, 1);
+            this.pagesSection2 = _.slice(this.pagesList, 1, this.pagesList.length);
         }
     }
     showSocketResponse(data) {
