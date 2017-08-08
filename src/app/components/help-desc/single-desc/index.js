@@ -40,9 +40,16 @@ class SingleDescController {
         this.helpService = HelpDescService;
         this.showLoader = true;
         this.getConversation();
+        this.getFeaturedTags();
         this.answer = '';
     }
 
+    getFeaturedTags() {
+        this.helpService.getTags(this.type)
+            .then((response) => {
+                this.tags = response.slice(0, 8);
+            })
+    }
     getConversation() {
         if (!this.creationPage) {
             this.helpService.getConversation(this.type, this.id)
@@ -118,6 +125,11 @@ class SingleDescController {
 
     goToPage(id = 'create') {
         this._$state.go('landing.single-' + this.type.slice(0, -1), {id});
+    }
+
+    autoResize($event) {
+        $event.target.style.height = 'auto';
+        $event.target.style.height = $event.target.scrollHeight+'px';
     }
 }
 

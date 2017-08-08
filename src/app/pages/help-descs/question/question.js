@@ -11,7 +11,8 @@ function QuestionConfig($stateProvider) {
             controllerAs: '$ctrl',
             templateUrl: 'pages/help-descs/question/question.html',
             title: 'Question and Answer',
-            showFooter: true
+            showFooter: true,
+            slug: 'qna'
         })
 
 }

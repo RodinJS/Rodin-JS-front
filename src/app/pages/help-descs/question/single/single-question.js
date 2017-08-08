@@ -12,7 +12,8 @@ function SingleQuestionConfig($stateProvider) {
             controllerAs: '$ctrl',
             template:'<single-desc type="questions" id="$ctrl.id"></single-desc>',
             title: 'Question and Answer',
-            showFooter: true
+            showFooter: true,
+            slug: 'qna'
         });
 
 }

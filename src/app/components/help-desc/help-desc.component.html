@@ -75,6 +75,9 @@
                                         <ul>
                                             <li ng-repeat="tag in message.tags"><a ng-click="$ctrl.filterByTag(tag)"> {{tag}}</a></li>
                                         </ul>
+                                        <ul class="pull-right reply">
+                                            <li ><a ng-click="$ctrl.goToPage(message.id)">Reply</a></li>
+                                        </ul>
                                     </div>
 
                                 </div>

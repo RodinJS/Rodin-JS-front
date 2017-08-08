@@ -2,7 +2,7 @@ import footer from '../home/scripts/components/footer';
 import header from '../home/scripts/components/header';
 
 class AuthCtrl {
-    constructor(User, $scope, $state, $stateParams, AppConstants, $window, Notification) {
+    constructor(User, $rootScope, $scope, $state, $stateParams, AppConstants, $window, Notification) {
         'ngInject';
         this._Constants = AppConstants;
         this._$state = $state;
@@ -14,6 +14,7 @@ class AuthCtrl {
         this.title = $state.current.title;
         this.authType = $state.current.name.replace('landing.', '');
         this.formErrors = AppConstants.FORMERRORS.register;
+        this._$rootScope = $rootScope;
         //this.gotToHome = this.gotToHome.bind(this);
 
         this.patterns = {
@@ -61,7 +62,11 @@ class AuthCtrl {
         if (this.authType === 'login') {
             this._User.login(this.formData).then(
                 (res) => {
-                    this._$state.go('app.dashboard');
+                    if(this._$rootScope.previousState.slug && this._$rootScope.previousState.slug === 'qna') {
+                        this._$state.go(this._$rootScope.previousState.name, {id: this._$rootScope.previousParams.id});
+                    } else {
+                        this._$state.go('app.dashboard');
+                    }
                 },
 
                 (err) => {
