@@ -1,5 +1,7 @@
 # Rodin-JS-front
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/RodinJS/Rodin-JS-front.svg?token=4ebf39210f75f3041bf2248150dd217d159487916298413f14b67fe6616e815c&ts=1502272735648)](https://greenkeeper.io/)
+
 [![Build Status](http://qa.rodin.io/buildStatus/icon?job=Front-End-Protractor)](http://qa.rodin.io/job/Front-End-Protractor/)
 
 ## Program dependencies
