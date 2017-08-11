@@ -3,9 +3,9 @@ class HomeCtrl {
     constructor(AppConstants, $sce, $window, $scope, User, Notification, PagesService) {
         'ngInject';
 
-        if (LANDING && Object.keys(LANDING).length >= 10) {
-            return location.reload();
-        }
+        // if (LANDING && Object.keys(LANDING).length >= 10) {
+        //     return location.reload();
+        // }
 
         this._$window = $window;
         this._$scope = $scope;
