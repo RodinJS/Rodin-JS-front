@@ -30,6 +30,7 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
     }
     & span.user-name {
       vertical-align: top;
+      word-wrap: break-word;
     }
   }
 

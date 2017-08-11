@@ -37,4 +37,7 @@ servicesModule.service('ModulesService', ModulesService);
 import PagesService from './pages.service';
 servicesModule.service('PagesService', PagesService);
 
+import HelpDescService from './help-desc.service';
+servicesModule.service('HelpDescService', HelpDescService);
+
 export default servicesModule;

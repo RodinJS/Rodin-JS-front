@@ -28,6 +28,7 @@ import 'angular-ui-switch/angular-ui-switch.min';
 import 'angular-ui-notification/dist/angular-ui-notification';
 import 'ng-tags-input/build/ng-tags-input.min';
 import 'angular-img-cropper/dist/angular-img-cropper.min'
+import 'ui-select/dist/select'
 
 //import 'app/components/wysiwyg/bootstrap-colorpicker-module'
 //import 'app/components/wysiwyg/angular-wysiwyg'
@@ -43,6 +44,8 @@ import './components/index';
 import './layout/index';
 import './pages/index';
 import './filters/index';
+import HelpDescComponent from './components/help-desc/index';
+import SingleDescComponent from "./components/help-desc/single-desc/index";
 
 // Create and bootstrap application
 const requires = [
@@ -65,6 +68,7 @@ const requires = [
     'ngTagsInput',
     'ui-notification',
     'angular-img-cropper',
+    'ui.select'
 ];
 
 // Mount on window for testing
@@ -78,6 +82,10 @@ angular.module('app').config(appConfig);
 
 angular.module('app').run(appRun);
 
+app.component('helpDesc', HelpDescComponent);
+app.component('singleDesc', SingleDescComponent);
+
 angular.bootstrap(document, ['app'], {
     strictDi: true
 });
+

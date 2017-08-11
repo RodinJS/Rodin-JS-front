@@ -171,6 +171,18 @@
 	}
 }
 
+.icon-vote-up {
+	&:before {
+		content: $icon-vote-up;
+	}
+}
+
+.icon-vote-down {
+	&:before {
+		content: $icon-vote-down;
+	}
+}
+
 // Material Icon Font
 .material-icons {
 	font-family: 'Material Icons';

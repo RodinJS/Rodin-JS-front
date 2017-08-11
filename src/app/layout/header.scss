@@ -19,6 +19,52 @@
 //::-webkit-scrollbar-thumb:window-inactive {
 //  background: rgba(255,0,0,0.4);
 //}
+.dropdown-menu-edit {
+  left: -75px !important;
+  top: 60px !important;
+}
+.landing-drop {
+  left: 0px !important;
+  top: 45px !important;
+}
+.dropdown-menu-new {
+  background-color: #0C1F37 !important;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5) !important;
+  -moz-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5) !important;
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5) !important;
+  left: 0px;
+  top: 40px;
+  margin-top: 0;
+  padding: 0 !important;
+  width: 100% !important;
+  line-height: normal !important;
+  clear: both;
+  min-width: 200px !important;
+  ul {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    li {
+      a {
+        font-size: 15px !important;
+        padding: 2px 8px !important;
+      }
+      padding: 10px;
+      &:hover {
+        background: #082542;
+        a {
+          color: #DEDEDE !important;
+        }
+      }
+    }
+    //white-space: nowrap;
+  }
+}
+@media (max-width: 767px) {
+  .header-logo {
+    margin-top: 20px;
+  }
+}
+
 .header {
   min-height: 70px;
   padding-top: 0;
@@ -146,11 +192,40 @@
       }
     }
   }
+ .sign-up-btn-non-sticky {
+    background-color: $primary-color !important;
+   &:hover {
+     color: white;
+     border-color: #31a7ff !important;
+     background: #31a7ff !important;
+   }
+   &:focus {
+     background: #31a7ff !important;
+   }
+  }
   .sign-up-btn {
+    color: white;
+    background: $primary-color !important;
+    transition: background .2s ease, border-color .2s ease;
+    //transition: border-color .2s ease;
+    padding: 12px 20px;
+  }
+  .sticky-signup {
+    background: transparent !important;
+    color: $color-text-gray;
+    transition: background .2s ease, border-color .2s ease;
     margin-top: 0;
     margin-bottom: 11px;
-    padding: 12px 30px;
+    padding: 12px 20px;
     font-size: 15px;
+    &:hover {
+      border-color: $primary-color;
+      background: $primary-color;
+    }
+    &:focus {
+      background: $primary-color;
+    }
+
   }
 }
 
@@ -177,15 +252,20 @@
 .header-auth {
   @include cf();
   min-height: 84px;
-  padding: 20px 0;
+  padding: 20px;
+  .main-navbar-header {
+    //padding-top: 13px;
+  }
   //margin-bottom: 34px;
   //background-color: rgba(#D8D8D8, .09);
   .logo {
-    display: inline-block;
-    float: left;
+    display: inline-flex;
     padding-top: 13px;
   }
   .header-menu {
+    .support-dropdown {
+
+    }
     float: left;
     padding-top: 7px;
     .menu-list {
@@ -221,6 +301,14 @@
             }
           }
         }
+      }
+    }
+  }
+  .more-dropdown-menu {
+    a {
+      color: #B0B0B0 !important;
+      &:hover {
+        color: #d6d6d6 !important;
       }
     }
   }
@@ -335,10 +423,10 @@
       }
     }
     &.account-dropdown-menu {
-      left: auto;
+      margin-top: 0;
+      //left: auto;
       right: 0;
-      min-width: 230px;
-      padding: 20px 30px;
+      padding: 20px;
       line-height: 32px;
       h4 {
         font-size: 18px;
@@ -362,9 +450,9 @@
           }
           &:last-child {
             a {
-              color: $color-text-gray !important;
+              color: $color-text-gray;
               &:hover{
-                color: $color-text-secondary !important;
+                color: $color-text-secondary;
               }
             }
           }
@@ -603,11 +691,48 @@
     }
   }
 }
+landing-header {
+  .support-menu {
+    left: auto;
+    right: 0;
+    min-width: 230px;
+    padding: 20px 30px;
+    line-height: 32px;
+    background-color: #09192e;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px 0 black;
+    border: none;
+    margin: 0;
+    margin-top: 5px;
+    font-size: 16px;
+    color: #B0B0B0;
+  }
+  .more-menu-redesign {
+    background-color: #09192e;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px 0 black;
+    border: none;
+    padding: 8px 0;
+    margin: 0;
+    margin-top: 5px;
+    font-size: 16px;
+    color: #B0B0B0;
+    a {
+      font-size: 15px;
+      color: #B0B0B0;
+      padding: 5px 30px;
+      &:hover {
+        color: #d6d6d6;
+        background: none;
+      }
+    }
+  }
+}
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .header {
     height: 40px;
-    padding-top: 20px;
+    //padding-top: 20px;
     &.sticky {
       padding-top: 11px;
     }
@@ -618,7 +743,7 @@
   .nav {
     > li {
       > a {
-        padding: 10px 10px;
+        padding: 12px 10px;
       }
     }
     .sign-up-btn {
@@ -650,6 +775,7 @@
     .header-auth {
       border: none;
       min-height: 66px;
+      padding: 0;
       .navbar-header {
         .btn-mobile-login {
           float: right;
@@ -660,11 +786,8 @@
           padding: 15px 13px;
           margin-right: 3px;
           &.login {
-            padding: 0;
-            margin: 0;
             position: relative;
-            right: 45px;
-            top: 5px;
+            right: 30px;
           }
           &.subscribe {
             border: 1px solid #008BF2;
@@ -727,7 +850,6 @@
   }
   .header-auth {
     min-height: 60px;
-    padding: 19px 0;
     background-color: rgba(#09192e, .9);
     .logo {
       padding-top: 0;
@@ -837,17 +959,31 @@
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .header {
     .header-auth {
-      height: 60px !important;
+      //height: 60px !important;
     }
     .header-background {
       height: 60px !important;
+    }
+    .more-menu-redesign {
+      a {
+        cursor: pointer;
+        font-size: 14px;
+        width: 100%;
+        padding: 10px 0px 10px 0px;
+        color: #DEDEDE;
+        font-family: "Roboto", sans-serif;
+        &:hover{
+          color: white;
+          background: #082542;
+        }
+      }
     }
   }
 }
 @media screen and (orientation:landscape) and (min-width: 320px) and (max-width: 767px) {
   .header {
     .header-auth {
-      height: 60px !important;
+      //height: 60px !important;
     }
     .header-background {
       height: 60px !important;
@@ -857,7 +993,7 @@
 @media screen and (orientation:landscape) and (min-width: 768px) and (max-width: 1024px) {
   .header {
     .header-auth {
-      height: 84px !important;
+      //height: 84px !important;
     }
     .header-background {
       height: 84px !important;
@@ -869,6 +1005,17 @@
     //.header-auth {
     //  height: 60px !important;
     //}
+    .more-menu-redesign {
+      background-color: #09192e;
+      border-radius: 6px;
+      box-shadow: 0 3px 8px 0 black;
+      border: none;
+      padding: 8px 0;
+      margin: 0;
+      margin-top: 5px;
+      font-size: 16px;
+      color: #B0B0B0;
+    }
     .header-background {
       height: 74px !important;
     }

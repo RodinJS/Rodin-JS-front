@@ -1,0 +1,312 @@
+a {
+  cursor: pointer;
+}
+
+.search-line {
+  border: 1px solid rgba(170, 170, 170, .2);
+  border-left-color: transparent;
+  border-right-color: transparent;
+  .button-ask {
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 15.5px;
+    float: right;
+    margin-top: 6px;
+    background: #045190;
+    color: #DEDEDE;
+    border: none;
+    border-radius: 6px;
+    &:hover {
+      background: $color-primary;
+      color: white;
+    }
+  }
+}
+.single-tag-section {
+  margin-bottom: 22px;
+}
+.tag-section {
+  .reply {
+    li {
+      border: none;
+      a {
+        color: $primary-color;
+      }
+      &:hover {
+        color: $color-primary;
+        background: none;
+        border: none;
+        a {
+          text-decoration: underline;
+          color: $gey-blue;
+        }
+      }
+    }
+  }
+  ul {
+    padding-left: 0px;
+    display: inline-block;
+    list-style-type: none;
+    li {
+      border: 1px solid #4f5864;
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: #AAAAAA;
+      font-family: "Roboto", sans-serif;
+      display: inline-block;
+      margin-right: 8px;
+      margin-top: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      a {
+        color: #AAAAAA;
+      }
+      &:hover {
+        color: white;
+        background: #045190;
+        border: 1px solid #045190;
+        a {
+          text-decoration: none;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.content {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  h2 {
+    font-family: Roboto;
+    font-weight: 300;
+    color: #95989A;
+  }
+}
+
+.message-section {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  .vote-panel {
+    z-index: 99999;
+    text-align: center;
+    list-style: none;
+    position: absolute;
+    right: 0;
+    span {
+      cursor: pointer;
+      color: #3A4758;
+      font-size: 24px;
+      padding: 5px;
+      &:hover {
+        color: #5F6977;
+      }
+      &:active {
+        .count {
+          color: #C1C5CA;
+        }
+        color: #C1C5CA;
+      }
+    }
+    .count {
+      cursor: pointer;
+      color: #848C97;
+      font-family: $Roboto;
+      font-size: 20px;
+      &:active {
+        color: #C1C5CA;
+      }
+    }
+  }
+  .answerer {
+    max-width: 64px;
+  }
+  .profile-image {
+    max-width: 48px;
+  }
+  .text-section {
+    .question-description {
+      //margin-top: 30px;
+      color: #DEDEDE;
+      font-size: 16px;
+    }
+    .message-content {
+      padding: 15px;
+      .question-subject {
+        p {
+          font-size: 32px !important;
+          font-weight: bold;
+        }
+      }
+    }
+    small {
+      margin-left: 18px;
+      font-size: 12px;
+      color: #575F6A;
+    }
+    p {
+      color: #aaaaaa;
+      display: inline-block;
+      font-size: 18px;
+      a {
+        color: #DEDEDE;
+        &:hover {
+          color: white;
+        }
+      }
+    }
+    .message-background {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      opacity: .2;
+      background: black;
+    }
+    .message {
+      height: auto;
+      p {
+        margin-bottom: 0px;
+        color: #DEDEDE;
+        display: inline-block;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.answer-question {
+  margin-bottom: 30px;
+  h3 {
+    color: #AAAAAA;
+    margin-bottom: 15px;
+  }
+  .question-type {
+    color: #aaaaaa;
+    font-size: 18px;
+  }
+  .question-section {
+    width: 100%;
+    border: 1px solid #045190;
+    border-radius: 6px;
+    height: 100px;
+    background: #0F1F35;
+    padding: 10px 15px;
+    color: white;
+    font-size: 18px;
+    resize: vertical;
+    overflow: hidden;
+    &::-webkit-input-placeholder {
+      font-size: 18px;
+      color: $placeholder-color;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .ask-form {
+    .form-group {
+      margin-top: 8px;
+      margin-bottom: 8px !important;
+    }
+  }
+  .answer-question-section {
+    width: 100%;
+    border: 1px solid #045190;
+    border-radius: 6px;
+    min-height: 100px;
+    background: #0F1F35;
+    padding: 10px 15px;
+    color: white;
+    font-size: 18px;
+    resize: vertical;
+    overflow: hidden;
+
+    &::-webkit-input-placeholder {
+      font-size: 18px;
+      color: $placeholder-color;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .action-section {
+    .btn-answer {
+      margin-left: 30px;
+    }
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .tag-selection {
+    margin-top: 16px;
+    .tags {
+      width: 100% !important;
+      box-shadow: none;
+      border: 1px solid #045190;
+      border-radius: 6px;
+      min-height: 52px;
+      background: #0F1F35;
+      padding: 8px;
+      color: #5C646F;
+      font-size: 24px;
+      resize: none;
+      .input {
+        height: 34px;
+        background: transparent;
+        border: none;
+        margin: 0;
+        color: white;
+        font-size: 18px;
+        font-family: $Roboto;
+        &:focus {
+          outline: none !important;
+        }
+        &::-webkit-input-placeholder {
+          font-size: 18px;
+          color: $placeholder-color;
+
+        }
+
+      }
+      &::-webkit-input-placeholder {
+        font-size: 18px;
+        color: $placeholder-color;
+      }
+
+      .ui-select-match {
+        position: absolute;
+        top: -6px;
+      }
+
+      .tag-list {
+        li {
+          border: 1px solid #4f5864;
+          border-radius: 6px;
+          padding: 4px 12px;
+          height: 34px;
+          color: #AAAAAA;
+          font-family: "Roboto", sans-serif;
+          display: inline-block;
+          margin-right: 6px;
+          cursor: pointer;
+          font-size: 14px;
+          background: none;
+          margin-top: 0;
+          a {
+            color: #AAAAAA;
+          }
+          &:hover {
+            color: white;
+            background: #045190;
+            border: 1px solid #045190;
+            a {
+              text-decoration: none;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

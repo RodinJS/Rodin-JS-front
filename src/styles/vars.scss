@@ -7,6 +7,7 @@
 //
 $bg-primary:                                          #09192E;
 $color-primary:                                       #008BF2;
+$gey-blue:                                            #31A7FF;
 $color-icon-primary:                                  $color-primary;
 $color-icon-secondary:                                #14273C;
 $color-subTitileBg:                                   #07172A;
@@ -19,6 +20,7 @@ $bg-secondary:                                        #0C1E33;
 $bg-blue:                                             #0178D3;
 $text-gray:                                           #A6A6A6;
 $text-light-gray:                                     #DADADA;
+$placeholder-color:                                   #5C646F;
 $black:               #000;
 $white:               #fff;
 $colorSemiWhite:      rgba(255, 255, 255, .5);
@@ -72,5 +74,7 @@ $icon-info:          "\e908";
 $icon-link:          "\e909";
 $icon-edit:          "\e90a";
 $icon-settings:      "\e90b";
+$icon-vote-up: "\ea32";
+$icon-vote-down: "\ea36";
 
 @import "common/main-icons/ionicons-variables";
