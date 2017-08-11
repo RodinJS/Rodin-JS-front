@@ -193,7 +193,7 @@
     }
   }
  .sign-up-btn-non-sticky {
-    background-color: $primary-color !important;
+   background-color: $primary-color !important;
    &:hover {
      color: white;
      border-color: #31a7ff !important;
@@ -212,13 +212,14 @@
   }
   .sticky-signup {
     background: transparent !important;
-    color: $color-text-gray;
+    color: $color-text-gray !important;
     transition: background .2s ease, border-color .2s ease;
     margin-top: 0;
     margin-bottom: 11px;
     padding: 12px 20px;
     font-size: 15px;
     &:hover {
+      color: white !important;
       border-color: $primary-color;
       background: $primary-color;
     }
@@ -748,7 +749,7 @@ landing-header {
     }
     .sign-up-btn {
       margin: 0;
-      padding: 10px 25px;
+      padding: 10px 20px;
     }
   }
   .navbar-brand {

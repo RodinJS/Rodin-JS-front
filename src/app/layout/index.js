@@ -8,6 +8,14 @@ let layoutModule = angular.module('app.layout', []);
 import AppHeader from './main/header.component';
 layoutModule.component('appHeader', AppHeader);
 
+/*
+**
+ */
+import AppHeaderNew from './header/header.component';
+layoutModule.component('appHeaderNew', AppHeaderNew);
+/*
+**
+ */
 import AppFooter from './main/footer.component';
 layoutModule.component('appFooter', AppFooter);
 
