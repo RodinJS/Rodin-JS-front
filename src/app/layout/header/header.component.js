@@ -18,6 +18,7 @@ class AppHeaderNewCtrl {
                 PagesStore,
                 EventBus) {
         'ngInject';
+        this.isLocal = AppConstants.env === 'local';
         this._$state = $state;
         this._User = User;
         this._$scope = $scope;
