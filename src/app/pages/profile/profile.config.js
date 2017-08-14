@@ -7,7 +7,7 @@ function ProfileConfig($stateProvider) {
         controller: 'ProfileCtrl',
         controllerAs: '$ctrl',
         templateUrl: 'pages/profile/profile.html',
-        title: 'Profile',
+        title: 'Edit Profile',
         pageClass: 'new',
         resolve: {
             auth: function (User) {
