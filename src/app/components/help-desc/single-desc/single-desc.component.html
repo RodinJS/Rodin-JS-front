@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 action-section text-center">
-                    <a class="btn-back" ui-sref="{{'landing.' + $ctrl.type.slice(0, -1)}}">Back</a>
+                    <a class="btn-back"  ng-click="$ctrl.goBack()">Back</a>
                     <button class="btn-answer" ng-click="$ctrl.submitAnswer()">{{$ctrl.currentUser ? 'Post':'Sing in and post'}}</button>
                 </div>
             </div>

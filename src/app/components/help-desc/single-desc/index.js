@@ -131,6 +131,10 @@ class SingleDescController {
         $event.target.style.height = 'auto';
         $event.target.style.height = $event.target.scrollHeight+'px';
     }
+
+    goBack() {
+        this._$state.go('landing.' + this.type.slice(0, -1),{page: this._$state.params.page ? this._$state.params.page : 1})
+    }
 }
 
 let SingleDescComponent = {

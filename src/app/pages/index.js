@@ -103,7 +103,7 @@ let pagesModule = angular.module('app.pages', [
     'landing.single-question',
     'landing.feature',
     'landing.single-feature',
-    'landing.issues',
+    'landing.issue',
     'landing.single-issue',
 
 
