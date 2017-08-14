@@ -469,6 +469,9 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
   }
 
   .section {
+    label {
+      font-size: 16px;
+    }
     .drag-cont {
       position: relative;
       label {
@@ -678,11 +681,6 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
     }
     .input-blue {
       color: $color-primary;
-    }
-  }
-  .section {
-    label {
-      font-size: 16px;
     }
   }
   .section-switch {
