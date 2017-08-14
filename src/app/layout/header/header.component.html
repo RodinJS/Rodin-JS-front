@@ -32,7 +32,7 @@
                             <ul class="nav navbar-nav main-header-bar">
                                 <div ng-repeat="pages in $ctrl.pagesList"  ng-style="pages._id.length > 0 ? {display:'inline-flex'}:{display: 'inline-flex'}">
                                     <li class="drop-more" ng-repeat="page in pages.values" ng-if="pages._id.length === 0 && $ctrl.pagesSection.length === 0">
-                                        <a ng-if="page.externalURL" ng-href="{{$ctrl.isLocal ? '/#' : ''}}{{page.externalURL}}">{{page.title}}</a>
+                                        <a ng-if="page.externalURL" ng-href="{{page.externalURL}}">{{page.title}}</a>
                                         <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                                     </li>
                                     <li class="dropdown more-drop" data-uib-dropdown auto-close="outsideClick" ng-if="pages._id.length > 0">
@@ -45,7 +45,7 @@
                                             <ul class="account-action-list">
                                                 <li ng-if="pages._id.length > 0"
                                                     ng-repeat="page in pages.values">
-                                                    <a data-ui-sref-active="active" ng-href="{{$ctrl.isLocal ? '/#' : ''}}{{page.externalURL}}">{{page.slug}}</a>
+                                                    <a data-ui-sref-active="active" ng-href="{{page.externalURL}}">{{page.slug}}</a>
                                                 </li>
                                             </ul>
                                         </ul>
@@ -167,7 +167,7 @@
                         </li>
                         <div ng-repeat="pages in $ctrl.pagesList">
                             <li ng-repeat="page in pages.values" ng-if="pages._id.length === 0">
-                                <a ng-if="page.externalURL" ng-href="/#{{page.externalURL}}">{{page.title}}</a>
+                                <a ng-if="page.externalURL" ng-href="{{page.externalURL}}">{{page.title}}</a>
                                 <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                             </li>
                             <li class="dropdown drop-more" ng-if="pages._id.length > 0">
