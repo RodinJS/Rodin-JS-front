@@ -80,7 +80,11 @@ class AppHeaderNewCtrl {
     }
 
     setPagesDropdown() {
-        if (window.innerWidth >= 768 && window.innerWidth <= 992) {
+        if (window.innerWidth >= 768) {
+            $("body").removeClass("scroll-prevent");
+            $("#mySidenav").removeClass("nav-opened");
+            $(".side-bar-background").removeClass("show-background");
+            this.collapse = false;
             this.pagesList.map((pages, i) => {
                 if (pages._id.length === 0) {
                     this.pagesSection = _.slice(this.pagesList[i].values, 0, this.pagesList[i].values.length);
