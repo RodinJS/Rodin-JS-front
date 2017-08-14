@@ -19,6 +19,11 @@
 //::-webkit-scrollbar-thumb:window-inactive {
 //  background: rgba(255,0,0,0.4);
 //}
+.search-line {
+  .header-search-box {
+    border: none;
+  }
+}
 .dropdown-menu-edit {
   left: -75px !important;
   top: 60px !important;
