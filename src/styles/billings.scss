@@ -1,3 +1,9 @@
+.plans-section {
+  margin-top: 50px;
+}
+.sub-title {
+  margin-bottom: 30px;
+}
 .page-account-billing .popover {
   border: none;
   border-radius: 0;
@@ -727,10 +733,16 @@
     }
   }
   .plan-content-wrapper {
+    .plan-content-item-box-disabled {
+      &:hover {
+        border-color: #aaaaaa !important;
+      }
+    }
     .plan-content {
       .plan-content-item-box {
         .sign-up-btn {
           color: #aaaaaa;
+          transition: all 0.3s;
           &:hover {
             color: white;
             border-color: #31a7ff !important;
@@ -763,14 +775,28 @@
           border: 1px solid rgba(51, 222, 255, 0.2);
         }
         .plan-content-item {
+          .button-section {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            -webkit-transition: all .3s;
+          }
+          i {
+            color: #008BF2 !important;
+          }
           background-color: rgba(255, 255, 255, 0.02);
-          padding: 50px 85px 65px;
+          padding: 50px 25px;
           position: relative;
           border: 1px solid transparent;
           -webkit-transition: all .3s;
           transition: all 0.3s;
+          height: 515px;
+
           &:hover {
-            border: 1px solid rgba(51, 222, 255, 0.4);
+            border: 1px solid #008BF2;
+            background-color: rgba(255, 255, 255, 0.04);
             i {
               -webkit-transform: rotate(-5deg);
               transform: rotate(-5deg);
@@ -784,11 +810,14 @@
           }
           i {
             display: inline-block;
-            font-size: 60px;
+            font-size: 42px;
             color: #33deff;
             margin-bottom: 30px;
             -webkit-transition: all .3s;
             transition: all 0.3s;
+          }
+          .icon-monocle {
+            font-size: 60px;
           }
           h2 {
             color: #fff;
@@ -803,9 +832,8 @@
             padding: 0;
             list-style-type: none;
             margin-bottom: 15px;
-            min-height: 260px;
             li {
-              color: #fff;
+              color: #DEDEDE;
               margin-bottom: 10px;
               a {
                 color: #fff;
