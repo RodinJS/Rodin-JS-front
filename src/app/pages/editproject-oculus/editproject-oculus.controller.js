@@ -18,7 +18,6 @@ class EditProjectOculusCtrl {
         this.projectId = $stateParams.projectId;
         this.project = {};
         this.showLoader = true;
-        this.getProject();
 
         this.user = User.current;
         this._checkVersion = Validator.checkVersion;
@@ -47,8 +46,8 @@ class EditProjectOculusCtrl {
 
         this.submiting = false;
         this.openEvent = null;
-
         this.eventBus = EventBus;
+        this.getProject();
         ProjectStore.subscribeAndInit($scope, () => {
             this.project = ProjectStore.getProject();
         });
@@ -57,10 +56,12 @@ class EditProjectOculusCtrl {
                 this._$interval.cancel(this.timer);
             }
         })
+        this.getProject();
     }
 
     getProject() {
         this.showLoader = true;
+        // console.log(this.eventBus)
         this.eventBus.emit(this.eventBus.project.DELETE, {});
         this.Project.get(this.projectId, {device: 'oculus'}).then(
             project => {
@@ -206,7 +207,7 @@ class EditProjectOculusCtrl {
     }
 
     build(e, isValid) {
-        if (!isValid) return;
+        if (!isValid || !this._checkVersion(this.project.build.oculus.version, this.project.oculus.version)) return;
         if (!this.project.publishedPublic) {
             return this.modals.notPublished = true;
         }

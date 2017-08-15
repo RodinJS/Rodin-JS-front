@@ -7,7 +7,7 @@ function EditProjectConfig($stateProvider) {
         controller: 'EditProjectCtrl',
         controllerAs: '$ctrl',
         templateUrl: 'pages/editproject/editproject.html',
-        title: 'EditProject',
+        title: 'Edit Project',
         pageClass: 'page-settings new',
         resolve: {
             auth: function (User) {

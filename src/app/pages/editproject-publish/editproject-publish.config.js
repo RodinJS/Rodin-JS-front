@@ -7,7 +7,7 @@ function EditProjectPublishConfig($stateProvider) {
         controller: 'EditProjectPublishCtrl',
         controllerAs: '$ctrl',
         templateUrl: 'pages/editproject-publish/editproject-publish.html',
-        title: 'EditProjectpublish',
+        title: 'Edit Project Publish',
         pageClass: 'page-account new',
         resolve: {
             auth: function (User) {

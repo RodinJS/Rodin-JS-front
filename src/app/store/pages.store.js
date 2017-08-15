@@ -31,7 +31,9 @@ function PagesStore(EventBus, BaseStore, $stateParams, $state, Project) {
     };
 
     factory.getHeadarPagesList = () => {
-        return _.filter(factory.data.pagesList, (filterPage) => filterPage.state === 'published');
+        return _.filter(factory.data.pagesList, (filterPage) => {
+            return _.filter(filterPage.values, (oneFilterPage) => oneFilterPage.state === 'published')
+        });
     };
 
     factory.getFooterPagesList = () => {

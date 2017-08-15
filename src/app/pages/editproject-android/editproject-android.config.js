@@ -7,8 +7,8 @@ function EditProjectAndroidConfig($stateProvider) {
         controller: 'EditProjectAndroidCtrl',
         controllerAs: '$ctrl',
         templateUrl: 'pages/editproject-android/editproject-android.html',
-        title: 'Edit Project - Android',
-        pageClass: 'page-account new',
+        title: 'Edit Project Android',
+        pageClass: 'page-account',
         resolve: {
             auth: function (User) {
                 return User.ensureAuthIs(true);
