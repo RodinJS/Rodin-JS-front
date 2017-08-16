@@ -30,29 +30,29 @@
                     <div class="main-header-page-section col-sm-8 col-md-8" ng-class="{'navbar-center': !$ctrl.user}">
                         <div class="row">
                             <ul class="nav navbar-nav main-header-bar">
-                                <div ng-repeat="pages in $ctrl.pagesList"  ng-style="pages._id.length > 0 ? {display:'inline-flex'}:{display: 'inline-flex'}">
-                                    <li class="drop-more" ng-repeat="page in pages.values" ng-if="pages._id.length === 0 && $ctrl.pagesSection.length === 0">
-                                        <a ng-if="page.externalURL" ng-href="{{page.externalURL}}">{{page.title}}</a>
-                                        <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+                                <div ng-repeat="menus in $ctrl.menusList | orderBy : 'position'"
+                                     ng-style="{display: 'inline-flex'}">
+                                    <li data-ng-if="menus.items.length === 0" class="drop-more">
+                                        <a ng-if="menus.href" ng-href="{{menus.href}}">{{menus.name}}</a>
                                     </li>
-                                    <li class="dropdown more-drop" data-uib-dropdown auto-close="outsideClick" ng-if="pages._id.length > 0">
-                                        <a class="" id="{{pages._id}}" data-uib-dropdown-toggle>
-                                        <span class="hidden-xs">{{pages._id.charAt(0).toUpperCase() + pages._id.slice(1)}} <i
+                                    <li data-ng-if="menus.items.length > 0" class="dropdown more-drop" data-uib-dropdown
+                                        auto-close="outsideClick">
+                                        <a class="" id="{{menus.slug}}" data-uib-dropdown-toggle>
+                                        <span class="hidden-xs">{{menus.name}} <i
                                                 class="rd rd-angle-down"></i></span>
                                         </a>
                                         <ul class="dropdown-menu header-dropdown"
                                             uib-dropdown-menu>
                                             <ul class="account-action-list">
-                                                <li ng-if="pages._id.length > 0"
-                                                    ng-repeat="page in pages.values">
-                                                    <a data-ui-sref-active="active" ng-href="{{page.externalURL}}">{{page.slug}}</a>
+                                                <li ng-repeat="item in menus.items | orderBy : 'position'">
+                                                    <a data-ui-sref-active="active" ng-href="{{item.href}}">{{item.name}}</a>
                                                 </li>
                                             </ul>
                                         </ul>
                                     </li>
                                 </div>
-                                <div style="display: inline-flex">
-                                    <li class="dropdown more-drop" data-uib-dropdown auto-close="outsideClick" ng-if="$ctrl.pagesSection.length > 0" >
+                                <div style="display: inline-flex" ng-if="$ctrl.pagesSection.length > 0">
+                                    <li class="dropdown more-drop" data-uib-dropdown auto-close="outsideClick">
                                         <a class="" id="more" data-uib-dropdown-toggle>
                                         <span class="hidden-xs">More <i
                                                 class="rd rd-angle-down"></i></span>
@@ -60,8 +60,8 @@
                                         <ul class="dropdown-menu header-dropdown"
                                             uib-dropdown-menu>
                                             <ul class="account-action-list">
-                                                <li ng-repeat="page in $ctrl.pagesSection">
-                                                    <a data-ui-sref-active="active">{{page.slug}}</a>
+                                                <li ng-repeat="page in $ctrl.pagesSection ">
+                                                    <a data-ui-sref-active="active">{{page.name}}</a>
                                                 </li>
                                             </ul>
                                         </ul>
@@ -165,32 +165,15 @@
                         <li ng-if="$ctrl.user">
                             <a data-ui-sref-active="active" data-ui-sref="app.dashboard">Dashboard</a>
                         </li>
-                        <div ng-repeat="pages in $ctrl.pagesList">
-                            <li ng-repeat="page in pages.values" ng-if="pages._id.length === 0">
-                                <a ng-if="page.externalURL" ng-href="{{page.externalURL}}">{{page.title}}</a>
-                                <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+                        <div ng-repeat="menus in $ctrl.menusList | orderBy : 'position'">
+                            <li data-ng-if="menus.items.length === 0">
+                                <a ng-if="menus.href" ng-href="{{menus.href}}">{{menus.name}}</a>
                             </li>
-                            <li class="dropdown drop-more" ng-if="pages._id.length > 0">
-                                <a>
-                                    {{pages._id.charAt(0).toUpperCase() + pages._id.slice(1)}} <i class="rd rd-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-header" ng-if="pages._id.length > 0">
-                                    <li class="" ng-repeat="page in pages.values">
-                                        <a ng-if="page.externalURL" ng-href="{{page.externalURL}}">{{page.title}}</a>
-                                        <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </div>
-                        <div>
-                            <li class="dropdown drop-more" ng-if="$ctrl.pagesSection.length > 0">
-                                <a>
-                                   More <i class="rd rd-angle-down"></i>
-                                </a>
+                            <li data-ng-if="menus.items.length > 0" class="dropdown drop-more">
+                                <a>{{menus.name}} <i class="rd rd-angle-down"></i></a>
                                 <ul class="dropdown-menu dropdown-header">
-                                    <li class="" ng-repeat="page in $ctrl.pagesSection.values">
-                                        <a ng-if="page.externalURL" ng-href="{{page.externalURL}}">{{page.title}}</a>
-                                        <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
+                                    <li class="" ng-repeat="item in menus.items | orderBy : 'position'">
+                                        <a data-ui-sref-active="active" ng-href="{{item.href}}">{{item.name}}</a>
                                     </li>
                                 </ul>
                             </li>
