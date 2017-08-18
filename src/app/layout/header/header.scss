@@ -518,15 +518,14 @@
 }
 
 @media screen and (min-width: 993px) and (max-width: 1200px) {
-  .dropdown-header {
-    display: none;
+  .side-bar {
+    .nav-opened {
+      width: 0% !important;
+    }
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  .sidenav {
-    //display: none;
-  }
+@media screen and (min-width: 769px) and (max-width: 992px) {
   .dropdown-header {
     display: none;
   }
@@ -598,11 +597,14 @@
 }
 
 .account-action-list {
- li {
-   display: block !important;
-   margin-left: 0px !important;
-   a {
-     color:#B0B0B0;
-   }
- }
+  li {
+    display: block !important;
+    margin-left: 0px !important;
+    a {
+      color: #B0B0B0;
+    }
+  }
+}
+.open-sidebar {
+  display: block;
 }
