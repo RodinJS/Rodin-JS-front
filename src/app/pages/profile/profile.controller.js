@@ -192,6 +192,7 @@ class ProfileCtrl {
                 this.isSubmitting = false;
                 this.errors = err;
                 _.each(err, (val, key) => {
+                    console.log(val);
                     this.Notification.error(val.fieldName);
                 });
             })
@@ -264,7 +265,7 @@ class ProfileCtrl {
                 }
             },
             {
-                name: "confirm",
+                name: "confirmPassword",
                 value: this.newPassword.confirm,
                 conditions: {
                     required: true
@@ -276,7 +277,7 @@ class ProfileCtrl {
             var data = Validator.getData();
 
             this.showLoader = true;
-            this._User.updatePassword(Object.filterByKeys(data, ['password'])).then((data) => {
+            this._User.updatePassword(Object.filterByKeys(data, ['password', 'confirmPassword'])).then((data) => {
                 this.showLoader = false;
                 this.passwordChangeResponse = 'success';
                 this.Notification.success('Password successfully updated');
