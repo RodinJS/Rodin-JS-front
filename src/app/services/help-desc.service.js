@@ -7,11 +7,12 @@ class HelpDescService {
         this._JWT = JWT;
         this._AppConstants = AppConstants;
         this._Analyser = Analyser;
-
+        this.history = {};
         this._Support = Restangular.all('support');
         this._$state = $state;
         this._$q = $q;
         this._Validator = new Validator();
+        this.resetValues = this.resetValues.bind(this);
     }
 
     getList(type = '', page = 1) {
@@ -55,6 +56,11 @@ class HelpDescService {
         let Analyser = new this._Analyser();
         this._Support.one(`/search/${type}`).get({}).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
+    }
+
+    resetValues() {
+        this.history.post = null;
+        this.history.tags = null;
     }
 }
 

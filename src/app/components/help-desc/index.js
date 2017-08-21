@@ -51,6 +51,9 @@ class HelpDescComponentController {
     }
 
     getContent(page =1) {
+        if(this._$state.params.page) {
+            page = this._$state.params.page;
+        }
         this.helpService.getList(this.type, page)
             .then((response) => {
                 this.showLoader = false;
@@ -89,11 +92,19 @@ class HelpDescComponentController {
             })
     }
     goToPage(id = 'create') {
-        this._$state.go('landing.single-' + this.type.slice(0,-1), {id});
+        this._$state.go('landing.single-' + this.type.slice(0,-1), {id, page: this.response.page}, );
     }
 
     changePage(page) {
         this.showLoader = true;
+        if(page < 1) {
+            this.showLoader = false;
+            return;
+        }
+        if(page > this.response.pages) {
+            this.showLoader = false;
+            return;
+        }
         this.getContent(page);
     }
 

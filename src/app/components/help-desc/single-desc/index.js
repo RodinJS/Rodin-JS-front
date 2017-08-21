@@ -30,18 +30,26 @@ class SingleDescController {
                 placeholder: 'Type the idea here...'
             },
         };
-        this.post = {
+        this.helpService = HelpDescService;
+        this.post = this.helpService.history.post ? this.helpService.history.post : {
             subject: '',
             description: '',
             tags: []
         };
-        this.selectedTags = [];
+        this.selectedTags = this.helpService.history.tags ? this.helpService.history.tags : [];
         this.config = this.configs[this.type];
-        this.helpService = HelpDescService;
         this.showLoader = true;
         this.getConversation();
         this.getFeaturedTags();
         this.answer = '';
+        this.tinymceOptions = {
+            plugins: 'link image code',
+            skin: 'lightgray',
+            theme : 'modern',
+            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+        };
+        console.log(this.helpService)
+
     }
 
     getFeaturedTags() {
@@ -50,6 +58,7 @@ class SingleDescController {
                 this.tags = response.slice(0, 8);
             })
     }
+
     getConversation() {
         if (!this.creationPage) {
             this.helpService.getConversation(this.type, this.id)
@@ -77,7 +86,7 @@ class SingleDescController {
     }
 
     vote(id, vote, index) {
-        if(!this.currentUser) {
+        if (!this.currentUser) {
             this.Notification.success('You need to be logged in to upvote things.');
             return
         }
@@ -91,6 +100,9 @@ class SingleDescController {
 
     submitAnswer() {
         if (!this.currentUser) {
+            this.helpService.history = {
+                tags: this.selectedTags, post: this.post
+            };
             return this._$state.go('landing.login');
         }
         if (this.creationPage) {
@@ -99,6 +111,8 @@ class SingleDescController {
         this.showLoader = true;
         this.helpService.createQuestionThread(this.question.id, {description: this.answer})
             .then(response => {
+                this.helpService.history.tags = null;
+                this.helpService.history.post = null;
                 this.showLoader = false;
                 this.answer = '';
                 this.getConversation()
@@ -110,12 +124,13 @@ class SingleDescController {
     }
 
     askQuestion() {
-        if(this.selectedTags.length > 0) {
+        if (this.selectedTags.length > 0) {
             this.post.tags = this.selectedTags.map((tag) => tag.text)
         }
         this.showLoader = true;
         this.helpService.createQuestion(this.type, this.post)
             .then(response => {
+                this.helpService.resetValues();
                 this.showLoader = false;
                 this._$state.go('landing.' + this.type.slice(0, -1))
             }).catch((err) => {
@@ -128,8 +143,15 @@ class SingleDescController {
     }
 
     autoResize($event) {
-        $event.target.style.height = 'auto';
-        $event.target.style.height = $event.target.scrollHeight+'px';
+        $($event.target).css('height', 'auto');
+        console.log($event.target.scrollHeight)
+        if($event.target.scrollHeight !== $event.target.clientHeight) {
+            $($event.target).height($event.target.scrollHeight + 10)
+        }
+    }
+
+    goBack() {
+        this._$state.go('landing.' + this.type.slice(0, -1), {page: this._$state.params.page ? this._$state.params.page : 1})
     }
 }
 
