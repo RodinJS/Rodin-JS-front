@@ -54,7 +54,6 @@ class HelpDescComponentController {
         if(this._$state.params.page) {
             page = this._$state.params.page;
         }
-        console.log(this._$state.params)
         this.helpService.getList(this.type, page)
             .then((response) => {
                 this.showLoader = false;
@@ -98,6 +97,10 @@ class HelpDescComponentController {
 
     changePage(page) {
         this.showLoader = true;
+        if(page < 1) {
+            this.showLoader = false;
+            return;
+        }
         if(page > this.response.pages) {
             this.showLoader = false;
             return;

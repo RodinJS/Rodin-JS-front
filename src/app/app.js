@@ -8,7 +8,6 @@ import 'jquery/dist/jquery.min';
 import './assists/jquery.form';
 import moment from 'moment/min/moment.min.js';
 
-
 // Import our app config files
 import constants  from './config/app.constants';
 import appConfig  from './config/app.config';
@@ -29,7 +28,7 @@ import 'angular-ui-notification/dist/angular-ui-notification';
 import 'ng-tags-input/build/ng-tags-input.min';
 import 'angular-img-cropper/dist/angular-img-cropper.min'
 import 'ui-select/dist/select'
-
+import 'ng-wig/dist/ng-wig.min'
 //import 'app/components/wysiwyg/bootstrap-colorpicker-module'
 //import 'app/components/wysiwyg/angular-wysiwyg'
 
@@ -52,7 +51,6 @@ const requires = [
     'ngAnimate',
     'ngTouch',
     'ngCookies',
-
     'ui.router',
     'angular-storage',
     'restangular',
@@ -68,7 +66,8 @@ const requires = [
     'ngTagsInput',
     'ui-notification',
     'angular-img-cropper',
-    'ui.select'
+    'ui.select',
+    'ngWig'
 ];
 
 // Mount on window for testing
