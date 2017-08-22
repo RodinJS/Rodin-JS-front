@@ -16,6 +16,7 @@ RUN npm install -g gulp
 
 COPY ./ /tmp
 RUN npm run ${env}
+RUN gulp vendor
 
 
 FROM rodinvr/nginx:stable
