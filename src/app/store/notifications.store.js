@@ -70,9 +70,7 @@ function NotificationstStore(EventBus, BaseStore, $stateParams, $state, Project,
             };
             if (val.project && !val.error) {
 
-                const device = _.find(validDevices, ( s ) => {
-                    return val.label.indexOf(s) !== -1;
-                });
+                const device = _.find(validDevices, ( s ) => val.label.indexOf(s) !== -1);
 
                 let url = '';
                 switch(device){

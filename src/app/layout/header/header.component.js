@@ -97,8 +97,8 @@ class AppHeaderNewCtrl {
     showSocketResponse(data) {
         const respData = (data.data && typeof data.data === 'object') ? data.data : data;
         const message = respData.message || respData.label || respData.data;
-        //console.log('respData', respData);
-        //console.log('data', data);
+        console.log('respData', respData);
+        console.log('data', data);
 
         if (respData.error)
             this._Notification.error(message);

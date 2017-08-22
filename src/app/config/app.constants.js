@@ -12,7 +12,7 @@ const AppConstants = {
     local: {
         COOKIEDOMAIN: ['localhost', '192.168.99.100', '.rodin.space'],
         // SOCKET: 'https://ss.rodin.space/api',
-        SOCKET: 'http://localhost:4000/api',
+        SOCKET: 'http://localhost:4000',
         API: 'http://localhost:3000/api',
         // API: 'https://api.rodin.space/api',
         RECORDIP: '178.62.229.191',
@@ -22,7 +22,7 @@ const AppConstants = {
         PUBLIC: 'https://rodin.space/public/',
         PUBLISH: 'https://rodin.space',
         EDITOR: 'http://localhost:8000/#/',
-        FB: '216861662081500', //'' '216982868736046'
+        FB: '112014279508072', //'' '216982868736046'
         GITHUB: '2350afe57c144672285b',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.space/list.json',

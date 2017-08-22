@@ -29,7 +29,7 @@ class AuthCtrl {
                 cookie: true,  // enable cookies to allow the server to access
                 // the session
                 xfbml: true,  // parse social plugins on this page
-                version: 'v2.8', // use graph api version 2.8
+                version: 'v2.10', // use graph api version 2.8
             });
         }
         catch(e){

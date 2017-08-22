@@ -11,6 +11,7 @@ function SocketService(AppConstants, User, $rootScope){
 		emit: emitter
 	};
 
+
     socket.on('connect', ()=> Factory.connected = true);
 
 	return Factory;
