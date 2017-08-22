@@ -83,7 +83,10 @@ class ProfileCtrl {
                     this.showGitSyncModal();
             }, (err) => {
                 this.isSubmitting = false;
-                this.errors = err;
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+                this._$state.go('app.profile', {token: undefined, id: undefined, socialEmail: undefined});
             })
 
         }
