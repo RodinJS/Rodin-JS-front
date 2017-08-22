@@ -4,6 +4,7 @@
 class AppHeaderNewCtrl {
     constructor(AppConstants,
                 $window,
+                MenusService,
                 User,
                 $scope,
                 $state,
@@ -18,13 +19,10 @@ class AppHeaderNewCtrl {
                 PagesStore,
                 EventBus) {
         'ngInject';
-        this.isLocal = AppConstants.env === 'local';
         this._$state = $state;
         this._User = User;
         this._$scope = $scope;
         this._$rootScope = $rootScope;
-        this._PagesService = PagesService;
-        this._PagesStore = PagesStore;
         this._$stateParams = $stateParams;
         this.eventBus = EventBus;
         this._ModulesStore = ModulesStore;
@@ -32,20 +30,14 @@ class AppHeaderNewCtrl {
         this.user = User.current;
         this.notificationsStore = NotificationsStore;
         this._Notification = Notification;
-        this.pagesSection = [];
-        this.setPagesDropdown = this.setPagesDropdown.bind(this);
-        this._PagesStore.subscribeAndInit($scope, () => {
-            this.pagesList = this._PagesStore.getHeadarPagesList();
-            if (this.pagesList.length <= 0 && !this.try) {
-                this.try = true;
-                return this.getPagesList();
-            }
-            this.setPagesDropdown();
-        });
+        this.menusList = [];
         this.logout = () => {
             User.logout(...arguments);
         };
 
+        this._$rootScope.$on('login', (event, data) => {
+            this.user = data;
+        });
         this.isLanding = this._$state.current.name === 'home.landing';
 
         let tryAttempt = 0;
@@ -59,10 +51,6 @@ class AppHeaderNewCtrl {
             });
         }
 
-        $scope.$watch('User.current', (newUser) => {
-            this.currentUser = newUser;
-        });
-
         if (!SocketService.connected) {
             SocketService.on('projectBuild', (data) => this.showSocketResponse(data));
             SocketService.on('gitSync', (data) => this.showSocketResponse(data));
@@ -74,26 +62,12 @@ class AppHeaderNewCtrl {
             $("#mySidenav").toggleClass("nav-opened");
             $(".side-bar-background").toggleClass("show-background")
         });
-        angular.element($window).bind('resize', () => {
-            this.setPagesDropdown();
-        });
-    }
 
-    setPagesDropdown() {
-        if (window.innerWidth >= 768) {
-            $("body").removeClass("scroll-prevent");
-            $("#mySidenav").removeClass("nav-opened");
-            $(".side-bar-background").removeClass("show-background");
-            this.collapse = false;
-            this.pagesList.map((pages, i) => {
-                if (pages._id.length === 0) {
-                    this.pagesSection = _.slice(this.pagesList[i].values, 0, this.pagesList[i].values.length);
-                }
+        this.menusService = MenusService;
+        this.menusService.getList()
+            .then((res) => {
+                this.menusList = res;
             });
-        } else {
-            this.pagesSection = [];
-        }
-
     }
 
     scrollToSignUp() {
@@ -109,17 +83,6 @@ class AppHeaderNewCtrl {
                 _this._$scope.$apply();
             },
         });
-    }
-
-    getPagesList() {
-        this._PagesService.getList().then(
-            pagesList => {
-                this.eventBus.emit(this.eventBus.pages.SET, pagesList);
-            },
-            err => {
-                console.log(err);
-            }
-        );
     }
 
     checkMobile() {

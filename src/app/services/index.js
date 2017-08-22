@@ -40,4 +40,7 @@ servicesModule.service('PagesService', PagesService);
 import HelpDescService from './help-desc.service';
 servicesModule.service('HelpDescService', HelpDescService);
 
+import MenusService from './menus.service';
+servicesModule.service('MenusService', MenusService);
+
 export default servicesModule;

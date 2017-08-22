@@ -1,5 +1,5 @@
 class PageCtrl {
-    constructor(AppConstants, $scope, $state, $stateParams,  EventBus, PagesService, PagesStore, $window) {
+    constructor(AppConstants, $scope, $state, $stateParams, EventBus, PagesService, PagesStore, $window) {
         'ngInject';
 
         $window.scrollTo(0, 0);
@@ -19,6 +19,9 @@ class PageCtrl {
         this._PagesService.get(this.pageURL).then(
             page => {
                 this.page = page;
+                setTimeout(()=> {
+                    angular.element('.docs-iframe')[0].style.height =  (angular.element('.docs-iframe')[0].contentWindow.document.body.scrollHeight - 70) + 'px'
+                })
             },
 
             err => {
@@ -31,4 +34,5 @@ class PageCtrl {
         return this._$state.go('landing.error');
     }
 }
+
 export default PageCtrl;

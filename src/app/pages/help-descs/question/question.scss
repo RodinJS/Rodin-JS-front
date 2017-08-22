@@ -136,6 +136,10 @@ a {
         p {
           font-size: 32px !important;
           font-weight: bold;
+          word-break: break-all;
+          a {
+            word-break: break-all;
+          }
         }
       }
     }
@@ -148,8 +152,11 @@ a {
       color: #aaaaaa;
       display: inline-block;
       font-size: 18px;
+      word-break: break-all;
+
       a {
         color: #DEDEDE;
+        word-break: break-all;
         &:hover {
           color: white;
         }
@@ -190,13 +197,17 @@ a {
     width: 100%;
     border: 1px solid #045190;
     border-radius: 6px;
-    height: 100px;
+    min-height: 122px;
+    height: 122px;
     background: #0F1F35;
     padding: 10px 15px;
     color: white;
     font-size: 18px;
-    resize: vertical;
+    //resize: vertical;
     overflow: hidden;
+    transition: height 100ms linear;
+    box-sizing: border-box;
+    resize: none;
     &::-webkit-input-placeholder {
       font-size: 18px;
       color: $placeholder-color;
