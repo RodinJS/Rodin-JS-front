@@ -128,7 +128,7 @@
                 </div>
                 <div class="col-md-11">
                     <div class="row question-area" >
-                        <ng-wig  ng-model="$ctrl.answer"></ng-wig>
+                        <ng-wig placeholder="Type your answer here..." ng-model="$ctrl.answer"></ng-wig>
                         <!--<textarea rows="2" cols="2"-->
                                   <!--class="answer-question-section"-->
                                   <!--ng-model="$ctrl.answer"-->
@@ -159,7 +159,7 @@
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
                         <div class="form-group question-area">
-                            <ng-wig ng-model="$ctrl.post.description"></ng-wig>
+                            <ng-wig ng-model="$ctrl.post.description" placeholder="Fill in the details..."></ng-wig>
                         </div>
                     </form>
                 </div>
