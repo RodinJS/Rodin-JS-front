@@ -5,86 +5,88 @@
             <span class="line"></span>
         </div>
     </div>
-    <div class="container plans-section">
-        <div class="page-content col-md-12">
-            <h2 class="sub-title text-center">To switch your plan, select from one of the options below.</h2>
-            <div class="section-wrapper section-plan-wrapper">
-                <div class="plan-content-wrapper">
-                    <div class="plan-content">
-                        <div class="plan-content-item-box col-md-4 text-center">
-                            <div class="plan-content-item">
-                                <!--<i class="icon icon-monocle"></i>-->
-                                <h2>FREE</h2>
-                                <p class="text-small">
-                                    Most unlimited sites without paying us a dime with Client Billing.
-                                </p>
-                                <div class="plan-price-wrapper">
-                                            <span class="price">
-                                                <sup>$</sup>0<sub>/mo</sub>
-                                            </span>
-                                </div>
-                                <ul class="plan-item-info-list">
-                                    <li class="text-primary">Rodin URL</li>
-                                    <li class="text-primary">500 MB Traffic</li>
-                                    <li class="text-primary">1 GB Hosting space</li>
-                                    <li class="text-primary">2 apps</li>
-                                    <li class="text-primary">Rodin Loader</li>
-                                </ul>
+    <div class="container billing-section">
+        <p class="billing-title text-center">To switch your plan, select from one of the options below.</p>
+        <div class="col-md-4 text-center payment-data">
+            <div class="payment-content">
+                <h1>FREE</h1>
+                <p class="about-plan">Most unlimited sites without paying us a dime with Client Billing</p>
+                <p class="price"><sup class="currency">$</sup>0<sub class="payment-period">/month</sub></p>
+                <ul class="paymen-benefit text-left">
+                    <li>Rodin URL</li>
+                    <li>500 MB Traffic</li>
+                    <li>1GB Hosting space</li>
+                    <li>2 Apps</li>
+                    <li>Rodin Loader</li>
+                </ul>
+                <div class="action-section">
+                    <button ng-click="$ctrl.downgrade ? $ctrl.modals.downgrade = true : $ctrl.modals.downgrade = false" ng-class="{'button-negative': !$ctrl.downgrade, 'button-downgrade': $ctrl.downgrade}">{{$ctrl.downgrade ? 'Downgrade': 'Current Plan'}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center payment-data">
+            <div class="payment-content">
+                <h1>PREMIUM</h1>
+                <p class="about-plan">For professionals that need unbranded, advanced features</p>
+                <p class="price"><sup class="currency">$</sup>90<sub class="payment-period">/month</sub></p>
+                <ul class="paymen-benefit text-left">
+                    <li>Custom URL</li>
+                    <li>3 TB Traffic</li>
+                    <li>40 GB Hosting space</li>
+                    <li>All apps</li>
+                    <li>Rodin Loader</li>
+                </ul>
+                <div class="action-section">
+                    <button class="btn btn-sign-up">Upgrade plan</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center payment-data">
+            <div class="payment-content">
+                <h1>ENTERPRISE</h1>
+                <p class="about-plan">For small agencies and companies
+                    <span class="payment-info">(will be available soon)</span></p>
+                <p class="price"><sup class="currency">$</sup>700<sub class="payment-period">/month</sub></p>
+                <ul class="paymen-benefit text-left">
+                    <li>Custom URL</li>
+                    <li>6 TB Traffic</li>
+                    <li>200 GB Hosting space</li>
+                    <li>All apps</li>
+                    <li>Custom Loader</li>
+                </ul>
+                <div class="action-section">
+                    <button class="button-negative">Upgrade plan</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-3">
+            <ul class="payment-service">
+                <li><img class="img-responsive" src="/images/payment/visa.png" alt=""></li>
+                <li><img class="img-responsive" src="/images/payment/master_card.png" alt=""></li>
+                <li><img class="img-responsive" src="/images/payment/american_express.png" alt=""></li>
+                <li><img class="img-responsive" src="/images/payment/paypal.png" alt=""></li>
+                <li class="payservice-info"> All prices subject to applicable local taxes.</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-                                <!--<div class="button-section">-->
-                                    <!--<a class="btn sign-up-btn sign-up-btn-non-sticky">Current Plan</a>-->
-                                <!--</div>-->
-                            </div>
-                        </div>
-                        <div class="plan-content-item-box recommended-item-box col-md-4 text-center">
-                            <div class="plan-content-item">
-                                <!--<i class="icon icon-glasses"></i>-->
-                                <h2>PREMIUM</h2>
-                                <p class="text-small">
-                                    For professionals that need unbranded, advanced features
-                                </p>
-                                <div class="plan-price-wrapper">
-                                            <span class="price">
-                                                <sup>$</sup>90<sub>/mo</sub>
-                                            </span>
-                                </div>
-                                <ul class="plan-item-info-list">
-                                    <li class="text-primary">Custom URL</li>
-                                    <li class="text-primary">3 TB Traffic</li>
-                                    <li class="text-primary">40 GB Hosting space</li>
-                                    <li class="text-primary">All apps</li>
-                                    <li class="text-primary">Rodin Loader</li>
-                                </ul>
-                                <div class="button-section">
-                                    <a href="" class="btn sign-up-btn sign-up-btn-non-sticky sticky-signup">Upgrade Plan</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="plan-content-item-box  col-md-4 text-center">
-                            <div class="plan-content-item plan-content-item-box-disabled">
-                                <!--<i class="icon icon-oculus"></i>-->
-                                <h2>ENTERPRISE</h2>
-                                <p class="text-small">
-                                    For small agencies and companies.
-                                </p>
-                                <div class="plan-price-wrapper">
-                                            <span class="price">
-                                                <sup>$</sup>700<sub>/mo</sub>
-                                            </span>
-                                </div>
-                                <ul class="plan-item-info-list">
-                                    <li class="text-primary">Custom URL</li>
-                                    <li class="text-primary">6 TB Traffic</li>
-                                    <li class="text-primary">200 GB Hosting space</li>
-                                    <li class="text-primary">All apps</li>
-                                    <li class="text-primary">Custom Loader</li>
-                                </ul>
-                                <div class="signout-content button-section">
-                                    <a href="" class="btn sign-up-btn sign-up-btn-non-sticky">See Team Plans</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="modal" close-modal="downgrade"
+     ng-class="{'display-block': $ctrl.modals.downgrade, 'display-none': !$ctrl.modals.downgrade}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <p>Downgrade</p>
+        </div>
+        <div class="modal-body">
+            <p>
+                Are you sure you want to downgrade your profile from PREMIUM to FREE?
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <div class="text-center">
+                    <button class="btn btn-negative">Yes</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.downgrade = false">Cancel</a>
                 </div>
             </div>
         </div>

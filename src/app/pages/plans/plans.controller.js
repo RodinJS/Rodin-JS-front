@@ -6,6 +6,10 @@ class PlansCrtl {
 		this.currentUser = User.current;
 		this.formData = {};
 
+		this.modals = {
+			downgrade: false
+		}
+		this.downgrade = true;
 		$scope.$watch('User.current', (newUser) => {
 			this.currentUser = newUser;
 		});
