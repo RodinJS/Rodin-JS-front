@@ -65,6 +65,7 @@ class SingleDescController {
                 .then(response => {
                     this.showLoader = false;
                     this.question = response;
+                    console.log(this.question)
                     if (this.currentUser) {
                         this.isEditable = this.question.user.email === this.currentUser.email;
                     }
@@ -97,20 +98,15 @@ class SingleDescController {
         let downvoted = vote === -1;
         if(upvoted && this.question.voted) {
             switch (this.question.voted.vote) {
-                case 1:
-                    this.question.rating -= 1;
-                    vote = -1;
-                    break;
-                case -1:
-                    this.question.rating += 1;
+                case 0:
                     vote = 1;
                     break;
-                case 2:
-                    this.question.rating = -1;
-                    vote = -2;
+                case 1:
+                    this.question.rating -= 1;
+                    vote = 0;
                     break;
-                case -2:
-                    this.question.rating = +2;
+                case -1:
+                    this.question.rating += 2;
                     vote = 1;
                     break;
                 default:
@@ -119,21 +115,16 @@ class SingleDescController {
             }
         } else if(downvoted && this.question.voted) {
             switch (this.question.voted.vote) {
+                case 0:
+                    vote = -1;
+                    break;
                 case 1:
                     this.question.rating -= 2;
-                    vote = -2;
+                    vote = -1;
                     break;
                 case -1:
                     this.question.rating += 1;
-                    vote = 1;
-                    break;
-                case 2:
-                    this.question.rating = 2;
-                    vote = 2;
-                    break;
-                case -2:
-                    this.question.rating += 1;
-                    vote = 1;
+                    vote = 0;
                     break;
                 default:
                     console.log('error');
@@ -181,16 +172,17 @@ class SingleDescController {
     }
 
     askQuestion(form) {
+        if (!this.currentUser) {
+            this.helpService.history = {
+                tags: this.selectedTags, post: this.post
+            };
+            return this._$state.go('landing.login');
+        }
         if (form.$valid) {
-            if (!this.currentUser) {
-                this.helpService.history = {
-                    tags: this.selectedTags, post: this.post
-                };
-                return this._$state.go('landing.login');
-            }
             if (this.selectedTags.length > 0) {
                 this.post.tags = this.selectedTags.map((tag) => tag.text)
             }
+            console.log(this.post)
             this.showLoader = true;
             this.helpService.createQuestion(this.type, this.post)
                 .then(response => {
