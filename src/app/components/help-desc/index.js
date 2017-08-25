@@ -2,7 +2,7 @@
  * Created by Reinchard on 7/26/2017.
  */
 class HelpDescComponentController {
-    constructor($scope, $element, $attrs,$state,User, HelpDescService) {
+    constructor($scope, $element, $attrs, $state, User, HelpDescService) {
         'ngInject';
         this.currentUser = User.current;
         this._$scope = $scope;
@@ -11,9 +11,9 @@ class HelpDescComponentController {
         this.showLoader = true;
         this.helpService = HelpDescService;
         this.configs = {
-            questions: {title: 'All Questions', buttonText: 'Ask a Question', searchTitle: '', create:''},
-            issues: {title: 'Issue Tracker', buttonText: 'Report a Bug', searchTitle: '', create:''},
-            features: {title: 'Feature Requests', buttonText: 'Post an Idea', searchTitle: '', create:''},
+            questions: {title: 'All Questions', buttonText: 'Ask a Question', searchTitle: '', create: ''},
+            issues: {title: 'Issue Tracker', buttonText: 'Report a Bug', searchTitle: '', create: ''},
+            features: {title: 'Feature Requests', buttonText: 'Post an Idea', searchTitle: '', create: ''},
         };
         this.config = this.configs[this.type];
         this.response = [];
@@ -22,7 +22,6 @@ class HelpDescComponentController {
         this.getContent();
         this.getFeaturedTags();
         this.pages = [];
-
     }
 
     search($event) {
@@ -50,9 +49,10 @@ class HelpDescComponentController {
             })
     }
 
-    getContent(page =1) {
-        if(this._$state.params.page) {
+    getContent(page = 1) {
+        if (this._$state.params.page) {
             page = this._$state.params.page;
+            this._$state.params.page = null;
         }
         this.helpService.getList(this.type, page)
             .then((response) => {
@@ -63,12 +63,23 @@ class HelpDescComponentController {
     }
 
     vote(id, vote, index) {
-        if(!this.currentUser) {
+        if (!this.currentUser) {
             this.Notification.success('You need to be logged in to upvote things.');
             return
         }
+
         this.inProgress = true;
-        this.response.items[index].rating = this.response.items[index].rating + vote;
+        if (!this.response.items[index].voted) {
+            this.response.items[index].voted = {vote};
+            this.response.items[index].rating = this.response.items[index].rating + vote;
+            console.log(this.response.items[index])
+        } else if (this.response.items[index].voted && this.response.items[index].voted.vote === 1) {
+            console.log(this.response.items[index])
+            vote = -1
+        } else if (this.response.items[index].voted && this.response.items[index].voted.vote === 0) {
+            console.log(this.response.items[index])
+            vote = -2
+        }
         this.helpService.vote(this.type, id, vote)
             .then((response) => {
                 this.inProgress = false;
@@ -91,17 +102,18 @@ class HelpDescComponentController {
                 this.showLoader = false;
             })
     }
+
     goToPage(id = 'create') {
-        this._$state.go('landing.single-' + this.type.slice(0,-1), {id, page: this.response.page}, );
+        this._$state.go('landing.single-' + this.type.slice(0, -1), {id, page: this.response.page},);
     }
 
     changePage(page) {
         this.showLoader = true;
-        if(page < 1) {
+        if (page < 1) {
             this.showLoader = false;
             return;
         }
-        if(page > this.response.pages) {
+        if (page > this.response.pages) {
             this.showLoader = false;
             return;
         }
@@ -110,8 +122,8 @@ class HelpDescComponentController {
 
     updatePagination(pages) {
         this.pages = [];
-        for(let i =0; i< pages; i++) {
-            this.pages.push(i+ 1);
+        for (let i = 0; i < pages; i++) {
+            this.pages.push(i + 1);
         }
     }
 }

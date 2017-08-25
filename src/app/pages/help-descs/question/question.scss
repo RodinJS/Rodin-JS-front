@@ -2,6 +2,16 @@ a {
   cursor: pointer;
 }
 
+.reply-button {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  z-index: 1;
+  &:hover {
+    color: $gey-blue;
+  }
+}
+
 .search-line {
   border: 1px solid rgba(170, 170, 170, .2);
   border-left-color: transparent;
@@ -22,9 +32,11 @@ a {
     }
   }
 }
+
 .single-tag-section {
   margin-bottom: 22px;
 }
+
 .tag-section {
   .reply {
     li {
@@ -93,10 +105,14 @@ a {
     list-style: none;
     position: absolute;
     right: 0;
+    .reply {
+      position: absolute;
+      transform: translate(-11%, 200%);
+    }
     span {
       cursor: pointer;
       color: #3A4758;
-      font-size: 24px;
+      font-size: 18px;
       padding: 5px;
       &:hover {
         color: #5F6977;
@@ -111,8 +127,10 @@ a {
     .count {
       cursor: pointer;
       color: #848C97;
+      font-weight: 600;
+      line-height: 1;
       font-family: $Roboto;
-      font-size: 20px;
+      font-size: 16px;
       &:active {
         color: #C1C5CA;
       }
@@ -122,13 +140,16 @@ a {
     max-width: 64px;
   }
   .profile-image {
-    max-width: 48px;
+    //max-width: 48px;
   }
   .text-section {
     .question-description {
       //margin-top: 30px;
       color: #DEDEDE;
       font-size: 16px;
+    }
+    .message-answer {
+      min-height: auto !important;
     }
     .message-content {
       padding: 15px;
@@ -172,7 +193,58 @@ a {
       background: black;
     }
     .message {
-      height: auto;
+      min-height: 120px;
+      position: relative;
+      .settings {
+        margin-bottom: 10px;
+        .settings-dropdown {
+          background-color: #0C1F37 !important;
+          box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5) !important;
+          left: -127px;
+          top: 29px;
+          margin-top: 0;
+          padding: 0 !important;
+          width: 100% !important;
+          line-height: normal !important;
+          clear: both;
+          li {
+            cursor: pointer;
+            padding: 10px;
+            &:hover {
+              background: #082542;
+              a {
+                color: white;
+              }
+            }
+          }
+          .settings-list {
+            margin-top: 5px;
+            margin-bottom: 5px;
+          }
+          a {
+            font-size: 15px !important;
+            padding: 2px 8px !important;
+            color: #B0B0B0;
+          }
+        }
+        > a {
+          color: #AAAAAA;
+          position: relative;
+          font-size: 21px;
+          &:hover {
+            &:after {
+              content: '';
+              display: block;
+              width: 100%;
+              background: #008BF2;
+              height: 2px;
+              position: absolute;
+              bottom: -2px;
+              right: 0px;
+            }
+          }
+        }
+      }
       p {
         margin-bottom: 0px;
         color: #DEDEDE;
@@ -180,6 +252,22 @@ a {
         font-size: 16px;
       }
     }
+  }
+}
+
+.post-answer {
+  .has-error {
+    .answer-wig {
+      .ng-wig {
+        border-color: rgba(255, 0, 0, 0.5) !important;
+      }
+      .wig-focused {
+        border-color: #843534;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+      }
+
+    }
+
   }
 }
 
