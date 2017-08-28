@@ -73,11 +73,11 @@
                                             </li>
                                             <li ng-click="$ctrl.vote($ctrl.question.id, 1, index)"
                                                 disabled="{{inProgress}}">
-                                                <span class="icon-vote-up" ng-class="{'voted': $ctrl.question.voted.vote === 1}"></span></li>
+                                                <span class="icon-vote-up" ng-class="{'voted': $ctrl.question.voted.vote == 1}"></span></li>
                                             <li class="count">{{$ctrl.question.rating}}</li>
                                             <li ng-click="$ctrl.vote($ctrl.question.id, -1, index)"
                                                 disabled="{{inProgress}}">
-                                                <span class="icon-vote-down" ng-class="{'voted': $ctrl.question.voted.vote === -1}"></span></li>
+                                                <span class="icon-vote-down" ng-class="{'voted': $ctrl.question.voted.vote == -1}"></span></li>
                                         </ul>
 
                                     </div>

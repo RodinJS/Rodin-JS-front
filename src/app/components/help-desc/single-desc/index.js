@@ -106,7 +106,7 @@ class SingleDescController {
                 case 1:
                     this.question.rating -= 1;
                     this.question.voted.vote = 0;
-                    vote = -1;
+                    vote = 0;
                     break;
                 case -1:
                     this.question.rating += 2;
