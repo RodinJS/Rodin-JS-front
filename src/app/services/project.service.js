@@ -29,7 +29,8 @@ class Project {
         let Analyser = new this._Analyser();
         let deletingDomain = fields.domain;
         fields.domain = '';
-        this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName', 'domain']))
+        console.log(fields)
+        this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName', 'domain','_id']))
             .then(
                 data => {
                     return this._ProjectDomains.remove({domain: deletingDomain}).then(Analyser.resolve, Analyser.reject);
