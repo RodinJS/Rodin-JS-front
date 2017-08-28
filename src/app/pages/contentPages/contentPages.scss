@@ -80,6 +80,11 @@
       }
     }
   }
+  .outer-content {
+    iframe {
+      margin-top: 2px !important;
+    }
+  }
 }
 
 .color-box {
