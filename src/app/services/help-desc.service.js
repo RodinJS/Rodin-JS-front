@@ -34,9 +34,10 @@ class HelpDescService {
         return Analyser.promise;
     }
 
-    updateThread(conversationId) {
+    updateThread(conversationId, data) {
         let Analyser = new this._Analyser();
-        this._Support.one(`/thread/${conversationId}`).customPUT(data).then(Analyser.resolve, Analyser.reject);
+        this._Support.one(`/thread/${conversationId}`).customPUT(JSON.stringify(data,undefined, undefined,
+            { 'Content-Type': 'application/x-www-form-urlencoded' })).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 

@@ -96,7 +96,7 @@ class SingleDescController {
         }
         let upvoted = vote === 1;
         let downvoted = vote === -1;
-        if(upvoted && this.question.voted) {
+        if (upvoted && this.question.voted) {
             switch (this.question.voted.vote) {
                 case 0:
                     vote = 1;
@@ -113,7 +113,7 @@ class SingleDescController {
                     console.log('error');
                     break
             }
-        } else if(downvoted && this.question.voted) {
+        } else if (downvoted && this.question.voted) {
             switch (this.question.voted.vote) {
                 case 0:
                     vote = -1;
@@ -132,7 +132,7 @@ class SingleDescController {
             }
         }
 
-        if(!this.question.voted) {
+        if (!this.question.voted) {
             this.question.rating = this.question.rating + vote;
         }
         this.helpService.vote(this.type, id, vote)
@@ -144,13 +144,13 @@ class SingleDescController {
     }
 
     submitAnswer(form) {
+        if (!this.currentUser) {
+            this.helpService.history = {
+                tags: this.selectedTags, post: this.post
+            };
+            return this._$state.go('landing.login');
+        }
         if (this.answer && this.answer.length > 0) {
-            if (!this.currentUser) {
-                this.helpService.history = {
-                    tags: this.selectedTags, post: this.post
-                };
-                return this._$state.go('landing.login');
-            }
             if (this.creationPage) {
                 return this.askQuestion(form);
             }
@@ -177,12 +177,13 @@ class SingleDescController {
                 tags: this.selectedTags, post: this.post
             };
             return this._$state.go('landing.login');
+        } else {
+
         }
         if (form.$valid) {
             if (this.selectedTags.length > 0) {
                 this.post.tags = this.selectedTags.map((tag) => tag.text)
             }
-            console.log(this.post)
             this.showLoader = true;
             this.helpService.createQuestion(this.type, this.post)
                 .then(response => {
@@ -204,12 +205,19 @@ class SingleDescController {
         this.updated.subject = subject;
     }
 
+    updatePreview(preview) {
+        this.updated.description = preview;
+    }
     updateQuestion() {
-        let promises = [];
-        this.helpService.updateConversation(this.type, this.question.id, {
+        let promises = [this.helpService.updateConversation(this.type, this.question.id, {
             tags: this.updated.tags,
             subject: this.updated.subject
-        })
+        })];
+
+        if(this.updated.description) {
+            // promises.push(this.helpService.updateThread(this.question.id, {description: this.updated.description, threadId: this.question.id}))
+        }
+        Promise.all(promises)
             .then((resp) => {
                 this.Notification.success('Conversation updated');
             })
