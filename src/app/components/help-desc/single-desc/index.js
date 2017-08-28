@@ -99,14 +99,18 @@ class SingleDescController {
         if (upvoted && this.question.voted) {
             switch (this.question.voted.vote) {
                 case 0:
+                    this.question.rating += 1;
+                    this.question.voted.vote = 1;
                     vote = 1;
                     break;
                 case 1:
                     this.question.rating -= 1;
-                    vote = 0;
+                    this.question.voted.vote = 0;
+                    vote = -1;
                     break;
                 case -1:
                     this.question.rating += 2;
+                    this.question.voted.vote = 1;
                     vote = 1;
                     break;
                 default:
@@ -117,9 +121,12 @@ class SingleDescController {
             switch (this.question.voted.vote) {
                 case 0:
                     vote = -1;
+                    this.question.rating -= 1;
+                    this.question.voted.vote = 1;
                     break;
                 case 1:
                     this.question.rating -= 2;
+                    this.question.voted.vote = -1;
                     vote = -1;
                     break;
                 case -1:
