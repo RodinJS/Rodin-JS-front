@@ -30,7 +30,7 @@ class Project {
         let deletingDomain = fields.domain;
         fields.domain = '';
         console.log(fields)
-        this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName', 'domain','_id']))
+        this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName', 'domain']))
             .then(
                 data => {
                     return this._ProjectDomains.remove({domain: deletingDomain}).then(Analyser.resolve, Analyser.reject);
@@ -106,7 +106,7 @@ class Project {
         this._Projects.one(project._id).remove(fields).then(
             data => {
                 if (project.domain) {
-                    return this._ProjectDomains.remove({domain: project.domain}).then(Analyser.resolve, Analyser.reject);
+                    return this._ProjectDomains.remove({domain: project.domain, id: project._id}).then(Analyser.resolve, Analyser.reject);
                 }
                 return Analyser.resolve(data);
             }, Analyser.reject);
