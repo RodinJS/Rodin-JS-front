@@ -18,7 +18,7 @@ class HelpDescService {
     getList(type = '', page = 1) {
         let Analyser = new this._Analyser();
         this._Support.one(`/search/${type}?page=${page}`).get({}).then(Analyser.resolve, Analyser.reject);
-        // this._Support.one(`/${type}`).get({}).then(Analyser.resolve, Analyser.reject);
+        // this._Support.one(`/${type}?page=${page}`).get({}).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 
@@ -31,6 +31,13 @@ class HelpDescService {
     createQuestionThread(conversationId, data) {
         let Analyser = new this._Analyser();
         this._Support.one(`/thread/${conversationId}`).customPOST(data).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    updateThread(conversationId, data) {
+        let Analyser = new this._Analyser();
+        this._Support.one(`/thread/${conversationId}`).customPUT(JSON.stringify(data,undefined, undefined,
+            { 'Content-Type': 'application/x-www-form-urlencoded' })).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 
@@ -61,6 +68,19 @@ class HelpDescService {
     resetValues() {
         this.history.post = null;
         this.history.tags = null;
+    }
+
+    updateConversation(type, id, data) {
+        let Analyser = new this._Analyser();
+        this._Support.one(`/conversation/${type}/${id}`).customPUT(JSON.stringify(data,undefined, undefined,
+            { 'Content-Type': 'application/x-www-form-urlencoded' })).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    deleteConversation(type, id) {
+        let Analyser = new this._Analyser();
+        this._Support.one(`/conversation/${type}/${id}`).customDELETE().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
     }
 }
 

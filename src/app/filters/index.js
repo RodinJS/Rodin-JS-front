@@ -12,5 +12,6 @@ FiltersModule.filter('htmlize', ['$sce', Filters.htmlize]);
 
 FiltersModule.filter('formValidator', ['$sce', Filters.formValidator]);
 FiltersModule.filter('PFValidator', ['$sce', Filters.projectFormsValidator]);
+FiltersModule.filter('supportFormsValidator', ['$sce', Filters.supportFormsValidator]);
 
 export default FiltersModule;
