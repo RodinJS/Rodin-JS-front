@@ -6,6 +6,7 @@ class SingleDescController {
     constructor($scope, $element, $attrs, $state, HelpDescService, User, Notification) {
         'ngInject';
         this.creationPage = this.id === 'create';
+        this.editPage = false;
         this.currentUser = User.current;
         this._$state = $state;
         this._$scope = $scope;
@@ -42,14 +43,13 @@ class SingleDescController {
         this.getConversation();
         this.getFeaturedTags();
         this.answer = '';
-        this.tinymceOptions = {
-            plugins: 'link image code',
-            skin: 'lightgray',
-            theme : 'modern',
-            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+        this.modals = {
+            remove: false
         };
-        console.log(this.helpService)
-
+        this.isEditable = false;
+        this.updated = {
+            tags: []
+        };
     }
 
     getFeaturedTags() {
@@ -65,6 +65,10 @@ class SingleDescController {
                 .then(response => {
                     this.showLoader = false;
                     this.question = response;
+                    console.log(this.question)
+                    if (this.currentUser) {
+                        this.isEditable = this.question.user.email === this.currentUser.email;
+                    }
                 })
                 .catch((err) => {
                     this.showLoader = false;
@@ -90,64 +94,161 @@ class SingleDescController {
             this.Notification.success('You need to be logged in to upvote things.');
             return
         }
-        this.question.rating = this.question.rating + vote;
+        let upvoted = vote === 1;
+        let downvoted = vote === -1;
+        if (upvoted && this.question.voted) {
+            switch (this.question.voted.vote) {
+                case 0:
+                    vote = 1;
+                    break;
+                case 1:
+                    this.question.rating -= 1;
+                    vote = 0;
+                    break;
+                case -1:
+                    this.question.rating += 2;
+                    vote = 1;
+                    break;
+                default:
+                    console.log('error');
+                    break
+            }
+        } else if (downvoted && this.question.voted) {
+            switch (this.question.voted.vote) {
+                case 0:
+                    vote = -1;
+                    break;
+                case 1:
+                    this.question.rating -= 2;
+                    vote = -1;
+                    break;
+                case -1:
+                    this.question.rating += 1;
+                    vote = 0;
+                    break;
+                default:
+                    console.log('error');
+                    break
+            }
+        }
+
+        if (!this.question.voted) {
+            this.question.rating = this.question.rating + vote;
+        }
         this.helpService.vote(this.type, id, vote)
             .then((response) => {
+                console.log(response)
             })
             .catch((err) => {
             })
     }
 
-    submitAnswer() {
+    submitAnswer(form) {
         if (!this.currentUser) {
             this.helpService.history = {
                 tags: this.selectedTags, post: this.post
             };
             return this._$state.go('landing.login');
         }
-        if (this.creationPage) {
-            return this.askQuestion();
-        }
-        this.showLoader = true;
-        this.helpService.createQuestionThread(this.question.id, {description: this.answer})
-            .then(response => {
-                this.helpService.history.tags = null;
-                this.helpService.history.post = null;
+        if (this.answer && this.answer.length > 0) {
+            if (this.creationPage) {
+                return this.askQuestion(form);
+            }
+            this.showLoader = true;
+            this.helpService.createQuestionThread(this.question.id, {description: this.answer})
+                .then(response => {
+                    this.helpService.history.tags = null;
+                    this.helpService.history.post = null;
+                    this.showLoader = false;
+                    this.answer = '';
+                    this.getConversation()
+                }).catch(err => {
                 this.showLoader = false;
-                this.answer = '';
-                this.getConversation()
-            }).catch(err => {
-            this.showLoader = false;
 
-        })
+            })
+        }
+
 
     }
 
-    askQuestion() {
-        if (this.selectedTags.length > 0) {
-            this.post.tags = this.selectedTags.map((tag) => tag.text)
+    askQuestion(form) {
+        if (!this.currentUser) {
+            this.helpService.history = {
+                tags: this.selectedTags, post: this.post
+            };
+            return this._$state.go('landing.login');
+        } else {
+
         }
-        this.showLoader = true;
-        this.helpService.createQuestion(this.type, this.post)
-            .then(response => {
-                this.helpService.resetValues();
+        if (form.$valid) {
+            if (this.selectedTags.length > 0) {
+                this.post.tags = this.selectedTags.map((tag) => tag.text)
+            }
+            this.showLoader = true;
+            this.helpService.createQuestion(this.type, this.post)
+                .then(response => {
+                    this.helpService.resetValues();
+                    this.showLoader = false;
+                    this._$state.go('landing.' + this.type.slice(0, -1))
+                }).catch((err) => {
                 this.showLoader = false;
-                this._$state.go('landing.' + this.type.slice(0, -1))
-            }).catch((err) => {
-            this.showLoader = false;
-        })
+            })
+        }
+    }
+
+    switchToEdit() {
+        this.creationPage = false;
+        this.editPage = true;
+    }
+
+    updateSubject(subject) {
+        this.updated.subject = subject;
+    }
+
+    updatePreview(preview) {
+        this.updated.description = preview;
+    }
+    updateQuestion() {
+        let promises = [this.helpService.updateConversation(this.type, this.question.id, {
+            tags: this.updated.tags,
+            subject: this.updated.subject
+        })];
+
+        if(this.updated.description) {
+            // promises.push(this.helpService.updateThread(this.question.id, {description: this.updated.description, threadId: this.question.id}))
+        }
+        Promise.all(promises)
+            .then((resp) => {
+                this.Notification.success('Conversation updated');
+            })
+            .catch((err) => console.log(err))
+    }
+
+    deleteQuestion() {
+        this.helpService.deleteConversation(this.type, this.question.id)
+            .then((resp) => {
+                this.goBack();
+                this.modals.remove = false;
+            })
+            .catch((err) => console.log(err))
+    }
+
+    onAddTags(tag) {
+        this.updated.tags.push(tag.text);
+    }
+
+    onRemoveTag(tag) {
+        if (this.updated.tags.indexOf(tag.text) !== -1) {
+            this.updated.tags.splice(this.updated.tags.indexOf(tag.text), 1);
+        }
+    }
+
+    open(modal) {
+        this.modals[modal] = true;
     }
 
     goToPage(id = 'create') {
         this._$state.go('landing.single-' + this.type.slice(0, -1), {id});
-    }
-
-    autoResize($event) {
-        $($event.target).css('height', 'auto');
-        console.log($event.target.scrollHeight)
-        if($event.target.scrollHeight !== $event.target.clientHeight) {
-            $($event.target).height($event.target.scrollHeight + 10)
-        }
     }
 
     goBack() {
