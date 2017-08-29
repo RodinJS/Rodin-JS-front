@@ -171,8 +171,11 @@
                                       data-ng-focus="createQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
-                        <div class="form-group question-area">
-                                <ng-wig ng-model="$ctrl.post.description" placeholder="Fill in the details..."></ng-wig>
+                        <div class="form-group question-area" data-ng-class="{
+                         'has-error': (createQuestion | supportFormsValidator:'description')  == 'invalid',
+                         'has-success': (createQuestion | supportFormsValidator:'description')  == 'valid',
+                         }">
+                                <ng-wig ng-model="$ctrl.post.description" name="description" placeholder="Fill in the details..."></ng-wig>
                         </div>
                         <div class="col-md-12 tag-selection">
                             <div class="row">
@@ -182,7 +185,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 action-section text-center">
-                            <a class="btn-back" ui-sref="{{'landing.' + $ctrl.type.slice(0, -1)}}">Back</a>
+                            <a class="btn-back" ng-click="$ctrl.goBack()">Back</a>
                             <button class="btn-answer" ng-click="$ctrl.askQuestion(createQuestion)">{{$ctrl.currentUser ? 'Post':'Sign in and post'}}
                             </button>
                         </div>
@@ -214,8 +217,11 @@
                                       data-ng-focus="updateQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
-                        <div class="form-group question-area">
-                            <ng-wig ng-model="$ctrl.question.preview" placeholder="Fill in the details..." data-ng-change="$ctrl.updatePreview($ctrl.question.preview)"></ng-wig>
+                        <div class="form-group question-area" data-ng-class="{
+                         'has-error': (updateQuestion | supportFormsValidator:'preview')  == 'invalid',
+                         'has-success': (updateQuestion | supportFormsValidator:'preview')  == 'valid',
+                         }">
+                            <ng-wig ng-model="$ctrl.question.preview" placeholder="Fill in the details..." name="preview" data-ng-change="$ctrl.updatePreview($ctrl.question.preview)"></ng-wig>
                         </div>
                     </form>
                 </div>
@@ -228,7 +234,7 @@
                     </tags-input>
                 </div>
                 <div class="col-md-12 action-section text-center">
-                    <a class="btn-back" ui-sref="{{'landing.' + $ctrl.type.slice(0, -1)}}">Back</a>
+                    <a class="btn-back" ng-click="$ctrl.goBack()">Back</a>
                     <button class="btn-answer" ng-click="$ctrl.updateQuestion()">Update</button>
                 </div>
 

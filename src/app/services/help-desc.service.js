@@ -47,9 +47,9 @@ class HelpDescService {
         return Analyser.promise;
     }
 
-    vote(type, id, vote) {
+    vote(type, id, vote, voteType) {
         let Analyser = new this._Analyser();
-        this._Support.one(`/conversation/${type}/${id}`).customPUT({vote}).then(Analyser.resolve, Analyser.reject);
+        this._Support.one(`/conversation/${type}/${id}`).customPUT({vote, voteType}).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 

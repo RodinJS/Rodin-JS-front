@@ -96,12 +96,12 @@ class SingleDescController {
         }
         let upvoted = vote === 1;
         let downvoted = vote === -1;
+        let voteType = vote === 1 ? 1: -1;
         if (upvoted && this.question.voted) {
             switch (this.question.voted.vote) {
                 case 0:
-                    this.question.rating += 1;
-                    this.question.voted.vote = 1;
-                    vote = 1;
+                    this.question.rating += vote;
+                    this.question.voted.vote = vote;
                     break;
                 case 1:
                     this.question.rating -= 1;
@@ -120,9 +120,8 @@ class SingleDescController {
         } else if (downvoted && this.question.voted) {
             switch (this.question.voted.vote) {
                 case 0:
-                    vote = -1;
-                    this.question.rating -= 1;
-                    this.question.voted.vote = 1;
+                    this.question.rating += vote;
+                    this.question.voted.vote = vote;
                     break;
                 case 1:
                     this.question.rating -= 2;
@@ -131,6 +130,7 @@ class SingleDescController {
                     break;
                 case -1:
                     this.question.rating += 1;
+                    this.question.voted.vote = 0;
                     vote = 0;
                     break;
                 default:
@@ -141,8 +141,9 @@ class SingleDescController {
 
         if (!this.question.voted) {
             this.question.rating = this.question.rating + vote;
+            this.question.voted = {vote}
         }
-        this.helpService.vote(this.type, id, vote)
+        this.helpService.vote(this.type, id, vote, voteType)
             .then((response) => {
                 console.log(response)
             })
@@ -222,7 +223,7 @@ class SingleDescController {
         })];
 
         if(this.updated.description) {
-            // promises.push(this.helpService.updateThread(this.question.id, {description: this.updated.description, threadId: this.question.id}))
+            promises.push(this.helpService.updateThread(this.question.id, {description: this.updated.description, threadId: this.question.id, tags: this.updated.tags}))
         }
         Promise.all(promises)
             .then((resp) => {
