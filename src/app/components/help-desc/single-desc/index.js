@@ -223,7 +223,7 @@ class SingleDescController {
         })];
 
         if(this.updated.description) {
-            promises.push(this.helpService.updateThread(this.question.id, {description: this.updated.description, threadId: this.question.id, tags: this.updated.tags}))
+            promises.push(this.helpService.updateThread(this.question.id, {description: this.updated.description, threadId: this.question.myThreadId, tags: this.updated.tags}))
         }
         Promise.all(promises)
             .then((resp) => {

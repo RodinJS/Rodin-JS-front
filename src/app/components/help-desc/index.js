@@ -142,7 +142,6 @@ class HelpDescComponentController {
     }
 
     goToPage(id = 'create') {
-        console.log('create', this.response.page)
         this._$state.go('landing.single-' + this.type.slice(0, -1), {id, page: this.response.page},);
     }
 
