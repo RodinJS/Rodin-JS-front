@@ -33,7 +33,7 @@ class Project {
         this._Projects.one(projectId).customPUT(Object.filterByKeys(fields, ['name', 'description', 'thumbnail', 'tags', 'displayName', 'domain']))
             .then(
                 data => {
-                    return this._ProjectDomains.remove({domain: deletingDomain}).then(Analyser.resolve, Analyser.reject);
+                    return this._ProjectDomains.remove({domain: deletingDomain, id: projectId}).then(Analyser.resolve, Analyser.reject);
                 },
                 Analyser.reject
             );
