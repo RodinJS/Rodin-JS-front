@@ -69,18 +69,56 @@ class HelpDescComponentController {
         }
 
         this.inProgress = true;
-        if (!this.response.items[index].voted) {
-            this.response.items[index].voted = {vote};
-            this.response.items[index].rating = this.response.items[index].rating + vote;
-            console.log(this.response.items[index])
-        } else if (this.response.items[index].voted && this.response.items[index].voted.vote === 1) {
-            console.log(this.response.items[index])
-            vote = -1
-        } else if (this.response.items[index].voted && this.response.items[index].voted.vote === 0) {
-            console.log(this.response.items[index])
-            vote = -2
+        let upvoted = vote === 1;
+        let downvoted = vote === -1;
+        let voteType = vote === 1 ? 1: -1;
+        if (upvoted && this.response.items[index].voted) {
+            switch (this.response.items[index].voted) {
+                case 0:
+                    this.response.items[index].rating += vote;
+                    this.response.items[index].voted = vote;
+                    break;
+                case 1:
+                    this.response.items[index].rating -= 1;
+                    this.response.items[index].voted = 0;
+                    vote = 0;
+                    break;
+                case -1:
+                    this.response.items[index].rating += 2;
+                    this.response.items[index].voted = 1;
+                    vote = 1;
+                    break;
+                default:
+                    console.log('error');
+                    break
+            }
+        } else if (downvoted && this.response.items[index].voted) {
+            switch (this.response.items[index].voted) {
+                case 0:
+                    this.response.items[index].rating += vote;
+                    this.response.items[index].voted = vote;
+                    break;
+                case 1:
+                    this.response.items[index].rating -= 2;
+                    this.response.items[index].voted = -1;
+                    vote = -1;
+                    break;
+                case -1:
+                    this.response.items[index].rating += 1;
+                    this.response.items[index].voted = 0;
+                    vote = 0;
+                    break;
+                default:
+                    console.log('error');
+                    break
+            }
         }
-        this.helpService.vote(this.type, id, vote)
+
+        if (!this.response.items[index].voted) {
+            this.response.items[index].rating = this.response.items[index].rating + vote;
+            this.response.items[index].voted = {vote}
+        }
+        this.helpService.vote(this.type, id, vote, voteType)
             .then((response) => {
                 this.inProgress = false;
             })
@@ -104,6 +142,7 @@ class HelpDescComponentController {
     }
 
     goToPage(id = 'create') {
+        console.log('create', this.response.page)
         this._$state.go('landing.single-' + this.type.slice(0, -1), {id, page: this.response.page},);
     }
 
