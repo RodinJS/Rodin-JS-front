@@ -29,6 +29,7 @@ button:active {
 @import "./plugins/_swiper";
 
 @import "mixins";
+//@import "billings";
 @import "normalize";
 @import "GUI";
 @import "common";
@@ -44,6 +45,7 @@ button:active {
 @import "../../src/app/pages/resetPassword/resetPassword";
 @import "../../src/app/layout/header";
 @import "../../src/app/layout/footer";
+@import "../../src/app/layout/header/header";
 @import "../../src/app/pages/contacts/contacts";
 @import "../../src/app/pages/home/layout/banner";
 @import "../../src/app/pages/home/layout/benefits";
@@ -66,6 +68,8 @@ button:active {
 @import "../../src/app/pages/samples/samples";
 @import "../../src/app/pages/modules/modules";
 @import "../app/pages/help-descs/question/question";
+@import "ngWig";
+
 .page-404{
   .main-container{
     .page-404-content{

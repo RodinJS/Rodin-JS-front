@@ -4,7 +4,7 @@
 import angular from 'angular/index';
 
 // Create the module where our functionality can attach to
-let issuesModule = angular.module('landing.issues', []);
+let issuesModule = angular.module('landing.issue', []);
 
 // Include our UI-Router config settings
 import IssuesConfig from './issues';

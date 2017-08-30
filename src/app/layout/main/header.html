@@ -44,7 +44,7 @@
                                     <a data-ui-sref-active="active" data-ui-sref="landing.question">Questions and Answers</a></li>
                                 </li>
                                 <li>
-                                    <a data-ui-sref-active="active" data-ui-sref="landing.issues">Issue Tracker</a></li>
+                                    <a data-ui-sref-active="active" data-ui-sref="landing.issue">Issue Tracker</a></li>
                                 </li>
                                 <li>
                                     <a data-ui-sref-active="active" data-ui-sref="landing.feature">Feature Requests</a></li>
@@ -52,7 +52,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="dropdown account-dropdown" uib-dropdown auto-close="outsideClick" ng-if="$ctrl.pagesSection2.length > 0">
+                    <li class="dropdown account-dropdown" data-uib-dropdown auto-close="outsideClick" ng-if="$ctrl.pagesSection2.length > 0">
                         <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown"
                            role="button"
                            aria-haspopup="true" aria-expanded="false">
@@ -77,9 +77,6 @@
                 </li>
                 <li class="hidden-xs">
                     <a ui-sref="landing.register"  style="font-size:16px">Sign up</a>
-<!--
-                    <a href="" ng-click="$ctrl.scrollToSignUp()" class="btn sign-up-btn">Sign up</a>
--->
                 </li>
             </ul>
             <div class="account-action" ng-if="$ctrl.user">

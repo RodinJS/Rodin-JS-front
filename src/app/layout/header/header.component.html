@@ -1,0 +1,196 @@
+<nav class="navbar navbar-default main-navbar" ng-class="{'navbar-fixed-top':$ctrl.isLanding}">
+    <div class="header-background" ng-if="!$ctrl.isLanding"></div>
+    <div class="container">
+        <div class="row header-row">
+            <div class="navbar-header col-md-2 col-sm-2">
+                <div class="row">
+                    <button type="button"
+                            id="burger-button"
+                            class="navbar-toggle "
+                            data-toggle="collapse"
+                            data-target="#HeaderNavber"
+                            ng-class="$ctrl.collapse ? '' : 'collapsed'"
+                            ng-click="$ctrl.collapse = !$ctrl.collapse"
+                            aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar top"></span>
+                        <span class="icon-bar middle"></span>
+                        <span class="icon-bar bottom"></span>
+                    </button>
+                    <a ui-sref="landing.login" class="visible-xs-inline-block mobile-login"
+                       ng-if="!$ctrl.user">Login</a>
+                    <a class="navbar-brand" ui-sref="home.landing">
+                        <img alt="Rodin" src="images/landing/general/logo.png" class="img-responsive header-logo">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-10 col-sm-10"
+                 id="bs-example-navbar-collapse-1">
+                <div class="row">
+                    <div class="main-header-page-section col-sm-8 col-md-8" ng-class="{'navbar-center': !$ctrl.user}">
+                        <div class="row">
+                            <ul class="nav navbar-nav main-header-bar">
+                                <div ng-repeat="menus in $ctrl.menusList | orderBy : 'position'"
+                                     ng-style="{display: 'inline-flex'}">
+                                    <li data-ng-if="menus.menuitems.length === 0" class="drop-more">
+                                        <a ng-if="menus.href" ng-href="{{menus.href}}">{{menus.name}}</a>
+                                    </li>
+                                    <li data-ng-if="menus.menuitems.length > 0" class="dropdown more-drop" data-uib-dropdown
+                                        auto-close="outsideClick">
+                                        <a class="" id="{{menus.slug}}" data-uib-dropdown-toggle>
+                                        <span class="hidden-xs">{{menus.name}} <i
+                                                class="rd rd-angle-down"></i></span>
+                                        </a>
+                                        <ul class="dropdown-menu header-dropdown"
+                                            uib-dropdown-menu>
+                                            <ul class="account-action-list">
+                                                <li ng-repeat="item in menus.menuitems | orderBy : 'position'">
+                                                    <a data-ui-sref-active="active" ng-href="{{item.href}}">{{item.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </ul>
+                                    </li>
+                                </div>
+                                <div style="display: inline-flex" ng-if="$ctrl.pagesSection.length > 0">
+                                    <li class="dropdown more-drop" data-uib-dropdown auto-close="outsideClick">
+                                        <a class="" id="more" data-uib-dropdown-toggle>
+                                        <span class="hidden-xs">More <i
+                                                class="rd rd-angle-down"></i></span>
+                                        </a>
+                                        <ul class="dropdown-menu header-dropdown"
+                                            uib-dropdown-menu>
+                                            <ul class="account-action-list">
+                                                <li ng-repeat="page in $ctrl.pagesSection ">
+                                                    <a data-ui-sref-active="active">{{page.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </ul>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div ng-if="!$ctrl.user" class="col-md-4 col-sm-4 actions-container">
+                        <div class="row">
+                            <ul class="nav navbar-nav navbar-right main-header-actions">
+                                <li class="hidden-xs">
+                                    <a ui-sref="landing.login" class=" main-header-login">Login</a>
+                                </li>
+                                <li>
+                                    <a ui-sref="landing.register" id="idl"
+                                       class="btn sign-up-btn sign-up-btn-non-sticky">Sign Up</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="account-action text-right col-md-4 col-sm-4" ng-if="$ctrl.user">
+                        <!--ng-class="{'col-md-4': $ctrl.user, 'col-md-3': $ctrl.user}" >-->
+                        <div class="row">
+                            <ul class="user-dropdown">
+                                <li class="dropdown notifi-dropdown" uib-dropdown auto-close="outsideClick">
+                                    <a href="" ng-if="$ctrl.notifications.length > 0"
+                                       class="btn-notifi new dropdown-toggle btn-notifi" uib-dropdown-toggle
+                                       role="button">
+                                        <i class="rd rd-notifi"></i>
+                                    </a>
+                                    <a href="" ng-if="$ctrl.notifications.length <= 0"
+                                       class="btn-notifi dropdown-toggle btn-notifi"
+                                       uib-dropdown-toggle role="button">
+                                        <i class="rd rd-notifi"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-new notifi-dropdown-menu" uib-dropdown-menu>
+                                        <div class="notification-wrapper">
+                                            <h5 class="pull-left">Notifications</h5>
+                                            <small class="pull-right">
+                                                <a href="" ng-click="$ctrl.deleteNotification()"
+                                                   style="font-size: 11px;">
+                                                    Delete all
+                                                </a>
+                                            </small>
+                                            <div style="clear:both"></div>
+                                        </div>
+                                        <div data-ng-if="$ctrl.notifications.length > 0">
+                                            <ul rd-scroll total-notifications="{{$ctrl.notifications.length}}"
+                                                style="top: 150px;"
+                                                class="notifi-list"
+                                                id="notifi-list">
+                                                <li ng-repeat="(index, notification) in $ctrl.notifications"
+                                                    class="notifi-list-element"
+                                                    ng-click="$ctrl.updateNotification(notification, index, $event)"
+                                                    ng-class="notification.typeClass +' '+ notification.readClass">
+                                                    <a href="">
+                                                        <p compile="notification.label"></p>
+                                                        <span class="notifi-date">{{notification.date}}</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div ng-if="$ctrl.notifications.length <= 0" class="notification-list">
+                                            <span class="no-notifications">No new notifications</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown account-dropdown" data-uib-dropdown auto-close="outsideClick">
+                                    <a href="" class="btn-account" id="accountLabel" data-uib-dropdown-toggle>
+                                        <span class="hidden-xs">{{$ctrl.user.username}}</span>
+                                        <span class="accout-img-wrapper">
+                                            <span class="account-img"
+                                                  style="background-image: url(/images/general/avatar.png);"></span>
+                                        </span>
+                                        <i class="rd rd-angle-down hidden-xs"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-new dropdown-menu-edit account-dropdown-menu"
+                                         uib-dropdown-menu>
+                                        <ul class="account-action-list">
+                                            <li>
+                                                <a data-ui-sref-active="active" data-ui-sref="app.profile">Edit
+                                                    Profile</a>
+                                            </li>
+                                            <li>
+                                                <a data-ui-sref-active="active" href="" data-ng-click="$ctrl.logout()"
+                                                   class="signout-link">Sign Out</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side-bar">
+                <div class="side-bar-background"></div>
+                <div id="mySidenav" class="sidenav">
+                    <ul class="sidebar-hidden-content">
+                        <li ng-if="$ctrl.user">
+                            <a data-ui-sref-active="active" data-ui-sref="app.dashboard">Dashboard</a>
+                        </li>
+                        <div ng-repeat="menus in $ctrl.menusList | orderBy : 'position'">
+                            <li data-ng-if="menus.menuitems.length === 0">
+                                <a ng-if="menus.href" ng-href="{{menus.href}}">{{menus.name}}</a>
+                            </li>
+                            <li data-ng-if="menus.menuitems.length > 0" class="dropdown drop-more">
+                                <a>{{menus.name}} <i class="rd rd-angle-down"></i></a>
+                                <ul class="dropdown-menu dropdown-header">
+                                    <li class="" ng-repeat="item in menus.menuitems | orderBy : 'position'">
+                                        <a data-ui-sref-active="active" ng-href="{{item.href}}">{{item.name}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                        <li class="text-center signup-content" ng-if="!$ctrl.user">
+                            <a ui-sref="landing.register"
+                               class="btn sign-up-btn sign-up-btn-non-sticky">Sign Up</a>
+                        </li>
+                        <li class="text-center signout-content" ng-if="$ctrl.user">
+                            <a data-ui-sref-active="active" href="" data-ng-click="$ctrl.logout()"
+                               class="btn sign-up-btn sign-up-btn-non-sticky">Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-backdrop"></div>
+</nav>
+

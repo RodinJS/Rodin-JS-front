@@ -56,7 +56,6 @@ class AppHeaderCtrl {
             SocketService.on('projectBuild', (data)=> this.showSocketResponse(data));
             SocketService.on('gitSync', (data)=> this.showSocketResponse(data));
         }
-
     }
 
     setPagesDropdown() {

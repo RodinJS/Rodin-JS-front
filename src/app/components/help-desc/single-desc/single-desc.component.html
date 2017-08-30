@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="container" ng-if="!$ctrl.creationPage">
+        <div class="container" ng-if="!$ctrl.creationPage && !$ctrl.editPage">
             <div class="col-md-12">
                 <div class="tag-section">
                     <ul>
@@ -47,7 +47,7 @@
                              alt="">
                     </div>
                     <div class="col-md-11 text-section">
-                        <p>{{$ctrl.question.user.firstName}} {{$ctrl.question.user.lastName}}</p>
+                        <p>{{$ctrl.question.user.firstName}}</p>
                         <small>{{$ctrl.question.createdAt | date:'medium'}}</small>
                         <div class="col-md-12 message">
                             <div class="message-background"></div>
@@ -57,21 +57,32 @@
                                         <p>{{$ctrl.question.subject}}</p>
                                     </div>
                                 </section>
-                                <!--<section class="col-md-1">-->
-                                    <!--<div class="row">-->
-                                        <!--<ul class="vote-panel">-->
-                                            <!--<li ng-click="$ctrl.vote($ctrl.question.id, 1, index)"-->
-                                                <!--disabled="{{inProgress}}">-->
-                                                <!--<span class="icon-vote-up"></span></li>-->
-                                            <!--<li class="count">{{$ctrl.question.rating}}</li>-->
-                                            <!--<li ng-click="$ctrl.vote($ctrl.question.id, -1, index)"-->
-                                                <!--disabled="{{inProgress}}">-->
-                                                <!--<span class="icon-vote-down"></span></li>-->
-                                        <!--</ul>-->
+                                <section class="col-md-1">
+                                    <div class="row">
+                                        <ul class="vote-panel">
+                                            <li class="settings" ng-if="$ctrl.isEditable" uib-dropdown>
+                                                    <a class="" id="settings"   uib-dropdown-toggle>
+                                                        <i class="icon icon-settings more-settings"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu settings-dropdown" uib-dropdown-menu>
+                                                        <ul class="settings-list">
+                                                            <li ng-click="$ctrl.switchToEdit()"><a >Edit</a></li>
+                                                            <li ng-click="$ctrl.open('remove')"><a >Remove</a></li>
+                                                        </ul>
+                                                    </ul>
+                                            </li>
+                                            <li ng-click="$ctrl.vote($ctrl.question.id, 1, index)"
+                                                disabled="{{inProgress}}">
+                                                <span class="icon-vote-up" ng-class="{'voted': $ctrl.question.voted.vote == 1}"></span></li>
+                                            <li class="count">{{$ctrl.question.rating}}</li>
+                                            <li ng-click="$ctrl.vote($ctrl.question.id, -1, index)"
+                                                disabled="{{inProgress}}">
+                                                <span class="icon-vote-down" ng-class="{'voted': $ctrl.question.voted.vote == -1}"></span></li>
+                                        </ul>
 
-                                    <!--</div>-->
+                                    </div>
 
-                                <!--</section>-->
+                                </section>
 
                                 <div class="tag-section single-tag-section col-md-12" ng-if="$ctrl.question.tags.length > 0">
                                     <div class="row">
@@ -82,8 +93,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 question-description">
-                                    <div class="row">
-                                        {{$ctrl.question.preview}}
+                                    <div class="row answer-area">
+                                        <ng-wig  style="width: 100px;" ng-model="$ctrl.question.preview" ng-disabled="true"></ng-wig>
+
+                                        <!--{{$ctrl.question.preview}}-->
                                     </div>
                                 </div>
                             </div>
@@ -100,14 +113,15 @@
                         </div>
                     </div>
                     <div class="col-md-11 text-section">
-                        <p>{{message.createdBy.firstName}} {{message.createdBy.lastName}}</p>
+                        <p>{{message.createdBy.firstName}}</p>
                         <small>{{message.createdAt | date:'medium'}}</small>
-                        <div class="col-md-12 message">
+                        <div class="col-md-12 message message-answer">
                             <div class="message-background"></div>
                             <div class="row message-content">
                                 <section class="col-md-11">
                                     <div class="row">
-                                        <p>{{message.body}}</p>
+                                        <ng-wig style="width: 100px;"   style="width: 100px;" data-ng-disabled="true" ng-model="message.body"></ng-wig>
+                                        <!--<p>{{message.body}}</p>-->
                                     </div>
                                 </section>
                             </div>
@@ -124,13 +138,15 @@
                     </div>
                 </div>
                 <div class="col-md-11">
-                    <div class="row">
-                        <textarea class="answer-question-section" ng-model="$ctrl.answer" placeholder="Type your answer here..." ng-keyup="$ctrl.autoResize($event)"></textarea>
-                    </div>
+                    <form novalidate name="answerForm" class="main-form post-answer">
+                        <div class="row question-area" ng-class="{'has-error': answerForm.answer.$viewValue.length === 0 && answerForm.submitted}">
+                            <ng-wig placeholder="Type your answer here..." ng-model="$ctrl.answer" name="answer" class="answer-wig" ng-class="{'wig-focused':answerForm.answer.focused}" required></ng-wig>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-md-12 action-section text-center">
-                    <a class="btn-back" ui-sref="{{'landing.' + $ctrl.type.slice(0, -1)}}">Back</a>
-                    <button class="btn-answer" ng-click="$ctrl.submitAnswer()">{{$ctrl.currentUser ? 'Post':'Sing in and post'}}</button>
+                    <a class="btn-back"  ng-click="$ctrl.goBack()">Back</a>
+                    <button class="btn-answer" ng-click="$ctrl.submitAnswer(); answerForm.submitted = true">{{$ctrl.currentUser ? 'Post':'Sign in and post'}}</button>
                 </div>
             </div>
         </div>
@@ -145,25 +161,81 @@
                 </div>
                 <div class="col-md-11">
                     <p class="question-type">{{$ctrl.config.type}}</p>
-                    <form ng-submit="askQuestion()" class="ask-form">
-                        <div class="form-group">
-                            <textarea type="text" class="question-section" style="height: 50px;" ng-model="$ctrl.post.subject" ng-keyup="$ctrl.autoResize($event)"
+                    <form class="ask-form main-form" name="createQuestion" novalidate>
+                        <div class="form-group" data-ng-class="{
+                         'has-error': (createQuestion | supportFormsValidator:'subject')  == 'invalid',
+                         'has-success': (createQuestion | supportFormsValidator:'subject')  == 'valid',
+                         }">
+                            <textarea rows="4"
+                                      name="subject" required ng-minlength="3" class="question-section form-control" ng-model="$ctrl.post.subject"
+                                      data-ng-focus="createQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
-                        <div class="form-group">
-                            <textarea class="answer-question-section" placeholder="Fill in the details..." ng-keyup="$ctrl.autoResize($event)" ng-model="$ctrl.post.description"></textarea>
+                        <div class="form-group question-area" data-ng-class="{
+                         'has-error': (createQuestion | supportFormsValidator:'description')  == 'invalid',
+                         'has-success': (createQuestion | supportFormsValidator:'description')  == 'valid',
+                         }">
+                                <ng-wig ng-model="$ctrl.post.description" name="description" placeholder="Fill in the details..."></ng-wig>
+                        </div>
+                        <div class="col-md-12 tag-selection">
+                            <div class="row">
+                                <p class="question-type">Tags</p>
+                                <tags-input ng-model="$ctrl.selectedTags" placeholder="Enter tags...">
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="col-md-12 action-section text-center">
+                            <a class="btn-back" ng-click="$ctrl.goBack()">Back</a>
+                            <button class="btn-answer" ng-click="$ctrl.askQuestion(createQuestion)">{{$ctrl.currentUser ? 'Post':'Sign in and post'}}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="container" ng-if="$ctrl.editPage">
+            <div class="col-md-12 answer-question">
+                <div class="content" style="margin-bottom: 30px;">
+                    <h2>{{$ctrl.config.title}}</h2>
+                </div>
+                <div class="col-md-1">
+                    <img class="img-circle img-responsive" src="/images/question/incognito.png"
+                         alt="">
+                </div>
+                <div class="col-md-11">
+                    <p class="question-type">{{$ctrl.config.type}}</p>
+                    <form name="updateQuestion" class="ask-form main-form" novalidate>
+                        <div class="form-group" data-ng-class="{
+                         'has-error': (updateQuestion | supportFormsValidator:'subject')  == 'invalid',
+                         'has-success': (updateQuestion | supportFormsValidator:'subject')  == 'valid',
+                         }">
+                            <textarea required ng-minlength="3" rows="4"
+                                      name="subject" class="question-section form-control"
+                                      data-ng-change="$ctrl.updateSubject($ctrl.question.subject)"
+                                      ng-model="$ctrl.question.subject"
+                                      data-ng-focus="updateQuestion.subject.focused = true"
+                                      placeholder="{{$ctrl.config.placeholder}}"></textarea>
+                        </div>
+                        <div class="form-group question-area" data-ng-class="{
+                         'has-error': (updateQuestion | supportFormsValidator:'preview')  == 'invalid',
+                         'has-success': (updateQuestion | supportFormsValidator:'preview')  == 'valid',
+                         }">
+                            <ng-wig ng-model="$ctrl.question.preview" placeholder="Fill in the details..." name="preview" data-ng-change="$ctrl.updatePreview($ctrl.question.preview)"></ng-wig>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-offset-1 col-md-11 tag-selection">
                     <p class="question-type">Tags</p>
-                    <tags-input ng-model="$ctrl.selectedTags" placeholder="Enter tags...">
+                    <tags-input ng-model="$ctrl.question.tags"
+                                on-tag-adding="$ctrl.onAddTags($tag)"
+                                on-tag-removed="$ctrl.onRemoveTag($tag)"
+                                placeholder="Enter tags...">
                     </tags-input>
                 </div>
                 <div class="col-md-12 action-section text-center">
-                    <a class="btn-back" ui-sref="{{'landing.' + $ctrl.type.slice(0, -1)}}">Back</a>
-                    <button class="btn-answer" ng-click="$ctrl.submitAnswer()">{{$ctrl.currentUser ? 'Post':'Sing in and post'}}
-                    </button>
+                    <a class="btn-back" ng-click="$ctrl.goBack()">Back</a>
+                    <button class="btn-answer" ng-click="$ctrl.updateQuestion()">Update</button>
                 </div>
 
             </div>
@@ -171,5 +243,27 @@
     </div>
     <div class="loaderContent" data-ng-if="$ctrl.showLoader">
         <div class="spriteLoader"></div>
+    </div>
+</div>
+
+<div class="modal" close-modal="remove"
+     ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <p style="color: #aaaaaa;font-size: 16px;">Remove Question</p>
+        </div>
+        <div class="modal-body">
+            <p style="color: #aaaaaa;font-size: 14px;">Are you sure you want to remove this conversation ?</p>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <div class="text-center">
+                    <button type="button" class="btn btn-positive"
+                            data-ng-click="$ctrl.deleteQuestion()">Remove
+                    </button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.remove = false">Cancel</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

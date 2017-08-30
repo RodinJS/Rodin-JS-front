@@ -57,7 +57,7 @@ const AppConstants = {
         PUBLISH: `${window.location.protocol}//${window.extractDomain()}`,
         EDITOR: `${window.location.protocol}//editor.${window.extractDomain()}/`,
         RECORDIP: '138.197.41.119',
-        FB: '214577345643265',
+        FB: '1981479458801362',
         GITHUB: 'd2030c37902fa3d4d0c7',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.io/list.json',

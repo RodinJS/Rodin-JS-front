@@ -1,0 +1,68 @@
+.question-area {
+  .ng-wig {
+    border: 1px solid #045190;
+    border-radius: 6px;
+    background: #0F1F35;
+    padding: 10px 7px;
+    min-height: 122px;
+    color: white;
+    #ng-wig-editable {
+      &:before {
+        font-size: 18px;
+        color: $placeholder-color;
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+    .nw-toolbar {
+      display: none;
+    }
+    .nw-editor {
+      background: #0F1F35;
+      height: 98px;
+      pre {
+        font-size: 8.1pt !important;
+      }
+    }
+    .nw-editor-container {
+      border: none;
+    }
+  }
+}
+
+.answer-area, .message-content {
+  .ng-wig {
+    border: none;
+    background: none;
+    padding: 0px;
+    &:focus {
+      outline: none;
+    }
+    .nw-toolbar {
+      display: none;
+    }
+    .nw-editor {
+      color: #DEDEDE;
+      height: 100%;
+      background: none;
+      pre {
+        font-size: 8.1pt !important;
+      }
+    }
+    .ng-wig-editable {
+
+    }
+    .nw-editor-container {
+      border: none;
+    }
+  }
+
+}
+
+.has-error {
+  .ng-wig {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  }
+}
