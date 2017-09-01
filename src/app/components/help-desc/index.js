@@ -73,19 +73,19 @@ class HelpDescComponentController {
         let downvoted = vote === -1;
         let voteType = vote === 1 ? 1: -1;
         if (upvoted && this.response.items[index].voted) {
-            switch (this.response.items[index].voted) {
+            switch (this.response.items[index].voted.vote) {
                 case 0:
                     this.response.items[index].rating += vote;
-                    this.response.items[index].voted = vote;
+                    this.response.items[index].voted.vote = vote;
                     break;
                 case 1:
                     this.response.items[index].rating -= 1;
-                    this.response.items[index].voted = 0;
+                    this.response.items[index].voted.vote = 0;
                     vote = 0;
                     break;
                 case -1:
                     this.response.items[index].rating += 2;
-                    this.response.items[index].voted = 1;
+                    this.response.items[index].voted.vote = 1;
                     vote = 1;
                     break;
                 default:
@@ -93,19 +93,19 @@ class HelpDescComponentController {
                     break
             }
         } else if (downvoted && this.response.items[index].voted) {
-            switch (this.response.items[index].voted) {
+            switch (this.response.items[index].voted.vote) {
                 case 0:
                     this.response.items[index].rating += vote;
-                    this.response.items[index].voted = vote;
+                    this.response.items[index].voted.vote = vote;
                     break;
                 case 1:
                     this.response.items[index].rating -= 2;
-                    this.response.items[index].voted = -1;
+                    this.response.items[index].voted.vote = -1;
                     vote = -1;
                     break;
                 case -1:
                     this.response.items[index].rating += 1;
-                    this.response.items[index].voted = 0;
+                    this.response.items[index].voted.vote = 0;
                     vote = 0;
                     break;
                 default:

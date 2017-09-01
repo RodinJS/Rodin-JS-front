@@ -61,10 +61,10 @@
                                         <div class="row">
                                             <ul class="vote-panel">
                                                 <li ng-click="$ctrl.vote(message.id, 1, index)" disabled="{{inProgress}}">
-                                                    <span class="icon-vote-up"></span></li>
+                                                    <span class="icon-vote-up" ng-class="{'voted': message.voted.vote == 1}"></span></li>
                                                 <li class="count">{{message.rating}}</li>
                                                 <li ng-click="$ctrl.vote(message.id, -1, index)" disabled="{{inProgress}}">
-                                                    <span class="icon-vote-down"></span></li>
+                                                    <span class="icon-vote-down" ng-class="{'voted': message.voted.vote == -1}"></span></li>
                                             </ul>
                                         </div>
                                     </section>
