@@ -35,8 +35,7 @@
                                     <li data-ng-if="menus.menuitems.length === 0" class="drop-more">
                                         <a ng-if="menus.href" ng-href="{{menus.href}}">{{menus.name}}</a>
                                     </li>
-                                    <li data-ng-if="menus.menuitems.length > 0" class="dropdown more-drop" data-uib-dropdown
-                                        auto-close="outsideClick">
+                                    <li data-ng-if="menus.menuitems.length > 0" class="dropdown more-drop" data-uib-dropdown>
                                         <a class="" id="{{menus.slug}}" data-uib-dropdown-toggle>
                                         <span class="hidden-xs">{{menus.name}} <i
                                                 class="rd rd-angle-down"></i></span>
@@ -52,7 +51,7 @@
                                     </li>
                                 </div>
                                 <div style="display: inline-flex" ng-if="$ctrl.pagesSection.length > 0">
-                                    <li class="dropdown more-drop" data-uib-dropdown auto-close="outsideClick">
+                                    <li class="dropdown more-drop" data-uib-dropdown>
                                         <a class="" id="more" data-uib-dropdown-toggle>
                                         <span class="hidden-xs">More <i
                                                 class="rd rd-angle-down"></i></span>
@@ -87,7 +86,7 @@
                         <!--ng-class="{'col-md-4': $ctrl.user, 'col-md-3': $ctrl.user}" >-->
                         <div class="row">
                             <ul class="user-dropdown">
-                                <li class="dropdown notifi-dropdown" uib-dropdown auto-close="outsideClick">
+                                <li class="dropdown notifi-dropdown" uib-dropdown>
                                     <a href="" ng-if="$ctrl.notifications.length > 0"
                                        class="btn-notifi new dropdown-toggle btn-notifi" uib-dropdown-toggle
                                        role="button">
@@ -130,7 +129,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="dropdown account-dropdown" data-uib-dropdown auto-close="outsideClick">
+                                <li class="dropdown account-dropdown" data-uib-dropdown>
                                     <a href="" class="btn-account" id="accountLabel" data-uib-dropdown-toggle>
                                         <span class="hidden-xs">{{$ctrl.user.username}}</span>
                                         <span class="accout-img-wrapper">
