@@ -43,7 +43,7 @@
                             <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
                             <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                         </li>
-                        <li class="dropdown" data-uib-dropdown auto-close="outsideClick">
+                        <li class="dropdown" data-uib-dropdown>
                             <a href="" class="btn-account" id="support" data-uib-dropdown-toggle>
                                 <span class="hidden-xs">Support <i class="rd rd-angle-down"></i></span>
                             </a>
@@ -61,7 +61,7 @@
                                 </ul>
                             </ul>
                         </li>
-                        <li class="dropdown" uib-dropdown auto-close="outsideClick"  ng-if="$ctrl.pagesSection2.length > 0">
+                        <li class="dropdown" uib-dropdown ng-if="$ctrl.pagesSection2.length > 0">
                             <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">
                                 More <i class="rd rd-angle-down"></i>

@@ -311,7 +311,7 @@ const AppConstants = {
     },
     FORMERRORS: {
         register: {
-            username: 'Username must contain at least 3 characters',
+            username: 'Username must contain at least 3 characters and not more then 31',
             email: 'Invalid email',
             password: 'Password must contain at least 8 characters, including numbers and letters',
             confirmPassword: 'Passwords do not match',
