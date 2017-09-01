@@ -2,7 +2,7 @@
  * Created by kh.levon98 on 13-Sep-16.
  */
 
-function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $urlRouterProvider, AppConstants, NotificationProvider) {
+function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $urlRouterProvider, AppConstants, NotificationProvider, markedProvider) {
     'ngInject';
 
     RestangularProvider.setBaseUrl(AppConstants.API);
@@ -70,6 +70,25 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
         replaceMessage: false,
         maxCount: 5,
     });
+
+    markedProvider.setOptions({
+        gfm: true,
+        tables: true,
+        sanitize: true,
+        highlight: function (code, lang) {
+            if (lang) {
+                return hljs.highlight(lang, code, true).value;
+            } else {
+                return hljs.highlightAuto(code).value;
+            }
+        }
+    });
+
+    // // highlight config
+    // hljsServiceProvider.setOptions({
+    //     // replace tab with 4 spaces
+    //     tabReplace: '    '
+    // });
 
 }
 

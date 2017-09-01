@@ -5,6 +5,7 @@
 class SingleDescController {
     constructor($scope, $element, $attrs, $state, HelpDescService, User, Notification) {
         'ngInject';
+        this.editor1 = '';
         this.creationPage = this.id === 'create';
         this.editPage = false;
         this.currentUser = User.current;

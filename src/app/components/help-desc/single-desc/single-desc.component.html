@@ -171,11 +171,14 @@
                                       data-ng-focus="createQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
-                        <div class="form-group question-area" data-ng-class="{
-                         'has-error': (createQuestion | supportFormsValidator:'description')  == 'invalid',
-                         'has-success': (createQuestion | supportFormsValidator:'description')  == 'valid',
-                         }">
-                                <ng-wig ng-model="$ctrl.post.description" name="description" placeholder="Fill in the details..."></ng-wig>
+                        <div class="form-group question-area">
+                            <textarea 	name="editor1" class="content-box"
+                                         ng-model="$ctrl.editor1"
+                                         markdown-editor="{'iconlibrary': 'fa', addExtraButtons: true, resize: 'vertical'}"
+                                         rows="10" >
+					</textarea>
+                            <div marked="$ctrl.editor1" class="markdown outline" style="padding: 20px">
+                                <!--<ng-wig ng-model="$ctrl.post.description" name="description" placeholder="Fill in the details..."></ng-wig>-->
                         </div>
                         <div class="col-md-12 tag-selection">
                             <div class="row">
@@ -217,10 +220,7 @@
                                       data-ng-focus="updateQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
-                        <div class="form-group question-area" data-ng-class="{
-                         'has-error': (updateQuestion | supportFormsValidator:'preview')  == 'invalid',
-                         'has-success': (updateQuestion | supportFormsValidator:'preview')  == 'valid',
-                         }">
+                        <div class="form-group question-area">
                             <ng-wig ng-model="$ctrl.question.preview" placeholder="Fill in the details..." name="preview" data-ng-change="$ctrl.updatePreview($ctrl.question.preview)"></ng-wig>
                         </div>
                     </form>
