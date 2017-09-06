@@ -367,6 +367,9 @@
             top: 15px;
             left: 10px;
           }
+          &:hover {
+            background-color: rgba(white, .8);
+          }
           &:last-child {
             a {
               border-bottom: none;
@@ -381,9 +384,6 @@
           border-bottom: 1px solid rgba(151, 151, 151, 0.18);
           //background-color: rgba(#09192e, .85);
           transition: all .3s;
-          &:hover {
-            background-color: rgba(white, .1);
-          }
         }
         p {
           color: white;

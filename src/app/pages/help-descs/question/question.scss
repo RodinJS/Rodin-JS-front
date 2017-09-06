@@ -62,24 +62,23 @@ a {
     display: inline-block;
     list-style-type: none;
     li {
-      border: 1px solid #4f5864;
-      border-radius: 6px;
-      padding: 6px 12px;
       color: #AAAAAA;
       font-family: "Roboto", sans-serif;
       display: inline-block;
-      margin-right: 8px;
-      margin-top: 8px;
       cursor: pointer;
       font-size: 14px;
+      margin-top: 8px;
+      margin-right: 8px;
       a {
+        border: 1px solid #4f5864;
+        border-radius: 6px;
+        padding: 6px 12px;
         color: #AAAAAA;
       }
       &:hover {
-        color: white;
-        background: #045190;
-        border: 1px solid #045190;
         a {
+          background: #045190;
+          border: 1px solid #045190;
           text-decoration: none;
           color: white;
         }
@@ -102,7 +101,7 @@ a {
   padding-top: 15px;
   padding-bottom: 15px;
   .vote-panel {
-    z-index: 99999;
+    z-index: 1;
     text-align: center;
     list-style: none;
     position: absolute;
@@ -157,7 +156,7 @@ a {
       padding: 15px;
       .question-subject {
         p {
-          font-size: 32px !important;
+          font-size: 24px !important;
           font-weight: bold;
           word-break: break-all;
           a {
@@ -292,14 +291,14 @@ a {
     background: #0F1F35;
     padding: 10px 15px;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     //resize: vertical;
     overflow: hidden;
     transition: height 100ms linear;
     box-sizing: border-box;
     resize: none;
     &::-webkit-input-placeholder {
-      font-size: 18px;
+      font-size: 16px;
       color: $placeholder-color;
     }
     &:focus {
@@ -325,7 +324,7 @@ a {
     overflow: hidden;
 
     &::-webkit-input-placeholder {
-      font-size: 18px;
+      font-size: 16px;
       color: $placeholder-color;
     }
     &:focus {
@@ -364,14 +363,14 @@ a {
           outline: none !important;
         }
         &::-webkit-input-placeholder {
-          font-size: 18px;
+          font-size: 16px;
           color: $placeholder-color;
 
         }
 
       }
       &::-webkit-input-placeholder {
-        font-size: 18px;
+        font-size: 16px;
         color: $placeholder-color;
       }
 
