@@ -88,6 +88,8 @@ class ProfileCtrl {
 
         }
 
+        console.log(this.currentUser);
+
     }
 
     showGitSyncModal() {
@@ -137,7 +139,8 @@ class ProfileCtrl {
         let currentUser = {
             email: this.currentUser.email,
             profile: this.currentUser.profile,
-            username: this.currentUser.username
+            username: this.currentUser.username,
+            notification:this.currentUser.notification
         };
 
 
