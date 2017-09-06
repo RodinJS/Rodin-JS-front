@@ -8,11 +8,11 @@ function Compile($compile) {
 
     return function (scope, element, attrs) {
         scope.$watch((scope) => {
-            return scope.$eval(attrs.compile);
-        }, (value) => {
-            element.html(value);
-            $compile(element.contents())(scope);
-        }
+                return scope.$eval(attrs.compile);
+            }, (value) => {
+                element.html(value);
+                $compile(element.contents())(scope);
+            }
         );
     };
 }
@@ -30,7 +30,7 @@ function limitTo() {
                 let pastedData = e.originalEvent.clipboardData.getData('text');
                 let totalSymbolsLength = elem[0].value.length + pastedData.length;
 
-                if (totalSymbolsLength >= limit) {
+                if (totalSymbolsLength > limit) {
                     e.preventDefault();
                     return false;
                 }
@@ -69,17 +69,17 @@ function ShowAuthed(User) {
                 // If user detected
                 if (val) {
                     if (attrs.showAuthed === 'true') {
-                        element.css({ display: 'inherit' });
+                        element.css({display: 'inherit'});
                     } else {
-                        element.css({ display: 'none' });
+                        element.css({display: 'none'});
                     }
 
                     // no user detected
                 } else {
                     if (attrs.showAuthed === 'true') {
-                        element.css({ display: 'none' });
+                        element.css({display: 'none'});
                     } else {
-                        element.css({ display: 'inherit' });
+                        element.css({display: 'inherit'});
                     }
                 }
             });
@@ -247,6 +247,20 @@ function MultiSelect() {
         },
     };
 }
+
+function AutoGrow() {
+    return function (scope, element, attr) {
+        let update = function () {
+            element.css("height", "auto");
+            element.css("height", element[0].scrollHeight + "px");
+        };
+        scope.$watch(attr.ngModel, function () {
+            update();
+        });
+        attr.$set("ngTrim", "false");
+    }
+}
+
 export default {
     limitTo,
     Compile,
@@ -256,5 +270,6 @@ export default {
     CloseModal,
     Codify,
     ConfirmPassword,
-	RdScroll,
+    RdScroll,
+    AutoGrow,
 };

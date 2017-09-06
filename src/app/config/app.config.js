@@ -1,8 +1,7 @@
 /**
  * Created by kh.levon98 on 13-Sep-16.
  */
-
-function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $urlRouterProvider, AppConstants, NotificationProvider, markedProvider) {
+function AppConfig(RestangularProvider, $stateProvider, $locationProvider, $urlRouterProvider, AppConstants, NotificationProvider, markedProvider) {
     'ngInject';
 
     RestangularProvider.setBaseUrl(AppConstants.API);
@@ -12,38 +11,38 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
         id: '_id',
     });
 
-    if (AppConstants.env == 'prod' || AppConstants.env == 'dev' ||  AppConstants.env == 'stage' ||  AppConstants.env == 'test') {
+    if (AppConstants.env == 'prod' || AppConstants.env == 'dev' || AppConstants.env == 'stage' || AppConstants.env == 'test') {
         $locationProvider.html5Mode(true);
     }
 
     $stateProvider
-     .state('app', {
-        abstract: true,
-        templateUrl: 'layout/main/app-view.html',
-        resolve: {
-            auth: function (User) {
-                return User.verifyPermission(true);
+        .state('app', {
+            abstract: true,
+            templateUrl: 'layout/main/app-view.html',
+            resolve: {
+                auth: function (User) {
+                    return User.verifyPermission(true);
+                },
             },
-        },
-    })
-     .state('landing', {
-        abstract: true,
-        templateUrl: 'layout/main/app-view.html',
-        resolve: {
-            auth: function (User) {
-                return User.verifyAuth(false);
+        })
+        .state('landing', {
+            abstract: true,
+            templateUrl: 'layout/main/app-view.html',
+            resolve: {
+                auth: function (User) {
+                    return User.verifyAuth(false);
+                },
             },
-        },
-    })
-     .state('home', {
-        abstract: true,
-        templateUrl: 'layout/landing/landing-view.html',
-        resolve: {
-            auth: function (User) {
-                return User.verifyAuth(false);
+        })
+        .state('home', {
+            abstract: true,
+            templateUrl: 'layout/landing/landing-view.html',
+            resolve: {
+                auth: function (User) {
+                    return User.verifyAuth(false);
+                },
             },
-        },
-    });
+        });
 
     $urlRouterProvider.rule(($injector, $location) => {
 
@@ -74,7 +73,11 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
     markedProvider.setOptions({
         gfm: true,
         tables: true,
+        breaks: false,
+        pedantic: false,
         sanitize: true,
+        smartLists: true,
+        smartypants: false,
         highlight: function (code, lang) {
             if (lang) {
                 return hljs.highlight(lang, code, true).value;
@@ -83,12 +86,6 @@ function AppConfig(RestangularProvider, $stateProvider,  $locationProvider, $url
             }
         }
     });
-
-    // // highlight config
-    // hljsServiceProvider.setOptions({
-    //     // replace tab with 4 spaces
-    //     tabReplace: '    '
-    // });
 
 }
 

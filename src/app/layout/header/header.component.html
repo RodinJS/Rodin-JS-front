@@ -36,15 +36,15 @@
                                         <a ng-if="menus.href" ng-href="{{menus.href}}">{{menus.name}}</a>
                                     </li>
                                     <li data-ng-if="menus.menuitems.length > 0" class="dropdown more-drop" data-uib-dropdown>
-                                        <a class="" id="{{menus.slug}}" data-uib-dropdown-toggle>
-                                        <span class="hidden-xs">{{menus.name}} <i
-                                                class="rd rd-angle-down"></i></span>
+                                        <a id="{{menus.slug}}" data-uib-dropdown-toggle>
+                                        <span class="hidden-xs">{{menus.name}} </span>
+                                            <i class="rd rd-angle-down"></i>
                                         </a>
                                         <ul class="dropdown-menu header-dropdown"
                                             uib-dropdown-menu>
                                             <ul class="account-action-list">
                                                 <li ng-repeat="item in menus.menuitems | orderBy : 'position'">
-                                                    <a data-ui-sref-active="active" ng-href="{{item.href}}">{{item.name}}</a>
+                                                    <a data-ui-sref-active="active"  ng-href="{{item.href}}">{{item.name}}</a>
                                                 </li>
                                             </ul>
                                         </ul>
@@ -161,16 +161,13 @@
                 <div class="side-bar-background"></div>
                 <div id="mySidenav" class="sidenav">
                     <ul class="sidebar-hidden-content">
-                        <li ng-if="$ctrl.user">
-                            <a data-ui-sref-active="active" data-ui-sref="app.dashboard">Dashboard</a>
-                        </li>
                         <div ng-repeat="menus in $ctrl.menusList | orderBy : 'position'">
                             <li data-ng-if="menus.menuitems.length === 0">
                                 <a ng-if="menus.href" ng-href="{{menus.href}}">{{menus.name}}</a>
                             </li>
-                            <li data-ng-if="menus.menuitems.length > 0" class="dropdown drop-more">
-                                <a>{{menus.name}} <i class="rd rd-angle-down"></i></a>
-                                <ul class="dropdown-menu dropdown-header">
+                            <li data-ng-if="menus.menuitems.length > 0" data-uib-dropdown class="dropdown drop-more">
+                                <a data-uib-dropdown-toggle id="{{menus.name}}">{{menus.name}} <i class="rd rd-angle-down"></i></a>
+                                <ul class="dropdown-menu dropdown-sidebar" uib-dropdown-menu>
                                     <li class="" ng-repeat="item in menus.menuitems | orderBy : 'position'">
                                         <a data-ui-sref-active="active" ng-href="{{item.href}}">{{item.name}}</a>
                                     </li>

@@ -32,12 +32,9 @@
             <div class="col-md-12">
                 <div class="tag-section">
                     <ul>
-                        <li ng-repeat="tag in $ctrl.tags"><a ng-click="$ctrl.filterByTag(tag.name)"> {{tag.name}}</a>
+                        <li ng-repeat="tag in $ctrl.tags"><a href="" ng-click="$ctrl.filterByTag(tag.name)"> {{tag.name}}</a>
                         </li>
                     </ul>
-                </div>
-                <div class="content">
-                    <!--<h2>{{$ctrl.config.title}}</h2>-->
                 </div>
             </div>
             <div class="col-md-12 message-section">
@@ -61,30 +58,33 @@
                                     <div class="row">
                                         <ul class="vote-panel">
                                             <li class="settings" ng-if="$ctrl.isEditable" uib-dropdown>
-                                                    <a class="" id="settings"   uib-dropdown-toggle>
-                                                        <i class="icon icon-settings more-settings"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu settings-dropdown" uib-dropdown-menu>
-                                                        <ul class="settings-list">
-                                                            <li ng-click="$ctrl.switchToEdit()"><a >Edit</a></li>
-                                                            <li ng-click="$ctrl.open('remove')"><a >Remove</a></li>
-                                                        </ul>
+                                                <a class="" id="settings" uib-dropdown-toggle>
+                                                    <i class="icon icon-settings more-settings"></i>
+                                                </a>
+                                                <ul class="dropdown-menu settings-dropdown" uib-dropdown-menu>
+                                                    <ul class="settings-list">
+                                                        <li ng-click="$ctrl.switchToEdit()"><a>Edit</a></li>
+                                                        <li ng-click="$ctrl.open('remove')"><a>Remove</a></li>
                                                     </ul>
+                                                </ul>
                                             </li>
                                             <li ng-click="$ctrl.vote($ctrl.question.id, 1, index)"
                                                 disabled="{{inProgress}}">
-                                                <span class="icon-vote-up" ng-class="{'voted': $ctrl.question.voted.vote == 1}"></span></li>
+                                                <span class="icon-vote-up"
+                                                      ng-class="{'voted': $ctrl.question.voted.vote == 1}"></span></li>
                                             <li class="count">{{$ctrl.question.rating}}</li>
                                             <li ng-click="$ctrl.vote($ctrl.question.id, -1, index)"
                                                 disabled="{{inProgress}}">
-                                                <span class="icon-vote-down" ng-class="{'voted': $ctrl.question.voted.vote == -1}"></span></li>
+                                                <span class="icon-vote-down"
+                                                      ng-class="{'voted': $ctrl.question.voted.vote == -1}"></span></li>
                                         </ul>
 
                                     </div>
 
                                 </section>
 
-                                <div class="tag-section single-tag-section col-md-12" ng-if="$ctrl.question.tags.length > 0">
+                                <div class="tag-section single-tag-section col-md-12"
+                                     ng-if="$ctrl.question.tags.length > 0">
                                     <div class="row">
                                         <ul>
                                             <li ng-repeat="tag in $ctrl.question.tags"><a
@@ -94,59 +94,65 @@
                                 </div>
                                 <div class="col-md-12 question-description">
                                     <div class="row answer-area">
-                                        <ng-wig  style="width: 100px;" ng-model="$ctrl.question.preview" ng-disabled="true"></ng-wig>
-
-                                        <!--{{$ctrl.question.preview}}-->
+                                        <div marked="$ctrl.escapeHtml($ctrl.question.preview)" class="markdown ">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div ng-repeat="message in $ctrl.question.threads" class="col-md-12 message-section">
-                <div class="row">
-                    <div class="col-md-1">
-                        <div class="row">
-                            <img class="img-circle img-responsive profile-image pull-right" src="/images/question/incognito.png"
-                                 alt="">
+                <div ng-repeat="message in $ctrl.question.threads" class="col-md-12 message-section">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="row">
+                                <img class="img-circle img-responsive profile-image pull-right"
+                                     src="/images/question/incognito.png"
+                                     alt="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-11 text-section">
-                        <p>{{message.createdBy.firstName}}</p>
-                        <small>{{message.createdAt | date:'medium'}}</small>
-                        <div class="col-md-12 message message-answer">
-                            <div class="message-background"></div>
-                            <div class="row message-content">
-                                <section class="col-md-11">
-                                    <div class="row">
-                                        <ng-wig style="width: 100px;"   style="width: 100px;" data-ng-disabled="true" ng-model="message.body"></ng-wig>
-                                        <!--<p>{{message.body}}</p>-->
-                                    </div>
-                                </section>
+                        <div class="col-md-11 text-section">
+                            <p>{{message.createdBy.firstName}}</p>
+                            <small>{{message.createdAt | date:'medium'}}</small>
+                            <div class="col-md-12 message message-answer">
+                                <div class="message-background"></div>
+                                <div class="row message-content">
+                                    <section class="col-md-11">
+                                        <div class="row">
+                                            <div marked="$ctrl.escapeHtml(message.body)" class="markdown "></div>
+                                        </div>
+                                    </section>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12 answer-question">
-                <h3>Your Answer</h3>
-                <div class="col-md-1">
-                    <div class="row">
-                        <img class="img-circle img-responsive profile-image" src="/images/question/incognito.png"
-                             alt="">
-                    </div>
-                </div>
-                <div class="col-md-11">
-                    <form novalidate name="answerForm" class="main-form post-answer">
-                        <div class="row question-area" ng-class="{'has-error': answerForm.answer.$viewValue.length === 0 && answerForm.submitted}">
-                            <ng-wig placeholder="Type your answer here..." ng-model="$ctrl.answer" name="answer" class="answer-wig" ng-class="{'wig-focused':answerForm.answer.focused}" required></ng-wig>
+                <div class="col-md-12 answer-question">
+                    <h3>Your Answer</h3>
+                    <div class="col-md-1">
+                        <div class="row">
+                            <img class="img-circle img-responsive profile-image" src="/images/question/incognito.png"
+                                 alt="">
                         </div>
-                    </form>
-                </div>
-                <div class="col-md-12 action-section text-center">
-                    <a class="btn-back"  ng-click="$ctrl.goBack()">Back</a>
-                    <button class="btn-answer" ng-click="$ctrl.submitAnswer(); answerForm.submitted = true">{{$ctrl.currentUser ? 'Post':'Sign in and post'}}</button>
+                    </div>
+                    <div class="col-md-11">
+                        <form novalidate name="answerForm" class="main-form post-answer">
+                            <div class="row question-area"
+                                 >
+                                <textarea ng-model="$ctrl.answer"
+                                          data-provide="markdown"
+                                          class="form-control" placeholder="Type your answer here..." on-show="$ctrl.markdownShow()" name="editor1"
+                                          auto-grow markdown-editor="{{$ctrl.editorConfig}}" rows="10" required></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-12 action-section text-center">
+                        <a class="btn-back" ng-click="$ctrl.goBack()">Back</a>
+                        <button class="btn-answer" ng-click="$ctrl.submitAnswer(); answerForm.submitted = true">
+                            {{$ctrl.currentUser ? 'Post':'Sign in and post'}}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -167,18 +173,20 @@
                          'has-success': (createQuestion | supportFormsValidator:'subject')  == 'valid',
                          }">
                             <textarea rows="4"
-                                      name="subject" required ng-minlength="3" class="question-section form-control" ng-model="$ctrl.post.subject"
+                                      name="subject" required ng-minlength="3" class="question-section form-control"
+                                      ng-model="$ctrl.post.subject"
+                                      auto-grow
                                       data-ng-focus="createQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
                         <div class="form-group question-area">
-                            <textarea 	name="editor1" class="content-box"
-                                         ng-model="$ctrl.editor1"
-                                         markdown-editor="{'iconlibrary': 'fa', addExtraButtons: true, resize: 'vertical'}"
-                                         rows="10" >
-					</textarea>
-                            <div marked="$ctrl.editor1" class="markdown outline" style="padding: 20px">
-                                <!--<ng-wig ng-model="$ctrl.post.description" name="description" placeholder="Fill in the details..."></ng-wig>-->
+                            <textarea ng-model="$ctrl.post.description"
+                                      on-show="$ctrl.markdownShow()"
+                                      name="editor1"
+                                      auto-grow
+                                      placeholder="Fill in the details..."
+                                      data-provide="markdown"
+                                      markdown-editor="{{$ctrl.editorConfig}}" rows="10" required></textarea>
                         </div>
                         <div class="col-md-12 tag-selection">
                             <div class="row">
@@ -189,7 +197,8 @@
                         </div>
                         <div class="col-md-12 action-section text-center">
                             <a class="btn-back" ng-click="$ctrl.goBack()">Back</a>
-                            <button class="btn-answer" ng-click="$ctrl.askQuestion(createQuestion)">{{$ctrl.currentUser ? 'Post':'Sign in and post'}}
+                            <button class="btn-answer" ng-click="$ctrl.askQuestion(createQuestion)">
+                                {{$ctrl.currentUser ? 'Post':'Sign in and post'}}
                             </button>
                         </div>
                     </form>
@@ -214,14 +223,23 @@
                          'has-success': (updateQuestion | supportFormsValidator:'subject')  == 'valid',
                          }">
                             <textarea required ng-minlength="3" rows="4"
+                                      auto-grow
                                       name="subject" class="question-section form-control"
                                       data-ng-change="$ctrl.updateSubject($ctrl.question.subject)"
                                       ng-model="$ctrl.question.subject"
                                       data-ng-focus="updateQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
-                        <div class="form-group question-area">
-                            <ng-wig ng-model="$ctrl.question.preview" placeholder="Fill in the details..." name="preview" data-ng-change="$ctrl.updatePreview($ctrl.question.preview)"></ng-wig>
+                        <div class="form-group question-area" data-ng-class="{
+                         'has-error': (updateQuestion | supportFormsValidator:'preview')  == 'invalid',
+                         'has-success': (updateQuestion | supportFormsValidator:'preview')  == 'valid',
+                         }">
+                            <textarea ng-model="$ctrl.question.preview" on-show="$ctrl.markdownShow()"
+                                      placeholder="Fill in the details..."
+                                      class="question-section form-control"
+                                      data-provide="markdown"
+                                      data-ng-change="$ctrl.updatePreview($ctrl.question.preview)" name="preview"
+                                      auto-grow markdown-editor="{{$ctrl.editorConfig}}" rows="10" required></textarea>
                         </div>
                     </form>
                 </div>
@@ -246,8 +264,7 @@
     </div>
 </div>
 
-<div class="modal" close-modal="remove"
-     ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
+<div class="modal" close-modal="remove" ng-class="{'display-block': $ctrl.modals.remove, 'display-none': !$ctrl.modals.remove}">
     <div class="modal-content">
         <div class="modal-header">
             <p style="color: #aaaaaa;font-size: 16px;">Remove Question</p>

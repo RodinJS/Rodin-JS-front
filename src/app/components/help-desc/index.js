@@ -2,7 +2,7 @@
  * Created by Reinchard on 7/26/2017.
  */
 class HelpDescComponentController {
-    constructor($scope, $element, $attrs, $state, User, HelpDescService) {
+    constructor($scope, $state, User, HelpDescService) {
         'ngInject';
         this.currentUser = User.current;
         this._$scope = $scope;
@@ -50,6 +50,9 @@ class HelpDescComponentController {
     }
 
     getContent(page = 1) {
+        if(this._$state.params.tag) {
+            return this.filterByTag(this._$state.params.tag)
+        }
         if (this._$state.params.page) {
             page = this._$state.params.page;
             this._$state.params.page = null;

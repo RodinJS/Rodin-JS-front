@@ -15,7 +15,9 @@ function IssuesConfig($stateProvider) {
             showFooter: true,
             slug: 'qna',
             params: {
-                page: null
+                page: null,
+                tag: null,
+
             }
         });
 

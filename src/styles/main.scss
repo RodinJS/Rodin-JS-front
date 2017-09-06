@@ -25,7 +25,7 @@ button:active {
 @import "./plugins/_bootstrap-tagsinput";
 @import "./plugins/_jquery.tagit";
 @import "./plugins/_jquery.tagsinput.min";
-@import "./plugins/_monokai-sublime";
+@import "./plugins/_monokai";
 @import "./plugins/_swiper";
 
 @import "mixins";
@@ -68,8 +68,8 @@ button:active {
 @import "../../src/app/pages/samples/samples";
 @import "../../src/app/pages/modules/modules";
 @import "../app/pages/help-descs/question/question";
-@import "ngWig";
 @import "../app/components/bootstrapMarkdown/css/bootstrap-markdown";
+@import "markdown";
 .page-404{
   .main-container{
     .page-404-content{
