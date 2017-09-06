@@ -7,7 +7,7 @@ import angular from 'angular/index';
 import 'jquery/dist/jquery.min';
 import './assists/jquery.form';
 import moment from 'moment/min/moment.min.js';
-import '../app/components/bootstrapMarkdown/js/bootstrap-markdown';
+import './components/bootstrapMarkdown/js/bootstrap-markdown';
 // Import our app config files
 import constants  from './config/app.constants';
 import appConfig  from './config/app.config';
@@ -29,10 +29,11 @@ import 'ng-tags-input/build/ng-tags-input.min';
 import 'angular-img-cropper/dist/angular-img-cropper.min';
 import 'ui-select/dist/select';
 import 'angular-sanitize/angular-sanitize';
-import './config/app.templates';
 import 'angular-markdown-editor/src/angular-markdown-editor';
 import 'angular-marked/dist/angular-marked.min';
+
 // Import our app functionaity
+import './config/app.templates';
 import './services/index';
 import './store/index';
 import './components/index';
