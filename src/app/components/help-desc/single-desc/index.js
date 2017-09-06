@@ -3,9 +3,10 @@
  */
 
 class SingleDescController {
-    constructor($scope, $element, $attrs, $state, HelpDescService, User, Notification) {
+    constructor($scope, $state, HelpDescService, User, Notification, marked) {
         'ngInject';
         this.creationPage = this.id === 'create';
+        this.marked = marked;
         this.editPage = false;
         this.currentUser = User.current;
         this._$state = $state;
@@ -31,6 +32,16 @@ class SingleDescController {
                 placeholder: 'Type the idea here...'
             },
         };
+        this.editorConfig = {
+            iconlibrary: 'fa',
+            fullscreen: {enable: false},
+            resize: 'none'
+        };
+
+        this.markdownShow = function (e) {
+            e.hideButtons(['cmdHeading', 'cmdImage', 'cmdList', 'cmdQuote','cmdUrl']);
+        };
+
         this.helpService = HelpDescService;
         this.post = this.helpService.history.post ? this.helpService.history.post : {
             subject: '',
@@ -59,13 +70,25 @@ class SingleDescController {
             })
     }
 
+    filterByTag(name) {
+        this.showLoader = true;
+        this._$state.go('landing.' + this.type.slice(0, -1),{tag: name})
+        this.helpService.searchConversations(this.type + `?tags[]=${name}`)
+            .then((response) => {
+                this.config.searchTitle = name;
+                this.showLoader = false;
+            })
+            .catch((err) => {
+                this.showLoader = false;
+            })
+    }
+
     getConversation() {
         if (!this.creationPage) {
             this.helpService.getConversation(this.type, this.id)
                 .then(response => {
                     this.showLoader = false;
                     this.question = response;
-                    console.log(this.question)
                     if (this.currentUser) {
                         this.isEditable = this.question.user.email === this.currentUser.email;
                     }
@@ -96,7 +119,7 @@ class SingleDescController {
         }
         let upvoted = vote === 1;
         let downvoted = vote === -1;
-        let voteType = vote === 1 ? 1: -1;
+        let voteType = vote === 1 ? 1 : -1;
         if (upvoted && this.question.voted) {
             switch (this.question.voted.vote) {
                 case 0:
@@ -170,10 +193,10 @@ class SingleDescController {
                     this.showLoader = false;
                     this.answer = '';
                     this.getConversation()
-                }).catch(err => {
-                this.showLoader = false;
-
-            })
+                })
+                .catch(err => {
+                    this.showLoader = false;
+                })
         }
 
 
@@ -197,6 +220,9 @@ class SingleDescController {
                 .then(response => {
                     this.helpService.resetValues();
                     this.showLoader = false;
+                    this.post.subject = '';
+                    this.post.description = '';
+                    this.post.tags = [];
                     this._$state.go('landing.' + this.type.slice(0, -1))
                 }).catch((err) => {
                 this.showLoader = false;
@@ -216,14 +242,19 @@ class SingleDescController {
     updatePreview(preview) {
         this.updated.description = preview;
     }
+
     updateQuestion() {
         let promises = [this.helpService.updateConversation(this.type, this.question.id, {
             tags: this.updated.tags,
             subject: this.updated.subject
         })];
 
-        if(this.updated.description) {
-            promises.push(this.helpService.updateThread(this.question.id, {description: this.updated.description, threadId: this.question.id, tags: this.updated.tags}))
+        if (this.updated.description) {
+            promises.push(this.helpService.updateThread(this.question.id, {
+                description: this.updated.description,
+                threadId: this.question.myThreadId,
+                tags: this.updated.tags
+            }))
         }
         Promise.all(promises)
             .then((resp) => {
@@ -261,6 +292,15 @@ class SingleDescController {
 
     goBack() {
         this._$state.go('landing.' + this.type.slice(0, -1), {page: this._$state.params.page ? this._$state.params.page : 1})
+    }
+
+    escapeHtml(html) {
+        if (html) {
+            return html.replace(/<br\s*\/?>/mgi, "")
+                .replace(/&lt;/, "<")
+                .replace(/&gt;/, ">")
+        }
+        return html
     }
 }
 
