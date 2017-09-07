@@ -84,6 +84,7 @@
     "angular-ui-notification": "^0.2.0",
     "angular-ui-router": "0.3.2",
     "angular-ui-switch": "0.1.1",
+    "bootstrap-markdown": "^2.10.0",
     "bootstrap-sass": "3.3.7",
     "font-awesome": "4.7.0",
     "jquery-form": "git+https://github.com/malsup/form#master",
