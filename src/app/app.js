@@ -29,6 +29,7 @@ import 'ng-tags-input/build/ng-tags-input.min';
 import 'angular-img-cropper/dist/angular-img-cropper.min';
 import 'ui-select/dist/select';
 import 'angular-sanitize/angular-sanitize';
+import 'angular-highlightjs/src/angular-highlightjs';
 import 'angular-markdown-editor/src/angular-markdown-editor';
 import 'angular-marked/dist/angular-marked.min';
 
@@ -67,6 +68,7 @@ const requires = [
     'ngSanitize',
     'hc.marked',
     'angular-markdown-editor',
+    'hljs'
 ];
 
 // Mount on window for testing

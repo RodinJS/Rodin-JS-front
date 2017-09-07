@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="col-md-12 question-description">
                                     <div class="row answer-area">
-                                        <div marked="$ctrl.escapeHtml($ctrl.question.preview)" class="markdown ">
+                                        <div marked="$ctrl.escapeHtml($ctrl.question.preview)" class="markdown">
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                                 <div class="row message-content">
                                     <section class="col-md-11">
                                         <div class="row">
-                                            <div marked="$ctrl.escapeHtml(message.body)" class="markdown "></div>
+                                            <div marked="$ctrl.escapeHtml(message.body)" class="markdown"></div>
                                         </div>
                                     </section>
 
@@ -142,7 +142,7 @@
                                  >
                                 <textarea ng-model="$ctrl.answer"
                                           class="form-control" placeholder="Type your answer here..." on-show="$ctrl.markdownShow()" name="editor1"
-                                          auto-grow markdown-editor="{{$ctrl.editorConfig}}" rows="10" required></textarea>
+                                          auto-grow markdown-editor="$ctrl.editorConfig" rows="10" required></textarea>
                             </div>
                         </form>
                     </div>
@@ -184,7 +184,7 @@
                                       name="editor1"
                                       auto-grow
                                       placeholder="Fill in the details..."
-                                      markdown-editor="{{$ctrl.editorConfig}}" rows="10" required></textarea>
+                                      markdown-editor="$ctrl.editorConfig" rows="10" required></textarea>
                         </div>
                         <div class="col-md-12 tag-selection">
                             <div class="row">
@@ -236,7 +236,7 @@
                                       placeholder="Fill in the details..."
                                       class="question-section form-control"
                                       data-ng-change="$ctrl.updatePreview($ctrl.question.preview)" name="preview"
-                                      auto-grow markdown-editor="{{$ctrl.editorConfig}}" rows="10" required></textarea>
+                                      auto-grow markdown-editor="$ctrl.editorConfig" rows="10" required></textarea>
                         </div>
                     </form>
                 </div>
