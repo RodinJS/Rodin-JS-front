@@ -159,13 +159,13 @@
                     <ul class="sidebar-hidden-content">
                         <div ng-repeat="menus in $ctrl.menusList | orderBy : 'position'">
                             <li data-ng-if="menus.menuitems.length === 0">
-                                <a ng-if="menus.href" ng-href="{{menus.href}}">{{menus.name}}</a>
+                                <a ng-if="menus.href" ng-href="{{menus.href}}" class="side-item">{{menus.name}}</a>
                             </li>
                             <li data-ng-if="menus.menuitems.length > 0" data-uib-dropdown class="dropdown drop-more">
                                 <a data-uib-dropdown-toggle id="{{menus.name}}">{{menus.name}} <i class="rd rd-angle-down"></i></a>
                                 <ul class="dropdown-menu dropdown-sidebar" uib-dropdown-menu>
                                     <li class="" ng-repeat="item in menus.menuitems | orderBy : 'position'">
-                                        <a data-ui-sref-active="active" ng-href="{{item.href}}">{{item.name}}</a>
+                                        <a data-ui-sref-active="active" ng-href="{{item.href}}" class="side-item">{{item.name}}</a>
                                     </li>
                                 </ul>
                             </li>
