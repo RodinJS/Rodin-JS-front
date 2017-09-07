@@ -141,7 +141,6 @@
                             <div class="row question-area"
                                  >
                                 <textarea ng-model="$ctrl.answer"
-                                          data-provide="markdown"
                                           class="form-control" placeholder="Type your answer here..." on-show="$ctrl.markdownShow()" name="editor1"
                                           auto-grow markdown-editor="{{$ctrl.editorConfig}}" rows="10" required></textarea>
                             </div>
@@ -185,7 +184,6 @@
                                       name="editor1"
                                       auto-grow
                                       placeholder="Fill in the details..."
-                                      data-provide="markdown"
                                       markdown-editor="{{$ctrl.editorConfig}}" rows="10" required></textarea>
                         </div>
                         <div class="col-md-12 tag-selection">
@@ -237,7 +235,6 @@
                             <textarea ng-model="$ctrl.question.preview" on-show="$ctrl.markdownShow()"
                                       placeholder="Fill in the details..."
                                       class="question-section form-control"
-                                      data-provide="markdown"
                                       data-ng-change="$ctrl.updatePreview($ctrl.question.preview)" name="preview"
                                       auto-grow markdown-editor="{{$ctrl.editorConfig}}" rows="10" required></textarea>
                         </div>
