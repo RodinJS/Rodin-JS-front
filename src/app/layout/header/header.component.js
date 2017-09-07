@@ -56,6 +56,10 @@ class AppHeaderNewCtrl {
             SocketService.on('gitSync', (data) => this.showSocketResponse(data));
         }
 
+        $(".side-item").click(function (e) {
+            e.preventDefault();
+            $("body").removeClass("scroll-prevent");
+        });
         $("#burger-button").click(function (e) {
             e.preventDefault();
             $("body").toggleClass("scroll-prevent");
