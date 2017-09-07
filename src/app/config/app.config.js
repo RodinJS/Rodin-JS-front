@@ -74,10 +74,8 @@ function AppConfig(RestangularProvider, $stateProvider, $locationProvider, $urlR
         gfm: true,
         tables: true,
         breaks: false,
-        pedantic: false,
         sanitize: true,
         smartLists: true,
-        smartypants: false,
         highlight: function (code, lang) {
             if (lang) {
                 return hljs.highlight(lang, code, true).value;
