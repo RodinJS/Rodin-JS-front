@@ -87,14 +87,10 @@
                         <div class="row">
                             <ul class="user-dropdown">
                                 <li class="dropdown notifi-dropdown" uib-dropdown>
-                                    <a href="" ng-if="$ctrl.notifications.length > 0"
-                                       class="btn-notifi new dropdown-toggle btn-notifi" uib-dropdown-toggle
+                                    <a href=""
+                                       ng-class="{'new': $ctrl.notifications.length > 0}"
+                                       class="btn-notifi dropdown-toggle btn-notifi" uib-dropdown-toggle
                                        role="button">
-                                        <i class="rd rd-notifi"></i>
-                                    </a>
-                                    <a href="" ng-if="$ctrl.notifications.length <= 0"
-                                       class="btn-notifi dropdown-toggle btn-notifi"
-                                       uib-dropdown-toggle role="button">
                                         <i class="rd rd-notifi"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-new notifi-dropdown-menu" uib-dropdown-menu>
@@ -124,7 +120,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div ng-if="$ctrl.notifications.length <= 0" class="notification-list">
+                                        <div ng-if="$ctrl.notifications.length < 1" class="notification-list">
                                             <span class="no-notifications">No new notifications</span>
                                         </div>
                                     </div>
