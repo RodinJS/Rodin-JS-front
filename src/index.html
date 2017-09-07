@@ -64,7 +64,9 @@
     </svg>
     <div data-ui-view class="page__wrapper"></div>
 </div>
+<script src="/scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/scripts/vendor/marked/marked.min.js"></script>
+<script src="/scripts/vendor/bootstrap-markdown/js/bootstrap-markdown.js"></script>
 <!--<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyA6Y8RlBTByatge6Ufdk4279cFABWBnm9Q"></script>-->
 <script src="//apis.google.com/js/platform.js"></script>
 <script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js"></script>
@@ -116,8 +118,6 @@
             'scripts/*': 'scripts/*'
         }
     });
-    System.import('jquery/dist/jquery.min');
-    System.import('app/components/bootstrapMarkdown/js/bootstrap-markdown');
     System.import('app/pages/home/highlight.pack.js');
     System.import('app/app.js');
 
