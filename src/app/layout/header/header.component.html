@@ -86,8 +86,8 @@
                         <!--ng-class="{'col-md-4': $ctrl.user, 'col-md-3': $ctrl.user}" >-->
                         <div class="row">
                             <ul class="user-dropdown">
-                                <li class="dropdown notifi-dropdown" uib-dropdown>
-                                    <a href=""
+                                <li class="dropdown notifi-dropdown" data-uib-dropdown>
+                                    <a id="notification"
                                        ng-class="{'new': $ctrl.notifications.length > 0}"
                                        class="btn-notifi dropdown-toggle btn-notifi" uib-dropdown-toggle
                                        role="button">
@@ -126,7 +126,7 @@
                                     </div>
                                 </li>
                                 <li class="dropdown account-dropdown" data-uib-dropdown>
-                                    <a href="" class="btn-account" id="accountLabel" data-uib-dropdown-toggle>
+                                    <a class="btn-account" id="accountLabel" data-uib-dropdown-toggle>
                                         <span class="hidden-xs">{{$ctrl.user.username}}</span>
                                         <span class="accout-img-wrapper">
                                             <span class="account-img"
@@ -134,15 +134,14 @@
                                         </span>
                                         <i class="rd rd-angle-down hidden-xs"></i>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-new dropdown-menu-edit account-dropdown-menu"
-                                         uib-dropdown-menu>
+                                    <div class="dropdown-menu header-dropdown edit-dropdown" uib-dropdown-menu>
                                         <ul class="account-action-list">
                                             <li>
-                                                <a data-ui-sref-active="active" data-ui-sref="app.profile">Edit
+                                                <a data-ui-sref="app.profile">Edit
                                                     Profile</a>
                                             </li>
                                             <li>
-                                                <a data-ui-sref-active="active" href="" data-ng-click="$ctrl.logout()"
+                                                <a data-ng-click="$ctrl.logout()"
                                                    class="signout-link">Sign Out</a>
                                             </li>
                                         </ul>
