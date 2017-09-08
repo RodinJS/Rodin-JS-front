@@ -65,7 +65,6 @@
     <div data-ui-view class="page__wrapper"></div>
 </div>
 <script src="/scripts/vendor/marked/marked.min.js"></script>
-<!--<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyA6Y8RlBTByatge6Ufdk4279cFABWBnm9Q"></script>-->
 <script src="//apis.google.com/js/platform.js"></script>
 <script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript" src="/scripts/vendor/systemjs/dist/system.js"></script>
@@ -108,12 +107,17 @@
             },
             "/scripts": {  // path to your project root
                 "defaultJSExtensions": true
+            },
+            'bootstrap-markdown': {
+                format: 'global',
+                defaultExtension: 'js',
+                main: 'scripts/vendor/bootstrap-markdown/js/bootstrap-markdown.js'
             }
         },
         paths: {
             '*': 'scripts/vendor/*',
             'app/*': 'app/*',
-            'scripts/*': 'scripts/*'
+            'scripts/*': 'scripts/*',
         }
     });
     System.import('app/pages/home/highlight.pack.js');

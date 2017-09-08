@@ -4,11 +4,10 @@
 import './helpers';
 
 import angular from 'angular/index';
-import 'jquery/dist/jquery.min';
+import 'jquery/dist/jquery.min.js'
 import './assists/jquery.form';
 import moment from 'moment/min/moment.min.js';
-import 'marked/marked.min';
-import './components/bootstrapMarkdown/js/bootstrap-markdown';
+import 'bootstrap-markdown/js/bootstrap-markdown'
 // Import our app config files
 import constants  from './config/app.constants';
 import appConfig  from './config/app.config';
