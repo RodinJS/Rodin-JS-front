@@ -72,7 +72,7 @@ class SingleDescController {
 
     filterByTag(name) {
         this.showLoader = true;
-        this._$state.go('landing.' + this.type.slice(0, -1),{tag: name})
+        this._$state.go('landing.' + this.type.slice(0, -1),{tag: name});
         this.helpService.searchConversations(this.type + `?tags[]=${name}`)
             .then((response) => {
                 this.config.searchTitle = name;
