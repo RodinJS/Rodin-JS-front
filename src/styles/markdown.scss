@@ -1,11 +1,20 @@
 code {
   color: #ddd;
 }
-.has-error {
-  .md-editor {
-    border-color: rgba(255, 0, 0, 0.5) !important;
+
+.editor-has-error {
+  border: 1px solid rgba(255, 0, 0, 0.5) !important;
+  &:focus {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483 !important;
   }
 }
+.editor-has-success.active {
+  border-color: #2b542c !important;
+  &:focus{
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168 !important;
+  }
+}
+
 .markdown {
   border: none;
 }
@@ -21,8 +30,9 @@ code {
     background: #0F1F35 !important;
     border: none;
   }
-  border: 1px solid #045190 !important;
-  border-radius: 6px !important;
+  border: 1px solid #045190;
+  border-radius: 6px;
+  min-height: 256px;
   textarea {
     color: white;
     border: none !important;
@@ -31,10 +41,11 @@ code {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    height: 100%;
     &::-webkit-input-placeholder {
       font-family: $Roboto;
       font-size: 16px;
-      color: $placeholder-color;
+      color: $placeholder-color !important;
     }
   }
   .md-header {

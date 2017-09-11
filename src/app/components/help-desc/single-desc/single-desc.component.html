@@ -138,11 +138,18 @@
                     </div>
                     <div class="col-md-11">
                         <form novalidate name="answerForm" class="main-form post-answer">
-                            <div class="row question-area"
-                                 >
+                            <div class="row question-area">
                                 <textarea ng-model="$ctrl.answer"
-                                          class="form-control" placeholder="Type your answer here..." on-show="$ctrl.markdownShow()" name="answer"
-                                          auto-grow markdown-editor="$ctrl.editorConfig" rows="10" required></textarea>
+                                          class="form-control"
+                                          placeholder="Type your answer here..."
+                                          on-show="$ctrl.markdownShow()"
+                                          name="answer"
+                                          auto-grow
+                                          markdown-editor="$ctrl.editorConfig"
+                                          ng-minlength="3"
+                                          rows="10"
+                                          required>
+                                </textarea>
                             </div>
                         </form>
                     </div>
@@ -175,6 +182,7 @@
                                       name="subject" required ng-minlength="3" class="question-section form-control"
                                       ng-model="$ctrl.post.subject"
                                       auto-grow
+                                      ng-minlength="3"
                                       data-ng-focus="createQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
@@ -183,8 +191,12 @@
                                       on-show="$ctrl.markdownShow()"
                                       name="description"
                                       auto-grow
+                                      ng-minlength="3"
+                                      on-preview="$ctrl.onMarkdownPreview()"
                                       placeholder="Fill in the details..."
-                                      markdown-editor="$ctrl.editorConfig" rows="10" required></textarea>
+                                      markdown-editor="$ctrl.editorConfig"
+                                      rows="10"
+                                      required></textarea>
                         </div>
                         <div class="col-md-12 tag-selection">
                             <div class="row">
@@ -228,15 +240,18 @@
                                       data-ng-focus="updateQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
-                        <div class="form-group question-area" data-ng-class="{
-                         'has-error': (updateQuestion | supportFormsValidator:'preview')  == 'invalid',
-                         'has-success': (updateQuestion | supportFormsValidator:'preview')  == 'valid',
-                         }">
-                            <textarea ng-model="$ctrl.question.preview" on-show="$ctrl.markdownShow()"
+                        <div class="form-group question-area">
+                            <textarea ng-model="$ctrl.question.preview"
+                                      on-show="$ctrl.markdownShow()"
                                       placeholder="Fill in the details..."
                                       class="question-section form-control"
-                                      data-ng-change="$ctrl.updatePreview($ctrl.question.preview)" name="preview"
-                                      auto-grow markdown-editor="$ctrl.editorConfig" rows="10" required></textarea>
+                                      ng-minlength="3"
+                                      data-ng-change="$ctrl.updatePreview($ctrl.question.preview)"
+                                      name="preview"
+                                      auto-grow markdown-editor="$ctrl.editorConfig"
+                                      rows="10"
+                                      required>
+                            </textarea>
                         </div>
                     </form>
                 </div>

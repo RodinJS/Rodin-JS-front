@@ -37,8 +37,9 @@ class SingleDescController {
             fullscreen: {enable: false},
             resize: 'none'
         };
-
-        this.markdownShow = function (e) {
+        this.onPreview = false;
+        this.markdownShow = (e) => {
+            e.$editor.bind('keyup', this.onMarkdownChange.bind(this,e));
             e.hideButtons(['cmdHeading', 'cmdImage', 'cmdList', 'cmdQuote','cmdUrl']);
         };
 
@@ -186,6 +187,8 @@ class SingleDescController {
                 return this.askQuestion(form);
             }
             this.showLoader = true;
+            this.answer = this.escapeHtml(this.answer);
+            console.dir(this.answer)
             this.helpService.createQuestionThread(this.question.id, {description: this.answer})
                 .then(response => {
                     this.helpService.history.tags = null;
@@ -211,10 +214,11 @@ class SingleDescController {
         } else {
 
         }
-        if (form.$valid) {
+        if (form.$valid && !this.onPreview) {
             if (this.selectedTags.length > 0) {
                 this.post.tags = this.selectedTags.map((tag) => tag.text)
             }
+            this.post.description = this.escapeHtml(this.post.description);
             this.showLoader = true;
             this.helpService.createQuestion(this.type, this.post)
                 .then(response => {
@@ -296,11 +300,29 @@ class SingleDescController {
 
     escapeHtml(html) {
         if (html) {
-            return html.replace(/<br\s*\/?>/mgi, "")
+            return html.replace(/<br\s*\/?>/gi, ' ')
+                // .replace(/\r?\n/gi,"")
                 .replace(/&lt;/, "<")
                 .replace(/&gt;/, ">")
         }
         return html
+    }
+
+    onMarkdownPreview(e) {
+        this.onPreview = !this.onPreview
+    }
+
+    onMarkdownChange(editor,e) {
+        if(e.target.className.includes('ng-invalid')) {
+            editor.$editor.addClass('editor-has-error')
+        } else {
+            editor.$editor.removeClass('editor-has-error')
+        }
+        if(e.target.value.length >= 3) {
+            editor.$editor.addClass('editor-has-success')
+        }else {
+            editor.$editor.removeClass('editor-has-success')
+        }
     }
 }
 

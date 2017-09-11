@@ -72,10 +72,8 @@ function AppConfig(RestangularProvider, $stateProvider, $locationProvider, $urlR
 
     markedProvider.setOptions({
         gfm: true,
-        tables: true,
-        breaks: false,
+        breaks: true,
         sanitize: true,
-        smartLists: true,
         highlight: function (code, lang) {
             if (lang) {
                 return hljs.highlight(lang, code, true).value;

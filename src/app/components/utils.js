@@ -251,7 +251,7 @@ function MultiSelect() {
 function AutoGrow() {
     return function (scope, element, attr) {
         let update = function () {
-            element.css("height", "auto");
+            element.css("height", "256px");
             element.css("height", element[0].scrollHeight + "px");
         };
         scope.$watch(attr.ngModel, function () {
