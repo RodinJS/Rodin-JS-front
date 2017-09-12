@@ -3,7 +3,7 @@
 [![Build Status](http://qa.rodin.io/buildStatus/icon?job=Front-End-Protractor)](http://qa.rodin.io/job/Front-End-Protractor/)
 
 ## Program dependencies
-1. [NodeJS](https://nodejs.org/en/) v4.2.0 or later.
+1. [NodeJS](https://nodejs.org/en/) v6.11.3 or later.
 
 ## Install dependencies
 Install [**gulp-cli**](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
