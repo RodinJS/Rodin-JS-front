@@ -3,10 +3,10 @@
  */
 
 class SingleDescController {
-    constructor($scope, $state, HelpDescService, User, Notification, marked) {
+    constructor($scope, $state, $timeout, HelpDescService, User, Notification) {
         'ngInject';
+        this.$timeout = $timeout;
         this.creationPage = this.id === 'create';
-        this.marked = marked;
         this.editPage = false;
         this.currentUser = User.current;
         this._$state = $state;
@@ -37,9 +37,11 @@ class SingleDescController {
             fullscreen: {enable: false},
             resize: 'none'
         };
-
-        this.markdownShow = function (e) {
-            e.hideButtons(['cmdHeading', 'cmdImage', 'cmdList', 'cmdQuote','cmdUrl']);
+        this.onPreview = false;
+        this.markdownShow = (e) => {
+            e.$editor.bind('input', this.onMarkdownChange.bind(this, e));
+            e.$editor.bind('click', this.onMarkdownChange.bind(this, e));
+            e.hideButtons(['cmdHeading', 'cmdImage', 'cmdList', 'cmdQuote', 'cmdUrl']);
         };
 
         this.helpService = HelpDescService;
@@ -72,7 +74,7 @@ class SingleDescController {
 
     filterByTag(name) {
         this.showLoader = true;
-        this._$state.go('landing.' + this.type.slice(0, -1),{tag: name});
+        this._$state.go('landing.' + this.type.slice(0, -1), {tag: name});
         this.helpService.searchConversations(this.type + `?tags[]=${name}`)
             .then((response) => {
                 this.config.searchTitle = name;
@@ -89,6 +91,7 @@ class SingleDescController {
                 .then(response => {
                     this.showLoader = false;
                     this.question = response;
+                    this.question.preview = this.escapeHtml(response.preview)
                     if (this.currentUser) {
                         this.isEditable = this.question.user.email === this.currentUser.email;
                     }
@@ -188,6 +191,7 @@ class SingleDescController {
             this.showLoader = true;
             this.helpService.createQuestionThread(this.question.id, {description: this.answer})
                 .then(response => {
+                    this.previewTrigger();
                     this.helpService.history.tags = null;
                     this.helpService.history.post = null;
                     this.showLoader = false;
@@ -208,9 +212,8 @@ class SingleDescController {
                 tags: this.selectedTags, post: this.post
             };
             return this._$state.go('landing.login');
-        } else {
-
         }
+
         if (form.$valid) {
             if (this.selectedTags.length > 0) {
                 this.post.tags = this.selectedTags.map((tag) => tag.text)
@@ -258,6 +261,7 @@ class SingleDescController {
         }
         Promise.all(promises)
             .then((resp) => {
+                this.previewTrigger();
                 this.Notification.success('Conversation updated');
             })
             .catch((err) => console.log(err))
@@ -296,11 +300,38 @@ class SingleDescController {
 
     escapeHtml(html) {
         if (html) {
-            return html.replace(/<br\s*\/?>/mgi, "")
+            return html.replace(/<br\s*\/?>/gi, '')
                 .replace(/&lt;/, "<")
                 .replace(/&gt;/, ">")
         }
         return html
+    }
+
+
+    onMarkdownChange(editor, e) {
+        this.onPreview = editor.$isPreview;
+        if (e && e.target && e.target.value) {
+            if (e.target.className.includes('ng-invalid')) {
+                editor.$editor.addClass('editor-has-error')
+            } else {
+                editor.$editor.removeClass('editor-has-error')
+            }
+            if (e.target.value.length >= 3) {
+                editor.$editor.addClass('editor-has-success')
+            } else {
+                editor.$editor.removeClass('editor-has-success')
+            }
+        }
+
+    }
+
+    previewTrigger() {
+        if (this.onPreview) {
+            this.$timeout(() => {
+                angular.element("button[title='Preview']").trigger('click');
+                this.onPreview = false;
+            });
+        }
     }
 }
 
