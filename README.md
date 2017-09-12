@@ -12,7 +12,7 @@ $ npm install --global gulp-cli
 ```
 Install node modules
 ```sh
-$ npm install
+$ npm run {dev|test|stage|prod}
 ```
 
 ## Build
