@@ -183,6 +183,7 @@
                                       ng-model="$ctrl.post.subject"
                                       auto-grow
                                       ng-minlength="3"
+                                      minlength="3"
                                       data-ng-focus="createQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
@@ -192,7 +193,7 @@
                                       name="description"
                                       auto-grow
                                       ng-minlength="3"
-                                      on-preview="$ctrl.onMarkdownPreview()"
+                                      minlength="3"
                                       placeholder="Fill in the details..."
                                       markdown-editor="$ctrl.editorConfig"
                                       rows="10"
@@ -248,7 +249,8 @@
                                       ng-minlength="3"
                                       data-ng-change="$ctrl.updatePreview($ctrl.question.preview)"
                                       name="preview"
-                                      auto-grow markdown-editor="$ctrl.editorConfig"
+                                      auto-grow
+                                      markdown-editor="$ctrl.editorConfig"
                                       rows="10"
                                       required>
                             </textarea>

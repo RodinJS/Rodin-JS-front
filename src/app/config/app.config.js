@@ -72,7 +72,8 @@ function AppConfig(RestangularProvider, $stateProvider, $locationProvider, $urlR
 
     markedProvider.setOptions({
         gfm: true,
-        breaks: true,
+        table:true,
+        breaks: false,
         sanitize: true,
         highlight: function (code, lang) {
             if (lang) {
