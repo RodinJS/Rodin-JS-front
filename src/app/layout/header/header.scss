@@ -448,6 +448,10 @@
       display: inline-block;
       vertical-align: middle;
       margin-left: 25px;
+      .edit-dropdown {
+        left: -75px !important;
+        top: 60px !important;
+      }
       &.account-dropdown {
         &.open {
           .btn-account {
