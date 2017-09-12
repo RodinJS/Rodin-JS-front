@@ -137,7 +137,7 @@ const BANNER = {
 
     showCodeBlock: function (block, devicePath, init) {
 
-        const minusTop = this.checkMobile()  ? $('.header .navbar-collapse').hasClass('in') ? -$('.header').height() : -70 : 0;
+        const minusTop = this.checkMobile()  ? $('.header1').hasClass('in') ? -$('.header1').height() : -70 : 0;
 
         let params = {
             width: devicePath[0].getBoundingClientRect().width - 10,
@@ -150,12 +150,7 @@ const BANNER = {
         } else {
             block.animate(params);
         }
-
-        if (codeBlock.length <= 0)
-            codeBlock = $('.code-block-wrapper');
-        if (code.length <= 0)
-            code = $('#rodinCode code');
-
+        codeBlock = $('.code-block-wrapper');
         codeBlock.css({ opacity: 1 });
 
     },
