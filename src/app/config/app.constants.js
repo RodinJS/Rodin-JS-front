@@ -95,7 +95,7 @@ const AppConstants = {
         EDITOR: `${window.location.protocol}//editor.${window.extractDomain()}/`,
         RECORDIP: '40.121.202.156',
         FB: '1981479458801362',
-        GITHUB: '5377f212205e0aa4b4cf',
+        GITHUB: '2fa42e9372769cc4c527',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodinapp.com/list.json',
         MODULES: 'http://localhost:4000/modules/',
