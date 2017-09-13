@@ -2,11 +2,12 @@
  * Created by kh.levon98 on 20-Sep-16.
  */
 class User {
-    constructor(JWT, AppConstants, Restangular, Validator, $state, $q, $timeout, Analyser, NotificationsStore) {
+    constructor(JWT , AppConstants, Restangular, Validator, $state, $q, $timeout, Analyser, NotificationsStore, $rootScope) {
         'ngInject';
 
         this._JWT = JWT;
         this._AppConstants = AppConstants;
+        this._$rootScope = $rootScope;
         this._NotificationsStore = NotificationsStore;
         this._User = Restangular.all('user');
         this._Auth = Restangular.all('auth');
@@ -291,7 +292,7 @@ class User {
             this._JWT.destroy();
             this._JWT.save(response.token);
             this.current = response.user;
-            this._$state.go('app.dashboard');
+            this._$rootScope.$emit('login', this.current);
             this.deferred.resolve(response);
         } else {
             this.deferred.reject(this._Validator.getErrorsHTTP());

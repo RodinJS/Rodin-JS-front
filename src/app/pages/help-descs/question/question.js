@@ -12,7 +12,11 @@ function QuestionConfig($stateProvider) {
             templateUrl: 'pages/help-descs/question/question.html',
             title: 'Question and Answer',
             showFooter: true,
-            slug: 'qna'
+            slug: 'qna',
+            params: {
+                page: null,
+                tag: null,
+            }
         })
 
 }

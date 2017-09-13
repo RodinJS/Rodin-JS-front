@@ -13,7 +13,10 @@ function SingleQuestionConfig($stateProvider) {
             template:'<single-desc type="questions" id="$ctrl.id"></single-desc>',
             title: 'Question and Answer',
             showFooter: true,
-            slug: 'qna'
+            slug: 'qna',
+            params: {
+                page: null
+            }
         });
 
 }

@@ -35,6 +35,9 @@ class AppHeaderNewCtrl {
             User.logout(...arguments);
         };
 
+        this._$rootScope.$on('login', (event, data) => {
+            this.user = data;
+        });
         this.isLanding = this._$state.current.name === 'home.landing';
 
         let tryAttempt = 0;
@@ -48,15 +51,15 @@ class AppHeaderNewCtrl {
             });
         }
 
-        $scope.$watch('User.current', (newUser) => {
-            this.currentUser = newUser;
-        });
-
         if (!SocketService.connected) {
             SocketService.on('projectBuild', (data) => this.showSocketResponse(data));
             SocketService.on('gitSync', (data) => this.showSocketResponse(data));
         }
 
+        $(".side-item").click(function (e) {
+            e.preventDefault();
+            $("body").removeClass("scroll-prevent");
+        });
         $("#burger-button").click(function (e) {
             e.preventDefault();
             $("body").toggleClass("scroll-prevent");

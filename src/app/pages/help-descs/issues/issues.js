@@ -6,14 +6,19 @@ function IssuesConfig($stateProvider) {
     'ngInject';
 
     $stateProvider
-        .state('landing.issues', {
+        .state('landing.issue', {
             url: '/issues',
             controller: 'IssuesCtrl',
             controllerAs: '$ctrl',
             templateUrl: 'pages/help-descs/issues/issues.html',
             title: 'Issues',
             showFooter: true,
-            slug: 'qna'
+            slug: 'qna',
+            params: {
+                page: null,
+                tag: null,
+
+            }
         });
 
 }

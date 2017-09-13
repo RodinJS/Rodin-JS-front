@@ -34,7 +34,7 @@
                         <a ng-if="page.externalURL"  ng-href="{{page.externalURL}}">{{page.title}}</a>
                         <a ng-if="!page.externalURL" ui-sref="landing.pages({pageURL:'{{page.slug}}'})">{{page.title}}</a>
                     </li>
-                    <li class="dropdown account-dropdown" data-uib-dropdown auto-close="outsideClick">
+                    <li class="dropdown account-dropdown" data-uib-dropdown>
                         <a href="" class="btn-account" id="support" data-uib-dropdown-toggle>
                             <span class="hidden-xs">Support <i class="rd rd-angle-down"></i></span>
                         </a>
@@ -44,7 +44,7 @@
                                     <a data-ui-sref-active="active" data-ui-sref="landing.question">Questions and Answers</a></li>
                                 </li>
                                 <li>
-                                    <a data-ui-sref-active="active" data-ui-sref="landing.issues">Issue Tracker</a></li>
+                                    <a data-ui-sref-active="active" data-ui-sref="landing.issue">Issue Tracker</a></li>
                                 </li>
                                 <li>
                                     <a data-ui-sref-active="active" data-ui-sref="landing.feature">Feature Requests</a></li>
@@ -52,7 +52,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="dropdown account-dropdown" data-uib-dropdown auto-close="outsideClick" ng-if="$ctrl.pagesSection2.length > 0">
+                    <li class="dropdown account-dropdown" data-uib-dropdown ng-if="$ctrl.pagesSection2.length > 0">
                         <a href="" uib-dropdown-toggle id="moreLabel" data-target="#" data-toggle="dropdown"
                            role="button"
                            aria-haspopup="true" aria-expanded="false">
@@ -81,7 +81,7 @@
             </ul>
             <div class="account-action" ng-if="$ctrl.user">
                 <ul>
-                    <li class="dropdown notifi-dropdown" uib-dropdown auto-close="outsideClick">
+                    <li class="dropdown notifi-dropdown" uib-dropdown>
                         <a href="" ng-if="$ctrl.notifications.length > 0"
                            class="btn-notifi new dropdown-toggle btn-notifi" uib-dropdown-toggle role="button">
                             <i class="rd rd-notifi"></i>
@@ -121,7 +121,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="dropdown account-dropdown" data-uib-dropdown auto-close="outsideClick">
+                    <li class="dropdown account-dropdown" data-uib-dropdown>
                         <a href="" class="btn-account" id="accountLabel" data-uib-dropdown-toggle>
                             <span class="hidden-xs">{{$ctrl.user.username}}</span>
                             <span class="accout-img-wrapper">

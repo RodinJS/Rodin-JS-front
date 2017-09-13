@@ -13,7 +13,12 @@ function FeatureConfig($stateProvider) {
             templateUrl: 'pages/help-descs/feature/feature.html',
             title: 'Question and Answer',
             showFooter: true,
-            slug: 'qna'
+            slug: 'qna',
+            params: {
+                page: null,
+                tag: null,
+
+            }
         });
 
 }

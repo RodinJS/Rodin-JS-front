@@ -137,52 +137,7 @@ const BANNER = {
 
     showCodeBlock: function (block, devicePath, init) {
 
-       /* let additionalParams = { l: 0, t: 0, w: 0, h: 0 };
-        //console.log(this.checkMobile());
-        switch (devicePath[0].parentNode.id){
-            case 'samsungGear':
-                additionalParams.l = 15;
-                additionalParams.w = -15;
-                break;
-            case 'oculus':
-                additionalParams.l = 10;
-                additionalParams.w = -15;
-                break;
-            case 'vive':
-                additionalParams.l = 10;
-                additionalParams.t = 10;
-                additionalParams.w = -10;
-                break;
-            case 'daydream':
-                additionalParams.l = 10;
-                break;
-        }
-
-
-
-        //console.log(devicePath[0].getBoundingClientRect());
-
-        let params = {
-            width: devicePath[0].getBoundingClientRect().width - 20 + additionalParams.w,
-            height: devicePath[0].getBoundingClientRect().height - 20,
-            top: devicePath[0].getBoundingClientRect().top + window.pageYOffset + additionalParams.t,
-            left: (devicePath[0].getBoundingClientRect().left + 10 + additionalParams.l) + minusLeft,
-        };
-        if (init) {
-            block.css(params);
-        } else {
-            block.animate(params);
-        }
-
-        if (codeBlock.length <= 0)
-            codeBlock = $('.code-block-wrapper');
-        if (code.length <= 0)
-            code = $('#rodinCode code');
-
-        codeBlock.css({ opacity: 1 });
-        */
-
-        const minusTop = this.checkMobile()  ? $('.header .navbar-collapse').hasClass('in') ? -$('.header').height() : -70 : 0;
+        const minusTop = this.checkMobile()  ? $('.header1').hasClass('in') ? -$('.header1').height() : -70 : 0;
 
         let params = {
             width: devicePath[0].getBoundingClientRect().width - 10,
@@ -195,12 +150,7 @@ const BANNER = {
         } else {
             block.animate(params);
         }
-
-        if (codeBlock.length <= 0)
-            codeBlock = $('.code-block-wrapper');
-        if (code.length <= 0)
-            code = $('#rodinCode code');
-
+        codeBlock = $('.code-block-wrapper');
         codeBlock.css({ opacity: 1 });
 
     },

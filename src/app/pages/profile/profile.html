@@ -239,7 +239,7 @@
                             <div class="checkbox">
                                 <label class="text-small" style="color: #fff;line-height: 25px;">
                                     <input type="checkbox"
-                                           ng-model="$ctrl.profile.emailNotification" style="margin-top: 6px">
+                                           ng-model="$ctrl.currentUser.notification" style="margin-top: 6px">
                                     I want to receive notifications on this email
                                     <span class="custom-check"></span>
                                 </label>
@@ -291,7 +291,7 @@
                                     <label>Confirm Password</label>
                                     <input type="password" class="form-control" placeholder=""
                                            name="confirmPassword"
-                                           data-ng-model="$ctrl.newPassword.confirm"
+                                           data-ng-model="$ctrl.newPassword.confirmPassword"
                                            required
                                            confirm-Password
                                            compare-to="changePasswordForm.confirmPassword.$viewValue"
