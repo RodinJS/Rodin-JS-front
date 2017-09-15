@@ -1,20 +1,19 @@
 class PlansCrtl {
-	constructor(AppConstants, User, $scope, Validator, Error) {
+	constructor(AppConstants, User, $scope, Validator, Error, PaymentService) {
 		'ngInject';
 
 		this.appName = AppConstants.appName;
 		this.currentUser = User.current;
 		this.formData = {};
-
+		this.paymentService = PaymentService;
 		this.modals = {
 			downgrade: false
-		}
+		};
 		this.downgrade = true;
 		$scope.$watch('User.current', (newUser) => {
 			this.currentUser = newUser;
 		});
-
-	}
+    }
 
 	updateProfile(isValidForm = true) {
 		if (!isValidForm) {

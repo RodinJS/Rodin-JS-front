@@ -1,16 +1,70 @@
 .billing-section {
   margin-top: 80px;
+  .upgrade-group {
+    margin-bottom: 0px !important;
+  }
+  .plan-info {
+    .info-items {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+      .plan-row {
+        display: table;
+        width: 95%;
+        vertical-align: middle;
+        background: #09192E;
+        min-height: 70px;
+        margin: 5px;
+        section {
+          vertical-align: middle;
+          display: table-cell;
+        }
+        p {
+          margin: 0;
+          color: $color-primary;
+        }
+      }
+    }
+  }
+  .price {
+    color: $color-primary;
+    position: relative;
+    font-size: 72px;
+    line-height: 1;
+    .currency {
+      font-size: 24px;
+      top: -31px;
+    }
+    .payment-period {
+      font-size: 16px;
+      position: absolute;
+      bottom: 15px;
+    }
+  }
   .payment-service {
     display: inline-table;
     border-spacing: 10px 0;
     margin-top: 30px;
+    margin-left: 0;
     .payservice-info {
       color: $color-text-gray;
     }
     li {
       display: table-cell;
       vertical-align: middle;
+      img {
+        border-radius: 3px;
+      }
     }
+  }
+  .image-highlight {
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,139,242,1);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0,139,242,1);
+    box-shadow: 0px 0px 8px 0px rgba(0,139,242,1);
+  }
+  .card-type-image {
+    position: absolute;
+    top: 44px;
+    right: -33px;
   }
   .billing-title {
     margin-bottom: 60px;
@@ -19,7 +73,7 @@
   }
 
   .payment-data {
-    .payment-content {
+      .payment-content {
       > h1 {
         margin-bottom: 24px;
       }
@@ -31,20 +85,6 @@
           color: #00518E;
           font-size: 13px;
           margin-left: 5px;
-        }
-      }
-      .price {
-        color: $color-primary;
-        position: relative;
-        font-size: 72px;
-        .currency {
-          font-size: 24px;
-          top: -31px;
-        }
-        .payment-period {
-          font-size: 16px;
-          position: absolute;
-          bottom: 30px;
         }
       }
       .paymen-benefit {
@@ -65,7 +105,7 @@
         -webkit-transform: translate(-50%, 0);
         transform: translate(-50%, 0);
         bottom: 36px;
-        .btn-sign-up {
+        .btn-upgrade {
           color: $color-text-gray;
           min-height: 48px;
           min-width: 148px;
@@ -73,7 +113,6 @@
             color: white;
           }
           &:active {
-            border: none;
             color: $bg-primary;
             background: $gey-blue;
           }
@@ -103,6 +142,66 @@
           }
         }
       }
+    }
+  }
+}
+.upgrade-form {
+  label {
+    font-size: 14px;
+    color: #AAAAAA;
+  }
+  .section-info {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .form-group {
+    >div {
+      input::-webkit-input-placeholder {
+        font-family: $Roboto;
+        font-size: 16px;
+        color: $placeholder-color !important;
+      }
+      margin-bottom: 15px;
+    }
+    .error {
+      margin-top: 10px;
+      p {
+        font-size: 13px;
+        color: rgba(255, 0, 0, 0.5) !important;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+.upgrade-content {
+  background: #0E1E32;
+  border-radius: 6px;
+  .what-you-get {
+    margin-left: 5px;
+    margin-bottom: 0px;
+    color:$color-primary ;
+  }
+  .upgrade-info-section:nth-child(2) {
+    &:before {
+      content: "";
+      height: 80%;
+      left: 0px;
+      border: 1px solid $color-primary;
+      position: absolute;
+      opacity: .5;
+    }
+  }
+  .upgrade-info-section {
+    padding: 30px;
+    .upgrade-plan-desc {
+      margin: 0px;
+      color: #aaaaaa;
+      font-size: 13px;
+    }
+    .change-plan {
+      color: #aaaaaa;
+      font-size: 13px;
+      //margin-top: 30px;
     }
   }
 }

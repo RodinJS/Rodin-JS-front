@@ -17,6 +17,8 @@ componentsModule.directive('codify', ['$timeout', Utils.Codify]);
 componentsModule.directive('confirmPassword', Utils.ConfirmPassword);
 componentsModule.directive('rdScroll', Utils.RdScroll);
 componentsModule.directive('autoGrow', Utils.AutoGrow);
+componentsModule.directive('creditCard', Utils.CreditCard);
+componentsModule.directive('creditCardExpiration', Utils.CreditCardExpiration);
 
 
 import EditorNavigation from './editorNavigation/index';

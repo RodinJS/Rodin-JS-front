@@ -14,8 +14,7 @@ function PlansConfig($stateProvider) {
 					return User.ensureAuthIs(true);
 				}
 			}
-		});
-
+		})
 }
 
 export default PlansConfig;
