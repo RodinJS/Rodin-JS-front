@@ -69,17 +69,18 @@ class EditProjectModulesCtrl {
             this.module.script = assignedToProject.script;
         }
 
-        this.modalInstance = this._$uibModal.open({
-            animation: this.animationsEnabled,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'pages/editproject-modules/assignModal.html',
-            controller: EditProjectModulesCtrl,
-            controllerAs: 'vm',
-            bindToController: true,
-            scope: this._$scope,
-            resolve: {},
-        });
+        this.assign(this.module);
+        // this.modalInstance = this._$uibModal.open({
+        //     animation: this.animationsEnabled,
+        //     ariaLabelledBy: 'modal-title',
+        //     ariaDescribedBy: 'modal-body',
+        //     templateUrl: 'pages/editproject-modules/assignModal.html',
+        //     controller: EditProjectModulesCtrl,
+        //     controllerAs: 'vm',
+        //     bindToController: true,
+        //     scope: this._$scope,
+        //     resolve: {},
+        // });
     }
 
     assign(module) {
