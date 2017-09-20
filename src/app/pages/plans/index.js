@@ -1,7 +1,7 @@
 import angular from 'angular/index';
 
 // Create the module where our functionality can attach to
-let profileModule = angular.module('app.plans', []);
+let profileModule = angular.module('landing.plans', []);
 
 // Include our UI-Router config settings
 import PlansConfig from './plans.config';

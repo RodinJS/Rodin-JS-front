@@ -1,5 +1,86 @@
 .billing-section {
   margin-top: 80px;
+  .section-desc {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+  }
+  .table-billing {
+    border: none !important;
+    th:first-child {
+      //border-bottom: none;
+    }
+    tr,td,th {
+      border-bottom:1px solid #002655;
+      font-size: 14px;
+      color: #dedede;
+    }
+    thead {
+      background: #0C1F37;
+      font-size: 14px;
+      font-weight: 600;
+      color: #dedede;
+    }
+
+    //tr {
+    //  //border-top:none;
+    //  border-bottom: 1px solid;
+    //  border-bottom-color: #002655;
+    //}
+  }
+  .billing-section-title {
+    color: #FFFFFF;
+    font-weight: 600;
+    margin-bottom: 0px;
+    font-family: Roboto;
+    font-size: 18px;
+  }
+  .billing-info {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    background: #0E1E32;
+    padding: 20px;
+    .info {
+      font-size: 13px;
+      color: #AAAAAA;
+      width: 50%;
+      margin: 0 auto 10px;
+    }
+    .plan-info {
+      .btn-submit {
+        margin-top: 30px;
+      }
+    }
+    .btn-submit {
+      color: #AAAAAA;
+    }
+    .payment-methods {
+      .btn-submit {
+        margin-left: 15px;
+      }
+    }
+    .card-info {
+      margin-top: 13px;
+      border: 2px solid #002F52;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      padding: 15px;
+      .card-user {
+        font-size: 14px;
+        margin-bottom: 0px;
+        span {
+          font-size: 13px;
+          color: #AAAAAA;
+        }
+      }
+      i {
+        font-size: 25px !important;
+        color: #002E51;
+        margin-top: 6px;
+      }
+    }
+  }
   .upgrade-group {
     margin-bottom: 0px !important;
   }
@@ -41,25 +122,28 @@
     }
   }
   .payment-service {
+    text-align: center;
     display: inline-table;
     border-spacing: 10px 0;
-    margin-top: 30px;
-    margin-left: 0;
+    margin-top: 45px;
+    margin-left: 60px;
     .payservice-info {
       color: $color-text-gray;
+      font-size: 12px;
     }
     li {
       display: table-cell;
       vertical-align: middle;
       img {
+        height: 25px;
         border-radius: 3px;
       }
     }
   }
   .image-highlight {
-    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,139,242,1);
-    -moz-box-shadow: 0px 0px 8px 0px rgba(0,139,242,1);
-    box-shadow: 0px 0px 8px 0px rgba(0,139,242,1);
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 139, 242, 1);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 139, 242, 1);
+    box-shadow: 0px 0px 8px 0px rgba(0, 139, 242, 1);
   }
   .card-type-image {
     position: absolute;
@@ -73,7 +157,7 @@
   }
 
   .payment-data {
-      .payment-content {
+    .payment-content {
       > h1 {
         margin-bottom: 24px;
       }
@@ -145,17 +229,27 @@
     }
   }
 }
+
+.section-info {
+  font-weight: 600;
+  margin-bottom: 0px;
+  font-size: 18px;
+}
+
+.what-you-get {
+  margin-left: 5px;
+  margin-bottom: 0px;
+  color: $color-primary;
+}
+
 .upgrade-form {
   label {
     font-size: 14px;
     color: #AAAAAA;
   }
-  .section-info {
-    font-weight: 600;
-    font-size: 18px;
-  }
+
   .form-group {
-    >div {
+    > div {
       input::-webkit-input-placeholder {
         font-family: $Roboto;
         font-size: 16px;
@@ -173,14 +267,11 @@
     }
   }
 }
+
 .upgrade-content {
   background: #0E1E32;
   border-radius: 6px;
-  .what-you-get {
-    margin-left: 5px;
-    margin-bottom: 0px;
-    color:$color-primary ;
-  }
+
   .upgrade-info-section:nth-child(2) {
     &:before {
       content: "";

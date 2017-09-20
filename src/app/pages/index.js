@@ -107,6 +107,7 @@ let pagesModule = angular.module('app.pages', [
     'landing.single-feature',
     'landing.issue',
     'landing.single-issue',
+    'landing.plans',
 
 
     'app.dashboard',
@@ -123,7 +124,7 @@ let pagesModule = angular.module('app.pages', [
     'app.editporjectPublish',
 
 
-    'app.plans',
+    // 'app.plans',
     'app.upgrade-plans',
     'app.billing',
     'app.purchases',

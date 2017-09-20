@@ -12,6 +12,9 @@ function UpgradePlansConfig($stateProvider) {
             templateUrl: 'pages/plans/upgrade/upgrade-plans.html',
             title: 'Profile',
             showFooter: true,
+            params: {
+              plan: null
+            },
             resolve: {
                 auth: function (User) {
                     return User.ensureAuthIs(true);

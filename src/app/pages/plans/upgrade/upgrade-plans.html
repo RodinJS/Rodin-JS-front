@@ -1,69 +1,47 @@
-<div class="container billing-section">
-    <div class="col-md-offset-3 col-md-6 ">
+<div class="container billing-section" style="margin-top: 30px !important;">
+    <div class="col-md-offset-3 col-md-6">
         <div class="row">
             <div class="col-md-12 upgrade-content">
                 <div class="row upgrade-info">
                     <div class="col-md-6 upgrade-info-section">
                         <div class="plan-info">
                             <h6 class="what-you-get">What you will get:</h6>
-                            <div class="col-md-6 info-items text-center">
+                            <div class="col-md-6 info-items text-center" ng-repeat="info in $ctrl.upgradetPlan.info">
                                 <div class="plan-row">
                                     <section>
-                                        <p>500MB</p>
-                                        <p class="small">Traffic</p>
-                                    </section>
-                                </div>
-                            </div>
-                            <div class="col-md-6 info-items text-center">
-                                <div class="plan-row">
-                                    <section>
-                                        <p>1GB</p>
-                                        <p class="small">Hosting space</p>
-                                    </section>
-                                </div>
-                            </div>
-                            <div class="col-md-6 info-items text-center">
-                                <div class="plan-row">
-                                    <section>
-                                        <p>Rodin URL</p>
-                                    </section>
-                                </div>
-                            </div>
-                            <div class="col-md-6 info-items text-center">
-                                <div class="plan-row">
-                                    <section>
-                                        <p>Rodin Loader</p>
+                                        <p> <strong>{{info.traffic}}</strong>{{info.value}}</p>
+                                        <p class="small">{{info.desc}}</p>
                                     </section>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 upgrade-info-section">
-                        <h1>DAVID</h1>
-                        <p class="upgrade-plan-desc">For professionals that need unbranded, advanced features</p>
-                        <a ui-sref="app.plans" class="change-plan"><i class="fa fa-chevron-circle-left" style="color: #AAAAAA" aria-hidden="true"></i>change</a>
-                        <p class="price"><sup class="currency">$</sup>50<sub class="payment-period">/month</sub></p>
+                        <h1>{{$ctrl.upgradetPlan.title}}</h1>
+                        <p class="upgrade-plan-desc" ng-bind-html="$ctrl.upgradetPlan.description"></p>
+                        <a ui-sref="landing.plans" class="change-plan"><i class="fa fa-chevron-circle-left" style="color: #AAAAAA" aria-hidden="true"></i>&nbsp; change</a>
+                        <p class="price"><sup class="currency">{{$ctrl.upgradetPlan.currency}}</sup>{{$ctrl.upgradetPlan.amount}}<sub class="payment-period">/{{$ctrl.upgradetPlan.period}}</sub></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="row">
-                    <h4 style="margin-top: 38px; margin-left: 10px;">Payment Information</h4>
-                    <ul class="payment-service">
+                    <p class="section-info" style="margin-top: 15px; margin-left: 10px;">Payment Information</p>
+                    <ul class="payment-service" style="margin-left: 0px;">
                         <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'visa'}" src="/images/payment/visa.png" alt=""></li>
                         <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'master_card'}" src="/images/payment/master_card.png" alt=""></li>
                         <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'american_express'}" src="/images/payment/american_express.png" alt=""></li>
                     </ul>
-                    <form name="upgrade" novalidate enctype="multipart/form-data" id="upgrade" method="post"
+                    <form name="upgrade" novalidate id="upgrade" ng-submit="$ctrl.createCustomer(upgrade.$valid)" method="post"
                           class="main-form upgrade-form">
-                        <div class="form-group" custom-input
+                        <div class="form-group" custom-input style="margin-bottom: 0px !important;"
                              data-ng-class="{
-                         'has-error': upgrade.cardNumber.$invalid && !upgrade.cardNumber.$pristine,
+                         'has-error': upgrade.cardNumber.$invalid && !upgrade.cardNumber.$pristine || upgrade.$submitted && upgrade.cardNumber.$invalid,
                          'has-success': upgrade.cardNumber.$valid,
                          }">
                             <div class="col-md-8">
                                 <label class="control-label">
-                                    <small>Credit Card Number:</small>
+                                    <small>Credit Card Number: <sub>*</sub></small>
                                 </label>
                                 <input type="text" class="form-control" placeholder="XXXXXXXXXXXXXXXX"
                                        name="cardNumber"
@@ -84,16 +62,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-bottom: 0px !important;">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 upgrade-group" custom-input
                                          data-ng-class="{
-                         'has-error': upgrade.securityCode.$invalid && !upgrade.securityCode.$pristine,
+                         'has-error': upgrade.securityCode.$invalid && !upgrade.securityCode.$pristine || upgrade.$submitted && upgrade.securityCode.$invalid,
                          'has-success': upgrade.securityCode.$valid,
                          }">
                                         <label class="control-label">
-                                            <small>Security Code:</small>
+                                            <small>Security Code: <i uib-tooltip="The 3 digits on the back of your credit card" class="fa fa-info-circle" aria-hidden="true"></i> <sub>*</sub></small>
                                         </label>
                                         <input type="text"
                                                class="form-control"
@@ -109,11 +87,11 @@
                                     </div>
                                     <div class="col-md-6 upgrade-group" custom-input
                                          data-ng-class="{
-                         'has-error': upgrade.expireDate.$invalid && !upgrade.expireDate.$pristine,
+                         'has-error': upgrade.expireDate.$invalid && !upgrade.expireDate.$pristine || upgrade.$submitted && upgrade.expireDate.$invalid,
                          'has-success': upgrade.expireDate.$valid,
                          }">
                                         <label class="control-label">
-                                            <small>Expiration Date:</small>
+                                            <small>Expiration Date: <sub>*</sub></small>
                                         </label>
                                         <input type="text"
                                                class="form-control"
@@ -136,11 +114,11 @@
                                 <div class="row">
                                     <div class="col-md-6 upgrade-group" custom-input
                                          data-ng-class="{
-                         'has-error': upgrade.firstName.$invalid && !upgrade.firstName.$pristine,
+                         'has-error': upgrade.firstName.$invalid && !upgrade.firstName.$pristine || upgrade.$submitted && upgrade.firstName.$invalid,
                          'has-success': upgrade.firstName.$valid,
                          }">
                                         <label class="control-label">
-                                            <small>First name:</small>
+                                            <small>First name: <sub>*</sub></small>
                                         </label>
                                         <input type="text" class="form-control" placeholder=""
                                                name="firstName"
@@ -152,11 +130,11 @@
                                     </div>
                                     <div class="col-md-6 upgrade-group" custom-input
                                          data-ng-class="{
-                         'has-error': upgrade.lastName.$invalid && !upgrade.lastName.$pristine,
+                         'has-error': upgrade.lastName.$invalid && !upgrade.lastName.$pristine || upgrade.$submitted && upgrade.lastName.$invalid,
                          'has-success': upgrade.lastName.$valid,
                          }">
                                         <label class="control-label">
-                                            <small>Last name:</small>
+                                            <small>Last name: <sub>*</sub></small>
                                         </label>
                                         <input type="text" class="form-control" placeholder=""
                                                name="lastName"
@@ -176,7 +154,7 @@
                          }">
                             <div class="col-md-12">
                                 <label class="control-label">
-                                    <small>Company name:</small>
+                                    <small>Company name: </small>
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
                                        name="companyName"
@@ -188,12 +166,12 @@
                         </div>
                         <div class="form-group" custom-input
                              data-ng-class="{
-                         'has-error': upgrade.address.$invalid && !upgrade.address.$pristine,
+                         'has-error': upgrade.address.$invalid && !upgrade.address.$pristine || upgrade.$submitted && upgrade.address.$invalid,
                          'has-success': upgrade.address.$valid,
                          }">
                             <div class="col-md-12">
                                 <label class="control-label">
-                                    <small>Address:</small>
+                                    <small>Address: <sub>*</sub></small>
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
                                        name="address"
@@ -208,11 +186,11 @@
                                 <div class="row">
                                     <div class="col-md-6 upgrade-group" custom-input
                                          data-ng-class="{
-                         'has-error': upgrade.city.$invalid && !upgrade.city.$pristine,
+                         'has-error': upgrade.city.$invalid && !upgrade.city.$pristine || upgrade.$submitted && upgrade.city.$invalid,
                          'has-success': upgrade.city.$valid,
                          }">
                                         <label class="control-label">
-                                            <small>City:</small>
+                                            <small>City: <sub>*</sub></small>
                                         </label>
                                         <input type="text" class="form-control" placeholder=""
                                                name="city"
@@ -223,11 +201,11 @@
                                     </div>
                                     <div class="col-md-6 upgrade-group" custom-input
                                          data-ng-class="{
-                         'has-error': upgrade.country.$invalid && !upgrade.country.$pristine,
+                         'has-error': upgrade.country.$invalid && !upgrade.country.$pristine || upgrade.$submitted && upgrade.country.$invalid,
                          'has-success': upgrade.country.$valid,
                          }">
                                         <label class="control-label">
-                                            <small>Country:</small>
+                                            <small>Country: <sub>*</sub></small>
                                         </label>
                                         <input type="text" class="form-control" placeholder=""
                                                name="country"
@@ -244,11 +222,11 @@
                                 <div class="row">
                                     <div class="col-md-6 upgrade-group" custom-input
                                          data-ng-class="{
-                         'has-error': upgrade.postalCode.$invalid && !upgrade.postalCode.$pristine,
+                         'has-error': upgrade.postalCode.$invalid && !upgrade.postalCode.$pristine || upgrade.$submitted && upgrade.postalCode.$invalid,
                          'has-success': upgrade.postalCode.$valid,
                          }">
                                         <label class="control-label">
-                                            <small>Postal Code:</small>
+                                            <small>Postal Code: <sub>*</sub></small>
                                         </label>
                                         <input type="text" class="form-control" placeholder=""
                                                name="postalCode"
@@ -277,7 +255,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 text-center">
-                                <button class="btn btn-highlighted">Purchase</button>
+                                <button class="btn btn-highlighted" type="submit">Purchase</button>
                             </div>
                         </div>
                     </form>
@@ -285,4 +263,7 @@
             </div>
         </div>
     </div>
+</div>
+<div class="loaderContent" data-ng-if="$ctrl.showLoader">
+    <div class="spriteLoader"></div>
 </div>

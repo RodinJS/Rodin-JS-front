@@ -18,23 +18,22 @@ a {
   border: 1px solid rgba(170, 170, 170, .2);
   border-left-color: transparent;
   border-right-color: transparent;
-  .button-ask {
-    cursor: pointer;
-    font-size: 16px;
-    padding: 10px 15.5px;
-    float: right;
-    margin-top: 6px;
-    background: #045190;
-    color: #DEDEDE;
-    border: none;
-    border-radius: 6px;
-    &:hover {
-      background: $color-primary;
-      color: white;
-    }
+}
+.button-ask {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 15.5px;
+  float: right;
+  margin-top: 6px;
+  background: #045190;
+  color: #DEDEDE;
+  border: none;
+  border-radius: 6px;
+  &:hover {
+    background: $color-primary;
+    color: white;
   }
 }
-
 .single-tag-section {
   margin-bottom: 22px;
 }

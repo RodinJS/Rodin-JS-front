@@ -1,145 +1,51 @@
 <div class="static-pages faq-page">
     <div class="container-fluid page static">
         <div class="row title-section">
-            <h1 class="title text-center">PLANS</h1>
+            <h1 class="title text-center">PROJECT PLANS</h1>
             <span class="line"></span>
         </div>
     </div>
     <div class="container billing-section">
         <p class="billing-title text-center">To switch your plan, select from one of the options below.</p>
-        <div class="col-md-4 text-center payment-data">
+        <div class="col-md-4 text-center payment-data" ng-repeat="plan in $ctrl.plans">
             <div class="payment-content">
-                <h1>THINKER</h1>
-                <p class="about-plan">Most unlimited sites without paying us a dime with Client Billing</p>
-                <p class="price"><sup class="currency">$</sup>0<sub class="payment-period">/month</sub></p>
+                <h1>{{plan.title}}</h1>
+                <p class="about-plan" ng-bind-html="plan.description"></p>
+                <p class="price"><sup class="currency">{{plan.currency}}</sup>{{plan.amount}}<sub
+                        class="payment-period">/{{plan.period}}</sub></p>
                 <div class="col-md-12 plan-info">
                     <div class="row">
-                        <div class="col-md-6 info-items text-center">
+                        <div class="col-md-6 info-items text-center" ng-repeat="info in plan.info">
                             <div class="plan-row">
                                 <section>
-                                    <p>500MB</p>
-                                    <p class="small">Traffic</p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>1GB</p>
-                                    <p class="small">Hosting space</p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>Rodin URL</p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>Rodin Loader</p>
+                                    <p><strong>{{info.traffic}}</strong>{{info.value}}</p>
+                                    <p class="small">{{info.desc}}</p>
                                 </section>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--ng-click="$ctrl.downgrade ? $ctrl.modals.downgrade = true : $ctrl.modals.downgrade = false"-->
+
                 <div class="action-section">
-                    <button ng-click="$ctrl.downgrade ? $ctrl.modals.downgrade = true : $ctrl.modals.downgrade = false"
-                            ng-class="{'button-negative': !$ctrl.downgrade, 'button-downgrade': $ctrl.downgrade}">
-                        {{$ctrl.downgrade ? 'Downgrade': 'Current Plan'}}
+                    <button data-ng-if="$ctrl.userSubscription.plan && plan.title !== 'LIBERTY'"
+                            ng-class="{'button-negative':$ctrl.userSubscription.plan.id === plan.title.toLowerCase(),
+                            'button-downgrade':$ctrl.userSubscription.plan.id !== plan.title.toLowerCase() && $ctrl.userSubscription.plan.id =='david', 'btn btn-upgrade': $ctrl.userSubscription.plan.id !=='david'}"
+                            ng-click="$ctrl.updatePlan(plan.title.toLowerCase())">
+                        {{
+                        $ctrl.userSubscription.plan.id === plan.title.toLowerCase() ?
+                        'Current Plan': $ctrl.userSubscription.plan.id !== 'david' ? 'Upgrade':'Downgrade'
+                        }}
                     </button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 text-center payment-data">
-            <div class="payment-content">
-                <h1>DAVID</h1>
-                <p class="about-plan">For professionals that need unbranded, advanced features</p>
-                <p class="price"><sup class="currency">$</sup>50<sub class="payment-period">/month</sub></p>
-                <div class="col-md-12 plan-info">
-                    <div class="row">
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>3TB</p>
-                                    <p class="small">Traffic</p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>40BG</p>
-                                    <p class="small">Hosting space</p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>Custom URL</p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>Rodin Loader</p>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="action-section">
-                    <a  ui-sref="app.upgrade-plans" class="btn btn-upgrade">Upgrade plan</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 text-center payment-data">
-            <div class="payment-content">
-                <h1>LIBERTY</h1>
-                <p class="about-plan">For small agencies and companies
-                    <span class="payment-info">(will be available soon)</span></p>
-                <p class="price"><sup class="currency">$</sup>500<sub class="payment-period">/month</sub></p>
-                <div class="col-md-12 plan-info">
-                    <div class="row">
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>6TB</p>
-                                    <p class="small">Traffic</p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>200GB</p>
-                                    <p class="small">Hosting space</p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>Custom URL</p>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="col-md-6 info-items text-center">
-                            <div class="plan-row">
-                                <section>
-                                    <p>Custom Loader</p>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="action-section">
-                    <button class="button-negative">Upgrade plan</button>
+                    <button data-ng-if="!$ctrl.userSubscription.plan && plan.title !== 'LIBERTY'"
+                            ng-class="{'button-negative':plan.title.toLowerCase() === 'thinker',
+                            'btn btn-upgrade': plan.title.toLowerCase() =='david'}"
+                            ui-sref="app.upgrade-plans">
+                        {{ plan.title.toLowerCase() === 'thinker' ? 'Current Plan':'Upgrade'}}
+                    </button>
+
+
+                    <button class="button-negative" data-ng-if="plan.title == 'LIBERTY'">Available soon</button>
                 </div>
             </div>
         </div>
@@ -156,23 +62,46 @@
 </div>
 
 <div class="modal" close-modal="downgrade"
-     ng-class="{'display-block': $ctrl.modals.downgrade, 'display-none': !$ctrl.modals.downgrade}">
+     ng-class="{'display-block': $ctrl.modals.downgrade.active, 'display-none': !$ctrl.modals.downgrade.active}">
     <div class="modal-content">
         <div class="modal-header">
-            <p>Downgrade</p>
+            <p>{{$ctrl.modals.downgrade.title}}</p>
         </div>
         <div class="modal-body">
-            <p>
-                Are you sure you want to downgrade your profile from PREMIUM to FREE?
+            <p ng-bind-html="$ctrl.modals.downgrade.description">
             </p>
         </div>
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <div class="text-center">
-                    <button class="btn btn-negative">Yes</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.downgrade = false">Cancel</a>
+                    <button class="btn btn-negative" ng-click="$ctrl.downgradePlan()">Yes</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.downgrade.active = false">Cancel</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal" close-modal="upgrade"
+     ng-class="{'display-block': $ctrl.modals.upgrade.active, 'display-none': !$ctrl.modals.upgrade.active}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <p>{{$ctrl.modals.upgrade.title}}</p>
+        </div>
+        <div class="modal-body">
+            <p ng-bind-html="$ctrl.modals.upgrade.description">
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <div class="text-center">
+                    <button class="btn btn-primary btn-positive" ng-click="$ctrl.approveUpgrade()">Confirm</button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.upgrade.active = false">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loaderContent" data-ng-if="$ctrl.showLoader">
+    <div class="spriteLoader"></div>
 </div>
