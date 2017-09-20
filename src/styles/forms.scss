@@ -3,7 +3,7 @@ $error_color: rgba(255, 0, 0, 0.5); //#a94442; //;
 .error:not(.ui-notification) {
 	color: $error_color !important;
 }
-.form-group {
+.form-group, .upgrade-group {
   margin-bottom: 36px !important;
   &.search{
     margin-bottom: 0 !important;

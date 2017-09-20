@@ -27,6 +27,8 @@ import './plans/index';
 
 import './billing/index';
 
+import './plans/upgrade/index';
+
 import './purchases/index';
 
 import './editproject-ios/index';
@@ -105,6 +107,7 @@ let pagesModule = angular.module('app.pages', [
     'landing.single-feature',
     'landing.issue',
     'landing.single-issue',
+    'landing.plans',
 
 
     'app.dashboard',
@@ -121,7 +124,8 @@ let pagesModule = angular.module('app.pages', [
     'app.editporjectPublish',
 
 
-    'app.plans',
+    // 'app.plans',
+    'app.upgrade-plans',
     'app.billing',
     'app.purchases',
     'modules'

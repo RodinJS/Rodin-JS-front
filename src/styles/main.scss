@@ -29,7 +29,7 @@ button:active {
 @import "./plugins/_swiper";
 
 @import "mixins";
-//@import "billings";
+@import "billings";
 @import "normalize";
 @import "GUI";
 @import "common";
@@ -104,5 +104,18 @@ button:active {
       padding: 12px;
       font-size: 12px;
     }
+  }
+}
+.btn-highlighted {
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #DEDEDE;
+  background: #008BF2 !important;
+  transition: background .2s ease, border-color .2s ease;
+  padding: 12px 20px;
+  &:hover {
+    border-color: #31a7ff !important;
+    background: #31a7ff !important;
+    color: white;
   }
 }
