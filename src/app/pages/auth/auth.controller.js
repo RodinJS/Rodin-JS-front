@@ -63,7 +63,9 @@ class AuthCtrl {
                 (res) => {
                     if(this._$rootScope.previousState.slug && this._$rootScope.previousState.slug === 'qna') {
                         this._$state.go(this._$rootScope.previousState.name, {id: this._$rootScope.previousParams.id});
-                    } else {
+                    } else if(this._$rootScope.previousState.slug) {
+                        this._$state.go(this._$rootScope.previousState.slug);
+                    }else {
                         this._$state.go('app.dashboard');
                     }
                 },

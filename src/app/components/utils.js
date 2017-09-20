@@ -261,6 +261,42 @@ function AutoGrow() {
     }
 }
 
+function CreditCard() {
+    return {
+        require: 'ngModel',
+        link: function link(scope, elm, attrs, ctrl) {
+            ctrl.$parsers.unshift(function(value){
+                scope.upgrade.type =
+                    (/^5[1-5]/.test(value)) ? "master_card"
+                        : (/^4/.test(value)) ? "visa"
+                        : (/^3[47]/.test(value)) ? 'american_express'
+                            : (/^6011|65|64[4-9]|622(1(2[6-9]|[3-9]\d)|[2-8]\d{2}|9([01]\d|2[0-5]))/.test(value)) ? 'discover'
+                                : undefined;
+                ctrl.$setValidity('invalid',!!scope.upgrade.type);
+                return value
+            })
+        },
+    };
+}
+
+function CreditCardExpiration() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ctrl){
+            scope.$watch('[upgrade.month,upgrade.year]',function(value){
+                ctrl.$setValidity('invalid',true);
+                if ( scope.upgrade.year == scope.currentYear
+                    && scope.upgrade.month <= scope.currentMonth
+                ) {
+                    ctrl.$setValidity('invalid',false)
+                }
+                return value
+            },true)
+        },
+    };
+}
+
+
 export default {
     limitTo,
     Compile,
@@ -272,4 +308,6 @@ export default {
     ConfirmPassword,
     RdScroll,
     AutoGrow,
+    CreditCard,
+    CreditCardExpiration
 };
