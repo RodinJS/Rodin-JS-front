@@ -9,7 +9,7 @@
                             <div class="col-md-6 info-items text-center" ng-repeat="info in $ctrl.upgradetPlan.info">
                                 <div class="plan-row">
                                     <section>
-                                        <p> <strong>{{info.traffic}}</strong>{{info.value}}</p>
+                                        <p><strong>{{info.traffic}}</strong>{{info.value}}</p>
                                         <p class="small">{{info.desc}}</p>
                                     </section>
                                 </div>
@@ -19,8 +19,11 @@
                     <div class="col-md-6 upgrade-info-section">
                         <h1>{{$ctrl.upgradetPlan.title}}</h1>
                         <p class="upgrade-plan-desc" ng-bind-html="$ctrl.upgradetPlan.description"></p>
-                        <a ui-sref="landing.plans" class="change-plan"><i class="fa fa-chevron-circle-left" style="color: #AAAAAA" aria-hidden="true"></i>&nbsp; change</a>
-                        <p class="price"><sup class="currency">{{$ctrl.upgradetPlan.currency}}</sup>{{$ctrl.upgradetPlan.amount}}<sub class="payment-period">/{{$ctrl.upgradetPlan.period}}</sub></p>
+                        <a ui-sref="landing.plans" class="change-plan"><i class="fa fa-chevron-circle-left"
+                                                                          style="color: #AAAAAA" aria-hidden="true"></i>&nbsp;
+                            change</a>
+                        <p class="price"><sup class="currency">{{$ctrl.upgradetPlan.currency}}</sup>{{$ctrl.upgradetPlan.amount}}<sub
+                                class="payment-period">/{{$ctrl.upgradetPlan.period}}</sub></p>
                     </div>
                 </div>
             </div>
@@ -28,11 +31,16 @@
                 <div class="row">
                     <p class="section-info" style="margin-top: 15px; margin-left: 10px;">Payment Information</p>
                     <ul class="payment-service" style="margin-left: 0px;">
-                        <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'visa'}" src="/images/payment/visa.png" alt=""></li>
-                        <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'master_card'}" src="/images/payment/master_card.png" alt=""></li>
-                        <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'american_express'}" src="/images/payment/american_express.png" alt=""></li>
+                        <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'visa'}"
+                                 src="/images/payment/visa.png" alt=""></li>
+                        <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'master_card'}"
+                                 src="/images/payment/master_card.png" alt=""></li>
+                        <li><img class="img-responsive"
+                                 ng-class="{'image-highlight': upgrade.type === 'american_express'}"
+                                 src="/images/payment/american_express.png" alt=""></li>
                     </ul>
-                    <form name="upgrade" novalidate id="upgrade" ng-submit="$ctrl.createCustomer(upgrade.$valid)" method="post"
+                    <form name="upgrade" novalidate id="upgrade" ng-submit="$ctrl.createCustomer(upgrade.$valid)"
+                          method="post"
                           class="main-form upgrade-form">
                         <div class="form-group" custom-input style="margin-bottom: 0px !important;"
                              data-ng-class="{
@@ -51,7 +59,8 @@
                                        data-ng-minlength="15"
                                        maxlength="19"
                                        required>
-                                <div class="error" ng-show="upgrade.cardNumber.$invalid && !upgrade.cardNumber.$pristine">
+                                <div class="error"
+                                     ng-show="upgrade.cardNumber.$invalid && !upgrade.cardNumber.$pristine">
                                     <p ng-show="upgrade.cardNumber.$error.minlength">Credit card must be 15-19
                                         digits</p>
                                     <p ng-show="upgrade.cardNumber.$error.pattern">Credit card must consist of only
@@ -71,7 +80,10 @@
                          'has-success': upgrade.securityCode.$valid,
                          }">
                                         <label class="control-label">
-                                            <small>Security Code: <i uib-tooltip="The 3 digits on the back of your credit card" class="fa fa-info-circle" aria-hidden="true"></i> <sub>*</sub></small>
+                                            <small>Security Code: <i
+                                                    uib-tooltip="The 3 digits on the back of your credit card"
+                                                    class="fa fa-info-circle" aria-hidden="true"></i> <sub>*</sub>
+                                            </small>
                                         </label>
                                         <input type="text"
                                                class="form-control"
@@ -98,6 +110,7 @@
                                                placeholder="XX/XX"
                                                ng-model="$ctrl.upgrade.expireDate"
                                                name="expireDate"
+                                               data-credit-card-expiration
                                                ng-pattern="/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/"
                                                required>
                                     </div>
@@ -124,7 +137,7 @@
                                                name="firstName"
                                                ng-model="$ctrl.upgrade.firstName"
                                                required
-                                               >
+                                        >
                                         <div class="error">
                                         </div>
                                     </div>
@@ -140,7 +153,7 @@
                                                name="lastName"
                                                ng-model="$ctrl.upgrade.lastName"
                                                required
-                                              >
+                                        >
                                         <div class=" error">
                                         </div>
                                     </div>
@@ -154,7 +167,7 @@
                          }">
                             <div class="col-md-12">
                                 <label class="control-label">
-                                    <small>Company name: </small>
+                                    <small>Company name:</small>
                                 </label>
                                 <input type="text" class="form-control" placeholder=""
                                        name="companyName"
@@ -245,7 +258,6 @@
                                         </label>
                                         <input type="text" class="form-control" placeholder=""
                                                name="phoneNumber"
-                                               required
                                                ng-model="$ctrl.upgrade.phoneNumber">
                                         <div class="error">
                                         </div>
