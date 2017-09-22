@@ -2,11 +2,12 @@
  * Created by Reinchard on 7/26/2017.
  */
 class HelpDescComponentController {
-    constructor($scope, $state, User, HelpDescService) {
+    constructor($scope, $state, User, HelpDescService, Notification) {
         'ngInject';
         this.currentUser = User.current;
         this._$scope = $scope;
         this._$state = $state;
+        this.Notification = Notification;
         this.inProgress = false;
         this.showLoader = true;
         this.helpService = HelpDescService;

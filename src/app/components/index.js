@@ -19,6 +19,7 @@ componentsModule.directive('rdScroll', Utils.RdScroll);
 componentsModule.directive('autoGrow', Utils.AutoGrow);
 componentsModule.directive('creditCard', Utils.CreditCard);
 componentsModule.directive('creditCardExpiration', Utils.CreditCardExpiration);
+componentsModule.directive('markdownValidation', Utils.markdownValidation);
 
 
 import EditorNavigation from './editorNavigation/index';

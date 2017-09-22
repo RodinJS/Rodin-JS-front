@@ -155,7 +155,7 @@
                     </div>
                     <div class="col-md-12 action-section text-center">
                         <a class="btn-back" ng-click="$ctrl.goBack()">Back</a>
-                        <button class="btn-answer" ng-click="$ctrl.submitAnswer(); answerForm.submitted = true">
+                        <button class="btn-answer" ng-click="$ctrl.submitAnswer(answerForm); answerForm.submitted = true">
                             {{$ctrl.currentUser ? 'Post':'Sign in and post'}}
                         </button>
                     </div>
@@ -187,7 +187,7 @@
                                       data-ng-focus="createQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
-                        <div class="form-group question-area">
+                        <div class="form-group question-area" markdown-validation markdown-form="createQuestion" markdown-input="description">
                             <textarea ng-model="$ctrl.post.description"
                                       on-show="$ctrl.markdownShow()"
                                       name="description"
@@ -241,7 +241,7 @@
                                       data-ng-focus="updateQuestion.subject.focused = true"
                                       placeholder="{{$ctrl.config.placeholder}}"></textarea>
                         </div>
-                        <div class="form-group question-area">
+                        <div class="form-group question-area" markdown-validation markdown-form="updateQuestion" markdown-input="preview">
                             <textarea ng-model="$ctrl.question.preview"
                                       on-show="$ctrl.markdownShow()"
                                       placeholder="Fill in the details..."
