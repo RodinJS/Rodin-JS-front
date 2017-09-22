@@ -17,8 +17,8 @@ class HelpDescService {
 
     getList(type = '', page = 1) {
         let Analyser = new this._Analyser();
-        this._Support.one(`/search/${type}?page=${page}`).get({}).then(Analyser.resolve, Analyser.reject);
-        // this._Support.one(`/${type}?page=${page}`).get({}).then(Analyser.resolve, Analyser.reject);
+        // this._Support.one(`/search/${type}?page=${page}`).get({}).then(Analyser.resolve, Analyser.reject);
+        this._Support.one(`/${type}?page=${page}`).get({}).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 
