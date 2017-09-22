@@ -39,6 +39,7 @@ class SingleDescController {
         };
         this.onPreview = false;
         this.markdownShow = (e) => {
+            this.editor = e.$editor;
             e.$editor.bind('input', this.onMarkdownChange.bind(this, e));
             e.$editor.bind('click', this.onMarkdownChange.bind(this, e));
             e.hideButtons(['cmdHeading', 'cmdImage', 'cmdList', 'cmdQuote', 'cmdUrl']);
@@ -202,6 +203,9 @@ class SingleDescController {
                     this.showLoader = false;
                 })
         }
+        if (form.$invalid) {
+            this.editor.addClass('editor-has-error')
+        }
 
 
     }
@@ -213,7 +217,6 @@ class SingleDescController {
             };
             return this._$state.go('landing.login');
         }
-
         if (form.$valid) {
             if (this.selectedTags.length > 0) {
                 this.post.tags = this.selectedTags.map((tag) => tag.text)
@@ -230,6 +233,9 @@ class SingleDescController {
                 }).catch((err) => {
                 this.showLoader = false;
             })
+        }
+        if (!form.description.$valid) {
+            this.editor.addClass('editor-has-error')
         }
     }
 
@@ -315,22 +321,8 @@ class SingleDescController {
         return html
     }
 
-
     onMarkdownChange(editor, e) {
         this.onPreview = editor.$isPreview;
-        if (e && e.target && e.target.value) {
-            if (e.target.className.includes('ng-invalid')) {
-                editor.$editor.addClass('editor-has-error')
-            } else {
-                editor.$editor.removeClass('editor-has-error')
-            }
-            if (e.target.value.length >= 3) {
-                editor.$editor.addClass('editor-has-success')
-            } else {
-                editor.$editor.removeClass('editor-has-success')
-            }
-        }
-
     }
 
     previewTrigger() {
