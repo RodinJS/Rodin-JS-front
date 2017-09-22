@@ -250,7 +250,6 @@ class SingleDescController {
         this.showLoader = true;
         let updateSubject = {
             subject: this.updated.subject,
-            tags:undefined
         };
         if (this.updated.tags.length > 0) {
             updateSubject.tags = this.updated.tags
