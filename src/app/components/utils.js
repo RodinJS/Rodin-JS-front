@@ -221,33 +221,6 @@ function RdScroll() {
 }
 
 
-function MultiSelect() {
-    return {
-        restrict: 'E',
-        scope: {
-            rdScroll: '=',
-        },
-        link: function link(scope, elem, attrs, ctrl) {
-            let elHeight = 0;
-            scope.$watch(() => {
-                for (let i = 0; i < elem[0].children.length; i++) {
-                    elHeight += elem[0].children[i].clientHeight;
-                }
-
-                setElementHeight(elHeight);
-            });
-            let setElementHeight = height => {
-                $(elem).slimScroll({
-                    height: `${height >= 350 ? 350 : height}px`,
-                    color: '#AAAAAA',
-                    alwaysVisible: true
-                });
-                elHeight = 0;
-            };
-        },
-    };
-}
-
 function AutoGrow() {
     return function (scope, element, attr) {
         let update = function () {
@@ -288,8 +261,8 @@ function CreditCardExpiration() {
             scope.$watch('upgrade.expireDate.$viewValue', function (value) {
                 ctrl.$setValidity('invalid', true);
                 if (value && value.length === 5 && value.includes('/')) {
-                    let year         = Number('20' + value.split('/')[1]),
-                        month        = value.split('/')[0];
+                    let year = Number('20' + value.split('/')[1]),
+                        month = value.split('/')[0];
                     if (month <= 0 || month > 12 || year > currentYear + 10) {
                         return ctrl.$setValidity('invalid', false)
                     }
@@ -309,6 +282,31 @@ function CreditCardExpiration() {
     };
 }
 
+function markdownValidation() {
+    return {
+        restrict: 'A',
+        scope: {
+            markdownForm: '=markdownForm',
+            markdownInput: '@'
+        },
+        link: function (scope, elm, attrs, ctrl) {
+            scope.$parent.$markdownEditorObject.$options.onChange = change;
+            function change(e) {
+                if (scope.markdownForm[scope.markdownInput].$invalid) {
+                    scope.$parent.$markdownEditorObject.$editor.addClass('editor-has-error')
+                } else {
+                    scope.$parent.$markdownEditorObject.$editor.removeClass('editor-has-error')
+                }
+                if (scope.markdownForm[scope.markdownInput].$valid) {
+                    scope.$parent.$markdownEditorObject.$editor.addClass('editor-has-success')
+                } else {
+                    scope.$parent.$markdownEditorObject.$editor.removeClass('editor-has-success')
+                }
+            }
+        },
+    }
+
+}
 
 export default {
     limitTo,
@@ -322,5 +320,6 @@ export default {
     RdScroll,
     AutoGrow,
     CreditCard,
-    CreditCardExpiration
+    CreditCardExpiration,
+    markdownValidation
 };
