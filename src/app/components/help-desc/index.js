@@ -63,6 +63,9 @@ class HelpDescComponentController {
                 this.response = response;
                 this.updatePagination(response.pages);
             })
+            .catch((err) => {
+                this.showLoader = false;
+            })
     }
 
     vote(id, vote, index) {

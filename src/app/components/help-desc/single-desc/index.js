@@ -247,24 +247,32 @@ class SingleDescController {
     }
 
     updateQuestion() {
-        let promises = [this.helpService.updateConversation(this.type, this.question.id, {
-            tags: this.updated.tags,
-            subject: this.updated.subject
-        })];
+        this.showLoader = true;
+        let updateSubject = {
+            subject: this.updated.subject,
+        };
+        if (this.updated.tags.length > 0) {
+            updateSubject.tags = this.updated.tags
+        }
+        let promises = [this.helpService.updateConversation(this.type, this.question.id, updateSubject)];
 
         if (this.updated.description) {
             promises.push(this.helpService.updateThread(this.question.id, {
                 description: this.updated.description,
                 threadId: this.question.myThreadId,
-                tags: this.updated.tags
             }))
         }
         Promise.all(promises)
             .then((resp) => {
+                this.showLoader = true;
                 this.previewTrigger();
                 this.Notification.success('Conversation updated');
+                this.goBack()
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                this.showLoader = true;
+                this.Notification.error('Something went wrong');
+            })
     }
 
     deleteQuestion() {
