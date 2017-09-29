@@ -266,7 +266,7 @@ function CreditCardExpiration() {
                     if (month <= 0 || month > 12 || year > currentYear + 10) {
                         return ctrl.$setValidity('invalid', false)
                     }
-                    if (year < currentYear || (year == currentYear && month < currentMonth)) {
+                    if (year < currentYear || year == currentYear) {
                         // The date is expired
                         return ctrl.$setValidity('invalid', false)
                     }
