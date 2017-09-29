@@ -25,7 +25,6 @@
                         </div>
                     </div>
                 </div>
-                <!--ng-click="$ctrl.downgrade ? $ctrl.modals.downgrade = true : $ctrl.modals.downgrade = false"-->
 
                 <div class="action-section">
                     <button data-ng-if="$ctrl.userSubscription.plan && plan.title !== 'LIBERTY'"
@@ -40,7 +39,7 @@
                     <button data-ng-if="!$ctrl.userSubscription.plan && plan.title !== 'LIBERTY'"
                             ng-class="{'button-negative':plan.title.toLowerCase() === 'thinker',
                             'btn btn-upgrade': plan.title.toLowerCase() =='david'}"
-                            ui-sref="app.upgrade-plans">
+                            ng-click="$ctrl.updatePlan(plan.title.toLowerCase())">
                         {{ plan.title.toLowerCase() === 'thinker' ? 'Current Plan':'Upgrade'}}
                     </button>
 
@@ -60,48 +59,50 @@
         </div>
     </div>
 </div>
-
-<div class="modal" close-modal="downgrade"
-     ng-class="{'display-block': $ctrl.modals.downgrade.active, 'display-none': !$ctrl.modals.downgrade.active}">
+<div class="modal" close-modal="{{$ctrl.modals.active.name}}"
+     ng-class="{'display-block': $ctrl.modals.active.active, 'display-none': !$ctrl.modals.active.active}">
     <div class="modal-content">
         <div class="modal-header">
-            <p>{{$ctrl.modals.downgrade.title}}</p>
+            <p>{{$ctrl.modals.active.title}}</p>
         </div>
         <div class="modal-body">
-            <p ng-bind-html="$ctrl.modals.downgrade.description">
+            <p ng-bind-html="$ctrl.modals.active.description">
             </p>
         </div>
         <div class="modal-footer">
             <div class="required-field-actions clearfix">
                 <div class="text-center">
-                    <button class="btn btn-negative" ng-click="$ctrl.downgradePlan()">Yes</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.downgrade.active = false">Cancel</a>
+                    <button class="btn"
+                            ng-class="{'btn-negative':$ctrl.modals.active.name === 'downgrade', 'btn-primary btn-positive': $ctrl.modals.active.name === 'upgrade'}"
+                            ng-click="$ctrl.modals.active.resolve()">{{$ctrl.modals.active.actions.success}}
+                    </button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.active.active = false">{{$ctrl.modals.active.actions.cancel}}</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal" close-modal="upgrade"
-     ng-class="{'display-block': $ctrl.modals.upgrade.active, 'display-none': !$ctrl.modals.upgrade.active}">
-    <div class="modal-content">
-        <div class="modal-header">
-            <p>{{$ctrl.modals.upgrade.title}}</p>
-        </div>
-        <div class="modal-body">
-            <p ng-bind-html="$ctrl.modals.upgrade.description">
-            </p>
-        </div>
-        <div class="modal-footer">
-            <div class="required-field-actions clearfix">
-                <div class="text-center">
-                    <button class="btn btn-primary btn-positive" ng-click="$ctrl.approveUpgrade()">Confirm</button>
-                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.upgrade.active = false">Cancel</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="modal" close-modal="upgrade"-->
+<!--ng-class="{'display-block': $ctrl.modals.upgrade.active, 'display-none': !$ctrl.modals.upgrade.active}">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<p>{{$ctrl.modals.upgrade.title}}</p>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<p ng-bind-html="$ctrl.modals.upgrade.description">-->
+<!--</p>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<div class="required-field-actions clearfix">-->
+<!--<div class="text-center">-->
+<!--<button class="btn btn-primary btn-positive" ng-click="$ctrl.approveUpgrade()">Confirm</button>-->
+<!--<a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.active.show = false">Cancel</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <div class="loaderContent" data-ng-if="$ctrl.showLoader">
     <div class="spriteLoader"></div>
 </div>

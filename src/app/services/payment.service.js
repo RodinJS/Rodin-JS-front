@@ -13,6 +13,8 @@ class PaymentService {
         this._PaymentCustomer = Restangular.all('payments/stripe/customer');
         this._PaymentSubscribe = Restangular.all('payments/stripe/subscription');
         this._PaymentCharges = Restangular.all('payments/stripe/charges');
+        this._PaymentToken = Restangular.all('payments/stripe/token');
+        this._PaymentInvoices = Restangular.all('payments/stripe/invoices');
         this._$state = $state;
         this._$q = $q;
         this._Validator = new Validator();
@@ -29,9 +31,10 @@ class PaymentService {
         this._PaymentCustomer.one('').customPOST(upgrade).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
-    updateCustomer(upgrade) {
+
+    updateCustomer(data) {
         let Analyser = new this._Analyser();
-        this._PaymentCustomer.one('').customPUT(upgrade).then(Analyser.resolve, Analyser.reject);
+        this._PaymentCustomer.one('').customPUT(data).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 
@@ -53,9 +56,9 @@ class PaymentService {
         return Analyser.promise;
     }
 
-    updateSubscription(planId) {
+    updateSubscription(data) {
         let Analyser = new this._Analyser();
-        this._PaymentSubscribe.one('').customPUT({planId}).then(Analyser.resolve, Analyser.reject);
+        this._PaymentSubscribe.one('').customPUT(data).then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 
@@ -68,6 +71,30 @@ class PaymentService {
     getCharges() {
         let Analyser = new this._Analyser();
         this._PaymentCharges.one('').customGET().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    createToken(card) {
+        let Analyser = new this._Analyser();
+        this._PaymentToken.one('').customPOST(card).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    getInvoices() {
+        let Analyser = new this._Analyser();
+        this._PaymentInvoices.one('').customGET().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    upgradeSubscribe(data) {
+        let Analyser = new this._Analyser();
+        this._PaymentSubscribe.one('/upgrade').customPUT(data).then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    upcomingInvoices() {
+        let Analyser = new this._Analyser();
+        this._PaymentInvoices.one('/upcoming').customGET().then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 }
