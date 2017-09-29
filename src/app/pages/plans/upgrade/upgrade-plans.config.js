@@ -13,7 +13,8 @@ function UpgradePlansConfig($stateProvider) {
             title: 'Profile',
             showFooter: true,
             params: {
-              plan: null
+                plan: null,
+                update: null
             },
             resolve: {
                 auth: function (User) {

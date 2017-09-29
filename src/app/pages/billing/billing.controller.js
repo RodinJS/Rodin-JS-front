@@ -14,6 +14,7 @@ class BillingCrtl {
         this.paymentService = PaymentService;
         this.getCustomer();
         this.getCharges();
+        this.getInvoices()
     }
 
     getCharges() {
@@ -29,12 +30,12 @@ class BillingCrtl {
         this.paymentService.getCustomer()
             .then((res) => {
                 this.showLoader = false;
-                if (res.subscriptions) {
-                    this.customer = res;
-
-                    this.plan = plans.filter(plan => plan.title.toLowerCase() === this.customer.subscriptions.data[0].plan.id)[0];
+                this.customer = res;
+                if (this.customer.subscriptions) {
+                    this.plan = plans.filter(plan => plan.title.toLowerCase() === this.customer.subscriptions.data["0"].plan.id)[0];
+                } else {
+                    this.plan = plans[0];
                 }
-                this.plan = plans[0];
             })
             .catch(() => {
                 this.showLoader = false;
@@ -86,6 +87,14 @@ class BillingCrtl {
             Error.show(Validator.getErrors(), this.formData, scope);
         }
 
+    }
+
+    getInvoices() {
+        this.paymentService.getInvoices()
+            .then((res) => {
+            this.invoices = res;
+                console.log(res)
+            })
     }
 }
 

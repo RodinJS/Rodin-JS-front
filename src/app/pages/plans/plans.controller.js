@@ -1,51 +1,79 @@
 import {plans} from './plans.js'
 
 class PlansCrtl {
-    constructor(AppConstants, User, $scope, Validator, Error, PaymentService) {
+    constructor(AppConstants, User, $state, $scope, Validator, Error, PaymentService, Notification) {
         'ngInject';
         this.showLoader = false;
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this.currentUser = User.current;
         this.formData = {};
         this._$scope = $scope;
+        this._$state = $state;
         this.paymentService = PaymentService;
         this.plans = plans;
         this.downgrade = true;
+        this.upcomingInvoice = {};
         if (User.current) {
             $scope.$watch('User.current', (newUser) => {
                 this.currentUser = newUser;
-                console.log(this.currentUser)
             });
             this.getUserSubscription();
             this.getCustomer();
+            this.upcomingInvoices();
         }
 
     }
 
+    upcomingInvoices() {
+        this.paymentService.upcomingInvoices()
+            .then((res) => {
+                this.upcomingInvoice = res;
+            })
+    }
+
     getCustomer() {
+        this.showLoader = true;
         this.paymentService.getCustomer()
             .then((res) => {
                 this.customer = res;
+                this.showLoader = false;
                 if (this.customer.sources) {
                     this.cardNumber = res.sources.data["0"].last4;
                 }
-                this.setModals();
-            })
+            }).catch(err => {
+            _.each(err, (val, key) => {
+                this.showLoader = false;
+                this.Notification.error(val.fieldName);
+            });
+        })
     }
 
     setModals() {
         this.modals = {
             downgrade: {
+                name: 'downgrade',
                 active: false,
                 title: 'Downgrade',
-                description: `Are you sure you want to downgrade your profile from <strong>DAVID</strong> to <strong>THINKER</strong>?`
+                description: `It’s ok <strong>David</strong>, sometimes we have to go back to tinkering and <strong>Thinking</strong>. You can still use David’s powers up to <strong>${this.timeConverter(this.userSubscription.current_period_end)}</strong>`,
+                resolve: this.downgradePlan.bind(this),
+                actions: {
+                    success: 'Yes',
+                    cancel: 'Cancel'
+                }
             },
             upgrade: {
+                name: 'upgrade',
                 active: false,
                 title: 'Upgrade',
-                description: `Changing plan from <strong>THINKER</strong> to <strong>DAVID</strong>. <br> Your card ending in <strong>${this.cardNumber}</strong> will be charged <strong>$50</strong>. <br>
-Please confirm.`
-            }
+                description: `Hey, you are still a <strong>David</strong>. We have not charged anything to your plastic as of now. The next charge will be on ${this.upcomingInvoice.next_payment_attempt ? this.timeConverter(this.upcomingInvoice.next_payment_attempt) : 'XX/XX/XXXX'}`,
+                resolve: this.approveUpgrade.bind(this),
+                actions: {
+                    success: 'Confirm',
+                    cancel: 'Cancel'
+                }
+            },
+            active: {}
         };
     }
 
@@ -54,7 +82,14 @@ Please confirm.`
             .then((res) => {
                 this.showLoader = false;
                 this.userSubscription = res;
-            }).catch(err => this.showLoader = false)
+                this.setModals();
+            }).catch(err => {
+            this.showLoader = false;
+            _.each(err, (val, key) => {
+                this.Notification.error(val.fieldName);
+            });
+        })
+
     }
 
     updateProfile(isValidForm = true) {
@@ -104,25 +139,38 @@ Please confirm.`
 
     }
 
+
     updatePlan(id) {
+        if (!this.userSubscription.plan) return this._$state.go('app.upgrade-plans', {plan: id})
         this.selectedPlan = id;
         if (this.selectedPlan === this.userSubscription.plan.id) {
             return false
         }
-        if (this.selectedPlan !== this.userSubscription.plan.id && this.userSubscription.plan.id === 'thinker') {
-            this.modals.upgrade.active = !this.modals.upgrade.active;
-        } else {
-            this.modals.downgrade.active = !this.modals.downgrade.active;
+        if (this.userSubscription.plan.id && this.userSubscription.plan.id !== 'thinker') {
+            this.modals.active = this.modals.downgrade;
         }
+        if (this.userSubscription.plan.id && this.userSubscription.plan.id !== 'david') {
+            this.modals.active = this.modals.upgrade;
+        }
+        this.modals.active.active = !this.modals.active.active;
     }
 
     changePlane(type) {
         this.showLoader = true;
-        this.modals[type].active = false;
-        this.paymentService.updateSubscription(this.selectedPlan)
+        this.modals.active = this.modals[type];
+        this.modals.active.active = false;
+        if (this.userSubscription.plan && this.userSubscription.plan.id && type === 'upgrade') {
+            return this._$state.go('app.upgrade-plans', {plan: 'david', update: true})
+        }
+        this.paymentService.updateSubscription({planId: this.selectedPlan})
             .then((res) => {
                 this.getUserSubscription()
-            })
+            }).catch(err => {
+            this.showLoader = false;
+            _.each(err, (val, key) => {
+                this.Notification.error(val.fieldName);
+            });
+        })
     }
 
     approveUpgrade() {
@@ -131,6 +179,16 @@ Please confirm.`
 
     downgradePlan() {
         this.changePlane('downgrade')
+    }
+
+
+    timeConverter(UNIX_timestamp) {
+        let a = new Date(UNIX_timestamp * 1000);
+        let year = a.getFullYear();
+        let month = a.getMonth() + 1;
+        let date = a.getDate();
+        let time = date + '/' + month + '/' + year;
+        return time;
     }
 }
 

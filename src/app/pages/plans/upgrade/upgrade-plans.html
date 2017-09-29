@@ -1,7 +1,7 @@
 <div class="container billing-section" style="margin-top: 30px !important;">
     <div class="col-md-offset-3 col-md-6">
         <div class="row">
-            <div class="col-md-12 upgrade-content">
+            <div class="col-md-12 upgrade-content" ng-if="!$ctrl.isUpdate">
                 <div class="row upgrade-info">
                     <div class="col-md-6 upgrade-info-section">
                         <div class="plan-info">
@@ -39,7 +39,7 @@
                                  ng-class="{'image-highlight': upgrade.type === 'american_express'}"
                                  src="/images/payment/american_express.png" alt=""></li>
                     </ul>
-                    <form name="upgrade" novalidate id="upgrade" ng-submit="$ctrl.createCustomer(upgrade.$valid)"
+                    <form name="upgrade" novalidate id="upgrade" ng-submit="$ctrl.create(upgrade.$valid)"
                           method="post"
                           class="main-form upgrade-form">
                         <div class="form-group" custom-input style="margin-bottom: 0px !important;"
