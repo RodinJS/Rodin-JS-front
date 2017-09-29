@@ -319,9 +319,8 @@ function AnaliticsTrack() {
         link: function (scope, elm, attrs, ctrl) {
             elm.bind('click', (e) => {
                 if(events.some(i => i === scope.trackName.toLowerCase())) {
-                    ga('send', {
-                        hitType: 'click',
-                        eventCategory: 'SignUp',
+                    ga('send', 'event' ,{
+                        eventCategory: scope.trackName.toLowerCase(),
                         eventAction: 'click',
                         eventLabel: `Click on ${scope.trackName.toLowerCase()}`
                     })
