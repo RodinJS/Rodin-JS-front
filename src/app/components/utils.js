@@ -291,6 +291,7 @@ function markdownValidation() {
         },
         link: function (scope, elm, attrs, ctrl) {
             scope.$parent.$markdownEditorObject.$options.onChange = change;
+
             function change(e) {
                 if (scope.markdownForm[scope.markdownInput].$invalid) {
                     scope.$parent.$markdownEditorObject.$editor.addClass('editor-has-error')
@@ -308,6 +309,29 @@ function markdownValidation() {
 
 }
 
+function AnaliticsTrack() {
+    let events = ['signup','tutorials','getting-started','home','android','ios','oculus','vive','register'];
+    return {
+        scope:{
+            trackName: '='
+        },
+        restrict: 'A',
+        link: function (scope, elm, attrs, ctrl) {
+            elm.bind('click', (e) => {
+                if(events.some(i => i === scope.trackName.toLowerCase())) {
+                    ga('send', {
+                        hitType: 'click',
+                        eventCategory: 'SignUp',
+                        eventAction: 'click',
+                        eventLabel: `Click on ${scope.trackName.toLowerCase()}`
+                    })
+                }
+
+            })
+        }
+    }
+}
+
 export default {
     limitTo,
     Compile,
@@ -321,5 +345,6 @@ export default {
     AutoGrow,
     CreditCard,
     CreditCardExpiration,
-    markdownValidation
+    markdownValidation,
+    AnaliticsTrack
 };
