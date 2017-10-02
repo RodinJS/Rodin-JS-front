@@ -244,7 +244,9 @@ function CreditCard() {
                         : (/^4/.test(value)) ? "visa"
                         : (/^3[47]/.test(value)) ? 'american_express'
                             : (/^6011|65|64[4-9]|622(1(2[6-9]|[3-9]\d)|[2-8]\d{2}|9([01]\d|2[0-5]))/.test(value)) ? 'discover'
-                                : undefined;
+                                :(/^3(?:0[0-5]|[68][0-9])[0-9]{11}$/).test(value) ? 'diners_club'
+                                    :(/^(?:2131|1800|35\d{3})\d{11}$/).test(value) ? 'jcb'
+                                        : undefined;
                 ctrl.$setValidity('invalid', !!scope.upgrade.type);
                 return value
             })
@@ -266,11 +268,12 @@ function CreditCardExpiration() {
                     if (month <= 0 || month > 12 || year > currentYear + 10) {
                         return ctrl.$setValidity('invalid', false)
                     }
-                    if (year < currentYear || year == currentYear) {
-                        // The date is expired
+                    if (year < currentYear) {
                         return ctrl.$setValidity('invalid', false)
                     }
-
+                    if(year === currentYear && month <= currentMonth) {
+                        return ctrl.$setValidity('invalid', false)
+                    }
                     return true;
                 } else {
                     ctrl.$setValidity('invalid', false)
@@ -309,7 +312,7 @@ function markdownValidation() {
 
 }
 
-function AnaliticsTrack() {
+function AnalyticsTrack() {
     let events = ['signup','tutorials','getting-started','home','android','ios','oculus','vive','register'];
     return {
         scope:{
@@ -345,5 +348,5 @@ export default {
     CreditCard,
     CreditCardExpiration,
     markdownValidation,
-    AnaliticsTrack
+    AnaliticsTrack: AnalyticsTrack
 };
