@@ -106,7 +106,7 @@
                         <tr ng-repeat="billing in $ctrl.billingHistory.data">
                             <td>{{billing.created * 1000 | date:'mediumDate'}}</td>
                             <td>Invoice for {{billing.created * 1000| date:'MMMM y'}}</td>
-                            <td>{{billing.amount | currency}}</td>
+                            <td>{{billing.amount / 100 | currency}}</td>
                         </tr>
                         </tbody>
                     </table>

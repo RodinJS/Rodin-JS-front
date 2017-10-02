@@ -10,6 +10,7 @@ class PlansCrtl {
         this.formData = {};
         this._$scope = $scope;
         this._$state = $state;
+        this.isUpgradable = false;
         this.paymentService = PaymentService;
         this.plans = plans;
         this.downgrade = true;
@@ -18,9 +19,10 @@ class PlansCrtl {
             $scope.$watch('User.current', (newUser) => {
                 this.currentUser = newUser;
             });
-            this.getUserSubscription();
+            // this.getUserSubscription();
             this.getCustomer();
             this.upcomingInvoices();
+            this.getSubscriptions()
         }
 
     }
@@ -40,6 +42,10 @@ class PlansCrtl {
                 this.showLoader = false;
                 if (this.customer.sources) {
                     this.cardNumber = res.sources.data["0"].last4;
+                    this.userSubscription = this.customer.subscriptions.data["0"] || null;
+                    if (this.userSubscription) {
+                        this.setModals();
+                    }
                 }
             }).catch(err => {
             _.each(err, (val, key) => {
@@ -58,7 +64,7 @@ class PlansCrtl {
                 description: `It’s ok <strong>David</strong>, sometimes we have to go back to tinkering and <strong>Thinking</strong>. You can still use David’s powers up to <strong>${this.timeConverter(this.userSubscription.current_period_end)}</strong>`,
                 resolve: this.downgradePlan.bind(this),
                 actions: {
-                    success: 'Yes',
+                    success: 'Confirm',
                     cancel: 'Cancel'
                 }
             },
@@ -81,8 +87,8 @@ class PlansCrtl {
         this.paymentService.getSubscription()
             .then((res) => {
                 this.showLoader = false;
-                this.userSubscription = res;
-                this.setModals();
+                // this.userSubscription = res;
+                // this.setModals();
             }).catch(err => {
             this.showLoader = false;
             _.each(err, (val, key) => {
@@ -141,10 +147,11 @@ class PlansCrtl {
 
 
     updatePlan(id) {
-        if (!this.userSubscription.plan) return this._$state.go('app.upgrade-plans', {plan: id})
+        if(this.isUpgradable) return this._$state.go('app.upgrade-plans', {plan: id, update: this.isUpgradable});
+        if (!this.userSubscription) return this._$state.go('app.upgrade-plans', {plan: id});
         this.selectedPlan = id;
         if (this.selectedPlan === this.userSubscription.plan.id) {
-            return false
+            return false;
         }
         if (this.userSubscription.plan.id && this.userSubscription.plan.id !== 'thinker') {
             this.modals.active = this.modals.downgrade;
@@ -164,7 +171,7 @@ class PlansCrtl {
         }
         this.paymentService.updateSubscription({planId: this.selectedPlan})
             .then((res) => {
-                this.getUserSubscription()
+                this.getCustomer()
             }).catch(err => {
             this.showLoader = false;
             _.each(err, (val, key) => {
@@ -181,6 +188,15 @@ class PlansCrtl {
         this.changePlane('downgrade')
     }
 
+
+    getSubscriptions() {
+        this.paymentService.getSubscriptions()
+            .then((res) => {
+                if (res.data[0] && res.data[0].status === 'canceled') {
+                    this.isUpgradable = true;
+                }
+            })
+    }
 
     timeConverter(UNIX_timestamp) {
         let a = new Date(UNIX_timestamp * 1000);

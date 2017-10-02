@@ -8,6 +8,7 @@ class UpgradePlansCtrl {
     constructor(AppConstants, $state, User, $scope, PaymentService, Notification) {
         'ngInject';
         this._$state = $state;
+        this._$scope = $scope;
         this.isUpdate = $state.params.update;
         if (!this.isUpdate && !$state.params.plan) {
             this._$state.go('landing.plans')

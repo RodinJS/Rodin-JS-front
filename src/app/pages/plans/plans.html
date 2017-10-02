@@ -42,17 +42,18 @@
                             ng-click="$ctrl.updatePlan(plan.title.toLowerCase())">
                         {{ plan.title.toLowerCase() === 'thinker' ? 'Current Plan':'Upgrade'}}
                     </button>
-
-
                     <button class="button-negative" data-ng-if="plan.title == 'LIBERTY'">Available soon</button>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
             <ul class="payment-service">
-                <li><img class="img-responsive" src="/images/payment/visa.png" alt=""></li>
-                <li><img class="img-responsive" src="/images/payment/master_card.png" alt=""></li>
-                <li><img class="img-responsive" src="/images/payment/american_express.png" alt=""></li>
+                <li><img class="img-responsive" src="/images/payment/visa.png" alt="visa"></li>
+                <li><img class="img-responsive" src="/images/payment/master_card.png" alt="master_card"></li>
+                <li><img class="img-responsive" src="/images/payment/american_express.png" alt="american_express"></li>
+                <li><img class="img-responsive" src="/images/payment/discover.png" alt="discover"></li>
+                <li><img class="img-responsive" src="/images/payment/jcb.png" alt="jcb"></li>
+                <li><img class="img-responsive" src="/images/payment/diners_club.png" alt="diners_club"></li>
                 <!--<li><img class="img-responsive" src="/images/payment/paypal.png" alt=""></li>-->
                 <li class="payservice-info"> All prices subject to applicable local taxes.</li>
             </ul>
