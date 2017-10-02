@@ -38,6 +38,15 @@
                         <li><img class="img-responsive"
                                  ng-class="{'image-highlight': upgrade.type === 'american_express'}"
                                  src="/images/payment/american_express.png" alt=""></li>
+                        <li><img class="img-responsive"
+                                 ng-class="{'image-highlight': upgrade.type === 'discover'}"
+                                 src="/images/payment/discover.png" alt=""></li>
+                        <li><img class="img-responsive"
+                                 ng-class="{'image-highlight': upgrade.type === 'jcb'}"
+                                 src="/images/payment/jcb.png" alt=""></li>
+                        <li><img class="img-responsive"
+                                 ng-class="{'image-highlight': upgrade.type === 'diners_club'}"
+                                 src="/images/payment/diners_club.png" alt=""></li>
                     </ul>
                     <form name="upgrade" novalidate id="upgrade" ng-submit="$ctrl.create(upgrade.$valid)"
                           method="post"
@@ -56,7 +65,7 @@
                                        ng-model="$ctrl.upgrade.cardNumber"
                                        data-credit-card
                                        data-ng-pattern="/^[0-9]+$/"
-                                       data-ng-minlength="15"
+                                       data-ng-minlength="14"
                                        maxlength="19"
                                        required>
                                 <div class="error"
@@ -267,7 +276,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 text-center">
-                                <button class="btn btn-highlighted" type="submit">Purchase</button>
+                                <button class="btn btn-highlighted" type="submit">Submit</button>
                             </div>
                         </div>
                     </form>

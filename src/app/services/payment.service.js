@@ -12,6 +12,7 @@ class PaymentService {
 
         this._PaymentCustomer = Restangular.all('payments/stripe/customer');
         this._PaymentSubscribe = Restangular.all('payments/stripe/subscription');
+        this._PaymentSubscriptions = Restangular.all('payments/stripe/subscriptions');
         this._PaymentCharges = Restangular.all('payments/stripe/charges');
         this._PaymentToken = Restangular.all('payments/stripe/token');
         this._PaymentInvoices = Restangular.all('payments/stripe/invoices');
@@ -95,6 +96,12 @@ class PaymentService {
     upcomingInvoices() {
         let Analyser = new this._Analyser();
         this._PaymentInvoices.one('/upcoming').customGET().then(Analyser.resolve, Analyser.reject);
+        return Analyser.promise;
+    }
+
+    getSubscriptions() {
+        let Analyser = new this._Analyser();
+        this._PaymentSubscriptions.one('').customGET().then(Analyser.resolve, Analyser.reject);
         return Analyser.promise;
     }
 }

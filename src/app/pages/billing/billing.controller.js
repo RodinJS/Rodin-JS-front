@@ -1,9 +1,10 @@
 import {plans} from "../plans/plans";
 
 class BillingCrtl {
-    constructor(AppConstants, User, $scope, Validator, Error, PaymentService) {
+    constructor(AppConstants, User, $scope, Validator, Error, PaymentService, Notification) {
         'ngInject';
         this.showLoader = true;
+        this.Notification = Notification;
         this.appName = AppConstants.appName;
         this.currentUser = User.current;
         this.formData = {};
@@ -23,7 +24,11 @@ class BillingCrtl {
                 if (res) {
                     this.billingHistory = res;
                 }
-            })
+            }).catch((err) => {
+            _.each(err, (val, key) => {
+                this.Notification.error(val.fieldName);
+            });
+        })
     }
 
     getCustomer() {
@@ -31,7 +36,7 @@ class BillingCrtl {
             .then((res) => {
                 this.showLoader = false;
                 this.customer = res;
-                if (this.customer.subscriptions) {
+                if (this.customer.subscriptions && this.customer.subscriptions.data.length > 0) {
                     this.plan = plans.filter(plan => plan.title.toLowerCase() === this.customer.subscriptions.data["0"].plan.id)[0];
                 } else {
                     this.plan = plans[0];
@@ -92,9 +97,12 @@ class BillingCrtl {
     getInvoices() {
         this.paymentService.getInvoices()
             .then((res) => {
-            this.invoices = res;
-                console.log(res)
-            })
+                this.invoices = res;
+            }).catch((err) => {
+            _.each(err, (val, key) => {
+                this.Notification.error(val.fieldName);
+            });
+        })
     }
 }
 
