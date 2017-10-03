@@ -92,7 +92,8 @@ class SingleDescController {
                 .then(response => {
                     this.showLoader = false;
                     this.question = response;
-                    this.question.preview = this.escapeHtml(response.preview)
+                    this.updated.tags = this.question.tags || [];
+                    this.question.preview = this.escapeHtml(response.preview);
                     if (this.currentUser) {
                         this.isEditable = this.question.user.email === this.currentUser.email;
                     }
@@ -141,7 +142,7 @@ class SingleDescController {
                     vote = 1;
                     break;
                 default:
-                    console.log('error');
+                    return;
                     break
             }
         } else if (downvoted && this.question.voted) {
@@ -161,7 +162,7 @@ class SingleDescController {
                     vote = 0;
                     break;
                 default:
-                    console.log('error');
+                    return;
                     break
             }
         }
@@ -172,7 +173,6 @@ class SingleDescController {
         }
         this.helpService.vote(this.type, id, vote, voteType)
             .then((response) => {
-                console.log(response)
             })
             .catch((err) => {
             })
