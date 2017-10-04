@@ -229,6 +229,7 @@ class SingleDescController {
                     this.post.subject = '';
                     this.post.description = '';
                     this.post.tags = [];
+                    this.Notification.success(`Your ${this.type.slice(0,-1)} has been published.`);
                     this._$state.go('landing.' + this.type.slice(0, -1))
                 }).catch((err) => {
                 this.showLoader = false;
@@ -286,6 +287,7 @@ class SingleDescController {
             .then((resp) => {
                 this.goBack();
                 this.modals.remove = false;
+                this.Notification.success('Conversation deleted');
             })
             .catch((err) => console.log(err))
     }
