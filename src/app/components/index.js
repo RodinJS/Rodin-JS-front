@@ -20,7 +20,8 @@ componentsModule.directive('autoGrow', Utils.AutoGrow);
 componentsModule.directive('creditCard', Utils.CreditCard);
 componentsModule.directive('creditCardExpiration', Utils.CreditCardExpiration);
 componentsModule.directive('markdownValidation', Utils.markdownValidation);
-componentsModule.directive('analiticsTrack', Utils.AnaliticsTrack);
+componentsModule.directive('analyticsTrack', Utils.AnalyticsTrack);
+componentsModule.directive('cardSecurityCode', Utils.CardSecurityCode);
 
 
 import EditorNavigation from './editorNavigation/index';

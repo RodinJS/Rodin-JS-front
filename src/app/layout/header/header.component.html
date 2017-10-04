@@ -20,7 +20,7 @@
                     </button>
                     <a ui-sref="landing.login" class="visible-xs-inline-block mobile-login"
                        ng-if="!$ctrl.user">Login</a>
-                    <a class="navbar-brand" ui-sref="home.landing"  analitics-track track-name="'home'">
+                    <a class="navbar-brand" ui-sref="home.landing"  analytics-track track-name="'home'">
                         <img alt="Rodin" src="images/landing/general/logo.png" class="img-responsive header-logo">
                     </a>
                 </div>
@@ -34,7 +34,7 @@
                                 <div ng-repeat="menus in $ctrl.menusList | orderBy : 'position'"
                                      ng-style="{display: 'inline-flex'}">
                                     <li data-ng-if="menus.menuitems.length === 0" class="drop-more">
-                                        <a ng-if="menus.href" analitics-track track-name="menus.slug" ng-href="{{menus.href}}">{{menus.name}}</a>
+                                        <a ng-if="menus.href" analytics-track track-name="menus.slug" ng-href="{{menus.href}}">{{menus.name}}</a>
                                     </li>
                                     <li data-ng-if="menus.menuitems.length > 0" class="dropdown more-drop" data-uib-dropdown>
                                         <a id="{{menus.slug}}" data-uib-dropdown-toggle>
@@ -45,7 +45,7 @@
                                             uib-dropdown-menu>
                                             <ul class="account-action-list">
                                                 <li ng-repeat="item in menus.menuitems | orderBy : 'position'">
-                                                    <a data-ui-sref-active="active" track-name="item.slug" analitics-track ng-href="{{item.href}}">{{item.name}}</a>
+                                                    <a data-ui-sref-active="active" track-name="item.slug" analytics-track ng-href="{{item.href}}">{{item.name}}</a>
                                                 </li>
                                             </ul>
                                         </ul>
@@ -61,7 +61,7 @@
                                             uib-dropdown-menu>
                                             <ul class="account-action-list">
                                                 <li ng-repeat="page in $ctrl.pagesSection ">
-                                                    <a analitics-track track-name="page.slug" data-ui-sref-active="active">{{page.name}}</a>
+                                                    <a analytics-track track-name="page.slug" data-ui-sref-active="active">{{page.name}}</a>
                                                 </li>
                                             </ul>
                                         </ul>
@@ -77,7 +77,7 @@
                                     <a ui-sref="landing.login" class=" main-header-login">Login</a>
                                 </li>
                                 <li>
-                                    <a ui-sref="landing.register" id="idl" analitics-track track-name="'signUp'"
+                                    <a ui-sref="landing.register" id="idl" analytics-track track-name="'signUp'"
                                        class="btn sign-up-btn sign-up-btn-non-sticky">Sign Up</a>
                                 </li>
                             </ul>
@@ -162,19 +162,19 @@
                     <ul class="sidebar-hidden-content">
                         <div ng-repeat="menus in $ctrl.menusList | orderBy : 'position'">
                             <li data-ng-if="menus.menuitems.length === 0">
-                                <a ng-if="menus.href" ng-href="{{menus.href}}" analitics-track track-name="menus.slug" class="side-item">{{menus.name}}</a>
+                                <a ng-if="menus.href" ng-href="{{menus.href}}" analytics-track track-name="menus.slug" class="side-item">{{menus.name}}</a>
                             </li>
                             <li data-ng-if="menus.menuitems.length > 0" data-uib-dropdown class="dropdown drop-more">
                                 <a data-uib-dropdown-toggle id="{{menus.name}}">{{menus.name}} <i class="rd rd-angle-down"></i></a>
                                 <ul class="dropdown-menu dropdown-sidebar" uib-dropdown-menu>
                                     <li class="" ng-repeat="item in menus.menuitems | orderBy : 'position'">
-                                        <a data-ui-sref-active="active" analitics-track track-name="item.slug" ng-href="{{item.href}}" class="side-item">{{item.name}}</a>
+                                        <a data-ui-sref-active="active" analytics-track track-name="item.slug" ng-href="{{item.href}}" class="side-item">{{item.name}}</a>
                                     </li>
                                 </ul>
                             </li>
                         </div>
                         <li class="text-center signup-content" ng-if="!$ctrl.user">
-                            <a ui-sref="landing.register" analitics-track track-name="'signUp'"
+                            <a ui-sref="landing.register" analytics-track track-name="'signUp'"
                                class="btn sign-up-btn sign-up-btn-non-sticky">Sign Up</a>
                         </li>
                         <li class="text-center signout-content" ng-if="$ctrl.user">
