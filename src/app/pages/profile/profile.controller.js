@@ -87,9 +87,6 @@ class ProfileCtrl {
             })
 
         }
-
-        console.log(this.currentUser);
-
     }
 
     showGitSyncModal() {

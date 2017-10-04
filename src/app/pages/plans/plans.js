@@ -8,11 +8,14 @@ export const plans = [{
     currency: '$',
     amount: '0',
     period: 'month',
-    info: [{traffic: 500, value: 'MB', desc: 'Traffic'}, {
-        traffic: 1,
-        value: 'GB',
-        desc: 'Hosting space'
-    }, {traffic: '', value: '', desc: 'Rodin URL'}, {traffic: '', value: '', desc: 'Rodin Loader'}]
+    info: [
+        {traffic: 500, value: 'GB', desc: 'Traffic'}, {
+            traffic: 500,
+            value: 'MB',
+            desc: 'Hosting space'
+        }, {traffic: '', value: '', desc: `Rodin Loader <br> Rodin URL`},
+        {traffic: 5, value: '', desc: 'Projects'},
+    ]
 }, {
     title: 'DAVID',
     description: 'For professionals that need unbranded, advanced features',
@@ -21,25 +24,26 @@ export const plans = [{
     period: 'month',
     info: [
         {
-            traffic: 3,
+            traffic: 5,
             value: 'TB',
             desc: 'Traffic'
         },
         {
-            traffic: 40,
+            traffic: 5,
             value: 'GB',
             desc: 'Hosting space'
         },
         {
             traffic: '',
             value: '',
-            desc: 'Custom URL'
+            desc: `Rodin Loader <br> Rodin Custom URL`
         },
         {
-            traffic: '',
+            traffic: 15,
             value: '',
-            desc: 'Rodin Loader'
-        }
+            desc: 'Projects'
+        },
+
     ]
 }, {
     title: 'LIBERTY',
@@ -49,7 +53,7 @@ export const plans = [{
     period: 'month',
     info: [
         {
-            traffic: 6,
+            traffic: 100,
             value: 'TB',
             desc: 'Traffic'
         },
@@ -61,12 +65,12 @@ export const plans = [{
         {
             traffic: '',
             value: '',
-            desc: 'Custom URL'
+            desc: `Custom Loader <br> Custom URL`
         },
         {
-            traffic: '',
+            traffic: `Unlimited`,
             value: '',
-            desc: 'Custom Loader'
+            desc: 'Projects'
         }
     ]
 }];
