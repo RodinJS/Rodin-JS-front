@@ -39,7 +39,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="row">
-                                <button ui-sref="app.upgrade-plans({update:true})" class="btn btn-positive">Change Credit Card</button>
+                                <button ui-sref="app.upgrade-plans({update:true})" class="btn btn-positive">Change
+                                    Credit Card
+                                </button>
                             </div>
                         </div>
                         <div class="col-md-12 card-info">
@@ -53,9 +55,9 @@
                                 </div>
                             </div>
                             <!--<div class="col-md-2">-->
-                                <!--<div class="row pull-right">-->
-                                    <!--<i class="fa fa-window-close" style="font-size: 20px" aria-hidden="true"></i>-->
-                                <!--</div>-->
+                            <!--<div class="row pull-right">-->
+                            <!--<i class="fa fa-window-close" style="font-size: 20px" aria-hidden="true"></i>-->
+                            <!--</div>-->
                             <!--</div>-->
                         </div>
                     </div>
@@ -102,11 +104,16 @@
                             <th class="col-md-1">Amount</th>
                         </tr>
                         </thead>
-                        <tbody ng-if="$ctrl.billingHistory.data">
-                        <tr ng-repeat="billing in $ctrl.billingHistory.data">
+                        <tbody ng-if="$ctrl.billingHistory.data" ng-repeat="billing in $ctrl.billingHistory.data">
+                        <tr>
                             <td>{{billing.created * 1000 | date:'mediumDate'}}</td>
                             <td>Invoice for {{billing.created * 1000| date:'MMMM y'}}</td>
                             <td>{{billing.amount / 100 | currency}}</td>
+                        </tr>
+                        <tr ng-if="billing.refunded" ng-repeat="refund in billing.refunds.data">
+                            <td>{{refund.created * 1000 | date:'mediumDate'}}</td>
+                            <td>Refunded / Reason <span style="color: #008BF2;">{{refund.reason}}</span></td>
+                            <td>{{refund.amount / 100 | currency}}</td>
                         </tr>
                         </tbody>
                     </table>

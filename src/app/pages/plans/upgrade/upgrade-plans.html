@@ -90,7 +90,7 @@
                          }">
                                         <label class="control-label">
                                             <small>Security Code: <i
-                                                    uib-tooltip="The 3 digits on the back of your credit card"
+                                                    uib-tooltip="{{upgrade.securityCodeMessage}}"
                                                     class="fa fa-info-circle" aria-hidden="true"></i> <sub>*</sub>
                                             </small>
                                         </label>
@@ -99,6 +99,7 @@
                                                placeholder="XXX"
                                                name="securityCode"
                                                required
+                                               card-security-code="upgrade.type"
                                                ng-model="$ctrl.upgrade.securityCode"
                                                data-ng-pattern="/^[0-9]+$/"
                                                data-ng-minlength="3"
