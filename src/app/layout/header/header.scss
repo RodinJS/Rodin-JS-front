@@ -129,7 +129,7 @@
   color: #B0B0B0;
   padding-top: 0;
   padding-bottom: 0;
-  min-width: 230px;
+  min-width: 230px !important;
   left: auto;
   right: 0;
   .notification-list {
@@ -138,6 +138,11 @@
     display: table;
     text-align: center;
     width: 100%;
+    li {
+      a {
+        padding: 2px 12px !important;
+      }
+    }
     .no-notifications {
       font-size: 14px;
       display: table-cell;

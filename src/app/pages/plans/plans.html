@@ -18,8 +18,8 @@
                         <div class="col-md-6 info-items text-center" ng-repeat="info in plan.info">
                             <div class="plan-row">
                                 <section>
-                                    <p><strong>{{info.traffic}}</strong>{{info.value}}</p>
-                                    <p class="small">{{info.desc}}</p>
+                                    <p><strong ng-bind-html="info.traffic"></strong>{{info.value}}</p>
+                                    <p class="small" ng-bind-html="info.desc"></p>
                                 </section>
                             </div>
                         </div>
