@@ -237,6 +237,7 @@ function AutoGrow() {
 function CreditCard() {
     return {
         require: 'ngModel',
+
         link: function link(scope, elm, attrs, ctrl) {
             ctrl.$parsers.unshift(function (value) {
                 scope.upgrade.type =
@@ -244,14 +245,27 @@ function CreditCard() {
                         : (/^4/.test(value)) ? "visa"
                         : (/^3[47]/.test(value)) ? 'american_express'
                             : (/^6011|65|64[4-9]|622(1(2[6-9]|[3-9]\d)|[2-8]\d{2}|9([01]\d|2[0-5]))/.test(value)) ? 'discover'
-                                :(/^3(?:0[0-5]|[68][0-9])[0-9]{11}$/).test(value) ? 'diners_club'
-                                    :(/^(?:2131|1800|35\d{3})\d{11}$/).test(value) ? 'jcb'
+                                : (/^3(?:0[0-5]|[68][0-9])[0-9]{11}$/).test(value) ? 'diners_club'
+                                    : (/^(?:2131|1800|35\d{3})\d{11}$/).test(value) ? 'jcb'
                                         : undefined;
                 ctrl.$setValidity('invalid', !!scope.upgrade.type);
                 return value
             })
         },
     };
+}
+
+function CardSecurityCode() {
+    return {
+        restrict: 'A',
+        link: function (scope, elm, attrs, ctrl) {
+            scope.$watch('upgrade.type', (o, n) => {
+                attrs.$set('placeholder', o == 'american_express' ? 'XXXX' : 'XXX');
+                attrs.$set('ngMinlength', o == 'american_express' ? 4 : 3);
+                scope.upgrade.securityCodeMessage = `The ${o == 'american_express' ? 4 : 3} digits on the back of your credit card`
+            })
+        }
+    }
 }
 
 function CreditCardExpiration() {
@@ -271,7 +285,7 @@ function CreditCardExpiration() {
                     if (year < currentYear) {
                         return ctrl.$setValidity('invalid', false)
                     }
-                    if(year === currentYear && month <= currentMonth) {
+                    if (year === currentYear && month <= currentMonth) {
                         return ctrl.$setValidity('invalid', false)
                     }
                     return true;
@@ -313,16 +327,16 @@ function markdownValidation() {
 }
 
 function AnalyticsTrack() {
-    let events = ['signup','tutorials','getting-started','home','android','ios','oculus','vive','register'];
+    let events = ['signup', 'tutorials', 'getting-started', 'home', 'android', 'ios', 'oculus', 'vive', 'register'];
     return {
-        scope:{
+        scope: {
             trackName: '='
         },
         restrict: 'A',
         link: function (scope, elm, attrs, ctrl) {
             elm.bind('click', (e) => {
-                if(events.some(i => i === scope.trackName.toLowerCase())) {
-                    ga('send', 'event' ,{
+                if (events.some(i => i === scope.trackName.toLowerCase())) {
+                    ga('send', 'event', {
                         eventCategory: scope.trackName.toLowerCase(),
                         eventAction: 'click',
                         eventLabel: `Click on ${scope.trackName.toLowerCase()}`
@@ -348,5 +362,6 @@ export default {
     CreditCard,
     CreditCardExpiration,
     markdownValidation,
-    AnaliticsTrack: AnalyticsTrack
+    AnalyticsTrack,
+    CardSecurityCode
 };
