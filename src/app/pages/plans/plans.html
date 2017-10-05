@@ -27,22 +27,22 @@
                 </div>
 
                 <div class="action-section">
-                    <button data-ng-if="$ctrl.userSubscription.plan && plan.title !== 'LIBERTY'"
-                            ng-class="{'button-negative':$ctrl.userSubscription.plan.id === plan.title.toLowerCase(),
-                            'button-downgrade':$ctrl.userSubscription.plan.id !== plan.title.toLowerCase() && $ctrl.userSubscription.plan.id =='david', 'btn btn-upgrade': $ctrl.userSubscription.plan.id !=='david'}"
-                            ng-click="$ctrl.updatePlan(plan.title.toLowerCase())">
+                    <button data-ng-if="$ctrl.userSubscription.plan && plan.id !== 'Enterprise'"
+                            ng-class="{'button-negative':$ctrl.userSubscription.plan.id === plan.id,
+                            'button-downgrade':$ctrl.userSubscription.plan.id !== plan.id && $ctrl.userSubscription.plan.id =='Premium', 'btn btn-upgrade': $ctrl.userSubscription.plan.id !=='david'}"
+                            ng-click="$ctrl.updatePlan(plan.id)">
                         {{
-                        $ctrl.userSubscription.plan.id === plan.title.toLowerCase() ?
-                        'Current Plan': $ctrl.userSubscription.plan.id !== 'david' ? 'Upgrade':'Downgrade'
+                        $ctrl.userSubscription.plan.id === plan.id ?
+                        'Current Plan': $ctrl.userSubscription.plan.id !== 'Premium' ? 'Upgrade':'Downgrade'
                         }}
                     </button>
-                    <button data-ng-if="!$ctrl.userSubscription.plan && plan.title !== 'LIBERTY'"
-                            ng-class="{'button-negative':plan.title.toLowerCase() === 'thinker',
-                            'btn btn-upgrade': plan.title.toLowerCase() =='david'}"
-                            ng-click="$ctrl.updatePlan(plan.title.toLowerCase())">
-                        {{ plan.title.toLowerCase() === 'thinker' ? 'Current Plan':'Upgrade'}}
+                    <button data-ng-if="!$ctrl.userSubscription.plan && plan.id !== 'Enterprise'"
+                            ng-class="{'button-negative':plan.id === 'Free',
+                            'btn btn-upgrade': plan.id =='Premium'}"
+                            ng-click="$ctrl.updatePlan(plan.id)">
+                        {{ plan.id === 'Free' ? 'Current Plan':'Upgrade'}}
                     </button>
-                    <button class="button-negative" data-ng-if="plan.title == 'LIBERTY'">Available soon</button>
+                    <button class="button-negative" data-ng-if="plan.id == 'Enterprise'">Available soon</button>
                 </div>
             </div>
         </div>

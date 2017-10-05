@@ -4,6 +4,7 @@
 
 export const plans = [{
     title: 'THINKER',
+    id:'Free',
     description: 'Most unlimited sites without paying us a dime with Client Billing',
     currency: '$',
     amount: '0',
@@ -18,6 +19,7 @@ export const plans = [{
     ]
 }, {
     title: 'DAVID',
+    id:'Premium',
     description: 'For professionals that need unbranded, advanced features',
     currency: '$',
     amount: '50',
@@ -47,6 +49,7 @@ export const plans = [{
     ]
 }, {
     title: 'LIBERTY',
+    id:'Enterprise',
     description: 'For small agencies and companies <span class="payment-info">(will be available soon)</span>',
     currency: '$',
     amount: '500',

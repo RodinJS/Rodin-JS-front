@@ -147,16 +147,17 @@ class PlansCrtl {
 
 
     updatePlan(id) {
+        console.log(id)
         if(this.isUpgradable) return this._$state.go('app.upgrade-plans', {plan: id, update: this.isUpgradable});
         if (!this.userSubscription) return this._$state.go('app.upgrade-plans', {plan: id});
         this.selectedPlan = id;
         if (this.selectedPlan === this.userSubscription.plan.id) {
             return false;
         }
-        if (this.userSubscription.plan.id && this.userSubscription.plan.id !== 'thinker') {
+        if (this.userSubscription.plan.id && this.userSubscription.plan.id !== 'Free') {
             this.modals.active = this.modals.downgrade;
         }
-        if (this.userSubscription.plan.id && this.userSubscription.plan.id !== 'david') {
+        if (this.userSubscription.plan.id && this.userSubscription.plan.id !== 'Premium') {
             this.modals.active = this.modals.upgrade;
         }
         this.modals.active.active = !this.modals.active.active;
@@ -167,7 +168,7 @@ class PlansCrtl {
         this.modals.active = this.modals[type];
         this.modals.active.active = false;
         if (this.userSubscription.plan && this.userSubscription.plan.id && type === 'upgrade') {
-            return this._$state.go('app.upgrade-plans', {plan: 'david', update: true})
+            return this._$state.go('app.upgrade-plans', {plan: 'Premium', update: true})
         }
         this.paymentService.updateSubscription({planId: this.selectedPlan})
             .then((res) => {
@@ -192,7 +193,7 @@ class PlansCrtl {
     getSubscriptions() {
         this.paymentService.getSubscriptions()
             .then((res) => {
-                if (res.data[0] && res.data[0].status === 'canceled') {
+                if (res.data && res.data[0] && res.data[0].status === 'canceled') {
                     this.isUpgradable = true;
                 }
             })
