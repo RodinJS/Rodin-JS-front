@@ -117,7 +117,6 @@ class UpgradePlansCtrl {
             this.paymentService.updateCustomer({card: this.upgrade})
                 .then((res) => {
                     this.showLoader = false;
-                    console.log(res)
                 }).catch((err) => {
                 _.each(err, (val, key) => {
                     this.Notification.error(val.fieldName);
