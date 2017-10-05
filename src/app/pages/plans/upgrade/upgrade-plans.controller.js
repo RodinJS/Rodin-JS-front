@@ -10,7 +10,8 @@ class UpgradePlansCtrl {
         this._$state = $state;
         this._$scope = $scope;
         this.isUpdate = $state.params.update;
-        if (!this.isUpdate && !$state.params.plan) {
+        this.isCustomerUpdate = $state.params.updateCustomer;
+        if (!this.isUpdate && !$state.params.plan && !this.isCustomerUpdate) {
             this._$state.go('landing.plans')
         }
         this.Notification = Notification;
@@ -19,7 +20,7 @@ class UpgradePlansCtrl {
         this.upgradetPlan = plans.filter((i) => i.title === 'DAVID')[0];
         this.upgrade = {};
         this.paymentService = PaymentService;
-        this.getCustomer()
+        this.getCustomer();
     }
 
     getCustomer() {
@@ -38,6 +39,9 @@ class UpgradePlansCtrl {
     create(valid) {
         if (this.isUpdate) {
             return this.upgradePlan(valid)
+        } else if (this.isCustomerUpdate) {
+            return this.updateCustomer(valid)
+
         } else {
             return this.createCustomer(valid)
         }
@@ -103,6 +107,25 @@ class UpgradePlansCtrl {
                 this.Notification.error(val.fieldName);
             });
         })
+    }
+
+    updateCustomer(valid) {
+
+        if (valid) {
+            this.showLoader = true;
+
+            this.paymentService.updateCustomer({card: this.upgrade})
+                .then((res) => {
+                    this.showLoader = false;
+                    console.log(res)
+                }).catch((err) => {
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
+                this.showLoader = false;
+
+            })
+        }
     }
 }
 

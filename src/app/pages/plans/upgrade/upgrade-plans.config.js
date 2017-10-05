@@ -14,7 +14,8 @@ function UpgradePlansConfig($stateProvider) {
             showFooter: true,
             params: {
                 plan: null,
-                update: null
+                update: null,
+                updateCustomer: false
             },
             resolve: {
                 auth: function (User) {
