@@ -37,7 +37,7 @@ class BillingCrtl {
                 this.showLoader = false;
                 this.customer = res;
                 if (this.customer.subscriptions && this.customer.subscriptions.data.length > 0) {
-                    this.plan = plans.filter(plan => plan.title.toLowerCase() === this.customer.subscriptions.data["0"].plan.id)[0];
+                    this.plan = plans.filter(plan => plan.id === this.customer.subscriptions.data["0"].plan.id)[0];
                 } else {
                     this.plan = plans[0];
                 }
@@ -45,53 +45,6 @@ class BillingCrtl {
             .catch(() => {
                 this.showLoader = false;
             })
-    }
-
-    updateProfile(isValidForm = true) {
-        if (!isValidForm) {
-            return;
-        }
-
-
-        Validator.validate([
-            {
-                name: "avatar",
-                value: scope.UserGeneralInfo.avatar,
-                conditions: {}
-            },
-            {
-                name: "name",
-                value: scope.UserGeneralInfo.name,
-                conditions: {
-                    required: true,
-                    pattern: scope.patterns.name
-                }
-            },
-            {
-                name: "state",
-                value: scope.UserGeneralInfo.state,
-                conditions: {}
-            },
-            {
-                name: "country",
-                value: scope.UserGeneralInfo.country,
-                conditions: {}
-            }
-        ]);
-
-        if (Validator.isValid()) {
-            var data = Validator.getData();
-            data.avatar = data.avatar || "";
-
-            User.update(Validator.getData()).then(function (data) {
-                Notification.success('Your profile successfully updated.');
-            }, function (data) {
-                Error.show(data, scope.profileForm, scope);
-            });
-        } else {
-            Error.show(Validator.getErrors(), this.formData, scope);
-        }
-
     }
 
     getInvoices() {
