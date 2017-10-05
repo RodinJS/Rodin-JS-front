@@ -40,6 +40,9 @@ class HelpDescComponentController {
             })
             .catch((err) => {
                 this.showLoader = false;
+                _.each(err, (val, key) => {
+                    this.Notification.error(val.fieldName);
+                });
             })
     }
 
@@ -66,6 +69,10 @@ class HelpDescComponentController {
             })
             .catch((err) => {
                 this.showLoader = false;
+                return this.getContent()
+                // _.each(err, (val, key) => {
+                //     this.Notification.error(val.fieldName);
+                // });
             })
     }
 
