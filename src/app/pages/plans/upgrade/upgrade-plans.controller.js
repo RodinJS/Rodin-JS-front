@@ -52,7 +52,7 @@ class UpgradePlansCtrl {
             this.showLoader = true;
             let data = {
                 card: this.upgrade,
-                planId: 'david'
+                planId: 'Premium'
             };
             this.paymentService.upgradeSubscribe(data)
                 .then((res) => {
@@ -84,7 +84,7 @@ class UpgradePlansCtrl {
     }
 
     subscribeToPlan() {
-        this.paymentService.createSubscribition(this.upgradetPlan.title.toLowerCase())
+        this.paymentService.createSubscribition(this.upgradetPlan.id)
             .then((response) => {
                 this.showLoader = false;
                 this._$state.go('app.billing')
