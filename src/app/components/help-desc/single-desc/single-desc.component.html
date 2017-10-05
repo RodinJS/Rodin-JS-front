@@ -201,7 +201,7 @@
                         <div class="col-md-12 tag-selection">
                             <div class="row">
                                 <p class="question-type">Tags</p>
-                                <tags-input ng-model="$ctrl.selectedTags" placeholder="Enter tags...">
+                                <tags-input min-length="2" ng-model="$ctrl.selectedTags" placeholder="Enter tags...">
                                 </tags-input>
                             </div>
                         </div>
@@ -259,6 +259,7 @@
                 <div class="col-md-offset-1 col-md-11 tag-selection">
                     <p class="question-type">Tags</p>
                     <tags-input ng-model="$ctrl.question.tags"
+                                min-length="2"
                                 on-tag-adding="$ctrl.onAddTags($tag)"
                                 on-tag-removed="$ctrl.onRemoveTag($tag)"
                                 placeholder="Enter tags...">

@@ -1,16 +1,26 @@
 class AppFooterCtrl {
-    constructor(AppConstants, $scope, PagesStore) {
+    constructor(AppConstants, $scope, PagesService, PagesStore, EventBus) {
         'ngInject';
         this.appName = AppConstants.appName;
         this._PagesStore = PagesStore;
-
+        this._PagesService = PagesService;
         // Get today's date to generate the year
         this.date = new Date();
+        this.eventBus = EventBus;
+        this.pagesList = [];
+        this.getPagesList()
 
-        this._PagesStore.subscribeAndInit($scope, () => {
-            this.pagesList = this._PagesStore.getFooterPagesList();
-        });
+    }
+    getPagesList() {
+        this._PagesService.getList().then(
+            pagesList => {
+                this.pagesList = pagesList[0].values.filter((pages) => pages.putOnFooter);
+            },
 
+            err => {
+                console.log(err);
+            }
+        );
     }
 }
 
