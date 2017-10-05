@@ -83,6 +83,12 @@
   }
   .upgrade-group {
     margin-bottom: 0px !important;
+    .agreement {
+      margin-bottom: 20px;
+      & .error {
+        color: rgba(255, 0, 0, 0.5) !important;
+      }
+    }
   }
   .plan-info {
     .info-items {

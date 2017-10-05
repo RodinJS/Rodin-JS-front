@@ -287,10 +287,12 @@
                                        ng-model="$ctr.upgrade.agreed"
                                        required>
                             </div>
-                            <label class="control-label col-md-6">
+                            <label class="control-label col-md-8">
                                 <div class="row">
-                                    <small style="color: #95989A;" >I agree to the <a ui-sref="landing.pages({pageURL:'terms-and-conditions'})">Rodin
-                                    Payment Agreement : <sub>*</sub></a></small>
+                                    <p ng-class="{'error': upgrade.agreed.$invalid && !upgrade.agreed.$pristine || upgrade.$submitted && upgrade.agreed.$invalid}" style="color: #95989A;">
+                                        I agree to the <a ng-class="{'error': upgrade.agreed.$invalid && !upgrade.agreed.$pristine || upgrade.$submitted && upgrade.agreed.$invalid}" ui-sref="landing.pages({pageURL:'terms-and-conditions'})">Rodin
+                                        Payment Agreement : <sub>*</sub></a>
+                                    </p>
                                 </div>
 
                             </label>
