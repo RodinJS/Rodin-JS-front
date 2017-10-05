@@ -1,7 +1,7 @@
 <div class="container billing-section" style="margin-top: 30px !important;">
     <div class="col-md-offset-3 col-md-6">
         <div class="row">
-            <div class="col-md-12 upgrade-content" ng-if="!$ctrl.isUpdate">
+            <div class="col-md-12 upgrade-content" ng-if="!$ctrl.isUpdate && !$ctrl.isCustomerUpdate">
                 <div class="row upgrade-info">
                     <div class="col-md-6 upgrade-info-section">
                         <div class="plan-info">
@@ -74,7 +74,8 @@
                                         digits</p>
                                     <p ng-show="upgrade.cardNumber.$error.pattern">Credit card must consist of only
                                         numbers</p>
-                                    <p ng-show="upgrade.cardNumber.$error.invalid">Credit card must be a valid Visa, Mastercard, American Express, Discover, Diners Club or JCB card.</p>
+                                    <p ng-show="upgrade.cardNumber.$error.invalid">Credit card must be a valid Visa,
+                                        Mastercard, American Express, Discover, Diners Club or JCB card.</p>
                                     <p ng-show="upgrade.cardNumber.$error.required">Credit card required</p>
                                 </div>
                             </div>
@@ -272,6 +273,30 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="upgrade-group" custom-input
+                             data-ng-class="{
+                         'has-error': upgrade.agreed.$invalid && !upgrade.agreed.$pristine || upgrade.$submitted && upgrade.agreed.$invalid,
+                         'has-success': upgrade.agreed.$valid,
+                         }">
+
+                            <div class="col-md-1">
+                                <input type="checkbox" class="form-control agreement"  style="height: 15px;margin-top: 2px;" placeholder=""
+                                       name="agreed"
+                                       ng-model="$ctr.upgrade.agreed"
+                                       required>
+                            </div>
+                            <label class="control-label col-md-8">
+                                <div class="row">
+                                    <p ng-class="{'error': upgrade.agreed.$invalid && !upgrade.agreed.$pristine || upgrade.$submitted && upgrade.agreed.$invalid}" style="color: #95989A;">
+                                        I agree to the <a ng-class="{'error': upgrade.agreed.$invalid && !upgrade.agreed.$pristine || upgrade.$submitted && upgrade.agreed.$invalid}" ui-sref="landing.pages({pageURL:'terms-and-conditions'})">Rodin
+                                        Payment Agreement : <sub>*</sub></a>
+                                    </p>
+                                </div>
+
+                            </label>
+                            <div class="error">
                             </div>
                         </div>
                         <div class="form-group">
