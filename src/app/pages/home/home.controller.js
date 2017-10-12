@@ -90,9 +90,7 @@ class HomeCtrl {
                 this.changeVideo(0);
             },
 
-            err => {
-                console.log(err);
-            }
+            err => err
         );
     }
 

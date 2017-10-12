@@ -8,7 +8,6 @@ function SamplesConfig($stateProvider) {
         controllerAs: '$ctrl',
         templateUrl: 'pages/samples/samples.html',
         title: 'Samples',
-        pageClass: 'new',
         resolve: {
             auth: function (User) {
                 // return User.ensureAuthIs(true);

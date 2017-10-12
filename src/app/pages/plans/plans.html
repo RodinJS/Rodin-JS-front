@@ -1,92 +1,109 @@
 <div class="static-pages faq-page">
     <div class="container-fluid page static">
         <div class="row title-section">
-            <h1 class="title text-center">PLANS</h1>
+            <h1 class="title text-center">PROJECT PLANS</h1>
             <span class="line"></span>
         </div>
     </div>
-    <div class="container plans-section">
-        <div class="page-content col-md-12">
-            <h2 class="sub-title text-center">To switch your plan, select from one of the options below.</h2>
-            <div class="section-wrapper section-plan-wrapper">
-                <div class="plan-content-wrapper">
-                    <div class="plan-content">
-                        <div class="plan-content-item-box col-md-4 text-center">
-                            <div class="plan-content-item">
-                                <!--<i class="icon icon-monocle"></i>-->
-                                <h2>FREE</h2>
-                                <p class="text-small">
-                                    Most unlimited sites without paying us a dime with Client Billing.
-                                </p>
-                                <div class="plan-price-wrapper">
-                                            <span class="price">
-                                                <sup>$</sup>0<sub>/mo</sub>
-                                            </span>
-                                </div>
-                                <ul class="plan-item-info-list">
-                                    <li class="text-primary">Rodin URL</li>
-                                    <li class="text-primary">500 MB Traffic</li>
-                                    <li class="text-primary">1 GB Hosting space</li>
-                                    <li class="text-primary">2 apps</li>
-                                    <li class="text-primary">Rodin Loader</li>
-                                </ul>
-
-                                <!--<div class="button-section">-->
-                                    <!--<a class="btn sign-up-btn sign-up-btn-non-sticky">Current Plan</a>-->
-                                <!--</div>-->
-                            </div>
-                        </div>
-                        <div class="plan-content-item-box recommended-item-box col-md-4 text-center">
-                            <div class="plan-content-item">
-                                <!--<i class="icon icon-glasses"></i>-->
-                                <h2>PREMIUM</h2>
-                                <p class="text-small">
-                                    For professionals that need unbranded, advanced features
-                                </p>
-                                <div class="plan-price-wrapper">
-                                            <span class="price">
-                                                <sup>$</sup>90<sub>/mo</sub>
-                                            </span>
-                                </div>
-                                <ul class="plan-item-info-list">
-                                    <li class="text-primary">Custom URL</li>
-                                    <li class="text-primary">3 TB Traffic</li>
-                                    <li class="text-primary">40 GB Hosting space</li>
-                                    <li class="text-primary">All apps</li>
-                                    <li class="text-primary">Rodin Loader</li>
-                                </ul>
-                                <div class="button-section">
-                                    <a href="" class="btn sign-up-btn sign-up-btn-non-sticky sticky-signup">Upgrade Plan</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="plan-content-item-box  col-md-4 text-center">
-                            <div class="plan-content-item plan-content-item-box-disabled">
-                                <!--<i class="icon icon-oculus"></i>-->
-                                <h2>ENTERPRISE</h2>
-                                <p class="text-small">
-                                    For small agencies and companies.
-                                </p>
-                                <div class="plan-price-wrapper">
-                                            <span class="price">
-                                                <sup>$</sup>700<sub>/mo</sub>
-                                            </span>
-                                </div>
-                                <ul class="plan-item-info-list">
-                                    <li class="text-primary">Custom URL</li>
-                                    <li class="text-primary">6 TB Traffic</li>
-                                    <li class="text-primary">200 GB Hosting space</li>
-                                    <li class="text-primary">All apps</li>
-                                    <li class="text-primary">Custom Loader</li>
-                                </ul>
-                                <div class="signout-content button-section">
-                                    <a href="" class="btn sign-up-btn sign-up-btn-non-sticky">See Team Plans</a>
-                                </div>
+    <div class="container billing-section">
+        <p class="billing-title text-center">To switch your plan, select from one of the options below.</p>
+        <div class="col-md-4 text-center payment-data" ng-repeat="plan in $ctrl.plans">
+            <div class="payment-content">
+                <h1>{{plan.title}}</h1>
+                <p class="about-plan" ng-bind-html="plan.description"></p>
+                <p class="price"><sup class="currency">{{plan.currency}}</sup>{{plan.amount}}<sub
+                        class="payment-period">/{{plan.period}}</sub></p>
+                <div class="col-md-12 plan-info">
+                    <div class="row">
+                        <div class="col-md-6 info-items text-center" ng-repeat="info in plan.info">
+                            <div class="plan-row">
+                                <section>
+                                    <p><strong ng-bind-html="info.traffic"></strong>{{info.value}}</p>
+                                    <p class="small" ng-bind-html="info.desc"></p>
+                                </section>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="action-section">
+                    <button data-ng-if="$ctrl.userSubscription.plan && plan.id !== 'Enterprise'"
+                            ng-class="{'button-negative':$ctrl.userSubscription.plan.id === plan.id,
+                            'button-downgrade':$ctrl.userSubscription.plan.id !== plan.id && $ctrl.userSubscription.plan.id =='Premium', 'btn btn-upgrade': $ctrl.userSubscription.plan.id !=='david'}"
+                            ng-click="$ctrl.updatePlan(plan.id)">
+                        {{
+                        $ctrl.userSubscription.plan.id === plan.id ?
+                        'Current Plan': $ctrl.userSubscription.plan.id !== 'Premium' ? 'Upgrade':'Downgrade'
+                        }}
+                    </button>
+                    <button data-ng-if="!$ctrl.userSubscription.plan && plan.id !== 'Enterprise'"
+                            ng-class="{'button-negative':plan.id === 'Free',
+                            'btn btn-upgrade': plan.id =='Premium'}"
+                            ng-click="$ctrl.updatePlan(plan.id)">
+                        {{ plan.id === 'Free' ? 'Current Plan':'Upgrade'}}
+                    </button>
+                    <button class="button-negative" data-ng-if="plan.id == 'Enterprise'">Available soon</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-3">
+            <ul class="payment-service">
+                <li><img class="img-responsive" src="/images/payment/visa.png" alt="visa"></li>
+                <li><img class="img-responsive" src="/images/payment/master_card.png" alt="master_card"></li>
+                <li><img class="img-responsive" src="/images/payment/american_express.png" alt="american_express"></li>
+                <li><img class="img-responsive" src="/images/payment/discover.png" alt="discover"></li>
+                <li><img class="img-responsive" src="/images/payment/jcb.png" alt="jcb"></li>
+                <li><img class="img-responsive" src="/images/payment/diners_club.png" alt="diners_club"></li>
+                <!--<li><img class="img-responsive" src="/images/payment/paypal.png" alt=""></li>-->
+                <li class="payservice-info"> All prices subject to applicable local taxes.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="modal" close-modal="{{$ctrl.modals.active.name}}"
+     ng-class="{'display-block': $ctrl.modals.active.active, 'display-none': !$ctrl.modals.active.active}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <p>{{$ctrl.modals.active.title}}</p>
+        </div>
+        <div class="modal-body">
+            <p ng-bind-html="$ctrl.modals.active.description">
+            </p>
+        </div>
+        <div class="modal-footer">
+            <div class="required-field-actions clearfix">
+                <div class="text-center">
+                    <button class="btn"
+                            ng-class="{'btn-negative':$ctrl.modals.active.name === 'downgrade', 'btn-primary btn-positive': $ctrl.modals.active.name === 'upgrade'}"
+                            ng-click="$ctrl.modals.active.resolve()">{{$ctrl.modals.active.actions.success}}
+                    </button>
+                    <a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.active.active = false">{{$ctrl.modals.active.actions.cancel}}</a>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+<!--<div class="modal" close-modal="upgrade"-->
+<!--ng-class="{'display-block': $ctrl.modals.upgrade.active, 'display-none': !$ctrl.modals.upgrade.active}">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<p>{{$ctrl.modals.upgrade.title}}</p>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<p ng-bind-html="$ctrl.modals.upgrade.description">-->
+<!--</p>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<div class="required-field-actions clearfix">-->
+<!--<div class="text-center">-->
+<!--<button class="btn btn-primary btn-positive" ng-click="$ctrl.approveUpgrade()">Confirm</button>-->
+<!--<a href="" class="btn btn-cancel" data-ng-click="$ctrl.modals.active.show = false">Cancel</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<div class="loaderContent" data-ng-if="$ctrl.showLoader">
+    <div class="spriteLoader"></div>
 </div>

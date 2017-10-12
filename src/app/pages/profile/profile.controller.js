@@ -23,7 +23,7 @@ class ProfileCtrl {
 
         this.newPassword = {
             password: "",
-            confirm: ""
+            confirmPassword: ""
         };
 
         this.modals = {
@@ -87,7 +87,6 @@ class ProfileCtrl {
             })
 
         }
-
     }
 
     showGitSyncModal() {
@@ -137,7 +136,8 @@ class ProfileCtrl {
         let currentUser = {
             email: this.currentUser.email,
             profile: this.currentUser.profile,
-            username: this.currentUser.username
+            username: this.currentUser.username,
+            notification:this.currentUser.notification
         };
 
 
@@ -264,8 +264,8 @@ class ProfileCtrl {
                 }
             },
             {
-                name: "confirm",
-                value: this.newPassword.confirm,
+                name: "confirmPassword",
+                value: this.newPassword.confirmPassword,
                 conditions: {
                     required: true
                 }
@@ -276,7 +276,7 @@ class ProfileCtrl {
             var data = Validator.getData();
 
             this.showLoader = true;
-            this._User.updatePassword(Object.filterByKeys(data, ['password'])).then((data) => {
+            this._User.updatePassword(Object.filterByKeys(data, ['password','confirmPassword'])).then((data) => {
                 this.showLoader = false;
                 this.passwordChangeResponse = 'success';
                 this.Notification.success('Password successfully updated');
@@ -292,7 +292,7 @@ class ProfileCtrl {
     }
 
     confirmPassword() {
-        this._$scope.changePasswordForm.confirmPassword.$setValidity('match', this.newPassword.password == this.newPassword.confirm);
+        this._$scope.changePasswordForm.confirmPassword.$setValidity('match', this.newPassword.password == this.newPassword.confirmPassword);
     }
 }
 

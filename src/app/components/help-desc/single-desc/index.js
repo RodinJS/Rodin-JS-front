@@ -3,8 +3,9 @@
  */
 
 class SingleDescController {
-    constructor($scope, $element, $attrs, $state, HelpDescService, User, Notification) {
+    constructor($scope, $state, $timeout, HelpDescService, User, Notification) {
         'ngInject';
+        this.$timeout = $timeout;
         this.creationPage = this.id === 'create';
         this.editPage = false;
         this.currentUser = User.current;
@@ -31,6 +32,19 @@ class SingleDescController {
                 placeholder: 'Type the idea here...'
             },
         };
+        this.editorConfig = {
+            iconlibrary: 'fa',
+            fullscreen: {enable: false},
+            resize: 'none'
+        };
+        this.onPreview = false;
+        this.markdownShow = (e) => {
+            this.editor = e.$editor;
+            e.$editor.bind('input', this.onMarkdownChange.bind(this, e));
+            e.$editor.bind('click', this.onMarkdownChange.bind(this, e));
+            e.hideButtons(['cmdHeading', 'cmdImage', 'cmdList', 'cmdQuote', 'cmdUrl']);
+        };
+
         this.helpService = HelpDescService;
         this.post = this.helpService.history.post ? this.helpService.history.post : {
             subject: '',
@@ -59,13 +73,27 @@ class SingleDescController {
             })
     }
 
+    filterByTag(name) {
+        this.showLoader = true;
+        this._$state.go('landing.' + this.type.slice(0, -1), {tag: name});
+        this.helpService.searchConversations(this.type + `?tags[]=${name}`)
+            .then((response) => {
+                this.config.searchTitle = name;
+                this.showLoader = false;
+            })
+            .catch((err) => {
+                this.showLoader = false;
+            })
+    }
+
     getConversation() {
         if (!this.creationPage) {
             this.helpService.getConversation(this.type, this.id)
                 .then(response => {
                     this.showLoader = false;
                     this.question = response;
-                    console.log(this.question)
+                    this.updated.tags = this.question.tags || [];
+                    this.question.preview = this.escapeHtml(response.preview);
                     if (this.currentUser) {
                         this.isEditable = this.question.user.email === this.currentUser.email;
                     }
@@ -96,7 +124,7 @@ class SingleDescController {
         }
         let upvoted = vote === 1;
         let downvoted = vote === -1;
-        let voteType = vote === 1 ? 1: -1;
+        let voteType = vote === 1 ? 1 : -1;
         if (upvoted && this.question.voted) {
             switch (this.question.voted.vote) {
                 case 0:
@@ -114,7 +142,7 @@ class SingleDescController {
                     vote = 1;
                     break;
                 default:
-                    console.log('error');
+                    return;
                     break
             }
         } else if (downvoted && this.question.voted) {
@@ -134,7 +162,7 @@ class SingleDescController {
                     vote = 0;
                     break;
                 default:
-                    console.log('error');
+                    return;
                     break
             }
         }
@@ -145,7 +173,6 @@ class SingleDescController {
         }
         this.helpService.vote(this.type, id, vote, voteType)
             .then((response) => {
-                console.log(response)
             })
             .catch((err) => {
             })
@@ -165,15 +192,19 @@ class SingleDescController {
             this.showLoader = true;
             this.helpService.createQuestionThread(this.question.id, {description: this.answer})
                 .then(response => {
+                    this.previewTrigger();
                     this.helpService.history.tags = null;
                     this.helpService.history.post = null;
                     this.showLoader = false;
                     this.answer = '';
                     this.getConversation()
-                }).catch(err => {
-                this.showLoader = false;
-
-            })
+                })
+                .catch(err => {
+                    this.showLoader = false;
+                })
+        }
+        if (form.$invalid) {
+            this.editor.addClass('editor-has-error')
         }
 
 
@@ -185,8 +216,6 @@ class SingleDescController {
                 tags: this.selectedTags, post: this.post
             };
             return this._$state.go('landing.login');
-        } else {
-
         }
         if (form.$valid) {
             if (this.selectedTags.length > 0) {
@@ -197,10 +226,17 @@ class SingleDescController {
                 .then(response => {
                     this.helpService.resetValues();
                     this.showLoader = false;
+                    this.post.subject = '';
+                    this.post.description = '';
+                    this.post.tags = [];
+                    this.Notification.success(`Your ${this.type.slice(0,-1)} has been published.`);
                     this._$state.go('landing.' + this.type.slice(0, -1))
                 }).catch((err) => {
                 this.showLoader = false;
             })
+        }
+        if (!form.description.$valid) {
+            this.editor.addClass('editor-has-error')
         }
     }
 
@@ -216,20 +252,34 @@ class SingleDescController {
     updatePreview(preview) {
         this.updated.description = preview;
     }
-    updateQuestion() {
-        let promises = [this.helpService.updateConversation(this.type, this.question.id, {
-            tags: this.updated.tags,
-            subject: this.updated.subject
-        })];
 
-        if(this.updated.description) {
-            promises.push(this.helpService.updateThread(this.question.id, {description: this.updated.description, threadId: this.question.id, tags: this.updated.tags}))
+    updateQuestion() {
+        this.showLoader = true;
+        let updateSubject = {
+            subject: this.updated.subject,
+        };
+        if (this.updated.tags.length > 0) {
+            updateSubject.tags = this.updated.tags
+        }
+        let promises = [this.helpService.updateConversation(this.type, this.question.id, updateSubject)];
+
+        if (this.updated.description) {
+            promises.push(this.helpService.updateThread(this.question.id, {
+                description: this.updated.description,
+                threadId: this.question.myThreadId,
+            }))
         }
         Promise.all(promises)
             .then((resp) => {
+                this.showLoader = true;
+                this.previewTrigger();
                 this.Notification.success('Conversation updated');
+                this.goBack()
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                this.showLoader = true;
+                this.Notification.error('Something went wrong');
+            })
     }
 
     deleteQuestion() {
@@ -237,6 +287,7 @@ class SingleDescController {
             .then((resp) => {
                 this.goBack();
                 this.modals.remove = false;
+                this.Notification.success('Conversation deleted');
             })
             .catch((err) => console.log(err))
     }
@@ -261,6 +312,28 @@ class SingleDescController {
 
     goBack() {
         this._$state.go('landing.' + this.type.slice(0, -1), {page: this._$state.params.page ? this._$state.params.page : 1})
+    }
+
+    escapeHtml(html) {
+        if (html) {
+            return html.replace(/<br\s*\/?>/gi, '')
+                .replace(/&lt;/, "<")
+                .replace(/&gt;/, ">")
+        }
+        return html
+    }
+
+    onMarkdownChange(editor, e) {
+        this.onPreview = editor.$isPreview;
+    }
+
+    previewTrigger() {
+        if (this.onPreview) {
+            this.$timeout(() => {
+                angular.element("button[title='Preview']").trigger('click');
+                this.onPreview = false;
+            });
+        }
     }
 }
 

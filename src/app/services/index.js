@@ -43,4 +43,7 @@ servicesModule.service('HelpDescService', HelpDescService);
 import MenusService from './menus.service';
 servicesModule.service('MenusService', MenusService);
 
+import PaymentService from './payment.service';
+servicesModule.service('PaymentService', PaymentService);
+
 export default servicesModule;

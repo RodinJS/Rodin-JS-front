@@ -1,202 +1,129 @@
-<div class="page__wrapper">
+<div class="page__wrapper" ng-show="$ctrl.plan">
+    <div class="container billing-section" style="margin-top: 30px !important;">
+        <div class="col-md-offset-3 col-md-6">
+            <p class="billing-section-title">Account Summary</p>
+            <div class="col-md-12 billing-info" ng-show="$ctrl.plan">
+                <div class="col-md-12 text-center">
+                    <h1>{{$ctrl.plan.title}}</h1>
+                    <p class="info" ng-bind-html="$ctrl.plan.description"></p>
+                </div>
+                <div class="col-md-12 plan-info">
+                    <h6 class="what-you-get" style="margin-left: -5px;">You have these great features:</h6>
+                    <div class="row">
+                        <div class="col-md-3 info-items text-center" ng-repeat="info in $ctrl.plan.info">
+                            <div class="plan-row">
+                                <section>
+                                    <p><strong ng-bind-html="info.traffic"></strong>{{info.value}}</p>
+                                    <p class="small" ng-bind-html="info.desc"></p>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
 
-	<div class="main-container account-settings-container">
-		<h1 class="main-title">
-			Account Settings
-			<a href="" class="btn-upgrade text-action">
-				<i class="icon icon-glasses-bold"></i>UPGRADE YOUR PLAN
-			</a>
-		</h1>
-		<div class="page-content">
-			<div class="section section-plan-subscription">
-				<h2 class="section-title">Plan Subscription</h2>
-				<div class="row">
-					<div class="col-md-6">
-						<table class="table main-table">
-							<tbody>
-							<tr>
-								<td class="text-primary"><span>Plan Name</span>
-								</td>
-								<td class="text-primary"><span>Personal (Month)</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary"><span>Subscription Status</span>
-								</td>
-								<td class="text-primary"><span>Past due</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary"><span>Billing Period Start</span>
-								</td>
-								<td class="text-primary"><span>March 9th 2016. 7:50:32 am</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary"><span>Billing Period End</span>
-								</td>
-								<td class="text-primary"><span>April 9th 2016. 7:5032 am</span>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="section section-upcoming-invoice">
-				<h2 class="section-title">Upcoming Invoice</h2>
-				<div class="row">
-					<div class="col-md-6">
-						<table class="table main-table">
-							<tbody>
-							<tr>
-								<td class="text-primary"><span>Ptan Name</span>
-								</td>
-								<td class="text-primary"><span>No Name</span>
-								</td>
-								<td class="text-primary"><span>No Name</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary"><span>Date - Number</span>
-								</td>
-								<td class="text-primary"><span>No Date</span>
-								</td>
-								<td class="text-primary"><span>No Date</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary"><span>Amount</span>
-								</td>
-								<td class="text-primary"><span>$ 0.00</span>
-								</td>
-								<td class="text-primary"><span>$ 0.00</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary"><span>Subtotal</span>
-								</td>
-								<td class="text-primary"><span>$ 0.00</span>
-								</td>
-								<td class="text-primary"><span>$ 0.00</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary"><span>Total</span>
-								</td>
-								<td class="text-primary"><span>$ 0.00</span>
-								</td>
-								<td class="text-primary"><span>$ 0.00</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary"><span>Amount Due</span>
-								</td>
-								<td class="text-primary"><span>$ 0.00</span>
-								</td>
-								<td class="text-primary"><span>$ 0.00</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary"><span>Description</span>
-								</td>
-								<td class="text-primary"><span>No Description</span>
-								</td>
-								<td class="text-primary"><span>No Description</span>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="section section-upcoming-invoice bottom">
-				<h2 class="section-title">Past Invoices</h2>
-				<div class="row">
-					<div class="col-lg-6 col-md-8">
-						<table class="table main-table table-secondary">
-							<tbody>
-							<tr>
-								<td class="text-primary">March 27, 2016</td>
-								<td class="text-primary">Basic Hosting (Personal) for <a href="" class="more-link">hefltrarurytguru</a>
-								</td>
-								<td class="text-primary">
-									$5.00
-								</td>
-								<td>
-									<button type="button" class="btn btn-table-popover" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="top" data-content="Save PDF">
-										<i class="icon icon-download"></i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary">March 27, 2016</td>
-								<td class="text-primary">Basic Hosting (Personal) for <a href="" class="more-link">knoxlabs</a>
-								</td>
-								<td class="text-primary">
-									$5.00
-								</td>
-								<td>
-									<button type="button" class="btn btn-table-popover" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="top" data-content="Save PDF">
-										<i class="icon icon-download"></i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary">February 27, 2016</td>
-								<td class="text-primary">Personal (Month)</td>
-								<td class="text-primary">
-									$20.00
-								</td>
-								<td>
-									<button type="button" class="btn btn-table-popover" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="top" data-content="Save PDF">
-										<i class="icon icon-download"></i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary">January 27, 2016</td>
-								<td class="text-primary">Basic Hosting (Personal) for <a href="" class="more-link">hcarmcoutguru</a>
-								</td>
-								<td class="text-primary">
-									$5.00
-								</td>
-								<td>
-									<button type="button" class="btn btn-table-popover" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="top" data-content="Save PDF">
-										<i class="icon icon-download"></i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary">December 27, 2015</td>
-								<td class="text-primary">Basic Hosting (Personal) for <a href="" class="more-link">knoxabs</a>
-								</td>
-								<td class="text-primary">
-									$5.00
-								</td>
-								<td>
-									<button type="button" class="btn btn-table-popover" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="top" data-content="Save PDF">
-										<i class="icon icon-download"></i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-primary">December 27, 2015</td>
-								<td class="text-primary">Personal (Month)</td>
-								<td class="text-primary">
-									$20.00
-								</td>
-								<td>
-									<button type="button" class="btn btn-table-popover" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="top" data-content="Save PDF">
-										<i class="icon icon-download"></i>
-									</button>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <div class="text-center" style="margin-top: 15px;">
+                        <button ui-sref="landing.plans" class="btn-answer">Get Large</button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="billing-section-title" ng-show="$ctrl.customer.sources">Payment methods</p>
+            <div class="col-md-12 billing-info" ng-if="$ctrl.customer.sources">
+                <div class="row">
+                    <div class="col-md-12 payment-methods">
+                        <p class="section-desc">Credit or debit cards</p>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <p style="font-size: 14px;">Card will be charged monthly for resources used. <br>
+                                    All major credit cards accepted.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <button ui-sref="app.upgrade-plans({updateCustomer:true})" class="btn btn-positive">Change
+                                    Card
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 card-info">
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <p class="card-user">
+                                        <strong>{{$ctrl.customer.sources.data["0"].name}}
+                                            XXXX-{{$ctrl.customer.sources.data["0"].last4}}</strong> <br>
+                                        <span>Expires {{$ctrl.customer.sources.data["0"].exp_month}} / {{$ctrl.customer.sources.data["0"].exp_year}} | Added on {{$ctrl.customer.created * 1000| date:'dd/MM/yy'}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-2">-->
+                            <!--<div class="row pull-right">-->
+                            <!--<i class="fa fa-window-close" style="font-size: 20px" aria-hidden="true"></i>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="col-md-12 billing-info">-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-12 payment-methods">-->
+            <!--<p class="section-desc">Promo code</p>-->
+            <!--<div class="col-md-12">-->
+            <!--<div class="row">-->
+            <!--<p>The promo code <span style="color: #008AF2;">#$%^&*(*&^%$#@</span> for $250000 was applied to your account. <br>-->
+
+            <!--if you have a prmo code, pleace enter it below to recieve your credit.</p>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-8">-->
+            <!--<div class="row">-->
+            <!--<form class="main-form">-->
+            <!--<div class="form-group" style="margin-bottom: 0px !important;">-->
+            <!--<input type="text" class="form-control">-->
+            <!--</div>-->
+            <!--</form>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4">-->
+            <!--<div class="row">-->
+            <!--<button class="button-ask">Apply code</button>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <p class="billing-section-title" style="margin-bottom: 15px;">Billing history</p>
+            <div class="col-md-12">
+                <div class="row">
+                    <table class="table table-billing" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th class="col-md-3">Date</th>
+                            <th class="col-md-8">Description</th>
+                            <th class="col-md-1">Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody ng-if="$ctrl.billingHistory.data" ng-repeat="billing in $ctrl.billingHistory.data">
+                        <tr>
+                            <td>{{billing.created * 1000 | date:'mediumDate'}}</td>
+                            <td>Invoice for {{billing.created * 1000| date:'MMMM y'}}</td>
+                            <td>{{billing.amount / 100 | currency}}</td>
+                        </tr>
+                        <tr ng-if="billing.refunded" ng-repeat="refund in billing.refunds.data">
+                            <td>{{refund.created * 1000 | date:'mediumDate'}}</td>
+                            <td>Refunded / Reason <span style="color: #008BF2;">{{refund.reason}}</span></td>
+                            <td>{{refund.amount / 100 | currency}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p ng-if="!$ctrl.billingHistory.data" class="text-center">You don`t have any billings</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loaderContent" data-ng-if="$ctrl.showLoader">
+    <div class="spriteLoader"></div>
 </div>

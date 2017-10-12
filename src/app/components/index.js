@@ -16,6 +16,12 @@ componentsModule.directive('closeModal', Utils.CloseModal);
 componentsModule.directive('codify', ['$timeout', Utils.Codify]);
 componentsModule.directive('confirmPassword', Utils.ConfirmPassword);
 componentsModule.directive('rdScroll', Utils.RdScroll);
+componentsModule.directive('autoGrow', Utils.AutoGrow);
+componentsModule.directive('creditCard', Utils.CreditCard);
+componentsModule.directive('creditCardExpiration', Utils.CreditCardExpiration);
+componentsModule.directive('markdownValidation', Utils.markdownValidation);
+componentsModule.directive('analyticsTrack', Utils.AnalyticsTrack);
+componentsModule.directive('cardSecurityCode', Utils.CardSecurityCode);
 
 
 import EditorNavigation from './editorNavigation/index';

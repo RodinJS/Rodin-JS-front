@@ -12,6 +12,12 @@
                             <li ng-class="$ctrl.privacy ? 'active' : ''">
                                 <a href="" ng-click="$ctrl.privacy = true">Password</a>
                             </li>
+                            <!--<li>-->
+                                <!--<a ui-sref="app.upgrade-plans">Upgrade</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a ui-sref="app.billing">Billings</a>-->
+                            <!--</li>-->
                         </ul>
                     </div>
 
@@ -54,56 +60,56 @@
                                 <h3 class="section-title">Connected Accounts</h3>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <div class="form-group title">Facebook</div>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <button type="button" ng-if="!$ctrl.currentUser.facebook"
-                                                        ng-click="$ctrl.fbSync()"
-                                                        class="btn btn-primary border-orange">Sync with Facebook
-                                                </button>
-                                                <div class="synced row" ng-if="$ctrl.currentUser.facebook">
-                                                    <div class="col-md-4" style="font-size: 14px">
-                                                        <span ng-click="$ctrl.openUnSync('facebook')">
-                                                            <i class=" icon icon-send"></i> Synced as
-                                                        ({{$ctrl.currentUser.facebook}})
-                                                        </span>
-                                                    </div>
-                                                    <!--<div class="col-md-6">-->
-                                                    <!--<button type="button"-->
-                                                    <!--ng-click="$ctrl.openUnSync('facebook')"-->
-                                                    <!--class="btn btn-primary border-orange">Unsync from Facebook-->
-                                                    <!--</button>-->
+                                        <!--<div class="row">-->
+                                            <!--<div class="col-md-2">-->
+                                                <!--<div class="form-group title">Facebook</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="col-md-10">-->
+                                                <!--<button type="button" ng-if="!$ctrl.currentUser.facebook"-->
+                                                        <!--ng-click="$ctrl.fbSync()"-->
+                                                        <!--class="btn btn-primary border-orange">Sync with Facebook-->
+                                                <!--</button>-->
+                                                <!--<div class="synced row" ng-if="$ctrl.currentUser.facebook">-->
+                                                    <!--<div class="col-md-4" style="font-size: 14px">-->
+                                                        <!--<span ng-click="$ctrl.openUnSync('facebook')">-->
+                                                            <!--<i class=" icon icon-send"></i> Synced as-->
+                                                        <!--({{$ctrl.currentUser.facebook}})-->
+                                                        <!--</span>-->
                                                     <!--</div>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <div class="form-group title">Google</div>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <button type="button" ng-if="!$ctrl.currentUser.google"
-                                                        ng-click="$ctrl.googleSync()"
-                                                        class="btn btn-primary border-orange">Sync with Google
-                                                </button>
-                                                <div class="synced row" ng-if="$ctrl.currentUser.google">
-                                                    <div class="col-md-4">
-                                                        <span ng-click="$ctrl.openUnSync('google')">
-                                                            <i class=" icon icon-send"></i> Synced as
-                                                        ({{$ctrl.currentUser.google}})
-                                                        </span>
-                                                    </div>
-                                                    <!--<div class="col-md-6">-->
-                                                    <!--<button type="button"-->
-                                                    <!--ng-click="$ctrl.openUnSync('google')"-->
-                                                    <!--class="btn btn-primary border-orange">Unsync from Google-->
-                                                    <!--</button>-->
+                                                    <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;<button type="button"&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;ng-click="$ctrl.openUnSync('facebook')"&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;class="btn btn-primary border-orange">Unsync from Facebook&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<div class="row">-->
+                                            <!--<div class="col-md-2">-->
+                                                <!--<div class="form-group title">Google</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="col-md-10">-->
+                                                <!--<button type="button" ng-if="!$ctrl.currentUser.google"-->
+                                                        <!--ng-click="$ctrl.googleSync()"-->
+                                                        <!--class="btn btn-primary border-orange">Sync with Google-->
+                                                <!--</button>-->
+                                                <!--<div class="synced row" ng-if="$ctrl.currentUser.google">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<span ng-click="$ctrl.openUnSync('google')">-->
+                                                            <!--<i class=" icon icon-send"></i> Synced as-->
+                                                        <!--({{$ctrl.currentUser.google}})-->
+                                                        <!--</span>-->
                                                     <!--</div>-->
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;<button type="button"&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;ng-click="$ctrl.openUnSync('google')"&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;class="btn btn-primary border-orange">Unsync from Google&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <div class="form-group title">GitHub</div>
@@ -239,7 +245,7 @@
                             <div class="checkbox">
                                 <label class="text-small" style="color: #fff;line-height: 25px;">
                                     <input type="checkbox"
-                                           ng-model="$ctrl.profile.emailNotification" style="margin-top: 6px">
+                                           ng-model="$ctrl.currentUser.notification" style="margin-top: 6px">
                                     I want to receive notifications on this email
                                     <span class="custom-check"></span>
                                 </label>
@@ -291,7 +297,7 @@
                                     <label>Confirm Password</label>
                                     <input type="password" class="form-control" placeholder=""
                                            name="confirmPassword"
-                                           data-ng-model="$ctrl.newPassword.confirm"
+                                           data-ng-model="$ctrl.newPassword.confirmPassword"
                                            required
                                            confirm-Password
                                            compare-to="changePasswordForm.confirmPassword.$viewValue"

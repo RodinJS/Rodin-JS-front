@@ -1,0 +1,315 @@
+<div class="container billing-section" style="margin-top: 30px !important;">
+    <div class="col-md-offset-3 col-md-6">
+        <div class="row">
+            <div class="col-md-12 upgrade-content" ng-if="!$ctrl.isUpdate && !$ctrl.isCustomerUpdate">
+                <div class="row upgrade-info">
+                    <div class="col-md-6 upgrade-info-section">
+                        <div class="plan-info">
+                            <h6 class="what-you-get">What you will get:</h6>
+                            <div class="col-md-6 info-items text-center" ng-repeat="info in $ctrl.upgradetPlan.info">
+                                <div class="plan-row">
+                                    <section>
+                                        <p><strong ng-bind-html="info.traffic"></strong>{{info.value}}</p>
+                                        <p class="small" ng-bind-html="info.desc"></p>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 upgrade-info-section">
+                        <h1>{{$ctrl.upgradetPlan.title}}</h1>
+                        <p class="upgrade-plan-desc" ng-bind-html="$ctrl.upgradetPlan.description"></p>
+                        <a ui-sref="landing.plans" class="change-plan"><i class="fa fa-chevron-circle-left"
+                                                                          style="color: #AAAAAA" aria-hidden="true"></i>&nbsp;
+                            change</a>
+                        <p class="price"><sup class="currency">{{$ctrl.upgradetPlan.currency}}</sup>{{$ctrl.upgradetPlan.amount}}<sub
+                                class="payment-period">/{{$ctrl.upgradetPlan.period}}</sub></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <p class="section-info" style="margin-top: 15px; margin-left: 10px;">Payment Information</p>
+                    <ul class="payment-service" style="margin-left: 0px;">
+                        <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'visa'}"
+                                 src="/images/payment/visa.png" alt=""></li>
+                        <li><img class="img-responsive" ng-class="{'image-highlight': upgrade.type === 'master_card'}"
+                                 src="/images/payment/master_card.png" alt=""></li>
+                        <li><img class="img-responsive"
+                                 ng-class="{'image-highlight': upgrade.type === 'american_express'}"
+                                 src="/images/payment/american_express.png" alt=""></li>
+                        <li><img class="img-responsive"
+                                 ng-class="{'image-highlight': upgrade.type === 'discover'}"
+                                 src="/images/payment/discover.png" alt=""></li>
+                        <li><img class="img-responsive"
+                                 ng-class="{'image-highlight': upgrade.type === 'jcb'}"
+                                 src="/images/payment/jcb.png" alt=""></li>
+                        <li><img class="img-responsive"
+                                 ng-class="{'image-highlight': upgrade.type === 'diners_club'}"
+                                 src="/images/payment/diners_club.png" alt=""></li>
+                    </ul>
+                    <form name="upgrade" novalidate id="upgrade" ng-submit="$ctrl.create(upgrade.$valid)"
+                          method="post"
+                          class="main-form upgrade-form">
+                        <div class="form-group" custom-input style="margin-bottom: 0px !important;"
+                             data-ng-class="{
+                         'has-error': upgrade.cardNumber.$invalid && !upgrade.cardNumber.$pristine || upgrade.$submitted && upgrade.cardNumber.$invalid,
+                         'has-success': upgrade.cardNumber.$valid,
+                         }">
+                            <div class="col-md-8">
+                                <label class="control-label">
+                                    <small>Credit Card Number: <sub>*</sub></small>
+                                </label>
+                                <input type="text" class="form-control" placeholder="XXXXXXXXXXXXXXXX"
+                                       name="cardNumber"
+                                       ng-model="$ctrl.upgrade.cardNumber"
+                                       data-credit-card
+                                       data-ng-pattern="/^[0-9]+$/"
+                                       data-ng-minlength="14"
+                                       maxlength="19"
+                                       required>
+                                <div class="error"
+                                     ng-show="upgrade.cardNumber.$invalid && !upgrade.cardNumber.$pristine">
+                                    <p ng-show="upgrade.cardNumber.$error.minlength">Credit card must be 15-19
+                                        digits</p>
+                                    <p ng-show="upgrade.cardNumber.$error.pattern">Credit card must consist of only
+                                        numbers</p>
+                                    <p ng-show="upgrade.cardNumber.$error.invalid">Credit card must be a valid Visa,
+                                        Mastercard, American Express, Discover, Diners Club or JCB card.</p>
+                                    <p ng-show="upgrade.cardNumber.$error.required">Credit card required</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0px !important;">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 upgrade-group" custom-input
+                                         data-ng-class="{
+                         'has-error': upgrade.securityCode.$invalid && !upgrade.securityCode.$pristine || upgrade.$submitted && upgrade.securityCode.$invalid,
+                         'has-success': upgrade.securityCode.$valid,
+                         }">
+                                        <label class="control-label">
+                                            <small>Security Code: <i
+                                                    uib-tooltip="{{upgrade.securityCodeMessage}}"
+                                                    class="fa fa-info-circle" aria-hidden="true"></i> <sub>*</sub>
+                                            </small>
+                                        </label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="XXX"
+                                               name="securityCode"
+                                               required
+                                               card-security-code="upgrade.type"
+                                               ng-model="$ctrl.upgrade.securityCode"
+                                               data-ng-pattern="/^[0-9]+$/"
+                                               data-ng-minlength="3"
+                                               maxlength="4">
+                                        <div class="error">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 upgrade-group" custom-input
+                                         data-ng-class="{
+                         'has-error': upgrade.expireDate.$invalid && !upgrade.expireDate.$pristine || upgrade.$submitted && upgrade.expireDate.$invalid,
+                         'has-success': upgrade.expireDate.$valid,
+                         }">
+                                        <label class="control-label">
+                                            <small>Expiration Date: <sub>*</sub></small>
+                                        </label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="XX/XX"
+                                               ng-model="$ctrl.upgrade.expireDate"
+                                               name="expireDate"
+                                               data-credit-card-expiration
+                                               ng-pattern="/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/"
+                                               required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <p class="section-info">Billing address</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6 upgrade-group" custom-input
+                                         data-ng-class="{
+                         'has-error': upgrade.firstName.$invalid && !upgrade.firstName.$pristine || upgrade.$submitted && upgrade.firstName.$invalid,
+                         'has-success': upgrade.firstName.$valid,
+                         }">
+                                        <label class="control-label">
+                                            <small>First name: <sub>*</sub></small>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder=""
+                                               name="firstName"
+                                               ng-model="$ctrl.upgrade.firstName"
+                                               required
+                                        >
+                                        <div class="error">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 upgrade-group" custom-input
+                                         data-ng-class="{
+                         'has-error': upgrade.lastName.$invalid && !upgrade.lastName.$pristine || upgrade.$submitted && upgrade.lastName.$invalid,
+                         'has-success': upgrade.lastName.$valid,
+                         }">
+                                        <label class="control-label">
+                                            <small>Last name: <sub>*</sub></small>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder=""
+                                               name="lastName"
+                                               ng-model="$ctrl.upgrade.lastName"
+                                               required
+                                        >
+                                        <div class=" error">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" custom-input
+                             data-ng-class="{
+                         'has-error': upgrade.companyName.$invalid && !upgrade.companyName.$pristine,
+                         'has-success': upgrade.companyName.$valid,
+                         }">
+                            <div class="col-md-12">
+                                <label class="control-label">
+                                    <small>Company name:</small>
+                                </label>
+                                <input type="text" class="form-control" placeholder=""
+                                       name="companyName"
+                                       ng-model="$ctrl.upgrade.companyName"
+                                       data-ng-focus="upgrade.companyName.focused = true">
+                                <div class="error">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" custom-input
+                             data-ng-class="{
+                         'has-error': upgrade.address.$invalid && !upgrade.address.$pristine || upgrade.$submitted && upgrade.address.$invalid,
+                         'has-success': upgrade.address.$valid,
+                         }">
+                            <div class="col-md-12">
+                                <label class="control-label">
+                                    <small>Address: <sub>*</sub></small>
+                                </label>
+                                <input type="text" class="form-control" placeholder=""
+                                       name="address"
+                                       ng-model="$ctr.upgrade.address"
+                                       required>
+                                <div class="error">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6 upgrade-group" custom-input
+                                         data-ng-class="{
+                         'has-error': upgrade.city.$invalid && !upgrade.city.$pristine || upgrade.$submitted && upgrade.city.$invalid,
+                         'has-success': upgrade.city.$valid,
+                         }">
+                                        <label class="control-label">
+                                            <small>City: <sub>*</sub></small>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder=""
+                                               name="city"
+                                               ng-model="$ctrl.upgrade.city"
+                                               required>
+                                        <div class="error">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 upgrade-group" custom-input
+                                         data-ng-class="{
+                         'has-error': upgrade.country.$invalid && !upgrade.country.$pristine || upgrade.$submitted && upgrade.country.$invalid,
+                         'has-success': upgrade.country.$valid,
+                         }">
+                                        <label class="control-label">
+                                            <small>Country: <sub>*</sub></small>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder=""
+                                               name="country"
+                                               ng-model="$ctrl.upgrade.country"
+                                               required>
+                                        <div class="error">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6 upgrade-group" custom-input
+                                         data-ng-class="{
+                         'has-error': upgrade.postalCode.$invalid && !upgrade.postalCode.$pristine || upgrade.$submitted && upgrade.postalCode.$invalid,
+                         'has-success': upgrade.postalCode.$valid,
+                         }">
+                                        <label class="control-label">
+                                            <small>Postal Code: <sub>*</sub></small>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder=""
+                                               name="postalCode"
+                                               required
+                                               ng-model="$ctrl.upgrade.postalCode">
+                                        <div class="error">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 upgrade-group" custom-input
+                                         data-ng-class="{
+                         'has-error': upgrade.phoneNumber.$invalid && !upgrade.phoneNumber.$pristine,
+                         'has-success': upgrade.phoneNumber.$valid,
+                         }">
+                                        <label class="control-label">
+                                            <small>Phone number:</small>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder=""
+                                               name="phoneNumber"
+                                               ng-model="$ctrl.upgrade.phoneNumber">
+                                        <div class="error">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upgrade-group" custom-input
+                             data-ng-class="{
+                         'has-error': upgrade.agreed.$invalid && !upgrade.agreed.$pristine || upgrade.$submitted && upgrade.agreed.$invalid,
+                         'has-success': upgrade.agreed.$valid,
+                         }">
+
+                            <div class="col-md-1">
+                                <input type="checkbox" class="form-control agreement"  style="height: 15px;margin-top: 2px;" placeholder=""
+                                       name="agreed"
+                                       ng-model="$ctr.upgrade.agreed"
+                                       required>
+                            </div>
+                            <label class="control-label col-md-8">
+                                <div class="row">
+                                    <p ng-class="{'error': upgrade.agreed.$invalid && !upgrade.agreed.$pristine || upgrade.$submitted && upgrade.agreed.$invalid}" style="color: #95989A;">
+                                        I agree to the <a ng-class="{'error': upgrade.agreed.$invalid && !upgrade.agreed.$pristine || upgrade.$submitted && upgrade.agreed.$invalid}" ui-sref="landing.pages({pageURL:'terms-and-conditions'})">Rodin
+                                        Payment Agreement : <sub>*</sub></a>
+                                    </p>
+                                </div>
+
+                            </label>
+                            <div class="error">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-highlighted" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loaderContent" data-ng-if="$ctrl.showLoader">
+    <div class="spriteLoader"></div>
+</div>

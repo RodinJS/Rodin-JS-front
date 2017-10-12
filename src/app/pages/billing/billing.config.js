@@ -8,6 +8,7 @@ function BillingConfig($stateProvider) {
 			controllerAs: '$ctrl',
 			templateUrl: 'pages/billing/billing.html',
 			title: 'Profile',
+			showFooter:true,
 			resolve: {
 				auth: function (User) {
 					return User.ensureAuthIs(true);

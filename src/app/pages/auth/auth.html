@@ -65,6 +65,7 @@
                                value=""
                                ng-minlength="3"
                                ng-maxlength="32"
+                               limit-to="32"
                                name="username"
                                data-ng-model="$ctrl.formData.username"
                                required
@@ -191,7 +192,7 @@
                         </span>
                     </div>
                     <div class="btn-wrapper">
-                        <button type="submit" class="btn btn-default btn-submit">
+                        <button type="submit" class="btn btn-default btn-submit" analytics-track track-name="'register'">
                             Sign up
                         </button>
                     </div>

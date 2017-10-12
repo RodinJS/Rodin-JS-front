@@ -258,7 +258,7 @@ $primary-color: #008BF2;
     font-family: 'SF UI Display';
     font-size: 16px;
     font-weight: 600;
-    color: white;
+    color: white !important;
     //background-color: #008bf2;
     border-color: $primary-color;
     background: transparent;

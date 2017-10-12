@@ -22,7 +22,7 @@ const AppConstants = {
         PUBLIC: 'https://rodin.space/public/',
         PUBLISH: 'https://rodin.space',
         EDITOR: 'http://localhost:8000/#/',
-        FB: '216861662081500', //'' '216982868736046'
+        FB: '1981479458801362', //'' '216982868736046'
         GITHUB: '2350afe57c144672285b',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.space/list.json',
@@ -39,7 +39,7 @@ const AppConstants = {
         PUBLIC: 'https://apps.rodin.space/public/',
         PUBLISH: 'https://apps.rodin.space',
         EDITOR: 'https://editor.rodin.space/',
-        FB: '216982868736046', //'216861662081500' '216982868736046'
+        FB: '1981479458801362', //'216861662081500' '216982868736046'
         GITHUB: 'fa69c03ad5758fce1f10',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.space/list.json',
@@ -76,7 +76,7 @@ const AppConstants = {
         PUBLISH: `${window.location.protocol}//apps.${window.extractDomain()}`,
         EDITOR: `${window.location.protocol}//editor.${window.extractDomain()}/`,
         RECORDIP: '178.62.211.113',
-        FB: '263064010794598',
+        FB: '1981479458801362',
         GITHUB: '5377f212205e0aa4b4cf',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodin.design/list.json',
@@ -94,8 +94,8 @@ const AppConstants = {
         PUBLISH: `${window.location.protocol}//apps.${window.extractDomain()}`,
         EDITOR: `${window.location.protocol}//editor.${window.extractDomain()}/`,
         RECORDIP: '40.121.202.156',
-        FB: 'XXXX64010X945XX',
-        GITHUB: '5377f212205e0aa4b4cf',
+        FB: '1981479458801362',
+        GITHUB: '2fa42e9372769cc4c527',
         GOOGLE: '442135244308-of5f6micijmgcf5196f1g3di39ivq8cp.apps.googleusercontent.com',
         SAMPLES: 'https://examples.rodinapp.com/list.json',
         MODULES: 'http://localhost:4000/modules/',

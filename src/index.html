@@ -15,13 +15,10 @@
     <link rel="manifest" href="/images/favicon/manifest.json">
     <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#000000">
     <link rel="stylesheet" type="text/css" href="/scripts/vendor/ng-tags-input/build/ng-tags-input.css">
-    <link rel="stylesheet" href="/scripts/vendor/ng-wig/dist/css/ng-wig.min.css">
     <meta name="theme-color" content="#ffffff">
-
     <link rel="stylesheet" href="/scripts/vendor/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/scripts/vendor/angular-ui-notification/dist/angular-ui-notification.css">
     <link rel="stylesheet"  href="/styles/style.css?v=0.2.10">
-
 
     <meta property="og:title" content="Rodin Inc." />
     <meta property="og:url" content="https://rodin.io" />
@@ -67,8 +64,7 @@
     </svg>
     <div data-ui-view class="page__wrapper"></div>
 </div>
-
-<!--<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyA6Y8RlBTByatge6Ufdk4279cFABWBnm9Q"></script>-->
+<script src="/scripts/vendor/marked/marked.min.js"></script>
 <script src="//apis.google.com/js/platform.js"></script>
 <script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript" src="/scripts/vendor/systemjs/dist/system.js"></script>
@@ -111,49 +107,43 @@
             },
             "/scripts": {  // path to your project root
                 "defaultJSExtensions": true
+            },
+            'bootstrap-markdown': {
+                format: 'global',
+                defaultExtension: 'js',
+                main: '/scripts/vendor/bootstrap-markdown/js/bootstrap-markdown.js'
             }
         },
         paths: {
             '*': 'scripts/vendor/*',
             'app/*': 'app/*',
-            'scripts/*': 'scripts/*'
+            'scripts/*': 'scripts/*',
         }
     });
     System.import('app/pages/home/highlight.pack.js');
     System.import('app/app.js');
 
-    /*System.import('app/pages/home/mainz3a5m8eh2etu1md1b57b9.min.js')*/
-
-
-    /* System.import('app/pages/home/landing.js').then( (e) => {
-     Promise.all([
-     System.import('app/pages/home/highlight.pack.js'),
-     System.import('app/app.js'),
-     ])
-     })*/
-
-
 </script>
 
 <!-- Google Analytics -->
 <script>
-    var host = window.location.host;
-    if (host === 'rodin.io') {
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-92405504-1', 'auto');
-        ga('send', 'pageview');
-    }
+//    var host = window.location.host;
+//    if (host === 'rodin.io') {
+//        (function (i, s, o, g, r, a, m) {
+//            i['GoogleAnalyticsObject'] = r;
+//            i[r] = i[r] || function () {
+//                    (i[r].q = i[r].q || []).push(arguments)
+//                }, i[r].l = 1 * new Date();
+//            a = s.createElement(o),
+//                m = s.getElementsByTagName(o)[0];
+//            a.async = 1;
+//            a.src = g;
+//            m.parentNode.insertBefore(a, m)
+//        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+//
+//        ga('create', 'UA-92405504-1', 'auto');
+//        ga('send', 'pageview');
+//    }
     <!-- End Google Analytics -->
 
     // Load the SDK asynchronously
@@ -166,5 +156,15 @@
      }(document, 'script', 'facebook-jssdk'));*/
 
 </script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-107261145-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<script src="/scripts/vendor/bootstrap-markdown/js/bootstrap-markdown.js"></script>
 </body>
 </html>
